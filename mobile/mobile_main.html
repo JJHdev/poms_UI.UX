@@ -5305,7 +5305,7 @@ body{background:#d8dce6;display:flex;justify-content:center;align-items:flex-sta
             <span class="ah-meta__sep" aria-hidden="true"></span>
             <span>2026.05.14</span>
           </span>
-          <span class="ah-logout" onclick="window.location.href='mobile_login.html'"><i class="ti ti-logout"></i> 로그아웃</span>
+          <span class="ah-logout" onclick="pomsLogout()"><i class="ti ti-logout"></i> 로그아웃</span>
         </div>
       </div>
     </div>
@@ -6062,6 +6062,13 @@ body{background:#d8dce6;display:flex;justify-content:center;align-items:flex-sta
     }
     return { read: read, write: write };
   })();
+
+  function pomsLogout() {
+    try { localStorage.clear(); } catch (e) {}
+    try { sessionStorage.clear(); } catch (e) {}
+    window.location.href = 'mobile_login.html';
+  }
+  window.pomsLogout = pomsLogout;
 
   /* ── 화면 전환 ─────────────────────────── */
   var currentPhoneId = 'phoneHome';
