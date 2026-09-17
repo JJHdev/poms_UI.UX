@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>POMS 모바일 로그인</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    padding: 24px 16px;
+    background: #d8dce6;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 휴대폰 외곽 */
+.phone {
+    width: 320px;
+    padding: 6px;
+
+    background: #1a1a1a;
+    border-radius: 40px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* 휴대폰 내부 */
+.pi {
+    position: relative;
+
+    width: 100%;
+    height: 680px;
+
+    padding: 0 32px 23px;
+
+    /* 짙은 남색 → 하단 밝은 블루 그라데이션 */
+    background: linear-gradient(180deg,
+                #10233c 0%,
+                #0c1d32 46%,
+                #123468 78%,
+                #174183 100%);
+
+    border-radius: 35px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    color: #ffffff;
+}
+
+/* 상단 항만 배경 사진 (아래로 갈수록 페이드아웃) */
+.pi::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 300px;
+
+    background-image: url("assets/main/login_bg.jpg");
+    background-size: cover;
+    background-position: center top;
+
+    -webkit-mask-image: linear-gradient(180deg,
+                        rgba(0, 0, 0, 1) 0%,
+                        rgba(0, 0, 0, 1) 55%,
+                        rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(180deg,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 1) 55%,
+                rgba(0, 0, 0, 0) 100%);
+
+    pointer-events: none;
+}
+
+/* 배경 사진 위로 콘텐츠 올리기 */
+.pi > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 상태바 */
+.sbar {
+    height: 46px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sbar-t {
+    font-size: 11px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.sbar-ic {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sbar-ic i {
+    font-size: 13px;
+    color: #ffffff;
+}
+
+/* 해양수산부 로고 */
+.ministry-logo {
+    margin-top: 72px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ministry-logo img {
+    width: 27px;
+    height: 27px;
+    object-fit: contain;
+}
+
+.ministry-logo span {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #ffffff;
+
+    letter-spacing: -0.4px;
+}
+
+/* 제목 (좌측 정렬) */
+.hero {
+    margin-top: 24px;
+    flex-shrink: 0;
+
+    text-align: left;
+}
+
+.app-sub {
+    margin-bottom: 1px;
+
+    font-size: 11.5px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #d9dce4;
+
+    letter-spacing: -0.3px;
+}
+
+.app-name {
+    font-size: 25.5px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #ffffff;
+
+    letter-spacing: -0.7px;
+}
+
+/* 로그인 영역 */
+.form-area {
+    width: 100%;
+    margin-top: 16px;
+    flex-shrink: 0;
+}
+
+.field {
+    position: relative;
+    height: 43px;
+
+    background: #ffffff;
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+}
+
+.field + .field {
+    margin-top: 13px;
+}
+
+.field-inp {
+    width: 100%;
+    height: 100%;
+
+    padding: 0 42px 0 18px;
+
+    border: 0;
+    outline: none;
+    background: transparent;
+
+    color: #1b2a3f;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 11.5px;
+}
+
+.field-inp::placeholder {
+    color: #8a93a3;
+}
+
+.password-eye {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+
+    width: 24px;
+    height: 24px;
+
+    transform: translateY(-50%);
+
+    border: 0;
+    background: transparent;
+    color: #8a93a3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.password-eye i {
+    font-size: 15px;
+}
+
+/* 로그인 버튼 */
+.login-btn {
+    width: 100%;
+    height: 44px;
+
+    margin-top: 12px;
+
+    border: 0;
+    border-radius: 14px;
+
+    background: #003d8f;
+    color: #ffffff;
+
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+
+    letter-spacing: -0.2px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #01458f;
+}
+
+/* 아이디 저장 / 비밀번호 찾기 */
+.login-options {
+    margin-top: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 10px;
+    color: #aeb8c6;
+}
+
+.save-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    cursor: pointer;
+}
+
+.save-label input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.save-chk {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+
+    border-radius: 4px;
+    background: #ffffff;
+
+    color: #1b3050;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.save-chk i {
+    display: none;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.save-label input:checked + .save-chk i {
+    display: block;
+}
+
+.option-divider {
+    width: 1px;
+    height: 11px;
+
+    margin: 0 14px;
+
+    background: #8a94a5;
+}
+
+.find-password {
+    border: 0;
+    background: transparent;
+
+    color: #aeb8c6;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+/* 공지사항 */
+.notice-wrap {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.notice-card {
+    width: 100%;
+    min-height: 94px;
+
+    padding: 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10px;
+
+    background: rgba(6, 20, 40, 0.55);
+
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    cursor: pointer;
+}
+
+.nc-icon {
+    width: 27px;
+    height: 27px;
+    flex-shrink: 0;
+
+    border-radius: 8px;
+    background: #0d2038;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nc-icon i {
+    font-size: 15px;
+    color: #1c6fff;
+}
+
+.nc-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.nc-title {
+    margin-bottom: 2px;
+
+    font-size: 11.5px;
+    line-height: 1.35;
+    font-weight: 700;
+    color: #ffffff;
+
+    letter-spacing: -0.4px;
+}
+
+.nc-org {
+    margin-bottom: 8px;
+
+    font-size: 8.5px;
+    line-height: 1.3;
+    color: #8d9bb0;
+
+    letter-spacing: -0.2px;
+}
+
+.nc-body {
+    padding-top: 10px;
+    padding-left: px;
+
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #eeeeee;
+    text-align: left;
+
+    letter-spacing: 0.5px;
+}
+
+/* 하단 문구 */
+.app-footer {
+    flex-shrink: 0;
+
+    padding-top: 16px;
+
+    text-align: center;
+}
+
+.af-copy {
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: #e3eaf4;
+}
+
+/* 작은 화면 대응 */
+@media (max-width: 360px) {
+    body {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .phone {
+        width: min(320px, 100%);
+    }
+}
+
+/* 실제 모바일 화면에서는 목업 제거 */
+@media (max-width: 480px) {
+    body {
+        padding: 0;
+        background: #0c1d32;
+    }
+
+    .phone {
+        width: 100%;
+        padding: 0;
+
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .pi {
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: auto;
+
+        border-radius: 0;
+        overflow: visible;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+    <div class="pi">
+
+        <!-- 상태바 -->
+        <div class="sbar">
+            <!-- <span class="sbar-t">12:00</span>
+
+            <div class="sbar-ic">
+                <i class="ti ti-antenna-bars-5"></i>
+                <i class="ti ti-wifi"></i>
+                <i class="ti ti-battery-2"></i>
+            </div> -->
+        </div>
+
+        <!-- 해양수산부 로고 -->
+        <div class="ministry-logo">
+            <img
+                src="assets/main/logo_bg.png"
+                alt="해양수산부">
+
+            <span>해양수산부</span>
+        </div>
+
+        <!-- 서비스 제목 -->
+        <div class="hero">
+            <div class="app-sub">
+                항만시설물 유지관리 시스템 모바일
+            </div>
+
+            <div class="app-name">
+                항만시설 지킴이
+            </div>
+        </div>
+
+        <!-- 로그인 입력 영역 -->
+        <div class="form-area">
+
+            <div class="field">
+                <input
+                    id="userId"
+                    class="field-inp"
+                    type="text"
+                    placeholder="아이디"
+                    autocomplete="username">
+            </div>
+
+            <div class="field">
+                <input
+                    id="password"
+                    class="field-inp"
+                    type="password"
+                    placeholder="비밀번호"
+                    autocomplete="current-password">
+
+                <button
+                    type="button"
+                    class="password-eye"
+                    aria-label="비밀번호 표시"
+                    onclick="togglePassword()">
+
+                    <i id="passwordIcon" class="ti ti-eye"></i>
+                </button>
+            </div>
+
+            <button
+                type="button"
+                class="login-btn"
+                onclick="window.location.href='mobile_main.html'">
+                로그인
+            </button>
+
+            <div class="login-options">
+
+                <label class="save-label">
+                    <input id="saveId" type="checkbox" checked>
+
+                    <span class="save-chk">
+                        <i class="ti ti-check"></i>
+                    </span>
+
+                    <span>아이디 저장</span>
+                </label>
+
+                <span class="option-divider"></span>
+
+                <button
+                    type="button"
+                    class="find-password"
+                    onclick="findPassword()">
+                    비밀번호 찾기
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- 공지사항 -->
+        <div class="notice-wrap">
+
+            <div
+                class="notice-card"
+                onclick="openNotice()">
+
+                <div class="nc-icon">
+                    <i class="ti ti-bell"></i>
+                </div>
+
+                <div class="nc-content">
+
+                    <div class="nc-title" style="word-break: keep-all;">
+                        항만시설물 안전점검 제출 관련하여 문의사항은 항만협회로 연락바랍니다.
+                    </div>
+
+                    <div class="nc-body">
+                        02 - 2165 - 0146
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 하단 -->
+        <div class="app-footer">
+            <div class="af-copy">
+                &copy; Ministry of Oceans and Fisheries
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

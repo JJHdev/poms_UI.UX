@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>드론 영상 등록 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/facility-management-detail.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <link rel="stylesheet" href="css/drone-video-detail.css">
+  <link rel="stylesheet" href="css/drone-video-player.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page fmd-figma-page facility-search-page drone-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시스템 관리 메뉴">
+        <div class="fs-lnb__title">
+          <h2 class="fs-lnb__title-text">시스템 관리</h2>
+        </div>
+        <nav class="fs-lnb__nav" data-admin-sub-tabs="1" aria-label="시스템 관리 하위 메뉴">
+          <a href="facility-management.html" class="fs-lnb__item">
+            <span>시설물 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="maintenance-plan-manage.html" class="fs-lnb__item">
+            <span>유지관리계획 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="mooring-facility-management.html" class="fs-lnb__item">
+            <span>계류시설 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="facility-location-status.html" class="fs-lnb__item">
+            <span>시설물 위치 현황 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="drone-video-management.html" class="fs-lnb__item is-active" aria-current="page">
+            <span>드론 영상관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="responsible-engineer.html" class="fs-lnb__item">
+            <span>책임기술자 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="fmd-page fs-manage" aria-label="드론 영상관리">
+        <div class="fmd-crumb-row">
+          <button type="button" class="fmd-back-btn" id="droneDetailBackBtn" aria-label="목록으로">
+            <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+          </button>
+          <a href="drone-video-management.html" class="fmd-home-btn" aria-label="드론 영상관리 목록">
+            <img src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+          </a>
+          <nav class="fmd-breadcrumb" aria-label="현재 위치">
+            <a href="facility-management.html">시스템 관리</a>
+            <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; 드론 영상관리 &gt; </span>
+            <span class="fmd-breadcrumb__current" id="droneDetailCrumb">드론 영상 등록</span>
+          </nav>
+        </div>
+
+        <div class="drone-detail-layout">
+          <form id="droneForm" class="fmd-stack drone-detail-layout__main" novalidate>
+            <section class="fmd-section" aria-labelledby="droneDetailPageTitle">
+              <div class="fmd-section__head">
+                <span class="fmd-section__icon" aria-hidden="true">
+                  <img src="assets/main/facility-management/icon-section-facility.svg" alt="" width="24" height="24">
+                </span>
+                <h1 class="fmd-section__title" id="droneDetailPageTitle">드론 영상 등록</h1>
+              </div>
+
+              <div class="fmd-section__body">
+                <table class="drone-info-table" aria-label="드론 영상 정보">
+                  <colgroup>
+                    <col class="drone-info-table__label">
+                    <col>
+                    <col class="drone-info-table__label">
+                    <col>
+                  </colgroup>
+                  <tbody>
+                    <tr>
+                      <th scope="row"><span class="req">*</span> 관리기관</th>
+                      <td>
+                        <select class="fmd-select" id="droneFormAgency" name="agency" required>
+                          <option value="">선택</option>
+                        </select>
+                      </td>
+                      <th scope="row"><span class="req">*</span> 항</th>
+                      <td>
+                        <select class="fmd-select" id="droneFormPort" name="port" required>
+                          <option value="">선택</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><span class="req">*</span> 세부항</th>
+                      <td>
+                        <select class="fmd-select" id="droneFormSubPort" name="subPort" required>
+                          <option value="">선택</option>
+                        </select>
+                      </td>
+                      <th scope="row"><span class="req">*</span> 시설물</th>
+                      <td>
+                        <select class="fmd-select" id="droneFormFacility" name="facilityId" required>
+                          <option value="">선택</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><span class="req">*</span> 제목</th>
+                      <td colspan="3">
+                        <input type="text" class="fmd-input" id="droneFormTitle" name="title" required placeholder="제목을 입력하세요.">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">내용</th>
+                      <td colspan="3">
+                        <textarea class="fmd-textarea" id="droneFormContent" name="content" rows="4" placeholder="내용을 입력하세요."></textarea>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">촬영년도</th>
+                      <td id="droneFormYearTd">
+                        <input type="number" class="fmd-input" id="droneFormYear" name="filmYear" min="2000" max="2099" placeholder="예: 2024">
+                      </td>
+                      <th scope="row" id="droneFormRegisteredTh">등록일자</th>
+                      <td id="droneFormRegisteredWrap">
+                        <input type="text" class="fmd-input" id="droneFormRegistered" name="registeredAt" readonly>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">첨부파일</th>
+                      <td colspan="3">
+                        <div class="drone-file-upload" id="droneFormFileWrap">
+                          <div class="drone-file-view" id="droneFormFileView" hidden>
+                            <div class="drone-file-view__meta">
+                              <strong id="droneFormFileViewName"></strong>
+                              <span id="droneFormFileViewSize"></span>
+                            </div>
+                            <div class="drone-file-view__actions">
+                              <button type="button" class="fmd-btn fmd-btn--edit" id="droneFormDownloadBtn">다운로드</button>
+                              <button type="button" class="fmd-btn fmd-btn--save" id="droneFormPlayBtn">동영상 재생하기</button>
+                            </div>
+                          </div>
+
+                          <div class="drone-file-upload__row" id="droneFormFileUpload">
+                            <div class="drone-file-upload__body">
+                              <div class="drone-file-picker">
+                                <input type="file" id="droneFormFile" name="file" accept="video/*,.mp4,.avi,.mov" hidden>
+                                <button type="button" class="drone-file-picker__btn" id="droneFormFileBtn">파일 선택</button>
+                                <span class="drone-file-picker__name" id="droneFormFileName">선택된 파일 없음</span>
+                              </div>
+                              <div class="drone-file-drop" id="droneFormFileDrop">파일을 드래그 해주세요.</div>
+                            </div>
+                            <div class="drone-file-upload__actions">
+                              <button type="button" class="drone-file-delete" id="droneFormFileDelete">파일삭제</button>
+                              <span class="drone-file-hint">(용량 : 1GB 미만)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <div class="fmd-footer">
+              <button type="button" class="fmd-btn fmd-btn--cancel" id="droneCancelBtn">
+                <span class="fmd-btn__icon">
+                  <img src="assets/main/facility-management/icon-cancel.svg" alt="" width="14" height="14">
+                </span>
+                취소
+              </button>
+              <button type="button" class="fmd-btn fmd-btn--edit" id="droneEditBtn" hidden>
+                <span class="fmd-btn__icon">
+                  <img src="assets/main/archive-board/icon-edit.svg" alt="" width="14" height="14">
+                </span>
+                수정하기
+              </button>
+              <button type="button" class="fmd-btn fmd-btn--cancel" id="droneDeleteBtn" hidden>삭제</button>
+              <button type="button" class="fmd-btn fmd-btn--save" id="droneSaveBtn" hidden>
+                <span class="fmd-btn__icon">
+                  <img src="assets/main/facility-management/icon-save.svg" alt="" width="14" height="14">
+                </span>
+                저장하기
+              </button>
+            </div>
+          </form>
+
+          <aside class="drone-side-preview" id="dronePreviewPanel" aria-label="영상 미리보기">
+            <div class="drone-side-preview__head">
+              <h3 class="drone-side-preview__title">영상 미리보기</h3>
+            </div>
+            <div class="drone-side-preview__body" id="dronePreviewVideoWrap">
+              <video id="dronePreviewVideo" controls playsinline preload="metadata"></video>
+              <span class="drone-side-preview__empty" id="dronePreviewEmpty">항목을 선택하거나 영상을 등록하면 미리보기가 표시됩니다.</span>
+            </div>
+            <div class="drone-side-preview__meta">
+              <strong id="dronePreviewFileName"></strong>
+              <span id="dronePreviewFileSize"></span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/drone-video-management-data.js"></script>
+  <script src="js/drone-video-player.js"></script>
+  <script src="js/drone-video-detail.js"></script>
+</body>
+</html>

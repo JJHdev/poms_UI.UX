@@ -1,0 +1,726 @@
+@import url("common-modal.css");
+
+/* 안전점검보고서 승인/반려 — type3 flat */
+
+.safety-report-approval-page {
+  margin: 0;
+  min-width: 1240px;
+}
+
+.safety-report-approval-page .sra-filter-fields > .type3-field {
+  flex: 0 0 200px;
+  width: 200px;
+  max-width: 200px;
+}
+
+.safety-report-approval-page .sra-filter-fields > .type3-field--sm {
+  flex: 0 0 140px;
+  width: 140px;
+  max-width: 140px;
+}
+
+.safety-report-approval-page .sra-filter-fields > .type3-field--grow {
+  flex: 1 1 240px;
+  width: auto;
+  max-width: 320px;
+}
+
+.safety-report-approval-page .type3-results-foot {
+  justify-content: center;
+}
+
+@media (max-width: 1600px) {
+  .safety-report-approval-page .type3-filter--strip {
+    flex-wrap: wrap;
+  }
+
+  .safety-report-approval-page .sra-filter-fields > .type3-field,
+  .safety-report-approval-page .sra-filter-fields > .type3-field--sm,
+  .safety-report-approval-page .sra-filter-fields > .type3-field--grow {
+    flex: 1 1 180px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* ===== Table — fit 1200 content, no horizontal scroll ===== */
+.safety-report-approval-page .type3-table-wrap {
+  overflow-x: hidden;
+}
+
+.safety-report-approval-page .sra-table {
+  width: 100%;
+  min-width: 0 !important;
+  max-width: 100%;
+  table-layout: fixed;
+}
+
+.safety-report-approval-page .sra-table col.col-no { width: 3%; }
+.safety-report-approval-page .sra-table col.col-year { width: 5%; }
+.safety-report-approval-page .sra-table col.col-agency { width: 10%; }
+.safety-report-approval-page .sra-table col.col-name { width: 13%; }
+.safety-report-approval-page .sra-table col.col-type { width: 8%; }
+.safety-report-approval-page .sra-table col.col-requester { width: 8%; }
+.safety-report-approval-page .sra-table col.col-date { width: 11%; }
+.safety-report-approval-page .sra-table col.col-status { width: 7%; }
+.safety-report-approval-page .sra-table col.col-report { width: 11%; }
+.safety-report-approval-page .sra-table col.col-action { width: 10%; }
+.safety-report-approval-page .sra-table col.col-history { width: 8%; }
+
+.safety-report-approval-page .sra-table thead th,
+.safety-report-approval-page .sra-table tbody td {
+  height: 32px;
+  padding: 2px 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.safety-report-approval-page .sra-table tbody td {
+  color: #333;
+}
+
+.safety-report-approval-page .sra-table tbody td.is-left {
+  text-align: left;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.safety-report-approval-page .sra-table tbody tr.is-downloaded td {
+  color: #6c788b;
+}
+
+
+/* ===== Status badges ===== */
+.sra-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.sra-status--pending {
+  background: rgba(239, 201, 75, 0.15);
+  color: #d4a50a;
+}
+
+.sra-status--approved {
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+}
+
+.sra-status--rejected {
+  background: rgba(230, 0, 45, 0.04);
+  color: #e6002d;
+}
+
+.sra-status--downloaded {
+  background: rgba(108, 120, 139, 0.1);
+  color: #6c788b;
+}
+
+/* ===== Table action buttons ===== */
+.sra-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  max-width: 100%;
+}
+
+.sra-tbl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 2px 6px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.sra-tbl-btn:hover {
+  background: #f4f4fa;
+  border-color: #c8cfd9;
+}
+
+.sra-tbl-btn--approve {
+  border-color: #1c6fff;
+  background: #1c6fff;
+  color: #fff;
+}
+
+.sra-tbl-btn--approve:hover {
+  background: #1557d0;
+  border-color: #1557d0;
+  color: #fff;
+}
+
+.sra-tbl-btn--reject {
+  border-color: #e6002d;
+  color: #e6002d;
+  background: #fff;
+}
+
+.sra-tbl-btn--reject:hover {
+  background: rgba(230, 0, 45, 0.06);
+  border-color: #e6002d;
+  color: #e6002d;
+}
+
+.sra-tbl-btn--download,
+.sra-tbl-btn--history {
+  width: auto;
+  max-width: 100%;
+  padding: 2px 6px;
+}
+
+.sra-done-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #6c788b;
+}
+
+/* ===== Reject modal ===== */
+.safety-report-approval-page ~ .sra-modal,
+.sra-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.sra-modal[hidden] {
+  display: none !important;
+}
+
+.sra-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.sra-modal__panel {
+  position: relative;
+  width: min(520px, 100%);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+}
+
+.sra-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid #ededed;
+}
+
+.sra-modal__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.36px;
+}
+
+.sra-modal__close {
+  border: none;
+  background: transparent;
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+  line-height: 1;
+  color: #6c788b;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.sra-modal__close:hover {
+  background: #f4f4fa;
+  color: #111;
+}
+
+.sra-modal__body {
+  padding: 20px;
+}
+
+.sra-modal__sub {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #6c788b;
+  line-height: 1.4;
+}
+
+.sra-modal__label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+}
+
+.sra-modal__label .req {
+  color: #e6002d;
+  margin-left: 2px;
+}
+
+.sra-modal__textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  resize: vertical;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+.sra-modal__textarea:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+.sra-modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 16px 20px 20px;
+}
+
+.sra-modal__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sra-modal__btn--cancel {
+  border-color: #dadae2;
+  background: #fff;
+  color: #333;
+}
+
+.sra-modal__btn--cancel:hover {
+  background: #f4f4fa;
+}
+
+.sra-modal__btn--danger {
+  background: #e6002d;
+  color: #fff;
+}
+
+.sra-modal__btn--danger:hover {
+  background: #c40026;
+}
+
+/* ===== History drawer ===== */
+body:has(.sra-drawer-overlay.is-open) #sidebar-root,
+body:has(.sra-drawer.is-open) #sidebar-root {
+  z-index: 1000;
+}
+
+.safety-report-approval-page .sra-drawer-overlay,
+.sra-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+.sra-drawer-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.sra-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3001;
+  display: flex;
+  flex-direction: column;
+  width: 560px;
+  max-width: 100vw;
+  height: min(980px, 100vh);
+  max-height: 100vh;
+  background: #fff;
+  border-radius: 14px 0 0 14px;
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.25),
+    4px 4px 5px rgba(0, 0, 0, 0.15),
+    4px 4px 7px rgba(0, 0, 0, 0.04);
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  box-sizing: border-box;
+}
+
+.sra-drawer.is-open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.sra-drawer__top {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+  flex: 1 1 auto;
+  padding-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.sra-drawer__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 30px 24px 20px;
+  border-bottom: 1px solid #ededed;
+  border-radius: 14px 0 0 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.sra-drawer__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.48px;
+  line-height: 1.2;
+}
+
+.sra-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: #dadae2;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sra-drawer__close img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.sra-drawer__close:hover {
+  background: #cbccd6;
+}
+
+.sra-drawer__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 0 24px;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.sra-hist-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.sra-hist-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sra-hist-summary__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.sra-hist-summary__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.sra-hist-summary__name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.36px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sra-hist-summary__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  min-width: 0;
+}
+
+.sra-hist-summary__type {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sra-hist-summary__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.sra-hist-summary__status.is-pending {
+  background: rgba(239, 201, 75, 0.15);
+  color: #d4a50a;
+}
+
+.sra-hist-summary__status.is-approved {
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+}
+
+.sra-hist-summary__status.is-rejected {
+  background: rgba(230, 0, 45, 0.04);
+  color: #e6002d;
+}
+
+.sra-hist-summary__status.is-downloaded {
+  background: rgba(108, 120, 139, 0.1);
+  color: #6c788b;
+}
+
+.sra-hist-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.sra-hist-row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 44px;
+}
+
+.sra-hist-row__label {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  flex-shrink: 0;
+  padding: 10px 20px;
+  background: rgba(28, 111, 255, 0.04);
+  border: 1px solid #dadae2;
+  border-radius: 12px 0 0 12px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  white-space: nowrap;
+}
+
+.sra-hist-row__value {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sra-hist-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.sra-hist-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: 1px solid #dadae2;
+  background: rgba(108, 120, 139, 0.04);
+}
+
+.sra-hist-card.is-done {
+  border-color: #1c6fff;
+  background: rgba(28, 111, 255, 0.05);
+}
+
+.sra-hist-card.is-reject {
+  border-color: #e6002d;
+  background: rgba(230, 0, 45, 0.05);
+}
+
+.sra-hist-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.sra-hist-card__left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sra-hist-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(108, 120, 139, 0.15);
+  font-size: 12px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.sra-hist-card.is-done .sra-hist-card__badge {
+  background: rgba(28, 111, 255, 0.15);
+  color: #1c6fff;
+}
+
+.sra-hist-card.is-reject .sra-hist-card__badge {
+  background: rgba(230, 0, 45, 0.12);
+  color: #e6002d;
+}
+
+.sra-hist-card__by {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sra-hist-card__date {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sra-hist-card__note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.sra-hist-card__note-tag {
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+.sra-hist-card__note-text {
+  color: #333;
+  word-break: break-word;
+}

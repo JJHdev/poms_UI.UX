@@ -1,0 +1,102 @@
+/**
+ * 표 행 높이 공통 규칙
+ * - 목록형(헤더 아래 데이터): 32px
+ * - 정보형(라벨 | 값 가로): 34px
+ */
+:root {
+  --table-row-list: 32px;
+  --table-row-inline: 34px;
+}
+
+/* ── 목록형: thead 단일/데이터 행 + tbody ── */
+.type3-table thead th,
+.type3-table tbody td,
+.fcr-table thead th,
+.fcr-table tbody td,
+.fm-table thead th,
+.fm-table tbody td,
+.svc-table th,
+.svc-table td,
+.fms-table thead th,
+.fms-table tbody td,
+.fca-table thead th,
+.fca-table tbody td,
+.rsh-table thead th,
+.rsh-table tbody td,
+.agency-table thead th,
+.agency-table tbody td,
+.result-manage-table thead th,
+.result-manage-table tbody td,
+.vrd-table thead th,
+.vrd-table tbody td,
+.sra-table thead th,
+.sra-table tbody td,
+.grade-detail-table thead th,
+.grade-detail-table tbody td,
+.sms-contacts-table thead th,
+.sms-contacts-table tbody td,
+.sms-history-table thead th,
+.sms-history-table tbody td,
+.insp-status-table tbody td,
+.insp-overview-detail__table thead th,
+.insp-overview-detail__table tbody td,
+.data-table thead th,
+.data-table tbody td,
+.condition-table thead th,
+.condition-table tbody td,
+.mpd-table thead th,
+.mpd-table tbody td,
+.ntc-table thead th,
+.ntc-table tbody td,
+.notice-table thead th,
+.notice-table tbody td,
+.loc-table thead th,
+.loc-table tbody td,
+.admin-users-table thead th,
+.admin-users-table tbody td,
+.fcr-history-table thead th,
+.fcr-history-table tbody td {
+  height: var(--table-row-list);
+  min-height: var(--table-row-list);
+  box-sizing: border-box;
+}
+
+/* 점검현황 그룹 헤더(2단)는 기존 27px 유지 */
+.insp-status-table thead tr:first-child th[colspan],
+.insp-status-table thead tr:nth-child(2) th {
+  height: 27px;
+  min-height: 27px;
+}
+
+/* ── 정보형: 라벨|값 가로 배치 ── */
+.info-field__label,
+.info-field__value,
+.fac-add-field__label,
+.fac-add-field__control:not(.fac-add-field__control--stack),
+.facility-detail-page .info-table th,
+.facility-detail-page .info-table td,
+.facility-form-page .info-table.precision-modal__table th,
+.facility-form-page .info-table.precision-modal__table td,
+.facility-form-page .info-table.repair-modal__table th,
+.facility-form-page .info-table.repair-modal__table td,
+.facility-form-page .info-table.vulnerable-modal__table:not(:has(thead)) th,
+.facility-form-page .info-table.vulnerable-modal__table:not(:has(thead)) td,
+.facility-form-page .info-table.major-defect-modal__table th,
+.facility-form-page .info-table.major-defect-modal__table td {
+  height: var(--table-row-inline);
+  min-height: var(--table-row-inline);
+  box-sizing: border-box;
+}
+
+.fac-add-field:not(.notice-detail-field--content):not(:has(.fac-add-field__control--stack)) {
+  min-height: var(--table-row-inline);
+}
+
+body.fcr-detail-flat-page .fac-add-field:not(.notice-detail-field--content):not(:has(.fac-add-field__control--stack)) {
+  height: var(--table-row-inline) !important;
+  min-height: var(--table-row-inline) !important;
+}
+
+body.fcr-detail-flat-page .fac-add-field:has(.fac-add-field__control--stack):not(.notice-detail-field--content) {
+  min-height: var(--table-row-inline) !important;
+}

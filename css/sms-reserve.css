@@ -1,0 +1,753 @@
+/* 문자예약 — 관리자 시안 기준 (admin-notices.css 동일 규격, 자체 완결형) */
+
+/* ===== 레이아웃 ===== */
+/* 폭/양옆 여백(1400 + 260×2)은 admin-topnav.css의 .main-content 규칙이 담당 */
+.sms-reserve-page-root .main-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.sms-reserve-page-root .sms-reserve-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ===== 섹션 타이틀 ===== */
+.sms-reserve-page-root .sms-reserve-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+}
+
+.sms-reserve-page-root .sms-reserve-section-title__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* 아이콘을 포인트 블루(#1c6fff)로 — SVG 원본 색과 무관하게 filter로 채색 */
+.sms-reserve-page-root .sms-reserve-section-title__icon img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(45.1%) sepia(99.6%) saturate(434%)
+    hue-rotate(190deg) brightness(87.7%) contrast(236%);
+}
+
+.sms-reserve-page-root .sms-reserve-section-title__text {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.sms-reserve-page-root .sms-reserve-section-title__badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* ===== 목록 헤더 ===== */
+.sms-reserve-page-root .sms-reserve-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sms-reserve-page-root .sms-reserve-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 30px;
+}
+
+.sms-reserve-page-root .sms-reserve-results__count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sms-reserve-page-root .sms-reserve-results__bar-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sms-reserve-page-root .sms-reserve-results__bar-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-reserve-page-root .sms-reserve-results__label {
+  margin: 0;
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.sms-reserve-page-root .sms-reserve-results__meta {
+  margin: 0;
+  color: #6c788b;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+}
+
+.sms-reserve-page-root .sms-reserve-results__meta strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+/* 추가 버튼 */
+.sms-reserve-page-root .btn-sms-reserve-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 96px;
+  height: 30px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+.sms-reserve-page-root .btn-sms-reserve-add:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+.sms-reserve-page-root .btn-sms-reserve-add img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: none;
+  flex-shrink: 0;
+}
+
+/* ===== 목록 테이블 ===== */
+.sms-reserve-page-root .sms-reserve-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px 6px 0 0;
+}
+
+.sms-reserve-page-root .sms-reserve-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.sms-reserve-page-root .sms-reserve-table thead,
+.sms-reserve-page-root .sms-reserve-table tbody,
+.sms-reserve-page-root .sms-reserve-table tr {
+  border: 0 !important;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sms-reserve-page-root .sms-reserve-table thead th,
+.sms-reserve-page-root .sms-reserve-table tbody td {
+  height: 32px;
+  max-height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.sms-reserve-page-root .sms-reserve-table thead th {
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111;
+  font-weight: 500;
+}
+
+.sms-reserve-page-root .sms-reserve-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+.sms-reserve-page-root .sms-reserve-table thead th:last-child {
+  border-right: 0 !important;
+  border-radius: 0 6px 0 0;
+}
+
+.sms-reserve-page-root .sms-reserve-table tbody td {
+  background: #fff;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333;
+  font-weight: 400;
+}
+
+.sms-reserve-page-root .sms-reserve-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+.sms-reserve-page-root .sms-reserve-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.sms-reserve-page-root .sms-reserve-table tbody tr {
+  cursor: pointer;
+}
+
+.sms-reserve-page-root .sms-reserve-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.sms-reserve-page-root .sms-reserve-table tbody tr.is-selected td {
+  background: #eef4ff;
+}
+
+/* 메세지 셀 좌측 정렬 */
+.sms-reserve-page-root .sms-reserve-table tbody td:last-child {
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: left;
+}
+
+/* 컬럼 폭 */
+.sms-reserve-page-root .sms-reserve-table .col-no {
+  width: 48px;
+}
+
+.sms-reserve-page-root .sms-reserve-table .col-type {
+  width: 160px;
+}
+
+.sms-reserve-page-root .sms-reserve-table .col-date {
+  width: 160px;
+}
+
+/* 데이터 없음 */
+.sms-reserve-page-root .sms-reserve-table .sms-reserve-empty td,
+.sms-reserve-page-root .sms-reserve-table .is-empty td {
+  height: 120px;
+  max-height: none;
+  line-height: 1.4;
+  color: #8993a1;
+  text-align: center !important;
+  cursor: default;
+}
+
+/* ===== 페이지네이션 (flat) ===== */
+.sms-reserve-page-root .sms-reserve-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 20px 0 0;
+}
+
+.sms-reserve-page-root .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.sms-reserve-page-root .pagination__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+  transform: none;
+}
+
+.sms-reserve-page-root .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.sms-reserve-page-root .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.sms-reserve-page-root .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.sms-reserve-page-root .pagination__btn[data-page-move] {
+  font-size: inherit;
+  color: inherit;
+  background-color: #fff;
+  background-image: none;
+}
+
+.sms-reserve-page-root .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-reserve-page-root .pagination__btn[data-page-move="next"] img,
+.sms-reserve-page-root .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.sms-reserve-page-root .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.sms-reserve-page-root .pagination__btn svg {
+  display: none;
+}
+
+.sms-reserve-page-root .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+/* ===== 상세 슬라이드(우측 드로어) ===== */
+.sms-reserve-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  background: rgba(13, 31, 53, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.sms-reserve-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sms-reserve-overlay[hidden] {
+  display: none !important;
+}
+
+.sms-reserve-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2101;
+  display: flex;
+  flex-direction: column;
+  width: min(560px, calc(100vw - 40px));
+  height: 100vh;
+  max-height: 100vh;
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.sms-reserve-drawer.is-open {
+  transform: translateX(0);
+}
+
+.sms-reserve-drawer__top {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+.sms-reserve-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 0;
+  padding: 22px 24px 14px;
+  border-bottom: 1px solid #dadae2;
+  flex-shrink: 0;
+}
+
+.sms-reserve-drawer__title {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.sms-reserve-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sms-reserve-drawer__close img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-reserve-drawer__close:hover {
+  background: #f6f8fb;
+}
+
+.sms-reserve-drawer__body {
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: 18px 24px 24px;
+  overflow-y: auto;
+}
+
+.sms-reserve-drawer__desc {
+  margin: 0 0 16px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* 입력 폼 */
+.sms-reserve-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sms-reserve-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sms-reserve-field--message {
+  grid-column: 1 / -1;
+}
+
+.sms-reserve-field label {
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sms-reserve-field input,
+.sms-reserve-field textarea,
+.sms-reserve-select-wrap select {
+  width: 100%;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sms-reserve-field input,
+.sms-reserve-select-wrap select {
+  height: 34px;
+  padding: 0 14px;
+  line-height: 1;
+}
+
+.sms-reserve-field input::placeholder,
+.sms-reserve-field textarea::placeholder {
+  color: #999;
+}
+
+.sms-reserve-field textarea {
+  min-height: 170px;
+  padding: 10px 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.sms-reserve-field input:focus,
+.sms-reserve-field textarea:focus,
+.sms-reserve-select-wrap select:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+/* 셀렉트 */
+.sms-reserve-select-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.sms-reserve-select-wrap select {
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+.sms-reserve-select-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  width: 9px;
+  height: 9px;
+  margin-top: -6px;
+  border-right: 1.6px solid #6c788b;
+  border-bottom: 1.6px solid #6c788b;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.sms-reserve-select-wrap img {
+  display: none;
+}
+
+/* 예약어 안내 */
+.sms-reserve-guide {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #f3f8fe;
+  box-sizing: border-box;
+}
+
+.sms-reserve-guide h3 {
+  margin: 0 0 10px;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.sms-reserve-guide ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.sms-reserve-guide ul + ul {
+  margin-top: 8px;
+}
+
+.sms-reserve-guide li {
+  margin: 4px 0;
+  color: #6c788b;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.sms-reserve-guide strong {
+  color: #1c6fff;
+  font-weight: 500;
+}
+
+/* 드로어 푸터 */
+.sms-reserve-drawer__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  border-top: 1px solid #dadae2;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.sms-reserve-drawer__note {
+  margin: 0;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+.sms-reserve-drawer__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-sms-reserve-cancel,
+.btn-sms-reserve-delete,
+.btn-sms-reserve-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 88px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-sms-reserve-cancel:hover {
+  background: #f6f8fb;
+}
+
+.btn-sms-reserve-delete {
+  border-color: #e5002b;
+  background: #fef5f8;
+  color: #e5002b;
+}
+
+.btn-sms-reserve-delete:hover {
+  background: #fdeaf0;
+}
+
+.btn-sms-reserve-save {
+  border-color: #0b1a2d;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.btn-sms-reserve-save:hover {
+  border-color: #16304f;
+  background: #16304f;
+}
+
+/* 삭제 / 저장 버튼 아이콘 */
+.btn-sms-reserve-delete img,
+.btn-sms-reserve-save img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* 삭제: #e5002b */
+.btn-sms-reserve-delete img {
+  filter: brightness(0) saturate(100%) invert(25.1%) sepia(29.2%) saturate(1116%)
+    hue-rotate(289deg) brightness(125.7%) contrast(263%);
+}
+
+/* 저장: 흰색 */
+.btn-sms-reserve-save img {
+  filter: brightness(0) invert(1);
+}
+
+/* 구버전 인라인 SVG 아이콘 제거 */
+.btn-sms-reserve-delete__icon {
+  display: none;
+}
+
+/* ===== 유틸 ===== */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .sms-reserve-drawer {
+    width: 100vw;
+  }
+
+  .sms-reserve-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

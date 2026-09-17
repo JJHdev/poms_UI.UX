@@ -1,0 +1,529 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>항만시설물 유지관리 시스템 (POMS)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css?v=20260820-vendor-apply">
+  <link rel="stylesheet" href="css/site-footer.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/facility-detail.css">
+  <link rel="stylesheet" href="css/facility-add.css">
+  <link rel="stylesheet" href="css/facility-change-request-detail.css">
+  <link rel="stylesheet" href="css/archive-notice.css?v=3">
+  <link rel="stylesheet" href="css/archive-board.css?v=3">
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+  <link rel="stylesheet" href="css/facility-info-modal.css">
+  <link rel="stylesheet" href="css/facility-info-page.css">
+  <link rel="stylesheet" href="css/vendor-apply.css?v=20260820-figma">
+  <link rel="stylesheet" href="css/drone-video-player.css">
+  <link rel="stylesheet" href="css/education-video-modal.css">
+</head>
+<body class="page-home">
+  <header class="home-header">
+    <div class="home-header__inner container">
+      <a href="./index.html" class="home-header__brand" aria-label="항만시설물 유지관리시스템">
+        <img class="home-header__logo-mark" src="assets/figma-home/main1-v2/logo-mark.svg" alt="" width="40" height="40">
+        <img class="home-header__logo-title" src="assets/figma-home/main1-v2/logo-title.svg" alt="항만시설물 유지관리시스템" width="226" height="19">
+      </a>
+
+      <nav class="home-header__actions" aria-label="바로가기">
+        <a class="home-header__action" href="./service_main.html">용역사 신청</a>
+        <span class="home-header__sep" aria-hidden="true"></span>
+        <a class="home-header__action" href="./mobile/mobile_main.html">모바일</a>
+        <span class="home-header__sep" aria-hidden="true"></span>
+        <a class="home-header__action" href="./admin-users.html">관리자</a>
+      </nav>
+
+      <nav class="home-header__nav" aria-label="주요 메뉴">
+        <a class="home-header__nav-btn" href="#/facility" data-home-view="facility" data-mega-col="facility-info">항만 시설물 정보</a>
+        <a class="home-header__nav-btn" href="#/safety" data-home-view="safety" data-mega-col="facility-manage">안전등급 현황</a>
+        <a class="home-header__nav-btn" href="#/notice" id="homeArchiveCard" data-home-view="archive" data-mega-col="archive">자료실</a>
+      </nav>
+    </div>
+
+    <div class="home-header__mega" role="navigation" aria-label="세부 메뉴">
+      <div class="home-header__mega-inner container">
+        <div class="home-header__mega-cols">
+          <div class="home-header__mega-col" data-mega-col="facility-info">
+            <a class="home-header__mega-link" href="#/facility" data-home-view="facility">시설물 정보</a>
+          </div>
+          <div class="home-header__mega-col" data-mega-col="facility-manage">
+            <a class="home-header__mega-link" href="#/safety" data-home-view="safety">안전등급현황</a>
+          </div>
+          <div class="home-header__mega-col" data-mega-col="archive">
+            <a class="home-header__mega-link" href="#/notice" data-home-view="notice">공지사항</a>
+            <a class="home-header__mega-link" href="#/law" data-home-view="law">게시판</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="home-header__mega-dim" aria-hidden="true"></div>
+  </header>
+
+  <section id="homeSubpage" class="home-subpage" hidden>
+    <div class="home-subpage__inner container">
+      <div class="type3-page home-subpage__type3" id="homeSubPanel">
+        <div class="home-subpage__list-chrome" id="homeSubListChrome">
+          <header class="page-header home-subpage__nav">
+            <button type="button" class="btn-back" id="homeSubBack" data-action="home" aria-label="이전">
+              <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+            </button>
+            <button type="button" class="page-header__home" id="homeSubHome" data-action="home" aria-label="홈으로">
+              <img class="page-header__home-icon" src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+            </button>
+            <nav class="breadcrumb" aria-label="현재 위치">
+              <button type="button" class="breadcrumb__link" id="homeSubCrumbHome" data-action="home">홈</button>
+              <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+              <span class="breadcrumb__current" id="homeSubCrumbCurrent">제목</span>
+            </nav>
+          </header>
+          <div class="type3-section-title">
+            <span class="type3-section-title__icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+            </span>
+            <h1 class="type3-section-title__text" id="homeSubTitleText">제목</h1>
+          </div>
+        </div>
+        <div class="home-subpage__body" id="homeSubBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="homeLanding">
+  <main class="home-main">
+    <div class="home-main__top">
+      <section class="hero-banner" aria-label="메인 비주얼">
+        <div class="hero-banner__media" aria-hidden="true">
+          <img class="hero-banner__img" src="assets/figma-home/main1-v2/hero-banner.jpg" alt="">
+          <div class="hero-banner__overlay"></div>
+        </div>
+        <div class="hero-banner__content">
+          <h1 class="hero-banner__title">
+            <span class="hero-banner__title-line">항만시설물</span>
+            <span class="hero-banner__title-line"><span class="hero-banner__title-accent">유지관리</span> 시스템 (POMS)</span>
+          </h1>
+          <p class="hero-banner__desc">
+            항만시설물 유지관리부터 안전등급 현황까지.<br>
+            <strong>항만시설물 유지관리시스템</strong>에 오신것을 환영합니다.
+          </p>
+          <button type="button" class="hero-banner__cta" id="heroGuideBtn">
+            동영상 교육자료
+            <span class="hero-banner__cta-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.17 10h11.66M11.67 5.83 15.83 10l-4.16 4.17" stroke="#fff" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <aside class="login-card">
+        <div class="login-card__head-block">
+          <div class="login-card__brand">
+            <span class="login-card__brand-badge" aria-hidden="true">
+              <img
+                src="assets/figma-home/main1/login-brand-icon.svg"
+                alt=""
+                class="login-card__brand-img"
+                width="22"
+                height="22"
+              >
+            </span>
+            <span class="login-card__brand-text"><strong>항만시설물</strong> 유지관리 시스템</span>
+          </div>
+          <h2 class="login-card__title">로그인</h2>
+        </div>
+        <form class="login-card__form" id="loginForm" action="#" method="post" novalidate>
+          <p id="loginMessage" class="login-card__message" hidden role="alert"></p>
+          <div class="login-card__fields">
+            <div class="login-card__fields-inner">
+              <div class="login-card__field">
+                <label class="sr-only" for="userId">사용자 아이디</label>
+                <input type="text" id="userId" name="userId" placeholder="사용자 아이디" autocomplete="username">
+              </div>
+              <div class="login-card__field">
+                <label class="sr-only" for="userPw">비밀번호</label>
+                <div class="login-card__input-wrap">
+                  <input type="password" id="userPw" name="userPw" placeholder="비밀번호" autocomplete="current-password">
+                  <button type="button" class="login-card__toggle-pw" id="togglePw" aria-label="비밀번호 표시">
+                    <img src="assets/figma-home/main1/login-eye.svg" alt="" width="16" height="16">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="login-card__submit">로그인</button>
+          <div class="login-card__footer">
+            <label class="login-card__remember">
+              <input type="checkbox" id="saveId" name="saveId" checked>
+              <span>아이디 저장</span>
+            </label>
+            <span class="login-card__sep" aria-hidden="true">|</span>
+            <a href="#/vendor-apply" class="login-card__find-pw">용역사 신청</a>
+          </div>
+        </form>
+      </aside>
+    </div>
+
+    <div class="home-main__bottom">
+      <div class="boards">
+        <article class="board" id="homeNoticeBoard">
+          <header class="board__head">
+            <h2 class="board__title">공지사항</h2>
+            <a class="board__more" href="#/notice" id="homeNoticeMoreBtn">더보기+</a>
+          </header>
+          <ul class="board__list">
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">01</span>
+                <span class="board__title-group">
+                  <a class="board__link" href="#/notice/26" data-notice-id="26">2026년 항만시설물 유지관리 시스템 개선 안내</a>
+                  <span class="badge badge--new">NEW</span>
+                </span>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">02</span>
+                <span class="board__title-group">
+                  <a class="board__link" href="#/notice/24" data-notice-id="24">항만시설물 유지관리 교육(2기) 안내</a>
+                  <span class="badge badge--new">NEW</span>
+                </span>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">03</span>
+                <a class="board__link" href="#/notice/23" data-notice-id="23">2026년 시스템 사업자평가 대상 안내</a>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">04</span>
+                <a class="board__link" href="#/notice/22" data-notice-id="22">2026년 시스템 사업자평가 대상 안내</a>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">05</span>
+                <a class="board__link" href="#/notice/21" data-notice-id="21">2026년 시스템 사업자평가 대상 안내</a>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">06</span>
+                <a class="board__link" href="#/notice/20" data-notice-id="20">2026년 시스템 사업자평가 대상 안내</a>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+          </ul>
+        </article>
+
+        <article class="board board--law" id="homeLawBoard">
+          <header class="board__head">
+            <h2 class="board__title">게시판</h2>
+            <a class="board__more" href="#/law" id="homeLawMoreBtn">더보기+</a>
+          </header>
+          <ul class="board__list">
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">01</span>
+                <a class="board__link" href="#/law/15" data-law-id="15">1종 항만외곽시설물의 시설물 안전 및 유지관리에 관한 특별법 시행령 개정 안내</a>
+                <span class="badge badge--new">NEW</span>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">02</span>
+                <a class="board__link" href="#/law/14" data-law-id="14">2종 항만외곽시설물의 시설물 안전 및 유지관리에 관한 특별법 시행령 개정 안내</a>
+                <span class="badge badge--new">NEW</span>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">03</span>
+                <a class="board__link" href="#/law/13" data-law-id="13">산업입지 및 개발에 관한 법률 안내</a>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">04</span>
+                <a class="board__link" href="#/law/12" data-law-id="12">항만시설물 안전 및 유지관리에 관한 규정 안내</a>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">05</span>
+                <a class="board__link" href="#/law/11" data-law-id="11">시설물 안전관리 지침 개정 안내</a>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+            <li class="board__item">
+              <div class="board__main">
+                <span class="board__num">06</span>
+                <a class="board__link" href="#/law/10" data-law-id="10">항만시설 유지관리 매뉴얼 안내</a>
+              </div>
+              <time class="board__date" datetime="2024-05-10">2024-05-10</time>
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <aside class="home-side" aria-label="연관 시스템·문의">
+        <div class="sys-grid">
+          <div class="sys-grid__row">
+            <a href="https://www.koreaports.kr/" class="sys-grid__item" target="_blank" rel="noopener">
+              <img src="assets/figma-home/main1-v2/btn-ports.png" alt="한국항만협회" width="159" height="100">
+            </a>
+            <a href="https://www.mof.go.kr/index.do" class="sys-grid__item" target="_blank" rel="noopener">
+              <img src="assets/figma-home/main1-v2/btn-mof.png" alt="해양수산부" width="159" height="100">
+            </a>
+          </div>
+          <div class="sys-grid__row">
+            <a href="#" class="sys-grid__item">
+              <img src="assets/figma-home/main1-v2/btn-report.png" alt="보고관리시스템" width="159" height="100">
+            </a>
+            <a href="https://www.fms.or.kr/com/mainForm.do" class="sys-grid__item" target="_blank" rel="noopener">
+              <img src="assets/figma-home/main1-v2/btn-fms.png" alt="FMS" width="159" height="100">
+            </a>
+          </div>
+        </div>
+
+        <div class="support-panel">
+          <a href="mobile/mobile_main.html" class="support-panel__top" aria-label="모바일 화면으로 이동">
+            <div class="support-panel__top-text">
+              <strong class="support-panel__top-title">모바일 접속</strong>
+              <p class="support-panel__top-desc">모바일에서 스캔하시면<br>로그인 화면으로 이동합니다.</p>
+            </div>
+            <span class="support-panel__top-qr">
+              <img src="assets/QR/mobile-access-qr.png" alt="모바일 접속 QR코드" width="50" height="50">
+            </span>
+          </a>
+          <a href="tel:0221650146" class="support-panel__phone">
+            <span class="support-panel__phone-label">
+              <img src="assets/figma-home/main1-v2/icon-phone.svg" alt="" width="18" height="18">
+              문의전화
+            </span>
+            <strong class="support-panel__phone-num">02-2165-0146</strong>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+  </div>
+
+  <!-- ===== 메인 접속 팝업 (이미지형 / 게시글형) ===== -->
+  <style>
+    .main-popup {
+      position: fixed;
+      top: 60px;
+      z-index: 2000;
+      width: 520px;
+      max-width: calc(100vw - 40px);
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .3);
+      display: flex;
+      flex-direction: column;
+      font-family: "Noto Sans KR", system-ui, sans-serif;
+    }
+    .main-popup[hidden] { display: none; }
+    .main-popup--image { left: 80px; }
+    .main-popup--board { left: 640px; top: 90px; width: 560px; }
+    @media (max-width: 1240px) { .main-popup--board { left: 120px; top: 120px; } }
+    .main-popup__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e5e7eb;
+      color: #111827;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .main-popup__head-close { border: none; background: none; color: #6b7280; font-size: 18px; line-height: 1; cursor: pointer; }
+    .main-popup__body { padding: 14px; overflow-y: auto; max-height: 72vh; }
+    .main-popup__foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      border-top: 1px solid #e5e7eb;
+      background: #f8fafc;
+    }
+    .main-popup__today { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #374151; }
+    .main-popup__close-btn {
+      height: 28px; padding: 0 14px; border: none; background: #111827; color: #fff;
+      font-size: 12px; font-weight: 600; font-family: inherit; cursor: pointer;
+    }
+
+    /* 이미지형 팝업 — CSS 포스터 (무채색) */
+    .main-popup__poster {
+      background: #f3f4f6;
+      padding: 26px 22px;
+      text-align: center;
+    }
+    .main-popup__poster-eyebrow { font-size: 11px; letter-spacing: 2px; color: #6b7280; font-weight: 700; margin: 0 0 10px; }
+    .main-popup__poster-title { margin: 0 0 16px; font-size: 24px; line-height: 1.35; font-weight: 800; color: #111827; }
+    .main-popup__poster-lead {
+      margin: 0 0 14px; padding: 10px 12px; background: #fff; border: 1px solid #e5e7eb;
+      font-size: 12.5px; color: #1f2937; line-height: 1.7; text-align: left; border-radius: 6px;
+    }
+    .main-popup__poster-box {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;
+      text-align: left;
+    }
+    .main-popup__poster-box h4 { margin: 0 0 6px; font-size: 13px; color: #111827; }
+    .main-popup__poster-box p { margin: 0; font-size: 12px; color: #374151; line-height: 1.6; }
+    .main-popup__poster-org { margin: 14px 0 0; font-size: 12px; font-weight: 700; color: #4b5563; }
+
+    /* 게시글형 팝업 */
+    .main-popup__post-title { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 15px; font-weight: 700; color: #111827; }
+    .main-popup__post-title::before { content: ""; width: 10px; height: 10px; background: #6b7280; flex-shrink: 0; }
+    .main-popup__post-meta { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 12px; }
+    .main-popup__post-meta th { width: 90px; padding: 6px 10px; background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569; font-weight: 600; }
+    .main-popup__post-meta td { padding: 6px 10px; border: 1px solid #e2e8f0; color: #111827; }
+    .main-popup__post-body { font-size: 13px; color: #1f2937; line-height: 1.8; max-height: 300px; overflow-y: auto; padding-right: 4px; }
+    .main-popup__post-body p { margin: 0 0 12px; }
+  </style>
+
+  <!-- 팝업 1: 이미지형 -->
+  <div class="main-popup main-popup--image" id="mainPopupImage" hidden role="dialog" aria-label="알림 팝업">
+    <div class="main-popup__head">
+      <span>알림</span>
+      <button type="button" class="main-popup__head-close" data-popup-close="mainPopupImage" aria-label="닫기">&times;</button>
+    </div>
+    <div class="main-popup__body" style="padding:0;">
+      <div class="main-popup__poster">
+        <p class="main-popup__poster-eyebrow">| PORT FACILITY MAINTENANCE SYSTEM |</p>
+        <h3 class="main-popup__poster-title">상반기 정기안전점검<br>자료 제출 안내</h3>
+        <p class="main-popup__poster-lead">
+          점검·진단·성능평가 용역에 참여하는 관리기관 및 용역사는 상반기 정기안전점검
+          결과 자료를 기한 내 POMS(항만시설물 유지관리 시스템)에 등록하여야 합니다.
+        </p>
+        <div class="main-popup__poster-box">
+          <h4>✦ 제출 기간</h4>
+          <p>2026-06-08 ~ 2026-06-20 (기한 초과 시 제출이 제한됩니다.)</p>
+        </div>
+        <div class="main-popup__poster-box">
+          <h4>✦ 제출 방법</h4>
+          <p>점검결과 등록관리 &gt; 점검보고서 등록에서 결과보고서(PDF)를 업로드해 주세요.</p>
+        </div>
+        <div class="main-popup__poster-box">
+          <h4>✦ 유의 사항</h4>
+          <p>제출 자료는 관리자 승인 후 반영되며, 반려 시 사유 확인 후 재제출하여야 합니다.</p>
+        </div>
+        <p class="main-popup__poster-org">해양수산부 · POMS 항만시설물 유지관리 시스템</p>
+      </div>
+    </div>
+    <div class="main-popup__foot">
+      <label class="main-popup__today">
+        <input type="checkbox" data-popup-today="mainPopupImage">
+        오늘 하루 창 열지 않기
+      </label>
+      <button type="button" class="main-popup__close-btn" data-popup-close="mainPopupImage">닫기</button>
+    </div>
+  </div>
+
+  <!-- 팝업 2: 게시글형 (popup-detail.html?id=28 등록 글) -->
+  <div class="main-popup main-popup--board" id="mainPopupBoard" hidden role="dialog" aria-label="공지사항 팝업">
+    <div class="main-popup__head">
+      <span>공지사항</span>
+      <button type="button" class="main-popup__head-close" data-popup-close="mainPopupBoard" aria-label="닫기">&times;</button>
+    </div>
+    <div class="main-popup__body">
+      <h3 class="main-popup__post-title">상반기 정기점검 자료 제출 안내</h3>
+      <table class="main-popup__post-meta">
+        <tbody>
+          <tr>
+            <th>작성일</th>
+            <td>2026-06-08 오전 09:30</td>
+            <th style="width:90px;">작성자</th>
+            <td>관리자</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="main-popup__post-body">
+        <p>상반기 정기안전점검 자료 제출 마감일과 제출 방법을 확인해 주세요.</p>
+        <p>1. 제출 대상: 2026년 상반기 정기안전점검을 수행한 전체 관리기관 및 점검기관</p>
+        <p>2. 제출 기간: 2026-06-08 ~ 2026-06-20</p>
+        <p>3. 제출 방법: POMS 접속 → 점검결과 등록관리 → 점검보고서 등록 메뉴에서 결과보고서(PDF) 및 점검사항, 사진대지를 등록</p>
+        <p>4. 유의사항: 제출된 자료는 관리자 검토·승인 후 시스템에 반영되며, 반려된 경우 반려 사유를 확인하고 기한 내 재제출하여 주시기 바랍니다.</p>
+        <p>기타 문의 사항은 시스템 관리자에게 연락해 주시기 바랍니다.</p>
+      </div>
+    </div>
+    <div class="main-popup__foot">
+      <label class="main-popup__today">
+        <input type="checkbox" data-popup-today="mainPopupBoard">
+        오늘 하루 창 열지 않기
+      </label>
+      <button type="button" class="main-popup__close-btn" data-popup-close="mainPopupBoard">닫기</button>
+    </div>
+  </div>
+
+  <script>
+    // 메인 팝업 — 오늘 하루 열지 않기 (localStorage)
+    (function () {
+      var todayKey = new Date().toISOString().slice(0, 10);
+      ['mainPopupImage', 'mainPopupBoard'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var hideUntil = '';
+        try { hideUntil = localStorage.getItem('poms-popup-hide-' + id) || ''; } catch (e) { /* file:// 등 예외 무시 */ }
+        if (hideUntil !== todayKey) el.hidden = false;
+      });
+      document.querySelectorAll('[data-popup-close]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.dataset.popupClose;
+          var el = document.getElementById(id);
+          if (!el) return;
+          var chk = el.querySelector('[data-popup-today]');
+          if (chk && chk.checked) {
+            try { localStorage.setItem('poms-popup-hide-' + id, todayKey); } catch (e) { /* 무시 */ }
+          }
+          el.hidden = true;
+        });
+      });
+    })();
+  </script>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/related-sites-data.js"></script>
+  <script src="js/site-footer.js"></script>
+  <script src="js/archive.js"></script>
+  <script src="js/related-laws-data.js"></script>
+  <script src="js/archive-materials-data.js"></script>
+  <script src="js/home-facility-stats-data.js"></script>
+  <script src="js/home-facility-stats.js"></script>
+  <script src="js/home-safety-grade-stats-data.js"></script>
+  <script src="js/home-safety-grade-stats.js"></script>
+  <script src="js/home-archive-shell.js"></script>
+  <script src="js/index-notices.js"></script>
+  <script src="js/index-laws.js"></script>
+  <script src="js/index-archive.js"></script>
+  <script src="js/index-vendor-apply.js"></script>
+  <script src="js/home-facility-view.js"></script>
+  <script src="js/home-safety-view.js"></script>
+  <script src="js/home-views.js"></script>
+  <script src="js/education-video-data.js"></script>
+  <script src="js/education-video-modal.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물 추가 | POMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/facility-add.css">
+  <style>
+    body { font-family: "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header__top">
+        <h1 class="page-title">시설물 추가</h1>
+        <nav class="breadcrumb" aria-label="현재 위치">
+          <a href="facility-management.html">시설물 관리</a>
+          <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+          <span class="breadcrumb__current">시설물 추가</span>
+        </nav>
+      </div>
+    </header>
+
+    <div class="fac-add-page">
+      <div class="fac-add-page__head">
+        <h2 class="fac-add-page__title">시설물 추가</h2>
+      </div>
+
+      <form id="facilityAddForm" novalidate>
+        <!-- 기본 정보 -->
+        <section class="fac-add-section" aria-labelledby="facAddBasicTitle">
+          <button type="button" class="fac-add-section__head" id="facAddBasicTitle" aria-expanded="true">
+            <span>기본 정보</span>
+            <span class="fac-add-section__toggle" aria-hidden="true"></span>
+          </button>
+          <div class="fac-add-section__body">
+            <div class="fac-add-grid">
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">시설물명</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="name" placeholder="시설물명을 입력하세요."></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">주소</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="address" placeholder="주소를 입력하세요."></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">FMS_ID</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="fmsId" placeholder="FMS_ID를 입력하세요."></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">관리구분<span class="req">*</span></div>
+                <div class="fac-add-field__control">
+                  <select class="fac-add-select" name="manageType" required>
+                    <option value="">선택</option>
+                    <option value="직접관리">직접관리</option>
+                    <option value="위탁관리">위탁관리</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">관리기관<span class="req">*</span></div>
+                <div class="fac-add-field__control fac-add-field__control--stack">
+                  <select class="fac-add-select" name="agency">
+                    <option value="">선택</option>
+                    <option value="부산항만공사">부산항만공사</option>
+                    <option value="인천항만공사">인천항만공사</option>
+                    <option value="여수광양항만공사">여수광양항만공사</option>
+                  </select>
+                  <input type="text" class="fac-add-input" name="agencyDirectText" placeholder="관리기관 직접 입력">
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">항명</div>
+                <div class="fac-add-field__control">
+                  <select class="fac-add-select" name="port">
+                    <option value="">선택</option>
+                    <option value="부산항">부산항</option>
+                    <option value="인천항">인천항</option>
+                    <option value="광양항">광양항</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">세부항명<span class="req">*</span></div>
+                <div class="fac-add-field__control">
+                  <select class="fac-add-select" name="subPort">
+                    <option value="">선택</option>
+                    <option value="북항">북항</option>
+                    <option value="남항">남항</option>
+                    <option value="신항">신항</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">준공일자</div>
+                <div class="fac-add-field__control"><input type="date" class="fac-add-input" name="completionDate"></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">종별<span class="req">*</span></div>
+                <div class="fac-add-field__control">
+                  <select class="fac-add-select" name="classType">
+                    <option value="">선택</option>
+                    <option value="1종">1종</option>
+                    <option value="2종">2종</option>
+                    <option value="3종">3종</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">시설구분<span class="req">*</span></div>
+                <div class="fac-add-field__control">
+                  <select class="fac-add-select" name="facilityType">
+                    <option value="">선택</option>
+                    <option value="계류시설" selected>계류시설</option>
+                    <option value="외곽시설">외곽시설</option>
+                    <option value="건축물">건축물</option>
+                    <option value="교통시설">교통시설</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">시설형식<span class="req">*</span></div>
+                <div class="fac-add-field__control">
+                  <select class="fac-add-select" name="facilityFormat">
+                    <option value="">선택</option>
+                    <option value="중력식">중력식</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">구조형식<span class="req">*</span></div>
+                <div class="fac-add-field__control fac-add-field__control--stack">
+                  <select class="fac-add-select" name="structureType">
+                    <option value="">선택</option>
+                    <option value="철근콘크리트">철근콘크리트</option>
+                    <option value="기타">기타</option>
+                  </select>
+                  <input type="text" class="fac-add-input" name="structureDirectText" placeholder="구조형식 직접 입력">
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">연장(m)</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="length" placeholder="연장(m)을 입력하세요."></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 운영 정보 -->
+        <section class="fac-add-section" aria-labelledby="facAddOpsTitle">
+          <button type="button" class="fac-add-section__head" id="facAddOpsTitle" aria-expanded="true">
+            <span>운영 정보</span>
+            <span class="fac-add-section__toggle" aria-hidden="true"></span>
+          </button>
+          <div class="fac-add-section__body">
+            <div class="fac-add-grid">
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">기타상세제원</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="otherSpec"></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">개방여부</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="openStatus" placeholder="예: 개방, 폐쇄"></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">선석</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="berth"></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">접안능력</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="berthingCapacity"></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">취급화물</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="cargo"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 구조 정보 -->
+        <section class="fac-add-section" aria-labelledby="facAddStructTitle">
+          <button type="button" class="fac-add-section__head" id="facAddStructTitle" aria-expanded="true">
+            <span>구조 정보</span>
+            <span class="fac-add-section__toggle" aria-hidden="true"></span>
+          </button>
+          <div class="fac-add-section__body">
+            <div class="fac-add-grid">
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">상부구조</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">하부구조</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">내진설계 적용여부</div>
+                <div class="fac-add-field__control">
+                  <select class="fac-add-select" name="seismic">
+                    <option value="">선택</option>
+                    <option value="Y">적용</option>
+                    <option value="N">미적용</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">건축 연면적</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">대지면적</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">층수</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">기초형식</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">교량받침</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">신축이음</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">건축면적</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">등과높이(m)</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">설계하중</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">주용도</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">교량시설구분</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">재해취약지구사업</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">폭(m)</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input is-disabled" value="해당없음" disabled readonly></div>
+              </div>
+              <div class="fac-add-field fac-add-field--span-2">
+                <div class="fac-add-field__label">관리자의견</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="managerOpinion"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 세부 정보 -->
+        <section class="fac-add-section" aria-labelledby="facAddDetailTitle">
+          <button type="button" class="fac-add-section__head" id="facAddDetailTitle" aria-expanded="true">
+            <span>세부 정보</span>
+            <span class="fac-add-section__toggle" aria-hidden="true"></span>
+          </button>
+          <div class="fac-add-section__body">
+            <div class="fac-add-grid">
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">전면수심(최소)(m)</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="depthMin"></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">전면수심(최대)(m)</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="depthMax"></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">상세하중(최소)(ton/㎡)</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="loadMin"></div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">상세하중(최대)(ton/㎡)</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="loadMax"></div>
+              </div>
+              <div class="fac-add-field fac-add-field--span-2">
+                <div class="fac-add-field__label">좌표</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="coordinates" placeholder="위도, 경도"></div>
+              </div>
+              <div class="fac-add-field fac-add-field--full">
+                <div class="fac-add-field__label">도분초(DMS)</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="dms"></div>
+              </div>
+              <div class="fac-add-field fac-add-field--full">
+                <div class="fac-add-field__label">비고</div>
+                <div class="fac-add-field__control"><input type="text" class="fac-add-input" name="remarks"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 첨부 파일 -->
+        <section class="fac-add-section" aria-labelledby="facAddFileTitle">
+          <button type="button" class="fac-add-section__head" id="facAddFileTitle" aria-expanded="true">
+            <span>첨부 파일</span>
+            <span class="fac-add-section__toggle" aria-hidden="true"></span>
+          </button>
+          <div class="fac-add-section__body">
+            <div class="fac-add-file-row">
+              <div class="fac-add-file-row__label">위치도</div>
+              <div class="fac-add-file-row__body">
+                <div class="fac-add-file-picker">
+                  <input type="file" id="fileLocation" hidden>
+                  <button type="button" class="fac-add-file-picker__btn">파일 선택</button>
+                  <span class="fac-add-file-picker__name">선택된 파일 없음</span>
+                </div>
+                <div class="fac-add-file-drop">파일을 드래그 해주세요.</div>
+              </div>
+              <div class="fac-add-file-row__actions">
+                <button type="button" class="btn-fac-file-delete">파일삭제</button>
+                <span class="fac-add-file-row__hint">(용량 : 1GB 미만)</span>
+              </div>
+            </div>
+            <div class="fac-add-file-row">
+              <div class="fac-add-file-row__label">단면도</div>
+              <div class="fac-add-file-row__body">
+                <div class="fac-add-file-picker">
+                  <input type="file" id="fileSection" hidden>
+                  <button type="button" class="fac-add-file-picker__btn">파일 선택</button>
+                  <span class="fac-add-file-picker__name">선택된 파일 없음</span>
+                </div>
+                <div class="fac-add-file-drop">파일을 드래그 해주세요.</div>
+              </div>
+              <div class="fac-add-file-row__actions">
+                <button type="button" class="btn-fac-file-delete">파일삭제</button>
+                <span class="fac-add-file-row__hint">(용량 : 1GB 미만)</span>
+              </div>
+            </div>
+            <div class="fac-add-file-row">
+              <div class="fac-add-file-row__label">현장사진 1</div>
+              <div class="fac-add-file-row__body">
+                <div class="fac-add-file-picker">
+                  <input type="file" id="filePhoto1" hidden accept="image/*">
+                  <button type="button" class="fac-add-file-picker__btn">파일 선택</button>
+                  <span class="fac-add-file-picker__name">선택된 파일 없음</span>
+                </div>
+                <div class="fac-add-file-drop">파일을 드래그 해주세요.</div>
+              </div>
+              <div class="fac-add-file-row__actions">
+                <button type="button" class="btn-fac-file-delete">파일삭제</button>
+                <span class="fac-add-file-row__hint">(용량 : 1GB 미만)</span>
+              </div>
+            </div>
+            <div class="fac-add-file-row">
+              <div class="fac-add-file-row__label">현장사진 2</div>
+              <div class="fac-add-file-row__body">
+                <div class="fac-add-file-picker">
+                  <input type="file" id="filePhoto2" hidden accept="image/*">
+                  <button type="button" class="fac-add-file-picker__btn">파일 선택</button>
+                  <span class="fac-add-file-picker__name">선택된 파일 없음</span>
+                </div>
+                <div class="fac-add-file-drop">파일을 드래그 해주세요.</div>
+              </div>
+              <div class="fac-add-file-row__actions">
+                <button type="button" class="btn-fac-file-delete">파일삭제</button>
+                <span class="fac-add-file-row__hint">(용량 : 1GB 미만)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="fac-add-footer">
+          <button type="button" class="btn-fac-add-cancel" id="facAddCancelBtn">취소</button>
+          <button type="button" class="btn-fac-add-save" id="facAddSaveBtn">저장</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>window.location.replace('facility-management.html?add=1');</script>
+</body>
+</html>

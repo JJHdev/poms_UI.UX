@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물 변경요청 상세 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/facility-management-detail.css">
+  <link rel="stylesheet" href="css/facility-change-approval-detail.css?v=20260818b">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page fcd-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fmd-crumb-row">
+      <button type="button" class="fmd-back-btn" id="fcdBackBtn" aria-label="목록으로">
+        <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+      </button>
+      <a href="facility-change-approval.html" class="fmd-home-btn" aria-label="시설물 변경요청 관리 목록">
+        <img src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+      </a>
+      <nav class="fmd-breadcrumb" aria-label="현재 위치">
+        <a href="safety-report-approval.html">승인/반려 관리</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; 시설물 변경요청 관리 &gt; </span>
+        <span class="fmd-breadcrumb__current" id="fcdCrumb">상세</span>
+      </nav>
+    </div>
+
+    <div class="admin-detail-title-row">
+      <div class="admin-detail-title-row__lead">
+        <h1 class="admin-detail-title-row__title">시설물 변경요청 상세</h1>
+      </div>
+    </div>
+
+    <div class="fmd-stack fcd-stack">
+      <section class="fmd-panel fcd-panel" aria-label="요청 정보">
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title">요청 정보</h2>
+        </div>
+        <div class="fmd-panel__body">
+          <table class="fcd-meta-table" aria-label="요청 정보">
+            <colgroup>
+              <col class="fcd-meta-table__label">
+              <col>
+              <col class="fcd-meta-table__label">
+              <col>
+            </colgroup>
+            <tbody id="fcdMeta"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="fmd-panel fcd-panel" id="fcdFacilityInfoCard" hidden aria-label="시설물 정보">
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-management/icon-section-facility.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title">시설물 정보</h2>
+          <span class="fcd-panel__note">삭제 대상 시설물의 마지막 등록 정보입니다.</span>
+        </div>
+        <div class="fmd-panel__body">
+          <div class="fcd-info-tabs" id="fcdInfoTabs" role="tablist"></div>
+          <div class="fcd-info-body" id="fcdInfoBody"></div>
+        </div>
+      </section>
+
+      <section class="fmd-panel fcd-panel" id="fcdCompareCard" aria-label="변경 전/후 비교">
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-management/icon-section-facility.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title">변경 전 / 변경 후 비교</h2>
+          <span class="fcd-panel__note">변경이 요청된 항목은 「변경」으로 표시됩니다.</span>
+        </div>
+        <div class="fmd-panel__body">
+          <div class="fcd-delete-banner" id="fcdDeleteBanner">
+            시설물 삭제 요청입니다. 승인 시 아래 시설물이 목록에서 삭제됩니다.
+          </div>
+          <div class="fcd-compare-wrap">
+            <table class="fcd-compare" aria-label="변경 전후 비교">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-item">항목</th>
+                  <th scope="col" class="col-before">변경 전</th>
+                  <th scope="col" class="col-after">변경 후</th>
+                  <th scope="col" class="col-mark">변경</th>
+                </tr>
+              </thead>
+              <tbody id="fcdCompareBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="fmd-footer" id="fcdFooter">
+      <button type="button" class="fmd-btn fcd-btn fcd-btn--reject" id="fcdRejectBtn">반려</button>
+      <button type="button" class="fmd-btn fcd-btn fcd-btn--approve" id="fcdApproveBtn">승인</button>
+    </div>
+  </main>
+
+  <div class="fcd-modal" id="fcdRejectModal" hidden role="dialog" aria-modal="true" aria-labelledby="fcdRejectTitle">
+    <div class="fcd-modal__backdrop" data-close-reject aria-hidden="true"></div>
+    <div class="fcd-modal__panel">
+      <header class="fcd-modal__head">
+        <h3 class="fcd-modal__title" id="fcdRejectTitle">변경요청 반려</h3>
+        <button type="button" class="fcd-modal__close" data-close-reject aria-label="닫기">
+          <img src="assets/facility-change-approval/icon-close.png" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="fcd-modal__body">
+        <div class="fcd-modal__label">반려 사유<span class="req">*</span></div>
+        <textarea class="fcd-modal__textarea" id="fcdRejectReason" placeholder="반려 사유를 입력하세요."></textarea>
+      </div>
+      <footer class="fcd-modal__foot">
+        <button type="button" class="fcd-modal__btn fcd-modal__btn--cancel" data-close-reject>취소</button>
+        <button type="button" class="fcd-modal__btn fcd-modal__btn--danger" id="fcdRejectSubmit">반려 처리</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/facility-management-data.js"></script>
+  <script src="js/facility-change-approval-data.js"></script>
+  <script src="js/facility-change-approval-detail.js?v=20260819f"></script>
+</body>
+</html>

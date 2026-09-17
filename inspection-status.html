@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>점검정보현황 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <link rel="stylesheet" href="css/inspection-status.css?v=20260819f">
+  <link rel="stylesheet" href="css/maintenance-plan-manage-detail.css?v=20260818h">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; }
+
+    /* 유지관리계획 관리 전용 미세조정 */
+    #planFilterAgency:disabled {
+      opacity: 1;
+      color: #687386;
+      background: #f4f6f8;
+      cursor: default;
+    }
+    #planTitleInput[readonly] {
+      background: #fff;
+      color: inherit;
+      cursor: default;
+    }
+    .insp-plan-kv__value--file {
+      min-height: 54px;
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+    }
+    .insp-plan-template-btn {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .insp-plan-register-notice {
+      margin: 7px 14px 0 !important;
+      padding-top: 7px !important;
+      font-size: 11px !important;
+      line-height: 1.55 !important;
+      color: #8a94a3 !important;
+      font-weight: 400 !important;
+    }
+    .insp-plan-register-notice strong {
+      color: #707b8b !important;
+      font-weight: 500 !important;
+    }
+  </style>
+  <link rel="stylesheet" href="css/pagination.css?v=20260813p">
+</head>
+<body class="app-layout facility-search-page inspection-status-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시설물 관리 메뉴">
+        <div class="fs-lnb__title">
+          <span class="fs-lnb__title-text">시설물 관리</span>
+        </div>
+        <nav class="fs-lnb__nav">
+          <a class="fs-lnb__item is-active" href="inspection-status.html" aria-current="page">
+            <span>점검정보현황</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="safety-grade-status.html">
+            <span>안전 등급현황</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="facility-statistics.html">
+            <span>시설물통계</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="special-facility.html">
+            <span>특별관리시설</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="type3-port-facility.html" hidden>
+            <span>제 3종 항만시설물</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="facility-change-request.html">
+            <span>시설물 정보변경 요청</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="data-receive.html">
+            <span>자료수신</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="data-process.html">
+            <span>자료처리</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="stats-process.html">
+            <span>통계처리</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+        </nav>
+      </aside>
+
+      <div class="fs-manage">
+        <header class="page-header">
+          <div class="page-header__nav">
+            <a href="facility.html" class="page-header__home" aria-label="시설물 관리 홈">
+              <span class="page-header__home-icon" aria-hidden="true">
+                <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+                <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+                <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+              </span>
+            </a>
+          </div>
+          <nav class="breadcrumb" aria-label="현재 위치">
+            <a href="inspection-status.html">시설물 관리</a>
+            <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+            <span class="breadcrumb__current">점검정보현황</span>
+          </nav>
+        </header>
+
+        <div class="insp-status-page">
+          <div class="insp-status-page__title">
+            <span class="insp-status-page__title-icon-wrap" aria-hidden="true">
+              <img class="insp-status-page__title-icon" src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+            </span>
+            <h1 class="insp-status-page__heading">점검정보 현황</h1>
+          </div>
+
+          <div class="insp-status-card">
+            <nav class="insp-status-tabs" role="tablist" aria-label="점검정보 탭">
+              <button type="button" class="insp-status-tabs__btn is-active" role="tab" data-tab="system-inspection" aria-selected="true">점검진단 도래</button>
+              <button type="button" class="insp-status-tabs__btn" role="tab" data-tab="overview" aria-selected="false">유지관리계획 관리</button>
+              <button type="button" class="insp-status-tabs__btn" role="tab" data-tab="regular" aria-selected="false">정기안전점검</button>
+              <button type="button" class="insp-status-tabs__btn" role="tab" data-tab="precision" aria-selected="false">정밀안전점검</button>
+              <button type="button" class="insp-status-tabs__btn" role="tab" data-tab="precision-diagnosis" aria-selected="false">정밀안전진단</button>
+              <button type="button" class="insp-status-tabs__btn" role="tab" data-tab="perform-evaluation" aria-selected="false">성능평가</button>
+            </nav>
+
+            <!-- 점검진단 도래 -->
+            <div class="insp-status-panel is-active" data-panel="system-inspection" role="tabpanel">
+              <section class="insp-filter-panel" aria-labelledby="sysInspFilterTitle">
+                <div class="insp-filter-panel__head">
+                  <div class="insp-filter-panel__head-main">
+                    <span class="insp-filter-panel__title-icon" aria-hidden="true">
+                      <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+                    </span>
+                    <h2 id="sysInspFilterTitle" class="insp-filter-panel__title">검색조건</h2>
+                  </div>
+                </div>
+                <form class="insp-filter" id="sysInspSearchForm" novalidate onsubmit="return false;">
+                  <div class="insp-filter__row">
+                    <div class="insp-field insp-field--agency">
+                      <label for="sysInspAgency">관리기관</label>
+                      <select id="sysInspAgency"><option value="군산지방해양수산청" selected>군산지방해양수산청</option></select>
+                    </div>
+                    <div class="insp-field">
+                      <label for="sysInspYear">연도</label>
+                      <select id="sysInspYear">
+                        <option value="" selected>전체</option><option value="2031">2031</option><option value="2030">2030</option>
+                        <option value="2029">2029</option><option value="2028">2028</option><option value="2027">2027</option>
+                        <option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option>
+                      </select>
+                    </div>
+                    <div class="insp-field">
+                      <label for="sysInspPort">항</label>
+                      <select id="sysInspPort"><option value="" selected>전체</option><option value="군산항">군산항</option><option value="장항항">장항항</option><option value="상왕등도항">상왕등도항</option></select>
+                    </div>
+                    <div class="insp-field">
+                      <label for="sysInspSubPort">세부항</label>
+                      <select id="sysInspSubPort"><option value="" selected>전체</option><option value="내항">내항</option><option value="외항">외항</option><option value="장항항">장항항</option><option value="상왕등도항">상왕등도항</option></select>
+                    </div>
+                    <div class="insp-field">
+                      <label for="sysInspClass">종구분</label>
+                      <select id="sysInspClass"><option value="" selected>전체</option><option value="1종">1종</option><option value="2종">2종</option><option value="3종">3종</option><option value="기타">기타</option></select>
+                    </div>
+                    <div class="insp-field insp-field--name">
+                      <label for="sysInspName">시설물명</label>
+                      <input type="text" id="sysInspName" placeholder="검색어를 입력해주세요.">
+                    </div>
+                    <div class="insp-filter-actions">
+                      <button type="button" class="insp-btn insp-btn--search" data-search="system-inspection">
+                        <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">검색하기
+                      </button>
+                      <button type="button" class="insp-btn insp-btn--reset" data-reset="system-inspection">
+                        <img src="assets/main/facility-condition-search/Group%20239763.svg" alt="" width="18" height="18">초기화
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </section>
+
+              <section class="insp-results-panel" aria-labelledby="sysInspListTitle">
+                <div class="insp-results__head">
+                  <div class="insp-results__left">
+                    <div class="insp-results__count">
+                      <span class="insp-results__bar" aria-hidden="true"><img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14"></span>
+                      <h2 id="sysInspListTitle" class="insp-results__label">검색결과</h2>
+                      <p class="insp-results__meta">총 <strong id="sysInspResultCount">0</strong>건</p>
+                    </div>
+                  </div>
+                  <button type="button" class="insp-btn insp-btn--excel" id="systemInspectionExcelBtn">
+                    <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">엑셀 다운로드
+                  </button>
+                </div>
+                <div class="insp-status-table-wrap">
+                  <table class="insp-status-table insp-status-table--due" aria-label="점검진단 도래 목록">
+                    <thead id="systemInspectionTableHead"></thead>
+                    <tbody id="systemInspectionTableBody"></tbody>
+                  </table>
+                </div>
+                <div class="insp-results-foot"><nav class="pagination" id="sysInspPagination" aria-label="목록 페이지"></nav></div>
+              </section>
+            </div>
+
+            <!-- 유지관리계획 관리 : 이 부분만 구조 변경 -->
+            <div class="insp-status-panel" data-panel="overview" role="tabpanel" hidden>
+              <section class="insp-filter-panel" aria-labelledby="planFilterTitle">
+                <div class="insp-filter-panel__head">
+                  <div class="insp-filter-panel__head-main">
+                    <span class="insp-filter-panel__title-icon" aria-hidden="true">
+                      <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+                    </span>
+                    <h2 id="planFilterTitle" class="insp-filter-panel__title">검색조건</h2>
+                  </div>
+                </div>
+                <form class="insp-filter" id="planSearchForm" novalidate onsubmit="return false;">
+                  <div class="insp-filter__row">
+                    <div class="insp-field insp-field--agency">
+                      <label for="planFilterAgency">관리주체</label>
+                      <select id="planFilterAgency" disabled aria-disabled="true" title="현재 접속 관리주체">
+                        <option value="군산지방해양수산청" selected>군산지방해양수산청</option>
+                      </select>
+                    </div>
+                    <div class="insp-field">
+                      <label for="planFilterYear">점검년도</label>
+                      <select id="planFilterYear">
+                        <option value="2026" selected>2026</option><option value="2025">2025</option>
+                        <option value="2024">2024</option><option value="2023">2023</option>
+                        <option value="2022">2022</option><option value="2021">2021</option>
+                      </select>
+                    </div>
+                    <div class="insp-field">
+                      <label for="planFilterClass">종구분</label>
+                      <select id="planFilterClass">
+                        <option value="" selected>전체</option><option value="1종">1종</option>
+                        <option value="2종">2종</option><option value="3종">3종</option><option value="기타">기타</option>
+                      </select>
+                    </div>
+                    <div class="insp-field">
+                      <label for="planFilterType">점검구분</label>
+                      <select id="planFilterType">
+                        <option value="" selected>전체</option>
+                        <option value="regular">정기안전점검</option>
+                        <option value="precision">정밀안전점검</option>
+                        <option value="diagnosis">정밀안전진단</option>
+                        <option value="performance">성능평가</option>
+                      </select>
+                    </div>
+                    <div class="insp-field insp-field--name">
+                      <label for="planFilterName">시설물명</label>
+                      <input type="text" id="planFilterName" placeholder="검색어를 입력해주세요.">
+                    </div>
+                    <div class="insp-filter-actions">
+                      <button type="button" class="insp-btn insp-btn--search" id="planSearchBtn">
+                        <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">검색하기
+                      </button>
+                      <button type="button" class="insp-btn insp-btn--reset" id="planResetBtn">
+                        <img src="assets/main/facility-condition-search/Group%20239763.svg" alt="" width="18" height="18">초기화
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </section>
+
+              <div class="insp-divider" aria-hidden="true"></div>
+
+              <div class="insp-plan-status-bar">
+                <span class="insp-plan-status-bar__label">결재상태 :</span>
+                <span class="insp-plan-status" id="planStatusBadge">요청전</span>
+              </div>
+
+              <div class="insp-plan-form" aria-label="유지관리계획 신청 정보">
+                <div class="insp-plan-form__row insp-plan-form__row--full">
+                  <div class="insp-plan-kv insp-plan-kv--title">
+                    <label class="insp-plan-kv__label" for="planTitleInput">제목</label>
+                    <div class="insp-plan-kv__value">
+                      <input type="text" id="planTitleInput" value="2026년 군산지방해양수산청 항만시설 유지관리계획" readonly aria-readonly="true">
+                    </div>
+                  </div>
+                </div>
+                <div class="insp-plan-form__row insp-plan-form__row--full">
+                  <div class="insp-plan-kv">
+                    <label class="insp-plan-kv__label" for="planReasonInput">신청 사유 <em>*</em></label>
+                    <div class="insp-plan-kv__value">
+                      <input type="text" id="planReasonInput" placeholder="승인요청 사유를 입력하세요. (예: 2026년도 정기안전점검 등 점검주기 도래에 따른 유지관리계획 신청)">
+                    </div>
+                  </div>
+                </div>
+                <div class="insp-plan-form__row insp-plan-form__row--full">
+                  <div class="insp-plan-kv">
+                    <label class="insp-plan-kv__label" for="planYearSelect">점검년도</label>
+                    <div class="insp-plan-kv__value">
+                      <select id="planYearSelect" aria-label="점검년도">
+                        <option value="2031">2031</option><option value="2030">2030</option><option value="2029">2029</option>
+                        <option value="2028">2028</option><option value="2027">2027</option><option value="2026" selected>2026</option>
+                        <option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option>
+                        <option value="2022">2022</option><option value="2021">2021</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="insp-plan-form__row insp-plan-form__row--full">
+                  <div class="insp-plan-kv">
+                    <label class="insp-plan-kv__label" for="planFileInput">유지관리계획 업로드 <em>*</em></label>
+                    <div class="insp-plan-kv__value insp-plan-kv__value--file" style="gap:10px;flex-wrap:wrap">
+                      <div style="flex:1;display:flex;align-items:center;gap:8px;min-width:0">
+                        <label class="insp-plan-file-btn" for="planFileInput">파일 선택</label>
+                        <input type="file" id="planFileInput" accept=".xlsx,.xls">
+                        <span class="insp-plan-file-name" id="planFileName">선택된 파일 없음</span>
+                      </div>
+                      <button type="button" class="insp-btn insp-btn--excel insp-plan-template-btn" id="planTemplateDownloadBtn">
+                        <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+                        유지관리계획 등록 양식
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="insp-plan-form__row insp-plan-form__row--full">
+                  <div class="insp-plan-kv">
+                    <div class="insp-plan-kv__label">신청일자</div>
+                    <div class="insp-plan-kv__value" id="planDateValue">2026-08-04</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-notice insp-plan-register-notice" id="planRegisterNotice">
+                ※ <strong>유지관리계획 등록 양식</strong>을 다운로드하여 점검 대상 시설물의 점검 항목
+                (정기안전점검, 정밀안전점검, 정밀안전진단, 성능평가)에 <strong>"O"</strong>를 입력한 후 업로드하세요.<br>
+                ※ 승인 완료 시 업로드된 파일의 데이터가 자동으로 반영됩니다.
+              </div>
+
+              <div class="insp-plan-actions">
+                <button type="button" class="insp-btn insp-btn--excel" id="planHistoryBtn">
+                  <span class="insp-btn__icon" aria-hidden="true">
+                    <img src="assets/service/main/figma/icon-history.svg" alt="" width="14" height="14">
+                  </span>
+                  결재이력
+                </button>
+                <button type="button" class="insp-btn insp-btn--search" id="planRequestBtn">승인요청</button>
+              </div>
+            </div>
+
+            <!-- 정기안전점검 -->
+            <div class="insp-status-panel" data-panel="regular" role="tabpanel" hidden>
+              <section class="insp-filter-panel" aria-labelledby="regularFilterTitle">
+                <div class="insp-filter-panel__head">
+                  <div class="insp-filter-panel__head-main">
+                    <span class="insp-filter-panel__title-icon" aria-hidden="true"><img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24"></span>
+                    <h2 id="regularFilterTitle" class="insp-filter-panel__title">검색조건</h2>
+                  </div>
+                  <div class="insp-status-head-stats" aria-label="정기안전점검 현황 요약">
+                    <span>시설물 <strong id="regularSummaryTotal" class="insp-stat--total">0</strong><em>건</em></span>
+                    <span class="insp-status-head-stats__sep" aria-hidden="true"></span>
+                    <span>점검누락(1회차) <strong id="regularSummaryMissFirst" class="insp-stat--red">0</strong><em>건</em></span>
+                    <span class="insp-status-head-stats__sep" aria-hidden="true"></span>
+                    <span>점검누락(2회차) <strong id="regularSummaryMissSecond" class="insp-stat--amber">0</strong><em>건</em></span>
+                  </div>
+                </div>
+                <form class="insp-filter" novalidate onsubmit="return false;">
+                  <div class="insp-filter__row">
+                    <div class="insp-field"><label for="regularAgency">관리주체</label><select id="regularAgency"><option value="군산지방해양수산청" selected>군산지방해양수산청</option></select></div>
+                    <div class="insp-field"><label for="regularYear">년도</label><select id="regularYear"><option value="2026" selected>2026</option><option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option></select></div>
+                    <div class="insp-field"><label for="regularClass">종구분</label><select id="regularClass"><option value="">전체</option><option value="1종">1종</option><option value="2종">2종</option><option value="3종">3종</option><option value="기타">기타</option></select></div>
+                    <div class="insp-field insp-field--name"><label for="regularName">시설물명</label><input type="text" id="regularName" placeholder="검색어를 입력해주세요."></div>
+                    <div class="insp-field insp-field--check">
+                      <span class="insp-field__check-label">취약시설</span>
+                      <div class="insp-status-check-row"><input type="checkbox" id="regularVulnerable" name="vulnerable"><label for="regularVulnerable">취약시설</label></div>
+                    </div>
+                    <div class="insp-filter-actions"><button type="button" class="insp-btn insp-btn--search" data-search="regular"><img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">검색하기</button></div>
+                  </div>
+                </form>
+              </section>
+              <div class="insp-divider" aria-hidden="true"></div>
+              <section class="insp-results-panel" aria-labelledby="regularResultTitle">
+                <div class="insp-results__head">
+                  <div class="insp-results__left"><div class="insp-results__count"><span class="insp-results__bar"><img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14"></span><h2 id="regularResultTitle" class="insp-results__label">검색결과</h2><p class="insp-results__meta">총 <strong id="regularResultCount">0</strong>건</p></div></div>
+                  <button type="button" class="insp-btn insp-btn--excel" id="regularExcelBtn"><img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">엑셀 다운로드</button>
+                </div>
+                <div class="insp-status-table-wrap">
+                  <table class="insp-status-table insp-status-table--regular" aria-label="정기안전점검 조회결과">
+                    <colgroup><col class="col-no"><col class="col-agency"><col class="col-port"><col class="col-subport"><col class="col-name"><col class="col-class"><col class="col-grade"><col class="col-date"><col class="col-round"><col class="col-round"><col class="col-round"></colgroup>
+                    <thead>
+                      <tr><th rowspan="2" data-sort-key="__seq__">연번</th><th rowspan="2" data-sort-key="agency">관리주체</th><th rowspan="2" data-sort-key="port">항</th><th rowspan="2" data-sort-key="subPort">세부항</th><th rowspan="2" data-sort-key="name">시설물명</th><th rowspan="2" data-sort-key="classType">종구분</th><th rowspan="2" data-sort-key="grade">안전등급</th><th rowspan="2" data-sort-key="lastInspectDate">최종 점검일</th><th colspan="3">안전점검</th></tr>
+                      <tr><th data-sort-key="round1Status">1회차</th><th data-sort-key="round2Status">2회차</th><th data-sort-key="round3Status">3회차</th></tr>
+                    </thead>
+                    <tbody id="regularTableBody"></tbody>
+                  </table>
+                </div>
+                <div class="insp-results-foot"><nav class="pagination" id="regularPagination" aria-label="정기안전점검 목록 페이지"></nav></div>
+              </section>
+            </div>
+
+            <!-- 정밀안전점검 -->
+            <div class="insp-status-panel" data-panel="precision" role="tabpanel" hidden>
+              <section class="insp-filter-panel" aria-labelledby="precisionFilterTitle">
+                <div class="insp-filter-panel__head">
+                  <div class="insp-filter-panel__head-main"><span class="insp-filter-panel__title-icon"><img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24"></span><h2 id="precisionFilterTitle" class="insp-filter-panel__title">검색조건</h2></div>
+                  <div class="insp-status-head-stats"><span>시설물 <strong id="precisionSummaryTotal" class="insp-stat--total">0</strong><em>건</em></span><span class="insp-status-head-stats__sep"></span><span>미등록 <strong id="precisionSummaryTarget" class="insp-stat--red">0</strong><em>건</em></span></div>
+                </div>
+                <form class="insp-filter" novalidate onsubmit="return false;"><div class="insp-filter__row">
+                  <div class="insp-field"><label for="precisionAgency">관리주체</label><select id="precisionAgency"><option value="군산지방해양수산청" selected>군산지방해양수산청</option></select></div>
+                  <div class="insp-field"><label for="precisionClass">종구분</label><select id="precisionClass"><option value="">전체</option><option value="1종">1종</option><option value="2종">2종</option><option value="3종">3종</option><option value="기타">기타</option></select></div>
+                  <div class="insp-field insp-field--name"><label for="precisionName">시설물명</label><input type="text" id="precisionName" placeholder="검색어를 입력해주세요."></div>
+                  <div class="insp-filter-actions"><button type="button" class="insp-btn insp-btn--search" data-search="precision"><img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">검색하기</button></div>
+                </div></form>
+              </section>
+              <div class="insp-divider"></div>
+              <section class="insp-results-panel" aria-labelledby="precisionResultTitle">
+                <div class="insp-results__head"><div class="insp-results__left"><div class="insp-results__count"><span class="insp-results__bar"><img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14"></span><h2 id="precisionResultTitle" class="insp-results__label">검색결과</h2><p class="insp-results__meta">총 <strong id="precisionResultCount">0</strong>건</p></div></div><button type="button" class="insp-btn insp-btn--excel" id="precisionExcelBtn"><img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">엑셀 다운로드</button></div>
+                <div class="insp-status-table-wrap"><table class="insp-status-table insp-status-table--precision"><colgroup><col class="col-no"><col class="col-agency"><col class="col-port"><col class="col-subport"><col class="col-name"><col class="col-class"><col class="col-grade"><col class="col-date"><col class="col-perform"></colgroup><thead><tr><th data-sort-key="__seq__">연번</th><th data-sort-key="agency">관리주체</th><th data-sort-key="port">항</th><th data-sort-key="subPort">세부항</th><th data-sort-key="name">시설물명</th><th data-sort-key="classType">종구분</th><th data-sort-key="grade">안전등급</th><th data-sort-key="lastInspectDate">최종 점검·진단일</th><th data-sort-key="yearPerform">당해연도 수행</th></tr></thead><tbody id="precisionTableBody"></tbody></table></div>
+                <div class="insp-results-foot"><nav class="pagination" id="precisionPagination"></nav></div>
+              </section>
+            </div>
+
+            <!-- 정밀안전진단 -->
+            <div class="insp-status-panel" data-panel="precision-diagnosis" role="tabpanel" hidden>
+              <section class="insp-filter-panel" aria-labelledby="diagnosisFilterTitle">
+                <div class="insp-filter-panel__head">
+                  <div class="insp-filter-panel__head-main"><span class="insp-filter-panel__title-icon"><img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24"></span><h2 id="diagnosisFilterTitle" class="insp-filter-panel__title">검색조건</h2></div>
+                  <div class="insp-status-head-stats"><span>시설물 <strong id="diagnosisSummaryTotal" class="insp-stat--total">0</strong><em>건</em></span><span class="insp-status-head-stats__sep"></span><span>미등록 <strong id="diagnosisSummaryTarget" class="insp-stat--red">0</strong><em>건</em></span></div>
+                </div>
+                <form class="insp-filter" novalidate onsubmit="return false;"><div class="insp-filter__row">
+                  <div class="insp-field"><label for="diagnosisAgency">관리주체</label><select id="diagnosisAgency"><option value="군산지방해양수산청" selected>군산지방해양수산청</option></select></div>
+                  <div class="insp-field"><label for="diagnosisClass">종구분</label><select id="diagnosisClass"><option value="">전체</option><option value="1종">1종</option><option value="2종">2종</option><option value="3종">3종</option><option value="기타">기타</option></select></div>
+                  <div class="insp-field insp-field--name"><label for="diagnosisName">시설물명</label><input type="text" id="diagnosisName" placeholder="검색어를 입력해주세요."></div>
+                  <div class="insp-filter-actions"><button type="button" class="insp-btn insp-btn--search" data-search="precision-diagnosis"><img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">검색하기</button></div>
+                </div></form>
+              </section>
+              <div class="insp-divider"></div>
+              <section class="insp-results-panel" aria-labelledby="diagnosisResultTitle">
+                <div class="insp-results__head"><div class="insp-results__left"><div class="insp-results__count"><span class="insp-results__bar"><img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14"></span><h2 id="diagnosisResultTitle" class="insp-results__label">검색결과</h2><p class="insp-results__meta">총 <strong id="diagnosisResultCount">0</strong>건</p></div></div><button type="button" class="insp-btn insp-btn--excel" id="diagnosisExcelBtn"><img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">엑셀 다운로드</button></div>
+                <div class="insp-status-table-wrap"><table class="insp-status-table insp-status-table--precision"><colgroup><col class="col-no"><col class="col-agency"><col class="col-port"><col class="col-subport"><col class="col-name"><col class="col-class"><col class="col-grade"><col class="col-date"><col class="col-perform"></colgroup><thead><tr><th data-sort-key="__seq__">연번</th><th data-sort-key="agency">관리주체</th><th data-sort-key="port">항</th><th data-sort-key="subPort">세부항</th><th data-sort-key="name">시설물명</th><th data-sort-key="classType">종구분</th><th data-sort-key="grade">안전등급</th><th data-sort-key="lastInspectDate">최종 점검·진단일</th><th data-sort-key="yearPerform">당해연도 수행</th></tr></thead><tbody id="diagnosisTableBody"></tbody></table></div>
+                <div class="insp-results-foot"><nav class="pagination" id="diagnosisPagination"></nav></div>
+              </section>
+            </div>
+
+            <!-- 성능평가 -->
+            <div class="insp-status-panel" data-panel="perform-evaluation" role="tabpanel" hidden>
+              <section class="insp-filter-panel" aria-labelledby="performFilterTitle">
+                <div class="insp-filter-panel__head">
+                  <div class="insp-filter-panel__head-main"><span class="insp-filter-panel__title-icon"><img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24"></span><h2 id="performFilterTitle" class="insp-filter-panel__title">검색조건</h2></div>
+                  <div class="insp-status-head-stats"><span>시설물 <strong id="performSummaryTotal" class="insp-stat--total">0</strong><em>건</em></span><span class="insp-status-head-stats__sep"></span><span>평가대상 <strong id="performSummaryTarget" class="insp-stat--blue">0</strong><em>건</em></span></div>
+                </div>
+                <form class="insp-filter" novalidate onsubmit="return false;"><div class="insp-filter__row">
+                  <div class="insp-field"><label for="performAgency">관리주체</label><select id="performAgency"><option value="군산지방해양수산청" selected>군산지방해양수산청</option></select></div>
+                  <div class="insp-field"><label for="performYear">연도</label><select id="performYear"><option value="2025" selected>2025</option><option value="2026">2026</option><option value="2024">2024</option></select></div>
+                  <div class="insp-field"><label for="performClass">종구분</label><select id="performClass"><option value="">전체</option><option value="1종">1종</option><option value="2종">2종</option><option value="3종">3종</option><option value="기타">기타</option></select></div>
+                  <div class="insp-field insp-field--name"><label for="performName">시설물명</label><input type="text" id="performName" placeholder="검색어를 입력해주세요."></div>
+                  <div class="insp-filter-actions"><button type="button" class="insp-btn insp-btn--search" data-search="perform-evaluation"><img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">검색하기</button></div>
+                </div></form>
+              </section>
+              <div class="insp-divider"></div>
+              <section class="insp-results-panel" aria-labelledby="performListTitle">
+                <div class="insp-results__head"><div class="insp-results__left"><div class="insp-results__count"><span class="insp-results__bar"><img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14"></span><h2 id="performListTitle" class="insp-results__label">검색결과</h2><p class="insp-results__meta">총 <strong id="performResultCount">0</strong>건</p></div></div><button type="button" class="insp-btn insp-btn--excel" id="performExcelBtn"><img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">엑셀 다운로드</button></div>
+                <div class="insp-status-table-wrap"><table class="insp-status-table insp-status-table--precision"><colgroup><col class="col-no"><col class="col-agency"><col class="col-port"><col class="col-subport"><col class="col-name"><col class="col-class"><col class="col-grade"><col class="col-date"><col class="col-perform"></colgroup><thead><tr><th data-sort-key="__seq__">연번</th><th data-sort-key="agency">관리주체</th><th data-sort-key="port">항</th><th data-sort-key="subPort">세부항</th><th data-sort-key="name">시설물명</th><th data-sort-key="classType">종구분</th><th data-sort-key="grade">안전등급</th><th data-sort-key="lastInspectDate">최종 점검·진단일</th><th data-sort-key="yearPerform">당해연도 수행</th></tr></thead><tbody id="performEvaluationTableBody"></tbody></table></div>
+                <div class="insp-results-foot"><nav class="pagination" id="performPagination"></nav></div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 총괄표 상세 -->
+  <div class="insp-overview-detail" id="overviewDetailPanel" hidden role="dialog" aria-modal="true" aria-labelledby="overviewDetailTitle">
+    <div class="insp-overview-detail__backdrop" data-overview-detail-close tabindex="-1" aria-hidden="true"></div>
+    <div class="insp-overview-detail__panel" role="document">
+      <header class="insp-overview-detail__head">
+        <div class="insp-overview-detail__head-main">
+          <h2 class="insp-overview-detail__title" id="overviewDetailTitle">총괄표 상세 <strong id="overviewDetailTarget"></strong></h2>
+        </div>
+        <button type="button" class="insp-overview-detail__close" data-overview-detail-close aria-label="상세 점검현황 닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="insp-overview-detail__stack">
+        <div class="insp-overview-detail__body" id="overviewDetailBody">
+          <div class="insp-overview-detail__filters" aria-label="상세 목록 검색">
+            <div class="insp-overview-detail__filter-row">
+              <div class="insp-overview-detail__filter-field insp-overview-detail__filter-field--grow"><label for="overviewDetailName">시설물명</label><input type="text" id="overviewDetailName" placeholder="시설물명을 입력하세요."></div>
+              <div class="insp-overview-detail__filter-field" id="overviewDetailTypeField" hidden>
+                <label for="overviewDetailType">점검구분</label>
+                <select id="overviewDetailType"><option value="">전체</option><option value="plan">유지관리계획</option><option value="regular">정기안전점검</option><option value="precision">정밀안전점검</option><option value="diagnosis">정밀안전진단</option><option value="eval">성능평가</option></select>
+              </div>
+              <div class="insp-overview-detail__filter-field" id="overviewDetailStatusField"><label for="overviewDetailStatus">상태</label><select id="overviewDetailStatus"><option value="">전체</option><option value="실시">실시</option><option value="미실시">미실시</option></select></div>
+              <div class="insp-overview-detail__filter-actions"><button type="button" class="insp-btn insp-btn--search" data-search="overview-detail"><img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">검색하기</button></div>
+            </div>
+          </div>
+          <div class="insp-sys-cards insp-sys-cards--trio" aria-label="상세 점검현황 요약" hidden>
+            <div class="insp-sys-card"><div class="insp-sys-card__body"><span class="insp-sys-card__label">총</span><strong class="insp-sys-card__value"><span id="overviewDetailSummaryTotal">0</span><em> 건</em></strong></div></div>
+            <div class="insp-sys-card"><div class="insp-sys-card__body"><span class="insp-sys-card__label">미등록 포함</span><strong class="insp-sys-card__value"><span id="overviewDetailSummaryUnreg">0</span><em> 건</em></strong></div></div>
+            <div class="insp-sys-card"><div class="insp-sys-card__body"><span class="insp-sys-card__label">등록</span><strong class="insp-sys-card__value"><span id="overviewDetailSummaryReg">0</span><em> 건</em></strong></div></div>
+          </div>
+          <div class="insp-overview-detail__table-card"><div class="insp-overview-detail__table-wrap"><table class="insp-overview-detail__table"><thead id="overviewDetailTableHead"></thead><tbody id="overviewDetailTableBody"></tbody></table></div></div>
+          <div class="insp-overview-detail__foot">
+            <nav class="pagination insp-overview-detail__pagination" id="overviewDetailPagination"></nav>
+            <div class="insp-overview-detail__foot-actions">
+              <button type="button" class="insp-btn insp-btn--excel" id="overviewDetailExcelBtn"><img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">엑셀 다운로드</button>
+              <button type="button" class="insp-overview-detail__btn insp-overview-detail__btn--close" data-overview-detail-close>닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시설물 추가 모달 -->
+  <div class="facility-add-modal__overlay" id="facilityAddOverlay" hidden></div>
+  <aside class="mpd-panel facility-add-modal" id="facilityAddPanel" aria-labelledby="facilityAddTitle" aria-modal="true" aria-hidden="true" role="dialog" hidden>
+    <div class="mpd-panel__head mpd-panel__head--with-desc facility-add-modal__head">
+      <div class="facility-add-modal__title-group"><h2 class="mpd-panel__title" id="facilityAddTitle">시설물 추가</h2><p class="mpd-panel__desc">검색 조건에 맞는 시설을 지도와 목록에서 확인합니다.</p></div>
+      <button type="button" class="facility-add-modal__close" id="facilityAddClose" aria-label="시설물 추가 닫기"><img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16"></button>
+    </div>
+    <form class="mpd-filter facility-add-search" id="facilityAddSearchForm" role="search">
+      <div class="mpd-field"><label for="facilityAddPortFilter">항</label><select id="facilityAddPortFilter"><option value="">전체</option></select></div>
+      <div class="mpd-field"><label for="facilityAddSubportFilter">세부항</label><select id="facilityAddSubportFilter"><option value="">전체</option></select></div>
+      <div class="mpd-field"><label for="facilityAddTypeFilter">시설구분</label><select id="facilityAddTypeFilter"><option value="">전체</option></select></div>
+      <div class="mpd-field mpd-field--name"><label for="facilityAddKeyword">시설물명</label><input type="text" id="facilityAddKeyword" placeholder="검색어를 입력해주세요." autocomplete="off"></div>
+      <div class="mpd-filter-actions"><button type="submit" class="mpd-btn mpd-btn--search"><img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">검색하기</button></div>
+    </form>
+    <div class="mpd-divider"></div>
+    <div class="mpd-list-block mpd-list-block--add" id="facilityAddResultBlock">
+      <div class="mpd-results__head"><div class="mpd-section-head"><span class="mpd-panel__mark"><img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14"></span><h3 class="mpd-section-title">검색결과</h3><p class="mpd-section-count">선택 가능 시설 <strong id="facilityAddCount">0</strong>개</p></div></div>
+      <div class="mpd-table-wrap facility-add-table-wrap">
+        <table class="mpd-table mpd-table--facility-add">
+          <colgroup><col class="col-no"><col class="col-org"><col class="col-port"><col class="col-subport"><col class="col-type"><col class="col-class"><col class="col-name"><col class="col-check"><col class="col-check"><col class="col-check"></colgroup>
+          <thead><tr><th><span class="visually-hidden">선택</span></th><th>관리기관</th><th>항</th><th>세부항</th><th>시설구분</th><th>종</th><th>시설물명</th><th>정밀안전점검</th><th>정밀안전진단</th><th>성능평가</th></tr></thead>
+          <tbody id="facilityAddTableBody"></tbody>
+        </table>
+      </div>
+      <div class="facility-add-modal__footer"><div class="mpd-add-actions facility-add-panel__foot">
+        <button type="button" class="mpd-btn mpd-btn--outline mpd-btn--add-cancel" id="facilityAddCancel"><img src="assets/main/facility-management/icon-undo.svg" alt="" width="18" height="18">취소</button>
+        <button type="button" class="mpd-btn mpd-btn--outline mpd-btn--add-register" id="facilityAddRegister"><img src="assets/main/facility-management/icon-select-register.svg" alt="" width="18" height="18">선택 등록</button>
+      </div></div>
+    </div>
+  </aside>
+
+  <div class="insp-plan-history-overlay" id="planHistoryOverlay" hidden></div>
+  <aside class="insp-plan-history" id="planHistoryDrawer" aria-labelledby="planHistoryTitle" aria-hidden="true">
+    <div class="insp-plan-history__top">
+      <header class="insp-plan-history__head">
+        <h2 class="insp-plan-history__title" id="planHistoryTitle">결재이력 조회</h2>
+        <button type="button" class="insp-plan-history__close" id="planHistoryClose" aria-label="닫기"><img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16"></button>
+      </header>
+      <div class="insp-plan-history__body" id="planHistoryBody"></div>
+    </div>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/inspection-status-data.js?v=20260819b"></script>
+  <script src="js/inspection-status.js?v=20260819g"></script>
+  <script>
+    PomsSidebar.mount('#sidebar-root', { active: 'inspection-status' });
+
+    // 유지관리계획 검색조건은 현재 시안 확인용 구조.
+    // 기존 inspection-status.js에 영향 없이 기본 초기화만 처리.
+    (function () {
+      var resetBtn = document.getElementById('planResetBtn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          var year = document.getElementById('planFilterYear');
+          var cls = document.getElementById('planFilterClass');
+          var type = document.getElementById('planFilterType');
+          var name = document.getElementById('planFilterName');
+          if (year) year.value = '2026';
+          if (cls) cls.value = '';
+          if (type) type.value = '';
+          if (name) name.value = '';
+        });
+      }
+
+      var templateBtn = document.getElementById('planTemplateDownloadBtn');
+      if (templateBtn) {
+        templateBtn.addEventListener('click', function () {
+          alert('유지관리계획 등록 양식(Excel)을 다운로드합니다.');
+        });
+      }
+
+      // 검색조건의 점검년도와 등록 영역의 점검년도를 동일하게 연동한다.
+      // planYearSelect의 change 이벤트는 inspection-status.js에서
+      // 연도별 결재상태·제목·신청사유·신청일자를 다시 그린다.
+      var filterYear = document.getElementById('planFilterYear');
+      var planYear = document.getElementById('planYearSelect');
+
+      if (filterYear && planYear) {
+        filterYear.value = planYear.value || filterYear.value;
+
+        filterYear.addEventListener('change', function () {
+          if (!filterYear.value || planYear.value === filterYear.value) return;
+          planYear.value = filterYear.value;
+          planYear.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+
+        planYear.addEventListener('change', function () {
+          if ([].some.call(filterYear.options, function (opt) { return opt.value === planYear.value; })) {
+            filterYear.value = planYear.value;
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

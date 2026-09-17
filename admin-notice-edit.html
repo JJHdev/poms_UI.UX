@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 수정 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-notice-edit.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout notice-edit-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fmd-crumb-row">
+      <button type="button" class="fmd-back-btn" id="noticeBackBtn" aria-label="목록으로">
+        <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+      </button>
+      <nav class="fmd-breadcrumb" aria-label="현재 위치">
+        <a href="admin-notices.html">게시판 관리</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <a href="admin-notices.html">공지사항</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="fmd-breadcrumb__current" id="noticeEditCrumb">공지사항 수정</span>
+      </nav>
+    </div>
+
+    <form class="ne-stack" id="noticeEditForm" novalidate>
+      <section class="ne-title-card" aria-label="공지사항 수정">
+        <div class="ne-title-card__left">
+          <span class="ne-title-card__icon" aria-hidden="true">
+            <img src="assets/admin-notices/icon-notice.svg" alt="" width="20" height="20">
+          </span>
+          <h2 class="ne-title-card__title" id="noticeEditPageTitle">상세 내용 수정</h2>
+          <span class="ne-title-card__badge" id="noticePinBadge" hidden>상단고정</span>
+        </div>
+
+        <div class="ne-title-card__actions">
+          <button type="button" class="ne-btn ne-btn--cancel" id="btnNoticeCancel">
+            <img src="assets/admin-notices/icon-cancel.svg" alt="" width="14" height="14">
+            취소
+          </button>
+          <button type="button" class="ne-btn ne-btn--delete" id="btnNoticeDelete">
+            <img src="assets/admin-notices/icon-delete2.svg" alt="" width="16" height="16">
+            삭제
+          </button>
+          <button type="button" class="ne-btn ne-btn--save" id="btnNoticeSave">
+            <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+            수정하기
+          </button>
+        </div>
+      </section>
+
+      <section class="ne-panel">
+        <div class="ne-meta-row">
+          <div class="ne-meta-cell ne-meta-cell--label">작성자</div>
+          <div class="ne-meta-cell ne-meta-cell--value ne-meta-cell--wide">
+            <input type="text" class="ne-cell-input" id="fieldAuthor" name="author" aria-label="작성자">
+          </div>
+
+          <div class="ne-meta-cell ne-meta-cell--label">상단고정</div>
+          <div class="ne-meta-cell ne-meta-cell--value">
+            <select class="ne-cell-select" id="fieldPinned" name="pinned" aria-label="상단고정">
+              <option value="Y">고정</option>
+              <option value="N">일반</option>
+            </select>
+          </div>
+
+          <div class="ne-meta-cell ne-meta-cell--label">노출여부</div>
+          <div class="ne-meta-cell ne-meta-cell--value">
+            <select class="ne-cell-select ne-visible-select" id="fieldVisible" name="visible" aria-label="노출여부">
+              <option>노출</option>
+              <option>미노출</option>
+            </select>
+            <div class="ne-radio-group" aria-hidden="true">
+              <label><input type="radio" name="visibleDisplay" value="노출"> 노출</label>
+              <label><input type="radio" name="visibleDisplay" value="미노출"> 미노출</label>
+            </div>
+          </div>
+
+          <div class="ne-meta-cell ne-meta-cell--label">조회수</div>
+          <div class="ne-meta-cell ne-meta-cell--value ne-meta-cell--last ne-meta-cell--views">
+            <input type="text" class="ne-cell-input" id="fieldViews" name="views" inputmode="numeric" aria-label="조회수">
+          </div>
+        </div>
+
+        <div class="ne-title-row">
+          <div class="ne-title-label"><label for="fieldTitle">제목</label></div>
+          <div class="ne-title-value">
+            <input type="text" class="ne-cell-input" id="fieldTitle" name="title" placeholder="공지 제목을 입력하세요." required>
+          </div>
+        </div>
+
+        <div class="ne-content-head"><label for="fieldContent">내용</label></div>
+
+        <div class="ne-content-body">
+          <div class="ne-rte notice-rte">
+            <div class="notice-rte__toolbar" role="toolbar" aria-label="서식">
+              <select id="rteParagraph" aria-label="문단 스타일">
+                <option>문단</option>
+                <option>제목 1</option>
+                <option>제목 2</option>
+              </select>
+              <select id="rteFontSize" aria-label="글자 크기">
+                <option>12pt</option>
+                <option selected>14pt</option>
+                <option>16pt</option>
+              </select>
+              <button type="button" class="notice-rte__btn" data-cmd="bold" title="굵게"><strong>B</strong></button>
+            </div>
+            <div class="notice-rte__editor" id="fieldContent" contenteditable="true" role="textbox" aria-multiline="true" aria-label="공지 내용"></div>
+          </div>
+        </div>
+
+        <div class="ne-attach-row">
+          <span class="ne-attach-label">첨부파일</span>
+          <div class="ne-attach-value">
+            <button type="button" class="ne-attach__add" id="btnAddFile">파일 추가</button>
+            <div class="ne-attach__list" id="attachList"></div>
+          </div>
+        </div>
+      </section>
+
+      <input type="text" id="fieldNo" name="no" hidden>
+      <input type="text" id="fieldCreated" name="created" hidden>
+      <input type="text" id="fieldModified" name="modified" hidden>
+      <p id="noticeEditSummaryMeta" hidden>게시판관리 · 공지사항</p>
+    </form>
+  </main>
+
+  <input type="file" id="fileInput" class="sr-only" accept=".pdf,.doc,.docx,.hwp,.png,.jpg" multiple hidden>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-notices-data.js"></script>
+  <script src="js/admin-notice-edit.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'board-notice' });
+  </script>
+
+  <script>
+    (() => {
+      const select = document.getElementById('fieldVisible');
+      const radios = document.querySelectorAll('input[name="visibleDisplay"]');
+
+      const syncFromSelect = () => {
+        radios.forEach((radio) => {
+          radio.checked = radio.value === select.value;
+        });
+      };
+
+      radios.forEach((radio) => {
+        radio.addEventListener('change', () => {
+          if (!radio.checked) return;
+          select.value = radio.value;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+      });
+
+      requestAnimationFrame(syncFromSelect);
+      setTimeout(syncFromSelect, 0);
+      select?.addEventListener('change', syncFromSelect);
+    })();
+  </script>
+</body>
+</html>

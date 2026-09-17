@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>팝업관리 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/admin-popup.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout popup-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fmd-crumb-row">
+      <button type="button" class="fmd-back-btn" id="popupBack" aria-label="목록으로">
+        <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+      </button>
+      <nav class="fmd-breadcrumb" aria-label="현재 위치">
+        <a href="popup-manage.html">게시판 관리</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <a href="popup-manage.html">팝업관리</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="fmd-breadcrumb__current" id="popupDetailCrumb">팝업 상세</span>
+      </nav>
+    </div>
+
+    <form class="pd-stack" id="popupEditForm" novalidate>
+      <section class="pd-title-card" aria-label="팝업 상세">
+        <div class="pd-title-card__left">
+          <span class="pd-title-card__icon" aria-hidden="true">
+            <img src="assets/admin-notices/icon-notice.svg" alt="" width="20" height="20">
+          </span>
+
+          <h2 class="pd-title-card__title pd-view-only" id="popupDetailTitle">팝업 #1</h2>
+          <h2 class="pd-title-card__title pd-edit-only" id="popupEditTitle">상세 내용 수정</h2>
+
+          <span class="pd-title-card__badge" id="popupStatusBadge" hidden>게시중</span>
+        </div>
+
+        <div class="pd-title-card__actions">
+          <button type="button" class="pd-btn pd-btn--cancel pd-edit-only" id="popupCancel">
+            <img src="assets/admin-notices/icon-cancel.svg" alt="" width="14" height="14">
+            취소
+          </button>
+
+          <button type="button" class="pd-btn pd-btn--preview pd-view-only" id="popupPreviewOpen">
+            팝업창 보기
+          </button>
+
+          <button type="button" class="pd-btn pd-btn--delete" id="popupDelete">
+            <img src="assets/admin-notices/icon-delete2.svg" alt="" width="16" height="16">
+            삭제
+          </button>
+
+          <button type="button" class="pd-btn pd-btn--edit" id="popupSave">
+            <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+            <span id="popupSaveText">수정하기</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="pd-panel">
+        <!-- 수정 모드: 공지사항 수정 화면처럼 메타행 먼저 -->
+        <div class="pd-meta-row">
+          <div class="pd-meta-cell pd-meta-cell--label">팝업 유형</div>
+          <div class="pd-meta-cell pd-meta-cell--value">
+            <span class="pd-view-only" id="popupTypeText">텍스트 팝업</span>
+            <select class="pd-control pd-edit-only" id="popupTypeSelect" aria-label="팝업 유형">
+              <option value="text">텍스트 팝업</option>
+              <option value="image">이미지 팝업</option>
+            </select>
+          </div>
+
+          <div class="pd-meta-cell pd-meta-cell--label">시작일</div>
+          <div class="pd-meta-cell pd-meta-cell--value">
+            <span class="pd-view-only" id="popupStartText"></span>
+            <input type="date" class="pd-control pd-edit-only" id="popupStartInput">
+          </div>
+
+          <div class="pd-meta-cell pd-meta-cell--label">종료일</div>
+          <div class="pd-meta-cell pd-meta-cell--value">
+            <span class="pd-view-only" id="popupEndText"></span>
+            <input type="date" class="pd-control pd-edit-only" id="popupEndInput">
+          </div>
+
+          <div class="pd-meta-cell pd-meta-cell--label">노출여부</div>
+          <div class="pd-meta-cell pd-meta-cell--value">
+            <span class="pd-view-only" id="popupVisibleText"></span>
+            <select class="pd-control pd-edit-only" id="popupStatusInput">
+              <option>노출</option>
+              <option>미노출</option>
+            </select>
+          </div>
+
+          <div class="pd-meta-cell pd-meta-cell--label">팝업 너비</div>
+          <div class="pd-meta-cell pd-meta-cell--value pd-meta-cell--last">
+            <span class="pd-view-only"><span id="popupWidthText"></span>px</span>
+            <div class="pd-width-edit pd-edit-only">
+              <input type="number" class="pd-control" id="popupWidthInput">
+              <span>px</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 수정 모드에서는 제목을 별도 행으로 -->
+        <div class="pd-title-row pd-edit-only">
+          <div class="pd-title-label"><label for="popupTitleInput">제목</label></div>
+          <div class="pd-title-value">
+            <input type="text" class="pd-control pd-title-control" id="popupTitleInput" name="title" placeholder="팝업 제목을 입력하세요." required>
+          </div>
+        </div>
+
+        <!-- 상세 보기에서는 제목은 상단에 있으므로 별도 행 없음 -->
+
+        <div class="pd-link-row">
+          <span class="pd-link-label">링크 URL</span>
+          <a href="#" class="pd-link-value pd-view-only" id="popupLinkText"></a>
+          <div class="pd-link-edit pd-edit-only">
+            <input type="text" class="pd-control" id="popupLinkInput" placeholder="입력 시 새 창으로 연결">
+          </div>
+        </div>
+
+        <div class="pd-content-head">
+          <span class="pd-view-only">설명</span>
+          <label class="pd-edit-only" for="popupContentInput">설명</label>
+        </div>
+
+        <div class="pd-panel__body">
+          <div class="pd-content pd-view-only" id="popupContentText"></div>
+
+          <div class="pd-content-editor pd-edit-only">
+            <div class="notice-rte popup-detail-rte">
+<div class="notice-rte__editor" id="popupContentInput" contenteditable="true" role="textbox" aria-multiline="true" aria-label="팝업 설명"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pd-panel__image" id="popupImageRow" hidden>
+          <span class="pd-image-label">팝업 이미지</span>
+          <div class="pd-image-value">
+            <div class="pd-view-only" id="popupImageText"></div>
+            <div class="pd-image-edit pd-edit-only">
+              <button type="button" class="pd-file-btn" id="popupImageButton">파일 추가</button>
+              <div class="ne-attach__list" id="popupImageAttachList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="pd-note" id="popupFormNote">게시상태는 노출여부와 노출기간으로 표시됩니다.</p>
+      <p id="popupDetailSub" hidden>게시판관리 · 팝업관리</p>
+    </form>
+  </main>
+
+  <input type="file" id="popupImageInput" class="sr-only" accept=".png,.jpg,.jpeg,.gif" hidden>
+
+  <section class="mock-modal" id="popupPreviewModal" aria-modal="true" role="dialog" aria-labelledby="popupPreviewModalTitle" hidden>
+    <div class="mock-modal__backdrop" data-popup-preview-close></div>
+    <div class="mock-modal__dialog">
+      <div class="mock-modal__head">
+        <div>
+          <p class="mock-modal__eyebrow">팝업 미리보기</p>
+          <h2 id="popupPreviewModalTitle">팝업창 보기</h2>
+          <p class="mock-modal__sub">현재 입력값 기준으로 표시되는 팝업창입니다.</p>
+        </div>
+        <button type="button" class="mock-modal__close" data-popup-preview-close aria-label="팝업 미리보기 닫기">×</button>
+      </div>
+      <div class="mock-modal__body">
+        <div class="popup-preview-window" id="popupPreviewWindow">
+          <div class="popup-preview-window__head">
+            <span>POMS 안내</span>
+            <span class="popup-preview-window__close">×</span>
+          </div>
+          <div class="popup-preview-window__screen">
+            <div class="popup-preview-window__image" id="popupPreviewImage">이미지 영역<br>520 x 180 권장</div>
+            <div class="popup-preview-window__body">
+              <strong id="popupPreviewTitle">팝업 제목</strong>
+              <span id="popupPreviewContent">팝업 설명이 표시됩니다.</span>
+            </div>
+            <div class="popup-preview-window__foot">
+              <span id="popupPreviewStatus">노출</span>
+              <span class="popup-preview-window__link" id="popupPreviewLink">새 창 링크</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/popup-detail.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'board-popup' });
+  </script>
+</body>
+</html>

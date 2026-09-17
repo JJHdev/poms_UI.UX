@@ -1,0 +1,435 @@
+/* ===== User detail page ===== */
+.user-detail-page {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+.user-detail-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 48px;
+  padding-left: 41px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.user-detail-top,
+.user-detail-toolbar {
+  display: none !important;
+}
+
+.user-detail-page .btn-notice-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.user-detail-page .btn-notice-back:hover {
+  border-color: #9ca3af;
+  background: #f9fafb;
+}
+
+.user-detail-page .btn-notice-back svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Summary card */
+.user-summary-card {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 20px 0;
+  margin-bottom: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.user-summary-card__profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.user-summary-card__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.user-summary-card__name {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.user-summary-card__meta {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.user-summary-card__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 32px;
+  flex: 1;
+  max-width: 720px;
+}
+
+.user-summary-stat {
+  text-align: left;
+}
+
+.user-summary-stat__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.user-summary-stat__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.user-summary-stat__label {
+  display: block;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.user-summary-stat__value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.user-summary-stat__value--active {
+  color: #2563eb;
+}
+
+/* Detail grid 2x2 */
+.user-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.user-detail-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.user-detail-card__title {
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.user-detail-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-detail-field {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.user-detail-field dt {
+  margin: 0;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.user-detail-field dd {
+  margin: 0;
+  font-weight: 500;
+  color: #111827;
+}
+
+.user-detail-field .req {
+  display: none;
+  margin-left: 2px;
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.user-detail-page.is-editing .user-detail-field--required .req {
+  display: inline;
+}
+
+/* 입력·토글 영역 공통 너비 (비밀번호 행 기준) */
+.user-detail-page {
+  --user-detail-control-max: 400px;
+}
+
+.field-edit {
+  display: none;
+}
+
+.user-detail-page.is-editing .user-detail-field dd > .field-edit {
+  display: block;
+  width: 100%;
+  max-width: var(--user-detail-control-max);
+}
+
+.user-detail-page.is-editing .user-detail-field dd > input.field-edit {
+  display: block;
+}
+
+.user-detail-page.is-editing .field-view {
+  display: none;
+}
+
+.user-detail-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  color: #111827;
+}
+
+.user-detail-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.user-detail-password__edit {
+  display: none;
+}
+
+.user-detail-page.is-editing .user-detail-field dd > .user-detail-password__edit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.user-detail-page.is-editing .user-detail-password__edit .user-detail-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  /* 버튼이 잘리지 않도록 입력칸만 제한 */
+  max-width: 260px;
+}
+
+.user-detail-field--password {
+  align-items: center;
+}
+
+.user-detail-password {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.user-detail-password__mask {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #6b7280;
+}
+
+.btn-pw-reset {
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 6px;
+  background: #1e3a5f;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-pw-reset:hover {
+  background: #152a45;
+}
+
+/* Toggle button groups */
+.toggle-group {
+  display: flex;
+  width: 100%;
+  max-width: var(--user-detail-control-max);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.toggle-group__btn {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 14px;
+  border: none;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  font-family: inherit;
+  cursor: default;
+  transition: background 0.15s, color 0.15s;
+}
+
+.user-detail-page.is-editing .toggle-group__btn {
+  cursor: pointer;
+}
+
+.toggle-group__btn + .toggle-group__btn {
+  border-left: 1px solid #d1d5db;
+}
+
+.toggle-group__btn.is-active {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.toggle-group__btn.is-active--danger {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Footer actions */
+.user-detail-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-user-edit {
+  height: 42px;
+  padding: 0 24px;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-user-edit:hover {
+  background: #eff6ff;
+}
+
+.user-detail-page.is-editing .btn-user-edit {
+  display: none;
+}
+
+.btn-user-cancel {
+  height: 42px;
+  padding: 0 24px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-user-cancel:hover {
+  background: #f9fafb;
+}
+
+.btn-user-save {
+  height: 42px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-user-save:hover {
+  background: #1d4ed8;
+}
+
+.btn-user-delete {
+  height: 42px;
+  padding: 0 24px;
+  border: 1px solid #ef4444;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ef4444;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-user-delete:hover {
+  background: #fef2f2;
+}
+
+.user-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.user-table tbody tr.is-clickable:hover {
+  background: #eff6ff;
+}

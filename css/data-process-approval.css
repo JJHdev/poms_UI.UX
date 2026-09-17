@@ -1,0 +1,190 @@
+/* 자료처리 승인/반려 — type3 flat */
+
+.data-process-approval-page {
+  margin: 0;
+  min-width: 1240px;
+}
+
+.data-process-approval-page .dpa-filter-fields > .type3-field {
+  flex: 0 0 200px;
+  width: 200px;
+  max-width: 200px;
+}
+
+.data-process-approval-page .dpa-filter-fields > .type3-field--sm {
+  flex: 0 0 140px;
+  width: 140px;
+  max-width: 140px;
+}
+
+.data-process-approval-page .dpa-filter-fields > .type3-field--grow {
+  flex: 1 1 260px;
+  width: auto;
+  max-width: 360px;
+}
+
+.data-process-approval-page .type3-results-foot {
+  justify-content: center;
+}
+
+@media (max-width: 1600px) {
+  .data-process-approval-page .type3-filter--strip {
+    flex-wrap: wrap;
+  }
+
+  .data-process-approval-page .dpa-filter-fields > .type3-field,
+  .data-process-approval-page .dpa-filter-fields > .type3-field--sm,
+  .data-process-approval-page .dpa-filter-fields > .type3-field--grow {
+    flex: 1 1 180px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* ===== Table — fit 1200 content, no horizontal scroll ===== */
+.data-process-approval-page .type3-table-wrap {
+  overflow-x: hidden;
+}
+
+.data-process-approval-page .dpa-table {
+  width: 100%;
+  min-width: 0 !important;
+  max-width: 100%;
+  table-layout: fixed;
+}
+
+.data-process-approval-page .dpa-table col.col-no { width: 3.5%; }
+.data-process-approval-page .dpa-table col.col-work { width: 7%; }
+.data-process-approval-page .dpa-table col.col-form { width: 9%; }
+.data-process-approval-page .dpa-table col.col-agency { width: 11%; }
+.data-process-approval-page .dpa-table col.col-person { width: 8%; }
+.data-process-approval-page .dpa-table col.col-file { width: 18%; }
+.data-process-approval-page .dpa-table col.col-datetime { width: 10%; }
+.data-process-approval-page .dpa-table col.col-status { width: 7.5%; }
+.data-process-approval-page .dpa-table col.col-report { width: 11%; }
+.data-process-approval-page .dpa-table col.col-action { width: 10%; }
+
+.data-process-approval-page .dpa-table thead th,
+.data-process-approval-page .dpa-table tbody td {
+  height: 32px;
+  padding: 2px 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.data-process-approval-page .dpa-table tbody td {
+  color: #333;
+}
+
+.data-process-approval-page .dpa-table tbody td.is-left {
+  text-align: left;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.data-process-approval-page .dpa-table tbody tr.is-completed td {
+  color: #6c788b;
+}
+
+/* ===== Status badges ===== */
+.sra-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.sra-status--pending {
+  background: rgba(239, 201, 75, 0.15);
+  color: #d4a50a;
+}
+
+.sra-status--rejected {
+  background: rgba(230, 0, 45, 0.04);
+  color: #e6002d;
+}
+
+.sra-status--completed {
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+}
+
+/* ===== Table action buttons ===== */
+.sra-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  max-width: 100%;
+}
+
+.sra-tbl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 2px 6px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.sra-tbl-btn:hover {
+  background: #f4f4fa;
+  border-color: #c8cfd9;
+}
+
+.sra-tbl-btn--approve {
+  border-color: #1c6fff;
+  background: #1c6fff;
+  color: #fff;
+}
+
+.sra-tbl-btn--approve:hover {
+  background: #1557d0;
+  border-color: #1557d0;
+  color: #fff;
+}
+
+.sra-tbl-btn--reject {
+  border-color: #e6002d;
+  color: #e6002d;
+  background: #fff;
+}
+
+.sra-tbl-btn--reject:hover {
+  background: rgba(230, 0, 45, 0.06);
+  border-color: #e6002d;
+  color: #e6002d;
+}
+
+.sra-tbl-btn--download {
+  width: auto;
+  max-width: 100%;
+  padding: 2px 6px;
+}
+
+.sra-done-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #6c788b;
+}

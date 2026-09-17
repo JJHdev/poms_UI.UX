@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 24 25.875" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 8">
+<circle id="Ellipse 2" cx="15" cy="7" r="7" fill="var(--fill-0, #4970A2)" fill-opacity="0.2"/>
+<g id="Component 2" clip-path="url(#clip0_0_138)">
+<g id="Vector">
+</g>
+<path id="Vector_2" d="M3 8.875C3 8.34457 3.21071 7.83586 3.58579 7.46079C3.96086 7.08571 4.46957 6.875 5 6.875H19C19.5304 6.875 20.0391 7.08571 20.4142 7.46079C20.7893 7.83586 21 8.34457 21 8.875V18.875C21 19.4054 20.7893 19.9141 20.4142 20.2892C20.0391 20.6643 19.5304 20.875 19 20.875H5C4.46957 20.875 3.96086 20.6643 3.58579 20.2892C3.21071 19.9141 3 19.4054 3 18.875V8.875Z" stroke="var(--stroke-0, #6C788B)" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M3 8.875L12 14.875L21 8.875" stroke="var(--stroke-0, #6C788B)" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_138">
+<rect width="24" height="24" fill="white" transform="translate(0 1.875)"/>
+</clipPath>
+</defs>
+</svg>

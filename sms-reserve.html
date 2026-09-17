@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문자예약 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/sms-reserve.css?v=20260814-4">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout sms-reserve-page-root">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="sms-reserve-page" aria-label="문자예약 관리">
+
+      <div class="sms-reserve-section-title">
+        <span class="sms-reserve-section-title__icon" aria-hidden="true">
+          <img src="assets/sms-send/icon-calendar.svg" alt="" width="22" height="22">
+        </span>
+        <h1 class="sms-reserve-section-title__text">문자예약</h1>
+        <span class="sms-reserve-section-title__badge">점검구분별 예약문자 관리</span>
+      </div>
+
+      <section class="sms-reserve-results" aria-labelledby="smsReserveListTitle">
+        <div class="sms-reserve-results__head">
+          <div class="sms-reserve-results__count">
+            <span class="sms-reserve-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+            </span>
+            <h2 id="smsReserveListTitle" class="sms-reserve-results__label">문자예약 목록</h2>
+            <p class="sms-reserve-results__meta">총 <strong id="smsReserveCount">0</strong>건</p>
+          </div>
+          <button type="button" class="btn-sms-reserve-add" id="smsReserveAdd">
+            <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="14" height="14">
+            예약 등록
+          </button>
+        </div>
+
+        <div class="sms-reserve-table-wrap">
+          <table class="sms-reserve-table" aria-label="문자예약 목록">
+            <thead>
+              <tr>
+                <th scope="col" class="col-no">번호</th>
+                <th scope="col" class="col-type">점검구분</th>
+                <th scope="col" class="col-date">발송일</th>
+                <th scope="col">메세지</th>
+              </tr>
+            </thead>
+            <tbody id="smsReserveBody"></tbody>
+          </table>
+        </div>
+
+        <div class="sms-reserve-foot">
+          <nav class="pagination" id="smsReservePagination" aria-label="페이지 이동"></nav>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="sms-reserve-overlay" id="smsReserveOverlay" hidden data-close-sms-reserve></div>
+  <aside
+    class="sms-reserve-drawer"
+    id="smsReserveModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="smsReserveDetailTitle"
+    aria-hidden="true"
+  >
+    <div class="sms-reserve-drawer__top">
+      <header class="sms-reserve-drawer__head">
+        <h2 class="sms-reserve-drawer__title" id="smsReserveDetailTitle">문자예약 상세</h2>
+        <button type="button" class="sms-reserve-drawer__close" data-close-sms-reserve aria-label="닫기">
+          <img src="assets/sms-send/icon-close.svg" alt="" width="14" height="14">
+        </button>
+      </header>
+
+      <div class="sms-reserve-drawer__body">
+        <p class="sms-reserve-drawer__desc" id="smsReserveModeText">목록에서 예약문자를 선택하거나 추가 버튼을 눌러 입력하세요.</p>
+
+        <form id="smsReserveForm" class="sms-reserve-form" novalidate>
+          <input type="hidden" id="smsSchdlSn" name="smsSchdlSn">
+
+          <div class="sms-reserve-field">
+            <label for="chckGbn">점검구분</label>
+            <div class="sms-reserve-select-wrap">
+              <select id="chckGbn" name="chckGbn">
+                <option value="">-선택-</option>
+                <option value="100">정기안전점검</option>
+                <option value="202">정밀안전점검</option>
+                <option value="401">정밀안전진단</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sms-reserve-field">
+            <label for="inputSchdlDe">발송일</label>
+            <input type="text" id="inputSchdlDe" name="inputSchdlDe" inputmode="numeric" maxlength="5" placeholder="MM-DD">
+          </div>
+
+          <div class="sms-reserve-field sms-reserve-field--message">
+            <label for="inputMsg">메세지</label>
+            <textarea id="inputMsg" name="inputMsg" rows="9" placeholder="예약 발송할 메세지를 입력하세요."></textarea>
+          </div>
+        </form>
+
+        <div class="sms-reserve-guide" aria-labelledby="smsReserveGuideTitle">
+          <h3 id="smsReserveGuideTitle">예약어 안내</h3>
+          <ul>
+            <li><strong>{지난해}</strong> : 지난해의 년도</li>
+            <li><strong>{이번해}</strong> : 이번해의 년도</li>
+            <li><strong>{다음해}</strong> : 다음해의 년도</li>
+            <li><strong>{관리주체}</strong> : 이번해의 년도</li>
+          </ul>
+          <ul class="sms-reserve-guide__option" data-reserve-guide="100" hidden>
+            <li><strong>{상반기정기점검}</strong> : 정기안전점검 올해 상반기 미점검 시설물 수</li>
+            <li><strong>{하반기정기점검}</strong> : 정기안전점검 올해 하반기 미점검 시설물 수</li>
+          </ul>
+          <ul class="sms-reserve-guide__option" data-reserve-guide="202" hidden>
+            <li><strong>{지난해점검누락}</strong> : 정밀안전점검/정밀안전진단 지난해 미점검 시설물 수</li>
+            <li><strong>{이번해점검예정}</strong> : 정밀안전점검/정밀안전진단 이번해 미점검 시설물 수</li>
+            <li><strong>{다음해점검예정}</strong> : 정밀안전점검/정밀안전진단 다음해 미점검 시설물 수</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer class="sms-reserve-drawer__foot">
+      <p class="sms-reserve-drawer__note" id="smsReserveSaveNote" aria-live="polite"></p>
+      <div class="sms-reserve-drawer__actions">
+        <button type="button" class="btn-sms-reserve-cancel" data-close-sms-reserve>닫기</button>
+        <button type="button" class="btn-sms-reserve-delete" id="smsReserveDelete">
+          <img src="assets/admin-notices/icon-delete2.svg" alt="" width="16" height="16">
+          삭제
+        </button>
+        <button type="button" class="btn-sms-reserve-save" id="smsReserveSave">
+          <img src="assets/admin-users/icon-save.svg" alt="" width="16" height="16">
+          저장
+        </button>
+      </div>
+    </footer>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/sms-reserve.js"></script>
+  <script>
+    /* 목록 건수 표시 (sms-reserve.js가 tbody를 다시 그릴 때마다 갱신) */
+    (function () {
+      var tbody = document.getElementById('smsReserveBody');
+      var countEl = document.getElementById('smsReserveCount');
+      if (!tbody || !countEl) { return; }
+
+      function sync() {
+        var rows = Array.prototype.filter.call(tbody.rows, function (tr) {
+          return !tr.classList.contains('sms-reserve-empty')
+            && !tr.classList.contains('is-empty')
+            && tr.cells.length > 1;
+        });
+        countEl.textContent = rows.length;
+      }
+
+      if (window.MutationObserver) {
+        new MutationObserver(sync).observe(tbody, { childList: true });
+      }
+      sync();
+    })();
+  </script>
+</body>
+</html>

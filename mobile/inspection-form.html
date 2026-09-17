@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0a2d5c">
+  <title>점검 입력 | POMS 모바일</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/mobile-common.css">
+  <link rel="stylesheet" href="../css/mobile-inspection-form.css">
+</head>
+<body class="mobile-app-page">
+  <div class="mobile-app">
+    <header class="mobile-header">
+      <a href="home.html" class="mobile-header__brand" aria-label="홈으로 이동">
+        <span class="mobile-header__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>
+          </svg>
+        </span>
+        <div class="mobile-header__text">
+          <p class="mobile-header__eyebrow">항만 시설 지킴이</p>
+          <h1 class="mobile-header__title">해양수산부 POMS</h1>
+        </div>
+      </a>
+      <button type="button" class="mobile-header__menu" id="mobileMenuBtn" aria-label="메뉴 열기" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="mobile-app__main mobile-app__main--form">
+      <a href="inspection.html" class="mobile-form__back">← 목록</a>
+
+      <div class="mobile-form__tabs" role="tablist">
+        <button type="button" class="mobile-form__tab is-active" data-panel="panelChecklist" role="tab" aria-selected="true">체크리스트</button>
+        <button type="button" class="mobile-form__tab" data-panel="panelReport" role="tab" aria-selected="false">결과 보고서</button>
+      </div>
+
+      <div id="panelChecklist" class="mobile-form__panel is-active" role="tabpanel">
+        <section class="mobile-form__section" aria-labelledby="basicInfoTitle">
+          <h2 id="basicInfoTitle" class="mobile-form__section-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            기본정보
+          </h2>
+          <div class="mobile-form__field">
+            <label class="mobile-form__label" for="authorPhone">작성자 연락처<span class="req">*</span></label>
+            <input type="tel" class="mobile-form__input" id="authorPhone" placeholder="010-0000-0000" inputmode="tel">
+          </div>
+          <div class="mobile-form__field">
+            <label class="mobile-form__label" for="inspType">점검구분<span class="req">*</span></label>
+            <select class="mobile-form__select" id="inspType"><option value="">선택하세요</option><option>정기</option><option>수시</option></select>
+          </div>
+          <div class="mobile-form__field">
+            <label class="mobile-form__label" for="safetyGrade">안전등급<span class="req">*</span></label>
+            <select class="mobile-form__select" id="safetyGrade"><option value="">선택하세요</option><option>A</option><option>B</option><option>C</option></select>
+          </div>
+        </section>
+
+        <section class="mobile-form__section" aria-labelledby="techInfoTitle">
+          <h2 id="techInfoTitle" class="mobile-form__section-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            기술자 정보
+          </h2>
+          <div id="mobileTechList"></div>
+          <button type="button" class="mobile-form__add-tech" id="mobileAddTech">+ 점검자 추가</button>
+        </section>
+
+        <section class="mobile-form__section mobile-form__section--white" aria-labelledby="facilityFormTitle">
+          <h2 id="facilityFormTitle" class="mobile-form__facility-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            <span id="formTypeLabel">정기안전점검표 · 중력식</span>
+          </h2>
+          <div class="mobile-form__field">
+            <label class="mobile-form__label">시설물명</label>
+            <p class="mobile-form__static" id="formFacilityName">A계류시설</p>
+          </div>
+          <div class="mobile-form__field">
+            <label class="mobile-form__label">관리주체</label>
+            <p class="mobile-form__static" id="formFacilityManager">광양지방해양수산청</p>
+          </div>
+          <div class="mobile-form__field">
+            <label class="mobile-form__label" for="completeDate">준공년월일</label>
+            <div class="mobile-form__input-wrap">
+              <input type="date" class="mobile-form__input mobile-form__input--fill" id="completeDate">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+          </div>
+          <div class="mobile-form__field">
+            <label class="mobile-form__label" for="lastInspDate">최종 점검년월일</label>
+            <div class="mobile-form__input-wrap">
+              <input type="date" class="mobile-form__input mobile-form__input--fill" id="lastInspDate">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+          </div>
+        </section>
+
+        <section class="mobile-form__section mobile-form__section--white" aria-labelledby="checklistTitle">
+          <h2 id="checklistTitle" class="mobile-form__checklist-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            체크리스트
+          </h2>
+          <div id="mobileChecklistRoot"></div>
+        </section>
+      </div>
+
+      <div id="panelReport" class="mobile-form__panel" role="tabpanel">
+        <p class="mobile-form__report-placeholder">결과 보고서 화면은 샘플에서 준비 중입니다.</p>
+      </div>
+    </main>
+
+    <footer class="mobile-form__footer">
+      <button type="button" class="mobile-form__footer-btn mobile-form__footer-btn--ghost" id="formSaveDraft">임시저장</button>
+      <button type="button" class="mobile-form__footer-btn mobile-form__footer-btn--primary" id="formSubmit">제출</button>
+    </footer>
+  </div>
+
+  <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+    <button type="button" class="mobile-drawer__backdrop" id="mobileDrawerBackdrop" aria-label="메뉴 닫기" tabindex="-1"></button>
+    <aside class="mobile-drawer__panel" id="mobileDrawerPanel" role="dialog" aria-modal="true" aria-label="사이드 메뉴">
+      <div class="mobile-drawer__profile">
+        <span class="mobile-drawer__avatar" aria-hidden="true">한</span>
+        <div class="mobile-drawer__user">
+          <div class="mobile-drawer__user-line">
+            <p class="mobile-drawer__org">한국항만협회</p>
+            <span class="mobile-drawer__date" id="mobileDrawerDate">2026.05.15</span>
+          </div>
+          <div class="mobile-drawer__user-line mobile-drawer__user-line--bottom">
+            <p class="mobile-drawer__role">시설물 담당자</p>
+            <span class="mobile-drawer__status">
+              <span class="mobile-drawer__status-dot" aria-hidden="true"></span>
+              현재 접속중
+            </span>
+          </div>
+        </div>
+      </div>
+      <nav class="mobile-drawer__nav" aria-label="계정 메뉴">
+        <p class="mobile-drawer__label">계정</p>
+        <ul class="mobile-drawer__menu">
+          <li><a href="#" class="mobile-drawer__link" data-mobile-soon>내 정보</a></li>
+          <li><a href="#" class="mobile-drawer__link" data-mobile-soon>알림 설정</a></li>
+          <li><a href="#" class="mobile-drawer__link" data-mobile-soon>앱 설정</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-drawer__footer">
+        <a href="login.html?logout=1" class="mobile-drawer__link mobile-drawer__logout" id="mobileLogout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          로그아웃
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script src="../js/mobile-inspection-data.js"></script>
+  <script src="../js/mobile-inspection-form-data.js"></script>
+  <script src="../js/mobile-common.js"></script>
+  <script src="../js/mobile-drawer.js"></script>
+  <script src="../js/mobile-inspection-form.js"></script>
+</body>
+</html>

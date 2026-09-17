@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사용자 계정 관리 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/admin-users.css">
+  <link rel="stylesheet" href="css/user-account.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-search-page facility-change-request-page type3-port-page fcr-flat-page admin-users-page user-account-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="사용자 관리 메뉴">
+        <div class="fs-lnb__title">
+          <h2 class="fs-lnb__title-text">사용자 관리</h2>
+        </div>
+        <nav class="fs-lnb__nav" data-admin-sub-tabs="1" aria-label="사용자 관리 하위 메뉴">
+          <a href="admin-users.html" class="fs-lnb__item">
+            <span>사용자 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="user-account.html" class="fs-lnb__item is-active" aria-current="page">
+            <span>사용자 계정 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="type3-page fs-manage" aria-label="사용자 계정 관리">
+
+      <div class="ua-account-tabs" role="tablist" aria-label="사용자계정 관리 탭">
+        <button type="button" class="ua-account-tabs__btn is-active" role="tab" aria-selected="true" data-tab="privacy">개인정보처리 로그관리</button>
+        <button type="button" class="ua-account-tabs__btn" role="tab" aria-selected="false" data-tab="history">작업계정 이력조회</button>
+        <button type="button" class="ua-account-tabs__btn" role="tab" aria-selected="false" data-tab="access">접속자 수 조회</button>
+      </div>
+
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text">검색조건</h1>
+      </div>
+
+      <section class="type3-filter-strip" aria-label="검색조건">
+        <form class="type3-filter type3-filter--strip" id="privacyFilter" data-filter-panel="privacy" role="search" novalidate>
+          <div class="type3-filter__fields">
+            <div class="type3-field type3-field--w240">
+              <label for="privacyKeyword">작업계정 ID</label>
+              <input type="text" id="privacyKeyword" placeholder="작업계정 ID를 입력하세요." data-filter="keyword" autocomplete="off">
+            </div>
+            <div class="type3-field">
+              <label for="privacyWork">작업 구분</label>
+              <select id="privacyWork" data-filter="work">
+                <option value="">전체</option>
+                <option value="계정목록조회">계정목록조회</option>
+                <option value="사용자계정생성">사용자계정생성</option>
+                <option value="사용자계정삭제">사용자계정삭제</option>
+                <option value="사용자계정수정">사용자계정수정</option>
+                <option value="계정비밀번호변경">계정비밀번호변경</option>
+                <option value="계정로그인횟수초기화">계정로그인횟수초기화</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--range">
+              <label>검색기간</label>
+              <div class="ua-date-range">
+                <input type="date" value="2026-01-01">
+                <em>~</em>
+                <input type="date" value="2026-06-08">
+              </div>
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search" data-search>
+              <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="type3-btn type3-btn--reset" data-reset>
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </form>
+
+        <form class="type3-filter type3-filter--strip" id="historyFilter" data-filter-panel="history" role="search" novalidate hidden>
+          <div class="type3-filter__fields">
+            <div class="type3-field type3-field--w240">
+              <label for="historyKeyword">사용자 ID</label>
+              <input type="text" id="historyKeyword" placeholder="사용자 ID를 입력하세요." data-filter="keyword" autocomplete="off">
+            </div>
+            <div class="type3-field">
+              <label for="historyMenu">접속 메뉴</label>
+              <input type="text" id="historyMenu" placeholder="접속 메뉴명을 입력하세요." data-filter="menu" autocomplete="off">
+            </div>
+            <div class="type3-field type3-field--range">
+              <label>검색기간</label>
+              <div class="ua-date-range">
+                <input type="date" value="2026-01-01">
+                <em>~</em>
+                <input type="date" value="2026-06-08">
+              </div>
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search" data-search>
+              <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="type3-btn type3-btn--reset" data-reset>
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </form>
+
+        <form class="type3-filter type3-filter--strip" id="accessFilter" data-filter-panel="access" role="search" novalidate hidden>
+          <div class="type3-filter__fields">
+            <div class="type3-field type3-field--w240">
+              <label for="accessPeriod">검색 구분</label>
+              <select id="accessPeriod" data-filter="period">
+                <option value="year">년</option>
+                <option value="month" selected>월</option>
+                <option value="date">일</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--range">
+              <label>검색기간</label>
+              <div class="ua-date-range">
+                <input type="month" value="2026-01">
+                <em>~</em>
+                <input type="month" value="2026-06">
+              </div>
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search" data-search>
+              <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="type3-btn type3-btn--reset" data-reset>
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="type3-results-panel" aria-labelledby="accountResultsTitle">
+        <div class="type3-results__head">
+          <div class="type3-results__count">
+            <span class="type3-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="8" height="14">
+            </span>
+            <h2 id="accountResultsTitle" class="type3-results__label">검색결과</h2>
+            <p class="type3-results__meta">총 <strong id="accountResultCount">0</strong>건</p>
+          </div>
+          <button type="button" class="type3-btn type3-btn--create" id="btnAccountExcel">
+            <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+            엑셀 다운로드
+          </button>
+        </div>
+
+        <div class="type3-table-wrap">
+          <table class="type3-table ua-account-table" aria-label="사용자 계정 검색결과">
+            <thead id="accountTableHead"></thead>
+            <tbody id="accountTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="type3-results-foot">
+          <nav class="pagination" id="accountPagination" aria-label="페이지 이동"></nav>
+        </div>
+      </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/user-account.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'user-account' });
+  </script>
+</body>
+</html>

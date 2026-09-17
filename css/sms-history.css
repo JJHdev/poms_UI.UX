@@ -1,0 +1,846 @@
+/* 발송이력 — 관리자 시안 기준 (admin-notices.css 동일 규격, 자체 완결형) */
+
+/* ===== 레이아웃 ===== */
+/* 폭/양옆 여백(1400 + 260×2)은 admin-topnav.css의 .main-content 규칙이 담당 */
+.sms-history-page-root .main-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* ===== 컨텐츠 ===== */
+.sms-history-page-root .sms-history-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ===== 섹션 타이틀(검색기간) ===== */
+.sms-history-page-root .sms-history-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sms-history-page-root .sms-history-section-title__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.sms-history-page-root .sms-history-section-title__icon img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.sms-history-page-root .sms-history-section-title__text {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.sms-history-page-root .sms-history-section-title__badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* ===== 검색 스트립 ===== */
+.sms-history-page-root .sms-history-filter-strip {
+  padding: 9px 10px 8px;
+  background: #f3f8fe;
+  border-top: 1px solid #8d9aab;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.sms-history-page-root .sms-history-filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.sms-history-page-root .sms-history-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sms-history-page-root .sms-history-field--date {
+  flex: 0 0 auto;
+}
+
+.sms-history-page-root .sms-history-field > label {
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* 날짜 범위 */
+.sms-history-page-root .sms-history-date-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sms-history-page-root .sms-history-date-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 180px;
+  height: 34px;
+  padding: 0;
+  margin: 0;
+}
+
+.sms-history-page-root .sms-history-date-input-wrap input[type="date"] {
+  width: 100%;
+  height: 34px;
+  padding: 0 36px 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sms-history-page-root .sms-history-date-input-wrap input[type="date"]:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+/* 브라우저 기본 달력 아이콘 숨김 (커스텀 아이콘만 표시) */
+.sms-history-page-root .sms-history-date-input-wrap input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  width: 36px;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.sms-history-page-root .sms-history-date-input-wrap img {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.sms-history-page-root .sms-history-date-sep {
+  flex-shrink: 0;
+  color: #6c788b;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.sms-history-page-root .sms-history-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+/* ===== 버튼 공통 ===== */
+.sms-history-page-root .sms-history-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sms-history-page-root .sms-history-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sms-history-page-root .sms-history-btn--search {
+  min-width: 107px;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.sms-history-page-root .sms-history-btn--search:hover {
+  background: #16304f;
+}
+
+.sms-history-page-root .sms-history-btn--reset {
+  min-width: 96px;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.sms-history-page-root .sms-history-btn--reset:hover {
+  background: #f6f8fb;
+}
+
+/* ===== 조회결과 헤더 ===== */
+.sms-history-page-root .sms-history-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sms-history-page-root .sms-history-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 30px;
+}
+
+.sms-history-page-root .sms-history-results__count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sms-history-page-root .sms-history-results__bar-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sms-history-page-root .sms-history-results__bar-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-history-page-root .sms-history-results__label {
+  margin: 0;
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.sms-history-page-root .sms-history-results__meta {
+  margin: 0;
+  color: #6c788b;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+}
+
+.sms-history-page-root .sms-history-results__meta strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.sms-history-page-root .sms-history-results__hint {
+  margin: 0;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* ===== 목록 테이블 ===== */
+.sms-history-page-root .sms-history-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px 6px 0 0;
+}
+
+.sms-history-page-root .sms-history-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.sms-history-page-root .sms-history-table thead,
+.sms-history-page-root .sms-history-table tbody,
+.sms-history-page-root .sms-history-table tr {
+  border: 0 !important;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sms-history-page-root .sms-history-table thead th,
+.sms-history-page-root .sms-history-table tbody td {
+  height: 32px;
+  padding: 4px 8px;
+  font-size: 13px;
+  line-height: normal;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.sms-history-page-root .sms-history-table thead th {
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111;
+  font-weight: 500;
+}
+
+.sms-history-page-root .sms-history-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+.sms-history-page-root .sms-history-table thead th:last-child {
+  border-right: 0 !important;
+  border-radius: 0 6px 0 0;
+}
+
+.sms-history-page-root .sms-history-table tbody td {
+  background: #fff;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333;
+  font-weight: 400;
+}
+
+.sms-history-page-root .sms-history-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+.sms-history-page-root .sms-history-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.sms-history-page-root .sms-history-table tbody tr {
+  cursor: pointer;
+}
+
+.sms-history-page-root .sms-history-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.sms-history-page-root .sms-history-table tbody tr.is-selected td {
+  background: #eef4ff;
+}
+
+/* 메세지 셀 좌측 정렬 */
+.sms-history-page-root .sms-history-table tbody td:nth-child(4) {
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: left;
+}
+
+/* 컬럼 폭 */
+.sms-history-page-root .sms-history-table .col-no {
+  width: 48px;
+}
+
+.sms-history-page-root .sms-history-table .col-insert-date {
+  width: 160px;
+}
+
+.sms-history-page-root .sms-history-table .col-reserve-date {
+  width: 160px;
+}
+
+/* 메세지 텍스트 */
+.sms-history-page-root .sms-history-message {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.sms-history-page-root .sms-history-message__prefix {
+  color: #1c6fff;
+}
+
+.sms-history-page-root .sms-history-message__body {
+  color: #333;
+}
+
+/* 데이터 없음 */
+.sms-history-page-root .sms-history-empty {
+  height: 120px;
+  color: #8993a1;
+  font-weight: 400;
+  text-align: center !important;
+  cursor: default;
+}
+
+/* ===== 페이지네이션 (flat) ===== */
+.sms-history-page-root .sms-history-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 0;
+}
+
+.sms-history-page-root .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.sms-history-page-root .pagination__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  transform: none;
+}
+
+.sms-history-page-root .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.sms-history-page-root .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.sms-history-page-root .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.sms-history-page-root .pagination__btn[data-page-move] {
+  font-size: inherit;
+  color: inherit;
+  background-color: #fff;
+  background-image: none;
+}
+
+.sms-history-page-root .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-history-page-root .pagination__btn[data-page-move="next"],
+.sms-history-page-root .pagination__btn[data-page-move="last"] {
+  transform: none;
+}
+
+.sms-history-page-root .pagination__btn[data-page-move="next"] img,
+.sms-history-page-root .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.sms-history-page-root .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.sms-history-page-root .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+/* ===== 상세 슬라이드(우측 드로어) ===== */
+.sms-history-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  background: rgba(13, 31, 53, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.sms-history-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sms-history-overlay[hidden] {
+  display: none !important;
+}
+
+.sms-history-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2101;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: min(760px, calc(100vw - 40px));
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  padding: 24px 24px 20px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: hidden;
+  font-family: inherit;
+}
+
+.sms-history-drawer.is-open {
+  transform: translateX(0);
+}
+
+.sms-history-drawer__top {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  min-height: 0;
+  flex: 0 1 auto;
+  overflow: hidden;
+}
+
+.sms-history-drawer__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #dadae2;
+  flex-shrink: 0;
+}
+
+.sms-history-drawer__title {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.sms-history-drawer__desc {
+  margin: 6px 0 0;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.sms-history-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sms-history-drawer__close img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-history-drawer__close:hover {
+  background: #f6f8fb;
+}
+
+.sms-history-drawer__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  min-height: 0;
+  flex: 0 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sms-history-detail-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  padding: 10px 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #f3f8fe;
+  color: #333;
+  font-size: 13px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.sms-history-detail-summary strong {
+  margin-right: 6px;
+  color: #6c788b;
+  font-weight: 400;
+}
+
+.sms-history-detail-table-wrap {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  max-height: min(60vh, 520px);
+  height: fit-content;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.sms-history-detail-table {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  table-layout: fixed;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent;
+  font-size: 13px;
+}
+
+.sms-history-detail-table thead th,
+.sms-history-detail-table tbody td {
+  padding: 6px 8px;
+  font-size: 13px;
+  line-height: normal;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.sms-history-detail-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 32px;
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.sms-history-detail-table thead th:last-child {
+  border-right: 0 !important;
+}
+
+.sms-history-detail-table tbody td {
+  min-height: 32px;
+  background: #fff;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.sms-history-detail-table tbody td:last-child {
+  border-right: 0 !important;
+  padding-left: 12px;
+  padding-right: 12px;
+  text-align: left;
+}
+
+.sms-history-detail-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.sms-history-detail-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.sms-history-detail-table .col-receiver {
+  width: 100px;
+}
+
+.sms-history-detail-table .col-phone {
+  width: 130px;
+}
+
+.sms-history-detail-table .col-message-id {
+  width: 120px;
+}
+
+.sms-history-detail-message {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.sms-history-detail-message .sms-history-message__prefix,
+.sms-history-detail-message .sms-history-message__body {
+  display: inline;
+  white-space: normal;
+}
+
+.sms-history-drawer__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 12px 0 0;
+}
+
+.btn-sms-history-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.btn-sms-history-close:hover {
+  background: #f6f8fb;
+}
+
+/* ===== 유틸 ===== */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 1400px) {
+  .sms-history-page-root .sms-history-filter {
+    flex-wrap: wrap;
+  }
+
+  .sms-history-page-root .sms-history-results__hint {
+    white-space: normal;
+    text-align: right;
+  }
+}
+
+@media (max-width: 900px) {
+  .sms-history-drawer {
+    width: 100vw;
+  }
+}

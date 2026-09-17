@@ -1,0 +1,931 @@
+@import url("common-modal.css");
+
+/**
+ * 홈 > 시스템 자료실 / 공지사항 / 관련법령 모달
+ * 목록 Figma 138:6779 · 상세 Figma 138:6730
+ * 패널 1280×780 / backdrop navy 80% + blur
+ */
+
+.home-archive-modal--figma {
+  padding: 24px;
+  z-index: 3000;
+}
+
+.home-archive-modal--figma .home-notice-modal__backdrop {
+  background: rgba(13, 31, 53, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.home-archive-modal--figma .home-notice-modal__panel {
+  width: min(1280px, 100%);
+  height: min(780px, calc(100vh - 48px));
+  max-height: calc(100vh - 48px);
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.home-archive-modal--figma .home-notice-modal__toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 54px 50px 20px;
+  border-bottom: 0;
+  background: transparent;
+}
+
+.home-archive-modal--figma .home-notice-modal__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.home-archive-modal--figma.is-detail .home-notice-modal__titles {
+  gap: 8px;
+}
+
+.home-archive-modal--figma .home-archive-modal__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  height: 24px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: rgba(28, 111, 255, 0.1);
+  color: #1c6fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.home-archive-modal--figma .home-archive-modal__badge[hidden] {
+  display: none;
+}
+
+.home-archive-modal--figma .home-notice-modal__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  color: #0d1f35;
+}
+
+.home-archive-modal--figma .home-archive-modal__title-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.home-archive-modal--figma .home-archive-modal__title-ellipse {
+  position: absolute;
+  left: 13px;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.home-archive-modal--figma .home-archive-modal__title-folder {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+}
+
+.home-archive-modal--figma .home-notice-modal__subtitle {
+  margin: 0;
+  padding-left: 34px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: normal;
+  color: #333;
+}
+
+.home-archive-modal--figma .home-notice-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  /* Figma detail close button: keep enough content width for the 24x24 X icon */
+  padding: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(218, 218, 226, 0.5);
+  color: #153e85;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.home-archive-modal--figma .home-notice-modal__close img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.home-archive-modal--figma .home-notice-modal__close:hover,
+.home-archive-modal--figma .home-notice-modal__close:focus-visible {
+  background: #cfcfd8;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.home-archive-modal--figma .home-notice-modal__body {
+  flex: 1;
+  min-height: 0;
+  padding: 0 50px 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.home-archive-modal--figma .home-notice-modal__board {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+/* Search bar — Figma 검색 */
+.home-archive-modal--figma .home-archive-modal__search {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  height: 64px;
+  margin: 0;
+  padding: 0 12px 0 24px;
+  border: 1px solid #d2d2d2;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.76) 100%
+  );
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.home-archive-modal--figma .home-archive-modal__scope {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 0 12px;
+  border-radius: 10px;
+}
+
+.home-archive-modal--figma .home-archive-modal__scope select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 72px;
+  height: 24px;
+  padding: 0 24px 0 0;
+  border: 0;
+  background: transparent
+    url("../assets/index-quick/system/angle-down.svg")
+    no-repeat
+    right center / 20px 20px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1;
+  color: #111;
+  cursor: pointer;
+  outline: none;
+}
+
+.home-archive-modal--figma .home-archive-modal__keyword {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-left: 1px solid transparent;
+}
+
+.home-archive-modal--figma .home-archive-modal__keyword--full {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.home-archive-modal--figma .home-archive-modal__keyword input {
+  width: 100%;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1;
+  color: #111;
+  outline: none;
+}
+
+.home-archive-modal--figma .home-archive-modal__keyword input::placeholder {
+  color: #77838d;
+  font-weight: 300;
+}
+
+.home-archive-modal--figma .home-archive-modal__search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #0d1f35;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.home-archive-modal--figma .home-archive-modal__search-btn img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.home-archive-modal--figma .home-archive-modal__search-btn:hover,
+.home-archive-modal--figma .home-archive-modal__search-btn:focus-visible {
+  background: #16304d;
+}
+
+.home-archive-modal--figma .home-notice-modal__board .notice-table thead th {
+  background: rgba(28, 111, 255, 0.1);
+  border-color: #dadae2;
+  color: #111;
+  font-weight: 500;
+}
+
+.home-archive-modal--figma .home-notice-modal__board .notice-table tbody td {
+  border-color: #dadae2;
+}
+
+.home-archive-modal--figma .home-notice-modal__board .notice-table .col-category {
+  width: 100px;
+  color: inherit;
+}
+.home-archive-modal--figma .notice-table-wrap {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 0;
+  border-radius: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 10행(헤더 48 + 행 44×10 = 488)이 스크롤 없이 보이도록 */
+.home-archive-modal--figma .notice-table {
+  width: 100%;
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 15px;
+  table-layout: fixed;
+}
+
+.home-archive-modal--figma .notice-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 48px;
+  padding: 12px 10px 10px;
+  background: rgba(28, 111, 255, 0.1);
+  border-top: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-left: 0;
+  color: #111;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.home-archive-modal--figma .notice-table thead th:first-child {
+  border-left: 1px solid #dadae2;
+  border-top-left-radius: 12px;
+}
+
+.home-archive-modal--figma .notice-table thead th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.home-archive-modal--figma .notice-table thead th.col-title {
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+.home-archive-modal--figma .notice-table tbody td {
+  height: 44px;
+  padding: 10px;
+  background: #fff;
+  border-top: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-left: 0;
+  color: #333;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.home-archive-modal--figma .notice-table tbody td:first-child {
+  border-left: 1px solid #dadae2;
+}
+
+.home-archive-modal--figma .notice-table tbody td.col-no,
+.home-archive-modal--figma .notice-table tbody td.col-category {
+  font-weight: 500;
+  color: #333;
+}
+
+.home-archive-modal--figma .notice-table tbody td.col-title {
+  text-align: left;
+  padding-left: 30px;
+  padding-right: 10px;
+  font-weight: 500;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-archive-modal--figma .notice-table .col-no,
+.home-archive-modal--figma .notice-table .col-category,
+.home-archive-modal--figma .notice-table .col-author,
+.home-archive-modal--figma .notice-table .col-date,
+.home-archive-modal--figma .notice-table .col-views {
+  width: 100px;
+}
+
+.home-archive-modal--figma .notice-table tbody td.col-author,
+.home-archive-modal--figma .notice-table tbody td.col-date,
+.home-archive-modal--figma .notice-table tbody td.col-views {
+  font-weight: 400;
+  color: #333;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.home-archive-modal--figma .notice-table .col-title {
+  width: auto;
+}
+
+.home-archive-modal--figma .notice-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+.home-archive-modal--figma .notice-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.home-archive-modal--figma .notice-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.home-archive-modal--figma .notice-table tbody tr.is-clickable:hover td {
+  background: #f6f9ff;
+  color: #0b50d0;
+}
+
+.home-archive-modal--figma .notice-table tbody tr.is-clickable:hover .notice-title-link {
+  color: #0b50d0;
+}
+
+.home-archive-modal--figma .notice-table .notice-title-link {
+  display: inline;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.home-archive-modal--figma .home-notice-modal__empty {
+  padding: 48px 16px !important;
+  text-align: center;
+  color: #6c7275;
+  font-size: 15px;
+  border: 0 !important;
+}
+
+/* ===== Detail — Figma 138:6730 자료실 상세페이지 ===== */
+.home-archive-modal--figma.is-detail .home-notice-modal__panel {
+  width: min(1280px, 100%);
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.home-archive-modal--figma.is-detail .home-notice-modal__toolbar {
+  padding: 54px 50px 16px;
+}
+
+.home-archive-modal--figma.is-detail .home-notice-modal__body {
+  padding: 0 50px 24px;
+}
+
+.home-archive-modal--figma.is-detail .home-notice-modal__title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: normal;
+  gap: 12px;
+}
+
+.home-archive-modal--figma.is-detail .home-archive-modal__title-icon {
+  width: 27px;
+  height: 27px;
+}
+
+.home-archive-modal--figma.is-detail .home-archive-modal__title-ellipse {
+  left: 13px;
+  width: 16px;
+  height: 16px;
+}
+
+.home-archive-modal--figma.is-detail .home-archive-modal__title-folder {
+  width: 27px;
+  height: 27px;
+}
+
+.home-archive-modal--figma .home-archive-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.home-archive-modal--figma .home-archive-detail__main {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+/* 메타: 100+200+100+220+100+220+100+1fr = 1180 (Figma 138:6750) */
+.home-archive-modal--figma .home-archive-detail__meta {
+  display: grid;
+  grid-template-columns: 100px 200px 100px 220px 100px 220px 100px 1fr;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+.home-archive-modal--figma .home-archive-detail__meta-label,
+.home-archive-modal--figma .home-archive-detail__meta-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid #dadae2;
+  margin-left: -1px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: normal;
+  color: #111;
+  text-align: center;
+}
+
+.home-archive-modal--figma .home-archive-detail__meta-label:first-child {
+  margin-left: 0;
+  border-radius: 12px 0 0 0;
+}
+
+.home-archive-modal--figma .home-archive-detail__meta-value:last-child {
+  border-radius: 0 12px 0 0;
+}
+
+.home-archive-modal--figma .home-archive-detail__meta-label {
+  background: #f6f9ff;
+}
+
+.home-archive-modal--figma .home-archive-detail__meta-value {
+  background: #fff;
+}
+
+.home-archive-modal--figma .home-archive-detail__content {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  min-height: 0;
+  margin-top: -1px;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  flex-shrink: 0;
+  padding: 10px;
+  background: #f6f9ff;
+  border: 1px solid #dadae2;
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+  box-sizing: border-box;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-body {
+  flex: none;
+  height: 409px;
+  max-height: 409px;
+  min-height: 0;
+  overflow: auto;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+  color: #111;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-body > p {
+  margin: 0;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-body > p + p,
+.home-archive-modal--figma .home-archive-detail__content-body > p + .notice-block,
+.home-archive-modal--figma .home-archive-detail__content-body > .notice-block + p {
+  margin-top: 0;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-body .notice-block {
+  margin: 23px 0;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-body .notice-block__label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  color: #111;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-body .notice-block__list {
+  margin: 0;
+  padding: 0 0 0 22px;
+  list-style: disc;
+  color: #111;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-body .notice-block__list li {
+  margin: 0;
+  font-size: 15px;
+  line-height: 26px;
+}
+
+.home-archive-modal--figma .home-archive-detail__content-body .notice-block__text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.home-archive-modal--figma .home-archive-detail__attach {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 20px;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+.home-archive-modal--figma .home-archive-detail__attach-label {
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.32px;
+  color: #111;
+  white-space: nowrap;
+}
+
+.home-archive-modal--figma .home-archive-detail__attach-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #1c6fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.home-archive-modal--figma .home-archive-detail__attach-link:hover {
+  text-decoration: underline;
+}
+
+.home-archive-modal--figma .home-archive-detail__attach-link img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.home-archive-modal--figma .home-archive-detail__attach-empty {
+  font-size: 15px;
+  color: #6c7275;
+}
+
+.home-archive-modal--figma .home-archive-detail__foot {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.home-archive-modal--figma .home-archive-detail__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 110px;
+  min-width: 110px;
+  height: 42px;
+  padding: 10px 10px 10px 0;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background: #fff;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.home-archive-modal--figma .home-archive-detail__back img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.home-archive-modal--figma .home-archive-detail__back:hover,
+.home-archive-modal--figma .home-archive-detail__back:focus-visible {
+  background: #f6f9ff;
+  border-color: #c5c5d0;
+}
+
+.home-archive-modal--figma .home-notice-modal__foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 4px 0 0;
+}
+
+.home-archive-modal--figma .home-notice-modal__pagination {
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+}
+
+/* Figma 138:6948 — 30×30 연결형 페이지네이션 */
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  margin-left: -1px;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: inherit;
+  line-height: 1;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index: 0;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn:first-child {
+  margin-left: 0;
+  border-radius: 4px 0 0 4px;
+}
+
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+  border-color: #1c6fff;
+  z-index: 1;
+}
+
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn.is-active {
+  border-color: #1c6fff;
+  color: #1c6fff;
+  background: #fff;
+  font-weight: 400;
+  z-index: 2;
+}
+
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn[data-page-move="next"] img,
+.home-archive-modal--figma .home-notice-modal__pagination .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+@media (max-width: 1280px) {
+  .home-archive-modal--figma .home-notice-modal__toolbar,
+  .home-archive-modal--figma .home-notice-modal__body,
+  .home-archive-modal--figma.is-detail .home-notice-modal__toolbar,
+  .home-archive-modal--figma.is-detail .home-notice-modal__body {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta {
+    grid-template-columns: 90px 1fr 90px 1fr;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta-label,
+  .home-archive-modal--figma .home-archive-detail__meta-value {
+    margin-left: 0;
+    margin-top: -1px;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta-label:nth-child(1),
+  .home-archive-modal--figma .home-archive-detail__meta-label:nth-child(5) {
+    margin-left: 0;
+    border-radius: 0;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta-label:first-child {
+    margin-top: 0;
+    border-radius: 12px 0 0 0;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta-value:nth-child(4) {
+    border-radius: 0 12px 0 0;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta-label:nth-child(5),
+  .home-archive-modal--figma .home-archive-detail__meta-value:last-child {
+    border-radius: 0;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__content-body {
+    height: auto;
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-archive-modal--figma {
+    padding: 12px;
+  }
+
+  .home-archive-modal--figma .home-notice-modal__toolbar {
+    padding: 24px 20px 12px;
+  }
+
+  .home-archive-modal--figma .home-notice-modal__body {
+    padding: 0 20px 24px;
+  }
+
+  .home-archive-modal--figma .home-notice-modal__title {
+    font-size: 24px;
+  }
+
+  .home-archive-modal--figma .home-notice-modal__subtitle {
+    padding-left: 0;
+    font-size: 14px;
+  }
+
+  .home-archive-modal--figma .home-archive-modal__search {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .home-archive-modal--figma .home-archive-modal__keyword {
+    order: 3;
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .home-archive-modal--figma .home-archive-modal__search-btn {
+    margin-left: auto;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta {
+    grid-template-columns: 88px 1fr;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta-label,
+  .home-archive-modal--figma .home-archive-detail__meta-value {
+    border-top: 1px solid #dadae2;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta-label:first-child,
+  .home-archive-modal--figma .home-archive-detail__meta-value:nth-child(2) {
+    border-top: 0;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__meta-value {
+    border-right: 0;
+    justify-content: flex-start;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__attach {
+    flex-wrap: wrap;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__attach-link {
+    white-space: normal;
+    word-break: break-all;
+  }
+
+  .home-archive-modal--figma .home-archive-detail__content-body {
+    padding: 20px;
+    max-height: none;
+  }
+}

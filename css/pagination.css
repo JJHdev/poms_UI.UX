@@ -1,0 +1,229 @@
+/* 공통 페이지네이션 — 사용자/시설물 관리(flat)와 동일 */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.pagination__btn:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+  border-color: transparent;
+  background: #fff;
+}
+
+.pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.pagination__btn.is-active {
+  z-index: 2;
+  background: #fff !important;
+  border: 1px solid #1c6fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+/* arrow-right.svg 에셋은 좌향 — next/last만 뒤집어 우향 */
+.pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.pagination__btn[data-page-move="next"],
+.pagination__btn[data-page-move="last"] {
+  transform: none;
+}
+
+.pagination__btn[data-page-move="next"] img,
+.pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.pagination__btn svg {
+  display: none;
+}
+
+.pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+.pagination-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 16px;
+  padding: 16px 0 0;
+  border-top: none;
+}
+
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.pagination-foot .pagination {
+  grid-column: 2;
+  justify-self: center;
+  justify-content: center;
+}
+
+.pagination-foot .user-panel__summary,
+.pagination-foot .sms-contacts-summary {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.pagination-foot > select {
+  grid-column: 3;
+  justify-self: end;
+}
+
+.pagination-page-size {
+  height: 30px;
+  padding: 0 28px 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: inherit;
+  color: #111;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236c788b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 8px center no-repeat;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* type3 / 승인·연계 목록 foot — 중앙 정렬 */
+.type3-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 30px;
+  padding: 8px 0 0;
+  box-sizing: border-box;
+}
+
+.type3-results-foot .pagination {
+  margin: 0;
+}
+
+/* 레거시 sra foot도 동일 톤 */
+.sra-results__foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding-top: 4px;
+}
+
+.sra-results__foot .pagination {
+  gap: 0;
+}
+
+.sra-results__foot .pagination__btn {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sra-results__foot .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff !important;
+  border: 1px solid #1c6fff !important;
+  color: #1c6fff !important;
+}
+
+.sra-results__foot .pagination__btn:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+  border-color: transparent;
+  background: #fff;
+}
+
+.sra-results__foot .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.sra-results__foot .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.sra-results__foot .pagination__btn[data-page-move="next"] img,
+.sra-results__foot .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.sra-results__foot .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.sra-results__foot .pagination__btn svg {
+  display: none;
+}
+
+.sra-results__foot .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}

@@ -1,0 +1,2328 @@
+/* 시설물 상세정보 — Figma 224:5234 */
+
+.facility-detail-page .fd-content {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  max-width: 1136px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.facility-detail-page .main-content {
+  display: block;
+  gap: 0;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* ===== Page header — Figma 224:5236 ===== */
+.facility-detail-page .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+}
+
+.facility-detail-page .page-header__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.facility-detail-page a.btn-back {
+  position: static;
+  top: auto;
+  left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  gap: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: visible;
+  font-size: 0;
+  color: transparent;
+}
+
+.facility-detail-page a.btn-back:hover {
+  border-color: #1c6fff;
+}
+
+/* Figma angle-down: 16px slot (잘림 방지) */
+.facility-detail-page .ico-angle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.facility-detail-page .btn-back .ico-angle {
+  transform: rotate(90deg);
+}
+
+.facility-detail-page .ico-angle--right {
+  transform: rotate(-90deg);
+}
+
+.facility-detail-page .ico-angle__vec {
+  position: static;
+  display: block;
+  width: 10px;
+  height: 6px;
+  line-height: 0;
+}
+
+.facility-detail-page .ico-angle__vec img {
+  position: static;
+  display: block;
+  width: 10px;
+  height: 6px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.facility-detail-page .page-header__home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: visible;
+}
+
+.facility-detail-page .page-header__home:hover {
+  border-color: #1c6fff;
+}
+
+.facility-detail-page .page-header__home-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .page-header__home-icon-roof,
+.facility-detail-page .page-header__home-icon-body,
+.facility-detail-page .page-header__home-icon-door {
+  position: absolute;
+  display: block;
+}
+
+.facility-detail-page .page-header__home-icon-roof {
+  top: 12.5%;
+  right: 12.5%;
+  bottom: 50%;
+  left: 12.5%;
+}
+
+.facility-detail-page .page-header__home-icon-body {
+  top: 50%;
+  right: 20.83%;
+  bottom: 12.5%;
+  left: 20.83%;
+}
+
+.facility-detail-page .page-header__home-icon-door {
+  top: 54.17%;
+  right: 37.5%;
+  bottom: 12.5%;
+  left: 37.5%;
+}
+
+.facility-detail-page .page-header__home-icon img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+}
+
+.facility-detail-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: #6c788b;
+}
+
+.facility-detail-page .breadcrumb a,
+.facility-detail-page .breadcrumb__sep {
+  color: #a4afc0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.facility-detail-page .breadcrumb__current {
+  color: #6c788b;
+  font-weight: 500;
+}
+
+.facility-detail-page .breadcrumb a:hover {
+  color: #1c6fff;
+}
+
+.facility-detail-page .detail-toolbar,
+.facility-detail-page .btn-map-view {
+  display: none;
+}
+
+/* ===== Facility summary ===== */
+.facility-detail-page .facility-summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .facility-summary__primary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.facility-detail-page .facility-summary__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  border-radius: 4px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.facility-detail-page .facility-summary__icon-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.facility-detail-page .facility-summary__icon-inner > span {
+  position: absolute;
+  display: block;
+}
+
+.facility-detail-page .facility-summary__icon-base {
+  inset: 0;
+}
+
+.facility-detail-page .facility-summary__icon-line--base {
+  inset: 87.5% 12.5% 12.5% 12.5%;
+}
+
+.facility-detail-page .facility-summary__icon-dot--1 {
+  inset: 33.33% 58.33% 66.67% 37.5%;
+}
+
+.facility-detail-page .facility-summary__icon-dot--2 {
+  top: 50%;
+  right: 58.33%;
+  bottom: 50%;
+  left: 37.5%;
+}
+
+.facility-detail-page .facility-summary__icon-dot--3 {
+  inset: 66.67% 58.33% 33.33% 37.5%;
+}
+
+.facility-detail-page .facility-summary__icon-dot--4 {
+  inset: 33.33% 37.5% 66.67% 58.33%;
+}
+
+.facility-detail-page .facility-summary__icon-dot--5 {
+  top: 50%;
+  right: 37.5%;
+  bottom: 50%;
+  left: 58.33%;
+}
+
+.facility-detail-page .facility-summary__icon-dot--6 {
+  inset: 66.67% 37.5% 33.33% 58.33%;
+}
+
+.facility-detail-page .facility-summary__icon-frame {
+  inset: 12.5% 20.83%;
+}
+
+.facility-detail-page .facility-summary__icon-inner img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+}
+
+.facility-detail-page .facility-summary__icon-line--base img {
+  inset: -0.75px -3.85%;
+  width: auto;
+  height: auto;
+}
+
+.facility-detail-page .facility-summary__icon-dot img {
+  inset: -0.75px -69.23%;
+  width: auto;
+  height: auto;
+}
+
+.facility-detail-page .facility-summary__icon-frame img {
+  inset: -3.85% -4.95%;
+  width: auto;
+  height: auto;
+}
+
+.facility-detail-page .facility-summary__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.facility-detail-page .facility-summary__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  min-width: 0;
+}
+
+.facility-detail-page .facility-summary__location {
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.facility-detail-page .facility-summary__meta-divider {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0;
+  height: 10px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.facility-detail-page .facility-summary__meta-divider img {
+  display: block;
+  width: 1px;
+  height: 10px;
+  max-width: none;
+}
+
+.facility-detail-page .facility-summary__badge-group {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  gap: 6px;
+}
+
+.facility-detail-page .facility-summary__updated {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .facility-summary__updated-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.facility-detail-page .facility-summary__updated-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.facility-detail-page .info-table.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0 !important;
+  pointer-events: none;
+}
+
+.facility-detail-page .tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  height: auto;
+  min-height: 0;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.facility-detail-page .tag--orange {
+  background: rgba(239, 201, 75, 0.15);
+  color: #d4a50a;
+}
+
+.facility-detail-page .tag--blue {
+  background: rgba(28, 111, 255, 0.15);
+  color: #1c6fff;
+}
+
+/* ===== Detail shell (tabs + panels) ===== */
+.facility-detail-page .detail-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.facility-detail-page .detail-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  margin: 0;
+  padding: 10px 0 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.facility-detail-page .detail-tabs__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 30px 10px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.facility-detail-page .detail-tabs__btn:hover {
+  color: #111;
+}
+
+.facility-detail-page .detail-tabs__btn.is-active {
+  color: #111;
+  font-weight: 600;
+  border-bottom-color: #1c6fff;
+  background: transparent;
+}
+
+.facility-detail-page .detail-tab-panel {
+  display: none;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
+.facility-detail-page .detail-tab-panel.is-active {
+  display: block;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-general) {
+  padding: 6px 10px 20px;
+}
+
+.facility-detail-page #panel-precision.detail-tab-panel,
+.facility-detail-page #panel-repair.detail-tab-panel,
+.facility-detail-page #panel-vulnerable.detail-tab-panel,
+.facility-detail-page #panel-major-defect.detail-tab-panel,
+.facility-detail-page #panel-history.detail-tab-panel,
+.facility-detail-page #panel-safety.detail-tab-panel {
+  padding: 0 10px 20px;
+}
+
+.facility-detail-page #panel-precision .detail-section,
+.facility-detail-page #panel-repair .detail-section,
+.facility-detail-page #panel-vulnerable .detail-section,
+.facility-detail-page #panel-major-defect .detail-section,
+.facility-detail-page #panel-history .detail-section,
+.facility-detail-page #panel-safety .detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.facility-detail-page #panel-general.detail-tab-panel.is-active {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.facility-detail-page .detail-section {
+  margin-bottom: 0;
+}
+
+.facility-detail-page .detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.facility-detail-page .detail-section__title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.facility-detail-page .detail-section__bar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 14px;
+  flex-shrink: 0;
+  overflow: visible;
+  line-height: 0;
+}
+
+.facility-detail-page .detail-section__bar img {
+  display: block;
+  width: 8px;
+  height: 14px;
+  max-width: none;
+  object-fit: fill;
+  transform: scaleY(-1);
+}
+
+.facility-detail-page .detail-section__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 0;
+  min-height: 0;
+  padding: 0 10px;
+}
+
+.facility-detail-page .detail-section__head--basic {
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-bottom: 0;
+  min-height: 0;
+  height: auto;
+  padding: 0 10px;
+}
+
+.facility-detail-page .detail-section__head-left {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+  height: auto;
+}
+
+.facility-detail-page .detail-section__heading {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .detail-section__head--basic .detail-section__head-left {
+  height: auto;
+}
+
+/* 연도별 필터링 검색 — 시설물 통합검색(검색조건)과 동일 */
+.facility-detail-page .detail-year-search {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.facility-detail-page .detail-year-search__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.facility-detail-page .detail-year-search__title-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .detail-year-search__title-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.facility-detail-page .detail-year-search__title-text {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.36px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-year-search__row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.facility-detail-page .detail-year-search__field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  flex: 0 0 160px;
+  width: 160px;
+  min-width: 0;
+}
+
+.facility-detail-page .detail-year-search__field label {
+  display: block;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-year-search__field select {
+  width: 100%;
+  height: 38px;
+  padding: 0 40px 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background-color: #fff;
+  background-image: url("../assets/main/facility-search/icon-angle-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  color: #111;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .detail-year-search__field select:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+.facility-detail-page .detail-year-search__field--date-range {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 320px;
+}
+
+.facility-detail-page .detail-year-search__field-label {
+  display: block;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-year-search__date-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.facility-detail-page .detail-year-search__date {
+  width: 160px;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  color: #111;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .detail-year-search__date:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+.facility-detail-page .detail-year-search__date-sep {
+  flex-shrink: 0;
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.facility-detail-page .detail-year-search__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.facility-detail-page .detail-year-search__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.facility-detail-page .detail-year-search__btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .detail-year-search__btn--search {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.facility-detail-page .detail-year-search__btn--search:hover {
+  background: #152a44;
+}
+
+.facility-detail-page .detail-year-search__btn--reset {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+  box-shadow: none;
+}
+
+.facility-detail-page .detail-year-search__btn--reset:hover {
+  background: #f4f4fa;
+}
+
+.facility-detail-page .detail-year-search__empty {
+  padding: 28px 16px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* 검색조건 ↔ 목록 구분선 (통합검색 fs-card__divider) */
+.facility-detail-page .detail-list-divider {
+  height: 0;
+  border: none;
+  border-top: 1px solid #ededed;
+  margin: 24px 0;
+  width: 100%;
+}
+
+/* 기본정보 제목 — 버튼·선택칸과 하단 정렬 */
+.facility-detail-page .detail-section__head-left .detail-section__title {
+  margin: 0;
+  padding: 0;
+  position: static;
+  top: auto;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  color: #111;
+  white-space: nowrap;
+}
+
+.facility-detail-page .general-history-select {
+  height: 30px;
+  width: 240px;
+  min-width: 240px;
+  padding: 0 34px 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background-color: #fff;
+  background-image: url("../assets/main/facility-search/detail/figma224/icon-select-chevron.svg");
+  background-repeat: no-repeat;
+  /* Figma 20px slot 안 vector inset ≈ 12.92 × 7.08 */
+  background-position: right 14px center;
+  background-size: 12.918px 7.084px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 400;
+  color: #111;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .general-history-select:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+/* ===== FMS / POMS legend ===== */
+.facility-detail-page .info-data-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0;
+  padding: 0 10px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .info-data-legend__badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .info-data-legend__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  border: 1px solid #dadae2;
+  background: rgba(255, 255, 255, 0.04);
+  box-sizing: border-box;
+  text-transform: uppercase;
+}
+
+.facility-detail-page .info-data-legend__item--fms {
+  color: #1c6fff;
+  border-color: #1c6fff;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.facility-detail-page .info-data-legend__item--poms {
+  color: #999;
+  border-color: #dadae2;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.facility-detail-page .info-data-legend__note {
+  margin: 0;
+  flex: 0 1 auto;
+  min-width: 0;
+  width: auto;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.facility-detail-page .info-data-legend__note em {
+  font-style: normal;
+  color: #1c6fff;
+  font-weight: 500;
+}
+
+/* ===== Info field grid (Figma connected table) ===== */
+.facility-detail-page .info-field-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 14px;
+}
+
+.facility-detail-page .info-field-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.facility-detail-page .info-field-grid + .info-field-grid {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.facility-detail-page .info-field-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  align-items: stretch;
+  width: 100%;
+}
+
+.facility-detail-page .info-field {
+  display: flex;
+  min-width: 0;
+  align-items: stretch;
+  width: 100%;
+}
+
+.facility-detail-page .info-field--wide,
+.facility-detail-page .info-field--span-2,
+.facility-detail-page .info-field--grow {
+  grid-column: span 2;
+}
+
+.facility-detail-page .info-field--fixed {
+  grid-column: span 1;
+}
+
+.facility-detail-page .info-field__label {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 150px;
+  height: 34px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  background: rgba(28, 111, 255, 0.04);
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.facility-detail-page .info-field__value {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 34px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  background: #fff;
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: #111;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.facility-detail-page .info-field-row .info-field:last-child .info-field__value {
+  border-right: none;
+}
+
+.facility-detail-page .info-field-row:last-child .info-field__label,
+.facility-detail-page .info-field-row:last-child .info-field__value {
+  border-bottom: none;
+}
+
+.facility-detail-page .info-field__value--poms,
+.facility-detail-page .info-field__value.info-table__poms {
+  color: #1c6fff;
+  font-weight: 500;
+}
+
+.facility-detail-page .info-field__label--long {
+  white-space: normal;
+  line-height: 1.25;
+  font-size: 13px;
+}
+
+/* Legacy info-table (일반정보 숨김 테이블 + 대가산정 등) */
+.facility-detail-page .info-table {
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+.facility-detail-page .info-table th,
+.facility-detail-page .info-table td {
+  border: 1px solid #dadae2;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.facility-detail-page .info-table th {
+  width: 150px;
+  background: #f4f4fa;
+  color: #111;
+  font-weight: 500;
+}
+
+.facility-detail-page .info-table td {
+  color: #111;
+  font-weight: 500;
+}
+
+.facility-detail-page .info-table .info-table__poms,
+.facility-detail-page .info-table td.info-table__poms {
+  color: #1c6fff;
+}
+
+.facility-detail-page .info-table--sub {
+  margin-top: 16px;
+}
+
+/* ===== Media (도면 및 현장사진) — Figma 177:3184 ===== */
+.facility-detail-page .detail-section--media {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.facility-detail-page .detail-section__head--media {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  margin-bottom: 0;
+  min-height: 0;
+  height: auto;
+  padding: 0 10px;
+}
+
+.facility-detail-page .media-grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: calc(100% - 20px);
+  margin: 0 10px;
+}
+
+.facility-detail-page .media-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 10px;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #6c788b;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+}
+
+.facility-detail-page .media-card:hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.facility-detail-page .media-card__thumb {
+  width: 100%;
+  aspect-ratio: auto;
+  height: 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(28, 111, 255, 0.04);
+  border: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .media-card__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.facility-detail-page .media-card__label {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  color: #6c788b;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.facility-detail-page .media-card:hover .media-card__label {
+  color: #1c6fff;
+}
+
+/* ===== List tables — match facility-search data-table ===== */
+.facility-detail-page .detail-tab-panel .detail-table-wrap,
+.facility-detail-page .detail-tab-panel .detail-table-wrap.regular-table-wrap {
+  width: 100%;
+  margin: 0;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  overflow: auto;
+  background: #fff;
+  scrollbar-width: thin;
+  box-sizing: border-box;
+}
+
+.facility-detail-page #panel-precision .detail-table-wrap.regular-table-wrap--precision,
+.facility-detail-page #panel-repair .detail-table-wrap.regular-table-wrap--repair,
+.facility-detail-page #panel-vulnerable .detail-table-wrap.regular-table-wrap--vulnerable,
+.facility-detail-page #panel-major-defect .detail-table-wrap.regular-table-wrap--major-defect,
+.facility-detail-page #panel-history .detail-table-wrap.regular-table-wrap--history-timeline,
+.facility-detail-page #panel-history .detail-table-wrap.regular-table-wrap--history-list,
+.facility-detail-page #panel-safety .detail-table-wrap.regular-table-wrap--safety {
+  border-radius: 6px;
+  overflow: visible;
+  overflow-x: hidden;
+}
+
+.facility-detail-page .detail-tab-panel .inspection-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+  border: none;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-precision):not(#panel-repair):not(#panel-vulnerable):not(#panel-major-defect):not(#panel-history):not(#panel-safety) .inspection-table thead th {
+  height: 44px;
+  padding: 12px 10px 10px;
+  background: #4970a2;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-precision):not(#panel-repair):not(#panel-vulnerable):not(#panel-major-defect):not(#panel-history):not(#panel-safety) .inspection-table tbody td {
+  height: 45px;
+  padding: 10px;
+  border: none;
+  border-bottom: 0.7px solid #dadae2;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* 안전점검실적·보수보강·취약·중대결함·이력·안전시설현황·대가산정 — 통합검색/관련자료 표 스타일 */
+.facility-detail-page #panel-precision .inspection-table,
+.facility-detail-page #panel-repair .inspection-table,
+.facility-detail-page #panel-vulnerable .inspection-table,
+.facility-detail-page #panel-major-defect .inspection-table,
+.facility-detail-page #panel-history .inspection-table,
+.facility-detail-page #panel-safety .inspection-table,
+.facility-detail-page #panel-calculrate .inspection-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table thead th,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table thead th,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table thead th,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table thead th,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table thead th,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table thead th,
+.facility-detail-page .detail-tab-panel#panel-calculrate .inspection-table thead th {
+  height: 48px;
+  padding: 12px 10px 10px;
+  background: rgba(28, 111, 255, 0.1) !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111 !important;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* 이력정보·안전시설현황 — 안전점검실적과 동일 비율 (가로 스크롤 없이 전체 폭) */
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-timeline,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list,
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table thead th:last-child,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table thead th:last-child,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table thead th:last-child,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table thead th:last-child,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table thead th:last-child,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table thead th:last-child,
+.facility-detail-page .detail-tab-panel#panel-calculrate .inspection-table thead th:last-child {
+  border-right: none !important;
+}
+
+/* 안전점검·보수보강·중대결함 — 2단 헤더 (상단/하단 톤 구분) */
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history thead th,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history thead th,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table--major-defect-history thead th,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table--vulnerable-history thead th {
+  height: 32px;
+  padding: 0 10px;
+  line-height: 1.2;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history thead .col-no,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history thead .col-no,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table--major-defect-history thead .col-no,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table--vulnerable-history thead .col-no {
+  width: 6.349%;
+  min-width: 0;
+}
+
+/* 이력 목록 — 헤더/열 비율 (점검일 확보, 비용·등급 축소) */
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead th {
+  height: 28px;
+  padding: 0 4px;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead th.col-cost,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead th.col-grade {
+  white-space: normal;
+  word-break: keep-all;
+  padding: 4px 2px;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead .col-no {
+  width: 4%;
+  min-width: 0;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history thead tr + tr th,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history thead tr + tr th,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table--major-defect-history thead tr + tr th,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead tr + tr th {
+  border-top: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #f6f9ff !important;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table tbody td,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table tbody td,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table tbody td,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table tbody td,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table tbody td,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table tbody th,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table tbody td,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table tbody th,
+.facility-detail-page .detail-tab-panel#panel-calculrate .inspection-table tbody td,
+.facility-detail-page .detail-tab-panel#panel-calculrate .inspection-table tbody th {
+  height: 44px;
+  padding: 10px;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history tbody td,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history tbody td,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table--major-defect-history tbody td,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table--vulnerable-history tbody td {
+  height: 32px;
+  padding: 0 10px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list tbody td {
+  height: 36px;
+  min-height: 0;
+  padding: 0 4px;
+  color: #333;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list tbody td.col-date {
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none;
+  white-space: nowrap;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list tbody td.col-cost,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list tbody td.col-grade {
+  padding: 0 2px;
+  font-size: 12px;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history tbody td.col-no,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history tbody td.col-no,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table--major-defect-history tbody td.col-no,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table--vulnerable-history tbody td.col-no {
+  width: 6.349%;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list tbody td.col-no {
+  width: 4%;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history tbody tr.is-subrow td,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history tbody tr.is-subrow td,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table--major-defect-history tbody tr.is-subrow td {
+  background: rgba(247, 247, 248, 0.6);
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history tbody tr.is-hovered td,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history tbody tr.is-hovered td,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table--major-defect-history tbody tr.is-hovered td,
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history tbody tr.is-hovered.is-subrow td,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history tbody tr.is-hovered.is-subrow td,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table--major-defect-history tbody tr.is-hovered.is-subrow td {
+  background: #f3f4f6 !important;
+}
+
+.facility-detail-page .inspection-table--precision-history tbody td.is-left,
+.facility-detail-page .inspection-table--repair-history tbody td.is-left,
+.facility-detail-page .inspection-table--vulnerable-history tbody td.is-left {
+  text-align: left;
+  padding: 0 10px;
+  line-height: 1.4;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table--precision-history tbody td.is-left,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table--repair-history tbody td.is-left,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table--vulnerable-history tbody td.is-left {
+  text-align: left;
+  padding: 0 10px;
+  line-height: 1.4;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table tbody td:last-child,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table tbody td:last-child,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table tbody td:last-child,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table tbody td:last-child,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table tbody td:last-child,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table tbody th:last-child,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table tbody td:last-child,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table tbody th:last-child,
+.facility-detail-page .detail-tab-panel#panel-calculrate .inspection-table tbody td:last-child,
+.facility-detail-page .detail-tab-panel#panel-calculrate .inspection-table tbody th:last-child {
+  border-right: none !important;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .inspection-table tbody tr:last-child td,
+.facility-detail-page .detail-tab-panel#panel-repair .inspection-table tbody tr:last-child td,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .inspection-table tbody tr:last-child td,
+.facility-detail-page .detail-tab-panel#panel-major-defect .inspection-table tbody tr:last-child td,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table tbody tr:last-child td,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table tbody tr:last-child th,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table tbody tr:last-child td,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table tbody tr:last-child th,
+.facility-detail-page .detail-tab-panel#panel-calculrate .inspection-table tbody tr:last-child td,
+.facility-detail-page .detail-tab-panel#panel-calculrate .inspection-table tbody tr:last-child th {
+  border-bottom: none !important;
+}
+
+.facility-detail-page #panel-repair .inspection-table tbody tr:hover td,
+.facility-detail-page #panel-vulnerable .inspection-table tbody tr:hover td,
+.facility-detail-page #panel-major-defect .inspection-table tbody tr:hover td,
+.facility-detail-page #panel-history .inspection-table tbody tr:hover td,
+.facility-detail-page #panel-history .inspection-table tbody tr:hover th {
+  background: #f8fafc !important;
+}
+
+.facility-detail-page #panel-precision .inspection-table tbody tr.is-hovered td,
+.facility-detail-page #panel-precision .inspection-table--precision-history tbody tr.is-hovered.is-subrow td {
+  background: #f3f4f6 !important;
+}
+
+.facility-detail-page #panel-precision .inspection-table tbody tr.is-selected td,
+.facility-detail-page #panel-repair .inspection-table tbody tr.is-selected td,
+.facility-detail-page #panel-vulnerable .inspection-table tbody tr.is-selected td,
+.facility-detail-page #panel-major-defect .inspection-table tbody tr.is-selected td {
+  background: #eef5fc !important;
+}
+
+.facility-detail-page #panel-precision .inspection-table tbody tr.is-selected td:first-child,
+.facility-detail-page #panel-repair .inspection-table tbody tr.is-selected td:first-child,
+.facility-detail-page #panel-vulnerable .inspection-table tbody tr.is-selected td:first-child,
+.facility-detail-page #panel-major-defect .inspection-table tbody tr.is-selected td:first-child {
+  box-shadow: inset 3px 0 0 #1c6fff;
+}
+
+.facility-detail-page #panel-vulnerable .inspection-table--vulnerable-history tbody tr:nth-child(odd),
+.facility-detail-page #panel-vulnerable .inspection-table--vulnerable-history tbody tr:nth-child(even),
+.facility-detail-page #panel-vulnerable .inspection-table--vulnerable-history tbody tr:nth-child(odd) td,
+.facility-detail-page #panel-vulnerable .inspection-table--vulnerable-history tbody tr:nth-child(even) td {
+  background: #fff;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-history):not(#panel-safety) .inspection-table tbody th,
+.facility-detail-page .detail-tab-panel:not(#panel-history) .inspection-table--history-timeline tbody th[scope='row'] {
+  height: 45px;
+  padding: 10px;
+  border: none;
+  border-bottom: 0.7px solid #dadae2;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-safety) .safety-facility-table tbody th {
+  background: transparent;
+}
+
+.facility-detail-page .inspection-table--vulnerable-history tbody tr:nth-child(odd),
+.facility-detail-page .inspection-table--vulnerable-history tbody tr:nth-child(even) {
+  background: transparent;
+}
+
+.facility-detail-page .inspection-table--vulnerable-history tbody tr:nth-child(odd) td,
+.facility-detail-page .inspection-table--vulnerable-history tbody tr:nth-child(even) td {
+  background: #fff;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-precision) .inspection-table tbody tr:hover td,
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-precision) .inspection-table:not(.safety-facility-table) tbody tr:hover th,
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-precision) .inspection-table tbody tr.is-clickable:hover td,
+.facility-detail-page .inspection-table--vulnerable-history tbody tr.is-clickable:hover,
+.facility-detail-page .inspection-table--vulnerable-history tbody tr.is-clickable:hover td,
+.facility-detail-page .inspection-table--major-defect-history tbody tr.is-clickable:hover,
+.facility-detail-page .inspection-table--major-defect-history tbody tr.is-clickable:hover td {
+  background: #f8fafc !important;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .inspection-table tbody tr.is-selected td,
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .inspection-table tbody tr.is-selected th {
+  background: #eef5fc !important;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .inspection-table tbody tr.is-selected td:first-child {
+  box-shadow: inset 3px 0 0 #4970a2;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-precision):not(#panel-repair):not(#panel-vulnerable):not(#panel-major-defect):not(#panel-history):not(#panel-safety) .inspection-table tbody tr:last-child td,
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-precision):not(#panel-repair):not(#panel-vulnerable):not(#panel-major-defect):not(#panel-history):not(#panel-safety) .inspection-table tbody tr:last-child th {
+  border-radius: 0 !important;
+  border-bottom: none;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate):not(#panel-precision):not(#panel-repair):not(#panel-vulnerable):not(#panel-major-defect):not(#panel-history) .inspection-table .col-no {
+  width: 50px;
+  color: #fff;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .inspection-table tbody .col-no {
+  color: #111;
+}
+
+/* History list / timeline accent cells — keep meaning colors */
+.facility-detail-page .inspection-table tbody td.is-empty {
+  color: #9ca3af;
+}
+
+.facility-detail-page .inspection-table tbody td.history-cell--accent-red {
+  color: #dc2626;
+}
+
+.facility-detail-page .inspection-table tbody td.is-left,
+.facility-detail-page .inspection-table--precision-history tbody td.is-left,
+.facility-detail-page .inspection-table--repair-history tbody td.is-left,
+.facility-detail-page .inspection-table--vulnerable-history tbody td.is-left {
+  text-align: left;
+  padding: 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* History list — 점검일 전체 표시, 비용·등급 축소 */
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead th.col-date {
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list tbody td {
+  background: #fff;
+  color: #333;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-timeline thead th {
+  height: 36px;
+  padding: 0 6px;
+  font-size: 13px;
+}
+
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-timeline tbody td,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-timeline tbody th {
+  height: 36px;
+  padding: 0 6px;
+  font-size: 13px;
+}
+
+/* Safety facility — compact density so the full table fits without scroll */
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table thead th {
+  height: 28px;
+  padding: 0 6px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table tbody th.safety-facility-table__label {
+  height: 26px;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table tbody th.safety-facility-table__label--root,
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table tbody th.safety-facility-table__label--group {
+  white-space: normal;
+  line-height: 1.3;
+  padding: 4px 6px;
+}
+
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table tbody th.safety-facility-table__label--root {
+  background: #d7e2f0 !important;
+  color: #1e3a5f !important;
+  font-weight: 700;
+}
+
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table tbody th.safety-facility-table__label--group {
+  background: #e4ecf6 !important;
+  color: #1e3a5f !important;
+  font-weight: 600;
+}
+
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table tbody th.safety-facility-table__label--kind {
+  background: #eef3f9 !important;
+  color: #1e3a5f !important;
+  font-weight: 600;
+}
+
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table tbody th.safety-facility-table__label--item {
+  background: #fff !important;
+  color: #111827 !important;
+  font-weight: 500;
+}
+
+.facility-detail-page .detail-tab-panel#panel-safety .safety-facility-table tbody td.safety-facility-table__value {
+  height: 26px;
+  min-height: 0;
+  padding: 0 6px;
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+}
+
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table tbody td,
+.facility-detail-page .detail-tab-panel#panel-safety .inspection-table tbody th {
+  height: 26px;
+  padding: 0 6px;
+  font-size: 12px;
+}
+
+.facility-detail-page #panel-precision .detail-section__head,
+.facility-detail-page #panel-precision .detail-section__head--list,
+.facility-detail-page #panel-repair .detail-section__head,
+.facility-detail-page #panel-repair .detail-section__head--list,
+.facility-detail-page #panel-vulnerable .detail-section__head,
+.facility-detail-page #panel-vulnerable .detail-section__head--list,
+.facility-detail-page #panel-major-defect .detail-section__head,
+.facility-detail-page #panel-major-defect .detail-section__head--list,
+.facility-detail-page #panel-history .detail-section__head,
+.facility-detail-page #panel-history .detail-section__head--list,
+.facility-detail-page #panel-safety .detail-section__head,
+.facility-detail-page #panel-safety .detail-section__head--list {
+  align-items: flex-end;
+  min-height: 30px;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.facility-detail-page #panel-precision .detail-section__head--list,
+.facility-detail-page #panel-repair .detail-section__head--list,
+.facility-detail-page #panel-vulnerable .detail-section__head--list,
+.facility-detail-page #panel-major-defect .detail-section__head--list,
+.facility-detail-page #panel-history .detail-section__head--list,
+.facility-detail-page #panel-safety .detail-section__head--list {
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 16px;
+}
+
+.facility-detail-page #panel-precision .detail-section__head-left,
+.facility-detail-page #panel-repair .detail-section__head-left,
+.facility-detail-page #panel-vulnerable .detail-section__head-left,
+.facility-detail-page #panel-major-defect .detail-section__head-left,
+.facility-detail-page #panel-history .detail-section__head-left,
+.facility-detail-page #panel-safety .detail-section__head-left {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: auto;
+  min-width: 0;
+}
+
+.facility-detail-page #panel-precision .detail-section__title,
+.facility-detail-page #panel-repair .detail-section__title,
+.facility-detail-page #panel-vulnerable .detail-section__title,
+.facility-detail-page #panel-major-defect .detail-section__title,
+.facility-detail-page #panel-history .detail-section__title,
+.facility-detail-page #panel-safety .detail-section__title {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  color: #111;
+  margin: 0;
+}
+
+.facility-detail-page .detail-list-count {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+  color: #6c788b;
+  white-space: nowrap;
+}
+
+.facility-detail-page .detail-list-count em {
+  font-style: normal;
+  font-weight: 600;
+  color: #1c6fff;
+}
+
+.facility-detail-page .precision-section__actions,
+.facility-detail-page .repair-section__actions,
+.facility-detail-page .vulnerable-section__actions,
+.facility-detail-page .major-defect-section__actions,
+.facility-detail-page .safety-section__actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .detail-year-select {
+  height: 30px;
+  width: 140px;
+  min-width: 140px;
+  padding: 0 40px 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background-color: #fff;
+  background-image: url("../assets/main/facility-search/icon-angle-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 400;
+  color: #111;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+}
+
+.facility-detail-page #panel-precision .detail-year-select,
+.facility-detail-page #panel-repair .detail-year-select {
+  height: 30px;
+  padding: 0 34px 0 20px;
+  border-radius: 6px;
+  background-image: url("../assets/main/facility-search/detail/figma177/icon-angle-down.svg");
+  background-size: 13px 7px;
+}
+
+.facility-detail-page .detail-year-select:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-facility-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 30px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.facility-detail-page .detail-tab-panel#panel-precision .btn-facility-add,
+.facility-detail-page .detail-tab-panel#panel-repair .btn-facility-add,
+.facility-detail-page .detail-tab-panel#panel-vulnerable .btn-facility-add,
+.facility-detail-page .detail-tab-panel#panel-major-defect .btn-facility-add,
+.facility-detail-page .detail-tab-panel#panel-safety .btn-facility-add {
+  height: 30px;
+  border-radius: 6px;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-facility-add:hover {
+  background: #f4f4fa;
+  border-color: #c8cfd9;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-facility-add > img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.facility-detail-page #panel-precision .btn-facility-add__icon img,
+.facility-detail-page #panel-repair .btn-facility-add__icon img,
+.facility-detail-page #panel-vulnerable .btn-facility-add__icon img,
+.facility-detail-page #panel-major-defect .btn-facility-add__icon img {
+  display: block;
+  width: 10px;
+  height: 10px;
+  object-fit: contain;
+}
+
+.facility-detail-page #panel-safety .btn-facility-add__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.facility-detail-page #panel-safety .btn-facility-add__icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  /* 흰 스트로크 아이콘 → 흰 버튼에서도 보이게 */
+  filter: brightness(0);
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-detail-add,
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-detail-primary {
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-detail-add:hover,
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-detail-primary:hover {
+  background: #152a44;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-detail-primary--save {
+  background: #15803d;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-detail-primary--save:hover {
+  background: #166534;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-detail-outline {
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+}
+
+.facility-detail-page .detail-tab-panel:not(#panel-calculrate) .btn-detail-outline:hover {
+  border-color: #1c6fff;
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+}
+
+.facility-detail-page .vulnerable-list-foot,
+.facility-detail-page .precision-list-foot,
+.facility-detail-page .repair-list-foot,
+.facility-detail-page .major-defect-list-foot,
+.facility-detail-page .history-list-foot {
+  margin-top: 14px;
+}
+
+.facility-detail-page select:not(.general-history-select):not(.detail-year-select) {
+  border-radius: 8px;
+  border-color: #dadae2;
+}
+
+/* Pagination — Figma 177:3421 */
+.facility-detail-page .pagination,
+.facility-detail-page .regular-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 0;
+  margin: 0;
+}
+
+.facility-detail-page .pagination button,
+.facility-detail-page .regular-pagination button,
+.facility-detail-page .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.facility-detail-page .pagination__btn:hover:not(:disabled):not(.is-active),
+.facility-detail-page .pagination button:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+}
+
+.facility-detail-page .pagination__btn:disabled,
+.facility-detail-page .pagination button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.facility-detail-page .pagination button.is-active,
+.facility-detail-page .regular-pagination button.is-active,
+.facility-detail-page .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff;
+  border-color: #1c6fff;
+  color: #1c6fff;
+  font-weight: 400;
+}
+
+.facility-detail-page .pagination__btn[data-page-move] {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
+}
+
+.facility-detail-page .pagination__btn[data-page-move="prev"],
+.facility-detail-page .pagination__btn[data-page-move="next"] {
+  background-image: url("../assets/main/facility-search/arrow-right.svg");
+}
+
+.facility-detail-page .pagination__btn[data-page-move="first"],
+.facility-detail-page .pagination__btn[data-page-move="last"] {
+  background-image: url("../assets/main/facility-search/arrow-double-right.svg");
+}
+
+.facility-detail-page .pagination__btn[data-page-move="next"]:not(:has(img)),
+.facility-detail-page .pagination__btn[data-page-move="last"]:not(:has(img)) {
+  transform: scaleX(-1);
+}
+
+.facility-detail-page .pagination__btn[data-page-move]:has(img) {
+  background-image: none;
+}
+
+.facility-detail-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.facility-detail-page .pagination__btn[data-page-move="next"] img,
+.facility-detail-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.facility-detail-page .pagination__btn svg {
+  display: none;
+}
+
+.facility-detail-page .precision-list-foot,
+.facility-detail-page .vulnerable-list-foot,
+.facility-detail-page .repair-list-foot,
+.facility-detail-page .major-defect-list-foot,
+.facility-detail-page .history-list-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0;
+  margin-top: 14px;
+  border: none;
+}
+
+.facility-detail-page .history-list-foot {
+  margin-top: 8px;
+}
+
+.facility-detail-page .precision-list-foot .pagination,
+.facility-detail-page .vulnerable-list-foot .pagination,
+.facility-detail-page .repair-list-foot .pagination,
+.facility-detail-page .major-defect-list-foot .pagination,
+.facility-detail-page .history-list-foot .pagination {
+  justify-content: center;
+}
+
+/* 표 하단 — 페이지네이션·선택 30px */
+.facility-detail-page .precision-list-foot__size select,
+.facility-detail-page .vulnerable-list-foot__size select,
+.facility-detail-page .repair-list-foot__size select,
+.facility-detail-page .major-defect-list-foot__size select,
+.facility-detail-page .history-list-foot__size select,
+.facility-detail-page .pagination-page-size {
+  height: 30px;
+  min-height: 30px;
+  box-sizing: border-box;
+}
+
+.facility-detail-page #panel-history .history-list-foot .pagination__btn,
+.facility-detail-page #panel-history .history-list-foot .pagination button {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+
+.facility-detail-page .precision-list-foot__right,
+.facility-detail-page .vulnerable-list-foot__right,
+.facility-detail-page .repair-list-foot__right,
+.facility-detail-page .major-defect-list-foot__right,
+.facility-detail-page .history-list-foot__right {
+  display: none;
+}
+
+.facility-detail-page .info-field__label,
+.facility-detail-page .info-field__value,
+.facility-detail-page .info-table th,
+.facility-detail-page .info-table td {
+  height: 34px;
+  min-height: 34px;
+  box-sizing: border-box;
+}
+
+.fac-add-field:not(.notice-detail-field--content):not(:has(.fac-add-field__control--stack)) {
+  min-height: 34px;
+}
+
+/* ============================================================
+   시설물 요약 우측(최종 수정일 자리) 엑셀 다운로드 버튼 (facility-search .insp-btn--excel 이식)
+   ※ 롤백: 이 블록 전체를 삭제하면 원복됩니다.
+   ============================================================ */
+.facility-detail-page .facility-summary__actions {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn--excel {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn--excel:hover {
+  background: #f4f4fa;
+  border-color: #c5c5d0;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn--excel:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ============================================================
+   [영상 보기] 시설물 요약 우측 영상 버튼 + 영상 모달
+   ※ 롤백: 이 블록 전체를 삭제하면 원복됩니다.
+   ============================================================ */
+.facility-detail-page .facility-summary__actions {
+  gap: 8px;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn--video {
+  border: 1px solid #1c6fff;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn--video:hover {
+  background: #e9f1fe;
+}
+
+.facility-detail-page .facility-summary__actions .insp-btn--video:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ---- 영상 모달 ---- */
+body.fd-video-modal-open {
+  overflow: hidden;
+}
+
+.fd-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.fd-video-modal[hidden] {
+  display: none !important;
+}
+
+.fd-video-modal.is-open {
+  opacity: 1;
+}
+
+.fd-video-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 26, 45, 0.6);
+}
+
+.fd-video-modal__panel {
+  position: relative;
+  width: min(960px, 100%);
+  background: #fff;
+  border-radius: 6px;
+  border-top: 2px solid #8d9aab;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  transform: translateY(8px);
+  transition: transform 0.2s;
+}
+
+.fd-video-modal.is-open .fd-video-modal__panel {
+  transform: none;
+}
+
+.fd-video-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 0 12px 0 20px;
+  border-bottom: 1px solid #dadae2;
+}
+
+.fd-video-modal__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+}
+
+.fd-video-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.fd-video-modal__close:hover {
+  background: #f4f4fa;
+}
+
+.fd-video-modal__body {
+  padding: 16px 20px 20px;
+  background: #f6f9ff;
+}
+
+.fd-video-modal__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0b1a2d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.fd-video-modal__frame video,
+.fd-video-modal__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}

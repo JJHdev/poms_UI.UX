@@ -1,0 +1,1352 @@
+/* 제 3종 항만시설물 — 실태조사 상세 (Figma 225:9225) */
+
+.type3-survey-detail-page.facility-search-page {
+  --gnb-inner-width: 1400px;
+  --fs-lnb-w: 234px;
+  --fs-gap: 30px;
+  min-width: 1440px;
+  background: #fff;
+}
+
+.type3-survey-detail-page .main-content {
+  display: block;
+  gap: 0;
+  padding-top: 18px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.type3-survey-detail-page .fs-manage {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 1136px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.type3-survey-detail-page .type3-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.type3-survey-detail-page .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+}
+
+.type3-survey-detail-page .page-header__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Figma 225:9229 — 콘텐츠 내 뒤로가기 */
+.type3-survey-detail-page a.btn-back {
+  position: static;
+  top: auto;
+  left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  gap: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: visible;
+  font-size: 0;
+  color: transparent;
+}
+
+.type3-survey-detail-page a.btn-back:hover {
+  border-color: #1c6fff;
+}
+
+.type3-survey-detail-page .ico-angle {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .btn-back .ico-angle {
+  transform: rotate(90deg);
+}
+
+.type3-survey-detail-page .ico-angle__vec {
+  position: absolute;
+  inset: 34.37% 17.7% 30.21% 17.71%;
+}
+
+.type3-survey-detail-page .ico-angle__vec img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+}
+
+.type3-survey-detail-page a.btn-back img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transform: none;
+}
+
+.type3-survey-detail-page .page-header__home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.type3-survey-detail-page .page-header__home:hover {
+  border-color: #1c6fff;
+}
+
+.type3-survey-detail-page .page-header__home-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.type3-survey-detail-page .page-header__home-icon-roof,
+.type3-survey-detail-page .page-header__home-icon-body,
+.type3-survey-detail-page .page-header__home-icon-door {
+  position: absolute;
+  display: block;
+}
+
+.type3-survey-detail-page .page-header__home-icon-roof {
+  top: 12.5%;
+  right: 12.5%;
+  bottom: 50%;
+  left: 12.5%;
+}
+
+.type3-survey-detail-page .page-header__home-icon-body {
+  top: 50%;
+  right: 20.83%;
+  bottom: 12.5%;
+  left: 20.83%;
+}
+
+.type3-survey-detail-page .page-header__home-icon-door {
+  top: 54.17%;
+  right: 37.5%;
+  bottom: 12.5%;
+  left: 37.5%;
+}
+
+.type3-survey-detail-page .page-header__home-icon img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+}
+
+.type3-survey-detail-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.type3-survey-detail-page .breadcrumb a {
+  color: #a4afc0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.type3-survey-detail-page .breadcrumb__sep {
+  color: #a4afc0;
+  font-weight: 500;
+}
+
+.type3-survey-detail-page .breadcrumb__current {
+  color: #6c788b;
+  font-weight: 500;
+}
+
+.type3-survey-detail-page .breadcrumb a:hover {
+  color: #1c6fff;
+}
+
+.type3-survey-detail-page .type3-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* ===== Tabs: Figma pill buttons ===== */
+.type3-survey-detail-page .type3-detail-tabs {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  border-bottom: none;
+}
+
+.type3-survey-detail-page .type3-detail-tabs .insp-status-tabs__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 200px;
+  height: 34px;
+  padding: 6px 12px;
+  margin: 0;
+  border: 0;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #999;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+.type3-survey-detail-page .type3-detail-tabs .insp-status-tabs__btn:hover {
+  color: #1c6fff;
+  background: rgba(28, 111, 255, 0.08);
+}
+
+.type3-survey-detail-page .type3-detail-tabs .insp-status-tabs__btn.is-active {
+  background: #1c6fff;
+  border: 0;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.type3-survey-detail-page .type3-detail-tabs .insp-status-tabs__btn.is-active:hover {
+  background: #0f5de0;
+  color: #fff;
+}
+
+/* ===== 섹션 타이틀 (시설물 정보) ===== */
+.type3-survey-detail-page .type3-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.type3-survey-detail-page .type3-section-title__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.type3-survey-detail-page .type3-section-title__icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.type3-survey-detail-page .type3-section-title__text {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* ===== 실태조사 개요 정보 테이블 ===== */
+.type3-survey-detail-page .type3-detail-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.type3-survey-detail-page .type3-detail-summary__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .type3-detail-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Figma 195:3963 — row ratios 460:800 / 460:400:400 (of 1260) */
+.type3-survey-detail-page .type3-detail-info__row {
+  display: grid;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.type3-survey-detail-page .type3-detail-info__row--r1 {
+  grid-template-columns: minmax(0, 460fr) minmax(0, 800fr);
+}
+
+.type3-survey-detail-page .type3-detail-info__row--r2 {
+  grid-template-columns: minmax(0, 460fr) minmax(0, 400fr) minmax(0, 400fr);
+}
+
+.type3-survey-detail-page .type3-detail-info__pair {
+  display: grid;
+  align-items: stretch;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Inner label:value — Figma 160:300 / 160:640 / 160:240 */
+.type3-survey-detail-page .type3-detail-info__pair--agency,
+.type3-survey-detail-page .type3-detail-info__pair--manage-no {
+  grid-template-columns: minmax(0, 160fr) minmax(0, 300fr);
+}
+
+.type3-survey-detail-page .type3-detail-info__pair--manager {
+  grid-template-columns: minmax(0, 160fr) minmax(0, 640fr);
+}
+
+.type3-survey-detail-page .type3-detail-info__pair--period,
+.type3-survey-detail-page .type3-detail-info__pair--status {
+  grid-template-columns: minmax(0, 160fr) minmax(0, 240fr);
+}
+
+.type3-survey-detail-page .type3-detail-info__label,
+.type3-survey-detail-page .type3-detail-info__value {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  min-width: 0;
+  width: auto;
+  padding: 10px 20px;
+  border: 1px solid #dadae2;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.type3-survey-detail-page .type3-detail-info__label {
+  background: rgba(28, 111, 255, 0.04);
+  color: #111;
+  font-weight: 500;
+}
+
+.type3-survey-detail-page .type3-detail-info__value {
+  background: #fff;
+  color: #111;
+  font-weight: 400;
+}
+
+.type3-survey-detail-page .type3-detail-info__row:first-child .type3-detail-info__label:first-child {
+  border-top-left-radius: 6px;
+}
+
+.type3-survey-detail-page .type3-detail-info__value--end-top {
+  border-top-right-radius: 6px;
+}
+
+.type3-survey-detail-page .type3-detail-info__label--start-bottom {
+  border-bottom-left-radius: 6px;
+}
+
+.type3-survey-detail-page .type3-detail-info__value--end-bottom {
+  border-bottom-right-radius: 6px;
+}
+
+.type3-survey-detail-page .type3-detail-info__row + .type3-detail-info__row .type3-detail-info__label,
+.type3-survey-detail-page .type3-detail-info__row + .type3-detail-info__row .type3-detail-info__value {
+  border-top: none;
+}
+
+.type3-survey-detail-page .type3-detail-info__pair + .type3-detail-info__pair .type3-detail-info__label {
+  border-left: none;
+}
+
+.type3-survey-detail-page .type3-detail-info__label + .type3-detail-info__value {
+  border-left: none;
+}
+
+.type3-survey-detail-page .type3-detail-attach {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+}
+
+.type3-survey-detail-page .type3-detail-attach__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.type3-survey-detail-page .type3-info-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #1c6fff;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  line-height: normal;
+}
+
+.type3-survey-detail-page .type3-info-file:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: #0f5de0;
+}
+
+.type3-survey-detail-page .type3-info-file img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ===== STEP tabs (Figma 195:3998) ===== */
+.type3-survey-detail-page .type3-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.type3-survey-detail-page .type3-step-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.type3-survey-detail-page .type3-step-bars {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: transparent;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .type3-step-tab {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  margin: 0 0 -1px;
+  padding: 0 24px 10px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .type3-step-tab:hover .type3-step-bar__label {
+  color: #1c6fff;
+}
+
+.type3-survey-detail-page .type3-step-tab.is-active {
+  border-bottom-color: #1c6fff;
+}
+
+.type3-survey-detail-page .type3-step-bar__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(108, 120, 139, 0.15);
+  color: #6c788b;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.type3-survey-detail-page .type3-step-tab.is-active .type3-step-bar__badge {
+  background: rgba(28, 111, 255, 0.15);
+  color: #1c6fff;
+}
+
+.type3-survey-detail-page .type3-step-bar__label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.type3-survey-detail-page .type3-step-tab.is-active .type3-step-bar__label {
+  font-weight: 600;
+  color: #111;
+}
+
+/* ===== Search filter (Figma 195:4008) ===== */
+.type3-survey-detail-page .type3-step-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 6px 10px;
+  border-top: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  background: rgba(28, 111, 255, 0.05);
+  box-sizing: border-box;
+}
+.type3-survey-detail-page .type3-step-filter .type3-field {
+  gap: 6px;
+}
+
+/* Same 2-col grid both rows → columns align (Figma 225:9286) */
+.type3-survey-detail-page .type3-filter-row--figma {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 8px;
+  width: 100%;
+}
+
+.type3-survey-detail-page .type3-filter-row--figma > .type3-field {
+  min-width: 0;
+  width: auto !important;
+  max-width: none !important;
+  flex: none !important;
+}
+.type3-survey-detail-page .type3-field--scale {
+  grid-column: auto !important;
+}
+
+.type3-survey-detail-page .type3-field--half {
+  width: auto !important;
+  max-width: none !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+}
+
+.type3-survey-detail-page .type3-field--w410,
+.type3-survey-detail-page .type3-field--w284,
+.type3-survey-detail-page .type3-filter-row--figma > .type3-field--grow {
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+.type3-survey-detail-page .type3-filter-end {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  min-width: 0;
+  width: 100%;
+}
+
+.type3-survey-detail-page .type3-filter-end .type3-field--w284,
+.type3-survey-detail-page .type3-filter-end .type3-field--grow {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.type3-survey-detail-page .type3-filter-row--with-search .type3-btn--search {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  min-height: 38px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 6px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  gap: 4px;
+}
+
+.type3-survey-detail-page .type3-filter-row--with-search .type3-btn--search:hover {
+  background: #16304f;
+}
+
+.type3-survey-detail-page .type3-filter-row--with-search .type3-btn--search img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.type3-survey-detail-page .type3-step-filter .type3-field label {
+  display: block;
+  padding: 0 4px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.type3-survey-detail-page .type3-step-filter .type3-field select,
+.type3-survey-detail-page .type3-step-filter .type3-field input[type="text"],
+.type3-survey-detail-page .type3-step-filter .type3-field input[type="number"] {
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid #dadae2;
+  background-color: #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .type3-step-filter .type3-field select {
+  padding: 0 40px 0 20px;
+  background-image: url("../assets/main/facility-statistics/figma188/icon-angle-down-clean.svg");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.type3-survey-detail-page .type3-step-filter .type3-field select:focus,
+.type3-survey-detail-page .type3-step-filter .type3-field input[type="text"]:focus,
+.type3-survey-detail-page .type3-step-filter .type3-field input[type="number"]:focus {
+  border-color: #1c6fff;
+  outline: none;
+}
+
+.type3-survey-detail-page .type3-keyword-group {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.type3-survey-detail-page .type3-step-filter .type3-keyword-group select,
+.type3-survey-detail-page .type3-step-filter .type3-range-group select {
+  height: 34px;
+  padding: 0 40px 0 20px;
+  border-radius: 6px;
+  background-image: url("../assets/main/facility-statistics/figma188/icon-angle-down-clean.svg");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.type3-survey-detail-page .type3-step-filter .type3-scale-group input[type="number"] {
+  height: 34px;
+  border-radius: 6px;
+}
+
+.type3-survey-detail-page .type3-keyword-group--split select:first-child {
+  flex: 0 0 160px;
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+}
+
+.type3-survey-detail-page .type3-keyword-group--split select:last-child,
+.type3-survey-detail-page .type3-keyword-group--split input[type="text"] {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+.type3-survey-detail-page .type3-range-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.type3-survey-detail-page .type3-range-group select {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+}
+
+.type3-survey-detail-page .type3-range-sep {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.type3-survey-detail-page .type3-scale-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+  flex-wrap: nowrap;
+  padding-left: 4px;
+}
+
+.type3-survey-detail-page .type3-scale-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.type3-survey-detail-page .type3-scale-label {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  white-space: nowrap;
+}
+
+.type3-survey-detail-page .type3-scale-inputs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.type3-survey-detail-page .type3-scale-inputs input[type="number"] {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .type3-btn--search {
+  height: 38px;
+  min-height: 38px;
+  padding: 0 18px;
+  border-radius: 6px;
+  gap: 4px;
+}
+
+.type3-survey-detail-page .type3-divider {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid #dadae2;
+}
+
+/* ===== 결과 목록 ===== */
+.type3-survey-detail-page .type3-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .type3-results__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.type3-survey-detail-page .type3-results__count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.type3-survey-detail-page .type3-results__bar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+.type3-survey-detail-page .type3-results__bar-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.type3-survey-detail-page .type3-results__label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.type3-survey-detail-page .type3-results__meta {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.type3-survey-detail-page .type3-results__meta strong {
+  font-weight: 600;
+  color: #1c6fff;
+}
+
+.type3-survey-detail-page .type3-results__side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.type3-survey-detail-page .type3-btn--excel {
+  height: 32px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 4px;
+}
+
+.type3-survey-detail-page .type3-btn--excel:hover {
+  background: #f4f4fa;
+}
+
+.type3-survey-detail-page .type3-btn--excel img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* ===== 결과 테이블 (Figma 192:2901) ===== */
+.type3-survey-detail-page .type3-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* 공유 type3-table(13px/#e8f1ff) 덮어쓰기 */
+.type3-survey-detail-page .type3-step-table {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+.type3-survey-detail-page .type3-step-table thead th {
+  background: rgba(28, 111, 255, 0.1) !important;
+  font-size: 14px !important;
+  color: #111;
+}
+
+.type3-survey-detail-page .type3-step-table tbody td {
+  font-size: 14px !important;
+  color: #333;
+}
+
+.type3-survey-detail-page .type3-step-table thead th {
+  height: 32px;
+  padding: 4px 8px;
+  background: rgba(28, 111, 255, 0.1);
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .type3-step-table thead th:last-child {
+  border-right: none;
+}
+
+.type3-survey-detail-page .type3-step-table thead th:first-child {
+  border-radius: 5px 0 0 0;
+}
+
+.type3-survey-detail-page .type3-step-table thead th:last-child {
+  border-radius: 0 5px 0 0;
+}
+
+.type3-survey-detail-page .type3-step-table tbody td {
+  height: 32px;
+  padding: 4px 8px;
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.type3-survey-detail-page .type3-step-table tbody td:last-child {
+  border-right: none;
+}
+
+.type3-survey-detail-page .type3-step-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.type3-survey-detail-page .type3-step-table tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+.type3-survey-detail-page .type3-step-table tbody tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}
+
+.type3-survey-detail-page .type3-step-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.type3-survey-detail-page .type3-step-table tbody td.is-left,
+.type3-survey-detail-page .type3-step-table tbody td.is-name {
+  text-align: center;
+}
+
+.type3-survey-detail-page .type3-step-table .type3-name-cell {
+  font-weight: 500;
+  color: #111;
+}
+
+.type3-survey-detail-page .type3-step-table .type3-facility-link {
+  color: #1c6fff;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.type3-survey-detail-page .type3-step-table th,
+.type3-survey-detail-page .type3-step-table td {
+  max-width: none;
+}
+
+/* Figma base adjusted — 번호/준공일/비고↓, 시설물명·규모·관리주체↑ (sum 1260) */
+.type3-survey-detail-page .type3-step-table col.col-w60 {
+  width: calc(60 / 1260 * 100%);
+}
+
+.type3-survey-detail-page .type3-step-table col.col-w80 {
+  width: calc(80 / 1260 * 100%);
+}
+
+.type3-survey-detail-page .type3-step-table col.col-w100 {
+  width: calc(100 / 1260 * 100%);
+}
+
+.type3-survey-detail-page .type3-step-table col.col-w120 {
+  width: calc(120 / 1260 * 100%);
+}
+
+.type3-survey-detail-page .type3-step-table col.col-w125 {
+  width: calc(125 / 1260 * 100%);
+}
+
+.type3-survey-detail-page .type3-step-table col.col-w140 {
+  width: calc(140 / 1260 * 100%);
+}
+
+.type3-survey-detail-page .type3-step-table col.col-w160 {
+  width: calc(160 / 1260 * 100%);
+}
+
+.type3-survey-detail-page .type3-step-table col.col-w400 {
+  width: calc(400 / 1260 * 100%);
+}
+
+.type3-survey-detail-page .type3-step-table th,
+.type3-survey-detail-page .type3-step-table td {
+  width: auto;
+  max-width: none;
+}
+
+.type3-survey-detail-page .type3-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 0;
+}
+
+.type3-survey-detail-page .main-content {
+  overflow-x: visible;
+}
+
+/* ===== 모달 ===== */
+.type3-survey-detail-page .fcr-modal[hidden] {
+  display: none !important;
+}
+
+/* ===== 신규 관리번호 생성 — 상세와 같은 정보표 + 입력 ===== */
+
+/* 라벨 160px 고정, 값은 나머지 (상세 Figma와 동일 골격) */
+.type3-survey-create-page .type3-detail-info__pair--agency,
+.type3-survey-create-page .type3-detail-info__pair--manage-no,
+.type3-survey-create-page .type3-detail-info__pair--manager,
+.type3-survey-create-page .type3-detail-info__pair--period,
+.type3-survey-create-page .type3-detail-info__pair--status {
+  grid-template-columns: 160px minmax(0, 1fr);
+}
+
+/* 입력기간(날짜 2개) + 진행상태 균형: 460 | 480 | 320 */
+.type3-survey-create-page .type3-detail-info__row--r2 {
+  grid-template-columns: minmax(0, 460fr) minmax(0, 480fr) minmax(0, 320fr);
+}
+
+.type3-survey-create-page .type3-detail-info__label,
+.type3-survey-create-page .type3-detail-info__value {
+  height: 38px;
+  min-height: 38px;
+  padding: 0 16px;
+}
+
+.type3-survey-create-page .type3-detail-info__value {
+  /* 셀 자체가 입력면 — 이중 테두리 제거 */
+  gap: 8px;
+}
+
+.type3-survey-create-page .type3-form-input {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  box-sizing: border-box;
+}
+
+.type3-survey-create-page .type3-form-input:read-only {
+  background: transparent;
+  color: #111;
+}
+
+.type3-survey-create-page .type3-form-input:focus {
+  outline: none;
+}
+
+.type3-survey-create-page select.type3-form-input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("../assets/main/facility-statistics/figma188/icon-angle-down-clean.svg");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  background-size: 16px 16px;
+  padding-right: 20px;
+}
+
+.type3-survey-create-page .type3-form-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+}
+
+.type3-survey-create-page .type3-form-inline .type3-form-input {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+}
+
+.type3-survey-create-page .type3-form-inline .type3-range-sep {
+  flex: 0 0 auto;
+  color: #6c788b;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.type3-survey-create-page .type3-detail-attach {
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+}
+
+.type3-survey-create-page .type3-info-file {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.type3-survey-create-page .type3-form-input--file {
+  display: none;
+}
+
+.type3-survey-create-page .type3-create-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 12px 0 0;
+  border-top: 1px solid #dadae2;
+}
+
+.type3-survey-create-page .type3-results-panel {
+  padding-bottom: 0;
+}
+
+/* main-content min-height(100vh) 때문에 취소/저장 아래 흰 공백 + footer가 밀림
+   (#sidebar-root:has(.gnb-subnav) ~ .main-content 보다 높은 특이성 필요) */
+body.type3-survey-detail-page #sidebar-root:has(.gnb-subnav) ~ .main-content,
+body.type3-survey-detail-page .main-content {
+  min-height: 0;
+  padding-bottom: 32px;
+}
+
+.type3-survey-create-page .poms-site-footer {
+  margin-top: 40px;
+}
+
+.type3-survey-create-page .type3-create-bulk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+.type3-survey-create-page .type3-create-bulk[hidden] {
+  display: none !important;
+}
+
+.type3-survey-create-page .type3-create-bulk .type3-form-input {
+  max-width: 220px;
+  width: 220px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.type3-survey-create-page .type3-create-actions .type3-btn--search,
+.type3-survey-create-page .type3-create-bulk .type3-btn--search {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.type3-survey-create-page .type3-create-actions .type3-btn--search:hover,
+.type3-survey-create-page .type3-create-bulk .type3-btn--search:hover {
+  background: #16304f;
+}
+
+.type3-survey-create-page .type3-create-bulk .type3-btn--search {
+  height: 30px;
+  padding: 0 14px;
+}
+
+.type3-survey-create-page .type3-create-actions .type3-btn--search {
+  height: 34px;
+  padding: 0 18px;
+}
+
+.type3-survey-create-page .type3-step-table col.col-w48 {
+  width: calc(48 / 1308 * 100%);
+}
+
+.type3-survey-create-page .type3-col-check {
+  width: auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.type3-survey-create-page .type3-col-check input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #1c6fff;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.type3-survey-create-page .type3-cell-input {
+  width: 100%;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  color: #111;
+  box-sizing: border-box;
+}
+
+.type3-survey-create-page .type3-cell-input:focus {
+  border-color: #1c6fff;
+  outline: none;
+}
+
+.type3-survey-create-page .type3-empty-cell {
+  padding: 24px !important;
+  text-align: center;
+  color: #6c788b;
+}
+
+.type3-survey-create-page .type3-btn--ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.type3-survey-create-page .type3-btn--ghost:hover {
+  border-color: #1c6fff;
+  color: #1c6fff;
+}

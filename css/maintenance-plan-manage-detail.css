@@ -1,0 +1,1265 @@
+/* 유지관리계획 상세 — flat chrome (fmd-crumb + sub-tabs) */
+
+.plan-detail-page {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+html:has(body.is-mock-modal-open),
+body.is-mock-modal-open {
+  overflow: hidden !important;
+}
+
+.plan-detail-page .admin-detail-title-row__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 4px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.plan-detail-page .admin-detail-title-row__icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.plan-detail-page .admin-detail-title-row__badge {
+  height: auto;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: rgba(28, 111, 255, 0.15);
+  color: #1c6fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+.plan-detail-page .admin-detail-title-row__badge.is-unregistered,
+.plan-detail-page .admin-detail-title-row__badge.is-approved,
+.plan-detail-page .admin-detail-title-row__badge.is-requested,
+.plan-detail-page .admin-detail-title-row__badge.is-rejected {
+  background: rgba(28, 111, 255, 0.15);
+  padding: 2px 8px;
+  height: auto;
+  color: #1c6fff;
+}
+
+.plan-detail-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  padding-left: 41px;
+  overflow: visible;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+body.admin-topnav-layout.plan-detail-page .main-content {
+  overflow: visible;
+  padding-left: 41px;
+}
+
+.mpd-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.plan-detail-page .admin-sub-tabs {
+  margin-bottom: 0;
+}
+
+/* ===== Stack ===== */
+.mpd-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== Solid panels ===== */
+.mpd-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.mpd-panel[hidden] {
+  display: none !important;
+}
+
+.mpd-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.mpd-panel__head--with-desc {
+  gap: 10px;
+}
+
+.mpd-panel__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.mpd-panel__mark img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.mpd-panel__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.mpd-panel__desc {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8c9aac;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mpd-divider {
+  width: 100%;
+  height: 1px;
+  background: #e8ebf0;
+  border: 0;
+}
+
+.mpd-stack > .mpd-panel:first-child > .mpd-divider {
+  display: none;
+}
+
+.mpd-stack > .mpd-panel:first-child > .mpd-list-block {
+  margin-top: -8px;
+}
+
+/* ===== Summary KV — Figma 235:3331 한 덩어리 표 ===== */
+.mpd-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.mpd-summary__row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.mpd-summary__row--full .mpd-kv {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.mpd-kv {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  height: 34px;
+  box-sizing: border-box;
+}
+
+.mpd-kv--title,
+.mpd-kv--content {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.mpd-kv--year,
+.mpd-kv--date,
+.mpd-kv--status {
+  flex: 1 1 0;
+  width: auto;
+  max-width: none;
+}
+
+.mpd-kv__label {
+  flex: 0 0 160px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  background: rgba(28, 111, 255, 0.04);
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.mpd-kv__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.mpd-summary__row--full .mpd-kv__value,
+.mpd-summary__row:not(.mpd-summary__row--full) .mpd-kv:last-child .mpd-kv__value {
+  border-right: none;
+}
+
+.mpd-summary__row:last-child .mpd-kv__label,
+.mpd-summary__row:last-child .mpd-kv__value {
+  border-bottom: none;
+}
+
+.mpd-kv__value--plain {
+  font-weight: 400;
+}
+
+.mpd-kv__value .mock-readonly-text {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mpd-kv__value input[type="text"],
+.mpd-kv__value textarea {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.mpd-kv__value textarea {
+  height: 100%;
+  min-height: 0;
+  resize: none;
+  padding: 0;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mpd-kv--status .mpm-status {
+  font-weight: 600;
+}
+
+.mpd-kv--status .mpm-status.is-approved {
+  color: #1c6fff;
+}
+
+.mpd-kv--status .mpm-status.is-unregistered {
+  color: #6c788b;
+}
+
+.mpd-kv--status .mpm-status.is-requested {
+  color: #d97706;
+}
+
+.mpd-kv--status .mpm-status.is-rejected {
+  color: #dc2626;
+}
+
+/* ===== List block ===== */
+.mpd-list-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+.mpd-list-block--add {
+  gap: 16px;
+}
+
+.mpd-section-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.mpd-section-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.mpd-section-count {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.mpd-section-count strong {
+  font-weight: 700;
+  color: #1c6fff;
+}
+
+.mpd-list-block--add .mpd-section-count strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.mpd-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 38px;
+}
+
+.mpd-add-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.plan-detail-page .btn-facility-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.plan-detail-page .btn-facility-add:hover {
+  background: #f4f4fa;
+  border-color: #c8cfd9;
+}
+
+.plan-detail-page .btn-facility-add img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ===== Tables — Figma 235:3365 (셀 전체 그리드, 항/종은 내용 폭) ===== */
+.mpd-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.mpd-table-wrap.facility-add-table-wrap {
+  max-height: 488px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.plan-detail-page .mpd-table-wrap.facility-selected-table-wrap {
+  max-height: calc(32px * 11);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.plan-detail-page .facility-selected-table-wrap .mpd-table thead th {
+  position: sticky;
+  top: -1px;
+  z-index: 4;
+  background: #eef4ff;
+  background-clip: padding-box;
+  box-shadow: inset 0 -1px 0 #dadae2;
+}
+
+.mpd-table {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.mpd-table col.col-no,
+.mpd-table col.col-port,
+.mpd-table col.col-subport,
+.mpd-table col.col-type,
+.mpd-table col.col-class,
+.mpd-table col.col-check {
+  width: 1%;
+}
+
+.mpd-table col.col-org,
+.mpd-table col.col-name {
+  width: auto;
+}
+
+.mpd-table thead th {
+  height: 32px;
+  padding: 0 12px;
+  background: #eef4ff;
+  border: 1px solid #dadae2;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.facility-add-table-wrap .mpd-table thead th {
+  position: sticky;
+  top: -1px;
+  z-index: 4;
+  background: #eef4ff;
+  background-clip: padding-box;
+  box-shadow: inset 0 -1px 0 #dadae2;
+}
+
+.mpd-table tbody td {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.mpd-table--facility-check tbody td:nth-child(2),
+.mpd-table--facility-check tbody td:nth-child(7),
+.mpd-table--facility-add tbody td:nth-child(2),
+.mpd-table--facility-add tbody td:nth-child(7) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mpd-table tbody tr:hover td {
+  background: #f8fafc;
+}
+
+.mpd-table tbody td input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  vertical-align: middle;
+  cursor: default;
+  box-sizing: border-box;
+}
+
+.mpd-table tbody td input[type="checkbox"]:checked {
+  background: transparent;
+  border: none;
+  background-image: url("../assets/main/inspection-status/icon-check-circle.svg");
+  background-size: 18px 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mpd-table tbody tr.is-editable input[type="checkbox"]:not(:disabled) {
+  cursor: pointer;
+  border: 1px solid #6c788b;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.mpd-table tbody tr.is-editable input[type="checkbox"]:not(:disabled):checked {
+  border-color: transparent;
+  background: transparent;
+  background-image: url("../assets/main/inspection-status/icon-check-circle.svg");
+  background-size: 18px 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mpd-table--facility-add tbody td input[type="checkbox"] {
+  border: 1px solid #6c788b;
+  border-radius: 2px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.mpd-table--facility-add tbody td input[type="checkbox"][data-add-plan-id] {
+  border-radius: 50%;
+}
+
+.mpd-table--facility-add tbody td input[type="checkbox"][data-add-facility-id] {
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  accent-color: #1c6fff;
+}
+
+.mpd-table--facility-add tbody td input[type="checkbox"]:checked {
+  background: transparent;
+  border-color: transparent;
+  background-image: url("../assets/main/inspection-status/icon-check-circle.svg");
+  background-size: 18px 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mpd-table--facility-add tbody td input[type="checkbox"][data-add-facility-id]:checked {
+  background-image: none;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.mpd-check-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.plan-detail-page .mpd-pagination {
+  display: none !important;
+}
+
+.plan-detail-page .mpd-pagination.pagination-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: none;
+  column-gap: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.plan-detail-page .mpd-pagination .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+  transform: none;
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn:first-child,
+.plan-detail-page .mpd-pagination .pagination__btn:last-child {
+  margin-left: 0;
+  border-radius: 0;
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn:hover:not(:disabled):not(.is-active) {
+  z-index: 1;
+  border-color: transparent;
+  color: #1c6fff;
+  background: #fff;
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff !important;
+  border: 1px solid #1c6fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn[data-page-move="next"] img,
+.plan-detail-page .mpd-pagination .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.plan-detail-page .mpd-pagination .pagination__btn svg {
+  display: none;
+}
+
+/* ===== Footer actions (pagination 아래 구분선 + 우측 버튼) ===== */
+.mpd-footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid #e8ebf0;
+  box-sizing: border-box;
+}
+
+.mpd-footer-actions .mpd-btn {
+  height: 34px;
+  padding: 0 18px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  gap: 4px;
+}
+
+.mpd-footer-actions .mpd-btn[hidden] {
+  display: none !important;
+}
+
+.mpd-footer-actions .mpd-btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mpd-footer-actions .mpd-btn img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.mpd-btn--history {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.mpd-btn--history:hover {
+  background: #f4f4fa;
+}
+
+.mpd-btn--register {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.mpd-btn--register:hover,
+.mpd-footer-actions .mpd-btn--save:hover {
+  background: #16304f;
+}
+
+.mpd-footer-actions .mpd-btn--save {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.mpd-btn--approve {
+  border: none;
+  background: #1c6fff;
+  color: #fff;
+}
+
+.mpd-btn--approve:hover {
+  background: #0f5de0;
+}
+
+.mpd-btn--reject {
+  border: 1px solid #e6002d;
+  background: #fff;
+  color: #e6002d;
+}
+
+.mpd-btn--reject:hover {
+  background: rgba(230, 0, 45, 0.04);
+}
+
+.fca-hist-summary__status.is-unregistered {
+  background: rgba(108, 120, 139, 0.1);
+  color: #6c788b;
+}
+
+.fca-hist-empty {
+  margin: 0;
+  padding: 24px 4px;
+  color: #8c9aac;
+  font-size: 14px;
+  text-align: center;
+}
+
+.plan-detail-page .mpd-pagination .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-left: 0;
+  border: none;
+  background: transparent;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+.plan-detail-page .mpd-pagination > select,
+.plan-detail-page .mpd-pagination .mpd-page-size,
+.plan-detail-page .mpd-pagination .pagination-page-size {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ===== Facility add search ===== */
+.mpd-filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+}
+
+.mpd-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  flex: 0 0 307px;
+  width: 307px;
+  max-width: 307px;
+  min-width: 0;
+}
+
+.mpd-field--name {
+  flex: 1 1 280px;
+  width: auto;
+  max-width: 400px;
+}
+
+.mpd-field label {
+  margin: 0;
+  padding: 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mpd-field select,
+.mpd-field input[type="text"] {
+  width: 100%;
+  height: 38px;
+  padding: 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  line-height: 1;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.mpd-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  background-image: url("../assets/main/facility-statistics/angle-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+  cursor: pointer;
+}
+
+.mpd-field input::placeholder {
+  color: #999;
+}
+
+.mpd-field select:focus,
+.mpd-field input[type="text"]:focus {
+  border-color: #1c6fff;
+}
+
+.mpd-filter-actions {
+  display: flex;
+  align-items: flex-end;
+  flex: 0 0 auto;
+  margin-left: auto;
+  height: 61px;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+
+.mpd-filter-actions .mpd-btn {
+  height: 38px;
+  margin-top: auto;
+}
+
+/* ===== Facility add modal ===== */
+.facility-add-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(11, 26, 46, 0.44);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+.facility-add-modal__overlay[hidden] {
+  display: none !important;
+}
+
+.facility-add-modal__overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.facility-add-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9001;
+  width: min(1100px, calc(100vw - 16px));
+  height: 100vh;
+  padding: 18px 16px 16px;
+  border-radius: 14px 0 0 14px;
+  background: #fff;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.18);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.24s ease, opacity 0.22s ease, visibility 0.22s ease;
+}
+
+.facility-add-modal[hidden] {
+  display: none !important;
+}
+
+.facility-add-modal.is-open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.facility-add-modal__head {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ededed;
+  flex-shrink: 0;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.facility-add-modal__title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.facility-add-modal__title-group .mpd-panel__desc {
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.facility-add-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #f4f4f8;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.facility-add-modal__close:hover {
+  background: #e8ebf0;
+}
+
+.facility-add-modal .mpd-filter {
+  gap: 10px;
+  padding-top: 14px;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+
+.facility-add-modal .mpd-field {
+  flex: 0 0 108px;
+  width: auto;
+  max-width: 108px;
+}
+
+.facility-add-modal .mpd-field--name {
+  flex: 1 1 0;
+  max-width: none;
+}
+
+.facility-add-modal .mpd-list-block--add {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+.facility-add-modal .facility-add-table-wrap {
+  max-height: none;
+  flex: 1 1 auto;
+}
+
+.facility-add-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 14px;
+  border-top: 1px solid #ededed;
+  flex-shrink: 0;
+}
+
+.facility-add-modal .facility-add-panel__foot {
+  gap: 8px;
+}
+
+/* ===== Buttons ===== */
+.mpd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.mpd-btn img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.mpd-btn--search,
+.mpd-btn--ghost,
+.mpd-btn--primary,
+.mpd-btn--outline {
+  height: 38px;
+  font-size: 14px;
+}
+
+.mpd-btn--search img,
+.mpd-btn--ghost img,
+.mpd-btn--primary img,
+.mpd-btn--outline img {
+  width: 18px;
+  height: 18px;
+}
+
+.mpd-btn--cancel {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.mpd-btn--cancel:hover {
+  background: #f4f4fa;
+}
+
+.mpd-btn--save,
+.mpd-btn--edit {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.mpd-btn--save:hover,
+.mpd-btn--edit:hover {
+  background: #16304f;
+}
+
+/* 읽기 모드 수정하기 — Figma와 동일 네이비 계열 유지 */
+
+.mpd-btn--search {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+  min-width: 107px;
+}
+
+.mpd-btn--search:hover {
+  background: #16304f;
+}
+
+.mpd-btn--ghost {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.mpd-btn--ghost:hover {
+  background: #f4f4fa;
+}
+
+.mpd-btn--primary {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+  min-width: 110px;
+}
+
+.mpd-btn--primary:hover {
+  background: #16304f;
+}
+
+/* 시설물 추가 — 취소 / 선택 등록 (Figma 166:4465, 166:4469) */
+.mpd-btn--outline {
+  border: 1px solid #dadae2;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.mpd-btn--add-cancel {
+  color: #6c788b;
+  min-width: 72px;
+}
+
+.mpd-btn--add-register {
+  color: #333;
+  min-width: 92px;
+}
+
+.facility-add-modal .mpd-btn--add-register {
+  border-color: #0b1a2e;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.facility-add-modal .mpd-btn--add-register img {
+  filter: brightness(0) invert(1);
+}
+
+.facility-add-modal .mpd-btn--add-register:hover {
+  background: #16304f;
+  border-color: #16304f;
+}
+
+.mpd-btn--outline:hover {
+  background: #f4f4fa;
+  border-color: #c8cfd9;
+}
+
+.mpd-note {
+  margin: 0;
+  padding: 0 4px;
+  color: #d94949;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.mpd-note[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 1600px) {
+  .mpd-filter {
+    flex-wrap: wrap;
+  }
+
+  .mpd-field {
+    flex: 1 1 220px;
+    width: auto;
+    max-width: none;
+  }
+
+  .mpd-filter-actions {
+    margin-left: 0;
+    height: auto;
+  }
+
+  .facility-add-modal {
+    width: min(1100px, 100vw);
+  }
+
+  .facility-add-modal .mpd-filter {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1200px) {
+  .facility-add-modal {
+    left: 16px;
+    width: auto;
+    border-radius: 18px;
+  }
+}

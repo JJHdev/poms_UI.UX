@@ -1,0 +1,62 @@
+/**
+ * 시설물 등록 폼 레이아웃 v2 (테스트)
+ * - 3열 유지 + 행 높이를 살짝 줄여 컴팩트하게
+ * - 입력 포커스 표시, 파일 첨부 2열 압축
+ * 롤백: facility-management.html / facility-management-detail.html /
+ *       facility-change-request-detail.html 에서 이 파일 <link> 한 줄만 제거
+ */
+
+/* 행 높이 축소 */
+.fac-add-field {
+  min-height: 34px;
+}
+
+/* 라벨 */
+.fac-add-field__label {
+  padding: 6px 12px;
+  font-size: 12px;
+  background: #f8fafc;
+}
+
+/* 컨트롤 */
+.fac-add-field__control {
+  padding: 4px 10px;
+}
+
+.fac-add-input,
+.fac-add-select {
+  height: 30px;
+  font-size: 12.5px;
+  border-radius: 5px;
+}
+
+.fac-add-input:focus,
+.fac-add-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+  outline: none;
+}
+
+/* 아코디언 내부 그리드는 테두리와 맞닿게 */
+.fac-acc__inner .fac-add-grid {
+  padding: 0;
+}
+
+/* 파일 첨부 — 2열로 압축 */
+.fac-add-files {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fac-add-file-row {
+  min-height: 72px;
+  border-right: 1px solid #d1d5db;
+}
+
+.fac-add-file-row:nth-child(2n) {
+  border-right: none;
+}
+
+.fac-add-file-row:nth-last-child(-n+2) {
+  border-bottom: none;
+}

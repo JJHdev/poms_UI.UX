@@ -1,0 +1,1562 @@
+@import url("common-modal.css");
+
+/* 팝업관리 목록 — 관리자 시안 기준 (자체 완결형, facility 계열 CSS 미사용) */
+
+/* ===== 레이아웃 ===== */
+/* 폭/양옆 여백(1400 + 260×2)은 admin-topnav.css의 .main-content 규칙이 담당 */
+.admin-popup-page .main-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* ===== 컨텐츠 ===== */
+.admin-popup-page .ntc-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ===== 섹션 타이틀(검색조건) ===== */
+.admin-popup-page .ntc-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-popup-page .ntc-section-title__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.admin-popup-page .ntc-section-title__icon img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.admin-popup-page .ntc-section-title__text {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+/* ===== 검색 스트립 ===== */
+.admin-popup-page .ntc-filter-strip {
+  padding: 9px 10px 8px;
+  background: #f3f8fe;
+  border-top: 1px solid #8d9aab;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.admin-popup-page .ntc-filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-popup-page .ntc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-popup-page .ntc-field--title {
+  flex: 0 0 400px;
+  width: 400px;
+  max-width: 400px;
+}
+
+.admin-popup-page .ntc-field label {
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.admin-popup-page .ntc-field input[type="search"],
+.admin-popup-page .ntc-field input[type="text"] {
+  width: 100%;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.admin-popup-page .ntc-field input::placeholder {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.admin-popup-page .ntc-field input:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+.admin-popup-page .ntc-field input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.admin-popup-page .ntc-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+/* ===== 버튼 공통 ===== */
+.admin-popup-page .ntc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.admin-popup-page .ntc-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-popup-page .ntc-btn--search {
+  min-width: 107px;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.admin-popup-page .ntc-btn--search:hover {
+  background: #16304f;
+}
+
+.admin-popup-page .ntc-btn--reset {
+  min-width: 96px;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.admin-popup-page .ntc-btn--reset:hover {
+  background: #f6f8fb;
+}
+
+/* ===== 검색결과 헤더 ===== */
+.admin-popup-page .ntc-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-popup-page .ntc-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 30px;
+}
+
+.admin-popup-page .ntc-results__count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-popup-page .ntc-results__bar-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.admin-popup-page .ntc-results__bar-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.admin-popup-page .ntc-results__label {
+  margin: 0;
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.admin-popup-page .ntc-results__meta {
+  margin: 0;
+  color: #6c788b;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+}
+
+.admin-popup-page .ntc-results__meta strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.admin-popup-page .ntc-btn--create {
+  height: 30px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.admin-popup-page .ntc-btn--create img {
+  width: 14px;
+  height: 14px;
+}
+
+.admin-popup-page .ntc-btn--create:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+/* ===== 목록 테이블 ===== */
+.admin-popup-page .ntc-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px 6px 0 0;
+}
+
+.admin-popup-page .ntc-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.admin-popup-page .ntc-table thead,
+.admin-popup-page .ntc-table tbody,
+.admin-popup-page .ntc-table tr {
+  border: 0 !important;
+  background: transparent;
+  box-shadow: none;
+}
+
+.admin-popup-page .ntc-table thead th,
+.admin-popup-page .ntc-table tbody td {
+  height: 32px;
+  padding: 4px 8px;
+  font-size: 13px;
+  line-height: normal;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.admin-popup-page .ntc-table thead th {
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111;
+  font-weight: 500;
+}
+
+.admin-popup-page .ntc-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+.admin-popup-page .ntc-table thead th:last-child {
+  border-right: 0 !important;
+  border-radius: 0 6px 0 0;
+}
+
+.admin-popup-page .ntc-table tbody td {
+  background: #fff;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333;
+  font-weight: 400;
+}
+
+.admin-popup-page .ntc-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+.admin-popup-page .ntc-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.admin-popup-page .ntc-table tbody tr {
+  cursor: pointer;
+}
+
+.admin-popup-page .ntc-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.admin-popup-page .ntc-table tbody tr.is-selected td {
+  background: #eef4ff;
+}
+
+/* 제목 셀 좌측 정렬 */
+.admin-popup-page .ntc-table tbody td:nth-child(2),
+.admin-popup-page .ntc-table .notice-title-cell {
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: left;
+}
+
+/* 컬럼 폭 */
+.admin-popup-page .ntc-table .notice-col-no {
+  width: 48px;
+}
+
+.admin-popup-page .ntc-table .notice-col-title {
+  width: auto;
+}
+
+.admin-popup-page .ntc-table .notice-col-date,
+.admin-popup-page .ntc-table .notice-col-author,
+.admin-popup-page .ntc-table .notice-col-pin,
+.admin-popup-page .ntc-table .notice-col-visible {
+  width: 136px;
+}
+
+/* ===== 배지 ===== */
+.admin-popup-page .notice-pin-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 20px;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.admin-popup-page .notice-pin-text.is-off {
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #8993a1;
+  font-weight: 400;
+}
+
+.admin-popup-page .notice-stat-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 20px;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.admin-popup-page .notice-stat-badge.is-off,
+.admin-popup-page .notice-stat-badge--off,
+.admin-popup-page .notice-stat-badge--hidden,
+.admin-popup-page .notice-stat-badge--ended {
+  background: #fef5f8;
+  color: #e5002b;
+}
+
+/* ===== 페이지네이션 (flat) ===== */
+.admin-popup-page .ntc-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 0;
+}
+
+.admin-popup-page .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.admin-popup-page .pagination__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  transform: none;
+}
+
+.admin-popup-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.admin-popup-page .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.admin-popup-page .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.admin-popup-page .pagination__btn[data-page-move] {
+  font-size: inherit;
+  color: inherit;
+  background-color: #fff;
+  background-image: none;
+}
+
+.admin-popup-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.admin-popup-page .pagination__btn[data-page-move="next"],
+.admin-popup-page .pagination__btn[data-page-move="last"] {
+  transform: none;
+}
+
+.admin-popup-page .pagination__btn[data-page-move="next"] img,
+.admin-popup-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.admin-popup-page .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.admin-popup-page .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+@media (max-width: 1400px) {
+  .admin-popup-page .ntc-filter {
+    flex-wrap: wrap;
+  }
+
+  .admin-popup-page .ntc-field--title {
+    flex: 1 1 320px;
+    width: auto;
+    max-width: 400px;
+  }
+}
+
+
+/* ===== 팝업관리 전용 ===== */
+.admin-popup-page .ntc-filter {
+  align-items: flex-end;
+}
+
+.admin-popup-page .ntc-field--status {
+  flex: 0 0 150px;
+  width: 150px;
+  max-width: 150px;
+}
+
+.admin-popup-page .ntc-field select {
+  width: 100%;
+  height: 34px;
+  padding: 0 34px 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.admin-popup-page .ntc-field select:focus {
+  border-color: #1c6fff;
+}
+
+.admin-popup-page .ntc-table .popup-col-no {
+  width: 64px;
+}
+
+.admin-popup-page .ntc-table .popup-col-title {
+  width: auto;
+}
+
+.admin-popup-page .ntc-table .popup-col-period {
+  width: 260px;
+}
+
+.admin-popup-page .ntc-table .popup-col-status {
+  width: 140px;
+}
+
+.admin-popup-page .ntc-table .popup-col-image {
+  width: 120px;
+}
+
+/* popup-manage.js가 생성하는 제목 셀도 공지사항 목록과 동일하게 좌측 정렬 */
+.admin-popup-page .ntc-table tbody td:nth-child(2) {
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: left;
+}
+
+/* ========================================================================== */
+/* 팝업 상세 — 공지사항 상세 화면 기준 */
+/* ========================================================================== */
+
+.popup-detail-page {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+.popup-detail-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+  background: #fff;
+  overflow: visible;
+}
+
+.popup-detail-page .page-header,
+.popup-detail-page .page-header__bar,
+.popup-detail-page .btn-back,
+.popup-detail-page .admin-detail-title-row {
+  display: none !important;
+}
+
+.popup-detail-page .pd-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.popup-detail-page .pd-title-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-title-card__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+  height: 44px;
+}
+
+.popup-detail-page .pd-title-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.popup-detail-page .pd-title-card__icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.popup-detail-page .pd-title-card__title {
+  margin: 0;
+  color: #111;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.44px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popup-detail-page .pd-title-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: rgba(28, 111, 255, 0.08);
+  color: #1c6fff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.popup-detail-page .pd-title-card__badge[hidden] {
+  display: none !important;
+}
+
+.popup-detail-page .pd-title-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.popup-detail-page .pd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-btn img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.popup-detail-page .pd-btn--preview,
+.popup-detail-page .pd-btn--delete {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.popup-detail-page .pd-btn--preview:hover,
+.popup-detail-page .pd-btn--delete:hover {
+  background: #f6f8fb;
+}
+
+.popup-detail-page .pd-btn--edit {
+  border: 0;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.popup-detail-page .pd-btn--edit:hover {
+  background: #16304f;
+}
+
+.popup-detail-page .pd-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-panel__meta {
+  padding: 0;
+  background: #fff;
+}
+
+.popup-detail-page .pd-meta-row {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  border-bottom: 1px solid #dadae2;
+}
+
+.popup-detail-page .pd-meta-cell {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  padding: 6px 14px;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  margin: 0;
+  color: #111;
+  font-size: 13px;
+  line-height: normal;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-meta-cell--label {
+  justify-content: center;
+  width: 90px;
+  flex-shrink: 0;
+  background: #f6f9ff;
+  font-weight: 500;
+}
+
+.popup-detail-page .pd-meta-cell--value {
+  flex: 1 1 0;
+  min-width: 0;
+  background: #fff;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popup-detail-page .pd-meta-cell--period {
+  flex-grow: 1.5;
+  gap: 5px;
+}
+
+.popup-detail-page .pd-meta-cell--last {
+  border-right: 0;
+}
+
+.popup-detail-page .pd-link-row {
+  display: flex;
+  align-items: stretch;
+  min-height: 34px;
+  border-bottom: 1px solid #dadae2;
+}
+
+.popup-detail-page .pd-link-label,
+.popup-detail-page .pd-image-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  padding: 6px 14px;
+  border-right: 1px solid #dadae2;
+  background: #f6f9ff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-link-value {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 6px 16px;
+  color: #1c6fff;
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.popup-detail-page .pd-link-value:hover {
+  text-decoration: underline;
+}
+
+.popup-detail-page .pd-content-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 33px;
+  border-bottom: 1px solid #dadae2;
+  background: #f6f9ff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-panel__body {
+  padding: 0;
+  background: #fff;
+}
+
+.popup-detail-page .pd-content {
+  width: 100%;
+  min-height: 430px;
+  padding: 20px 24px;
+  border: 0;
+  background: #fff;
+  box-sizing: border-box;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.popup-detail-page .pd-content p {
+  margin: 0 0 0.8em;
+}
+
+.popup-detail-page .pd-content p:last-child {
+  margin-bottom: 0;
+}
+
+.popup-detail-page .pd-panel__image {
+  display: flex;
+  align-items: stretch;
+  min-height: 34px;
+  border-top: 1px solid #dadae2;
+}
+
+.popup-detail-page .pd-panel__image[hidden] {
+  display: none !important;
+}
+
+.popup-detail-page .pd-image-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 16px;
+  color: #1c6fff;
+  font-size: 13px;
+}
+
+.popup-detail-page .pd-image-value img {
+  display: block;
+  max-width: 140px;
+  max-height: 44px;
+  object-fit: contain;
+}
+
+.popup-detail-page .pd-note {
+  margin: 0;
+  color: #7b8796;
+  font-size: 12px;
+}
+
+.popup-detail-page .pd-hidden-fields {
+  display: none !important;
+}
+
+@media (max-width: 1400px) {
+  .popup-detail-page .pd-meta-row {
+    flex-wrap: wrap;
+  }
+
+  .popup-detail-page .pd-meta-cell--label,
+  .popup-detail-page .pd-link-label,
+  .popup-detail-page .pd-image-label {
+    width: 82px;
+  }
+}
+
+/* ===== 팝업 미리보기 모달: 상단 메뉴보다 위에 표시 ===== */
+.popup-detail-page .mock-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+}
+
+.popup-detail-page .mock-modal__backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+}
+
+.popup-detail-page .mock-modal__dialog {
+  position: relative !important;
+  z-index: 1 !important;
+  max-height: calc(100vh - 48px) !important;
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+}
+
+/* ===== 팝업 미리보기: 오른쪽 고정 배치 ===== */
+.popup-detail-page .mock-modal {
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: flex-end !important;
+}
+
+.popup-detail-page .mock-modal__dialog {
+  position: relative !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  margin: 0 !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  border-radius: 14px !important;
+}
+
+/* 닫기 버튼 클릭 시 hidden 속성이 정상 적용되도록 */
+.popup-detail-page .mock-modal[hidden] {
+  display: none !important;
+}
+
+/* ===== 팝업 상세: 보기/수정 모드 ===== */
+.popup-detail-page .pd-edit-only {
+  display: none !important;
+}
+
+.popup-detail-page.is-editing .pd-view-only {
+  display: none !important;
+}
+
+.popup-detail-page.is-editing .pd-edit-only {
+  display: flex !important;
+}
+
+.popup-detail-page.is-editing .pd-title-input {
+  display: block !important;
+}
+
+.popup-detail-page .pd-title-input {
+  flex: 1 1 auto;
+  min-width: 240px;
+  height: 34px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.44px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-control {
+  width: 100%;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-period-view,
+.popup-detail-page .pd-period-edit,
+.popup-detail-page .pd-width-edit {
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.popup-detail-page .pd-period-edit .pd-control {
+  flex: 1 1 0;
+}
+
+.popup-detail-page .pd-link-edit {
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 16px;
+}
+
+.popup-detail-page .pd-content-editor {
+  width: 100%;
+}
+
+.popup-detail-page.is-editing .popup-detail-rte .notice-rte__toolbar {
+  display: flex !important;
+}
+
+.popup-detail-page .popup-detail-rte .notice-rte__toolbar {
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.popup-detail-page .popup-detail-rte .notice-rte__toolbar select {
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.popup-detail-page .popup-detail-rte .notice-rte__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #374151;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.popup-detail-page .popup-detail-rte .notice-rte__editor {
+  min-height: 430px;
+  max-height: 620px;
+  padding: 20px 24px;
+  border: 0;
+  outline: none;
+  background: #fff;
+  box-sizing: border-box;
+  color: #111;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.popup-detail-page .pd-image-edit {
+  align-items: center;
+  gap: 10px;
+}
+
+.popup-detail-page .pd-file-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 11px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.popup-detail-page .pd-btn--cancel {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+/* ===== 팝업 수정 모드 — admin-notice-edit 기준 최종 보정 ===== */
+.popup-detail-page .pd-edit-only {
+  display: none !important;
+}
+
+.popup-detail-page.is-editing .pd-view-only {
+  display: none !important;
+}
+
+.popup-detail-page.is-editing .pd-edit-only {
+  display: flex !important;
+}
+
+.popup-detail-page.is-editing .pd-title-row {
+  display: flex !important;
+}
+
+.popup-detail-page .pd-title-row {
+  align-items: stretch;
+  min-height: 42px;
+  border-bottom: 1px solid #dadae2;
+}
+
+.popup-detail-page .pd-title-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  padding: 6px 14px;
+  background: #f6f9ff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.popup-detail-page .pd-title-value {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 14px;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-control {
+  width: 100%;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  outline: none;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.popup-detail-page .pd-title-control {
+  height: 30px;
+}
+
+.popup-detail-page .pd-width-edit {
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.popup-detail-page .pd-link-edit {
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 16px;
+}
+
+.popup-detail-page .popup-type-radios {
+  align-items: center;
+  gap: 14px;
+}
+
+.popup-detail-page .popup-type-radios label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.popup-detail-page .popup-type-radios input {
+  accent-color: #1c6fff;
+}
+
+.popup-detail-page .pd-content-editor {
+  width: 100%;
+}
+
+.popup-detail-page .popup-detail-rte {
+  width: 100%;
+  border: 0;
+  background: #fff;
+}
+
+/* 공지사항 수정 화면과 동일하게 툴바는 숨김 */
+.popup-detail-page .popup-detail-rte .notice-rte__toolbar {
+  display: none !important;
+}
+
+.popup-detail-page .popup-detail-rte .notice-rte__editor {
+  width: 100%;
+  min-height: 430px;
+  max-height: 620px;
+  overflow-y: auto;
+  padding: 20px 24px;
+  border: 0;
+  background: #fff;
+  box-sizing: border-box;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  outline: none;
+  box-shadow: none;
+}
+
+.popup-detail-page .pd-btn--cancel {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.popup-detail-page.is-editing .pd-title-card__badge {
+  display: none !important;
+}
+
+/* 수정 중에는 메타 셀 내부 input/select 선을 모두 제거 */
+.popup-detail-page.is-editing .pd-meta-cell,
+.popup-detail-page.is-editing .pd-meta-cell input,
+.popup-detail-page.is-editing .pd-meta-cell select,
+.popup-detail-page.is-editing .pd-title-row input,
+.popup-detail-page.is-editing .pd-link-row input {
+  outline: none;
+  box-shadow: none;
+}
+
+/* 모달은 오른쪽 고정 + hidden 정상 처리 */
+.popup-detail-page .mock-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  align-items: stretch !important;
+  justify-content: flex-end !important;
+}
+
+.popup-detail-page .mock-modal[hidden] {
+  display: none !important;
+}
+
+.popup-detail-page .mock-modal__backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.popup-detail-page .mock-modal__dialog {
+  position: relative !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  margin: 0 !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  border-radius: 14px !important;
+  z-index: 1 !important;
+}
+
+/* ===== 요청사항 최종 보정 2026-08-14 ===== */
+
+/* 1. 팝업 유형: 드롭다운 */
+.popup-detail-page #popupTypeSelect {
+  width: 100%;
+  height: 28px;
+  padding: 0 26px 0 8px;
+  border: none;
+  background-color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  color: #111;
+  outline: none;
+  cursor: pointer;
+}
+
+/* 2. 메타 컬럼 폭 보정
+   시작일/종료일은 넓게, 노출여부/팝업너비는 좁게 */
+.popup-detail-page .pd-meta-row {
+  display: grid;
+  grid-template-columns:
+    90px minmax(125px, 1.05fr)
+    90px minmax(180px, 1.55fr)
+    90px minmax(180px, 1.55fr)
+    90px minmax(105px, 0.8fr)
+    90px minmax(90px, 0.7fr);
+  width: 100%;
+}
+
+.popup-detail-page .pd-meta-cell {
+  width: auto !important;
+  min-width: 0;
+}
+
+.popup-detail-page .pd-meta-cell--label {
+  width: auto !important;
+}
+
+.popup-detail-page .pd-meta-cell--value {
+  min-width: 0;
+}
+
+.popup-detail-page .pd-meta-cell input[type="date"] {
+  min-width: 145px;
+  width: 100%;
+}
+
+.popup-detail-page #popupStatusInput {
+  min-width: 78px;
+}
+
+.popup-detail-page #popupWidthInput {
+  min-width: 55px;
+  text-align: left;
+}
+
+/* 3. 제목 행 라벨 옆 세로선 복구 */
+.popup-detail-page .pd-title-label {
+  border-right: 1px solid #dadae2;
+}
+
+.popup-detail-page .pd-title-row {
+  border-bottom: 1px solid #dadae2;
+}
+
+/* 4. 설명 툴바 제거 */
+.popup-detail-page .popup-detail-rte .notice-rte__toolbar {
+  display: none !important;
+}
+
+.popup-detail-page .pd-content-editor {
+  width: 100%;
+}
+
+.popup-detail-page .popup-detail-rte .notice-rte__editor {
+  min-height: 430px;
+  max-height: 620px;
+  padding: 20px 24px;
+}
+
+/* ===== 미세 보정 2026-08-14 ===== */
+
+/* 1) 시작일/종료일은 조금 줄이고, 팝업 유형은 글자 안 잘리게 */
+.popup-detail-page .pd-meta-row {
+  grid-template-columns:
+    90px minmax(145px, 1.15fr)
+    90px minmax(160px, 1.35fr)
+    90px minmax(160px, 1.35fr)
+    90px minmax(100px, 0.8fr)
+    90px minmax(90px, 0.7fr);
+}
+
+.popup-detail-page #popupTypeSelect {
+  min-width: 125px;
+  padding-right: 30px;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+
+/* 2) 설명 영역 약 20px 축소 */
+.popup-detail-page .popup-detail-rte .notice-rte__editor {
+  min-height: 410px;
+  max-height: 600px;
+}
+
+/* 3) 이미지 첨부 한 줄 정렬 */
+.popup-detail-page .pd-image-value {
+  align-items: center;
+}
+
+.popup-detail-page .pd-image-edit {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  min-width: 0;
+  width: 100%;
+}
+
+.popup-detail-page .pd-image-edit .ne-attach__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.popup-detail-page .pd-image-edit .ne-attach__file {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.popup-detail-page .pd-image-edit .ne-attach__file img {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+}
+
+.popup-detail-page .pd-image-edit .ne-attach__name {
+  display: inline-block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.popup-detail-page .pd-image-edit .ne-attach__remove {
+  flex: 0 0 auto;
+}
+
+/* ===== 이미지 첨부 보기/수정 모드 분리 ===== */
+
+/* 보기 모드: 아이콘 + 파일명만 표시 */
+.popup-detail-page #popupImageText.pd-view-only {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.popup-detail-page .pd-image-view-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: #1c6fff;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.popup-detail-page .pd-image-view-file img {
+  display: block;
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.popup-detail-page .pd-image-view-file span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.popup-detail-page .pd-image-empty {
+  color: #9aa3b2;
+  font-size: 13px;
+}
+
+/* 보기 모드에서는 파일추가/삭제 영역을 절대 노출하지 않음 */
+.popup-detail-page:not(.is-editing) .pd-image-edit {
+  display: none !important;
+}
+
+/* 수정 모드에서만 파일추가 + 파일명 + 삭제 버튼 노출 */
+.popup-detail-page.is-editing .pd-image-edit {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  min-width: 0;
+  width: 100%;
+}
+
+.popup-detail-page.is-editing #popupImageText {
+  display: none !important;
+}
+
+.popup-detail-page.is-editing .pd-image-edit .ne-attach__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.popup-detail-page.is-editing .pd-image-edit .ne-attach__file {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.popup-detail-page.is-editing .pd-image-edit .ne-attach__remove {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+/* 혹시 공통 스타일에서 삭제 버튼을 강제로 보여도 보기 모드에서는 숨김 */
+.popup-detail-page:not(.is-editing) .ne-attach__remove,
+.popup-detail-page:not(.is-editing) #popupImageButton,
+.popup-detail-page:not(.is-editing) #popupImageAttachList {
+  display: none !important;
+}

@@ -1,0 +1,5 @@
+<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Figma 더블 화살표 — first용 (좌향), last는 CSS scaleX(-1) -->
+  <path d="M7.5 11.6667L2.83333 7L7.5 2.33333" stroke="#6C788B" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M11.1667 11.6667L6.5 7L11.1667 2.33333" stroke="#6C788B" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

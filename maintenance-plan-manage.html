@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유지관리계획 관리 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/inspection-status.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/maintenance-plan-manage.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-search-page facility-change-request-page type3-port-page fcr-flat-page inspection-status-page maintenance-plan-manage-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시스템 관리 메뉴">
+        <div class="fs-lnb__title">
+          <h2 class="fs-lnb__title-text">시스템 관리</h2>
+        </div>
+        <nav class="fs-lnb__nav" data-admin-sub-tabs="1" aria-label="시스템 관리 하위 메뉴">
+          <a href="facility-management.html" class="fs-lnb__item">
+            <span>시설물 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="maintenance-plan-manage.html" class="fs-lnb__item is-active" aria-current="page">
+            <span>유지관리계획 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="mooring-facility-management.html" class="fs-lnb__item">
+            <span>계류시설 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="facility-location-status.html" class="fs-lnb__item">
+            <span>시설물 위치 현황 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="drone-video-management.html" class="fs-lnb__item">
+            <span>드론 영상관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="responsible-engineer.html" class="fs-lnb__item">
+            <span>책임기술자 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="type3-page fs-manage" aria-label="유지관리계획 관리">
+
+      <nav class="ua-account-tabs" role="tablist" aria-label="유지관리계획 관리 탭">
+        <button type="button" class="ua-account-tabs__btn is-active" role="tab" data-tab="system-inspection" aria-selected="true">점검진단 도래</button>
+        <button type="button" class="ua-account-tabs__btn" role="tab" data-tab="plan" aria-selected="false">유지관리계획</button>
+        <button type="button" class="ua-account-tabs__btn" role="tab" data-tab="overview" aria-selected="false">총괄표</button>
+      </nav>
+
+      <!-- 점검진단 도래 -->
+      <div class="insp-status-panel is-active" data-panel="system-inspection" role="tabpanel">
+        <div class="type3-section-title mpm-filter-head">
+          <span class="type3-section-title__icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h1 id="sysInspFilterTitle" class="type3-section-title__text">검색조건</h1>
+        </div>
+
+        <section class="type3-filter-strip" aria-label="검색조건">
+          <form class="type3-filter type3-filter--strip" id="sysInspSearchForm" novalidate onsubmit="return false;">
+            <div class="type3-filter__fields mpm-sys-filter-fields">
+              <div class="type3-field">
+                <label for="sysInspAgency">관리주체</label>
+                <select id="sysInspAgency">
+                  <option value="">전체</option>
+                  <option value="책임관리자">책임관리자</option>
+                  <option value="한국수자원공사">한국수자원공사</option>
+                  <option value="부산지방해양수산청">부산지방해양수산청</option>
+                  <option value="여수지방해양수산청">여수지방해양수산청</option>
+                  <option value="여수광양항만공사">여수광양항만공사</option>
+                  <option value="인천항만공사">인천항만공사</option>
+                  <option value="부산항만공사">부산항만공사</option>
+                  <option value="경상북도">경상북도</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--sm">
+                <label for="sysInspYear">점검 예정연도</label>
+                <select id="sysInspYear">
+                  <option value="" selected>전체</option>
+                  <option value="2031">2031</option>
+                  <option value="2030">2030</option>
+                  <option value="2029">2029</option>
+                  <option value="2028">2028</option>
+                  <option value="2027">2027</option>
+                  <option value="2026">2026</option>
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--sm">
+                <label for="sysInspClass">종구분</label>
+                <select id="sysInspClass">
+                  <option value="">전체</option>
+                  <option value="1종">1종</option>
+                  <option value="2종">2종</option>
+                  <option value="3종">3종</option>
+                  <option value="기타">기타</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--md">
+                <label for="sysInspCheckType">점검구분</label>
+                <select id="sysInspCheckType">
+                  <option value="">전체</option>
+                  <option value="100">정기안전점검</option>
+                  <option value="202">정밀안전점검</option>
+                  <option value="401">정밀안전진단</option>
+                  <option value="500">성능평가</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--sm">
+                <label for="sysInspProcess">처리상태</label>
+                <select id="sysInspProcess">
+                  <option value="">전체</option>
+                  <option value="NEED">신청필요</option>
+                  <option value="DONE">신청완료</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--grow">
+                <label for="sysInspName">시설물명</label>
+                <input type="text" id="sysInspName" placeholder="검색어를 입력해주세요.">
+              </div>
+            </div>
+            <div class="type3-filter-actions">
+              <button type="button" class="type3-btn type3-btn--search" data-search="system-inspection">
+                <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                검색하기
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="type3-results-panel" aria-labelledby="sysInspDueTitle">
+          <div class="type3-results__head">
+            <div class="mpm-due-toolbar">
+              <p class="mpm-due-title" id="sysInspDueTitle">
+                <span id="sysInspDueYear">2026</span>년 점검 대상시설물
+                <strong id="sysInspDueCount">0</strong>개
+              </p>
+              <p class="mpm-due-legend">
+                <span class="mpm-due-legend__on">
+                  <img src="assets/main/inspection-status/icon-check-circle.svg" alt="" width="15" height="15">
+                  선택 연도 점검 대상
+                </span>
+                <span class="mpm-due-legend__sep" aria-hidden="true">/</span>
+                <span class="mpm-due-legend__off">- 대상 아님</span>
+              </p>
+            </div>
+            <button type="button" class="type3-btn type3-btn--excel" id="systemInspectionExcelBtn">
+              <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+              엑셀 다운로드
+            </button>
+          </div>
+          <div class="type3-table-wrap insp-status-table-wrap">
+            <table class="type3-table insp-status-table insp-status-table--due" aria-label="점검진단 도래 목록">
+              <thead id="systemInspectionTableHead"></thead>
+              <tbody id="systemInspectionTableBody"></tbody>
+            </table>
+          </div>
+          <div class="type3-results-foot">
+            <nav class="pagination" id="sysInspPagination" aria-label="목록 페이지"></nav>
+          </div>
+        </section>
+      </div>
+
+      <!-- 유지관리계획 -->
+      <div class="insp-status-panel" data-panel="plan" role="tabpanel" hidden>
+        <div class="type3-section-title">
+          <span class="type3-section-title__icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h1 id="planManageTitle" class="type3-section-title__text">검색조건</h1>
+        </div>
+
+        <section class="type3-filter-strip" aria-label="검색조건">
+          <form class="type3-filter type3-filter--strip" id="planFilterForm" role="search">
+            <div class="type3-filter__fields mpm-plan-filter-fields">
+              <div class="type3-field">
+                <label for="planOwner">관리주체</label>
+                <select id="planOwner">
+                  <option value="" selected>전체</option>
+                  <option value="인천지방해양수산청">인천지방해양수산청</option>
+                  <option value="마산지방해양수산청">마산지방해양수산청</option>
+                  <option value="여수지방해양수산청">여수지방해양수산청</option>
+                  <option value="목포지방해양수산청">목포지방해양수산청</option>
+                  <option value="군산지방해양수산청">군산지방해양수산청</option>
+                  <option value="동해지방해양수산청">동해지방해양수산청</option>
+                  <option value="울산항만공사">울산항만공사</option>
+                  <option value="포항지방해양수산청">포항지방해양수산청</option>
+                  <option value="부산지방해양수산청">부산지방해양수산청</option>
+                  <option value="부산항만공사">부산항만공사</option>
+                  <option value="여수광양항만공사">여수광양항만공사</option>
+                  <option value="인천항만공사">인천항만공사</option>
+                  <option value="평택지방해양수산청">평택지방해양수산청</option>
+                  <option value="대산지방해양수산청">대산지방해양수산청</option>
+                  <option value="울산지방해양수산청">울산지방해양수산청</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--sm">
+                <label for="planYear">점검년도</label>
+                <select id="planYear">
+                  <option value="" selected>전체</option>
+                  <option value="2026">2026</option>
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--sm">
+                <label for="planStatusFilter">결재상태</label>
+                <select id="planStatusFilter">
+                  <option value="" selected>전체</option>
+                  <option value="승인">승인</option>
+                  <option value="미등록">미등록</option>
+                  <option value="승인요청">승인요청</option>
+                  <option value="반려">반려</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--grow">
+                <label for="planKeyword">제목</label>
+                <input type="text" id="planKeyword" placeholder="제목을 입력하세요." autocomplete="off">
+              </div>
+            </div>
+            <div class="type3-filter-actions">
+              <button type="submit" class="type3-btn type3-btn--search">
+                <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                검색하기
+              </button>
+              <button type="button" class="type3-btn type3-btn--reset" id="planReset" data-reset-filter>
+                <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                초기화
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="type3-results-panel" aria-labelledby="planResultsTitle">
+          <div class="type3-results__head">
+            <div class="type3-results__count">
+              <span class="type3-results__bar-icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="8" height="14">
+              </span>
+              <h2 id="planResultsTitle" class="type3-results__label">검색결과</h2>
+              <p class="type3-results__meta">총 <strong id="planResultCount">0</strong>건</p>
+            </div>
+          </div>
+          <div class="type3-table-wrap insp-status-table-wrap">
+            <table class="type3-table insp-status-table mpm-plan-table" aria-label="유지관리계획 관리 목록">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-no">번호</th>
+                  <th scope="col" class="col-owner">관리주체</th>
+                  <th scope="col" class="col-date">등록일자</th>
+                  <th scope="col" class="col-year">점검년도</th>
+                  <th scope="col" class="col-title">제목</th>
+                  <th scope="col" class="col-status">결재상태</th>
+                </tr>
+              </thead>
+              <tbody id="planTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- 총괄표 -->
+      <div class="insp-status-panel" data-panel="overview" role="tabpanel" hidden>
+        <div class="type3-section-title">
+          <span class="type3-section-title__icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h1 id="overviewFilterTitle" class="type3-section-title__text">검색조건</h1>
+        </div>
+
+        <section class="type3-filter-strip" aria-label="검색조건">
+          <form class="type3-filter type3-filter--strip" id="overviewFilterForm" role="search">
+            <div class="type3-filter__fields mpm-overview-filter-fields">
+              <div class="type3-field">
+                <label for="overviewAgency">관리기관</label>
+                <select id="overviewAgency">
+                  <option value="" selected>전체</option>
+                  <option value="인천지방해양수산청">인천지방해양수산청</option>
+                  <option value="마산지방해양수산청">마산지방해양수산청</option>
+                  <option value="여수지방해양수산청">여수지방해양수산청</option>
+                  <option value="목포지방해양수산청">목포지방해양수산청</option>
+                  <option value="군산지방해양수산청">군산지방해양수산청</option>
+                  <option value="동해지방해양수산청">동해지방해양수산청</option>
+                  <option value="울산항만공사">울산항만공사</option>
+                  <option value="포항지방해양수산청">포항지방해양수산청</option>
+                  <option value="부산지방해양수산청">부산지방해양수산청</option>
+                  <option value="부산항만공사">부산항만공사</option>
+                  <option value="여수광양항만공사">여수광양항만공사</option>
+                  <option value="인천항만공사">인천항만공사</option>
+                  <option value="평택지방해양수산청">평택지방해양수산청</option>
+                  <option value="대산지방해양수산청">대산지방해양수산청</option>
+                  <option value="울산지방해양수산청">울산지방해양수산청</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--year">
+                <label for="overviewYear">점검년도</label>
+                <select id="overviewYear"></select>
+              </div>
+              <div class="type3-field type3-field--grow">
+                <label for="overviewKeyword">제목</label>
+                <input type="text" id="overviewKeyword" placeholder="제목을 입력하세요." autocomplete="off">
+              </div>
+            </div>
+            <div class="type3-filter-actions">
+              <button type="submit" class="type3-btn type3-btn--search" data-search="overview">
+                <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                검색하기
+              </button>
+              <button type="button" class="type3-btn type3-btn--reset" id="overviewReset" data-reset="overview">
+                <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                초기화
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="type3-results-panel" aria-labelledby="overviewStepTitle">
+          <div class="type3-results__head mpm-overview-head">
+            <div class="type3-results__count">
+              <span class="type3-results__bar-icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="8" height="14">
+              </span>
+              <h2 id="overviewStepTitle" class="type3-results__label">2026년 유지관리계획 총괄표 ('26계획 · '25실적)</h2>
+            </div>
+            <p class="mpm-overview-legend" id="overviewLegend">
+              미수립: 해당 연도 유지관리계획 미등록 / 미실시: 전년도 점검·진단·평가 미수행
+            </p>
+            <button type="button" class="type3-btn type3-btn--excel" id="overviewExcelBtn">
+              <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+              엑셀 다운로드
+            </button>
+          </div>
+          <div class="type3-table-wrap insp-status-table-wrap">
+            <table class="type3-table insp-status-table insp-status-table--overview" aria-label="유지관리계획 총괄표">
+              <colgroup>
+                <col class="col-no">
+                <col class="col-agency">
+                <col class="col-total">
+                <col span="15" class="col-metric-group">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th rowspan="2" data-sort-key="__seq__">연번</th>
+                  <th rowspan="2" data-sort-key="agency">관리주체</th>
+                  <th rowspan="2" data-sort-key="total">대상시설물</th>
+                  <th colspan="3" id="overviewGroupPlan">'26 유지관리계획</th>
+                  <th colspan="3" id="overviewGroupRegular">'25 정기안전점검</th>
+                  <th colspan="3" id="overviewGroupPrecision">'25 정밀안전점검</th>
+                  <th colspan="3" id="overviewGroupDiagnosis">'25 정밀안전진단</th>
+                  <th colspan="3" id="overviewGroupEval">'25 성능평가</th>
+                </tr>
+                <tr>
+                  <th class="col-metric" data-sort-key="planTarget">대상</th>
+                  <th class="col-metric" data-sort-key="planMissing">미수립</th>
+                  <th class="col-rate" data-sort-key="planMissingRatio">비율(%)</th>
+                  <th class="col-metric" data-sort-key="regularTarget">대상</th>
+                  <th class="col-metric" data-sort-key="regularMissing">미실시</th>
+                  <th class="col-rate" data-sort-key="regularMissingRatio">비율(%)</th>
+                  <th class="col-metric" data-sort-key="precisionTarget">대상</th>
+                  <th class="col-metric" data-sort-key="precisionMissing">미실시</th>
+                  <th class="col-rate" data-sort-key="precisionMissingRatio">비율(%)</th>
+                  <th class="col-metric" data-sort-key="diagnosisTarget">대상</th>
+                  <th class="col-metric" data-sort-key="diagnosisMissing">미실시</th>
+                  <th class="col-rate" data-sort-key="diagnosisMissingRatio">비율(%)</th>
+                  <th class="col-metric" data-sort-key="evalTarget">대상</th>
+                  <th class="col-metric" data-sort-key="evalMissing">미실시</th>
+                  <th class="col-rate" data-sort-key="evalMissingRatio">비율(%)</th>
+                </tr>
+              </thead>
+              <tbody id="overviewTableBody"></tbody>
+              <tfoot id="overviewTableFoot"></tfoot>
+            </table>
+          </div>
+          <p class="insp-status-guide-note">파란 수치 셀을 선택하면 해당 관리주체와 구분의 상세 내용이 팝업으로 표출됩니다.</p>
+        </section>
+      </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="mock-modal mock-modal--plan" id="facilityDrawer" aria-modal="true" role="dialog" aria-labelledby="facilityDrawerTitle" aria-hidden="true" hidden>
+    <div class="mock-modal__backdrop" id="facilityDrawerOverlay"></div>
+    <div class="mock-modal__dialog mock-modal__dialog--plan-wide">
+      <header class="mock-modal__head">
+        <div>
+          <h2 id="facilityDrawerTitle">선택한 시설물 확인</h2>
+        </div>
+        <button type="button" class="mock-modal__close" id="facilityDrawerClose" aria-label="닫기">×</button>
+      </header>
+      <div class="mock-modal__body">
+      <div class="mock-table-meta">
+        <p>선택 시설물 수 <strong id="facilityCount">0</strong>개</p>
+        <button type="button" class="btn-admin-search mock-no-icon" id="facilityAddOpen">시설물 추가</button>
+      </div>
+      <div class="mock-table-wrap facility-selected-table-wrap">
+        <table class="mock-table mock-table--compact mock-table--facility-check">
+          <thead>
+            <tr>
+              <th scope="col">관리기관</th>
+              <th scope="col">항</th>
+              <th scope="col">세부항</th>
+              <th scope="col">시설구분</th>
+              <th scope="col">종</th>
+              <th scope="col">시설물명</th>
+              <th scope="col">정기안전점검</th>
+              <th scope="col">정밀안전점검</th>
+              <th scope="col">정밀안전진단</th>
+              <th scope="col">성능평가</th>
+            </tr>
+          </thead>
+          <tbody id="facilityTableBody"></tbody>
+        </table>
+      </div>
+      <div class="pagination-foot pagination-foot--facility-check">
+        <nav class="pagination" id="facilityPagination" aria-label="페이지 이동"></nav>
+        <label class="visually-hidden" for="facilityPageSize">페이지당 표시 건수</label>
+        <select id="facilityPageSize" class="pagination-page-size" aria-label="페이지당 표시 건수">
+          <option value="10">10 / page</option>
+          <option value="20">20 / page</option>
+          <option value="50">50 / page</option>
+        </select>
+      </div>
+      <section class="facility-add-panel" id="facilityAddPanel" aria-labelledby="facilityAddTitle" hidden>
+        <div class="facility-add-panel__head">
+          <div>
+            <h3 id="facilityAddTitle">시설물 추가</h3>
+            <p>추가할 시설물을 검색한 뒤 선택 등록하세요.</p>
+          </div>
+          <p>선택 가능 시설 <strong id="facilityAddCount">0</strong>개</p>
+        </div>
+        <form class="facility-add-search" id="facilityAddSearchForm" role="search">
+          <label>
+            <span>항</span>
+            <select id="facilityAddPortFilter" aria-label="항">
+              <option value="">전체</option>
+            </select>
+          </label>
+          <label>
+            <span>세부항</span>
+            <select id="facilityAddSubportFilter" aria-label="세부항">
+              <option value="">전체</option>
+            </select>
+          </label>
+          <label>
+            <span>시설구분</span>
+            <select id="facilityAddTypeFilter" aria-label="시설구분">
+              <option value="">전체</option>
+            </select>
+          </label>
+          <label>
+            <span>시설물명</span>
+            <input type="search" id="facilityAddKeyword" placeholder="시설명 입력하세요" autocomplete="off" aria-label="시설명 검색">
+          </label>
+          <button type="submit" class="btn-admin-search mock-no-icon">검색</button>
+        </form>
+        <div class="mock-table-wrap facility-add-table-wrap">
+          <table class="mock-table mock-table--compact mock-table--facility-add">
+            <thead>
+              <tr>
+                <th scope="col"><span class="visually-hidden">선택</span></th>
+                <th scope="col">관리기관</th>
+                <th scope="col">항</th>
+                <th scope="col">세부항</th>
+                <th scope="col">시설구분</th>
+                <th scope="col">종</th>
+                <th scope="col">시설물명</th>
+                <th scope="col">정기안전점검</th>
+                <th scope="col">정밀안전점검</th>
+                <th scope="col">정밀안전진단</th>
+                <th scope="col">성능평가</th>
+              </tr>
+            </thead>
+            <tbody id="facilityAddTableBody"></tbody>
+          </table>
+        </div>
+        <div class="facility-add-panel__foot">
+          <button type="button" class="btn-admin-reset mock-no-icon" id="facilityAddCancel">취소</button>
+          <button type="button" class="btn-admin-search mock-no-icon" id="facilityAddRegister">선택 등록</button>
+        </div>
+      </section>
+      </div>
+      <footer class="mock-modal__foot">
+        <button type="button" class="btn-admin-reset mock-no-icon" id="facilityDrawerCancel">취소</button>
+      </footer>
+    </div>
+  </section>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/inspection-status-data.js"></script>
+  <script src="js/inspection-status.js?v=20260819g"></script>
+  <script src="js/maintenance-plan-manage.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'maintenance-plan-manage' });
+
+    // [탭 파라미터] ?tab=plan 등으로 진입 시 해당 탭을 초기 활성화
+    (function () {
+      var tab = new URLSearchParams(location.search).get('tab');
+      if (!tab) return;
+      var btn = document.querySelector('.ua-account-tabs__btn[data-tab="' + tab + '"]');
+      if (btn && !btn.classList.contains('is-active')) btn.click();
+    })();
+  </script>
+</body>
+</html>

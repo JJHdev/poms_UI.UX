@@ -1,0 +1,167 @@
+/* 시설물 정보변경 요청 — type3-port-facility 플랫 레이아웃 보정 */
+
+.fcr-flat-page {
+  background: #fff;
+}
+
+.fcr-flat-page .type3-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.fcr-flat-page .type3-section-title__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.fcr-flat-page .type3-section-title__icon img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  overflow: visible;
+}
+
+.fcr-flat-page .type3-section-title__text {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.fcr-flat-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.fcr-flat-page .type3-field--sm {
+  flex: 0 1 120px;
+  max-width: 140px;
+}
+
+.fcr-flat-page .fcr-table {
+  min-width: 1100px;
+}
+
+.fcr-flat-page .fcr-table .col-no {
+  width: 56px;
+}
+
+.fcr-flat-page .fcr-table .col-history {
+  width: 100px;
+}
+
+.facility-change-request-page.fcr-flat-page .fcr-table {
+  min-width: 0;
+}
+
+.facility-change-request-page .fcr-table .col-manage,
+.facility-change-request-page .fcr-table .col-sea {
+  display: none !important;
+}
+
+.facility-change-request-page .fcr-table .col-port-cat {
+  width: 72px;
+}
+
+.facility-change-request-page .fcr-table .col-agency {
+  width: 140px;
+}
+
+.facility-change-request-page .fcr-table .col-port,
+.facility-change-request-page .fcr-table .col-subport {
+  width: 76px;
+}
+
+.facility-change-request-page .fcr-table .col-type {
+  width: 72px;
+}
+
+.facility-change-request-page .fcr-table .col-name {
+  width: auto;
+  min-width: 180px;
+}
+
+.facility-change-request-page .fcr-table tbody td.col-name {
+  text-align: left;
+  padding-left: 10px;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.fcr-flat-page .type3-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.fcr-flat-page .type3-table tbody tr.is-clickable:hover td {
+  background: #f7f9fc;
+}
+
+.fcr-flat-page .fcr-hist-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.fcr-flat-page .fcr-hist-btn:hover {
+  border-color: #1c6fff;
+  color: #1c6fff;
+  background: #eff5ff;
+}
+
+/* pagination: 사용자/시설물 관리 flat 톤 (버튼 transform 없이 img만 반전) */
+.fcr-flat-page .pagination__btn[data-page-move] {
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  background-image: none;
+  transform: none;
+}
+
+.fcr-flat-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.fcr-flat-page .pagination__btn[data-page-move="next"] img,
+.fcr-flat-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.fcr-flat-page .pagination__btn:disabled img {
+  opacity: 0.35;
+}

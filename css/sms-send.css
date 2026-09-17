@@ -1,0 +1,1286 @@
+/* 문자전송 — 관리자 시안 기준 (admin-notices.css 동일 규격, 자체 완결형) */
+
+/* ===== 레이아웃 ===== */
+/* 폭/양옆 여백은 admin-topnav.css의 .main-content 규칙이 담당 */
+.sms-send-page-root .main-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.sms-send-page-root .sms-send-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.sms-send-page-root .sms-send-layout {
+  display: grid;
+  grid-template-columns: 500px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+/* ===== 공통 : 섹션 타이틀 ===== */
+.sms-send-page-root .sms-compose-panel__head,
+.sms-send-page-root .sms-recipient-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.sms-send-page-root .sms-compose-panel__title-wrap,
+.sms-send-page-root .sms-recipient-panel__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sms-send-page-root .sms-compose-panel__title-icon,
+.sms-send-page-root .sms-recipient-panel__title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.sms-send-page-root .sms-compose-panel__title-icon img,
+.sms-send-page-root .sms-recipient-panel__title-icon img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  /* SVG 원본 색과 무관하게 포인트 블루(#1c6fff)로 */
+  filter: brightness(0) saturate(100%) invert(45.1%) sepia(99.6%) saturate(434%)
+    hue-rotate(190deg) brightness(87.7%) contrast(236%);
+}
+
+.sms-send-page-root .sms-compose-panel__title,
+.sms-send-page-root .sms-recipient-panel__title {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* ===== 왼쪽 : 메세지 작성 ===== */
+.sms-send-page-root .sms-compose-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sms-send-page-root .sms-compose-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 0;
+}
+
+.sms-send-page-root .sms-compose-panel__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* 초기화 / 발송하기 */
+.sms-send-page-root .btn-sms-reset,
+.sms-send-page-root .btn-sms-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+.sms-send-page-root .btn-sms-reset {
+  min-width: 95px;
+}
+
+.sms-send-page-root .btn-sms-reset:hover {
+  background: #f6f8fb;
+}
+
+.sms-send-page-root .btn-sms-send {
+  min-width: 107px;
+  border-color: #1c6fff;
+  background: #1c6fff;
+  color: #fff;
+}
+
+.sms-send-page-root .btn-sms-send:hover {
+  border-color: #1559d0;
+  background: #1559d0;
+}
+
+.sms-send-page-root .btn-sms-reset img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sms-send-page-root .btn-sms-send img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+
+/* 메세지 내용 */
+.sms-send-page-root .sms-compose-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sms-send-page-root .sms-compose-label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sms-send-page-root .sms-section-label {
+  margin: 0;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.sms-send-page-root .sms-compose-limit {
+  color: #1c6fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.sms-send-page-root .sms-compose-field__wrap {
+  display: flex;
+  min-width: 0;
+}
+
+.sms-send-page-root .sms-compose-textarea {
+  width: 100%;
+  min-height: 560px;
+  padding: 12px 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.sms-send-page-root .sms-compose-textarea::placeholder {
+  color: #999;
+}
+
+.sms-send-page-root .sms-compose-textarea:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+/* 발송 유형 / 예약 일시 */
+.sms-send-page-root .sms-schedule-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sms-send-page-root .sms-send-toggle {
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 200px;
+  width: 200px;
+  height: 34px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sms-send-page-root .sms-send-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  background: #fff;
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sms-send-page-root .sms-send-toggle__btn + .sms-send-toggle__btn {
+  border-left: 1px solid #dadae2;
+}
+
+.sms-send-page-root .sms-send-toggle__btn input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.sms-send-page-root .sms-send-toggle__btn:has(input:checked) {
+  background: #1c6fff;
+  color: #fff;
+  font-weight: 600;
+}
+
+.sms-send-page-root .sms-schedule-datetime {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sms-send-page-root .sms-schedule-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 34px;
+  margin: 0;
+}
+
+.sms-send-page-root .sms-schedule-input {
+  width: 100%;
+  height: 34px;
+  padding: 0 36px 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* 달력 아이콘 (브라우저 기본 아이콘은 숨기고 커스텀만 표시) */
+.sms-send-page-root .sms-schedule-input-wrap__icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.sms-send-page-root .sms-schedule-input:disabled + .sms-schedule-input-wrap__icon {
+  opacity: 0.4;
+}
+
+.sms-send-page-root .sms-schedule-input:disabled {
+  background: #fff;
+  color: #b7bfcb;
+  cursor: default;
+}
+
+.sms-send-page-root .sms-schedule-input:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+.sms-send-page-root .sms-schedule-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  width: 36px;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.sms-send-page-root #smsScheduleTime::-webkit-datetime-edit-second-field,
+.sms-send-page-root #smsScheduleTime::-webkit-datetime-edit-millisecond-field {
+  display: none;
+}
+
+/* ===== 오른쪽 : 수신자 목록 ===== */
+.sms-send-page-root .sms-recipient-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sms-send-page-root .sms-recipient-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 0;
+}
+
+/* 수신자 추가 스트립 */
+.sms-send-page-root .sms-recipient-add {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 9px 10px 8px;
+  background: #f3f8fe;
+  border-top: 1px solid #8d9aab;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.sms-send-page-root .sms-recipient-add__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sms-send-page-root .sms-recipient-add__field:first-child {
+  flex: 0 0 100px;
+  width: 100px;
+}
+
+.sms-send-page-root .sms-recipient-add__field label {
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sms-send-page-root .sms-recipient-add__input {
+  width: 100%;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sms-send-page-root .sms-recipient-add__field:first-child .sms-recipient-add__input {
+  text-align: left;
+}
+
+.sms-send-page-root .sms-recipient-add__input::placeholder {
+  color: #999;
+}
+
+.sms-send-page-root .sms-recipient-add__input:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+/* 전화번호 3분할 */
+.sms-send-page-root .sms-recipient-add__phone-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.sms-send-page-root .sms-phone-segment {
+  flex: 0 0 70px;
+  width: 70px;
+}
+
+.sms-send-page-root #smsAddPhone1 {
+  flex: 0 0 60px;
+  width: 60px;
+}
+
+.sms-send-page-root .sms-phone-separator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  color: #6c788b;
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* 추가하기 / 연락처 목록 */
+.sms-send-page-root .btn-sms-add-row,
+.sms-send-page-root .btn-sms-import {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  box-shadow: none;
+}
+
+.sms-send-page-root .btn-sms-add-row {
+  min-width: 107px;
+  border-color: #0b1a2d;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.sms-send-page-root .btn-sms-add-row:hover {
+  border-color: #16304f;
+  background: #16304f;
+}
+
+.sms-send-page-root .btn-sms-add-row img {
+  filter: brightness(0) invert(1);
+}
+
+.sms-send-page-root .btn-sms-import {
+  min-width: 122px;
+  margin-left: 2px;
+  color: #6c788b;
+}
+
+.sms-send-page-root .btn-sms-import:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+.sms-send-page-root .btn-sms-add-row img,
+.sms-send-page-root .btn-sms-import img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ===== 수신자 테이블 (행 분리형) ===== */
+.sms-send-page-root .sms-recipient-table-wrap {
+  padding: 0 10px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.sms-send-page-root .sms-recipient-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 8px !important;
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.sms-send-page-root .sms-recipient-table thead th,
+.sms-send-page-root .sms-recipient-table tbody td {
+  height: 32px;
+  max-height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.sms-send-page-root .sms-recipient-table thead th {
+  background: #e9f1fe !important;
+  border: 1px solid #dadae2 !important;
+  border-left: 0 !important;
+  color: #111;
+  font-weight: 500;
+}
+
+.sms-send-page-root .sms-recipient-table thead th:first-child {
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px 0 0 6px;
+}
+
+.sms-send-page-root .sms-recipient-table thead th:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+/* 본문 행 : 개별 카드처럼 분리 */
+.sms-send-page-root .sms-recipient-table tbody td {
+  background: #fff;
+  border: 0 !important;
+  border-top: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-right: 1px solid #dadae2 !important;
+  color: #333;
+  font-weight: 400;
+}
+
+.sms-send-page-root .sms-recipient-table tbody td:first-child {
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px 0 0 6px;
+}
+
+.sms-send-page-root .sms-recipient-table tbody .col-phone,
+.sms-send-page-root .sms-recipient-table tbody td:nth-last-child(2) {
+  border-radius: 0 6px 6px 0;
+}
+
+/* 작업 칸은 테두리 없이 버튼만 */
+.sms-send-page-root .sms-recipient-table tbody .col-action,
+.sms-send-page-root .sms-recipient-table tbody td:last-child {
+  padding: 0 0 0 8px;
+  background: transparent;
+  border: 0 !important;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.sms-send-page-root .sms-recipient-table tbody tr:hover td:not(.col-action):not(:last-child) {
+  background: #f5f8fc;
+}
+
+/* 컬럼 폭 */
+.sms-send-page-root .sms-recipient-table .col-no {
+  width: 60px;
+}
+
+.sms-send-page-root .sms-recipient-table .col-name {
+  width: 34%;
+}
+
+.sms-send-page-root .sms-recipient-table .col-phone {
+  width: auto;
+}
+
+/* 행 삭제 버튼 */
+.sms-send-page-root .btn-sms-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 44px;
+  min-width: 44px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 0;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.sms-send-page-root .btn-sms-delete:hover {
+  border-color: #e5002b;
+  background: #fef5f8;
+  color: #e5002b;
+}
+
+.sms-send-page-root .btn-sms-delete img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sms-send-page-root .btn-sms-delete svg {
+  display: none;
+}
+
+/* 작업 컬럼 폭 */
+.sms-send-page-root .sms-recipient-table .col-action {
+  width: 52px;
+}
+
+/* 데이터 없음 */
+.sms-send-page-root .sms-recipient-table .sms-recipient-empty td {
+  height: 120px;
+  max-height: none;
+  line-height: 1.4;
+  color: #8993a1;
+  text-align: center !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* ===== 연락처 불러오기 드로어 ===== */
+.sms-picker-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  background: rgba(13, 31, 53, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.sms-picker-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sms-picker-overlay[hidden] {
+  display: none !important;
+}
+
+.sms-picker-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2101;
+  display: flex;
+  flex-direction: column;
+  width: min(900px, calc(100vw - 40px));
+  height: 100vh;
+  max-height: 100vh;
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.sms-picker-drawer.is-open {
+  transform: translateX(0);
+}
+
+.sms-picker-drawer__top {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+.sms-picker-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 22px 24px 14px;
+  flex-shrink: 0;
+}
+
+.sms-picker-drawer__title {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.sms-picker-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #eef0f4;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sms-picker-drawer__close img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-picker-drawer__close:hover {
+  background: #e2e5ec;
+}
+
+.sms-picker-drawer__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: 4px 24px 24px;
+  overflow-y: auto;
+}
+
+/* 검색 조건 */
+.sms-picker-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.sms-picker-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.sms-picker-field label {
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sms-picker-field input,
+.sms-picker-select-wrap select {
+  width: 100%;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sms-picker-field input::placeholder {
+  color: #999;
+}
+
+.sms-picker-field input:focus,
+.sms-picker-select-wrap select:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+.sms-picker-select-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.sms-picker-select-wrap select {
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+.sms-picker-select-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  width: 9px;
+  height: 9px;
+  margin-top: -6px;
+  border-right: 1.6px solid #6c788b;
+  border-bottom: 1.6px solid #6c788b;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.sms-picker-select-wrap img {
+  display: none;
+}
+
+.btn-sms-picker-search {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 0 0 107px;
+  min-width: 107px;
+  height: 34px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #0b1a2d;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-sms-picker-search:hover {
+  background: #16304f;
+}
+
+/* 초성 탭 */
+.sms-picker-alpha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sms-picker-alpha .sms-alpha-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 37px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sms-picker-alpha .sms-alpha-tab:hover:not(.is-active) {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+.sms-picker-alpha .sms-alpha-tab.is-active {
+  min-width: 49px;
+  border-color: #1c6fff;
+  background: #f6f9ff;
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+/* 결과 툴바 */
+.sms-picker-result-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 30px;
+}
+
+.sms-picker-result-summary {
+  margin: 0;
+  padding: 0;
+  color: #6c788b;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.sms-picker-result-summary::before {
+  content: none;
+}
+
+.sms-picker-result-summary strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.sms-picker-result-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-sms-picker-reset,
+.btn-sms-picker-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 106px;
+  height: 30px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-sms-picker-reset:hover,
+.btn-sms-picker-submit:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+.btn-sms-picker-reset img,
+.btn-sms-picker-submit img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* 목록 */
+.sms-picker-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px 6px 0 0;
+}
+
+.sms-picker-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent;
+  font-size: 13px;
+}
+
+.sms-picker-table thead th,
+.sms-picker-table tbody td {
+  height: 32px;
+  max-height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.sms-picker-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111;
+  font-weight: 500;
+}
+
+.sms-picker-table thead th:last-child {
+  border-right: 0 !important;
+}
+
+.sms-picker-table tbody td {
+  background: #fff;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333;
+  font-weight: 400;
+}
+
+.sms-picker-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+.sms-picker-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.sms-picker-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.sms-picker-table .col-check {
+  width: 44px;
+}
+
+.sms-picker-table input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  vertical-align: middle;
+  accent-color: #1c6fff;
+  cursor: pointer;
+}
+
+/* 페이지네이션 */
+.sms-picker-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0 0;
+}
+
+.sms-picker-pagination .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.sms-picker-pagination .pagination__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+  transform: none;
+}
+
+.sms-picker-pagination .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.sms-picker-pagination .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.sms-picker-pagination .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.sms-picker-pagination .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-picker-pagination .pagination__btn[data-page-move="next"] img,
+.sms-picker-pagination .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.sms-picker-pagination .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.sms-picker-pagination .pagination__btn svg {
+  display: none;
+}
+
+.sms-picker-pagination .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+/* ===== 유틸 ===== */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 1400px) {
+  .sms-send-page-root .sms-send-layout {
+    grid-template-columns: 440px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .sms-send-page-root .sms-recipient-add {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 900px) {
+  .sms-picker-drawer {
+    width: 100vw;
+  }
+}
+
+/* ========================================================================
+   패널 카드(흰 박스) 제거 — 외부 공통 CSS(admin-topnav.css 등) 무력화
+   되돌리려면 이 블록만 통째로 삭제
+   ======================================================================== */
+html body.sms-send-page-root .main-content .sms-send-page,
+html body.sms-send-page-root .main-content .sms-send-page .sms-send-layout,
+html body.sms-send-page-root .main-content .sms-send-page .sms-send-layout > section,
+html body.sms-send-page-root .main-content .sms-send-page .sms-compose-panel,
+html body.sms-send-page-root .main-content .sms-send-page .sms-recipient-panel,
+html body.sms-send-page-root .main-content .sms-send-page .sms-compose-panel__head,
+html body.sms-send-page-root .main-content .sms-send-page .sms-recipient-panel__head,
+html body.sms-send-page-root .main-content .sms-send-page .sms-compose-panel__body,
+html body.sms-send-page-root .main-content .sms-send-page .sms-recipient-panel__body,
+html body.sms-send-page-root .main-content .sms-send-page .sms-compose-field,
+html body.sms-send-page-root .main-content .sms-send-page .sms-compose-field__wrap {
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+html body.sms-send-page-root .main-content .sms-send-page .sms-send-layout > section::before,
+html body.sms-send-page-root .main-content .sms-send-page .sms-send-layout > section::after {
+  content: none !important;
+}
+
+/* 위에서 일괄로 지운 것 중 필요한 값만 되돌림 */
+html body.sms-send-page-root .main-content .sms-send-page .sms-compose-panel__head,
+html body.sms-send-page-root .main-content .sms-send-page .sms-recipient-panel__head {
+  min-height: 34px !important;
+}
+
+html body.sms-send-page-root .main-content .sms-send-page .sms-recipient-add {
+  padding: 9px 10px 8px !important;
+  background-color: #f3f8fe !important;
+  border: 0 !important;
+  border-top: 1px solid #8d9aab !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+html body.sms-send-page-root .main-content .sms-send-page .sms-recipient-table-wrap {
+  padding: 0 10px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+html body.sms-send-page-root .main-content .sms-send-page .sms-compose-textarea {
+  padding: 12px 16px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background-color: #fff !important;
+}

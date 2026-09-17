@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물 추가 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/facility-management-detail.css?v=20260820f">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page fmd-figma-page" id="facilityDetailPage">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시스템 관리 메뉴">
+        <div class="fs-lnb__title">
+          <h2 class="fs-lnb__title-text">시스템 관리</h2>
+        </div>
+        <nav class="fs-lnb__nav" data-admin-sub-tabs="1" aria-label="시스템 관리 하위 메뉴">
+          <a href="facility-management.html" class="fs-lnb__item is-active" aria-current="page"><span>시설물 관리</span><span class="fs-lnb__chevron" aria-hidden="true">›</span></a>
+          <a href="maintenance-plan-manage.html" class="fs-lnb__item"><span>유지관리계획 관리</span><span class="fs-lnb__chevron" aria-hidden="true">›</span></a>
+          <a href="mooring-facility-management.html" class="fs-lnb__item"><span>계류시설 관리</span><span class="fs-lnb__chevron" aria-hidden="true">›</span></a>
+          <a href="facility-location-status.html" class="fs-lnb__item"><span>시설물 위치 현황 관리</span><span class="fs-lnb__chevron" aria-hidden="true">›</span></a>
+          <a href="drone-video-management.html" class="fs-lnb__item"><span>드론 영상관리</span><span class="fs-lnb__chevron" aria-hidden="true">›</span></a>
+          <a href="responsible-engineer.html" class="fs-lnb__item"><span>책임기술자 관리</span><span class="fs-lnb__chevron" aria-hidden="true">›</span></a>
+        </nav>
+      </aside>
+
+      <div class="fmd-page fs-manage" aria-label="시설물 관리">
+
+      <div class="fmd-crumb-row">
+        <a href="facility-management.html" class="fmd-back-btn" id="facilityDetailBackBtn" aria-label="목록으로">
+          <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+        </a>
+        <a href="facility-management.html" class="fmd-home-btn" aria-label="시설물 관리 목록">
+          <img src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+        </a>
+        <nav class="fmd-breadcrumb" aria-label="현재 위치">
+          <a href="facility-management.html">시스템 관리</a>
+          <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; 시설물 관리 &gt; </span>
+          <span class="fmd-breadcrumb__current" id="facilityDetailCrumb">시설물 추가</span>
+        </nav>
+      </div>
+
+
+
+      
+
+      <form id="facilityAddForm" class="fmd-stack" novalidate aria-label="시설물 추가">
+        <section class="fmd-section" id="facilityAddPanel">
+          <div class="fmd-section__head">
+            <span class="fmd-section__icon" aria-hidden="true">
+              <img src="assets/main/facility-management/icon-section-facility.svg" alt="" width="24" height="24">
+            </span>
+            <h1 class="fmd-section__title" id="facilityAddPanelTitle">시설물 추가</h1>
+            <span id="facilityDetailPageTitle" class="visually-hidden">시설물 추가</span>
+          </div>
+
+          <div class="fmd-section__body">
+            <div class="fmd-row">
+              <label class="fmd-field">
+                <span class="fmd-label">시설물명</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="name" placeholder="시설명을 입력하세요.">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">주소</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="address" placeholder="주소를 입력하세요.">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">FMS_ID</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="fmsId" placeholder="FMS_ID를 입력하세요.">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label"><span class="req">*</span> 관리구분</span>
+                <span class="fmd-control">
+                  <select class="fmd-select" name="manageType" required>
+                    <option value="">선택</option>
+                    <option value="직접관리">해양수산부</option>
+                    <option value="직접관리">지방자치단체</option>
+                    <option value="직접관리">항만공사</option>
+                    <option value="직접관리">기타 공공기관</option>
+                    <option value="위탁관리">기타</option>
+                  </select>
+                </span>
+              </label>
+            </div>
+
+            <div class="fmd-row">
+              <div class="fmd-field">
+                <span class="fmd-label"><span class="req">*</span> 관리기관</span>
+                <span class="fmd-control fmd-control--split">
+                  <select class="fmd-select fmd-select--sm" name="agency">
+                    <option value="">선택</option>
+                    <option value="책임관리자">책임관리자</option>
+                    <option value="부산지방해양수산청">부산청</option>
+                    <option value="인천지방해양수산청">인천청</option>
+                    <option value="여수지방해양수산청">여수청</option>
+                    <option value="마산지방해양수산청">마산청</option>
+                    <option value="울산지방해양수산청">울산청</option>
+                    <option value="동해지방해양수산청">동해청</option>
+                    <option value="군산지방해양수산청">군산청</option>
+                    <option value="목표지방해양수산청">목포청</option>
+                    <option value="대산지방해양수산청">대산청</option>
+                    <option value="부산광역시">부산</option>
+                    <option value="충청남도">충남</option>
+                    <option value="전라남도">전남</option>
+                    <option value="경상남도">경남</option>
+                    <option value="경상북도">경북</option>
+                    <option value="강원특별자치도">강원</option>
+                    <option value="창원특례시">창원</option>
+                    <option value="제주특별자치도">제주</option>
+                    <option value="기타">BPA</option>
+                    <option value="기타">IPA</option>
+                    <option value="기타">UPA</option>
+                    <option value="기타">YGPA</option>
+                    <option value="타부처">타부처</option>
+                  </select>
+                  <input type="text" class="fmd-input" name="agencyDirectText" placeholder="관리기관 직접 입력">
+                </span>
+              </div>
+              <label class="fmd-field">
+                <span class="fmd-label">항명</span>
+                <span class="fmd-control">
+                  <select class="fmd-select" name="port">
+                    <option value="">선택</option>
+                    <option value="부산항">부산항</option>
+                    <option value="인천항">인천항</option>
+                    <option value="광양항">광양항</option>
+                  </select>
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label"><span class="req">*</span> 세부항명</span>
+                <span class="fmd-control">
+                  <select class="fmd-select" name="subPort">
+                    <option value="">선택</option>
+                    <option value="북항">북항</option>
+                    <option value="남항">남항</option>
+                    <option value="신항">신항</option>
+                  </select>
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">준공일자</span>
+                <span class="fmd-control">
+                  <span class="fmd-date-wrap">
+                    <input type="date" class="fmd-input" name="completionDate" value="2026-01-01">
+                    <svg class="fmd-date-wrap__icon" viewBox="0 0 24 24" fill="none" stroke="#6c788b" stroke-width="1.6" aria-hidden="true">
+                      <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/>
+                    </svg>
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            <div class="fmd-row">
+              <label class="fmd-field">
+                <span class="fmd-label"><span class="req">*</span> 종별</span>
+                <span class="fmd-control">
+                  <select class="fmd-select" name="classType">
+                    <option value="">선택</option>
+                    <option value="1종">1종</option>
+                    <option value="2종">2종</option>
+                    <option value="3종">3종</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label"><span class="req">*</span> 시설구분</span>
+                <span class="fmd-control">
+                  <select class="fmd-select" name="facilityType">
+                    <option value="">선택</option>
+                    <option value="계류시설" selected>계류시설</option>
+                    <option value="외곽시설">외곽시설</option>
+                    <option value="건축물">건축물</option>
+                    <option value="교통시설">교통시설</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label"><span class="req">*</span> 시설형식</span>
+                <span class="fmd-control">
+                  <select class="fmd-select" name="facilityFormat">
+                    <option value="">선택</option>
+                    <option value="중력식">중력식</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </span>
+              </label>
+              <div class="fmd-field">
+                <span class="fmd-label"><span class="req">*</span> 구조형식</span>
+                <span class="fmd-control fmd-control--split">
+                  <select class="fmd-select fmd-select--sm" name="structureType">
+                    <option value="">선택</option>
+                    <option value="철근콘크리트">철근콘크리트</option>
+                    <option value="기타">기타</option>
+                  </select>
+                  <input type="text" class="fmd-input" name="structureDirectText" placeholder="구조형식 직접 입력">
+                </span>
+              </div>
+            </div>
+
+            <div class="fmd-row">
+              <label class="fmd-field">
+                <span class="fmd-label">연장</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="length" placeholder="연장을 입력하세요.">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">기타상세제원</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="otherSpec" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">시공사</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="constructorName" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">시공비</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="constructionCost" placeholder="-">
+                </span>
+              </label>
+            </div>
+
+            <div class="fmd-row">
+              <label class="fmd-field">
+                <span class="fmd-label">내진설계 적용여부</span>
+                <span class="fmd-control">
+                  <select class="fmd-select" name="seismic">
+                    <option value="">선택</option>
+                    <option value="Y">적용</option>
+                    <option value="N">미적용</option>
+                  </select>
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="계류시설">
+                <span class="fmd-label">개방여부</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="openStatus" placeholder="예: 개방, 폐쇄">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="계류시설">
+                <span class="fmd-label">선석</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="berth" placeholder="-">
+                </span>
+              </label>
+              <div class="fmd-field" data-fac-field="계류시설">
+                <span class="fmd-label">접안능력</span>
+                <span class="fmd-control fmd-control--split">
+                  <select class="fmd-select fmd-select--capacity" name="berthingCapacityRange" aria-label="접안능력 구간">
+                    <option value="">선택</option>
+                    <option value="1,000톤 미만">1,000톤 미만</option>
+                    <option value="1,000~3,000톤">1,000~3,000톤</option>
+                    <option value="3,000~5,000톤">3,000~5,000톤</option>
+                    <option value="5,000~10,000톤">5,000~10,000톤</option>
+                    <option value="10,000톤 이상">10,000톤 이상</option>
+                  </select>
+                  <input type="number" class="fmd-input" name="berthingCapacity" min="0" step="1" inputmode="numeric" placeholder="숫자 입력" aria-label="접안능력 톤수">
+                </span>
+              </div>
+              <label class="fmd-field" data-fac-field="외곽시설">
+                <span class="fmd-label">개방여부</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="openStatusOuter" placeholder="예: 개방, 폐쇄">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="외곽시설">
+                <span class="fmd-label">재해취약지구사업</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="disasterZone" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="외곽시설">
+                <span class="fmd-label">천단고</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="crownHeight" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="교통시설">
+                <span class="fmd-label">상부구조</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="upperStructure" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="교통시설">
+                <span class="fmd-label">하부구조</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="lowerStructure" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="교통시설">
+                <span class="fmd-label">교량시설구분</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="bridgeType" placeholder="-">
+                </span>
+              </label>
+            </div>
+
+            <div class="fmd-row" data-fac-row="계류시설">
+              <label class="fmd-field" data-fac-field="계류시설">
+                <span class="fmd-label">취급화물</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="cargo" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="계류시설">
+                <span class="fmd-label">마루높이</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="deckHeight" placeholder="-">
+                </span>
+              </label>
+            </div>
+
+            <div class="fmd-row" data-fac-row="교통시설">
+              <label class="fmd-field" data-fac-field="교통시설">
+                <span class="fmd-label">교량받침</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="bridgeBearing" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="교통시설">
+                <span class="fmd-label">신축이음</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="expansionJoint" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="교통시설">
+                <span class="fmd-label">통과높이(m)</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="clearHeight" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field" data-fac-field="교통시설">
+                <span class="fmd-label">설계하중</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="designLoad" placeholder="-">
+                </span>
+              </label>
+            </div>
+
+            <div class="fmd-row" data-fac-row="교통시설">
+              <label class="fmd-field" data-fac-field="교통시설">
+                <span class="fmd-label">폭(m)</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="bridgeWidth" placeholder="-">
+                </span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="fmd-section">
+          <div class="fmd-section__head">
+            <span class="fmd-section__icon" aria-hidden="true">
+              <img src="assets/main/facility-management/icon-section-files.svg" alt="" width="24" height="24">
+            </span>
+            <h2 class="fmd-section__title">기타 정보 · 첨부파일</h2>
+          </div>
+          <div class="fmd-section__body">
+            <div class="fmd-row">
+              <label class="fmd-field">
+                <span class="fmd-label">관리자 의견</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="managerOpinion" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">전면수심(최소)</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="depthMin" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">전면수심(최대)</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="depthMax" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">상세하중(최소)</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="loadMin" placeholder="-">
+                </span>
+              </label>
+            </div>
+
+            <div class="fmd-row">
+              <label class="fmd-field">
+                <span class="fmd-label">상세하중(최대)</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="loadMax" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">좌표</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="coordinates" placeholder="위도, 경도">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">도분초(DMS)</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="dms" placeholder="-">
+                </span>
+              </label>
+              <label class="fmd-field">
+                <span class="fmd-label">비고</span>
+                <span class="fmd-control">
+                  <input type="text" class="fmd-input" name="remarks" placeholder="-">
+                </span>
+              </label>
+            </div>
+
+            <div class="fmd-uploads">
+              <div class="fmd-upload fmd-file-row">
+                <span class="fmd-label">위치도</span>
+                <div class="fmd-upload__drop">
+                  <input type="file" id="fileLocation" hidden>
+                  <img class="fmd-upload__thumb" alt="위치도 미리보기" hidden>
+                  <p class="fmd-upload__text">파일을 여기에 드래그하거나<br>파일 업로드 버튼을 클릭해 업로드 해주세요.</p>
+                  <p class="fmd-upload__hint">최대 1GB</p>
+                  <p class="fmd-upload__name fmd-file-picker__name fac-add-file-picker__name" hidden></p>
+                  <button type="button" class="fmd-upload__btn fmd-file-picker__btn fac-add-file-picker__btn">파일선택</button>
+                  <button type="button" class="fmd-upload__clear btn-fac-file-delete" hidden>파일삭제</button>
+                </div>
+              </div>
+              <div class="fmd-upload fmd-file-row">
+                <span class="fmd-label">단면도</span>
+                <div class="fmd-upload__drop">
+                  <input type="file" id="fileSection" hidden>
+                  <img class="fmd-upload__thumb" alt="단면도 미리보기" hidden>
+                  <p class="fmd-upload__text">파일을 여기에 드래그하거나<br>파일 업로드 버튼을 클릭해 업로드 해주세요.</p>
+                  <p class="fmd-upload__hint">최대 1GB</p>
+                  <p class="fmd-upload__name fmd-file-picker__name fac-add-file-picker__name" hidden></p>
+                  <button type="button" class="fmd-upload__btn fmd-file-picker__btn fac-add-file-picker__btn">파일선택</button>
+                  <button type="button" class="fmd-upload__clear btn-fac-file-delete" hidden>파일삭제</button>
+                </div>
+              </div>
+              <div class="fmd-upload fmd-file-row">
+                <span class="fmd-label">현장사진 1</span>
+                <div class="fmd-upload__drop">
+                  <input type="file" id="filePhoto1" hidden accept="image/*">
+                  <img class="fmd-upload__thumb" alt="현장사진 1 미리보기" hidden>
+                  <p class="fmd-upload__text">파일을 여기에 드래그하거나<br>파일 업로드 버튼을 클릭해 업로드 해주세요.</p>
+                  <p class="fmd-upload__hint">JPEG/PNG 파일, 최대 1GB</p>
+                  <p class="fmd-upload__name fmd-file-picker__name fac-add-file-picker__name" hidden></p>
+                  <button type="button" class="fmd-upload__btn fmd-file-picker__btn fac-add-file-picker__btn">파일선택</button>
+                  <button type="button" class="fmd-upload__clear btn-fac-file-delete" hidden>파일삭제</button>
+                </div>
+              </div>
+              <div class="fmd-upload fmd-file-row">
+                <span class="fmd-label">현장사진 2</span>
+                <div class="fmd-upload__drop">
+                  <input type="file" id="filePhoto2" hidden accept="image/*">
+                  <img class="fmd-upload__thumb" alt="현장사진 2 미리보기" hidden>
+                  <p class="fmd-upload__text">파일을 여기에 드래그하거나<br>파일 업로드 버튼을 클릭해 업로드 해주세요.</p>
+                  <p class="fmd-upload__hint">JPEG/PNG 파일, 최대 1GB</p>
+                  <p class="fmd-upload__name fmd-file-picker__name fac-add-file-picker__name" hidden></p>
+                  <button type="button" class="fmd-upload__btn fmd-file-picker__btn fac-add-file-picker__btn">파일선택</button>
+                  <button type="button" class="fmd-upload__clear btn-fac-file-delete" hidden>파일삭제</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="fmd-footer">
+          <button type="button" class="fmd-btn fmd-btn--cancel" id="facAddCancelBtn">
+            <span class="fmd-btn__icon">
+              <img src="assets/main/facility-management/icon-cancel.svg" alt="" width="14" height="14">
+            </span>
+            취소
+          </button>
+          <button type="button" class="fmd-btn fmd-btn--edit" id="facAddEditBtn" hidden>
+            <span class="fmd-btn__icon">
+              <img src="assets/main/facility-management/icon-save.svg" alt="" width="14" height="14">
+            </span>
+            수정하기
+          </button>
+          <button type="button" class="fmd-btn fmd-btn--save" id="facAddSaveBtn">
+            <span class="fmd-btn__icon">
+              <img src="assets/main/facility-management/icon-save.svg" alt="" width="14" height="14">
+            </span>
+            저장하기
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/facility-management-data.js"></script>
+  <script src="js/facility-management-detail.js?v=20260820a"></script>
+</body>
+</html>

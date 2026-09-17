@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대상 시설물 신청 — POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/service-main.css">
+</head>
+<body>
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">POMS 용역사 대상시설물 신청 페이지</h2>
+<div class="pg">
+
+  <div class="gnb-wrap">
+    <header class="gnb inner">
+      <a href="index.html" class="gnb-logo" aria-label="POMS 메인으로 이동">
+        <img class="gnb-logo__emblem" src="assets/service/main/figma/logo-emblem-light.svg" alt="">
+        <img class="gnb-logo__title" src="assets/service/main/figma/logo-text-light.svg" alt="항만시설물 유지관리시스템">
+      </a>
+      <div class="gnb-r">
+        <div class="gnb-user">
+          <div class="gnb-avatar" aria-hidden="true">한</div>
+          <span class="gnb-u">한국항만협회 사용자</span>
+        </div>
+        <button type="button" class="gnb-logout" aria-label="로그아웃">
+          <img src="assets/service/main/figma/icon-logout-dark.svg" alt="">
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <div class="steps-wrap">
+    <nav class="steps inner" aria-label="진행 단계">
+      <div class="step on" aria-current="step">1. 대상 시설물 신청</div>
+      <a class="step off" href="service_inspect.html">2. 점검보고서 등록</a>
+    </nav>
+  </div>
+
+  <div class="wrap">
+
+    <div class="page-title">
+      <span class="step-badge">STEP. 01</span>
+      <h1>대상 시설물 신청</h1>
+    </div>
+
+    <div class="yk-bar">
+      <div class="yk-left">
+        <span class="ttl">용역 선택</span>
+      </div>
+      <div class="yk-main">
+        <div class="yk-controls">
+          <div class="yk-sel-group">
+            <select class="yk-sel" aria-label="용역 선택">
+              <option value="" selected disabled>선택</option>
+              <option>테스트 용역건</option>
+            </select>
+            <button type="button" class="btn btn-outline-blue">
+              <img src="assets/service/main/figma/icon-plus-blue.svg" alt="">
+              추가
+            </button>
+          </div>
+          <div class="yk-divider" aria-hidden="true"></div>
+          <div class="yk-status">
+            <div class="yk-status-live">
+              <img src="assets/service/main/figma/status-dot.svg" alt="">
+              요청 전
+            </div>
+            <span class="yk-stag">작성중</span>
+          </div>
+        </div>
+        <button type="button" class="btn btn-history" id="approvalHistoryOpen">
+          <img src="assets/service/main/figma/icon-history-dark.svg" alt="">
+          결재이력
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <section class="sec">
+        <div class="sec-title sec-pad">
+          <span class="sec-bar" aria-hidden="true">
+            <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+          </span>
+          <h2>과업정보</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-row">
+            <div class="field">
+              <label class="fl" for="taskName">과업(용역)명</label>
+              <input class="fi" id="taskName" placeholder="입력하세요.">
+            </div>
+            <div class="field">
+              <label class="fl" for="agency">발주기관</label>
+              <input class="fi" id="agency" placeholder="입력하세요.">
+            </div>
+            <div class="field">
+              <label class="fl">점검기간</label>
+              <div class="date-pair">
+                <div class="date-wrap">
+                  <input type="date" class="fi" value="2026-01-01" aria-label="점검 시작일">
+                  <img src="assets/service/main/figma/icon-calendar.svg" alt="">
+                </div>
+                <div class="date-wrap">
+                  <input type="date" class="fi" aria-label="점검 종료일">
+                  <img src="assets/service/main/figma/icon-calendar.svg" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label class="fl" for="manager">담당자(발주기관)</label>
+              <input class="fi" id="manager" placeholder="입력하세요.">
+            </div>
+            <div class="field">
+              <label class="fl" for="dept">담당부서(발주기관)</label>
+              <input class="fi" id="dept" placeholder="입력하세요.">
+            </div>
+            <div class="field">
+              <label class="fl" for="phone">연락처(발주기관)</label>
+              <input class="fi" id="phone" placeholder="입력하세요.">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <span class="fl">용역계약서</span>
+              <label class="file-box">
+                <span class="file-pick">파일 선택</span>
+                <span class="file-name" id="contractName">선택된 파일 없음</span>
+                <input type="file" id="contractFile" aria-label="용역계약서 파일 선택">
+              </label>
+            </div>
+            <div class="field">
+              <span class="fl">과업지시서</span>
+              <label class="file-box">
+                <span class="file-pick">파일 선택</span>
+                <span class="file-name" id="orderName">선택된 파일 없음</span>
+                <input type="file" id="orderFile" aria-label="과업지시서 파일 선택">
+              </label>
+            </div>
+            <div class="field">
+              <span class="fl">진행상태</span>
+              <div class="status-box">요청전</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="panel-divider">
+
+      <section class="sec filter-sec">
+        <div class="sec-title">
+          <span class="sec-bar" aria-hidden="true">
+            <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+          </span>
+          <h2>검색조건</h2>
+        </div>
+        <div class="filter-row">
+          <div class="field org">
+            <label class="fl" for="org">관리기관</label>
+            <select class="fs" id="org">
+              <option>목포지방해양수산청</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="fl" for="port">항</label>
+            <select class="fs" id="port">
+              <option>전체</option>
+              <option>목포항</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="fl" for="subPort">세부항</label>
+            <select class="fs" id="subPort">
+              <option>전체</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="fl" for="facilityType">시설구분</label>
+            <select class="fs" id="facilityType">
+              <option>전체</option>
+              <option>외곽시설</option>
+              <option>계류시설</option>
+            </select>
+          </div>
+          <div class="field name">
+            <label class="fl" for="facilityName">시설물명</label>
+            <input class="fi" id="facilityName" placeholder="검색어를 입력해주세요.">
+          </div>
+          <div class="field act">
+            <span class="fl">검색</span>
+            <button type="button" class="btn btn-dark">
+              <img src="assets/service/main/figma/icon-search-white.svg" alt="">
+              검색하기
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <hr class="panel-divider">
+
+      <section class="sec">
+        <div class="shuttle">
+          <div class="sh-panel">
+            <div class="sh-head-row">
+              <span class="sec-bar" aria-hidden="true">
+                <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+              </span>
+              <span class="sh-title">시설 목록</span>
+              <span class="sh-count">총 <b id="facilityCount">1,635</b>개소</span>
+            </div>
+            <div class="sh-table-wrap">
+              <table class="sh-table" id="facilityList">
+                <thead>
+                  <tr>
+                    <th>관리기관</th>
+                    <th>항</th>
+                    <th>세부항</th>
+                    <th>구분</th>
+                    <th>시설물명</th>
+                  </tr>
+                </thead>
+                <tbody id="facilityBody">
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>남항</td><td>계류시설</td><td>남항도류제</td></tr>
+                  <tr class="sel"><td>목포지방해양수산청</td><td>목포항</td><td>남항</td><td>외곽시설</td><td>남항방파제</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>남항</td><td>외곽시설</td><td>남항호안(1)</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>남항</td><td>외곽시설</td><td>남항호안(2)</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>내항</td><td>건축물</td><td>구석탄물양장(1)</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>내항</td><td>건축물</td><td>구석탄물양장(2)</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>내항</td><td>계류시설</td><td>내항안벽(1)</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>북항</td><td>계류시설</td><td>북항물양장</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>북항</td><td>외곽시설</td><td>북항방파제</td></tr>
+                  <tr><td>군산지방해양수산청</td><td>군산항</td><td>내항</td><td>계류시설</td><td>내항안벽(A)</td></tr>
+                  <tr><td>군산지방해양수산청</td><td>군산항</td><td>내항</td><td>계류시설</td><td>내항안벽(B)</td></tr>
+                  <tr><td>군산지방해양수산청</td><td>군산항</td><td>외항</td><td>외곽시설</td><td>외항방파제</td></tr>
+                  <tr><td>군산지방해양수산청</td><td>군산항</td><td>외항</td><td>건축물</td><td>여객터미널</td></tr>
+                  <tr><td>여수지방해양수산청</td><td>여수항</td><td>신항</td><td>계류시설</td><td>신항안벽(1)</td></tr>
+                  <tr><td>여수지방해양수산청</td><td>여수항</td><td>신항</td><td>계류시설</td><td>신항안벽(2)</td></tr>
+                  <tr><td>여수지방해양수산청</td><td>여수항</td><td>구항</td><td>외곽시설</td><td>구항호안</td></tr>
+                  <tr><td>여수지방해양수산청</td><td>광양항</td><td>컨테이너부두</td><td>계류시설</td><td>컨테이너안벽(1)</td></tr>
+                  <tr><td>여수지방해양수산청</td><td>광양항</td><td>컨테이너부두</td><td>계류시설</td><td>컨테이너안벽(2)</td></tr>
+                  <tr><td>포항지방해양수산청</td><td>포항항</td><td>영일만항</td><td>외곽시설</td><td>동방파제</td></tr>
+                  <tr><td>포항지방해양수산청</td><td>포항항</td><td>구항</td><td>건축물</td><td>어업지도선부두</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="sh-ctrl">
+            <button type="button" class="btn btn-outline-blue btn-shuttle" id="addFacility">
+              추가
+              <img src="assets/service/main/figma/icon-arrow-right.svg" alt="">
+            </button>
+            <button type="button" class="btn btn-outline btn-shuttle" id="removeFacility">
+              <img src="assets/service/main/figma/icon-arrow-left.svg" alt="">
+              삭제
+            </button>
+          </div>
+
+          <div class="sh-panel reg">
+            <div class="sh-head-row">
+              <span class="sh-title">등록 목록</span>
+              <span class="sh-badge" id="regCount">12</span>
+            </div>
+            <div class="sh-table-wrap">
+              <table class="sh-table" id="registeredList">
+                <thead>
+                  <tr>
+                    <th>관리기관</th>
+                    <th>항</th>
+                    <th>세부항</th>
+                    <th>구분</th>
+                    <th>시설물명</th>
+                  </tr>
+                </thead>
+                <tbody id="registeredBody">
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>남항</td><td>계류시설</td><td>남항도류제</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>남항</td><td>외곽시설</td><td>남항방파제</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>남항</td><td>외곽시설</td><td>남항호안(1)</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>내항</td><td>건축물</td><td>구석탄물양장(1)</td></tr>
+                  <tr><td>목포지방해양수산청</td><td>목포항</td><td>북항</td><td>계류시설</td><td>북항물양장</td></tr>
+                  <tr><td>군산지방해양수산청</td><td>군산항</td><td>내항</td><td>계류시설</td><td>내항안벽(A)</td></tr>
+                  <tr><td>군산지방해양수산청</td><td>군산항</td><td>외항</td><td>외곽시설</td><td>외항방파제</td></tr>
+                  <tr><td>여수지방해양수산청</td><td>여수항</td><td>신항</td><td>계류시설</td><td>신항안벽(1)</td></tr>
+                  <tr><td>여수지방해양수산청</td><td>여수항</td><td>구항</td><td>외곽시설</td><td>구항호안</td></tr>
+                  <tr><td>여수지방해양수산청</td><td>광양항</td><td>컨테이너부두</td><td>계류시설</td><td>컨테이너안벽(1)</td></tr>
+                  <tr><td>포항지방해양수산청</td><td>포항항</td><td>영일만항</td><td>외곽시설</td><td>동방파제</td></tr>
+                  <tr><td>포항지방해양수산청</td><td>포항항</td><td>구항</td><td>건축물</td><td>어업지도선부두</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <hr class="panel-divider">
+
+    <section class="submit-bar">
+      <p class="sub-note">등록 목록 확인 후 신청하기를 눌러 발주기관에 제출하세요.</p>
+      <div class="sub-acts">
+        <button type="button" class="btn btn-ghost">
+          <img src="assets/service/main/figma/icon-temp-save.svg" alt="">
+          임시저장
+        </button>
+        <button type="button" class="btn btn-apply" id="submitApplyBtn">
+          <img src="assets/service/main/figma/icon-apply.svg" alt="">
+          신청하기
+        </button>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="approval-modal" id="approvalHistoryModal" aria-hidden="true">
+  <div class="approval-dialog" role="dialog" aria-modal="true" aria-labelledby="approvalHistoryTitle">
+    <div class="approval-head">
+      <h3 class="approval-title" id="approvalHistoryTitle">결재이력</h3>
+      <button type="button" class="approval-close" id="approvalHistoryClose" aria-label="닫기">
+        <img src="assets/service/approval-history/icon-close.svg" alt="" width="16" height="16">
+      </button>
+    </div>
+    <div class="approval-body">
+      <div class="approval-meta">
+        <span class="approval-meta-ico" aria-hidden="true">
+          <img src="assets/service/approval-history/icon-facility.png" alt="" width="36" height="36">
+        </span>
+        <div class="approval-meta-text">
+          <span class="approval-meta-name">테스트 용역건</span>
+          <div class="approval-meta-sub">
+            <span class="approval-meta-date">2026-05-12</span>
+            <span class="approval-meta-sep" aria-hidden="true"></span>
+            <span class="approval-meta-desc">대상 시설물 신청</span>
+          </div>
+        </div>
+      </div>
+      <div class="approval-table-wrap">
+        <table class="approval-table">
+          <thead>
+            <tr>
+              <th class="col-type">구분</th>
+              <th class="col-requester">요청자</th>
+              <th class="col-company">회사</th>
+              <th class="col-date">일자</th>
+              <th class="col-reviewer">검토자</th>
+              <th>의견</th>
+              <th class="col-status">상태</th>
+            </tr>
+          </thead>
+          <tbody id="approvalHistoryBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const rows = [
+    ['신청', '홍길동', '해양수산부', '2026-05-12 15:00', '김해양', '점검보고서 내용을 확인하였습니다.', '승인'],
+    ['반려', '홍길동', '해양수산부', '2026-05-12 15:00', '김해양', '첨부파일을 확인해주세요.', '반려'],
+    ['신청', '홍길동', '해양수산부', '2026-05-12 15:00', '김해양', '-', '요청'],
+    ['재신청', '홍길동', '해양수산부', '2026-05-12 15:00', '김해양', '-', '요청'],
+    ['신청', '홍길동', '해양수산부', '2026-05-12 15:00', '나검토', '점검보고서와 첨부파일을 확인해주세요.', '요청'],
+  ];
+
+  const modal = document.getElementById('approvalHistoryModal');
+  const body = document.getElementById('approvalHistoryBody');
+
+  const statusClass = (status) => {
+    if (status === '승인') return 'approved';
+    if (status === '반려') return 'rejected';
+    return 'requested';
+  };
+
+  const typeClass = (type) => {
+    if (type === '반려') return 'is-reject';
+    if (type === '재신청') return 'is-reapply';
+    return '';
+  };
+
+  function renderRows() {
+    body.innerHTML = rows.map((row) => `
+      <tr>
+        <td class="col-type"><span class="approval-type ${typeClass(row[0])}">${row[0]}</span></td>
+        <td class="col-requester">${row[1]}</td>
+        <td class="col-company">${row[2]}</td>
+        <td class="col-date">${row[3]}</td>
+        <td class="col-reviewer">${row[4]}</td>
+        <td class="opinion">${row[5]}</td>
+        <td class="col-status"><span class="approval-status ${statusClass(row[6])}">${row[6]}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  function openModal() {
+    renderRows();
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  document.getElementById('approvalHistoryOpen')?.addEventListener('click', openModal);
+  document.getElementById('approvalHistoryClose')?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal?.classList.contains('open')) closeModal();
+  });
+
+  const facilityBody = document.getElementById('facilityBody');
+  const registeredBody = document.getElementById('registeredBody');
+  const regCount = document.getElementById('regCount');
+
+  const updateCounts = () => {
+    if (regCount) regCount.textContent = String(registeredBody?.querySelectorAll('tr').length || 0);
+  };
+
+  const bindRowSelect = (tableId, bodyId) => {
+    document.getElementById(tableId)?.addEventListener('click', (e) => {
+      const row = e.target.closest(`#${bodyId} tr`);
+      if (!row) return;
+      row.classList.toggle('sel');
+    });
+  };
+  bindRowSelect('facilityList', 'facilityBody');
+  bindRowSelect('registeredList', 'registeredBody');
+
+  const moveSelected = (fromBody, toBody) => {
+    if (!fromBody || !toBody) return;
+    const selected = [...fromBody.querySelectorAll('tr.sel')];
+    if (!selected.length) {
+      alert(fromBody === facilityBody
+        ? '시설 목록에서 추가할 항목을 선택해 주세요.'
+        : '등록 목록에서 삭제할 항목을 선택해 주세요.');
+      return;
+    }
+    selected.forEach((row) => {
+      row.classList.remove('sel');
+      toBody.appendChild(row);
+    });
+    updateCounts();
+  };
+
+  document.getElementById('addFacility')?.addEventListener('click', () => {
+    moveSelected(facilityBody, registeredBody);
+  });
+  document.getElementById('removeFacility')?.addEventListener('click', () => {
+    moveSelected(registeredBody, facilityBody);
+  });
+
+  updateCounts();
+
+  const bindFile = (inputId, nameId) => {
+    document.getElementById(inputId)?.addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      const label = document.getElementById(nameId);
+      if (label) label.textContent = file ? file.name : '선택된 파일 없음';
+    });
+  };
+  bindFile('contractFile', 'contractName');
+  bindFile('orderFile', 'orderName');
+
+  document.getElementById('submitApplyBtn')?.addEventListener('click', () => {
+    if (!window.confirm('신청하겠습니까?')) return;
+    alert('신청이 완료되었습니다.');
+  });
+})();
+</script>
+<script src="js/site-footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유지관리계획 상세 | POMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/detail.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/archive.css">
+  <link rel="stylesheet" href="css/admin-search-inline.css">
+  <style>
+    body { font-family: "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout notice-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="notice-detail-top">
+      <h1 class="notice-detail-top__title">유지관리계획 상세</h1>
+      <nav class="breadcrumb notice-detail-top__breadcrumb" aria-label="현재 위치">
+        <a href="index.html">홈</a>
+        <span class="breadcrumb__sep">&gt;</span>
+        <a href="archive.html">자료실</a>
+        <span class="breadcrumb__sep">&gt;</span>
+        <a href="maintenance-plan.html">유지관리계획</a>
+        <span class="breadcrumb__sep">&gt;</span>
+        <span class="breadcrumb__current">상세</span>
+      </nav>
+    </header>
+
+    <div class="notice-detail-toolbar">
+      <a href="maintenance-plan.html" class="btn-notice-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        목록으로
+      </a>
+    </div>
+
+    <article class="notice-detail-card">
+      <table class="notice-meta-table">
+        <colgroup>
+          <col class="col-label">
+          <col class="col-value">
+          <col class="col-label">
+          <col class="col-value">
+          <col class="col-label">
+          <col class="col-value">
+        </colgroup>
+        <tbody>
+          <tr class="notice-meta-table__title-row">
+            <td colspan="6">
+              <div class="notice-detail-title" id="maintenanceDetailTitle">
+                <span class="notice-badge notice-badge--detail">중점</span>
+                <span class="notice-detail-title__text">2026년 연간 항만시설물 유지관리계획(안)</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">작성자</th>
+            <td data-field="author">관리자</td>
+            <th scope="row">작성일</th>
+            <td data-field="date">2026-05-18 10:00</td>
+            <th scope="row">조회수</th>
+            <td data-field="views">412</td>
+          </tr>
+          <tr>
+            <th scope="row">계획기간</th>
+            <td colspan="3" data-field="period">2026-01-01 ~ 2026-12-31</td>
+            <th scope="row">첨부파일</th>
+            <td data-field="attach-cell">
+              <a href="#" class="notice-attach-link" id="maintenanceAttach">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                <span id="maintenanceAttachText">2026_유지관리계획안.pdf (820 KB)</span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="notice-body" id="maintenancePlanDetailBody">
+        <p>항만시설물의 안전한 유지·관리를 위한 2026년도 연간 계획입니다.</p>
+      </div>
+    </article>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/maintenance-plan.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'archive-maintenance' });
+  </script>
+</body>
+</html>

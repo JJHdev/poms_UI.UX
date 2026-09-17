@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FMS 연계 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/facility-management-detail.css">
+  <link rel="stylesheet" href="css/safety-report-approval.css?v=20260810a">
+  <link rel="stylesheet" href="css/fms-history.css?v=20260818g">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page fmd-figma-page fms-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fmd-page" aria-label="FMS 연계 상세">
+      <div class="fmd-crumb-row">
+        <button type="button" class="fmd-back-btn" id="fmsDetailBackBtn" aria-label="목록으로">
+          <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+        </button>
+        <a href="fms-history.html" class="fmd-home-btn" aria-label="FMS 연계이력 목록">
+          <img src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+        </a>
+        <nav class="fmd-breadcrumb" aria-label="현재 위치">
+          <a href="fms-history.html">연계 데이터 관리</a>
+          <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; FMS 연계이력 &gt; </span>
+          <span class="fmd-breadcrumb__current" id="fmsDetailCrumb">FMS 시설물 상세 정보</span>
+        </nav>
+      </div>
+
+      <div class="fmd-stack fms-detail-stack" aria-label="FMS 연계 상세">
+        <section class="fmd-section" aria-labelledby="fmsDetailPageTitle">
+          <div class="fmd-section__head">
+            <span class="fmd-section__icon" aria-hidden="true">
+              <img src="assets/main/facility-management/icon-section-facility.svg" alt="" width="24" height="24" id="fmsSectionIcon">
+            </span>
+            <h1 class="fmd-section__title" id="fmsDetailPageTitle">FMS 시설물 상세 정보</h1>
+            <span class="admin-detail-title-row__badge" id="fmsModeBadge"></span>
+            <p class="fms-section-note" id="fmsDetailSub"></p>
+          </div>
+
+          <div class="fmd-section__body">
+            <nav class="ua-account-tabs" id="fmsTabs" aria-label="FMS 상세 탭"></nav>
+            <div class="fms-tab-content" id="fmsTabContent"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/fms-detail-schema.js"></script>
+  <script src="js/fms-history-data.js"></script>
+  <script src="js/fms-history-detail.js"></script>
+</body>
+</html>

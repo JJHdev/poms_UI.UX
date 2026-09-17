@@ -1,0 +1,1794 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물 상세정보 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="css/detail.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <link rel="stylesheet" href="css/facility-detail-vulnerable.css">
+  <link rel="stylesheet" href="css/facility-detail-major-defect.css">
+  <link rel="stylesheet" href="css/facility-detail-precision.css">
+  <link rel="stylesheet" href="css/facility-detail-repair.css">
+  <link rel="stylesheet" href="css/facility-detail-history.css">
+  <link rel="stylesheet" href="css/facility-detail-safety.css">
+  <link rel="stylesheet" href="css/facility-detail-calculate.css">
+  <link rel="stylesheet" href="css/facility-detail.css">
+  <link rel="stylesheet" href="css/inspection-report.css">
+  <link rel="stylesheet" href="css/facility-map-modal.css">
+  <link rel="stylesheet" href="css/poms-popup.css">
+  <link rel="stylesheet" href="css/facility-form.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+</head>
+<body class="app-layout facility-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시설물 정보 메뉴">
+        <div class="fs-lnb__title">
+          <span class="fs-lnb__title-text">시설물 정보</span>
+        </div>
+        <nav class="fs-lnb__nav">
+          <a class="fs-lnb__item is-active" href="facility-search.html" aria-current="page">
+            <span>시설물 통합검색</span>
+            <span class="fs-lnb__chevron ico-angle ico-angle--right" aria-hidden="true">
+              <span class="ico-angle__vec">
+                <img src="assets/main/facility-search/detail/figma224/icon-angle-down-lnb.svg" alt="">
+              </span>
+            </span>
+          </a>
+          <a class="fs-lnb__item" href="facility-condition-search.html">
+            <span>시설물 조건검색</span>
+            <span class="fs-lnb__chevron ico-angle ico-angle--right" aria-hidden="true">
+              <span class="ico-angle__vec">
+                <img src="assets/main/facility-search/detail/figma224/icon-angle-down-lnb.svg" alt="">
+              </span>
+            </span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="fd-content">
+    <header class="page-header">
+      <div class="page-header__nav">
+        <a href="facility-search.html" class="btn-back" aria-label="목록으로">
+          <span class="ico-angle" aria-hidden="true">
+            <span class="ico-angle__vec">
+              <img src="assets/main/facility-search/detail/figma224/icon-angle-down.svg" alt="">
+            </span>
+          </span>
+        </a>
+        <a href="facility.html" class="page-header__home" aria-label="시설물 정보 홈">
+          <span class="page-header__home-icon" aria-hidden="true">
+            <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+            <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+            <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+          </span>
+        </a>
+      </div>
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="facility.html">시설물 정보</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <a href="facility-search.html">시설물 통합검색</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="breadcrumb__current">시설물 상세정보</span>
+      </nav>
+    </header>
+
+    <article class="facility-summary">
+      <div class="facility-summary__primary">
+        <div class="facility-summary__icon" aria-hidden="true">
+          <span class="facility-summary__icon-inner">
+            <span class="facility-summary__icon-base"><img src="assets/main/facility-search/detail/figma224/icon-facility-base.svg" alt=""></span>
+            <span class="facility-summary__icon-line facility-summary__icon-line--base"><img src="assets/main/facility-search/detail/figma224/icon-facility-v7.svg" alt=""></span>
+            <span class="facility-summary__icon-dot facility-summary__icon-dot--1"><img src="assets/main/facility-search/detail/figma224/icon-facility-v8.svg" alt=""></span>
+            <span class="facility-summary__icon-dot facility-summary__icon-dot--2"><img src="assets/main/facility-search/detail/figma224/icon-facility-v8.svg" alt=""></span>
+            <span class="facility-summary__icon-dot facility-summary__icon-dot--3"><img src="assets/main/facility-search/detail/figma224/icon-facility-v8.svg" alt=""></span>
+            <span class="facility-summary__icon-dot facility-summary__icon-dot--4"><img src="assets/main/facility-search/detail/figma224/icon-facility-v8.svg" alt=""></span>
+            <span class="facility-summary__icon-dot facility-summary__icon-dot--5"><img src="assets/main/facility-search/detail/figma224/icon-facility-v8.svg" alt=""></span>
+            <span class="facility-summary__icon-dot facility-summary__icon-dot--6"><img src="assets/main/facility-search/detail/figma224/icon-facility-v8.svg" alt=""></span>
+            <span class="facility-summary__icon-frame"><img src="assets/main/facility-search/detail/figma224/icon-facility-v9.svg" alt=""></span>
+          </span>
+        </div>
+        <h1 class="facility-summary__title" id="facilityName">남방파제</h1>
+        <div class="facility-summary__meta-row">
+          <span class="facility-summary__location">부산광역시 중구 항만로</span>
+          <span class="facility-summary__meta-divider" aria-hidden="true">
+            <img src="assets/main/facility-search/detail/figma224/icon-meta-divider.svg" alt="" width="1" height="10">
+          </span>
+          <span class="facility-summary__location">부산항 북항</span>
+          <span class="facility-summary__badge-group">
+            <span class="tag tag--orange">2종 시설물</span>
+            <span class="tag tag--blue">외곽시설</span>
+          </span>
+        </div>
+      </div>
+      <div class="facility-summary__actions">
+        <button type="button" class="insp-btn insp-btn--video" id="facilityDetailVideoBtn"
+                data-video-src="assets/main/facility-search/detail/video/sample.mp4"
+                data-video-title="남방파제 현장영상">
+          <svg viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false">
+            <rect x="1" y="3" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7.5 6.5v5l4-2.5z" fill="currentColor"/>
+          </svg>
+          영상 보기
+        </button>
+        <button type="button" class="insp-btn insp-btn--excel" id="facilityDetailExcelBtn">
+          <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+          엑셀 다운로드
+        </button>
+      </div>
+    </article>
+
+    <div class="detail-shell">
+    <div class="detail-tabs" role="tablist">
+      <button type="button" class="detail-tabs__btn is-active" role="tab" data-tab="general" aria-selected="true">일반정보</button>
+      <button type="button" class="detail-tabs__btn" role="tab" data-tab="precision">안전점검실적</button>
+      <button type="button" class="detail-tabs__btn" role="tab" data-tab="repair">보수보강실적</button>
+      <button type="button" class="detail-tabs__btn" role="tab" data-tab="vulnerable">취약시설물 중점관리</button>
+      <button type="button" class="detail-tabs__btn" role="tab" data-tab="major-defect">중대결함 사후관리</button>
+      <button type="button" class="detail-tabs__btn" role="tab" data-tab="history">이력정보</button>
+      <button type="button" class="detail-tabs__btn" role="tab" data-tab="safety">안전시설현황</button>
+      <button type="button" class="detail-tabs__btn" role="tab" data-tab="calculrate">대가산정</button>
+    </div>
+
+    <div class="detail-tab-panel is-active" id="panel-general" role="tabpanel">
+      <section class="detail-section">
+        <div class="detail-section__head detail-section__head--basic">
+          <div class="detail-section__head-left">
+            <div class="detail-section__heading">
+              <span class="detail-section__bar" aria-hidden="true">
+                <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+              </span>
+              <h3 class="detail-section__title">기본 정보</h3>
+            </div>
+            <select id="generalHistorySelect" class="general-history-select" aria-label="일반정보 변경 이력">
+              <option value="3" selected>목포지방해양수산청</option>
+              <option value="2">2차 - 입력오류수정(2018.01.16)</option>
+              <option value="1">1차 - 최초작성(2014.02.07)</option>
+            </select>
+          </div>
+        </div>
+        <div class="info-data-legend" aria-label="데이터 출처">
+          <p class="info-data-legend__note">
+            ※ 종시설물 데이터는 FMS에서 자동으로 연동되며, 수정할 수 없습니다. FMS 연동 항목은 <em>파란색 글씨</em>로 구분됩니다.
+          </p>
+          <div class="info-data-legend__badges">
+            <span class="info-data-legend__item info-data-legend__item--fms">FMS 데이터 (읽기 전용) - 2026.05.20</span>
+            <span class="info-data-legend__item info-data-legend__item--poms">POMS 데이터 (수정 가능)</span>
+          </div>
+        </div>
+
+        <!-- 호환용: JS가 .info-table th/td를 조회할 수 있도록 유지 -->
+        <table class="info-table visually-hidden" aria-hidden="true">
+          <tbody>
+            <tr>
+              <th>시설물명</th><td data-field="name">남방파제</td>
+              <th>중구분</th><td>외곽시설</td>
+              <th>준공년도</th><td data-gh="year">2010</td>
+            </tr>
+            <tr>
+              <th>안전(상태)등급</th><td>B</td>
+              <th>항구분</th><td>국가관리 무역항</td>
+              <th>시설구분</th><td>계류시설</td>
+            </tr>
+            <tr>
+              <th>항구분</th><td>부산항(건천항)</td>
+              <th>시설구분</th><td>계류시설</td>
+              <th>항명(세부항)</th><td>부산항(건천항)</td>
+            </tr>
+            <tr>
+              <th>시설형식</th><td>구면형</td>
+              <th>점검일(최근)</th><td>2024-05-01</td>
+              <th>안전(상태)등급</th><td>B</td>
+            </tr>
+            <tr>
+              <th>관리구분</th><td data-gh="manageType">직영</td>
+              <th>구조형식(상세)</th><td>RC(-)</td>
+              <th>내진보강</th><td>설계A</td>
+            </tr>
+            <tr>
+              <th>관리기관</th><td data-gh="agency">부산지방해양수산청</td>
+              <th>관리기관</th><td data-gh="agency">부산지방해양수산청</td>
+              <th>연장(m)</th><td data-gh="length">120</td>
+            </tr>
+            <tr>
+              <th>시설개방</th><td>Y</td>
+              <th>도분초(DMS)</th><td colspan="3">0°0′0″ N, NaN°NaN′NaN″ W</td>
+            </tr>
+            <tr>
+              <th>시공사</th><td class="info-table__poms">시공사</td>
+              <th>시공비</th><td class="info-table__poms">시공비</td>
+              <th>(계류시설)마루높이</th><td class="info-table__poms">마루높이</td>
+            </tr>
+            <tr>
+              <th>천단고</th><td class="info-table__poms">천단고</td>
+              <th>주소</th><td class="info-table__poms" colspan="3">주소</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-field-wrap">
+        <div class="info-field-grid" aria-label="FMS 기본 정보">
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">시설물명</span><span class="info-field__value" data-field="name">남방파제</span></div>
+            <div class="info-field"><span class="info-field__label">중구분</span><span class="info-field__value">외곽시설</span></div>
+            <div class="info-field"><span class="info-field__label">준공년도</span><span class="info-field__value" data-gh="year">2010</span></div>
+          </div>
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">안전(상태)등급</span><span class="info-field__value">B</span></div>
+            <div class="info-field"><span class="info-field__label">항구분</span><span class="info-field__value">국가관리 무역항</span></div>
+            <div class="info-field"><span class="info-field__label">시설구분</span><span class="info-field__value">계류시설</span></div>
+          </div>
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">항구분</span><span class="info-field__value">부산항(건천항)</span></div>
+            <div class="info-field"><span class="info-field__label">시설구분</span><span class="info-field__value">계류시설</span></div>
+            <div class="info-field"><span class="info-field__label">항명(세부항)</span><span class="info-field__value">부산항(건천항)</span></div>
+          </div>
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">시설형식</span><span class="info-field__value">구면형</span></div>
+            <div class="info-field"><span class="info-field__label">점검일(최근)</span><span class="info-field__value">2024-05-01</span></div>
+            <div class="info-field"><span class="info-field__label">안전(상태)등급</span><span class="info-field__value">B</span></div>
+          </div>
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">관리구분</span><span class="info-field__value" data-gh="manageType">직영</span></div>
+            <div class="info-field"><span class="info-field__label">구조형식(상세)</span><span class="info-field__value">RC(-)</span></div>
+            <div class="info-field"><span class="info-field__label">내진보강</span><span class="info-field__value">설계A</span></div>
+          </div>
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">관리기관</span><span class="info-field__value" data-gh="agency">부산지방해양수산청</span></div>
+            <div class="info-field"><span class="info-field__label">관리기관</span><span class="info-field__value" data-gh="agency">부산지방해양수산청</span></div>
+            <div class="info-field"><span class="info-field__label">연장(m)</span><span class="info-field__value" data-gh="length">120</span></div>
+          </div>
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">시설개방</span><span class="info-field__value">Y</span></div>
+            <div class="info-field"><span class="info-field__label">도분초(DMS)</span><span class="info-field__value">0°0′0″ N, NaN°NaN′NaN″ W</span></div>
+            <div class="info-field info-field--empty" aria-hidden="true"><span class="info-field__label"></span><span class="info-field__value"></span></div>
+          </div>
+        </div>
+
+        <div class="info-field-grid" aria-label="POMS 데이터">
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">시공사</span><span class="info-field__value info-field__value--poms">시공사</span></div>
+            <div class="info-field"><span class="info-field__label">시공비</span><span class="info-field__value info-field__value--poms">시공비</span></div>
+            <div class="info-field"><span class="info-field__label">(계류시설)마루높이</span><span class="info-field__value info-field__value--poms">마루높이</span></div>
+          </div>
+          <div class="info-field-row">
+            <div class="info-field"><span class="info-field__label">천단고</span><span class="info-field__value info-field__value--poms">천단고</span></div>
+            <div class="info-field"><span class="info-field__label">주소</span><span class="info-field__value info-field__value--poms">주소</span></div>
+            <div class="info-field info-field--empty" aria-hidden="true"><span class="info-field__label"></span><span class="info-field__value"></span></div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <section class="detail-section detail-section--media">
+        <div class="detail-section__head detail-section__head--media">
+          <span class="detail-section__bar" aria-hidden="true">
+            <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+          </span>
+          <h3 class="detail-section__title">도면 및 현장사진</h3>
+        </div>
+        <div class="media-grid">
+          <button type="button" class="media-card">
+            <span class="media-card__thumb">
+              <img src="assets/main/facility-search/detail/figma224/media-location.png" alt="위치도">
+            </span>
+            <span class="media-card__label">위치도</span>
+          </button>
+          <button type="button" class="media-card">
+            <span class="media-card__thumb">
+              <img src="assets/main/facility-search/detail/figma224/media-section.png" alt="단면도">
+            </span>
+            <span class="media-card__label">단면도</span>
+          </button>
+          <button type="button" class="media-card">
+            <span class="media-card__thumb">
+              <img src="assets/main/facility-search/detail/figma224/media-site-1.png" alt="현장사진 1">
+            </span>
+            <span class="media-card__label">현장사진 1</span>
+          </button>
+          <button type="button" class="media-card">
+            <span class="media-card__thumb">
+              <img src="assets/main/facility-search/detail/figma224/media-site-2.png" alt="현장사진 2">
+            </span>
+            <span class="media-card__label">현장사진 2</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <div class="detail-tab-panel" id="panel-vulnerable" role="tabpanel" hidden>
+      <section class="detail-section">
+        <div class="detail-section__head detail-section__head--list">
+          <div class="detail-section__head-left">
+            <span class="detail-section__bar" aria-hidden="true">
+              <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+            </span>
+            <h3 class="detail-section__title">취약시설물 중점관리</h3>
+            <p class="detail-list-count" id="vulnerableTotalCount">전체 <em>0</em>건</p>
+          </div>
+          <div class="vulnerable-section__actions">
+            <button type="button" class="btn-facility-add" id="vulnerableAddBtn">
+              <span class="btn-facility-add__icon" aria-hidden="true">
+                <img src="assets/main/facility-search/detail/figma177/icon-plus.svg" alt="" width="10" height="10">
+              </span>
+              추가하기
+            </button>
+          </div>
+        </div>
+
+        <div class="detail-table-wrap regular-table-wrap regular-table-wrap--vulnerable">
+          <table class="inspection-table inspection-table--list inspection-table--vulnerable-history">
+            <colgroup>
+              <col class="col-no">
+              <col class="col-date">
+              <col class="col-author">
+              <col class="col-plan">
+              <col class="col-restrict">
+              <col class="col-notice">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" class="col-no">번호</th>
+                <th scope="col">작성일</th>
+                <th scope="col">작성자</th>
+                <th scope="col">조치계획 및 진행상황</th>
+                <th scope="col">사용제한 여부</th>
+                <th scope="col">주민공지 여부</th>
+              </tr>
+            </thead>
+            <tbody id="vulnerableListBody"></tbody>
+          </table>
+        </div>
+
+        <div class="vulnerable-list-foot">
+          <nav class="pagination regular-pagination" id="vulnerablePagination" aria-label="취약시설물 중점관리 페이지"></nav>
+        </div>
+      </section>
+    </div>
+    <div class="detail-tab-panel" id="panel-precision" role="tabpanel" hidden>
+      <section class="detail-section">
+        <div class="detail-section__head detail-section__head--list">
+          <div class="detail-section__head-left">
+            <span class="detail-section__bar" aria-hidden="true">
+              <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+            </span>
+            <h3 class="detail-section__title">정밀안전(진단)점검 이력</h3>
+            <p class="detail-list-count" id="precisionTotalCount">전체 <em>0</em>건</p>
+          </div>
+          <div class="precision-section__actions">
+            <select id="precisionYearFilter" class="detail-year-select" aria-label="안전점검실적 연도 선택">
+              <option value="">전체</option>
+            </select>
+            <button type="button" class="btn-facility-add" id="precisionAddBtn">
+              <span class="btn-facility-add__icon" aria-hidden="true">
+                <img src="assets/main/facility-search/detail/figma177/icon-plus.svg" alt="" width="10" height="10">
+              </span>
+              추가하기
+            </button>
+          </div>
+        </div>
+
+        <div class="detail-table-wrap regular-table-wrap regular-table-wrap--precision">
+          <table class="inspection-table inspection-table--list inspection-table--precision-history">
+            <colgroup>
+              <col class="col-no">
+              <col class="col-type">
+              <col class="col-agency">
+              <col class="col-cost">
+              <col class="col-result">
+              <col class="col-date">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" class="col-no" rowspan="2">번호</th>
+                <th scope="col">점검진단구분</th>
+                <th scope="col">점검진단기관명</th>
+                <th scope="col">비용(천원)</th>
+                <th scope="col">주요 점검진단결과</th>
+                <th scope="col">작성일</th>
+              </tr>
+              <tr>
+                <th scope="col">점검진단기간</th>
+                <th scope="col">책임기술사</th>
+                <th scope="col">안전등급</th>
+                <th scope="col">주요 보수보강(안)</th>
+                <th scope="col">작성자</th>
+              </tr>
+            </thead>
+            <tbody id="precisionListBody"></tbody>
+          </table>
+        </div>
+
+        <div class="precision-list-foot">
+          <nav class="pagination regular-pagination" id="precisionPagination" aria-label="정밀안전(진단)점검 이력 페이지"></nav>
+        </div>
+      </section>
+    </div>
+    <div class="detail-tab-panel" id="panel-repair" role="tabpanel" hidden>
+      <section class="detail-section">
+        <div class="detail-section__head detail-section__head--list">
+          <div class="detail-section__head-left">
+            <span class="detail-section__bar" aria-hidden="true">
+              <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+            </span>
+            <h3 class="detail-section__title">보수보강 실적</h3>
+            <p class="detail-list-count" id="repairTotalCount">전체 <em>0</em>건</p>
+          </div>
+          <div class="repair-section__actions">
+            <select id="repairYearFilter" class="detail-year-select" aria-label="보수보강실적 연도 선택">
+              <option value="">전체</option>
+            </select>
+            <button type="button" class="btn-facility-add" id="repairAddBtn">
+              <span class="btn-facility-add__icon" aria-hidden="true">
+                <img src="assets/main/facility-search/detail/figma177/icon-plus.svg" alt="" width="10" height="10">
+              </span>
+              추가하기
+            </button>
+          </div>
+        </div>
+
+        <div class="detail-table-wrap regular-table-wrap regular-table-wrap--repair">
+          <table class="inspection-table inspection-table--list inspection-table--repair-history">
+            <colgroup>
+              <col class="col-no">
+              <col class="col-name">
+              <col class="col-type">
+              <col class="col-part">
+              <col class="col-person">
+              <col class="col-person">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" class="col-no" rowspan="2">번호</th>
+                <th scope="col">공사명</th>
+                <th scope="col" rowspan="2">공사구분</th>
+                <th scope="col">보수보강부위</th>
+                <th scope="col">설계자</th>
+                <th scope="col">시공자</th>
+              </tr>
+              <tr>
+                <th scope="col">공사기간</th>
+                <th scope="col">공사내역</th>
+                <th scope="col">공사비(천원)</th>
+                <th scope="col">책임기술자</th>
+              </tr>
+            </thead>
+            <tbody id="repairListBody"></tbody>
+          </table>
+        </div>
+
+        <div class="repair-list-foot">
+          <nav class="pagination regular-pagination" id="repairPagination" aria-label="보수보강 실적 페이지"></nav>
+        </div>
+      </section>
+    </div>
+    <div class="detail-tab-panel" id="panel-major-defect" role="tabpanel" hidden>
+      <section class="detail-section">
+        <div class="detail-section__head detail-section__head--list">
+          <div class="detail-section__head-left">
+            <span class="detail-section__bar" aria-hidden="true">
+              <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+            </span>
+            <h3 class="detail-section__title">중대결함 사후관리</h3>
+            <p class="detail-list-count" id="majorDefectTotalCount">전체 <em>0</em>건</p>
+          </div>
+          <div class="major-defect-section__actions">
+            <button type="button" class="btn-facility-add" id="majorDefectAddBtn">
+              <span class="btn-facility-add__icon" aria-hidden="true">
+                <img src="assets/main/facility-search/detail/figma177/icon-plus.svg" alt="" width="10" height="10">
+              </span>
+              추가하기
+            </button>
+          </div>
+        </div>
+
+        <div class="detail-table-wrap regular-table-wrap regular-table-wrap--major-defect">
+          <table class="inspection-table inspection-table--list inspection-table--major-defect-history">
+            <colgroup>
+              <col class="col-no">
+              <col class="col-type">
+              <col class="col-date">
+              <col class="col-part">
+              <col class="col-category">
+              <col class="col-kind">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" class="col-no" rowspan="2">번호</th>
+                <th scope="col">점검진단구분</th>
+                <th scope="col">점검진단일</th>
+                <th scope="col">결함발생부재</th>
+                <th scope="col">결함구분</th>
+                <th scope="col">결함종류</th>
+              </tr>
+              <tr>
+                <th scope="col">착수기한</th>
+                <th scope="col">조치착수일</th>
+                <th scope="col">완료기한</th>
+                <th scope="col">조치완료일</th>
+                <th scope="col">조치상태</th>
+              </tr>
+            </thead>
+            <tbody id="majorDefectListBody"></tbody>
+          </table>
+        </div>
+
+        <div class="major-defect-list-foot">
+          <nav class="pagination regular-pagination" id="majorDefectPagination" aria-label="중대결함 사후관리 페이지"></nav>
+        </div>
+      </section>
+    </div>
+    <div class="detail-tab-panel" id="panel-history" role="tabpanel" hidden>
+      <div class="history-view">
+        <section class="detail-section">
+          <div class="detail-section__head detail-section__head--list">
+            <div class="detail-section__head-left">
+              <span class="detail-section__bar" aria-hidden="true">
+                <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+              </span>
+              <h3 class="detail-section__title">이력정보</h3>
+            </div>
+          </div>
+          <div class="detail-table-wrap regular-table-wrap regular-table-wrap--history-timeline">
+            <table class="inspection-table inspection-table--list inspection-table--history-timeline">
+              <thead>
+                <tr id="historyTimelineHeadRow"></tr>
+              </thead>
+              <tbody id="historyTimelineBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <div class="detail-section__head detail-section__head--list">
+            <div class="detail-section__head-left">
+              <span class="detail-section__bar" aria-hidden="true">
+                <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+              </span>
+              <h3 class="detail-section__title">이력 목록</h3>
+              <p class="detail-list-count" id="historyTotalCount">전체 <em>0</em>건</p>
+            </div>
+          </div>
+          <div class="detail-table-wrap regular-table-wrap regular-table-wrap--history-list">
+            <table class="inspection-table inspection-table--list inspection-table--history-list">
+              <colgroup>
+                <col class="col-no">
+                <col class="col-date"><col class="col-cost"><col class="col-grade">
+                <col class="col-date"><col class="col-cost"><col class="col-grade">
+                <col class="col-date"><col class="col-cost"><col class="col-grade">
+                <col class="col-date"><col class="col-cost"><col class="col-grade">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" rowspan="2" class="col-no">회차</th>
+                  <th scope="colgroup" colspan="3">정기안전점검</th>
+                  <th scope="colgroup" colspan="3">정밀안전점검</th>
+                  <th scope="colgroup" colspan="3">정밀안전진단</th>
+                  <th scope="colgroup" colspan="3">성능평가</th>
+                </tr>
+                <tr>
+                  <th scope="col" class="col-date">점검일</th>
+                  <th scope="col" class="col-cost">비용(천원)</th>
+                  <th scope="col" class="col-grade">안전등급</th>
+                  <th scope="col" class="col-date">점검일</th>
+                  <th scope="col" class="col-cost">비용(천원)</th>
+                  <th scope="col" class="col-grade">안전등급</th>
+                  <th scope="col" class="col-date">점검일</th>
+                  <th scope="col" class="col-cost">비용(천원)</th>
+                  <th scope="col" class="col-grade">안전등급</th>
+                  <th scope="col" class="col-date">점검일</th>
+                  <th scope="col" class="col-cost">비용(천원)</th>
+                  <th scope="col" class="col-grade">안전등급</th>
+                </tr>
+              </thead>
+              <tbody id="historyListBody"></tbody>
+            </table>
+          </div>
+
+          <div class="history-list-foot">
+            <nav class="pagination regular-pagination" id="historyListPagination" aria-label="이력 목록 페이지"></nav>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="detail-tab-panel" id="panel-safety" role="tabpanel" hidden>
+      <div class="safety-view">
+        <section class="detail-section">
+          <div class="detail-section__head detail-section__head--list">
+            <div class="detail-section__head-left">
+              <span class="detail-section__bar" aria-hidden="true">
+                <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+              </span>
+              <h3 class="detail-section__title">안전시설현황</h3>
+            </div>
+            <div class="safety-section__actions">
+              <button type="button" class="btn-facility-add" id="safetyEditBtn">
+                <span class="btn-facility-add__icon" aria-hidden="true">
+                  <img src="assets/admin-notices/icon-edit.svg" alt="" width="14" height="14">
+                </span>
+                수정하기
+              </button>
+              <button type="button" class="btn-facility-add" id="safetyCancelBtn" hidden>취소</button>
+              <button type="button" class="btn-facility-add" id="safetySaveBtn" hidden>
+                <span class="btn-facility-add__icon" aria-hidden="true">
+                  <img src="assets/main/facility-form/icon-save.svg" alt="" width="14" height="14">
+                </span>
+                저장하기
+              </button>
+            </div>
+          </div>
+          <div class="detail-table-wrap regular-table-wrap regular-table-wrap--safety">
+            <table class="inspection-table inspection-table--list safety-facility-table">
+              <colgroup>
+                <col class="col-group-root">
+                <col class="col-group">
+                <col class="col-type">
+                <col class="col-item">
+                <col class="col-spec">
+                <col class="col-qty">
+                <col class="col-remark">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" class="safety-facility-table__col-group" colspan="2">구분</th>
+                  <th scope="col" class="safety-facility-table__col-type" colspan="2">종류</th>
+                  <th scope="col" class="safety-facility-table__col-spec">제원</th>
+                  <th scope="col" class="safety-facility-table__col-qty">설치량</th>
+                  <th scope="col" class="safety-facility-table__col-remark">비고</th>
+                </tr>
+              </thead>
+              <tbody id="safetyFacilityBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="detail-tab-panel" id="panel-calculrate" role="tabpanel" hidden>
+      <div class="calc-view">
+        <div class="calc-subtabs" role="tablist">
+          <button type="button" class="calc-subtabs__btn is-active" role="tab" data-subtab="basic" aria-selected="true">기본대가</button>
+          <button type="button" class="calc-subtabs__btn" role="tab" data-subtab="expense" aria-selected="false">직접관리</button>
+          <button type="button" class="calc-subtabs__btn" role="tab" data-subtab="survey" aria-selected="false">추가조사비</button>
+          <button type="button" class="calc-subtabs__btn" role="tab" data-subtab="statement" aria-selected="false">대가산출서</button>
+          <button type="button" class="calc-subtabs__btn" role="tab" data-subtab="history" aria-selected="false">대가 산출이력</button>
+        </div>
+
+        <!-- 기본대가 -->
+        <div class="calc-subpanel is-active" id="calc-basic" role="tabpanel">
+          <div class="calc-meta">
+            <div class="calc-meta__left">
+              <span class="calc-meta__name" id="calcFacilityName">대한통운신항부두</span>
+              <span class="calc-meta__label">시설물명</span>
+            </div>
+            <div class="calc-meta__right">
+              <label class="calc-meta__field">
+                <span class="calc-meta__field-label">점검진단구분</span>
+                <select class="calc-select calc-select--meta" aria-label="점검진단구분">
+                  <option>정기안전점검</option>
+                  <option selected>정밀안전점검</option>
+                  <option>정밀안전진단</option>
+                </select>
+              </label>
+              <label class="calc-meta__field">
+                <span class="calc-meta__field-label">기준일</span>
+                <input type="date" class="calc-date-input calc-date-input--meta" value="2026-01-01" aria-label="기준일">
+              </label>
+            </div>
+          </div>
+
+          <section class="detail-section">
+            <div class="detail-section__head">
+              <h3 class="detail-section__title">1. 제원</h3>
+            </div>
+            <div class="info-field-grid calc-spec-grid" aria-label="제원">
+              <div class="info-field-row info-field-row--1">
+                <div class="info-field">
+                  <span class="info-field__label">최대계류선박규모</span>
+                  <span class="info-field__value">FMS - 상세제원 기입된 값 표출, 기타시설물: 시설물등록현황에서 등록</span>
+                </div>
+              </div>
+              <div class="info-field-row info-field-row--1">
+                <div class="info-field">
+                  <span class="info-field__label">연장</span>
+                  <span class="info-field__value">FMS - 상세제원 기입된 값 표출, 기타시설물: 시설물등록현황에서 등록</span>
+                </div>
+              </div>
+              <div class="info-field-row info-field-row--1">
+                <div class="info-field">
+                  <span class="info-field__label">천단고</span>
+                  <span class="info-field__value">FMS - 상세제원 기입된 값 표출, 기타시설물: 시설물등록현황에서 등록</span>
+                </div>
+              </div>
+              <div class="info-field-row info-field-row--1">
+                <div class="info-field">
+                  <span class="info-field__label">수심</span>
+                  <span class="info-field__value">FMS - 상세제원 기입된 값 표출, 기타시설물: 시설물등록현황에서 등록</span>
+                </div>
+              </div>
+              <div class="info-field-row info-field-row--1">
+                <div class="info-field">
+                  <span class="info-field__label">준공 후 경과 연수</span>
+                  <span class="info-field__value">FMS - 상세제원 기입된 값 표출, 기타시설물: 시설물등록현황에서 등록</span>
+                </div>
+              </div>
+              <div class="info-field-row info-field-row--2">
+                <div class="info-field">
+                  <span class="info-field__label">복잡도</span>
+                  <span class="info-field__value info-field__value--controls">
+                    <span class="calc-cell-unit">
+                      <input type="text" class="calc-input calc-input--xs" value="0" aria-label="복잡도">
+                      <span class="calc-unit">%</span>
+                    </span>
+                    <span class="calc-hint">(매우복잡 +15% 이내, 단순 -15% 이내 범위 내에서 조정)</span>
+                  </span>
+                </div>
+                <div class="info-field">
+                  <span class="info-field__label">전자보고서 제공여부</span>
+                  <span class="info-field__value info-field__value--controls">
+                    <select class="calc-select calc-select--inline" aria-label="전자보고서 제공여부">
+                      <option selected>전자용역보고서 미제공</option>
+                      <option>전자용역보고서 제공</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="detail-section">
+            <div class="detail-section__head">
+              <h3 class="detail-section__title">2. 조정율</h3>
+              <button type="button" class="btn-facility-add" id="calcAdjustAddBtn">
+                <img src="assets/main/facility-search/detail/calc/icon-plus.svg" alt="" width="18" height="18">
+                행 추가
+              </button>
+            </div>
+            <div class="detail-table-wrap regular-table-wrap">
+              <table class="inspection-table calc-adjust-table" id="calcAdjustTable">
+                <thead>
+                  <tr>
+                    <th>해역별 조정</th>
+                    <th>구조형식별 조정</th>
+                    <th>톤급별 조정</th>
+                    <th>부두폭 조정</th>
+                    <th>배면매립부길이 조정</th>
+                    <th>해저송유관길이별 조정</th>
+                    <th class="calc-adjust-table__col-action"></th>
+                  </tr>
+                </thead>
+                <tbody id="calcAdjustBody">
+                  <tr>
+                    <td>
+                      <select class="calc-select calc-select--table" aria-label="해역별 조정">
+                        <option selected>남해안</option>
+                        <option>서해안</option>
+                        <option>동해안</option>
+                        <option>제주해안</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="calc-select calc-select--table" aria-label="구조형식별 조정">
+                        <option selected>잔교식</option>
+                        <option>중력식</option>
+                        <option>강널말뚝식</option>
+                        <option>부잔교식</option>
+                      </select>
+                    </td>
+                    <td>
+                      <span class="calc-cell-unit">
+                        <input type="text" class="calc-input calc-input--sm" placeholder="0" aria-label="톤급별 조정">
+                        <span class="calc-unit">톤</span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="calc-cell-unit">
+                        <input type="text" class="calc-input calc-input--sm" placeholder="0" aria-label="부두폭 조정">
+                        <span class="calc-unit">m</span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="calc-cell-unit">
+                        <input type="text" class="calc-input calc-input--sm" placeholder="0" aria-label="배면매립부길이 조정">
+                        <span class="calc-unit">m</span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="calc-cell-unit">
+                        <input type="text" class="calc-input calc-input--sm" placeholder="0" aria-label="해저송유관길이별 조정">
+                        <span class="calc-unit">m</span>
+                      </span>
+                    </td>
+                    <td>
+                      <button type="button" class="calc-row-delete">
+                        <img src="assets/main/facility-search/detail/calc/icon-delete.svg" alt="" width="16" height="16">
+                        삭제
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <select class="calc-select calc-select--table" aria-label="해역별 조정">
+                        <option selected>남해안</option>
+                        <option>서해안</option>
+                        <option>동해안</option>
+                        <option>제주해안</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="calc-select calc-select--table" aria-label="구조형식별 조정">
+                        <option selected>잔교식</option>
+                        <option>중력식</option>
+                        <option>강널말뚝식</option>
+                        <option>부잔교식</option>
+                      </select>
+                    </td>
+                    <td>
+                      <span class="calc-cell-unit">
+                        <input type="text" class="calc-input calc-input--sm" placeholder="0" aria-label="톤급별 조정">
+                        <span class="calc-unit">톤</span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="calc-cell-unit">
+                        <input type="text" class="calc-input calc-input--sm" placeholder="0" aria-label="부두폭 조정">
+                        <span class="calc-unit">m</span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="calc-cell-unit">
+                        <input type="text" class="calc-input calc-input--sm" placeholder="0" aria-label="배면매립부길이 조정">
+                        <span class="calc-unit">m</span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="calc-cell-unit">
+                        <input type="text" class="calc-input calc-input--sm" placeholder="0" aria-label="해저송유관길이별 조정">
+                        <span class="calc-unit">m</span>
+                      </span>
+                    </td>
+                    <td>
+                      <button type="button" class="calc-row-delete">
+                        <img src="assets/main/facility-search/detail/calc/icon-delete.svg" alt="" width="16" height="16">
+                        삭제
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="info-field-grid calc-spec-grid" aria-label="조정비율" style="margin-top: 6px;">
+              <div class="info-field-row info-field-row--1">
+                <div class="info-field">
+                  <span class="info-field__label">조정비율</span>
+                  <span class="info-field__value">FMS 규칙에 맞춰 비율 산정</span>
+                </div>
+              </div>
+            </div>
+            <p class="calc-note" style="margin-top: 6px;">- 시설물의 안전 및 유지관리 실시 등에 관한 지침(국토교통부고시 제2025-470호) 제6장 안전점검등 및 성능평가 비용의 산정기준 참조</p>
+          </section>
+
+          <section class="detail-section">
+            <div class="detail-section__head">
+              <h3 class="detail-section__title">3. 대가산출내역</h3>
+            </div>
+            <div class="calc-formula-list">
+              <div class="calc-formula-row calc-section-head">
+                <span class="calc-formula-label">1. 기본대가</span>
+                <span class="calc-formula-expr">
+                  가 + 나 + 다 +라 =
+                  <button type="button" class="calc-auto-btn calc-auto-btn--light" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+
+              <div class="calc-formula-row calc-indent-1 calc-label-only">
+                <span class="calc-formula-label">가. 직접인건비</span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  외업인건비 + 내업인건비 =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <div class="calc-formula-duo">
+                  <span class="calc-formula-sub calc-bullet">전체인원 <input type="text" class="calc-input calc-input--xs" aria-label="전체인원"> 인</span>
+                  <span class="calc-formula-sub calc-bullet">조정 전 <input type="text" class="calc-input calc-input--xs" aria-label="전체인원 조정 전"> 인</span>
+                </div>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <div class="calc-formula-duo">
+                  <span class="calc-formula-sub calc-bullet">외업인원 <input type="text" class="calc-input calc-input--xs" aria-label="외업인원"> 인</span>
+                  <span class="calc-formula-sub calc-bullet">조정 전 <input type="text" class="calc-input calc-input--xs" aria-label="외업인원 조정 전"> 인</span>
+                </div>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-label calc-formula-label--inline">인건비</span>
+                <input type="text" class="calc-input calc-input--md" aria-label="인건비">
+                <span class="calc-formula-unit">원</span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (1) 외업인원 × 인건비 =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (2) (전체인원 − 외업인원) × 인건비 =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (1) 외업인건비 = 외업인원값 ×
+                  <input type="text" class="calc-input calc-input--md" aria-label="외업인건비 단가">
+                  =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (2) 내업인건비 = 내업인원값 ×
+                  <input type="text" class="calc-input calc-input--md" aria-label="내업인건비 단가">
+                  =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                </span>
+              </div>
+
+              <div class="calc-formula-row calc-indent-1">
+                <span class="calc-formula-label calc-formula-label--fixed">나. 제경비</span>
+                <span class="calc-formula-expr">
+                  직접인건비의
+                  <input type="text" class="calc-input calc-input--xs" value="0" aria-label="제경비 비율">
+                  %
+                  [110~120]% = 직접인건비 표출 × 115% =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+
+              <div class="calc-formula-row calc-indent-1">
+                <span class="calc-formula-label calc-formula-label--fixed">다. 기술료</span>
+                <span class="calc-formula-expr">
+                  (가+나)의
+                  <input type="text" class="calc-input calc-input--xs" value="0" aria-label="기술료 비율">
+                  %
+                  [20~40]% = (직접인건비+제경비×기술료)% =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+
+              <div class="calc-formula-row calc-indent-1">
+                <span class="calc-formula-label calc-formula-label--fixed">라. 직접경비</span>
+                <span class="calc-formula-expr">
+                  (1)+(2)+(3)+(4)+(5)+(6) =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-sub calc-bullet">외업인원 <span class="calc-ref-badge">외업인원 값</span> 인</span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr calc-bullet">
+                  차량운행일 <span class="calc-ref-badge">외업인원 값</span> /
+                  <input type="text" class="calc-input calc-input--md" aria-label="차량운행 제수">
+                  =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">일</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr calc-bullet">
+                  현지보조인부
+                  <input type="text" class="calc-input calc-input--xs" aria-label="현지보조인부">
+                  인 (외업인원의
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  %)
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (1) 여비 및 제제비 = (가)+(나)+(다) =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-3">
+                <span class="calc-formula-expr">
+                  (가) 일비 = <span class="calc-ref-badge">외업인원 값</span> × 25,000원 =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-3">
+                <span class="calc-formula-expr">
+                  (나) 숙박비 = <span class="calc-ref-badge">외업인원 값</span> × 70,000원 =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-3">
+                <span class="calc-formula-expr">
+                  (다) 여비 =
+                  <input type="text" class="calc-input calc-input--xs" aria-label="여비 인원">
+                  인 × 20,000원 =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (2) 차량운행비 = 차량운행일 ×
+                  <input type="text" class="calc-input calc-input--md" aria-label="차량운행비 단가">
+                  원 =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (3) 현지보조인부 = 보조인부 수
+                  <input type="text" class="calc-input calc-input--xs" aria-label="보조인부 수">
+                  인 ×
+                  <input type="text" class="calc-input calc-input--md" aria-label="보조인부 단가">
+                  =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (4) 위험수당 = 외업인건비의
+                  <input type="text" class="calc-input calc-input--xs" aria-label="위험수당 비율">
+                  % [10~20]% =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (5) 기계기구손료 = 직접인건비의
+                  <input type="text" class="calc-input calc-input--xs" aria-label="기계기구손료 비율">
+                  % =
+                  <button type="button" class="calc-auto-btn" disabled>자동계산</button>
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+              <div class="calc-formula-row calc-indent-2">
+                <span class="calc-formula-expr">
+                  (6) 보고서인쇄비 =
+                  <input type="text" class="calc-input calc-input--md" aria-label="보고서인쇄비">
+                  <span class="calc-formula-unit">원</span>
+                </span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- 직접관리 -->
+        <div class="calc-subpanel" id="calc-expense" role="tabpanel" hidden>
+          <section class="detail-section">
+            <p class="calc-note">기본대가 탭에서 산출된 직접경비를 제외한 기타 경비항목을 직접 입력할 수 있습니다.</p>
+            <div class="detail-table-wrap regular-table-wrap">
+              <table class="inspection-table calc-expense-table">
+                <thead>
+                  <tr>
+                    <th>직접경비항목</th>
+                    <th>단위</th>
+                    <th>수량</th>
+                    <th>단가(원)</th>
+                    <th>금액(원)</th>
+                    <th>비고</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>일비</td><td>인,일</td><td><span class="calc-ref-badge">외업인원</span></td><td>20,000</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td>숙박비</td><td>인,일</td><td><span class="calc-ref-badge">외업인원</span></td><td>50,000</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td>여비</td><td>인,일</td><td><span class="calc-ref-badge">여비</span></td><td>20,000</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td>차량운행비</td><td>일</td><td><span class="calc-ref-badge">차량운행일</span></td><td><span class="calc-ref-badge">차량운행비</span></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td>현지보조인부</td><td>인,일</td><td><span class="calc-ref-badge">현지보조인원 수</span></td><td><span class="calc-ref-badge">현지보조인원 일당</span></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td>위험수당</td><td>식</td><td>1</td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td>외업인건비의 지정값%</td>
+                  </tr>
+                  <tr>
+                    <td>기계기구손료</td><td>식</td><td>1</td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td>직접인건비의 지정값%</td>
+                  </tr>
+                  <tr>
+                    <td>보고서인쇄비</td><td>식</td><td>1</td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="calc-expense-table__total">
+                    <td colspan="4">합계</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- 추가조사비 -->
+        <div class="calc-subpanel" id="calc-survey" role="tabpanel" hidden>
+          <section class="detail-section">
+            <div class="detail-section__head">
+              <h3 class="detail-section__title">추가조사비</h3>
+              <button type="button" class="btn-facility-add" id="calcSurveyAddBtn">
+                <img src="assets/main/facility-search/detail/calc/icon-plus.svg" alt="" width="18" height="18">
+                행 추가
+              </button>
+            </div>
+            <div class="detail-table-wrap regular-table-wrap">
+              <table class="inspection-table calc-survey-table">
+                <thead>
+                  <tr>
+                    <th>선택과업비용항목</th>
+                    <th>단위</th>
+                    <th>수량</th>
+                    <th>단가(원)</th>
+                    <th>금액(원)</th>
+                    <th>비고</th>
+                    <th class="calc-adjust-table__col-action"></th>
+                  </tr>
+                </thead>
+                <tbody id="calcSurveyBody">
+                  <tr>
+                    <td><input type="text" class="calc-input calc-input--block"></td>
+                    <td><input type="text" class="calc-input calc-input--block"></td>
+                    <td><input type="text" class="calc-input calc-input--block"></td>
+                    <td><input type="text" class="calc-input calc-input--block"></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td>
+                    <td><input type="text" class="calc-input calc-input--block"></td>
+                    <td>
+                      <button type="button" class="calc-row-delete">
+                        <img src="assets/main/facility-search/detail/calc/icon-delete.svg" alt="" width="16" height="16">
+                        삭제
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="calc-expense-table__total">
+                    <td colspan="4">합계</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td>
+                    <td colspan="2"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- 대가산출서 -->
+        <div class="calc-subpanel" id="calc-statement" role="tabpanel" hidden>
+          <section class="detail-section">
+            <div class="detail-table-wrap regular-table-wrap">
+              <table class="inspection-table calc-statement-table">
+                <thead>
+                  <tr>
+                    <th>구분</th>
+                    <th>단위</th>
+                    <th>수량</th>
+                    <th>단가(원)</th>
+                    <th>금액(원)</th>
+                    <th>비고</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="calc-statement-table__title-row"><td colspan="6">대한통운신항부두(I+II)</td></tr>
+                  <tr class="calc-statement-table__group-row"><td colspan="6">I. 공급가액</td></tr>
+                  <tr>
+                    <td class="calc-indent-label">1. 기본대가</td><td></td><td></td><td></td><td></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--1">가. 직접인건비</td><td></td><td></td><td></td><td></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(1) 외업</td><td>인,일</td>
+                    <td><span class="calc-ref-badge">외업인원</span></td><td><span class="calc-ref-badge">외업 인건비 기입값</span></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(2) 내업</td><td>인,일</td>
+                    <td><span class="calc-ref-badge">내업인원</span></td><td><span class="calc-ref-badge">내업 인건비 기입값</span></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--1">나. 제경비</td><td>식</td><td>1</td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--1">다. 기술료</td><td>식</td><td>1</td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--1">라. 직접경비</td><td></td><td></td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(1) 여비 및 제제비</td><td></td><td></td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--3">(가) 일비</td><td>인,일</td>
+                    <td><span class="calc-ref-badge">외업인원</span></td><td>20,000</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--3">(나) 숙박비</td><td>인,일</td>
+                    <td><span class="calc-ref-badge">외업인원</span></td><td>50,000</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--3">(다) 여비</td><td>인,일</td>
+                    <td><span class="calc-ref-badge">여비</span></td><td>20,000</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(2) 차량운행비</td><td>일</td>
+                    <td><span class="calc-ref-badge">차량운행일</span></td><td><span class="calc-ref-badge">차량운행비</span></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(3) 현지 보조인부</td><td>인,일</td>
+                    <td><span class="calc-ref-badge">현지보조인원 수</span></td><td><span class="calc-ref-badge">현지보조인원 일당</span></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(4) 위험수당</td><td>식</td><td>1</td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(5) 기계기구 손료</td><td>식</td><td>1</td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(6) 보고서 인쇄비</td><td>식</td><td>1</td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label calc-indent-label--2">(7) 기타경비항목</td><td></td><td></td><td></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr>
+                    <td class="calc-indent-label">2. 추가조사비</td>
+                    <td><span class="calc-ref-badge">추가조사비 기입값</span></td>
+                    <td><span class="calc-ref-badge">추가조사비 기입값</span></td>
+                    <td><span class="calc-ref-badge">추가조사비 기입값</span></td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                  <tr class="calc-statement-table__group-row">
+                    <td colspan="2">II. 부가가치세</td><td colspan="2">10%</td>
+                    <td><button type="button" class="calc-auto-btn" disabled>자동계산</button></td><td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- 대가산출이력 -->
+        <div class="calc-subpanel" id="calc-history" role="tabpanel" hidden>
+          <section class="detail-section detail-section--calc-history">
+            <div class="calc-search-panel" aria-labelledby="calcHistorySearchTitle">
+              <div class="calc-search-panel__head">
+                <span class="calc-search-panel__title-icon-wrap" aria-hidden="true">
+                  <img class="calc-search-panel__title-icon" src="assets/main/facility-search/icon-condition.svg" alt="" width="16" height="16">
+                </span>
+                <h3 class="calc-search-panel__title" id="calcHistorySearchTitle">검색조건</h3>
+              </div>
+
+              <form class="calc-search-filters" id="calcHistorySearch" action="#" method="get" novalidate>
+                <div class="calc-search-filters__row">
+                  <div class="calc-filter-field calc-filter-field--type">
+                    <label for="calcHistoryTypeFilter">점검진단구분</label>
+                    <select id="calcHistoryTypeFilter" name="inspectType" aria-label="점검진단구분 선택">
+                      <option value="" selected>전체</option>
+                      <option value="정기안전점검">정기안전점검</option>
+                      <option value="정밀안전점검">정밀안전점검</option>
+                      <option value="정밀안전진단">정밀안전진단</option>
+                    </select>
+                  </div>
+                  <div class="calc-filter-field calc-filter-field--date-range">
+                    <span class="calc-filter-field__label" id="calcHistoryDateLabel">산출기준일</span>
+                    <div class="calc-filter-field__date-range" role="group" aria-labelledby="calcHistoryDateLabel">
+                      <input type="date" id="calcHistoryDateFrom" name="dateFrom" value="2026-01-01" aria-label="산출기준일 시작">
+                      <span class="calc-filter-field__date-sep" aria-hidden="true">~</span>
+                      <input type="date" id="calcHistoryDateTo" name="dateTo" value="2026-04-21" aria-label="산출기준일 종료">
+                    </div>
+                  </div>
+                  <div class="calc-search-actions">
+                    <button type="submit" class="calc-btn-search">
+                      <img src="assets/main/facility-search/icon-search.svg" alt="" width="18" height="18">
+                      검색하기
+                    </button>
+                    <button type="reset" class="calc-btn-reset">
+                      <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                      초기화
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="calc-history-results">
+              <div class="calc-history-results__head">
+                <span class="calc-history-results__bar" aria-hidden="true">
+                  <img src="assets/main/facility-search/detail/figma224/icon-section-bar.svg" alt="" width="8" height="14">
+                </span>
+                <h3 class="calc-history-results__title">대가산출이력</h3>
+              </div>
+
+              <div class="detail-table-wrap regular-table-wrap">
+                <table class="inspection-table calc-history-table">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>산출기준일</th>
+                      <th>점검진단구분</th>
+                      <th>기본대가</th>
+                      <th>추가조사비</th>
+                      <th>계</th>
+                      <th>수정자</th>
+                      <th>최종수정일시</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>2023-01-02</td>
+                      <td>정밀점검</td>
+                      <td>39,864,312</td>
+                      <td>-</td>
+                      <td>39,864,312</td>
+                      <td>poms</td>
+                      <td>2023-01-02</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    </div><!-- /.detail-shell -->
+      </div><!-- /.fd-content -->
+    </div><!-- /.fs-layout -->
+  </main>
+
+  <!-- 영상 모달 — 시설물 요약 [영상 보기] 버튼 (map-modal 팝업 틀 톤 맞춤) -->
+  <div id="facilityVideoModal" class="fd-video-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="facilityVideoModalTitle" hidden>
+    <div class="fd-video-modal__backdrop" data-close-video-modal tabindex="-1" aria-hidden="true"></div>
+    <div class="fd-video-modal__panel">
+      <header class="fd-video-modal__head">
+        <h2 class="fd-video-modal__title" id="facilityVideoModalTitle">현장영상</h2>
+        <button type="button" class="fd-video-modal__close" data-close-video-modal aria-label="영상 창 닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="fd-video-modal__body">
+        <div class="fd-video-modal__frame" id="facilityVideoModalFrame"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 지도 모달 — Figma 118:2902 (공통 팝업 틀) -->
+  <div
+    id="facility-map-modal"
+    class="map-modal map-modal--detail"
+    data-map-embed-src="https://www.openstreetmap.org/export/embed.html?bbox=129.004%2C35.068%2C129.098%2C35.154&amp;layer=mapnik"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="facility-map-modal-title"
+  >
+    <div class="map-modal__backdrop" data-close-map-modal tabindex="-1" aria-hidden="true"></div>
+    <div class="map-modal__panel map-modal__panel--detail">
+      <header class="map-modal__detail-head">
+        <div class="map-modal__detail-titles">
+          <h2 id="facility-map-modal-title" class="map-modal__detail-title">시설물 위치</h2>
+          <p class="map-modal__detail-subtitle" id="facility-map-modal-subtitle">부산광역시 중구 항만로<span class="map-modal__detail-subtitle-sep" aria-hidden="true"></span>부산항 북항</p>
+        </div>
+        <button type="button" class="map-modal__side-close" data-close-map-modal aria-label="지도 창 닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="map-modal__detail-body">
+        <div class="map-modal__detail-map" id="facility-map-modal-frame">
+          <div id="facility-map-leaflet" class="map-modal__leaflet" role="presentation" aria-hidden="true"></div>
+
+          <div class="dash-map-tools map-modal__tools" aria-label="지도 도구">
+            <button type="button" class="dash-map-tools__btn" data-map-tool="distance" title="거리">
+              <span class="dash-map-tools__glyph" aria-hidden="true">
+                <img src="assets/main/dashboard/map/Group%20239673%20(1).svg" alt="" width="18" height="18">
+              </span>
+              <span>거리</span>
+            </button>
+            <button type="button" class="dash-map-tools__btn" data-map-tool="area" title="면적">
+              <span class="dash-map-tools__glyph" aria-hidden="true">
+                <img src="assets/main/dashboard/map/Group%20239750%20(1).svg" alt="" width="16" height="16">
+              </span>
+              <span>면적</span>
+            </button>
+            <div class="dash-map-tools__stack">
+              <button type="button" class="dash-map-tools__icon" data-map-tool="zoom-in" aria-label="확대">
+                <img src="assets/main/dashboard/map/Group%20239748%20(1).svg" alt="" width="12" height="12">
+              </button>
+              <button type="button" class="dash-map-tools__icon" data-map-tool="zoom-out" aria-label="축소">
+                <img src="assets/main/dashboard/map/Vector%20(1).svg" alt="" width="20" height="20">
+              </button>
+            </div>
+            <button type="button" class="dash-map-tools__btn" data-map-tool="satellite" title="위성">
+              <span class="dash-map-tools__glyph" aria-hidden="true">
+                <img src="assets/main/dashboard/map/Component%202%20(1).svg" alt="" width="20" height="20">
+              </span>
+              <span>위성</span>
+            </button>
+            <button type="button" class="dash-map-tools__btn" data-map-tool="drone" title="드론">
+              <span class="dash-map-tools__glyph" aria-hidden="true">
+                <img src="assets/main/dashboard/map/Group%20239751%20(1).svg" alt="" width="16" height="16">
+              </span>
+              <span>드론</span>
+            </button>
+          </div>
+        </div>
+
+        <aside class="map-modal__detail-side" aria-labelledby="map-results-heading">
+          <form class="map-modal__side-filters" id="facility-map-modal-form" action="#" method="get" novalidate>
+            <div class="map-modal__side-filter-group">
+              <div class="map-modal__side-row">
+                <div class="map-modal__side-field">
+                  <label for="map-filter-type">시설유형</label>
+                  <select id="map-filter-type" name="facilityType" class="map-modal__side-select">
+                    <option value="">전체</option>
+                    <option value="1">1종 시설물</option>
+                    <option value="2">2종 시설물</option>
+                    <option value="3">3종 시설물</option>
+                    <option value="etc">기타</option>
+                  </select>
+                </div>
+                <div class="map-modal__side-field">
+                  <label for="map-filter-port">항만 · 구역</label>
+                  <select id="map-filter-port" name="port" class="map-modal__side-select">
+                    <option value="">전체</option>
+                    <option value="busan-n">부산항 북항</option>
+                    <option value="busan-s">부산항 신항</option>
+                    <option value="incheon">인천항</option>
+                    <option value="ulsan">울산항</option>
+                  </select>
+                </div>
+              </div>
+              <div class="map-modal__side-field map-modal__side-field--full">
+                <label for="map-search-input">시설물 검색</label>
+                <input
+                  type="search"
+                  id="map-search-input"
+                  name="q"
+                  class="map-modal__side-input"
+                  placeholder="시설물명 · 관리번호"
+                  autocomplete="off"
+                  enterkeyhint="search"
+                >
+              </div>
+            </div>
+            <button type="submit" class="map-modal__side-search">
+              <img src="assets/main/dashboard/map/Component%201.svg" alt="" width="22" height="22">
+              검색하기
+            </button>
+          </form>
+
+          <div class="map-modal__side-results" aria-labelledby="map-results-heading">
+            <div class="map-modal__side-results-head">
+              <h3 id="map-results-heading" class="visually-hidden">검색결과</h3>
+              <span class="map-modal__side-count">
+                검색결과
+                <strong id="map-result-count">0건</strong>
+              </span>
+            </div>
+            <div class="map-modal__side-list-wrap">
+              <ul class="map-modal__cards" id="map-result-list" role="list"></ul>
+              <p class="map-modal__side-empty" id="map-result-empty" hidden>조건에 맞는 시설물이 없습니다.</p>
+            </div>
+            <button type="button" class="map-modal__side-detail" id="map-modal-detail-btn" disabled aria-disabled="true">
+              <img src="assets/main/dashboard/map/Component%204.svg" alt="" width="22" height="22">
+              상세보기
+            </button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="js/facility-map-modal.js"></script>
+  <script src="js/detail.js"></script>
+  <script src="js/facility-detail-precision-data.js"></script>
+  <script src="js/facility-detail-precision.js"></script>
+  <script src="js/facility-detail-repair-data.js"></script>
+  <script src="js/facility-detail-repair.js"></script>
+  <script src="js/facility-detail-vulnerable-data.js"></script>
+  <script src="js/facility-detail-vulnerable.js"></script>
+  <script src="js/facility-detail-major-defect-data.js"></script>
+  <script src="js/facility-detail-major-defect.js"></script>
+  <script src="js/facility-detail-history.js"></script>
+  <script src="js/facility-detail-safety.js"></script>
+  <script src="js/facility-detail-calculate.js"></script>
+  <script>
+    PomsSidebar.mount('#sidebar-root', { active: 'facility-search' });
+  </script>
+  <script>
+    // 엑셀 다운로드 — 현재 활성 탭(대가산정은 활성 서브탭)의 표를 내보냄
+    (() => {
+      const btn = document.getElementById('facilityDetailExcelBtn');
+      if (!btn) return;
+
+      const TITLE = {
+        general: '일반정보', precision: '안전점검실적', repair: '보수보강실적',
+        vulnerable: '취약시설물 중점관리', 'major-defect': '중대결함 사후관리',
+        history: '이력정보', safety: '안전시설현황', calculrate: '대가산정',
+      };
+
+      function activeTab() {
+        const t = document.querySelector('.detail-tabs__btn.is-active');
+        return t ? t.dataset.tab : 'general';
+      }
+
+      function findTables(tab) {
+        const panel = document.getElementById('panel-' + tab);
+        if (!panel) return [];
+        const root = tab === 'calculrate'
+          ? (panel.querySelector('.calc-subpanel.is-active') || panel)
+          : panel;
+        return Array.from(root.querySelectorAll('table')).filter((t) => !t.classList.contains('visually-hidden'));
+      }
+
+      function toHtml(tables, title) {
+        const body = tables.map((t) => {
+          const clone = t.cloneNode(true);
+          clone.querySelectorAll('select').forEach((el) => {
+            const v = el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '';
+            el.replaceWith(document.createTextNode(v));
+          });
+          clone.querySelectorAll('input').forEach((el) => el.replaceWith(document.createTextNode(el.value || '')));
+          clone.querySelectorAll('button, img, svg').forEach((el) => el.remove());
+          return clone.outerHTML;
+        }).join('<br>');
+        return '<html><head><meta charset="utf-8"><title>' + title + '</title></head><body>' + body + '</body></html>';
+      }
+
+      btn.addEventListener('click', () => {
+        const tab = activeTab();
+        // 탭별 전용 내보내기 함수가 등록돼 있으면 우선 사용 (예: window.excelExporters.precision)
+        const custom = window.excelExporters && window.excelExporters[tab];
+        if (typeof custom === 'function') { custom(); return; }
+
+        const tables = findTables(tab);
+        if (!tables.length) { alert('다운로드할 데이터가 없습니다.'); return; }
+        const name = (document.getElementById('facilityName') || {}).textContent || '시설물';
+        const title = name.trim() + '_' + (TITLE[tab] || tab);
+        const blob = new Blob(['\ufeff' + toHtml(tables, title)], { type: 'application/vnd.ms-excel;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = title + '.xls';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(a.href);
+      });
+    })();
+  </script>
+  <script>
+    // 일반정보 — 변경 이력(차수)별 데이터 표시
+    (() => {
+      const VERSIONS = {
+        3: { manageType: '직영', agency: '부산지방해양수산청', year: '2010', length: '120' },
+        2: { manageType: '대행', agency: '부산광역시', year: '2010', length: '120' },
+        1: { manageType: '대행', agency: '부산광역시', year: '2001', length: '115' },
+      };
+
+      const select = document.getElementById('generalHistorySelect');
+      if (!select) return;
+
+      function applyVersion() {
+        const data = VERSIONS[select.value] || {};
+        document.querySelectorAll('[data-gh]').forEach((cell) => {
+          const key = cell.dataset.gh;
+          if (data[key] !== undefined) cell.textContent = data[key];
+        });
+      }
+
+      select.addEventListener('change', applyVersion);
+      applyVersion();
+    })();
+  </script>
+  <script>
+    // 임베드 모드 (?embed=1) — 관리자 페이지 등에서 iframe 으로 탭 내용만 표시
+    (() => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('embed') !== '1') return;
+      document.body.classList.add('is-embed');
+
+      const style = document.createElement('style');
+      style.textContent = `
+        body{min-width:0!important;background:#fff!important}
+        body.is-embed #sidebar-root,
+        body.is-embed .fs-lnb,
+        body.is-embed .page-header,
+        body.is-embed .detail-toolbar,
+        body.is-embed .facility-summary,
+        body.is-embed .detail-tabs{display:none!important}
+        body.is-embed .main-content{margin-left:0!important;padding:4px 8px 16px!important;min-width:0!important}
+        body.is-embed .fs-layout{display:block!important}
+        body.is-embed .fd-content{max-width:none!important;width:100%!important}
+        /* 이력정보 탭 — 타임라인(이력정보) 제외, 이력 목록만 표시 */
+        body.is-embed #panel-history section.detail-section:has(.regular-table-wrap--history-timeline){display:none!important}
+        body.is-embed #panel-history section.detail-section{margin-top:0!important;padding-top:0!important}
+        body.is-embed #panel-history .history-view{margin-top:0!important;padding-top:0!important}
+        body.is-embed #panel-history h3.detail-section__title{margin-top:0!important}
+        /* 안전시설현황 탭 — 수정/저장/취소 버튼 숨김 (조회 전용) */
+        body.is-embed #panel-safety #safetyEditBtn,
+        body.is-embed #panel-safety #safetySaveBtn,
+        body.is-embed #panel-safety #safetyCancelBtn{display:none!important}
+        /* 일반정보 탭 — FMS/POMS 범례 문구 숨김 + 파란 POMS 항목 검정 */
+        body.is-embed #panel-general .info-data-legend{display:none!important}
+        body.is-embed .info-field__value--poms{color:#111827!important}
+        body.is-embed .info-table__poms{color:#111827!important}
+        /* 실적 목록 — +추가 버튼 숨김, 파란 행 글씨 검정 */
+        body.is-embed #precisionAddBtn,
+        body.is-embed #repairAddBtn,
+        body.is-embed #vulnerableAddBtn,
+        body.is-embed #majorDefectAddBtn{display:none!important}
+        body.is-embed .inspection-table tbody tr,
+        body.is-embed .inspection-table tbody td{color:#111827!important}
+        /* 대가산정 탭 — 조회 전용: 추가/삭제 버튼 숨김, 입력 비활성 */
+        body.is-embed #panel-calculrate .btn-detail-add,
+        body.is-embed #panel-calculrate .btn-facility-add,
+        body.is-embed #panel-calculrate .calc-row-delete{display:none!important}
+        body.is-embed #panel-calculrate input,
+        body.is-embed #panel-calculrate select,
+        body.is-embed #panel-calculrate textarea{pointer-events:none!important;background:#f8fafc!important;color:#475569!important}
+      `;
+      document.head.appendChild(style);
+
+      /* 목록 행 클릭 → 사용자 페이지 이동 대신 팝업(iframe)으로 상세 표시 */
+      const DETAIL_PAGES = {
+        'panel-precision': 'facility-precision-detail.html',
+        'panel-repair': 'facility-repair-detail.html',
+        'panel-vulnerable': 'facility-vulnerable-detail.html',
+        'panel-major-defect': 'facility-major-defect-detail.html',
+      };
+
+      /* 팝업은 최상위 창(관리자 페이지)에서 표시 — file:// 환경 호환을 위해 postMessage 사용 */
+      function openDetail(url) {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'poms-embed-detail', url: url }, '*');
+        } else {
+          window.location.href = url;
+        }
+      }
+
+      const facilityId = params.get('id') || 'south';
+      document.addEventListener('click', (e) => {
+        const tr = e.target.closest('tr.is-clickable[data-id]');
+        if (!tr) return;
+        const panel = tr.closest('.detail-tab-panel');
+        const page = DETAIL_PAGES[panel?.id];
+        if (!page) return;
+        e.preventDefault();
+        e.stopPropagation();
+        openDetail(`${page}?facilityId=${encodeURIComponent(facilityId)}&id=${encodeURIComponent(tr.dataset.id)}&embed=1`);
+      }, true);
+    })();
+  </script>
+  <script>
+    // 영상 보기 — 시설물 요약 [영상 보기] 버튼 → 영상 모달 (mp4 / YouTube URL 모두 지원)
+    (() => {
+      const btn = document.getElementById('facilityDetailVideoBtn');
+      const modal = document.getElementById('facilityVideoModal');
+      if (!btn || !modal) return;
+
+      const frame = modal.querySelector('#facilityVideoModalFrame');
+      const titleEl = modal.querySelector('#facilityVideoModalTitle');
+      let lastFocus = null;
+
+      function toEmbed(src) {
+        const yt = src.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
+        if (yt) {
+          const ifr = document.createElement('iframe');
+          ifr.src = 'https://www.youtube.com/embed/' + yt[1] + '?autoplay=1&rel=0';
+          ifr.allow = 'autoplay; fullscreen; picture-in-picture';
+          ifr.allowFullscreen = true;
+          ifr.title = titleEl.textContent;
+          return ifr;
+        }
+        const v = document.createElement('video');
+        v.src = src;
+        v.controls = true;
+        v.autoplay = true;
+        v.playsInline = true;
+        return v;
+      }
+
+      function open() {
+        const src = btn.dataset.videoSrc;
+        if (!src) { alert('등록된 영상이 없습니다.'); return; }
+        titleEl.textContent = btn.dataset.videoTitle || '현장영상';
+        frame.innerHTML = '';
+        frame.appendChild(toEmbed(src));
+        lastFocus = document.activeElement;
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('fd-video-modal-open');
+        requestAnimationFrame(() => modal.classList.add('is-open'));
+        modal.querySelector('.fd-video-modal__close').focus();
+      }
+
+      function close() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('fd-video-modal-open');
+        frame.innerHTML = ''; // 재생 중지
+        setTimeout(() => { modal.hidden = true; }, 200);
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      btn.addEventListener('click', open);
+      modal.querySelectorAll('[data-close-video-modal]').forEach((el) => el.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+      });
+    })();
+  </script>
+</body>
+</html>

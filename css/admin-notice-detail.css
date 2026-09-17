@@ -1,0 +1,376 @@
+/* 공지사항 상세 — 관리자 시안 기준 */
+/* 폭/양옆 여백(1400 + 260×2)과 fmd-crumb-row는 admin-topnav.css가 담당 */
+
+.notice-detail-page {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+.notice-detail-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+  background: #fff;
+  overflow: visible;
+}
+
+/* 레거시 page-header 무효화 (마크업은 fmd-crumb-row 사용) */
+.notice-detail-page .page-header,
+.notice-detail-page .page-header__bar,
+.notice-detail-page .btn-back {
+  display: none !important;
+}
+
+/* ===== Stack ===== */
+.nd-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== 제목 행 ===== */
+.nd-title-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.nd-title-card__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+  height: 44px;
+}
+
+.nd-title-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.nd-title-card__icon svg,
+.nd-title-card__icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.nd-title-card__title {
+  margin: 0;
+  color: #111;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.44px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nd-title-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: rgba(230, 0, 45, 0.08);
+  color: #e6002d;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nd-title-card__badge[hidden] {
+  display: none !important;
+}
+
+.nd-title-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.nd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.nd-btn img,
+.nd-btn__icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.nd-btn--delete {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.nd-btn--delete:hover {
+  background: #f6f8fb;
+}
+
+.nd-btn--edit {
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.nd-btn--edit:hover {
+  background: #16304f;
+}
+
+/* ===== 상세 패널 (정보표 + 내용 + 첨부파일 = 하나의 표) ===== */
+.nd-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.nd-panel__meta {
+  padding: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+.nd-meta-row {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  border-bottom: 1px solid #dadae2;
+}
+
+.nd-meta-cell {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  padding: 6px 14px;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  margin: 0;
+  color: #111;
+  font-size: 13px;
+  line-height: normal;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.nd-meta-cell:last-child,
+.nd-meta-cell--last {
+  border-right: 0;
+}
+
+.nd-meta-cell--label {
+  justify-content: center;
+  width: 90px;
+  flex-shrink: 0;
+  background: #f6f9ff;
+  font-weight: 500;
+}
+
+.nd-meta-cell--value {
+  flex: 1 1 0;
+  min-width: 0;
+  background: #fff;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 작성자/작성일 값 칸을 더 넓게 (시안 비율 168:110) */
+.nd-meta-cell--value[data-field="author"],
+.nd-meta-cell--value[data-field="date"] {
+  flex-grow: 1.5;
+}
+
+.nd-meta-cell--first,
+.nd-meta-cell--last {
+  border-radius: 0;
+}
+
+/* ===== 내용 헤더 ===== */
+.nd-content-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 33px;
+  border: 0;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  background: #f6f9ff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+/* ===== 내용 ===== */
+.nd-panel__body {
+  padding: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+.nd-content {
+  width: 100%;
+  min-height: 430px;
+  padding: 20px 24px;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-sizing: border-box;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.nd-content p {
+  margin: 0 0 0.6em;
+}
+
+.nd-content p:last-child {
+  margin-bottom: 0;
+}
+
+.nd-content .notice-block {
+  margin: 16px 0;
+}
+
+.nd-content .notice-block__label {
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.nd-content .notice-block__text {
+  margin: 0;
+}
+
+.nd-content .notice-block__list {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.nd-content .notice-block__list li {
+  margin: 4px 0;
+}
+
+/* ===== 첨부파일 행 ===== */
+.nd-panel__attach {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  border-top: 1px solid #dadae2;
+  background: #fff;
+  box-shadow: none;
+}
+
+.nd-attach-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  min-height: 34px;
+  padding: 6px 14px;
+  border-right: 1px solid #dadae2;
+  border-radius: 0;
+  background: #f6f9ff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.nd-attach-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  color: #1c6fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.nd-attach-link:hover {
+  text-decoration: underline;
+}
+
+.nd-attach-link img {
+  display: block;
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.nd-attach-link span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nd-panel__attach.is-empty .nd-attach-link {
+  color: #9aa3b2;
+  pointer-events: none;
+}
+
+.nd-panel__attach[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 1400px) {
+  .nd-meta-row {
+    flex-wrap: wrap;
+  }
+
+  .nd-meta-cell--label {
+    width: 82px;
+  }
+}

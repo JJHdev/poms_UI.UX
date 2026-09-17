@@ -1,0 +1,2368 @@
+@import url("common-modal.css");
+
+/* ===== Facility detail — precision (diagnosis) inspection ===== */
+
+.precision-section__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.btn-facility-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 30px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+tr.is-hovered > td {
+  background: #f3f4f6 !important;
+}
+
+.btn-facility-add:hover {
+  background: #f4f4fa;
+  border-color: #c8cfd9;
+}
+
+.btn-facility-add img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.btn-facility-add__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.btn-facility-add__icon img {
+  width: 10px;
+  height: 10px;
+}
+
+.btn-facility-excel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 14px;
+  border: 1px solid #16a34a;
+  border-radius: 6px;
+  background: #fff;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-facility-excel svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.btn-facility-excel:hover {
+  background: #f0fdf4;
+}
+
+.inspection-table--precision-history {
+  min-width: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.inspection-table--precision-history col.col-no { width: 6.349%; }
+.inspection-table--precision-history col.col-type { width: 22%; }
+.inspection-table--precision-history col.col-agency { width: 16.5%; }
+.inspection-table--precision-history col.col-cost { width: 7%; }
+.inspection-table--precision-history col.col-result { width: 38.151%; }
+.inspection-table--precision-history col.col-date { width: 10%; }
+
+.inspection-table--precision-history thead th {
+  font-size: 14px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.inspection-table--precision-history tbody td {
+  font-size: 14px;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
+}
+
+.inspection-table--precision-history tbody td.is-left {
+  text-align: left;
+  max-width: 0;
+}
+
+.inspection-table--precision-history tbody td.is-grade-good {
+  color: #111827;
+  font-weight: 600;
+}
+
+.precision-list-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.precision-list-foot .pagination {
+  justify-content: center;
+}
+
+.precision-list-foot__size select {
+  height: 30px;
+  min-width: 120px;
+  padding: 0 32px 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+  font-size: 13px;
+  font-family: inherit;
+  color: #374151;
+  appearance: none;
+}
+
+/* Modal */
+body.precision-modal-open {
+  overflow: hidden;
+}
+
+.precision-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.precision-modal[hidden],
+.precision-modal__source[hidden],
+.precision-modal__foot-actions [hidden] {
+  display: none !important;
+}
+
+.precision-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.precision-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(1200px, 100%);
+  max-height: calc(100vh - 48px);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+}
+
+.precision-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.precision-modal__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.precision-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.precision-modal__close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.precision-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px 24px 24px;
+}
+
+.precision-modal__source {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.precision-modal__source-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.precision-modal__table {
+  table-layout: fixed;
+}
+
+.precision-modal__table th {
+  width: 120px;
+  white-space: nowrap;
+}
+
+.precision-modal__table td {
+  background: #fff;
+}
+
+.precision-modal__cell-input,
+.precision-modal__cell-textarea,
+.precision-modal__cell-select {
+  width: 100%;
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #111827;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.precision-modal__cell-select {
+  padding-right: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+  cursor: default;
+}
+
+.precision-modal__form.is-edit-mode .precision-modal__cell-select:not(:disabled),
+.precision-modal__form.is-add-mode .precision-modal__cell-select:not(:disabled) {
+  padding-right: 28px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.precision-modal__form.is-readonly .precision-modal__cell-select {
+  background-image: none;
+  padding-right: 10px;
+}
+
+.precision-modal__cell-select--wide {
+  max-width: 240px;
+}
+
+.precision-modal__cell-textarea {
+  display: block;
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.precision-modal__form:not(.is-readonly) .precision-modal__cell-input:not(:disabled):not([readonly]),
+.precision-modal__form:not(.is-readonly) .precision-modal__cell-textarea:not([readonly]),
+.precision-modal__form.is-edit-mode .precision-modal__cell-select:not(:disabled),
+.precision-modal__form.is-add-mode .precision-modal__cell-select:not(:disabled) {
+  border-color: #d1d5db;
+  background-color: #fff;
+}
+
+.precision-modal__cell-input:focus,
+.precision-modal__cell-textarea:focus,
+.precision-modal__cell-select:focus:not(:disabled) {
+  outline: none;
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.precision-modal__form.is-readonly .precision-modal__cell-input,
+.precision-modal__form.is-readonly .precision-modal__cell-textarea,
+.precision-modal__form.is-readonly .precision-modal__cell-select {
+  pointer-events: none;
+  opacity: 1;
+}
+
+.precision-modal__form.is-readonly .precision-modal__cell-input,
+.precision-modal__form.is-readonly .precision-modal__cell-textarea,
+.precision-modal__form.is-readonly .precision-modal__cell-select,
+.precision-modal__form.is-readonly .precision-modal__cell-input:disabled,
+.precision-modal__form.is-readonly .precision-modal__cell-select:disabled {
+  color: #1c6fff;
+  -webkit-text-fill-color: #1c6fff;
+}
+
+.precision-modal__form.is-edit-mode .precision-modal__cell-input[readonly],
+.precision-modal__form.is-edit-mode .precision-modal__cell-input:disabled,
+.precision-modal__form.is-edit-mode .precision-modal__cell-select:disabled,
+.precision-modal__form.is-add-mode .precision-modal__cell-input[readonly],
+.precision-modal__form.is-add-mode .precision-modal__cell-input:disabled,
+.precision-modal__form.is-add-mode .precision-modal__cell-select:disabled {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  -webkit-text-fill-color: #6b7280;
+}
+
+.precision-modal__form.is-readonly .precision-modal__cell-input:focus,
+.precision-modal__form.is-readonly .precision-modal__cell-textarea:focus,
+.precision-modal__form.is-readonly .precision-modal__cell-select:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.precision-period-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.precision-period-inputs__sep {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.precision-period-inputs .precision-modal__cell-input {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.precision-cost-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.precision-cost-input .precision-modal__cell-input {
+  flex: 0 1 140px;
+  min-width: 80px;
+  max-width: 160px;
+}
+
+.precision-cost-input__unit {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: #dc2626;
+  white-space: nowrap;
+}
+
+.precision-modal__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.precision-modal__foot-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ===== Regular safety inspection report modal ===== */
+
+body.precision-report-modal-open {
+  overflow: hidden;
+}
+
+.precision-report-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.precision-report-modal[hidden],
+.precision-report-modal__tab-panel[hidden] {
+  display: none !important;
+}
+
+.precision-report-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* 단일 화이트 카드 (Figma 179:4672 / 179:4933) — 1200px */
+.precision-report-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(1200px, 100%);
+  max-width: 1200px;
+  height: auto;
+  max-height: calc(100vh - 48px);
+  background: #fff;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(13, 31, 53, 0.18);
+  overflow: hidden;
+}
+
+.precision-report-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 20px 24px;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #d1d1d1;
+  border-radius: 0;
+  box-shadow: none;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.precision-report-modal__head-main {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.precision-report-modal__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.44px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.precision-report-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: #dadae2;
+  color: #111;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.precision-report-modal__close img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.precision-report-modal__close:hover {
+  background: #c8c8d0;
+  color: #111;
+}
+
+.precision-report-modal__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.precision-report-modal__shell,
+.precision-report-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 20px 24px 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.precision-report-modal__top {
+  flex-shrink: 0;
+}
+
+.precision-report-modal__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* 탭 + 범례 칩 동일 선상 */
+.precision-report-modal__toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.precision-report-modal__tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.precision-report-modal__tab {
+  height: 38px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.precision-report-modal__tab:hover {
+  color: #1c6fff;
+}
+
+.precision-report-modal__tab.is-active {
+  background: #1c6fff;
+  border: none;
+  color: #fff;
+}
+
+.precision-report-modal__tab.is-active::after {
+  display: none;
+}
+
+.precision-report-modal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.precision-report-modal__actions .btn-form-primary,
+.precision-report-modal__actions .btn-form-secondary,
+.precision-report-modal__actions .btn-form-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.precision-report-modal__actions .btn-form-secondary {
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+}
+
+.precision-report-modal__actions .btn-form-secondary:hover {
+  background: #f9f9fa;
+}
+
+.precision-report-modal__actions .btn-form-ghost {
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+}
+
+.precision-report-modal__actions .btn-form-ghost:hover {
+  background: #f9f9fa;
+}
+
+.precision-report-modal__actions .btn-form-primary {
+  border: none;
+  border-radius: 6px;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.precision-report-modal__actions .btn-form-primary:hover {
+  background: #152a44;
+}
+
+.precision-report-modal__actions .btn-form-primary img,
+.precision-report-modal__actions .btn-form-secondary img,
+.precision-report-modal__actions .btn-form-ghost img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.precision-report-modal__actions .btn-form-primary[hidden],
+.precision-report-modal__actions .btn-form-ghost[hidden],
+.precision-report-modal__actions .btn-form-secondary[hidden] {
+  display: none !important;
+}
+
+.precision-report-modal__legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.precision-report-modal__legend-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.precision-report-modal__legend-item--fms {
+  color: #1c6fff;
+  border: 1px solid #1c6fff;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.precision-report-modal__legend-item--poms {
+  color: #999;
+  border: 1px solid #dadae2;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.precision-report-modal__legend-note {
+  display: none;
+}
+
+.precision-report-modal__content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.precision-report-modal__content > .precision-report-modal__tab-panel {
+  padding: 0;
+}
+
+.precision-report-modal__panel-hd {
+  background: transparent;
+  padding: 0 0 10px;
+}
+
+.precision-report-modal__panel-title,
+.precision-report-modal .regular-result-report__heading {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+}
+
+.precision-report-modal__panel-bd {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.precision-report-modal__tab-panel {
+  display: block;
+}
+
+.precision-report-modal__source {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.precision-report-modal__source-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* 기본정보 — 3열 필 필드 (Figma 179:4695) */
+.precision-report-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.precision-report-info-grid__row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.precision-report-info-field {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 34px;
+  align-items: stretch;
+}
+
+.precision-report-info-field__lbl,
+.precision-report-info-field__val {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 20px;
+  font-size: 14px;
+  border: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.precision-report-info-field__lbl {
+  width: 160px;
+  flex-shrink: 0;
+  font-weight: 500;
+  color: #111;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.precision-report-info-field__val {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 400;
+  color: #1c6fff;
+  background: #fff;
+}
+
+.precision-report-info-grid__row + .precision-report-info-grid__row .precision-report-info-field__lbl,
+.precision-report-info-grid__row + .precision-report-info-grid__row .precision-report-info-field__val {
+  border-top-width: 0;
+}
+
+.precision-report-info-grid__row:first-child .precision-report-info-field:first-child .precision-report-info-field__lbl {
+  border-radius: 6px 0 0 0;
+}
+
+.precision-report-info-grid__row:first-child .precision-report-info-field:last-child .precision-report-info-field__val {
+  border-radius: 0 6px 0 0;
+}
+
+.precision-report-info-grid__row:last-child .precision-report-info-field:first-child .precision-report-info-field__lbl {
+  border-radius: 0 0 0 6px;
+}
+
+.precision-report-info-grid__row:last-child .precision-report-info-field:last-child .precision-report-info-field__val {
+  border-radius: 0 0 6px 0;
+}
+
+.precision-report-info-grid__row .precision-report-info-field + .precision-report-info-field .precision-report-info-field__lbl {
+  border-left-width: 0;
+}
+
+.precision-report-info-field__lbl + .precision-report-info-field__val {
+  border-left-width: 0;
+}
+
+/* 구버전 info table 호환 */
+.precision-report-modal__info {
+  width: 100%;
+  margin-bottom: 14px;
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background: transparent;
+  table-layout: fixed;
+}
+
+.precision-report-modal__info th,
+.precision-report-modal__info td {
+  min-height: 44px;
+  height: auto;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #dadae2;
+  border-width: 0.5px 0.5px 0.5px 0;
+  background: #fff;
+}
+
+.precision-report-modal__info th {
+  width: 160px;
+  background: rgba(28, 111, 255, 0.04);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.precision-report-modal__info td {
+  color: #1c6fff;
+  font-weight: 400;
+}
+
+.precision-report-modal__info tr > :first-child {
+  border-left-width: 0.5px;
+  border-radius: 12px 0 0 12px;
+}
+
+.precision-report-modal__info tr > :last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+.precision-report-modal__table-wrap {
+  overflow: auto;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.precision-report-items-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+  border: none;
+}
+
+.precision-report-items-table thead th,
+.precision-report-items-table tbody th {
+  padding: 10px;
+  background: rgba(28, 111, 255, 0.1);
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  color: #111;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.precision-report-items-table thead tr:first-child th[rowspan="2"] {
+  height: 64px;
+}
+
+.precision-report-items-table thead tr:last-child th {
+  height: 32px;
+  width: 100px;
+  background: #f6f9ff;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* 2행 헤더의 「불량」은 last-child여도 표 끝 열이 아님 → 구분선 유지 */
+.precision-report-items-table thead tr:first-child th:last-child,
+.precision-report-items-table tbody th:last-child {
+  border-right: none;
+}
+
+.precision-report-items-table tbody td {
+  height: 32px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  color: #333;
+  text-align: center;
+  vertical-align: middle;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.precision-report-items-table tbody td:last-child {
+  border-right: none;
+}
+
+.precision-report-items-table tbody tr:last-child td,
+.precision-report-items-table tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.precision-report-items-table col.col-group {
+  width: 153px;
+}
+
+.precision-report-items-table col.col-item {
+  width: 144px;
+}
+
+.precision-report-items-table col.col-result {
+  width: 100px;
+}
+
+.precision-report-items-table col.col-opinion {
+  width: auto;
+}
+
+.precision-report-items-table col.col-repair,
+.precision-report-items-table col.col-photo {
+  width: 120px;
+}
+
+.precision-report-items-table__group {
+  width: 153px;
+  height: auto;
+  padding: 10px;
+  font-weight: 500;
+  color: #111;
+  background: #e9f1ff;
+}
+
+.precision-report-items-table__item {
+  width: 144px;
+  height: 32px;
+  padding: 0 10px;
+  font-weight: 500;
+  color: #111;
+  background: #fff;
+}
+
+.precision-report-items-table__footer-label {
+  height: 32px;
+  padding: 0 10px;
+  text-align: center;
+  color: #111;
+  font-weight: 500;
+  background: #e9f1ff;
+}
+
+.precision-report-items-table tbody td.precision-report-items-table__repair,
+.precision-report-items-table tbody td.precision-report-items-table__footer-value {
+  color: #333;
+  font-weight: 400;
+}
+
+.precision-report-items-table tbody td.precision-report-items-table__footer-value {
+  text-align: left;
+}
+
+.precision-report-opinion-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.precision-report-items-table__repair input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#precisionReportModal.is-editing .precision-report-items-table tbody td.precision-report-items-table__repair:has(input[type="radio"]) {
+  line-height: 0;
+}
+
+#precisionReportModal.is-editing .precision-report-items-table__repair input[type="radio"] {
+  position: relative;
+  top: 0;
+  vertical-align: middle;
+}
+
+.precision-report-edit-select {
+  height: 26px;
+  padding: 0 18px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236c788b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0 center;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  appearance: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.precision-report-edit-input {
+  width: 100%;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
+}
+
+.precision-report-edit-select:focus,
+.precision-report-edit-input:focus,
+.precision-report-edit-textarea:focus,
+.precision-report-edit-date:focus {
+  outline: none;
+  box-shadow: none;
+  border: 0;
+}
+
+.precision-report-date {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: auto;
+  min-height: 22px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  vertical-align: middle;
+  box-sizing: border-box;
+  max-width: none;
+}
+
+.precision-report-date__text {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font: inherit;
+  color: inherit;
+  line-height: 1.2;
+}
+
+.precision-report-edit-date {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.precision-report-edit-date::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.precision-report-date__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.precision-report-date__btn img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.precision-report-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  vertical-align: middle;
+}
+
+.precision-report-period__sep {
+  color: #6c788b;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* 사진대지 — 점검사항과 동일 톤 */
+.precision-report-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.precision-report-photos__top {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.precision-report-photos__lbl,
+.precision-report-photos__title,
+.precision-report-photos__owner {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 20px;
+  font-size: 14px;
+  border: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.precision-report-photos__lbl {
+  width: 160px;
+  flex-shrink: 0;
+  font-weight: 500;
+  color: #111;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.precision-report-photos__title,
+.precision-report-photos__owner {
+  flex: 1 1 0;
+  min-width: 0;
+  font-weight: 400;
+  color: #1c6fff;
+  background: #fff;
+}
+
+.precision-report-photos__top > :first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.precision-report-photos__top > :last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.precision-report-photos__lbl + .precision-report-photos__title,
+.precision-report-photos__lbl + .precision-report-photos__owner,
+.precision-report-photos__title + .precision-report-photos__lbl {
+  border-left-width: 0;
+}
+
+.precision-report-photos__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.precision-report-photo-card {
+  border: 0.5px solid #dadae2;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.precision-report-photo-card__frame {
+  height: 120px;
+  background: rgba(28, 111, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.precision-report-photo-card__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.precision-report-photo-card__body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 10px;
+  border-top: 0.5px solid #dadae2;
+  min-width: 0;
+}
+
+.precision-report-photo-card__caption {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #111;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.precision-report-photo-card__meta {
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1c6fff;
+  white-space: nowrap;
+}
+
+.precision-report-photo-card.is-editing .precision-report-photo-card__frame {
+  position: relative;
+}
+
+.precision-report-photo-card__empty {
+  font-size: 12px;
+  color: #6c798b;
+}
+
+.precision-report-photo-card__replace,
+.precision-report-photo-card__remove {
+  position: absolute;
+  bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.precision-report-photo-card__replace {
+  left: 6px;
+  background: rgba(28, 111, 255, 0.92);
+  color: #fff;
+}
+
+.precision-report-photo-card__remove {
+  right: 6px;
+  background: rgba(17, 17, 17, 0.72);
+  color: #fff;
+}
+
+.precision-report-photo-card.is-editing .precision-report-photo-card__body .precision-report-edit-input {
+  height: 24px;
+  min-height: 24px;
+  padding: 0;
+  font-size: 11px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.precision-report-photo-card.is-editing .precision-report-photo-card__body .precision-report-edit-input:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.precision-report-photo-card.is-editing .precision-report-photo-card__body .precision-report-edit-input:last-child {
+  flex: 0 1 46%;
+  color: #111;
+}
+
+.precision-report-photo-add {
+  min-height: 162px;
+  border: 0.5px dashed #dadae2;
+  border-radius: 8px;
+  background: #f9f9fa;
+  color: #6c798b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.precision-report-photo-add span {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+#precisionReportModal.is-editing .precision-report-result__general .precision-report-edit-input,
+#precisionReportModal.is-editing .precision-report-result__ofield .precision-report-edit-input,
+#precisionReportModal.is-editing .precision-report-result__tech .precision-report-edit-input {
+  width: 100%;
+  height: 18px;
+  min-height: 18px;
+  padding: 0;
+  font-size: 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+}
+
+#precisionReportModal.is-editing .precision-report-result__tech .precision-report-edit-input {
+  text-align: center;
+}
+
+#precisionReportModal.is-editing .precision-report-result__ofield {
+  padding: 0 4px;
+}
+
+#precisionReportModal.is-editing .precision-report-edit-textarea {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 32px;
+  border: 0;
+  resize: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#precisionReportModal.is-editing .precision-report-modal__content {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#precisionReportModal.is-editing #precisionReportPanelItems,
+#precisionReportModal.is-editing #precisionReportPanelReport,
+#precisionReportModal.is-editing #precisionReportPanelPhotos {
+  overflow: visible;
+  height: auto;
+  flex: 0 0 auto;
+}
+
+#precisionReportModal.is-editing .precision-report-result,
+#precisionReportModal.is-editing .precision-report-result .precision-report-modal__panel-bd,
+#precisionReportModal.is-editing .precision-report-result__section:last-child {
+  overflow: visible;
+  height: auto;
+  min-height: 0;
+  flex: 0 0 auto;
+}
+
+#precisionReportModal.is-editing .precision-report-result__ref {
+  flex: 0 0 auto;
+  min-height: 48px;
+}
+
+#precisionReportModal.is-editing .precision-report-items-table tbody td,
+#precisionReportModal.is-editing .precision-report-result__general td,
+#precisionReportModal.is-editing .precision-report-result__tech td {
+  overflow: visible;
+  white-space: nowrap;
+}
+
+#precisionReportModal.is-editing .precision-report-items-table tbody td.precision-report-items-table__footer-value {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+#precisionReportModal.is-editing .precision-report-result__general .precision-report-date,
+#precisionReportModal.is-editing .precision-report-result__tech .precision-report-date,
+#precisionReportModal.is-editing .precision-report-items-table .precision-report-date {
+  height: auto;
+  padding: 0;
+}
+
+.precision-report-modal__placeholder {
+  padding: 48px 16px;
+  text-align: center;
+  color: #6c798b;
+  font-size: 14px;
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  background: #f9f9fa;
+}
+
+.precision-report-modal__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px 24px;
+  border-top: none;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+/* stack 없이 shell/foot만 있는 구버전 HTML 호환 */
+.precision-report-modal__panel > .precision-report-modal__shell,
+.precision-report-modal__panel > .precision-report-modal__body {
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.precision-report-modal__panel > .precision-report-modal__foot {
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 16px 24px 24px;
+}
+
+/* 결과보고서 — 점검사항 모달 높이에 맞춰 압축, 참고사항 하단 보더가 잘리지 않게 */
+.precision-report-modal .precision-report-result {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#precisionReportModal .precision-report-result .precision-report-modal__panel-hd {
+  flex-shrink: 0;
+  padding: 0 0 4px;
+}
+
+.precision-report-modal .precision-report-result .precision-report-modal__panel-title {
+  font-size: 13px;
+}
+
+#precisionReportModal .precision-report-result .precision-report-modal__panel-bd {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.precision-report-modal .precision-report-result__section {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  gap: 4px;
+}
+
+.precision-report-modal .precision-report-result__section:last-child {
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+#precisionReportModal .precision-report-result__general-wrap {
+  border: 0.5px solid #dadae2;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+#precisionReportModal .precision-report-result__general {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+#precisionReportModal .precision-report-result__general col.col-lbl { width: 140px; }
+#precisionReportModal .precision-report-result__general col.col-val { width: auto; }
+
+#precisionReportModal .precision-report-result__general th,
+#precisionReportModal .precision-report-result__general td {
+  height: 22px;
+  padding: 0 12px;
+  font-size: 12px;
+  line-height: 22px;
+  border: none;
+  border-bottom: 0.5px solid #dadae2;
+  border-right: 0.5px solid #dadae2;
+  box-sizing: border-box;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#precisionReportModal .precision-report-result__general th {
+  background: rgba(28, 111, 255, 0.04);
+  color: #111;
+  font-weight: 500;
+  text-align: left;
+}
+
+#precisionReportModal .precision-report-result__general td {
+  background: #fff;
+  color: #111;
+  font-weight: 400;
+}
+
+#precisionReportModal .precision-report-result__general td.is-fms,
+#precisionReportModal .precision-report-result__general .is-fms {
+  color: #1c6fff;
+}
+
+#precisionReportModal .precision-report-result__general td.is-poms,
+#precisionReportModal .precision-report-result__general .is-poms {
+  color: #111;
+}
+
+#precisionReportModal .precision-report-result__general th:last-child,
+#precisionReportModal .precision-report-result__general td:last-child {
+  border-right: none;
+}
+
+#precisionReportModal .precision-report-result__general tr:last-child th,
+#precisionReportModal .precision-report-result__general tr:last-child td {
+  border-bottom: none;
+}
+
+.precision-report-info-grid--2col .precision-report-info-field {
+  flex: 1 1 0;
+}
+
+.precision-report-info-field--wide {
+  flex: 1 1 100%;
+}
+
+.precision-report-info-grid--2col .precision-report-info-field--wide .precision-report-info-field__lbl {
+  border-radius: 12px 0 0 12px;
+}
+
+.precision-report-info-grid--2col .precision-report-info-field--wide .precision-report-info-field__val {
+  border-radius: 0 12px 12px 0;
+}
+
+.precision-report-modal .precision-report-result__outcome {
+  display: grid;
+  grid-template-columns: 120px 170px minmax(0, 1fr);
+  border: 0.5px solid #dadae2;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.precision-report-modal .precision-report-result__group {
+  grid-row: span 2;
+  background: rgba(28, 111, 255, 0.04);
+  border-right: 0.5px solid #dadae2;
+  border-bottom: 0.5px solid #dadae2;
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.precision-report-modal .precision-report-result__olbl {
+  background: rgba(28, 111, 255, 0.04);
+  border-right: 0.5px solid #dadae2;
+  border-bottom: 0.5px solid #dadae2;
+  padding: 0 10px;
+  height: 22px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #111;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.precision-report-modal .precision-report-result__ofield {
+  border-bottom: 0.5px solid #dadae2;
+  padding: 0 10px;
+  height: 22px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  color: #111;
+  display: flex;
+  align-items: center;
+  line-height: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.precision-report-modal .precision-report-result__olbl--wide {
+  grid-column: 1 / 3;
+  justify-content: center;
+  text-align: center;
+}
+
+.precision-report-modal .precision-report-result__ofield--wide {
+  grid-column: 3 / 4;
+}
+
+.precision-report-modal .precision-report-result__outcome > *:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+.precision-report-modal .precision-report-result__tech-wrap {
+  border: 0.5px solid #dadae2;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.precision-report-modal .precision-report-result__tech {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.precision-report-modal .precision-report-result__tech th {
+  background: rgba(28, 111, 255, 0.1);
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+  padding: 0 8px;
+  height: 22px;
+  line-height: 22px;
+  border-bottom: 0.5px solid #dadae2;
+  border-right: 0.5px solid #dadae2;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.precision-report-modal .precision-report-result__tech th:last-child {
+  border-right: none;
+}
+
+.precision-report-modal .precision-report-result__tech td {
+  font-size: 12px;
+  color: #111;
+  font-weight: 500;
+  padding: 0 8px;
+  height: 22px;
+  line-height: 22px;
+  border-bottom: 0.5px solid #dadae2;
+  border-right: 0.5px solid #dadae2;
+  text-align: center;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.precision-report-modal .precision-report-result__tech td:last-child {
+  border-right: none;
+}
+
+.precision-report-modal .precision-report-result__tech tr:last-child td {
+  border-bottom: none;
+}
+
+.precision-report-result__tech-del {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 8px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#precisionReportModal.is-editing .precision-report-result__tech th,
+#precisionReportModal.is-editing .precision-report-result__tech td {
+  height: 28px;
+  line-height: 28px;
+}
+
+#precisionReportModal.is-editing .precision-report-result__tech th:last-child,
+#precisionReportModal.is-editing .precision-report-result__tech td:last-child {
+  width: 72px;
+}
+
+.precision-report-modal .precision-report-result__ref {
+  flex: 1 1 auto;
+  min-height: 40px;
+  border: 0.5px solid #dadae2;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+/* 구버전(표) 마크업이 남아도 둥근 카드 톤 통일 */
+.precision-report-modal .precision-report-result .regular-result-report__grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  border: none;
+  font-size: 14px;
+}
+
+.precision-report-modal .precision-report-result .regular-result-report__grid th,
+.precision-report-modal .precision-report-result .regular-result-report__grid td {
+  min-height: 44px;
+  padding: 10px 20px;
+  border-style: solid;
+  border-color: #dadae2;
+  border-width: 0.5px 0.5px 0.5px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  vertical-align: middle;
+}
+
+.precision-report-modal .precision-report-result .regular-result-report__grid th {
+  width: 160px;
+  background: #f9f9fa;
+  text-align: left;
+}
+
+.precision-report-modal .precision-report-result .regular-result-report__grid td {
+  background: #fff;
+}
+
+.precision-report-modal .precision-report-result .regular-result-report__grid tr > :first-child {
+  border-left-width: 0.5px;
+  border-radius: 12px 0 0 12px;
+}
+
+.precision-report-modal .precision-report-result .regular-result-report__grid tr > :last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+.precision-report-modal .precision-report-result .regular-result-report__notes {
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+  min-height: 100px;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #111;
+}
+
+/* ===== 정기안전점검표 — 점검사항 크기로 고정, 결과보고서만 스크롤 ===== */
+#precisionReportModal .precision-report-modal__panel {
+  width: 1200px;
+  max-width: calc(100vw - 48px);
+  height: auto;
+  max-height: calc(100vh - 48px);
+  overflow: hidden;
+}
+
+#precisionReportModal .precision-report-modal__head {
+  height: 60px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+#precisionReportModal .precision-report-modal__stack {
+  gap: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#precisionReportModal .precision-report-modal__shell {
+  gap: 10px;
+  padding: 16px 24px 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#precisionReportModal .precision-report-modal__top {
+  flex-shrink: 0;
+}
+
+#precisionReportModal .precision-report-modal__content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#precisionReportModal .precision-report-modal__tab-panel.is-active {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#precisionReportModal #precisionReportPanelItems {
+  overflow: hidden;
+}
+
+#precisionReportModal #precisionReportPanelPhotos {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#precisionReportModal #precisionReportPanelReport {
+  overflow: hidden;
+  min-height: 0;
+}
+
+#precisionReportModal .precision-report-modal__foot {
+  flex-shrink: 0;
+}
+
+#precisionReportModal .precision-report-modal__panel-hd {
+  padding: 0 0 8px;
+}
+
+#precisionReportModal .precision-report-modal__panel-bd {
+  gap: 10px;
+}
+
+#precisionReportModal .precision-report-modal__table-wrap {
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#precisionReportModal .precision-report-items-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+#precisionReportModal .precision-report-items-table col.col-group { width: 140px; }
+#precisionReportModal .precision-report-items-table col.col-item { width: 132px; }
+#precisionReportModal .precision-report-items-table col.col-result { width: 88px; }
+#precisionReportModal .precision-report-items-table col.col-opinion { width: auto; }
+#precisionReportModal .precision-report-items-table col.col-repair,
+#precisionReportModal .precision-report-items-table col.col-photo { width: 108px; }
+
+#precisionReportModal .precision-report-items-table thead th,
+#precisionReportModal .precision-report-items-table tbody th,
+#precisionReportModal .precision-report-items-table tbody td {
+  height: 28px;
+  padding: 0 8px;
+  line-height: 28px;
+  font-size: 13px;
+  font-weight: 400;
+  border: 1px solid #dadae2;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+#precisionReportModal .precision-report-items-table thead th {
+  background: rgba(28, 111, 255, 0.1);
+  color: #111;
+  font-weight: 500;
+}
+
+#precisionReportModal .precision-report-items-table thead tr:first-child th[rowspan="2"],
+#precisionReportModal .precision-report-items-table thead tr:first-child th[colspan="2"] {
+  height: 52px;
+  line-height: 1.2;
+}
+
+#precisionReportModal .precision-report-items-table thead tr:last-child th {
+  height: 26px;
+  line-height: 26px;
+  background: #f6f9ff;
+  color: #6c788b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+#precisionReportModal .precision-report-items-table__group {
+  background: #e9f1ff;
+  color: #111;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+#precisionReportModal .precision-report-items-table__item {
+  background: #fff;
+  color: #111;
+  font-weight: 500;
+}
+
+#precisionReportModal .precision-report-items-table tbody td {
+  color: #333;
+  background: #fff;
+  font-weight: 400;
+}
+
+#precisionReportModal .precision-report-items-table__footer-label {
+  background: #e9f1ff;
+  color: #111;
+  font-weight: 500;
+  text-align: center;
+}
+
+#precisionReportModal .precision-report-items-table tbody td.precision-report-items-table__repair,
+#precisionReportModal .precision-report-items-table tbody td.precision-report-items-table__footer-value {
+  color: #333;
+  font-weight: 400;
+}
+
+#precisionReportModal .precision-report-items-table tbody td.precision-report-items-table__footer-value {
+  text-align: left;
+}
+
+#precisionReportModal .precision-report-modal__foot {
+  padding: 12px 24px 16px;
+}
+
+#precisionReportModal .precision-report-info-grid__row {
+  height: 30px;
+}
+
+#precisionReportModal .precision-report-info-field,
+#precisionReportModal .precision-report-info-field__lbl,
+#precisionReportModal .precision-report-info-field__val {
+  height: 30px;
+  min-height: 30px;
+  line-height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* ===== 보수보강이행현황 (Figma 179:4931) ===== */
+.repair-status-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.repair-status-modal__panel {
+  width: min(1200px, 100%);
+  max-width: 1200px;
+  height: auto;
+  max-height: calc(100vh - 48px);
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(13, 31, 53, 0.18);
+  overflow: hidden;
+  gap: 0;
+}
+
+.repair-status-modal .precision-report-modal__head {
+  height: auto;
+  background: #fff;
+  border-bottom: 1px solid #d1d1d1;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 20px 24px;
+}
+
+.repair-status-modal .precision-report-modal__title {
+  font-size: 22px;
+  color: #111;
+  letter-spacing: -0.44px;
+}
+
+.repair-status-modal .precision-report-modal__close {
+  width: 28px;
+  height: 28px;
+}
+
+.repair-status-modal__stack {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.repair-status-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 20px 24px 24px !important;
+  background: #fff !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.repair-status-modal__body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.repair-status-modal__table-card {
+  display: none;
+}
+
+.repair-status-modal__table-wrap {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.repair-status-table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+.repair-status-table col.col-name { width: 140px; }
+.repair-status-table col.col-cat { width: 120px; }
+.repair-status-table col.col-type { width: auto; }
+.repair-status-table col.col-date { width: 120px; }
+.repair-status-table col.col-part { width: auto; }
+.repair-status-table col.col-content { width: auto; }
+.repair-status-table col.col-cost { width: 120px; }
+.repair-status-table col.col-note { width: 200px; }
+.repair-status-table col.col-view { width: 72px; }
+
+.repair-status-table thead th {
+  height: 32px;
+  padding: 0 10px;
+  background: rgba(28, 111, 255, 0.1);
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  color: #111;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.repair-status-table thead th:last-child {
+  border-right: none;
+}
+
+.repair-status-table tbody td {
+  height: 32px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  color: #333;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+  background: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.repair-status-table tbody td:last-child {
+  border-right: none;
+}
+
+.repair-status-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.repair-status-table tbody tr.is-active td {
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.repair-status-table tbody td.repair-status-table__note {
+  text-align: left;
+}
+
+.repair-status-table tbody td.repair-status-table__cost {
+  text-align: center;
+}
+
+.repair-status-view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 2px 12px;
+  border: 1px solid #1c6fff;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.repair-status-view-btn img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.repair-status-view-btn:hover {
+  background: rgba(28, 111, 255, 0.1);
+}
+
+.repair-status-view-btn.is-active {
+  background: rgba(28, 111, 255, 0.16);
+  box-shadow: inset 0 0 0 1px #1c6fff;
+}
+
+.repair-status-detail[hidden] {
+  display: none !important;
+}
+
+.repair-status-modal .pagination.repair-status-pagination {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.repair-status-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.repair-status-detail__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+}
+
+.repair-status-detail__grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.repair-status-detail__row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.repair-status-detail__row + .repair-status-detail__row .repair-status-detail__lbl,
+.repair-status-detail__row + .repair-status-detail__row .repair-status-detail__val {
+  border-top-width: 0;
+}
+
+.repair-status-detail__field {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 34px;
+  align-items: stretch;
+}
+
+.repair-status-detail__field--wide {
+  flex: 1 1 100%;
+}
+
+.repair-status-detail__field--third {
+  flex: 1 1 0;
+  max-width: none;
+}
+
+.repair-status-detail__field--rest {
+  flex: 2 1 0;
+}
+
+.repair-status-detail__lbl,
+.repair-status-detail__val {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 20px;
+  font-size: 14px;
+  border: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.repair-status-detail__lbl {
+  width: 160px;
+  flex-shrink: 0;
+  font-weight: 500;
+  color: #111;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.repair-status-detail__val {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 400;
+  color: #111;
+  background: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repair-status-detail__file {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  color: #1c6fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.repair-status-detail__file:hover span {
+  text-decoration: underline;
+}
+
+.repair-status-detail__file img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.repair-status-detail__file span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repair-status-detail__field + .repair-status-detail__field .repair-status-detail__lbl {
+  border-left-width: 0;
+}
+
+.repair-status-detail__lbl + .repair-status-detail__val {
+  border-left-width: 0;
+}
+
+.repair-status-detail__row:first-child .repair-status-detail__field:first-child .repair-status-detail__lbl {
+  border-top-left-radius: 6px;
+}
+
+.repair-status-detail__row:first-child .repair-status-detail__field:last-child .repair-status-detail__val {
+  border-top-right-radius: 6px;
+}
+
+.repair-status-detail__row--tail .repair-status-detail__field--third .repair-status-detail__lbl {
+  border-bottom-left-radius: 6px;
+}
+
+.repair-status-detail__row--tail .repair-status-detail__field--rest .repair-status-detail__val {
+  border-bottom-right-radius: 6px;
+}
+
+.repair-status-modal__foot {
+  display: none;
+}
+

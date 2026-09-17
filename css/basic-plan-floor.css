@@ -1,0 +1,639 @@
+@import url("common-modal.css");
+
+/* 기본계획평면도 — type3 flat + 좌우 미리보기 */
+
+.plan-floor-page.fcr-flat-page .main-content,
+.plan-floor-page.fcr-flat-page .type3-page {
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+.plan-floor-page.fcr-flat-page .archive-board-tabs {
+  margin-top: -4px;
+}
+
+.plan-floor-page.fcr-flat-page .archive-board-tabs__btn {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.plan-floor-page.fcr-flat-page .type3-field--sm {
+  flex: 0 1 220px;
+  max-width: 260px;
+}
+
+.plan-floor-page.fcr-flat-page .plan-floor-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.plan-floor-page.fcr-flat-page .plan-floor-results__head {
+  width: calc(38% - 8px);
+  max-width: 100%;
+}
+
+.plan-floor-page.fcr-flat-page .plan-floor-results__head .type3-results__side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.plan-floor-page .plan-floor-results {
+  display: grid;
+  grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+  grid-template-rows: auto auto;
+  column-gap: 20px;
+  row-gap: 14px;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.plan-floor-page .plan-floor-results > .type3-table-wrap {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: stretch;
+  overflow: hidden;
+}
+
+.plan-floor-page .plan-floor-results > .plan-floor-detail {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: stretch;
+  height: auto;
+  min-height: 0;
+}
+
+.plan-floor-page .plan-floor-results__foot {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.plan-floor-page.fcr-flat-page .type3-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.plan-floor-page.fcr-flat-page .type3-table .col-no {
+  width: 56px;
+}
+
+.plan-floor-page.fcr-flat-page .type3-table .col-action {
+  width: 120px;
+}
+
+.plan-floor-page.fcr-flat-page .type3-table tbody td.col-title {
+  text-align: left;
+  padding-left: 16px;
+}
+
+.plan-floor-page .type3-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.plan-floor-page .type3-table tbody tr.is-clickable:hover td {
+  background: #f7f9fc;
+}
+
+.plan-floor-page .type3-table tbody tr.is-selected td {
+  background: #eef5ff;
+}
+
+.plan-floor-page .plan-floor-row-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 90px;
+}
+
+.plan-floor-page .plan-floor-row-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
+  width: 42px;
+  height: 28px;
+  padding: 6px 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.plan-floor-page .plan-floor-row-btn:hover {
+  background: #f4f4fa;
+  border-color: #c5c5d0;
+}
+
+.plan-floor-page .plan-floor-row-btn--danger {
+  border-color: rgba(230, 0, 45, 0.4);
+  color: #e6002d;
+}
+
+.plan-floor-page .plan-floor-row-btn--danger:hover {
+  background: #fff5f5;
+  border-color: #e6002d;
+}
+
+.plan-floor-page #planFloorSearchPort.is-placeholder {
+  color: #999;
+}
+
+/* ===== 우측 미리보기 패널 ===== */
+.plan-floor-detail {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.plan-floor-detail__empty {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  height: 100%;
+  padding: 24px;
+  color: #9ca3af;
+  font-size: 14px;
+  text-align: center;
+  background: #fff;
+}
+
+.plan-floor-detail__empty[hidden],
+.plan-floor-detail__panel[hidden] {
+  display: none !important;
+}
+
+.plan-floor-detail.is-open {
+  min-height: 100%;
+}
+
+.plan-floor-detail.is-open:has(.plan-floor-detail__panel.is-edit-mode),
+.plan-floor-detail.is-open:has(.plan-floor-detail__panel.is-add-mode) {
+  grid-row: 1 / span 2;
+  min-height: 100%;
+  height: auto;
+}
+
+.plan-floor-detail.is-open .plan-floor-detail__empty {
+  display: none !important;
+}
+
+.plan-floor-detail.is-open .plan-floor-detail__panel {
+  display: flex !important;
+  height: 100%;
+  min-height: 0;
+}
+
+.plan-floor-detail__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 0;
+  padding: 24px;
+  box-sizing: border-box;
+  gap: 0;
+}
+
+.plan-floor-detail__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding: 0 0 16px;
+  border-bottom: 1px solid #dadae2;
+  background: transparent;
+  margin-bottom: 16px;
+}
+
+.plan-floor-detail__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.plan-floor-detail__sub {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.plan-floor-detail__view {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-floor-detail__view[hidden],
+.plan-floor-form[hidden],
+.plan-floor-detail__footer[hidden] {
+  display: none !important;
+}
+
+.plan-floor-preview {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 280px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #f1f5f9;
+}
+
+.plan-floor-preview__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 280px;
+  height: 100%;
+  padding: 24px;
+  color: #94a3b8;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.plan-floor-preview__empty[hidden],
+.plan-floor-preview__image[hidden] {
+  display: none;
+}
+
+.plan-floor-preview__empty p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.plan-floor-preview__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  max-height: 387px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #fff;
+  cursor: zoom-in;
+}
+
+.plan-floor-detail__panel.is-edit-mode .plan-floor-preview__image,
+.plan-floor-detail__panel.is-add-mode .plan-floor-preview__image {
+  cursor: default;
+  object-fit: contain;
+  max-height: 260px;
+}
+
+.plan-floor-detail__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 16px 0 0;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 16px;
+}
+
+.plan-floor-detail__btn {
+  min-width: 84px;
+  height: 38px;
+  padding: 0 16px;
+  border: 1px solid #0d1f35;
+  border-radius: 10px;
+  background: #fff;
+  color: #0d1f35;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.plan-floor-detail__btn:hover {
+  background: #f4f4fa;
+}
+
+.plan-floor-detail__btn--primary {
+  border: none;
+  background: #0d1f35;
+  color: #fff;
+}
+
+.plan-floor-detail__btn--primary:hover {
+  background: #16304f;
+}
+
+/* ===== 등록/수정 폼 ===== */
+.plan-floor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.plan-floor-section h4 {
+  margin: 0 0 10px;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.plan-floor-info-grid {
+  display: grid;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.plan-floor-info-grid label {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  min-height: 42px;
+  color: #374151;
+  font-size: 13px;
+}
+
+.plan-floor-info-grid label > span {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.plan-floor-info-grid select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 0;
+  padding: 0 32px 0 12px;
+  color: #111827;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 10px center no-repeat;
+  box-shadow: inset 0 0 0 1px #bfdbfe;
+}
+
+.plan-floor-info-grid .is-required {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.plan-floor-preview--edit {
+  min-height: 180px;
+  max-height: 260px;
+  border: 1px solid #dbe4f0;
+}
+
+.plan-floor-file-upload {
+  margin-top: 10px;
+}
+
+.plan-floor-file-upload .fac-add-files {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.plan-floor-file-upload .fac-add-file-row {
+  grid-template-columns: 100px minmax(0, 1fr) 96px;
+  min-height: 80px;
+}
+
+/* ===== 이미지 뷰어 ===== */
+.plan-floor-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.plan-floor-viewer[hidden] {
+  display: none !important;
+}
+
+.plan-floor-viewer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.plan-floor-viewer__dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(1100px, calc(100vw - 48px));
+  height: min(760px, calc(100vh - 48px));
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.35);
+  overflow: hidden;
+}
+
+.plan-floor-viewer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.plan-floor-viewer__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.plan-floor-viewer__tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.plan-floor-viewer__tool-btn {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #374151;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.plan-floor-viewer__tool-btn:hover {
+  background: #f3f4f6;
+}
+
+.plan-floor-viewer__tool-btn--text {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.plan-floor-viewer__zoom-label {
+  min-width: 52px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e4976;
+}
+
+.plan-floor-viewer__close {
+  width: 34px;
+  height: 34px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.plan-floor-viewer__close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.plan-floor-viewer__body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1f2937;
+}
+
+.plan-floor-viewer__body img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform-origin: center center;
+  transition: transform 0.08s ease-out;
+  cursor: grab;
+  user-select: none;
+}
+
+.plan-floor-viewer__body img.is-dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.plan-floor-viewer__hint {
+  margin: 0;
+  padding: 8px 20px;
+  border-top: 1px solid #e5e7eb;
+  background: #f8fafc;
+  font-size: 12px;
+  color: #64748b;
+  text-align: center;
+}
+
+/* 사용자 페이지 — 관리 열 없음, 목록 축소·미리보기 확대 */
+.plan-floor-page:not(.board-manage-plan-page) .plan-floor-results {
+  grid-template-columns: minmax(0, 0.30fr) minmax(0, 0.70fr);
+}
+
+.plan-floor-page:not(.board-manage-plan-page).fcr-flat-page .plan-floor-results__head {
+  width: calc(30% - 8px);
+}
+
+.plan-floor-page:not(.board-manage-plan-page).fcr-flat-page .type3-table .col-no {
+  width: 52px;
+}
+
+.plan-floor-page:not(.board-manage-plan-page).fcr-flat-page .type3-table .col-date {
+  width: 108px;
+}
+
+.plan-floor-page:not(.board-manage-plan-page).fcr-flat-page .type3-table .col-title {
+  width: auto;
+}
+
+.plan-floor-page:not(.board-manage-plan-page) .plan-floor-preview {
+  min-height: 340px;
+}
+
+.plan-floor-page:not(.board-manage-plan-page) .plan-floor-preview__empty {
+  min-height: 340px;
+}
+
+.plan-floor-page:not(.board-manage-plan-page) .plan-floor-preview__image {
+  min-height: 340px;
+  max-height: 520px;
+}
+
+
+@media (max-width: 1200px) {
+  .plan-floor-page .plan-floor-results {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .plan-floor-page .plan-floor-results > .type3-table-wrap {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .plan-floor-page .plan-floor-results > .plan-floor-detail {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 360px;
+  }
+
+  .plan-floor-page .plan-floor-results__foot {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .plan-floor-page.fcr-flat-page .plan-floor-results__head {
+    width: 100%;
+  }
+}

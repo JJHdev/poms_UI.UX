@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문자전송 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/sms-send.css?v=20260814-8">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout sms-send-page-root">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="sms-send-page" aria-label="문자전송">
+      <div class="sms-send-layout">
+
+        <!-- ===== 왼쪽 : 메세지 작성 ===== -->
+        <section class="sms-compose-panel" aria-labelledby="smsComposeTitle">
+          <div class="sms-compose-panel__head">
+            <div class="sms-compose-panel__title-wrap">
+              <span class="sms-compose-panel__title-icon" aria-hidden="true">
+                <img src="assets/admin-notices/icon-message.svg" alt="" width="22" height="22">
+              </span>
+              <h2 id="smsComposeTitle" class="sms-compose-panel__title">메세지 작성</h2>
+            </div>
+            <div class="sms-compose-panel__actions">
+              <button type="button" class="btn-sms-reset" id="smsResetBtn">
+                <img src="assets/main/facility-search/icon-reset.svg" alt="" width="16" height="16">
+                초기화
+              </button>
+              <button type="button" class="btn-sms-send btn-sms-send--header" id="smsSendBtn">
+                <img src="assets/admin-notices/icon-send.svg" alt="" width="16" height="16">
+                발송하기
+              </button>
+            </div>
+          </div>
+
+          <div class="sms-compose-panel__body">
+            <div class="sms-compose-field">
+              <div class="sms-compose-label-row">
+                <label class="sms-section-label" for="smsMessage">메세지 내용</label>
+                <span class="sms-compose-limit">한글 45자/영문 90자 이내로 입력 가능합니다.</span>
+              </div>
+              <div class="sms-compose-field__wrap">
+                <textarea id="smsMessage" class="sms-compose-textarea" maxlength="90" rows="8" placeholder="메세지 내용을 입력하세요."></textarea>
+              </div>
+            </div>
+
+            <div class="sms-schedule-row">
+              <div class="sms-send-toggle" role="group" aria-label="발송 유형">
+                <label class="sms-send-toggle__btn">
+                  <input type="radio" name="sendType" value="immediate" checked>
+                  <span>즉시발송</span>
+                </label>
+                <label class="sms-send-toggle__btn">
+                  <input type="radio" name="sendType" value="scheduled">
+                  <span>예약발송</span>
+                </label>
+              </div>
+              <div class="sms-schedule-datetime">
+                <label class="sms-schedule-input-wrap">
+                  <input type="date" id="smsScheduleDate" class="sms-schedule-input" disabled aria-label="예약 날짜">
+                  <img class="sms-schedule-input-wrap__icon" src="assets/sms-history/icon-calendar.svg" alt="" width="18" height="18">
+                </label>
+                <label class="sms-schedule-input-wrap">
+                  <input type="time" id="smsScheduleTime" class="sms-schedule-input" step="60" disabled aria-label="예약 시간">
+                  <img class="sms-schedule-input-wrap__icon" src="assets/sms-history/icon-calendar.svg" alt="" width="18" height="18">
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== 오른쪽 : 수신자 목록 ===== -->
+        <section class="sms-recipient-panel" aria-labelledby="smsRecipientTitle">
+          <div class="sms-recipient-panel__head">
+            <div class="sms-recipient-panel__title-wrap">
+              <span class="sms-recipient-panel__title-icon" aria-hidden="true">
+                <img src="assets/admin-notices/icon-list.svg" alt="" width="22" height="22">
+              </span>
+              <h2 id="smsRecipientTitle" class="sms-recipient-panel__title">수신자 목록</h2>
+            </div>
+          </div>
+
+          <div class="sms-recipient-panel__body">
+            <div class="sms-recipient-add">
+              <div class="sms-recipient-add__field">
+                <label for="smsAddName">이름</label>
+                <input type="text" id="smsAddName" class="sms-recipient-add__input" placeholder="">
+              </div>
+              <div class="sms-recipient-add__field">
+                <label for="smsAddPhone1">전화번호</label>
+                <div class="sms-recipient-add__phone-wrap sms-phone-segments" aria-label="전화번호 입력">
+                  <input type="text" id="smsAddPhone1" class="sms-recipient-add__input sms-phone-segment" inputmode="numeric" maxlength="3" aria-label="전화번호 앞자리">
+                  <span class="sms-phone-separator" aria-hidden="true">-</span>
+                  <input type="text" id="smsAddPhone2" class="sms-recipient-add__input sms-phone-segment" inputmode="numeric" maxlength="4" aria-label="전화번호 가운데자리">
+                  <span class="sms-phone-separator" aria-hidden="true">-</span>
+                  <input type="text" id="smsAddPhone3" class="sms-recipient-add__input sms-phone-segment" inputmode="numeric" maxlength="4" aria-label="전화번호 끝자리">
+                  <input type="hidden" id="smsAddPhone">
+                </div>
+              </div>
+              <button type="button" class="btn-sms-add-row" id="smsAddRowBtn">
+                <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="16" height="16">
+                추가하기
+              </button>
+              <button type="button" class="btn-sms-import" id="smsImportBtn">
+                <img src="assets/admin-notices/icon-list2.svg" alt="" width="16" height="16">
+                연락처 목록
+              </button>
+            </div>
+
+            <div class="sms-recipient-table-wrap">
+              <table class="sms-recipient-table" aria-label="수신자 목록">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-no">번호</th>
+                    <th scope="col" class="col-name">이름</th>
+                    <th scope="col" class="col-phone">전화번호</th>
+                    <th scope="col" class="col-action"><span class="visually-hidden">작업</span></th>
+                  </tr>
+                </thead>
+                <tbody id="smsRecipientBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== 연락처 불러오기 드로어 ===== -->
+  <div class="sms-picker-overlay" id="smsContactPickerOverlay" hidden data-close-contact-picker></div>
+  <aside
+    class="sms-picker-drawer"
+    id="smsContactPickerModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="smsContactPickerTitle"
+    aria-hidden="true"
+  >
+    <div class="sms-picker-drawer__top">
+      <header class="sms-picker-drawer__head">
+        <h2 class="sms-picker-drawer__title" id="smsContactPickerTitle">연락처 불러오기</h2>
+        <button type="button" class="sms-picker-drawer__close" data-close-contact-picker aria-label="닫기">
+          <img src="assets/sms-send/icon-close.svg" alt="" width="14" height="14">
+        </button>
+      </header>
+
+      <div class="sms-picker-drawer__body">
+        <form id="pickerFilterForm" class="sms-picker-filters" novalidate>
+          <div class="sms-picker-field">
+            <label for="pickerFilterName">이름</label>
+            <input type="text" id="pickerFilterName" placeholder="이름을 입력해주세요.">
+          </div>
+          <div class="sms-picker-field">
+            <label for="pickerFilterGroup">그룹</label>
+            <div class="sms-picker-select-wrap">
+              <select id="pickerFilterGroup">
+                <option value="">전체</option>
+              </select>
+            </div>
+          </div>
+          <div class="sms-picker-field">
+            <label for="pickerFilterAgency">관리기관</label>
+            <div class="sms-picker-select-wrap">
+              <select id="pickerFilterAgency">
+                <option value="">전체</option>
+              </select>
+            </div>
+          </div>
+          <div class="sms-picker-field">
+            <label for="pickerFilterPosition">직급</label>
+            <div class="sms-picker-select-wrap">
+              <select id="pickerFilterPosition">
+                <option value="">전체</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn-sms-picker-search">
+            <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="16" height="16">
+            검색하기
+          </button>
+        </form>
+
+        <div class="sms-picker-alpha" id="pickerAlphaTabs" role="tablist" aria-label="이름 초성 필터"></div>
+
+        <div class="sms-picker-result-toolbar">
+          <p class="sms-picker-result-summary">검색결과 <strong id="pickerSelectedCount">0</strong>명 선택됨</p>
+          <div class="sms-picker-result-actions">
+            <button type="button" class="btn-sms-picker-reset" id="pickerResetBtn">
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="14" height="14">
+              초기화
+            </button>
+            <button type="button" class="btn-sms-picker-submit" id="pickerSubmitBtn">
+              <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="14" height="14">
+              선택 추가
+            </button>
+          </div>
+        </div>
+
+        <div class="sms-picker-table-wrap">
+          <table class="sms-picker-table" aria-label="연락처 선택 목록">
+            <thead>
+              <tr>
+                <th scope="col" class="col-check"><input type="checkbox" id="pickerCheckAll" aria-label="전체 선택"></th>
+                <th scope="col">이름</th>
+                <th scope="col">전화번호</th>
+                <th scope="col">관리기관</th>
+                <th scope="col">직급</th>
+                <th scope="col">그룹</th>
+              </tr>
+            </thead>
+            <tbody id="pickerContactBody"></tbody>
+          </table>
+        </div>
+
+        <div class="sms-picker-pagination">
+          <nav class="pagination" id="pickerContactPagination" aria-label="페이지 이동"></nav>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/sms-contacts-data.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/sms-contact-picker.js"></script>
+  <script>
+    (function () {
+      var parts = [
+        document.getElementById("smsAddPhone1"),
+        document.getElementById("smsAddPhone2"),
+        document.getElementById("smsAddPhone3")
+      ];
+      var hidden = document.getElementById("smsAddPhone");
+      if (parts.some(function (el) { return !el; }) || !hidden) { return; }
+
+      function syncPhone() {
+        parts.forEach(function (input) {
+          input.value = input.value.replace(/\D/g, "");
+        });
+        hidden.value = parts.every(function (input) { return input.value; })
+          ? parts.map(function (input) { return input.value; }).join("-")
+          : "";
+      }
+
+      parts.forEach(function (input, index) {
+        input.addEventListener("input", function () {
+          syncPhone();
+          if (input.value.length === input.maxLength && parts[index + 1]) {
+            parts[index + 1].focus();
+          }
+        });
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Backspace" && !input.value && parts[index - 1]) {
+            parts[index - 1].focus();
+          }
+        });
+      });
+
+      var addBtn = document.getElementById("smsAddRowBtn");
+      if (addBtn) { addBtn.addEventListener("click", syncPhone, true); }
+    })();
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var resetBtn = document.getElementById("pickerResetBtn");
+      if (!resetBtn) return;
+      resetBtn.addEventListener("click", function () {
+        var form = document.getElementById("pickerFilterForm");
+        if (form) form.reset();
+        var all = document.getElementById("pickerCheckAll");
+        if (all) all.checked = false;
+        document.querySelectorAll("#pickerContactBody input[type=checkbox]").forEach(function (checkbox) {
+          checkbox.checked = false;
+          checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+        var firstAlpha = document.querySelector("#pickerAlphaTabs .sms-alpha-tab");
+        if (firstAlpha) firstAlpha.click();
+      });
+    });
+  </script>
+  <script src="js/sms-send.js"></script>
+  <script>
+    /* 수신자 행 삭제 버튼 — 아이콘만 남기고 텍스트 제거 */
+    (function () {
+      var DELETE_ICON = "assets/admin-notices/icon-delete2.svg";
+      var tbody = document.getElementById("smsRecipientBody");
+      if (!tbody) { return; }
+
+      function normalize() {
+        tbody.querySelectorAll(".btn-sms-delete").forEach(function (btn) {
+          if (btn.dataset.iconOnly === "1") { return; }
+          btn.textContent = "";
+          var img = document.createElement("img");
+          img.src = DELETE_ICON;
+          img.alt = "";
+          img.width = 16;
+          img.height = 16;
+          btn.appendChild(img);
+          if (!btn.getAttribute("aria-label")) { btn.setAttribute("aria-label", "삭제"); }
+          if (!btn.getAttribute("title")) { btn.setAttribute("title", "삭제"); }
+          btn.dataset.iconOnly = "1";
+        });
+      }
+
+      if (window.MutationObserver) {
+        new MutationObserver(normalize).observe(tbody, { childList: true, subtree: true });
+      }
+      normalize();
+    })();
+  </script>
+</body>
+</html>

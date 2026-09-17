@@ -1,0 +1,366 @@
+/* 관리자 공통 플랫 레이아웃 — 사용자/시스템 관리(Figma)와 동일 톤 */
+
+body.admin-flat-page {
+  background: #fff;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+body.admin-flat-page.admin-topnav-layout .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+body.admin-flat-page.admin-topnav-layout .main-content:has(.fmd-crumb-row) {
+  overflow: visible;
+}
+
+/* ===== 페이지 헤더: 카드 → 플랫 ===== */
+body.admin-flat-page .page-header {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+body.admin-flat-page .page-header__bar,
+body.admin-flat-page .notice-header-row,
+body.admin-flat-page .schedule-page-header .page-header__bar {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+  height: auto !important;
+  min-height: 0;
+  padding: 0 !important;
+}
+
+body.admin-flat-page .page-title {
+  font-size: 20px !important;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  color: #111;
+}
+
+body.admin-flat-page .breadcrumb,
+body.admin-flat-page .page-header__crumb,
+body.admin-flat-page .notice-breadcrumb {
+  font-size: 14px !important;
+  color: #a4afc0;
+}
+
+body.admin-flat-page .breadcrumb a,
+body.admin-flat-page .breadcrumb__sep,
+body.admin-flat-page .notice-breadcrumb span:not(:last-child) {
+  color: #a4afc0 !important;
+}
+
+body.admin-flat-page .breadcrumb__current,
+body.admin-flat-page .notice-breadcrumb strong {
+  color: #6c788b !important;
+  font-weight: 500;
+}
+
+/* 제목·브레드크럼만 있는 헤더는 숨김 (세부탭으로 대체) */
+body.admin-flat-page .page-header:not(:has(button)):not(:has(a.btn)):not(:has(.type3-btn)):not(:has(.mpd-btn)):not(:has(.btn-sms-send)):not(:has(.page-header__actions)):not(:has(.notice-header-actions)) {
+  display: none;
+}
+
+/* ===== insp-status 카드 → 플랫 ===== */
+body.admin-flat-page .insp-status-page {
+  gap: 14px;
+}
+
+body.admin-flat-page .insp-status-card,
+body.admin-flat-page .fcr-card,
+body.admin-flat-page .notice-content-card,
+body.admin-flat-page .popup-content-card,
+body.admin-flat-page .sra-search-panel,
+body.admin-flat-page .sms-compose-panel,
+body.admin-flat-page .sms-recipient-panel,
+body.admin-flat-page .sms-panel,
+body.admin-flat-page .admin-content-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+  gap: 14px;
+}
+
+body.admin-flat-page .insp-filter-panel,
+body.admin-flat-page .insp-results-panel,
+body.admin-flat-page .insp-status-panel.is-active {
+  gap: 14px;
+}
+
+body.admin-flat-page .insp-filter-panel__title-icon,
+body.admin-flat-page .notice-search-icon {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+}
+
+body.admin-flat-page .insp-filter-panel__title,
+body.admin-flat-page .notice-search-title h2,
+body.admin-flat-page .type3-section-title__text {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  color: #111;
+}
+
+body.admin-flat-page .insp-divider {
+  display: none;
+}
+
+/* 검색조건 폼 — type3 filter strip 톤 */
+body.admin-flat-page .insp-filter,
+body.admin-flat-page .insp-filter__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+body.admin-flat-page .insp-field label,
+body.admin-flat-page .type3-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6c788b;
+}
+
+body.admin-flat-page .insp-field select,
+body.admin-flat-page .insp-field input,
+body.admin-flat-page .type3-field select,
+body.admin-flat-page .type3-field input {
+  height: 36px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  color: #111;
+  box-sizing: border-box;
+}
+
+body.admin-flat-page .insp-btn--search,
+body.admin-flat-page .type3-btn--search,
+body.admin-flat-page .notice-search-button {
+  background: #1c6fff !important;
+  border-color: #1c6fff !important;
+  color: #fff !important;
+  border-radius: 6px;
+  height: 36px;
+}
+
+body.admin-flat-page .insp-btn--reset,
+body.admin-flat-page .type3-btn--reset {
+  background: #fff !important;
+  border: 1px solid #dadae2 !important;
+  color: #111 !important;
+  border-radius: 6px;
+  height: 36px;
+}
+
+body.admin-flat-page .insp-results__count,
+body.admin-flat-page .type3-results__count,
+body.admin-flat-page .ua-results__count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+
+/* 검색결과 카운트 */
+body.admin-flat-page .insp-results__label,
+body.admin-flat-page .ua-results__label,
+body.admin-flat-page .type3-results__label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.32px;
+}
+
+body.admin-flat-page .insp-results__meta,
+body.admin-flat-page .ua-results__meta,
+body.admin-flat-page .type3-results__meta {
+  font-size: 14px;
+  color: #6c788b;
+}
+
+body.admin-flat-page .insp-results__meta strong,
+body.admin-flat-page .ua-results__meta strong,
+body.admin-flat-page .type3-results__meta strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+/* 테이블 플랫 */
+body.admin-flat-page .insp-status-table-wrap,
+body.admin-flat-page .type3-table-wrap,
+body.admin-flat-page .notice-table-wrap {
+  border: none;
+  overflow-x: auto;
+}
+
+body.admin-flat-page .insp-status-table,
+body.admin-flat-page .type3-table,
+body.admin-flat-page .notice-table,
+body.admin-flat-page .admin-users-table,
+body.admin-flat-page .sra-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+body.admin-flat-page .insp-status-table thead th,
+body.admin-flat-page .type3-table thead th,
+body.admin-flat-page .notice-table thead th,
+body.admin-flat-page .sra-table thead th {
+  background: rgba(28, 111, 255, 0.1) !important;
+  border: 1px solid #dadae2 !important;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  height: 32px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+body.admin-flat-page .insp-status-table thead th:first-child,
+body.admin-flat-page .type3-table thead th:first-child,
+body.admin-flat-page .notice-table thead th:first-child,
+body.admin-flat-page .sra-table thead th:first-child {
+  border-top-left-radius: 6px;
+}
+
+body.admin-flat-page .insp-status-table thead th:last-child,
+body.admin-flat-page .type3-table thead th:last-child,
+body.admin-flat-page .notice-table thead th:last-child,
+body.admin-flat-page .sra-table thead th:last-child {
+  border-top-right-radius: 6px;
+}
+
+body.admin-flat-page .insp-status-table tbody td,
+body.admin-flat-page .type3-table tbody td,
+body.admin-flat-page .notice-table tbody td,
+body.admin-flat-page .sra-table tbody td {
+  border: 1px solid #dadae2 !important;
+  background: #fff;
+  font-size: 14px;
+  color: #111;
+  height: 32px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+body.admin-flat-page .insp-status-table tbody tr:hover td,
+body.admin-flat-page .type3-table tbody tr:hover td,
+body.admin-flat-page .notice-table tbody tr:hover td {
+  background: #f7f9fc;
+}
+
+/* 콘텐츠 탭(밑줄형) 공통 */
+body.admin-flat-page .insp-status-tabs,
+body.admin-flat-page .ua-account-tabs {
+  border-bottom: 1px solid #dadae2;
+  background: transparent;
+  margin-bottom: 0;
+}
+
+body.admin-flat-page .insp-status-tabs__btn,
+body.admin-flat-page .ua-account-tabs__btn {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body.admin-flat-page .insp-status-tabs__btn.is-active,
+body.admin-flat-page .ua-account-tabs__btn.is-active {
+  background: transparent !important;
+  color: #111;
+  border-bottom-color: #1c6fff;
+  font-weight: 600;
+}
+
+/* SMS / 특수 패널 */
+body.admin-flat-page .sms-send-page,
+body.admin-flat-page .sms-reserve-page,
+body.admin-flat-page .sms-contacts-page,
+body.admin-flat-page .sms-history-page {
+  gap: 14px;
+}
+
+body.admin-flat-page .sms-compose-panel,
+body.admin-flat-page .sms-recipient-panel {
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  padding: 16px 18px !important;
+  background: #fff !important;
+}
+
+/* 일정/팝업/공지 검색 영역 */
+body.admin-flat-page .notice-search-area,
+body.admin-flat-page .popup-search-area {
+  gap: 14px;
+}
+
+/* 상세 페이지 공통: 카드형 헤더 완화 */
+body.admin-flat-page .btn-back {
+  background: #fff !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+  height: 32px !important;
+  backdrop-filter: none !important;
+}
+
+body.admin-flat-page .btn-back:hover {
+  border-color: #1c6fff !important;
+  background: #f8f9fb !important;
+}
+
+body.admin-flat-page .mpd-panel,
+body.admin-flat-page .fcd-panel,
+body.admin-flat-page .fmd-section {
+  box-shadow: none;
+}
+
+/* 레거시 mock-panel / page-header__top */
+body.admin-flat-page .page-header__top {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+body.admin-flat-page .mock-panel {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+body.admin-flat-page .mock-stack {
+  gap: 14px;
+}
+
+body.admin-flat-page .mock-panel__title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+}

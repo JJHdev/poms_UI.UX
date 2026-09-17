@@ -1,0 +1,951 @@
+/* ===== Inspection report page ===== */
+.vendor-page--inspection {
+  padding-bottom: 100px;
+}
+
+.vendor-page--inspection.phase-edit {
+  padding-bottom: 100px;
+}
+
+/* 단계별 표시: 목록 → 이력 → 상세(읽기) → 추가(편집) */
+.inspection-split[hidden],
+.inspection-detail[hidden],
+.vendor-footer--inspection[hidden] {
+  display: none !important;
+}
+
+.vendor-page--inspection.phase-history .inspection-split {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.vendor-page--inspection.phase-view .inspection-split {
+  grid-template-columns: 1fr 320px;
+}
+
+.vendor-page--inspection.phase-edit .inspection-split {
+  grid-template-columns: 1fr;
+}
+
+.vendor-page--inspection.phase-edit .inspection-split__detail {
+  display: none !important;
+}
+
+.inspection-facility-form[hidden] {
+  display: none !important;
+}
+
+.vendor-page--inspection.phase-history .inspection-split__detail[hidden] {
+  display: none !important;
+}
+
+.inspection-detail.is-readonly .inspection-extra-form__textarea,
+.inspection-detail.is-readonly .inspection-date-input,
+.inspection-detail.is-readonly .inspection-result-select,
+.inspection-detail.is-readonly .inspection-result-memo,
+.inspection-detail.is-readonly .inspection-opinion-input,
+.inspection-detail.is-readonly .inspection-maint-select {
+  pointer-events: none;
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  color: #374151;
+}
+
+.inspection-detail.is-readonly .btn-photo-add {
+  pointer-events: none;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: default;
+}
+
+.inspection-detail.is-readonly .inspection-extra-form__footer {
+  display: none;
+}
+
+.inspection-readonly-text {
+  display: block;
+  font-size: 12px;
+  color: #374151;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.inspection-result-readonly {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inspection-result-readonly__status {
+  font-weight: 600;
+  color: #111827;
+}
+
+.inspection-result-readonly__memo {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.report-table tbody tr.is-clickable-history {
+  cursor: pointer;
+}
+
+.report-table tbody tr.is-clickable-history:hover {
+  background: #f8fafc;
+}
+
+.report-table tbody tr.is-clickable-history.is-selected {
+  background: #eff6ff;
+}
+
+.report-table tbody tr.is-clickable-history.is-selected td:first-child {
+  box-shadow: inset 3px 0 0 #2563eb;
+}
+
+/* ===== Section cards ===== */
+.report-section {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.report-section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f3f4f6;
+}
+
+.report-section__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-section__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.report-section__icon--clock {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.report-section__icon--building {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.report-section__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.report-section__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.report-section__meta {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.report-section__meta em {
+  font-style: normal;
+  color: #2563eb;
+}
+
+.report-section__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.report-section__controls select {
+  height: 40px;
+  min-width: 140px;
+  padding: 0 32px 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+  font-size: 13px;
+  font-family: inherit;
+  appearance: none;
+}
+
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background: #1d4ed8;
+}
+
+.report-section__body {
+  padding: 0;
+}
+
+.report-section__body--padded {
+  padding: 16px 20px 20px;
+}
+
+/* ===== Data tables ===== */
+.report-table-scroll {
+  overflow-x: auto;
+}
+
+.report-table-scroll--facility-list {
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.report-table-scroll--facility-list .report-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.report-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.report-table th {
+  padding: 11px 10px;
+  background: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+  color: #374151;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.report-table td {
+  padding: 11px 10px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.report-table tbody tr {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.report-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.report-table tbody tr.is-selected {
+  background: #eff6ff;
+}
+
+.report-table tbody tr.is-selected td:first-child {
+  box-shadow: inset 3px 0 0 #2563eb;
+}
+
+.tag-facility-type {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tag-facility-type--mooring {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.tag-facility-type--outer {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-approve {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-draft {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: #fff7ed;
+  color: #c2410c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-draft svg,
+.badge-approve svg {
+  width: 12px;
+  height: 12px;
+}
+
+.status-text {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-text--approved {
+  color: #15803d;
+}
+
+.status-text--draft {
+  color: #c2410c;
+}
+
+.attach-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.attach-count svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ===== Two-column bottom (원래 너비, 동일 높이) ===== */
+.inspection-split {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.inspection-split .report-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  min-height: 360px;
+}
+
+.inspection-split .report-section__head {
+  flex-shrink: 0;
+  min-height: 72px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.inspection-split .report-section__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.inspection-split .report-table-scroll {
+  flex: 1;
+  overflow: auto;
+}
+
+.inspection-split .report-table {
+  min-width: 640px;
+  width: 100%;
+}
+
+.inspection-split #facilityDetail {
+  flex: 1;
+  overflow: auto;
+}
+
+.inspection-split .facility-detail-list {
+  margin: 0;
+}
+
+.inspection-split .facility-detail-list > div {
+  padding: 11px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  grid-template-columns: 100px 1fr;
+}
+
+.inspection-split .facility-detail-list > div:first-child {
+  border-top: 1px solid #f3f4f6;
+}
+
+.inspection-split .report-section__controls--spacer {
+  visibility: hidden;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* ===== Facility detail card ===== */
+.facility-detail-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facility-detail-list > div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 13px;
+}
+
+.facility-detail-list > div:last-child {
+  border-bottom: none;
+}
+
+.facility-detail-list dt {
+  margin: 0;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.facility-detail-list dd {
+  margin: 0;
+  font-weight: 500;
+  color: #111827;
+}
+
+/* ===== 시설 정보 (추가 모드 — 탭 상단) ===== */
+.inspection-facility-form {
+  margin-bottom: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.inspection-facility-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.inspection-facility-form__row:last-child {
+  border-bottom: none;
+}
+
+.inspection-facility-form__field {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 48px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.inspection-facility-form__field:last-child {
+  border-right: none;
+}
+
+.inspection-facility-form__row .inspection-facility-form__field:last-child {
+  border-right: none;
+}
+
+.inspection-facility-form__label {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: #f3f4f6;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  border-right: 1px solid #e5e7eb;
+}
+
+.inspection-facility-form__label--stack {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1.25;
+  padding: 8px 14px;
+}
+
+.inspection-facility-form__label-main {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.inspection-facility-form__label-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.inspection-facility-form__value {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.inspection-facility-form__control {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 6px 12px;
+  background: #fff;
+}
+
+.inspection-facility-form__control--date {
+  padding: 6px 12px;
+}
+
+.inspection-facility-form__input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #111827;
+  background: #fff;
+}
+
+.inspection-facility-form__input::placeholder {
+  color: #9ca3af;
+}
+
+.inspection-facility-form__input:focus {
+  outline: none;
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 2px rgba(147, 197, 253, 0.35);
+}
+
+.inspection-date-field--compact {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  flex-shrink: 0;
+}
+
+.inspection-facility-form__input--date {
+  width: 100%;
+  padding-right: 36px;
+}
+
+.inspection-facility-form__input--date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 36px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.inspection-date-field--compact .inspection-date-field__icon {
+  right: 10px;
+}
+
+.inspection-date-field--compact .inspection-date-field__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ===== Inspection detail (tabs + items) ===== */
+.inspection-detail {
+  margin-top: 16px;
+}
+
+.inspection-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.inspection-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.inspection-tab svg {
+  width: 18px;
+  height: 18px;
+}
+
+.inspection-tab:hover {
+  border-color: #93c5fd;
+  color: #374151;
+}
+
+.inspection-tab.is-active {
+  background: #0c1a2e;
+  border-color: #0c1a2e;
+  color: #fff;
+}
+
+.inspection-tab-panel.is-hidden {
+  display: none;
+}
+
+.inspection-tab-placeholder {
+  padding: 48px 20px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.inspection-items-card {
+  margin-bottom: 16px;
+}
+
+.inspection-items-table {
+  min-width: 1100px;
+}
+
+.inspection-items-table tbody tr {
+  cursor: default;
+}
+
+.inspection-items-table tbody tr:hover {
+  background: #fff;
+}
+
+.inspection-items-table .cell-category {
+  font-weight: 600;
+  color: #374151;
+  background: #f3f4f6;
+  vertical-align: top;
+}
+
+.inspection-item-name {
+  font-weight: 500;
+}
+
+.inspection-item-name .required {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.inspection-items-table .cell-result {
+  min-width: 220px;
+}
+
+.inspection-result-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inspection-result-select,
+.inspection-maint-select {
+  height: 34px;
+  min-width: 72px;
+  padding: 0 28px 0 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
+  font-size: 12px;
+  font-family: inherit;
+  color: #111827;
+  appearance: none;
+  flex-shrink: 0;
+}
+
+.inspection-result-memo {
+  flex: 1;
+  min-width: 100px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: inherit;
+  background: #fff;
+}
+
+.inspection-result-memo:focus,
+.inspection-result-select:focus,
+.inspection-maint-select:focus,
+.inspection-opinion-input:focus {
+  outline: none;
+  border-color: #93c5fd;
+}
+
+.inspection-items-table .cell-opinion {
+  min-width: 160px;
+}
+
+.inspection-opinion-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: inherit;
+  line-height: 1.45;
+  resize: vertical;
+  background: #fff;
+}
+
+.inspection-opinion-input::placeholder,
+.inspection-result-memo::placeholder {
+  color: #9ca3af;
+}
+
+.inspection-items-table .cell-maint {
+  width: 100px;
+  text-align: center;
+}
+
+.inspection-maint-select {
+  min-width: 64px;
+}
+
+.inspection-items-table .cell-photo {
+  width: 120px;
+  text-align: center;
+}
+
+.btn-photo-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-photo-add svg {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+.inspection-items-card .report-section__body {
+  padding: 0;
+}
+
+.inspection-items-extra {
+  padding: 20px 24px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.inspection-extra-form__row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.inspection-extra-form__row:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.inspection-extra-form__row--date {
+  align-items: center;
+  padding-top: 0;
+}
+
+.inspection-extra-form__label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.inspection-extra-form__label .required,
+.inspection-item-name .required {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.inspection-extra-form__control--date {
+  display: flex;
+}
+
+.inspection-date-field {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+}
+
+.inspection-date-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 40px 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #111827;
+  background: #fff;
+}
+
+.inspection-date-input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.inspection-date-field__icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  display: flex;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.inspection-date-field__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.inspection-extra-form__textarea {
+  width: 100%;
+  min-height: 88px;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.5;
+  color: #111827;
+  background: #fff;
+  resize: vertical;
+}
+
+.inspection-extra-form__textarea::placeholder {
+  color: #9ca3af;
+}
+
+.inspection-extra-form__textarea:focus,
+.inspection-date-input:focus {
+  outline: none;
+  border-color: #93c5fd;
+}
+
+.inspection-extra-form__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.inspection-required-note {
+  margin: 0;
+  font-size: 12px;
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.inspection-items-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.inspection-items-actions .btn-draft,
+.inspection-items-actions .btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vendor-footer--inspection {
+  justify-content: flex-end;
+}
+
+.vendor-footer--inspection .vendor-footer__actions {
+  margin-left: auto;
+}
+
+.btn-submit--dark {
+  background: #0c1a2e;
+  box-shadow: 0 2px 8px rgba(12, 26, 46, 0.35);
+}
+
+.btn-submit--dark:hover {
+  background: #1a2f4d;
+}

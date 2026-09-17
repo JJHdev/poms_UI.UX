@@ -1,0 +1,319 @@
+/* 자료수신 목록 — type3 flat (정보변경 요청과 동일 셸) */
+
+.data-receive-page.fcr-flat-page .fcr-table {
+  min-width: 960px;
+}
+
+.data-receive-page.fcr-flat-page .type3-field--sm {
+  flex: 0 1 140px;
+  max-width: 160px;
+}
+
+.data-receive-page.fcr-flat-page .type3-table .col-agency {
+  width: 18%;
+}
+
+.data-receive-page.fcr-flat-page .type3-table .col-subject {
+  width: auto;
+}
+
+.data-receive-page.fcr-flat-page .type3-table .col-file {
+  width: 120px;
+}
+
+.data-receive-page.fcr-flat-page .type3-table .col-date {
+  width: 120px;
+}
+
+.data-receive-page.fcr-flat-page .type3-table tbody td.col-subject,
+.data-receive-page.fcr-flat-page .type3-table tbody td:nth-child(3) {
+  text-align: left;
+  padding-left: 16px;
+}
+
+/* ===== 자료수신 상세 — fcr-detail-flat (정보변경 요청 상세 톤) ===== */
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0 !important;
+  border: none !important;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100%;
+  margin: 0;
+  padding: 0 !important;
+  border: none !important;
+  border-top: 1px solid #dadae2 !important;
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  overflow: hidden;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-grid .fac-add-field--full {
+  grid-column: 1 / -1;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-grid .fac-add-field {
+  height: 38px !important;
+  max-height: none !important;
+  min-height: 38px !important;
+  margin: 0 !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+  background: #fff;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-grid .fac-add-field__label {
+  flex: 0 0 160px !important;
+  width: 160px !important;
+  max-width: 160px !important;
+  white-space: nowrap;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-grid .fac-add-field.receive-detail-field--content {
+  height: auto !important;
+  max-height: none !important;
+  min-height: 160px !important;
+  align-items: stretch !important;
+  overflow: hidden !important;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-grid .fac-add-field.receive-detail-field--content .fac-add-field__label {
+  height: unset !important;
+  min-height: unset !important;
+  max-height: none !important;
+  align-self: stretch;
+  align-items: flex-start;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-grid .fac-add-field.receive-detail-field--content .fac-add-field__control {
+  height: unset !important;
+  min-height: unset !important;
+  max-height: none !important;
+  align-self: stretch;
+  align-items: stretch;
+  padding: 8px 16px !important;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page #receiveDetailContent {
+  width: 100%;
+  min-height: 140px !important;
+  height: 140px !important;
+  padding: 0 !important;
+  resize: vertical;
+  line-height: 1.6;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  background: transparent !important;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .fac-add-input[readonly] {
+  background: transparent !important;
+  color: #111;
+  cursor: default;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-detail-file {
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-file-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-file-picker > img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-file-link {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  color: #1c6fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-file-link:hover {
+  color: #0f5de0;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-file-link.is-empty {
+  color: #999;
+  text-decoration: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .receive-file-link.is-empty:hover {
+  color: #999;
+}
+
+body.fcr-detail-flat-page.data-receive-detail-page .fac-add-footer {
+  margin-top: 16px;
+  padding-top: 8px;
+}
+
+/* 댓글 (마크업 사용 시) */
+.data-receive-detail-page .receive-comment-section {
+  margin-top: 16px;
+}
+
+.data-receive-detail-page .receive-comment-table-wrap {
+  width: 100%;
+  overflow: auto;
+  border-top: 1px solid #dadae2;
+  border-left: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.data-receive-detail-page .receive-comment-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+.data-receive-detail-page .receive-comment-table thead th {
+  height: 40px;
+  padding: 0 16px;
+  background: rgba(28, 111, 255, 0.04);
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.data-receive-detail-page .receive-comment-table thead th:last-child {
+  border-right: 1px solid #dadae2;
+}
+
+.data-receive-detail-page .receive-comment-table tbody td {
+  height: 40px;
+  padding: 0 16px;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  text-align: center;
+  color: #111;
+  font-weight: 400;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.data-receive-detail-page .receive-comment-table tbody td:last-child {
+  border-right: 1px solid #dadae2;
+}
+
+.data-receive-detail-page .receive-comment-table tbody td.is-left {
+  text-align: left;
+}
+
+.data-receive-detail-page .receive-comment-table tbody td.is-empty {
+  color: #6c788b;
+  font-weight: 400;
+}
+
+.data-receive-detail-page .receive-comment-table .col-author {
+  width: 140px;
+}
+
+.data-receive-detail-page .receive-comment-table .col-date {
+  width: 140px;
+}
+
+.data-receive-detail-page .receive-comment-compose {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.data-receive-detail-page .receive-comment-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 84px;
+  padding: 12px 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  line-height: 1.5;
+  resize: vertical;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.data-receive-detail-page .receive-comment-input:focus {
+  border-color: #1c6fff;
+  box-shadow: 0 0 0 2px rgba(28, 111, 255, 0.12);
+}
+
+.data-receive-detail-page .receive-comment-input::placeholder {
+  color: #999;
+}
+
+.data-receive-detail-page .receive-comment-submit {
+  flex: 0 0 auto;
+  height: 40px;
+  min-width: 110px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 6px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.data-receive-detail-page .receive-comment-submit:hover {
+  background: #16304f;
+}

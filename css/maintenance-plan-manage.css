@@ -1,0 +1,442 @@
+/* 유지관리계획 관리 — facility-management flat type3 + 콘텐츠 탭 */
+
+.maintenance-plan-manage-page.fcr-flat-page {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  margin: 0;
+  min-width: 1240px;
+}
+
+.maintenance-plan-manage-page.fcr-flat-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.maintenance-plan-manage-page .type3-page > .admin-sub-tabs {
+  margin-bottom: 0;
+}
+
+/* ===== 탭 — 사용자계정관리와 동일 (하단 보더 / 활성 파란 밑줄) ===== */
+.maintenance-plan-manage-page .ua-account-tabs {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-shrink: 0;
+  border-bottom: 1px solid #dadae2;
+  background: transparent;
+}
+
+.maintenance-plan-manage-page .ua-account-tabs__btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  padding: 0 30px 14px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  border-radius: 0;
+  background: transparent;
+  color: #6c788b;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.maintenance-plan-manage-page .ua-account-tabs__btn:hover {
+  color: #111;
+  background: transparent;
+}
+
+.maintenance-plan-manage-page .ua-account-tabs__btn.is-active {
+  border-bottom-color: #1c6fff;
+  background: transparent;
+  color: #111;
+  font-weight: 600;
+}
+
+/* 패널 */
+.maintenance-plan-manage-page .insp-status-panel {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.maintenance-plan-manage-page .insp-status-panel.is-active {
+  display: flex;
+}
+
+.maintenance-plan-manage-page .insp-status-panel[hidden],
+.maintenance-plan-manage-page .insp-status-panel:not(.is-active) {
+  display: none !important;
+}
+
+.maintenance-plan-manage-page .mpm-filter-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.maintenance-plan-manage-page .mpm-filter-head .insp-status-head-stats {
+  margin-left: auto;
+}
+
+/* ===== 필터 필드 폭 ===== */
+.maintenance-plan-manage-page .mpm-sys-filter-fields,
+.maintenance-plan-manage-page .mpm-plan-filter-fields,
+.maintenance-plan-manage-page .mpm-overview-filter-fields {
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+
+.maintenance-plan-manage-page .mpm-sys-filter-fields > .type3-field,
+.maintenance-plan-manage-page .mpm-plan-filter-fields > .type3-field,
+.maintenance-plan-manage-page .mpm-overview-filter-fields > .type3-field {
+  flex: 0 1 160px;
+  max-width: 200px;
+}
+
+.maintenance-plan-manage-page .mpm-sys-filter-fields > .type3-field--sm,
+.maintenance-plan-manage-page .mpm-plan-filter-fields > .type3-field--sm {
+  flex: 0 1 120px;
+  max-width: 140px;
+}
+
+.maintenance-plan-manage-page .mpm-overview-filter-fields > .type3-field--year {
+  flex: 0 1 240px;
+  max-width: 280px;
+}
+
+.maintenance-plan-manage-page .mpm-sys-filter-fields > .type3-field--md {
+  flex: 0 1 160px;
+  max-width: 180px;
+}
+
+.maintenance-plan-manage-page .mpm-sys-filter-fields > .type3-field--grow,
+.maintenance-plan-manage-page .mpm-plan-filter-fields > .type3-field--grow,
+.maintenance-plan-manage-page .mpm-overview-filter-fields > .type3-field--grow {
+  flex: 1 1 200px;
+  max-width: 320px;
+  min-width: 160px;
+}
+
+@media (max-width: 1480px) {
+  .maintenance-plan-manage-page .mpm-sys-filter-fields,
+  .maintenance-plan-manage-page .mpm-plan-filter-fields {
+    flex-wrap: wrap;
+  }
+
+  .maintenance-plan-manage-page .mpm-sys-filter-fields > .type3-field,
+  .maintenance-plan-manage-page .mpm-sys-filter-fields > .type3-field--sm,
+  .maintenance-plan-manage-page .mpm-sys-filter-fields > .type3-field--md,
+  .maintenance-plan-manage-page .mpm-sys-filter-fields > .type3-field--grow,
+  .maintenance-plan-manage-page .mpm-plan-filter-fields > .type3-field,
+  .maintenance-plan-manage-page .mpm-plan-filter-fields > .type3-field--sm,
+  .maintenance-plan-manage-page .mpm-plan-filter-fields > .type3-field--grow {
+    flex: 1 1 160px;
+    max-width: none;
+  }
+}
+
+/* ===== 결과 헤더 ===== */
+.maintenance-plan-manage-page [data-panel="system-inspection"] .type3-results__head {
+  align-items: center;
+}
+
+.maintenance-plan-manage-page .mpm-due-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.maintenance-plan-manage-page .mpm-due-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  color: #0b1a2e;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.maintenance-plan-manage-page .mpm-due-title strong {
+  color: #1c6fff;
+  font-weight: 700;
+}
+
+.maintenance-plan-manage-page .mpm-due-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.maintenance-plan-manage-page .mpm-due-legend__on {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #1c6fff;
+}
+
+.maintenance-plan-manage-page .mpm-due-legend__on img {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+.maintenance-plan-manage-page .mpm-due-legend__sep {
+  color: #c8cfd9;
+}
+
+.maintenance-plan-manage-page .mpm-due-legend__off {
+  color: #999;
+}
+
+.maintenance-plan-manage-page .insp-status-table--due thead tr:nth-child(2) th {
+  border-radius: 0;
+}
+
+.maintenance-plan-manage-page .insp-status-table--due thead tr:first-child th[colspan] {
+  border-radius: 0 5px 0 0;
+}
+
+.maintenance-plan-manage-page .insp-status-table--due thead th[rowspan] {
+  vertical-align: middle;
+}
+
+.maintenance-plan-manage-page .type3-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.maintenance-plan-manage-page .insp-sys-view-mode__btn {
+  background: #fff;
+}
+
+/* 총괄표 */
+.maintenance-plan-manage-page .insp-status-table--overview {
+  min-width: 1100px;
+}
+
+.maintenance-plan-manage-page .insp-status-table--overview tbody tr:last-child td {
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+}
+
+.maintenance-plan-manage-page .insp-status-table--overview tfoot td {
+  height: 32px;
+  padding: 4px 8px;
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  background: #f4f7fb;
+  color: #111;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.maintenance-plan-manage-page .insp-status-table--overview tfoot td.col-metric,
+.maintenance-plan-manage-page .insp-status-table--overview tfoot td.col-rate,
+.maintenance-plan-manage-page .insp-status-table--overview tfoot td.col-total {
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 12px;
+}
+
+.maintenance-plan-manage-page .insp-status-table--overview tfoot td:last-child {
+  border-right: none;
+}
+
+.maintenance-plan-manage-page .insp-status-table--overview tfoot tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+.maintenance-plan-manage-page .insp-status-table--overview tfoot tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}
+
+/* ===== 유지관리계획 테이블 ===== */
+.maintenance-plan-manage-page .mpm-plan-table {
+  table-layout: fixed;
+  min-width: 960px;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table .col-no {
+  width: 64px;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table .col-owner {
+  width: 18%;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table .col-date {
+  width: 12%;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table .col-year {
+  width: 10%;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table .col-title {
+  width: auto;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table .col-status {
+  width: 10%;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table thead th,
+.maintenance-plan-manage-page .mpm-plan-table tbody td {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table tbody tr[data-no] {
+  cursor: pointer;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table tbody td.col-status {
+  font-weight: 600;
+}
+
+.maintenance-plan-manage-page .mpm-status.is-approved {
+  color: #1c6fff;
+}
+
+.maintenance-plan-manage-page .mpm-status.is-unregistered {
+  color: #6c788b;
+}
+
+.maintenance-plan-manage-page .mpm-status.is-requested {
+  color: #d97706;
+}
+
+.maintenance-plan-manage-page .mpm-status.is-rejected {
+  color: #dc2626;
+}
+
+.maintenance-plan-manage-page .mpm-plan-table tbody td.col-title {
+  text-align: left;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* 총괄표 안내 */
+.maintenance-plan-manage-page .insp-status-guide-note {
+  margin-top: 0;
+}
+
+.maintenance-plan-manage-page .mpm-overview-head {
+  align-items: center;
+  gap: 12px;
+}
+
+.maintenance-plan-manage-page .mpm-overview-legend {
+  margin: 0 0 0 auto;
+  color: #6c788b;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.maintenance-plan-manage-page #overviewStepTitle {
+  white-space: nowrap;
+}
+
+/* 총괄표 상세 페이지 */
+.overview-detail-page .type3-field[hidden] {
+  display: none !important;
+}
+
+.overview-detail-page .type3-table.insp-overview-detail__table {
+  min-width: 1100px;
+  table-layout: auto;
+}
+
+.overview-detail-page .insp-overview-detail__table thead th {
+  position: static;
+  top: auto;
+  z-index: auto;
+  height: 32px;
+  background: #e8f1ff;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+}
+
+.overview-detail-page .insp-overview-detail__table thead tr:nth-child(2) th {
+  top: auto;
+  height: 32px;
+  background: #f6f9ff;
+  color: #6c788b;
+  border-radius: 0;
+}
+
+.overview-detail-page .insp-overview-detail__table thead th:first-child,
+.overview-detail-page .insp-overview-detail__table thead th:last-child {
+  border-radius: 0;
+}
+
+.overview-detail-page .insp-overview-detail__table thead tr:first-child th:first-child {
+  border-radius: 5px 0 0 0;
+}
+
+.overview-detail-page .insp-overview-detail__table thead tr:first-child th:last-child {
+  border-radius: 0 5px 0 0;
+}
+
+.overview-detail-page .insp-overview-detail__table tbody td {
+  height: 32px;
+  padding: 4px 8px;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+}
+
+.overview-detail-page .insp-overview-detail__table tbody tr:last-child td {
+  border-bottom: 1px solid #dadae2;
+}
+
+.overview-detail-page .admin-detail-title-row {
+  margin-bottom: 8px;
+}
+
+.overview-detail-page .type3-results__head {
+  align-items: center;
+}
+
+/* 목록 표 — 헤더 제외 본문 배경 흰색 통일 */
+.maintenance-plan-manage-page .type3-table tbody td,
+.maintenance-plan-manage-page .insp-status-table tbody td,
+.maintenance-plan-manage-page .insp-status-table tbody tr:nth-child(even) td,
+.maintenance-plan-manage-page .insp-status-table tbody tr:hover td,
+.maintenance-plan-manage-page [data-panel="system-inspection"] .insp-status-table--due tbody tr:nth-child(even) td,
+.maintenance-plan-manage-page .insp-status-table--plan tbody tr:nth-child(even) td,
+.maintenance-plan-manage-page .insp-sys-row.is-selected td,
+.maintenance-plan-manage-page .insp-sys-row.is-selected:hover td,
+.maintenance-plan-manage-page .insp-status-table--overview tfoot td {
+  background: #fff;
+}

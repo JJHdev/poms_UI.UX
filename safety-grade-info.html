@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>안전등급 현황 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-info-modal.css">
+  <link rel="stylesheet" href="css/facility-info-page.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout facility-info-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header__bar">
+        <div class="page-header__titles">
+          <h1 class="page-title">안전등급 현황</h1>
+          <nav class="breadcrumb" aria-label="현재 위치">
+            <a href="facility-management.html">시설물 관리</a>
+            <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+            <span class="breadcrumb__current">안전등급 현황</span>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="facility-info-page-content">
+      <section class="facility-info-panel" aria-labelledby="safetyGradeStatsTitle">
+        <div class="facility-stats-modal--figma facility-stats-modal--page">
+          <div class="facility-stats-modal__panel">
+            <header class="facility-stats-modal__head">
+              <div class="facility-stats-modal__head-main">
+                <span class="facility-stats-modal__badge">항만시설물 통계</span>
+                <div class="facility-stats-modal__title-row">
+                  <h2 id="safetyGradeStatsTitle" class="facility-stats-modal__title">
+                    <span class="facility-stats-modal__title-icon" aria-hidden="true">
+                      <span class="facility-stats-modal__title-icon-dot"></span>
+                      <img src="assets/index-quick/icon-folder-figma.svg" alt="" width="27" height="27">
+                    </span>
+                    안전등급 현황
+                  </h2>
+                  <span class="facility-stats-modal__baseline" id="safetyGradeStatsBaseline">2026.06.01 기준</span>
+                </div>
+                <p class="facility-stats-modal__desc">항만시설물 안전등급 통계자료를 활용해 정보를 확인할 수 있습니다.</p>
+              </div>
+            </header>
+            <div class="facility-stats-modal__body">
+              <div class="facility-stats-table-wrap">
+                <table class="facility-stats-table facility-stats-table--safety-grade" aria-label="안전등급현황 통계">
+                  <colgroup>
+                    <col class="facility-stats-table__kind">
+                    <col class="facility-stats-table__grade">
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col class="facility-stats-table__total">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">종류</th>
+                      <th scope="col">등급</th>
+                      <th scope="col">외곽시설</th>
+                      <th scope="col">계류시설</th>
+                      <th scope="col">건축물</th>
+                      <th scope="col">교량시설</th>
+                      <th scope="col">기타</th>
+                      <th scope="col">합계</th>
+                    </tr>
+                  </thead>
+                  <tbody id="safetyGradeStatsTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/home-safety-grade-stats-data.js"></script>
+  <script src="js/home-safety-grade-stats.js"></script>
+</body>
+</html>

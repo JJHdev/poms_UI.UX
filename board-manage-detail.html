@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/facility-detail.css">
+  <link rel="stylesheet" href="css/facility-add.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-detail.css?v=24">
+  <link rel="stylesheet" href="css/archive-notice.css?v=4">
+  <link rel="stylesheet" href="css/admin-notice-detail.css">
+  <link rel="stylesheet" href="css/board-manage-detail.css?v=20260820c">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page facility-change-request-detail-page archive-notice-detail-page archive-board-detail-page type3-port-page fcr-detail-flat-page board-manage-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="type3-page" aria-label="게시판 상세">
+      <div class="detail-shell">
+        <section class="detail-section" aria-labelledby="boardDetailSectionTitle">
+          <div class="detail-section__head">
+            <div class="type3-section-title">
+              <span class="type3-section-title__icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+              </span>
+              <h3 class="detail-section__title" id="boardDetailSectionTitle">자료 상세</h3>
+            </div>
+            <div class="board-manage-detail-actions">
+              <p class="detail-section__note">※ 자료의 제목·내용·첨부파일을 확인합니다.</p>
+              <button type="button" class="nd-btn nd-btn--delete" id="btnBoardDelete">
+                <img src="assets/admin-notices/icon-delete2.svg" alt="" width="16" height="16">
+                삭제
+              </button>
+              <button type="button" class="nd-btn nd-btn--edit" id="btnBoardEdit">
+                <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+                수정하기
+              </button>
+            </div>
+          </div>
+
+          <div class="fac-add-body notice-detail-body">
+            <div class="fac-add-grid notice-detail-grid">
+              <div class="fac-add-field fac-add-field--full">
+                <div class="fac-add-field__label">구분</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="boardDetailCategory" readonly>
+                </div>
+              </div>
+
+              <div class="fac-add-field fac-add-field--full">
+                <div class="fac-add-field__label">제목</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="boardDetailTitle" readonly>
+                </div>
+              </div>
+
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">등록자</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="boardDetailWriter" readonly>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">등록일</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="boardDetailDate" readonly>
+                </div>
+              </div>
+              <div class="fac-add-field fac-add-field--full">
+                <div class="fac-add-field__label">파일크기</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="boardDetailSize" readonly>
+                </div>
+              </div>
+
+              <div class="fac-add-field fac-add-field--full notice-detail-field--content">
+                <div class="fac-add-field__label">내용</div>
+                <div class="fac-add-field__control">
+                  <div class="fac-add-input notice-detail-content" id="boardDetailDesc"></div>
+                </div>
+              </div>
+
+              <div class="fac-add-field fac-add-field--full">
+                <div class="fac-add-field__label">첨부파일</div>
+                <div class="fac-add-field__control notice-detail-file">
+                  <div class="notice-file-picker" id="boardDetailFileWrap">
+                    <img src="assets/main/facility-form/icon-file.svg" alt="" width="18" height="18">
+                    <a href="#" class="notice-file-link is-empty" id="boardDetailFile">첨부된 파일 없음</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/board-manage-data.js?v=20260820b"></script>
+  <script src="js/board-manage-detail.js?v=20260820c"></script>
+</body>
+</html>

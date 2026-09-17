@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기본계획평면도 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/facility-add.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/archive-board.css?v=3">
+  <link rel="stylesheet" href="css/basic-plan-floor.css?v=4">
+  <link rel="stylesheet" href="css/board-manage-plan.css?v=20260820b">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout plan-floor-page board-manage-plan-page type3-port-page fcr-flat-page board-manage-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="type3-page" aria-label="기본계획평면도">
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text">기본계획평면도</h1>
+      </div>
+
+      <div class="archive-board-tabs" role="tablist" aria-label="자료 구분">
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="law" role="tab" aria-selected="false">법/지침/규정</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="forms" role="tab" aria-selected="false">각종서식</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="software" role="tab" aria-selected="false">매뉴얼 등</button>
+        <button type="button" class="archive-board-tabs__btn is-active" data-board-tab="plan" role="tab" aria-selected="true">기본계획평면도</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="materials" role="tab" aria-selected="false">안전점검 관련자료</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="etc" role="tab" aria-selected="false">기타</button>
+      </div>
+
+      <section class="type3-filter-strip" aria-label="검색조건">
+        <form class="type3-filter type3-filter--strip" id="planFloorSearchForm" novalidate onsubmit="return false;">
+          <div class="type3-filter__fields">
+            <div class="type3-field type3-field--sm">
+              <label for="planFloorSearchPort">항</label>
+              <select id="planFloorSearchPort" name="port">
+                <option value="">전체</option>
+              </select>
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search" id="planFloorSearchBtn">
+              <img src="assets/main/facility-statistics/figma188/icon-search-clean.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="type3-results-panel plan-floor-results-panel" aria-labelledby="planFloorResultTitle">
+        <div class="type3-results__head plan-floor-results__head">
+          <div class="type3-results__count">
+            <span class="type3-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+            </span>
+            <h2 id="planFloorResultTitle" class="type3-results__label">조회결과</h2>
+            <p class="type3-results__meta">총 <strong id="planFloorResultCount">0</strong>건</p>
+          </div>
+          <div class="type3-results__side">
+            <button type="button" class="type3-btn type3-btn--create" id="planFloorAddBtn">
+              <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="16" height="16">
+              추가하기
+            </button>
+          </div>
+        </div>
+
+        <div class="plan-floor-results">
+          <div class="type3-table-wrap">
+            <table class="type3-table plan-floor-table" aria-label="기본계획평면도 조회결과">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-no">번호</th>
+                  <th scope="col" class="col-title">제목</th>
+                  <th scope="col" class="col-date">등록일자</th>
+                  <th scope="col" class="col-action">관리</th>
+                </tr>
+              </thead>
+              <tbody id="planFloorTableBody"></tbody>
+            </table>
+          </div>
+
+          <aside class="plan-floor-detail" id="planFloorDetail" aria-label="계획평면도 상세">
+            <div class="plan-floor-detail__empty" id="planFloorDetailEmpty">
+              항목을 클릭하면 계획평면도가 표시됩니다.
+            </div>
+
+            <div class="plan-floor-detail__panel" id="planFloorDetailPanel" hidden>
+              <header class="plan-floor-detail__head">
+                <h3 class="plan-floor-detail__title" id="planFloorDetailTitle">계획평면도</h3>
+                <p class="plan-floor-detail__sub" id="planFloorDetailSub"></p>
+              </header>
+
+              <div class="plan-floor-detail__view" id="planFloorDetailView">
+                <div class="plan-floor-preview" id="planFloorPreviewWrap">
+                  <div class="plan-floor-preview__empty" id="planFloorPreviewEmpty">
+                    <p>등록된 계획평면도 이미지가 없습니다.</p>
+                  </div>
+                  <img id="planFloorPreviewImage" class="plan-floor-preview__image" alt="계획평면도 미리보기" hidden>
+                </div>
+              </div>
+
+              <form id="planFloorForm" class="plan-floor-form" hidden novalidate>
+                <section class="plan-floor-section" aria-labelledby="planFloorBasicInfoTitle">
+                  <h4 id="planFloorBasicInfoTitle">기본 정보</h4>
+                  <div class="plan-floor-info-grid">
+                    <label>
+                      <span>항 <span class="is-required" aria-hidden="true">*</span></span>
+                      <select id="planFloorPort" required>
+                        <option value="">선택</option>
+                      </select>
+                    </label>
+                  </div>
+                </section>
+
+                <section class="plan-floor-section" aria-labelledby="planFloorMapTitle">
+                  <h4 id="planFloorMapTitle">계획평면도</h4>
+                  <div class="plan-floor-preview plan-floor-preview--edit" id="planFloorEditPreviewWrap">
+                    <div class="plan-floor-preview__empty" id="planFloorEditPreviewEmpty">
+                      <p>이미지를 첨부해 주세요.</p>
+                    </div>
+                    <img id="planFloorEditPreviewImage" class="plan-floor-preview__image" alt="계획평면도 미리보기" hidden>
+                  </div>
+                  <div class="plan-floor-file-upload" id="planFloorFileUploadWrap">
+                    <div class="fac-add-files">
+                      <div class="fac-add-file-row">
+                        <div class="fac-add-file-row__label">첨부파일</div>
+                        <div class="fac-add-file-row__body">
+                          <div class="fac-add-file-picker">
+                            <input type="file" id="planFloorFile" accept="image/*,.jpg,.jpeg,.png,.gif,.webp" hidden>
+                            <button type="button" class="fac-add-file-picker__btn" id="planFloorFileBtn">파일 선택</button>
+                            <span class="fac-add-file-picker__name" id="planFloorFileName">선택된 파일 없음</span>
+                          </div>
+                          <div class="fac-add-file-drop" id="planFloorFileDrop">이미지 파일을 드래그 해주세요.</div>
+                        </div>
+                        <div class="fac-add-file-row__actions">
+                          <button type="button" class="btn-fac-file-delete" id="planFloorFileDelete">파일삭제</button>
+                          <span class="fac-add-file-row__hint">(용량 : 10MB 미만)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </form>
+
+              <footer class="plan-floor-detail__footer" id="planFloorDetailFooter" hidden>
+                <button type="button" class="plan-floor-detail__btn" id="planFloorCancelBtn">취소</button>
+                <button type="button" class="plan-floor-detail__btn plan-floor-detail__btn--primary" id="planFloorSaveBtn">저장</button>
+              </footer>
+            </div>
+          </aside>
+
+          <div class="type3-results-foot plan-floor-results__foot">
+            <nav class="pagination" id="planFloorPagination" aria-label="페이지 이동"></nav>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="plan-floor-viewer" id="planFloorImageViewer" hidden aria-hidden="true">
+    <div class="plan-floor-viewer__backdrop" data-plan-viewer-close></div>
+    <div class="plan-floor-viewer__dialog" role="dialog" aria-modal="true" aria-labelledby="planFloorViewerTitle">
+      <header class="plan-floor-viewer__head">
+        <h2 class="plan-floor-viewer__title" id="planFloorViewerTitle">계획평면도</h2>
+        <div class="plan-floor-viewer__tools">
+          <button type="button" class="plan-floor-viewer__tool-btn" id="planFloorZoomOutBtn" aria-label="축소">&minus;</button>
+          <span class="plan-floor-viewer__zoom-label" id="planFloorZoomLabel">100%</span>
+          <button type="button" class="plan-floor-viewer__tool-btn" id="planFloorZoomInBtn" aria-label="확대">+</button>
+          <button type="button" class="plan-floor-viewer__tool-btn plan-floor-viewer__tool-btn--text" id="planFloorZoomResetBtn">원본 크기</button>
+          <button type="button" class="plan-floor-viewer__close" data-plan-viewer-close aria-label="닫기">&times;</button>
+        </div>
+      </header>
+      <div class="plan-floor-viewer__body" id="planFloorViewerBody">
+        <img id="planFloorViewerImage" alt="계획평면도 확대 보기" draggable="false">
+      </div>
+      <p class="plan-floor-viewer__hint">마우스 휠로 확대/축소, 드래그로 이동할 수 있습니다.</p>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/user-table-utils.js"></script>
+  <script src="js/basic-plan-floor.js?v=20260820a"></script>
+</body>
+</html>

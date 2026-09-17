@@ -1,0 +1,402 @@
+@import url("common-modal.css");
+
+/* ===== Facility detail — major defect (중대결함 사후관리) ===== */
+
+.major-defect-section__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.regular-table-wrap--major-defect {
+  overflow: auto;
+  border-radius: 6px;
+}
+
+.inspection-table--major-defect-history {
+  min-width: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.inspection-table--major-defect-history col.col-no { width: 6.349%; }
+.inspection-table--major-defect-history col.col-type { width: 20%; }
+.inspection-table--major-defect-history col.col-date { width: 14%; }
+.inspection-table--major-defect-history col.col-part { width: 18%; }
+.inspection-table--major-defect-history col.col-category { width: 16%; }
+.inspection-table--major-defect-history col.col-kind { width: 25.651%; }
+
+.inspection-table--major-defect-history thead th {
+  font-size: 14px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.inspection-table--major-defect-history tbody td {
+  font-size: 14px;
+  padding: 0 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.major-defect-list-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.major-defect-list-foot .pagination {
+  justify-content: center;
+}
+
+.major-defect-list-foot__right {
+  display: none;
+}
+
+.major-defect-list-foot__total {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.major-defect-list-foot__size select {
+  height: 30px;
+  min-width: 120px;
+  padding: 0 32px 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+  font-size: 13px;
+  font-family: inherit;
+  color: #374151;
+  appearance: none;
+}
+
+.inspection-table--major-defect-history tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.inspection-table--major-defect-history tbody tr.is-clickable:hover {
+  background: #f9fafb;
+}
+
+.inspection-table--major-defect-history tbody tr.is-clickable:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+}
+
+/* Modal */
+body.major-defect-modal-open {
+  overflow: hidden;
+}
+
+.major-defect-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.major-defect-modal[hidden],
+.major-defect-modal__foot-actions [hidden] {
+  display: none !important;
+}
+
+.major-defect-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.major-defect-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(980px, 100%);
+  max-height: calc(100vh - 48px);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+}
+
+.major-defect-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.major-defect-modal__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.major-defect-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.major-defect-modal__close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.major-defect-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px 24px 24px;
+}
+
+.major-defect-modal__table {
+  table-layout: fixed;
+  margin-bottom: 20px;
+}
+
+.major-defect-modal__table.info-table--cols-2 th {
+  width: 18%;
+}
+
+.major-defect-modal__table.info-table--cols-2 td {
+  width: 32%;
+}
+
+.major-defect-modal__table th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.major-defect-modal__table td {
+  background: #fff;
+}
+
+.major-defect-modal__cell-input,
+.major-defect-action-table__input,
+.major-defect-action-table__status-input {
+  width: 100%;
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #111827;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.major-defect-modal__cell-input--cost {
+  width: auto;
+  min-width: 80px;
+}
+
+.major-defect-cost-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.major-defect-cost-input__unit {
+  font-size: 13px;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.major-defect-modal__form:not(.is-readonly) .major-defect-modal__cell-input:not([readonly]),
+.major-defect-modal__form:not(.is-readonly) .major-defect-action-table__input:not([readonly]),
+.major-defect-modal__form:not(.is-readonly) .major-defect-action-table__status-input:not([readonly]),
+.major-defect-modal__form.is-form-mode .major-defect-action-table__date-input:not(:disabled) {
+  border-color: #d1d5db;
+  background-color: #fff;
+}
+
+.major-defect-modal__form.is-form-mode .major-defect-modal__cell-input[readonly]:not(#majorDefectInspectionCategory),
+.major-defect-modal__form.is-form-mode .major-defect-action-table__status-input[readonly] {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  -webkit-text-fill-color: #6b7280;
+}
+
+.major-defect-modal__cell-input:focus,
+.major-defect-action-table__input:focus,
+.major-defect-action-table__status-input:focus,
+.major-defect-action-table__date-input:focus:not(:disabled) {
+  outline: none;
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.major-defect-modal__form.is-readonly .major-defect-modal__cell-input,
+.major-defect-modal__form.is-readonly .major-defect-action-table__input,
+.major-defect-modal__form.is-readonly .major-defect-action-table__status-input,
+.major-defect-modal__form.is-readonly .major-defect-action-table__date-input {
+  pointer-events: none;
+  opacity: 1;
+  color: #111827;
+  font-weight: 400;
+  -webkit-text-fill-color: #111827;
+}
+
+.major-defect-modal__form.is-form-mode #majorDefectInspectionCategory[readonly] {
+  border-color: #d1d5db;
+  background-color: #fff;
+  color: #111827;
+  -webkit-text-fill-color: #111827;
+  cursor: default;
+}
+
+.major-defect-modal__field-with-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.major-defect-modal__field-with-btn .major-defect-modal__cell-input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.major-defect-modal__inline-btn {
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #f9fafb;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.major-defect-modal__inline-btn:hover {
+  background: #f3f4f6;
+}
+
+.major-defect-action-table__date-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.major-defect-action-table__input--date-view {
+  width: auto;
+  min-width: 120px;
+  text-align: center;
+}
+
+.major-defect-action-table__date-input {
+  width: auto;
+  min-width: 140px;
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #111827;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.major-defect-action-table__date-note {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  color: #6b7280;
+  white-space: normal;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.major-defect-modal__action-wrap {
+  overflow-x: auto;
+}
+
+.major-defect-action-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 13px;
+}
+
+.major-defect-action-table th,
+.major-defect-action-table td {
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  text-align: center;
+  vertical-align: middle;
+  color: #111827;
+}
+
+.major-defect-action-table thead th {
+  background: #f9fafb;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.major-defect-action-table tbody th[scope='row'] {
+  width: 72px;
+  background: #f9fafb;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.major-defect-action-table tbody td {
+  background: #fff;
+}
+
+.major-defect-action-table tfoot th[scope='row'] {
+  background: #f9fafb;
+  color: #4b5563;
+  font-weight: 600;
+  text-align: center;
+}
+
+.major-defect-action-table tfoot td {
+  background: #fff;
+}
+
+.major-defect-modal__foot {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.major-defect-modal__foot-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+

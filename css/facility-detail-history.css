@@ -1,0 +1,180 @@
+/* ===== Facility detail — history info (compact, at-a-glance) ===== */
+
+.facility-detail-page #panel-history .history-view {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.facility-detail-page #panel-history .detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.facility-detail-page #panel-history .detail-section__head--list {
+  min-height: 0;
+  padding: 0 4px;
+  margin: 0;
+}
+
+.facility-detail-page #panel-history .detail-section__title {
+  font-size: 14px;
+}
+
+.facility-detail-page #panel-history .detail-list-count {
+  font-size: 12px;
+}
+
+.facility-detail-page #panel-history .regular-table-wrap--history-timeline,
+.facility-detail-page #panel-history .regular-table-wrap--history-list {
+  overflow: visible;
+  overflow-x: auto;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-timeline,
+.facility-detail-page #panel-history .inspection-table--history-list {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+/* 회차 4% + 점검일 4×14% + 비용 4×5% + 등급 4×5% = 100% */
+.facility-detail-page #panel-history .inspection-table--history-list col.col-no { width: 4%; }
+.facility-detail-page #panel-history .inspection-table--history-list col.col-date { width: 14%; }
+.facility-detail-page #panel-history .inspection-table--history-list col.col-cost { width: 5%; }
+.facility-detail-page #panel-history .inspection-table--history-list col.col-grade { width: 5%; }
+
+.facility-detail-page #panel-history .inspection-table--history-timeline thead th,
+.facility-detail-page #panel-history .detail-tab-panel#panel-history .inspection-table--history-timeline thead th,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-timeline thead th {
+  height: 28px !important;
+  padding: 0 4px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-list thead th,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead th {
+  height: 26px !important;
+  padding: 2px 3px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-list thead th.col-cost,
+.facility-detail-page #panel-history .inspection-table--history-list thead th.col-grade,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead th.col-cost,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list thead th.col-grade {
+  white-space: normal;
+  word-break: keep-all;
+  line-height: 1.2 !important;
+  padding: 2px 1px !important;
+  font-size: 10px !important;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-timeline tbody th[scope='row'] {
+  padding: 0 4px;
+  height: 26px;
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  background: #fff;
+  color: #333;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-timeline tbody td,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-timeline tbody td {
+  padding: 0 4px !important;
+  height: 26px !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-timeline tbody td.is-empty,
+.facility-detail-page #panel-history .inspection-table--history-list tbody td.is-empty {
+  color: #9ca3af;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-timeline tbody td.history-cell--accent-red,
+.facility-detail-page #panel-history .inspection-table--history-list tbody td.history-cell--accent-red {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-list tbody td,
+.facility-detail-page .detail-tab-panel#panel-history .inspection-table--history-list tbody td {
+  height: 26px !important;
+  padding: 0 3px !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-list tbody td.col-date {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 10px !important;
+  letter-spacing: -0.03em;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-list tbody td.col-cost,
+.facility-detail-page #panel-history .inspection-table--history-list tbody td.col-grade {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
+  padding: 0 1px !important;
+  font-size: 10px !important;
+}
+
+.facility-detail-page #panel-history .inspection-table--history-list tbody td.col-no {
+  white-space: nowrap;
+}
+
+.facility-detail-page #panel-history .history-list-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.facility-detail-page #panel-history .history-list-foot .pagination {
+  justify-content: center;
+  gap: 2px;
+}
+
+.facility-detail-page #panel-history .history-list-foot .pagination__btn,
+.facility-detail-page #panel-history .history-list-foot .pagination button {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+
+.facility-detail-page #panel-history .history-list-foot__size select {
+  height: 30px;
+  min-width: 96px;
+  padding: 0 28px 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
+  font-size: 12px;
+  font-family: inherit;
+  color: #374151;
+  appearance: none;
+}

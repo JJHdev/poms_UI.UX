@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물 위치 현황 관리 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-location-status.css?v=20260819a">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1440px; }
+  </style>
+</head>
+<body class="app-layout facility-search-page facility-change-request-page type3-port-page fcr-flat-page loc-status-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시스템 관리 메뉴">
+        <div class="fs-lnb__title">
+          <h2 class="fs-lnb__title-text">시스템 관리</h2>
+        </div>
+        <nav class="fs-lnb__nav" data-admin-sub-tabs="1" aria-label="시스템 관리 하위 메뉴">
+          <a href="facility-management.html" class="fs-lnb__item">
+            <span>시설물 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="maintenance-plan-manage.html" class="fs-lnb__item">
+            <span>유지관리계획 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="mooring-facility-management.html" class="fs-lnb__item">
+            <span>계류시설 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="facility-location-status.html" class="fs-lnb__item is-active" aria-current="page">
+            <span>시설물 위치 현황 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="drone-video-management.html" class="fs-lnb__item">
+            <span>드론 영상관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="responsible-engineer.html" class="fs-lnb__item">
+            <span>책임기술자 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="loc-status-shell fs-manage" aria-label="시설물 위치 현황 관리">
+      <div class="fmd-crumb-row">
+        <nav class="fmd-breadcrumb loc-breadcrumb" aria-label="현재 위치">
+          <a href="facility-management.html">시스템 관리</a>
+          <span class="fmd-breadcrumb__sep" aria-hidden="true">&gt;</span>
+          <span class="fmd-breadcrumb__current">시설물 위치 현황 관리</span>
+        </nav>
+      </div>
+
+      <div class="loc-map-page">
+        <section class="system-map-panel" aria-label="시설물 위치 지도">
+          <div class="system-map-panel__map" id="locStatusMap"></div>
+          <div class="system-map-panel__zoom" aria-label="지도 확대/축소">
+            <button type="button" class="system-map-panel__zoom-btn" id="locMapZoomIn" aria-label="확대">
+              <img src="assets/main/dashboard/figma224/icon-map-zoom-in.svg" alt="" width="12" height="12">
+            </button>
+            <button type="button" class="system-map-panel__zoom-btn" id="locMapZoomOut" aria-label="축소">
+              <img src="assets/main/dashboard/figma224/icon-map-zoom-out.svg" alt="" width="20" height="20">
+            </button>
+          </div>
+          <div class="system-map-panel__legend" aria-label="시설구분 범례">
+            <p class="system-map-panel__legend-title">범례</p>
+            <div class="system-map-panel__legend-list">
+              <span><i class="system-map-dot system-map-dot--outer" aria-hidden="true"></i>외곽시설</span>
+              <span><i class="system-map-dot system-map-dot--mooring" aria-hidden="true"></i>계류시설</span>
+              <span><i class="system-map-dot system-map-dot--other" aria-hidden="true"></i>기타시설</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="loc-map-content" aria-label="시설물 위치 현황 검색">
+          <div class="loc-side-card">
+            <nav class="loc-status-tabs" role="tablist" aria-label="위치 현황 탭">
+              <button type="button" class="loc-status-tabs__btn is-active" role="tab" data-tab="port" aria-selected="true">항</button>
+              <button type="button" class="loc-status-tabs__btn" role="tab" data-tab="subport" aria-selected="false">세부항</button>
+              <button type="button" class="loc-status-tabs__btn" role="tab" data-tab="facility" aria-selected="false">시설물</button>
+              <button type="button" class="loc-status-tabs__btn" role="tab" data-tab="security" aria-selected="false">보안지역</button>
+            </nav>
+
+            <div class="loc-status-panel is-active" data-panel="content" role="tabpanel">
+              <section class="loc-search-panel" aria-labelledby="locSearchTitle">
+                <div class="loc-search-panel__head">
+                  <span class="loc-search-panel__title-icon" aria-hidden="true">
+                    <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+                  </span>
+                  <h1 id="locSearchTitle" class="loc-search-panel__title">검색조건</h1>
+                </div>
+                <form id="locSearchForm" class="loc-search-form" novalidate>
+                  <label id="locSearchLabel" class="visually-hidden" for="locSearchKeyword">항명</label>
+                  <input type="text" id="locSearchKeyword" name="keyword" placeholder="항명을 입력하세요." autocomplete="off">
+                  <button type="submit" class="btn-loc-search">
+                    <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                    검색하기
+                  </button>
+                </form>
+              </section>
+
+              <section class="loc-results-panel" aria-labelledby="locResultsTitle">
+                <div class="loc-results-panel__head">
+                  <div class="loc-results-count">
+                    <h2 id="locResultsTitle" class="loc-results-count__label">검색결과</h2>
+                    <p class="loc-results-count__meta">총 <strong id="locResultCount">0</strong>건</p>
+                  </div>
+                </div>
+                <div class="loc-table-wrap">
+                  <table class="loc-table" aria-label="시설물 위치 현황 검색 결과">
+                    <thead id="locTableHead"></thead>
+                    <tbody id="locTableBody"></tbody>
+                  </table>
+                </div>
+                <div class="loc-results-panel__foot">
+                  <nav class="pagination" id="locPagination" aria-label="페이지 이동"></nav>
+                  <label class="visually-hidden" for="locPageSize">페이지당 표시 건수</label>
+                  <select id="locPageSize" class="visually-hidden" aria-label="페이지당 표시 건수" tabindex="-1">
+                    <option value="15" selected>15 / page</option>
+                  </select>
+                </div>
+              </section>
+
+              <section class="loc-coord-panel" id="locCoordPanel" hidden aria-labelledby="locCoordTitle">
+                <div class="loc-coord-panel__head">
+                  <h2 id="locCoordTitle" class="loc-coord-panel__title">좌표 목록 <span class="loc-coord-panel__target" id="locCoordTarget"></span></h2>
+                </div>
+                <div class="loc-coord-panel__body">
+                  <div class="loc-coord-table-wrap">
+                    <table class="loc-coord-table" aria-label="좌표 목록">
+                      <colgroup>
+                        <col class="loc-coord-col-coord">
+                        <col class="loc-coord-col-remark">
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th scope="col">세부항좌표</th>
+                          <th scope="col">비고</th>
+                        </tr>
+                      </thead>
+                      <tbody id="locCoordBody"></tbody>
+                    </table>
+                  </div>
+                  <div class="loc-coord-panel__actions">
+                    <button type="button" class="btn-loc-coord-create" id="locCoordCreateBtn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                      <span id="locCoordCreateLabel">좌표생성</span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </aside>
+      </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="loc-map-modal" id="locMapModal" hidden role="dialog" aria-modal="true" aria-labelledby="locMapModalTitle">
+    <div class="loc-map-modal__backdrop" data-close-loc-map></div>
+    <div class="loc-map-modal__dialog">
+      <header class="loc-map-modal__header">
+        <div>
+          <h3 class="loc-map-modal__title" id="locMapModalTitle">지도에서 좌표 생성</h3>
+          <p class="loc-map-modal__desc">지도를 클릭하면 좌표가 선택됩니다.</p>
+        </div>
+        <button type="button" class="loc-map-modal__close" data-close-loc-map aria-label="닫기">&times;</button>
+      </header>
+      <div class="loc-map-modal__body">
+        <div id="locMapCanvas" class="loc-map-modal__map" role="presentation"></div>
+      </div>
+      <footer class="loc-map-modal__footer">
+        <button type="button" class="btn-loc-map-cancel" data-close-loc-map">취소</button>
+        <button type="button" class="btn-loc-map-save" id="locMapSaveBtn" disabled>등록</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="js/facility-location-status-data.js?v=20260819a"></script>
+  <script src="js/facility-location-status.js?v=20260819b"></script>
+</body>
+</html>

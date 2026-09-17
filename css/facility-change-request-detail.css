@@ -1,0 +1,1628 @@
+@import url("common-modal.css");
+
+/* 시설물 정보변경 요청 상세
+   — 정밀안전(진단)점검 상세정보 수정(facility-form / precision-modal) 톤
+   — HTML 구조·내용은 유지, 스타일만 맞춤 */
+
+.facility-change-request-detail-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.facility-change-request-detail-page .btn-map-view {
+  display: none;
+}
+
+/* 흰 카드 셸 */
+.facility-change-request-detail-page .detail-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 20px 24px 28px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.facility-change-request-detail-page .detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin: 0 0 24px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.facility-change-request-detail-page .detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.facility-change-request-detail-page .detail-section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin: 0 0 16px;
+  padding: 0 10px;
+  min-height: 38px;
+}
+
+.facility-change-request-detail-page .detail-section__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.facility-change-request-detail-page .detail-section__note {
+  margin: 0;
+  margin-left: auto;
+  font-size: 12px;
+  color: #6c788b;
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* fac-add 크롬 제거 */
+.facility-change-request-detail-page .fac-add-page {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0;
+  padding: 0;
+  overflow: visible !important;
+}
+
+.facility-change-request-detail-page .fac-add-page__head {
+  display: none !important;
+}
+
+.facility-change-request-detail-page .fac-add-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* ===== 변경 구분 — 바깥만 radius, 라벨↔선택칸 사이는 직각 ===== */
+.facility-change-request-detail-page .change-request-type {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: 100%;
+  height: 40px;
+  margin: 0 0 6px;
+  padding: 0;
+  background: #fff;
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.facility-change-request-detail-page .change-request-type__label {
+  display: flex;
+  align-items: center;
+  flex: 0 0 160px;
+  width: 160px;
+  height: 100%;
+  min-height: 0;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background: rgba(28, 111, 255, 0.04);
+  border: none;
+  border-right: 0.5px solid #dadae2;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.facility-change-request-detail-page .change-request-type__label .req,
+.facility-change-request-detail-page .fac-add-field__label .req,
+.facility-change-request-detail-page .cr-modal__label .req {
+  color: #e24b4a;
+  margin-left: 2px;
+}
+
+.facility-change-request-detail-page .change-request-type select {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  padding: 0 44px 0 20px;
+  border: none !important;
+  border-radius: 0 !important;
+  background: #fff url("../assets/main/facility-statistics/angle-down.svg") no-repeat right 16px center;
+  background-size: 18px 18px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #111;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.facility-change-request-detail-page .change-request-type select:focus {
+  box-shadow: inset 0 0 0 1px #1c6fff;
+}
+
+.facility-change-request-detail-page .change-request-type__hint {
+  display: none;
+}
+
+/* ===== 필드 그리드 — precision info-table 3열 ===== */
+.facility-change-request-detail-page .fac-add-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 14px;
+  padding: 0 !important;
+  border: none !important;
+  width: 100%;
+}
+
+.facility-change-request-detail-page .fac-add-grid[hidden],
+.facility-change-request-detail-page .fac-add-files[hidden],
+.facility-change-request-detail-page #crRequestCard[hidden],
+.facility-change-request-detail-page .fac-add-field[hidden],
+.facility-change-request-detail-page .is-hidden {
+  display: none !important;
+}
+
+.facility-change-request-detail-page .fac-add-field {
+  display: flex;
+  align-items: stretch;
+  grid-template-columns: none !important;
+  height: 44px;
+  min-height: 44px;
+  max-height: 44px;
+  min-width: 0;
+  margin: 0;
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.facility-change-request-detail-page .fac-add-field:nth-child(3n) {
+  border-right: 0.5px solid #dadae2 !important;
+}
+
+.facility-change-request-detail-page .fac-add-field--span-2 {
+  grid-column: span 2;
+}
+
+.facility-change-request-detail-page .fac-add-field--full {
+  grid-column: 1 / -1;
+}
+
+/* 사유 textarea 등 높이 예외 */
+.facility-change-request-detail-page #crReasonSection .fac-add-field {
+  height: auto !important;
+  max-height: none !important;
+  min-height: 120px;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.facility-change-request-detail-page #crReasonSection .fac-add-field__label {
+  height: unset !important;
+  min-height: unset !important;
+  align-self: stretch;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  flex: 0 0 168px;
+  width: 168px;
+}
+
+.facility-change-request-detail-page #crReasonSection .fac-add-field__control {
+  height: unset !important;
+  min-height: unset !important;
+  align-self: stretch;
+  align-items: stretch;
+  padding: 10px 12px;
+  flex: 1 1 auto;
+}
+
+.facility-change-request-detail-page #crReasonSection textarea.fac-add-input,
+.facility-change-request-detail-page #crChangeReason {
+  width: 100%;
+  height: 110px !important;
+  min-height: 110px !important;
+  padding: 8px 12px !important;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  resize: vertical;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.facility-change-request-detail-page #crEvidenceSection .fac-add-field {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.facility-change-request-detail-page .fac-add-field__label {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 168px;
+  height: 100%;
+  min-height: 0;
+  padding: 0 14px;
+  box-sizing: border-box;
+  background: rgba(28, 111, 255, 0.04) !important;
+  border: none;
+  border-right: 0.5px solid #dadae2;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111 !important;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.facility-change-request-detail-page .fac-add-field__control {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  padding: 6px 12px;
+  box-sizing: border-box;
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  gap: 8px;
+}
+
+/* 관리기관·구조형식: 셀렉트+직접입력 한 줄 */
+.facility-change-request-detail-page .fac-add-field__control--stack {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6px 12px;
+  gap: 8px;
+}
+
+.facility-change-request-detail-page .fac-add-field__control--stack .fac-add-select,
+.facility-change-request-detail-page .fac-add-field__control--stack .fac-add-input {
+  width: auto;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* 값 안 입력 — 정밀 수정모드처럼 얇은 라운드 인풋 */
+.facility-change-request-detail-page .fac-add-input,
+.facility-change-request-detail-page .fac-add-select,
+.facility-change-request-detail-page .fac-add-field__control textarea.fac-add-input {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #111;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
+}
+
+.facility-change-request-detail-page .fac-add-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 32px;
+  background-image: url("../assets/main/facility-statistics/angle-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 16px;
+  cursor: pointer;
+}
+
+.facility-change-request-detail-page .fac-add-field__control textarea.fac-add-input {
+  height: auto;
+  min-height: 96px;
+  padding: 8px 12px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.facility-change-request-detail-page .fac-add-input:focus,
+.facility-change-request-detail-page .fac-add-select:focus {
+  border-color: #1c6fff;
+  box-shadow: 0 0 0 2px rgba(28, 111, 255, 0.12);
+}
+
+.facility-change-request-detail-page .fac-add-input::placeholder {
+  color: #999;
+  font-weight: 400;
+}
+
+.facility-change-request-detail-page .fac-add-input.is-disabled,
+.facility-change-request-detail-page .fac-add-input.is-locked,
+.facility-change-request-detail-page .fac-add-select.is-locked,
+.facility-change-request-detail-page .fac-add-input:disabled,
+.facility-change-request-detail-page .fac-add-select:disabled {
+  background: #f7f7f8 !important;
+  color: #6c788b;
+  cursor: not-allowed;
+  border-color: #dadae2;
+}
+
+/* 관리주체변경 섹션 */
+.facility-change-request-detail-page #crTransferSection {
+  border: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 6px !important;
+}
+
+/* ===== 파일 영역 — 구조 유지, 위 필드와 동일 색 ===== */
+.facility-change-request-detail-page .fac-add-files {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+  margin-top: 8px;
+  border: none !important;
+  padding: 0;
+}
+
+.facility-change-request-detail-page .fac-add-file-row {
+  display: flex;
+  align-items: stretch;
+  height: auto;
+  min-height: 72px;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+  gap: 0;
+}
+
+.facility-change-request-detail-page .fac-add-file-row__label {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 110px;
+  height: auto;
+  min-height: 0;
+  padding: 0 14px;
+  box-sizing: border-box;
+  background: rgba(28, 111, 255, 0.04) !important;
+  border: none;
+  border-right: 0.5px solid #dadae2;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111 !important;
+  white-space: nowrap;
+}
+
+.facility-change-request-detail-page .fac-add-file-row__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  border: none;
+}
+
+.facility-change-request-detail-page .fac-add-file-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+  flex: initial;
+}
+
+.facility-change-request-detail-page .fac-add-file-picker__btn,
+.facility-change-request-detail-page #crEvidenceBtn {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.facility-change-request-detail-page .fac-add-file-picker__btn:hover,
+.facility-change-request-detail-page #crEvidenceBtn:hover {
+  background: #f4f4fa;
+}
+
+.facility-change-request-detail-page .fac-add-file-picker__name {
+  font-size: 12px;
+  color: #6c788b;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  min-width: 0;
+}
+
+.facility-change-request-detail-page .fac-add-file-drop {
+  display: block;
+  margin-top: 0;
+  padding: 8px 10px;
+  border: 1px dashed #dadae2;
+  border-radius: 6px;
+  background: #fafbfc;
+  font-size: 12px;
+  color: #8c9aac;
+}
+
+.facility-change-request-detail-page .fac-add-file-row__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 10px 12px;
+  background: #fff;
+  border: none;
+  border-left: 0.5px solid #dadae2;
+  border-radius: 0;
+}
+
+.facility-change-request-detail-page .btn-fac-file-delete {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.facility-change-request-detail-page .btn-fac-file-delete:hover {
+  background: #f4f4fa;
+}
+
+.facility-change-request-detail-page .fac-add-file-row__hint {
+  font-size: 11px;
+  color: #8c9aac;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ===== 변경 요청 카드 ===== */
+.facility-change-request-detail-page #crRequestCard {
+  margin-top: 0 !important;
+}
+
+.facility-change-request-detail-page #crRequestCard .fac-add-body--request {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: none !important;
+}
+
+.facility-change-request-detail-page #crRequestCard .fac-add-grid {
+  display: block;
+  width: 100%;
+}
+
+.facility-change-request-detail-page #crRequestCard .fac-add-field--full {
+  width: 100%;
+}
+
+.facility-change-request-detail-page #crRequestCard .fac-add-field__label {
+  width: 168px;
+}
+
+.facility-change-request-detail-page #crDateSection .fac-add-field__control {
+  justify-content: flex-start;
+}
+
+.facility-change-request-detail-page #crDateSection .fac-add-input {
+  width: auto;
+  min-width: 180px;
+  max-width: 220px;
+  flex: 0 0 auto;
+}
+
+.facility-change-request-detail-page #crEvidenceSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.facility-change-request-detail-page #crEvidenceSection .fac-add-field__control {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.facility-change-request-detail-page .cr-evidence-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  width: 100%;
+}
+
+.facility-change-request-detail-page .cr-evidence-hint,
+.facility-change-request-detail-page #crEvidenceHint {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  color: #e24b4a;
+  line-height: 1.4;
+}
+
+.facility-change-request-detail-page .fac-add-footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 0 0;
+  border: none;
+  background: transparent;
+}
+
+.facility-change-request-detail-page .btn-fac-add-cancel,
+.facility-change-request-detail-page .btn-fac-add-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.facility-change-request-detail-page .btn-fac-add-cancel {
+  border: 1px solid #0d1f35;
+  background: #fff;
+  color: #0d1f35;
+}
+
+.facility-change-request-detail-page .btn-fac-add-cancel:hover {
+  background: #f4f4fa;
+}
+
+.facility-change-request-detail-page .btn-fac-add-save {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.facility-change-request-detail-page .btn-fac-add-save:hover {
+  background: #16304f;
+}
+
+/* ===== 사유 모달 — 정밀/공통 흰 헤더 ===== */
+.facility-change-request-detail-page.cr-modal-open {
+  overflow: hidden;
+}
+
+.cr-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.cr-modal[hidden] {
+  display: none !important;
+}
+
+.cr-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.cr-modal__panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(640px, 100%);
+  max-height: calc(100vh - 48px);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.cr-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #fff;
+  border-bottom: 1px solid #d1d1d1;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.cr-modal__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.44px;
+}
+
+.cr-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #dadae2;
+  cursor: pointer;
+}
+
+.cr-modal__close:hover {
+  background: #c8c8d0;
+}
+
+.cr-modal__close img {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.cr-modal__stack {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.cr-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 20px 24px 8px;
+  overflow-y: auto;
+}
+
+.cr-modal__info {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #6c788b;
+}
+
+.cr-modal__info strong {
+  color: #111;
+  font-weight: 600;
+}
+
+.cr-modal__label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+}
+
+.cr-modal__textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 12px 16px;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  resize: vertical;
+  box-sizing: border-box;
+  line-height: 1.6;
+  outline: none;
+}
+
+.cr-modal__textarea:focus {
+  border-color: #1c6fff;
+  box-shadow: 0 0 0 2px rgba(28, 111, 255, 0.12);
+}
+
+.cr-modal__hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #6c788b;
+}
+
+.cr-modal__foot {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px 24px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.cr-modal__btn {
+  min-width: 96px;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.cr-modal__btn--cancel {
+  background: #fff;
+  border: 1px solid #0d1f35;
+  color: #0d1f35;
+}
+
+.cr-modal__btn--cancel:hover {
+  background: #f4f4fa;
+}
+
+.cr-modal__btn--submit {
+  background: #0b1a2e;
+  border: none;
+  color: #fff;
+}
+
+.cr-modal__btn--submit:hover {
+  background: #16304f;
+}
+
+@media (max-width: 1200px) {
+  .facility-change-request-detail-page .fac-add-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .facility-change-request-detail-page .fac-add-files {
+    grid-template-columns: 1fr;
+  }
+
+  .facility-change-request-detail-page .change-request-type__label {
+    flex-basis: 160px;
+    width: 160px;
+  }
+}
+
+/* ===== Flat shell (type3-port / survey-detail 톤) ===== */
+.fcr-detail-flat-page {
+  background: #fff;
+}
+
+.fcr-detail-flat-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.fcr-detail-flat-page .type3-page {
+  gap: 16px;
+}
+
+.fcr-detail-flat-page .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.fcr-detail-flat-page .page-header__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.fcr-detail-flat-page a.btn-back {
+  position: static;
+  top: auto;
+  left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  gap: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: visible;
+  font-size: 0;
+  color: transparent;
+}
+
+.fcr-detail-flat-page a.btn-back:hover {
+  border-color: #1c6fff;
+}
+
+.fcr-detail-flat-page .ico-angle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.fcr-detail-flat-page .btn-back .ico-angle {
+  transform: rotate(90deg);
+}
+
+.fcr-detail-flat-page .ico-angle__vec {
+  position: static;
+  display: block;
+  width: 10px;
+  height: 6px;
+  line-height: 0;
+}
+
+.fcr-detail-flat-page .ico-angle__vec img {
+  position: static;
+  display: block;
+  width: 10px;
+  height: 6px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.fcr-detail-flat-page a.btn-back > img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  transform: rotate(90deg);
+}
+
+.fcr-detail-flat-page .page-header__home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: visible;
+}
+
+.fcr-detail-flat-page .page-header__home:hover {
+  border-color: #1c6fff;
+}
+
+.fcr-detail-flat-page .page-header__home-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.fcr-detail-flat-page .page-header__home-icon-roof,
+.fcr-detail-flat-page .page-header__home-icon-body,
+.fcr-detail-flat-page .page-header__home-icon-door {
+  position: absolute;
+  display: block;
+}
+
+.fcr-detail-flat-page .page-header__home-icon-roof {
+  top: 12.5%;
+  right: 12.5%;
+  bottom: 50%;
+  left: 12.5%;
+}
+
+.fcr-detail-flat-page .page-header__home-icon-body {
+  top: 50%;
+  right: 20.83%;
+  bottom: 12.5%;
+  left: 20.83%;
+}
+
+.fcr-detail-flat-page .page-header__home-icon-door {
+  top: 54.17%;
+  right: 37.5%;
+  bottom: 12.5%;
+  left: 37.5%;
+}
+
+.fcr-detail-flat-page .page-header__home-icon img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+}
+
+.fcr-detail-flat-page .page-header__home > img.page-header__home-icon {
+  position: static;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.fcr-detail-flat-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.fcr-detail-flat-page .breadcrumb a,
+.fcr-detail-flat-page .breadcrumb__sep {
+  color: #a4afc0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.fcr-detail-flat-page .breadcrumb__current {
+  color: #6c788b;
+  font-weight: 500;
+}
+
+.fcr-detail-flat-page .breadcrumb a:hover {
+  color: #1c6fff;
+}
+
+.fcr-detail-flat-page .detail-shell {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.fcr-detail-flat-page .detail-section__head {
+  align-items: center;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.fcr-detail-flat-page .type3-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.fcr-detail-flat-page .type3-section-title__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.fcr-detail-flat-page .type3-section-title__icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.fcr-detail-flat-page .detail-section__title {
+  font-size: 20px;
+  letter-spacing: -0.4px;
+}
+
+/* ===== Connected info table (type3-detail-info 톤) ===== */
+body.fcr-detail-flat-page.facility-change-request-detail-page .change-request-type {
+  display: flex;
+  align-items: stretch;
+  height: 40px;
+  min-height: 40px;
+  margin: 0 0 10px;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .change-request-type__label {
+  display: flex;
+  align-items: center;
+  flex: 0 0 160px !important;
+  width: 160px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  height: auto;
+  min-height: 0;
+  padding: 0 16px;
+  background: rgba(28, 111, 255, 0.04);
+  border: none;
+  border-right: 1px solid #dadae2;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .change-request-type select {
+  flex: 0 0 auto !important;
+  /* 가장 긴 옵션(시설물 일반정보 변경) 기준 고정 — 화살표 위치 유지 */
+  width: 168px !important;
+  min-width: 168px !important;
+  max-width: 168px !important;
+  field-sizing: fixed;
+  height: 100%;
+  min-height: 0;
+  padding: 0 22px 0 16px !important;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: #fff;
+  background-image: url("../assets/main/facility-statistics/figma188/icon-angle-down-clean.svg");
+  background-position: right 4px center !important;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .change-request-type select:focus {
+  box-shadow: inset 0 0 0 1px #1c6fff;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 !important;
+  width: 100%;
+  margin: 0;
+  padding: 0 !important;
+  border: none !important;
+  border-top: 1px solid #dadae2 !important;
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  overflow: hidden;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field {
+  display: flex;
+  align-items: stretch;
+  width: auto;
+  min-width: 0;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field--span-2 {
+  grid-column: span 2;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field--full {
+  grid-column: 1 / -1;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field--blank {
+  background: #fff !important;
+  pointer-events: none;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field:has(.fac-add-field__control--stack) {
+  height: auto !important;
+  min-height: 34px !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field__label {
+  display: flex;
+  align-items: center;
+  flex: 0 0 160px;
+  width: 160px !important;
+  min-width: 120px;
+  max-width: 160px;
+  height: auto;
+  min-height: 0;
+  padding: 0 16px;
+  background: rgba(28, 111, 255, 0.04) !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+  font-weight: 500;
+  color: #111 !important;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field__control {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  padding: 0 16px !important;
+  gap: 8px;
+  background: #fff;
+  border: none !important;
+  border-radius: 0 !important;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field__control--stack {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 4px 16px !important;
+  gap: 8px;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-input,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-select,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field__control textarea.fac-add-input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 30px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  color: #111;
+  box-shadow: none !important;
+  outline: none;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 20px !important;
+  background-image: url("../assets/main/facility-statistics/figma188/icon-angle-down-clean.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0 center !important;
+  background-size: 16px 16px !important;
+  cursor: pointer;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field__control--stack .fac-add-select,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field__control--stack .fac-add-input {
+  flex: 1 1 0;
+  width: auto;
+  min-height: 28px;
+  height: 28px;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-input:focus,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-select:focus {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-input.is-disabled,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-input.is-locked,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-select.is-locked,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-input:disabled,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-select:disabled {
+  background: transparent !important;
+  color: #6c788b;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field:has(.is-locked),
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field:has(:disabled) {
+  background: #f7f7f8;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field:has(.is-locked) .fac-add-field__control,
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-field:has(:disabled) .fac-add-field__control {
+  background: #f7f7f8;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crReasonSection .fac-add-field {
+  height: auto !important;
+  min-height: 120px !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crReasonSection .fac-add-field__label {
+  align-items: flex-start;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crReasonSection .fac-add-field__control {
+  padding: 8px 16px !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crReasonSection textarea.fac-add-input,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crChangeReason {
+  height: 100px !important;
+  min-height: 100px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  border: none !important;
+  border-top: 1px solid #dadae2 !important;
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  background: #fff !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection:not([hidden]) {
+  display: grid !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection[hidden] {
+  display: none !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection .fac-add-field {
+  height: 38px !important;
+  min-height: 38px !important;
+  margin: 0 !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: #fff;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection .fac-add-field__label {
+  flex: 0 0 160px;
+  width: 160px !important;
+  max-width: 160px;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection .fac-add-field__control {
+  justify-content: flex-start;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection .fac-add-input,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection .fac-add-select {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  height: 100%;
+  min-height: 30px;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection .fac-add-input {
+  width: 100%;
+  padding: 0 !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection .fac-add-select,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferAfter {
+  flex: 0 0 auto !important;
+  /* 가장 긴 옵션(○○지방해양수산청 등) 기준 고정 — 화살표 위치 유지 */
+  width: 156px !important;
+  min-width: 156px !important;
+  max-width: 156px !important;
+  field-sizing: fixed;
+  padding: 0 22px 0 0 !important;
+  background-image: url("../assets/main/facility-statistics/figma188/icon-angle-down-clean.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 2px center !important;
+  background-size: 16px 16px !important;
+  cursor: pointer;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-files {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 !important;
+  margin-top: 10px;
+  border: none !important;
+  border-top: 1px solid #dadae2 !important;
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-file-row {
+  display: flex;
+  align-items: stretch;
+  min-height: 64px;
+  margin: 0 !important;
+  padding: 0;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: #fff;
+  overflow: hidden;
+  gap: 0;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-file-row__label {
+  flex: 0 0 140px;
+  width: 140px !important;
+  padding: 0 16px;
+  background: rgba(28, 111, 255, 0.04) !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  font-size: 14px !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-file-row__body {
+  border: none !important;
+  border-right: none !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-file-row__actions {
+  border: none !important;
+  border-left: 1px solid #dadae2 !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard .detail-section__head {
+  margin-top: 20px;
+}
+
+/* 변경 요청 정보 — 날짜/증빙/사유를 하나의 연결 표처럼 */
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard .fac-add-body--request {
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+  margin: 0;
+  padding: 0;
+  border: none !important;
+  border-top: 1px solid #dadae2 !important;
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard .fac-add-grid[hidden],
+body.fcr-detail-flat-page.facility-change-request-detail-page #crDateSection[hidden],
+body.fcr-detail-flat-page.facility-change-request-detail-page #crEvidenceSection[hidden],
+body.fcr-detail-flat-page.facility-change-request-detail-page #crReasonSection[hidden],
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard[hidden] {
+  display: none !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard:not([hidden]) {
+  display: flex !important;
+  flex-direction: column;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crDateSection:not([hidden]),
+body.fcr-detail-flat-page.facility-change-request-detail-page #crEvidenceSection:not([hidden]),
+body.fcr-detail-flat-page.facility-change-request-detail-page #crReasonSection:not([hidden]),
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard .fac-add-grid:not([hidden]) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0 !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  overflow: visible;
+  background: transparent !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard .fac-add-field,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard .fac-add-field--full,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crDateSection .fac-add-field,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crEvidenceSection .fac-add-field {
+  width: auto;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: #fff;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crEvidenceSection .fac-add-field {
+  height: auto !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crReasonSection .fac-add-field {
+  width: auto;
+  height: auto !important;
+  min-height: 120px !important;
+  margin: 0 !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: #fff;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crRequestCard .fac-add-field__label,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crDateSection .fac-add-field__label,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crEvidenceSection .fac-add-field__label,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crReasonSection .fac-add-field__label {
+  flex: 0 0 160px;
+  width: 160px !important;
+  max-width: 160px;
+  font-size: 14px !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crDateSection .fac-add-field__control {
+  justify-content: flex-start;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crDateSection .fac-add-input,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crChangeDate {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 0 0 auto !important;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 2px 0 0 !important;
+  field-sizing: content;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crDateSection .fac-add-input::-webkit-calendar-picker-indicator,
+body.fcr-detail-flat-page.facility-change-request-detail-page #crChangeDate::-webkit-calendar-picker-indicator {
+  margin: 0 0 0 6px;
+  padding: 0;
+  cursor: pointer;
+  opacity: 1;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crEvidenceSection .fac-add-field__control {
+  gap: 4px;
+}
+
+body.fcr-detail-flat-page.facility-change-request-detail-page #crEvidenceHint,
+body.fcr-detail-flat-page.facility-change-request-detail-page .cr-evidence-hint {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+  body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.fcr-detail-flat-page.facility-change-request-detail-page .fac-add-files {
+    grid-template-columns: 1fr;
+  }
+
+  body.fcr-detail-flat-page.facility-change-request-detail-page #crTransferSection {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

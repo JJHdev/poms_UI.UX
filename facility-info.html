@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물 정보 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-info-modal.css">
+  <link rel="stylesheet" href="css/facility-info-page.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout facility-info-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header__bar">
+        <div class="page-header__titles">
+          <h1 class="page-title">시설물 정보</h1>
+          <nav class="breadcrumb" aria-label="현재 위치">
+            <a href="facility-management.html">시설물 관리</a>
+            <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+            <span class="breadcrumb__current">시설물 정보</span>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="facility-info-page-content">
+      <section class="facility-info-panel" aria-labelledby="facilityStatsTitle">
+        <div class="facility-stats-modal--figma facility-stats-modal--page">
+          <div class="facility-stats-modal__panel">
+            <header class="facility-stats-modal__head">
+              <div class="facility-stats-modal__head-main">
+                <span class="facility-stats-modal__badge">항만시설물 통계</span>
+                <div class="facility-stats-modal__title-row">
+                  <h2 id="facilityStatsTitle" class="facility-stats-modal__title">
+                    <span class="facility-stats-modal__title-icon" aria-hidden="true">
+                      <span class="facility-stats-modal__title-icon-dot"></span>
+                      <img src="assets/index-quick/icon-folder-figma.svg" alt="" width="27" height="27">
+                    </span>
+                    시설물 정보
+                  </h2>
+                  <span class="facility-stats-modal__baseline" id="facilityStatsBaseline">2022.12 기준</span>
+                </div>
+                <p class="facility-stats-modal__desc">항만시설물 통계자료를 활용해 정보를 확인할 수 있습니다.</p>
+              </div>
+            </header>
+            <div class="facility-stats-modal__body">
+              <div class="facility-stats-table-wrap">
+                <table class="facility-stats-table" aria-label="시설물정보 통계">
+                  <colgroup>
+                    <col class="facility-stats-table__kind">
+                    <col class="facility-stats-table__type">
+                    <col class="facility-stats-table__count">
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th colspan="3" scope="colgroup">구분</th>
+                      <th rowspan="2" scope="col">국가관리</th>
+                      <th rowspan="2" scope="col">지자체 관리</th>
+                      <th rowspan="2" scope="col">항만공사</th>
+                    </tr>
+                    <tr>
+                      <th scope="col">종류</th>
+                      <th scope="col">시설구분</th>
+                      <th scope="col">개소</th>
+                    </tr>
+                  </thead>
+                  <tbody id="facilityStatsTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/home-facility-stats-data.js"></script>
+  <script src="js/home-facility-stats.js"></script>
+</body>
+</html>

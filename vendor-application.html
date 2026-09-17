@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물신청관리 | POMS 사용자</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/admin-search-inline.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <section class="mock-stack">
+      <div class="mock-panel" aria-labelledby="companyRequestTitle">
+        <div class="mock-panel__head">
+          <div>
+            <h2 id="companyRequestTitle" class="mock-panel__title">신청 목록</h2>
+            <!-- <p class="mock-panel__desc">용역사가 신청한 시설물 목록을 확인하고 허가유무를 처리합니다.</p> -->
+          </div>
+        </div>
+
+        <div class="mock-table-meta">
+          <p id="requestResultText">검색결과 <strong>0</strong>건</p>
+          <span>신청일 기준 정렬</span>
+        </div>
+
+        <div class="mock-table-wrap">
+          <table class="mock-table mock-table--fit mock-table--compact mock-table--company-request">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>ID</th>
+                <th>업체명</th>
+                <th>용역명</th>
+                <th>신청일</th>
+                <th>신청개수</th>
+              </tr>
+            </thead>
+            <tbody id="requestTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="insp-sys-list-foot">
+          <nav class="pagination" id="requestPagination" aria-label="페이지 이동"></nav>
+          <div class="insp-sys-list-foot__side">
+            <!-- <p class="insp-sys-list-total">총 <strong id="requestListTotal">0</strong>건</p> -->
+            <label class="visually-hidden" for="requestPageSize">페이지당 표시 건수</label>
+            <select id="requestPageSize" class="insp-sys-page-size" aria-label="페이지당 표시 건수">
+              <option value="10" selected>10 / page</option>
+              <option value="20">20 / page</option>
+              <option value="50">50 / page</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="mock-modal mock-modal--request" id="requestDetailModal" aria-modal="true" role="dialog" aria-labelledby="requestDetailTitle" aria-hidden="true" hidden>
+    <div class="mock-modal__backdrop" id="requestDetailOverlay"></div>
+    <div class="mock-modal__dialog mock-modal__dialog--request">
+      <header class="mock-modal__head">
+        <div>
+          <h2 id="requestDetailTitle">신청 상세</h2>
+        </div>
+        <button type="button" class="mock-modal__close" id="requestDetailClose" aria-label="닫기">×</button>
+      </header>
+      <div class="mock-modal__body mock-modal__body--request">
+        <section class="history-modal-section" aria-labelledby="requestModalServiceTitle">
+          <div class="history-modal-section__head">
+            <h3 id="requestModalServiceTitle">용역 신청 정보</h3>
+          </div>
+          <form id="requestModalForm" autocomplete="off">
+            <div class="mock-table-wrap">
+              <table class="mock-table mock-table--fit mock-service-info-table mock-service-info-table--compact">
+                <tbody>
+                  <tr>
+                    <th>용역명</th>
+                    <td id="requestModalServiceName"></td>
+                    <th>발주처</th>
+                    <td id="requestModalManageName"></td>
+                  </tr>
+                  <tr>
+                    <th>발주처 담당자 성명</th>
+                    <td id="requestModalContactName"></td>
+                    <th>발주처 담당자 직책</th>
+                    <td id="requestModalContactPosition"></td>
+                  </tr>
+                  <tr>
+                    <th>발주처 담당자 연락처</th>
+                    <td id="requestModalContactTel"></td>
+                    <th>계약서</th>
+                    <td id="requestModalContractFile"></td>
+                  </tr>
+                  <tr>
+                    <th>과업지시서</th>
+                    <td id="requestModalOrderFile"></td>
+                    <th>기타</th>
+                    <td id="requestModalEtcFile"></td>
+                  </tr>
+                  <tr>
+                    <th>사용자ID</th>
+                    <td><input type="text" id="requestModalUserId" readonly></td>
+                    <th>허가유무</th>
+                    <td>
+                      <select id="requestModalPermitStatus">
+                        <option value="Y">승인</option>
+                        <option value="N">반려</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </section>
+
+        <section class="history-modal-section" aria-labelledby="requestModalFacilitiesTitle">
+          <div class="history-modal-section__head">
+            <h3 id="requestModalFacilitiesTitle">신청 시설물 목록</h3>
+            <p>신청 <strong id="requestModalFacilityCount">0</strong>개</p>
+          </div>
+          <div class="mock-table-wrap history-facility-table-wrap">
+            <table class="mock-table mock-table--fit mock-table--compact mock-table--static mock-table--company-facilities">
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>항만구분</th>
+                  <th>관리구분</th>
+                  <th>관리기관</th>
+                  <th>해역</th>
+                  <th>항명</th>
+                  <th>세부항명</th>
+                  <th>시설구분</th>
+                  <th>시설명</th>
+                </tr>
+              </thead>
+              <tbody id="requestModalFacilityBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+      <footer class="mock-modal__foot">
+        <button type="button" class="mock-row-btn mock-no-icon" id="requestModalProcessButton">결재이력</button>
+        <button type="button" class="mock-row-btn mock-no-icon" id="requestDetailCancel">닫기</button>
+        <button type="button" class="btn-admin-search mock-no-icon request-modal-save" id="requestModalSaveButton">저장</button>
+      </footer>
+    </div>
+  </section>
+
+  <div class="mock-drawer-overlay" id="requestDrawerOverlay"></div>
+  <aside class="mock-drawer" id="requestDrawer" aria-labelledby="requestDrawerTitle" aria-hidden="true">
+    <header class="mock-drawer__head">
+      <div>
+        <h2 class="mock-drawer__title" id="requestDrawerTitle">결재이력 조회</h2>
+        <p class="mock-drawer__sub" id="requestDrawerSub">선택한 시설물 신청 건의 결재 내역입니다.</p>
+      </div>
+      <button type="button" class="mock-drawer__close" id="requestDrawerClose" aria-label="닫기">×</button>
+    </header>
+    <div class="mock-drawer__body" id="requestDrawerBody"></div>
+    <footer class="mock-drawer__foot">
+      <button type="button" class="btn-admin-reset mock-no-icon" id="requestDrawerCloseBottom">닫기</button>
+    </footer>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/vendor-application.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'vendor-application' });
+  </script>
+</body>
+</html>

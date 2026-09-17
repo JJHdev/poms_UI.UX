@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유지관리계획 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-change-approval.css">
+  <link rel="stylesheet" href="css/maintenance-plan-manage-detail.css?v=20260820a">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+    .mpd-btn--file-download {
+      height: 28px !important;
+      min-height: 28px !important;
+      padding: 0 10px !important;
+      font-size: 12px !important;
+      line-height: 1 !important;
+      margin-left: 8px;
+    }
+
+    /* [시설물 이력 팝업] 시설물명 클릭 → 이력 목록 모달 */
+    .plan-detail-page .mpd-table--facility-check td:nth-child(7) {
+      cursor: pointer;
+    }
+    .plan-detail-page .mpd-table--facility-check td:nth-child(7):hover {
+      color: #1c6fff;
+      text-decoration: underline;
+    }
+    .fh-modal__overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 26, 45, 0.45);
+      z-index: 1200;
+    }
+    .fh-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(1240px, calc(100vw - 48px));
+      max-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid #dadae2;
+      border-radius: 6px;
+      box-shadow: 0 12px 32px rgba(11, 26, 45, 0.18);
+      z-index: 1210;
+    }
+    .fh-modal[hidden],
+    .fh-modal__overlay[hidden] {
+      display: none !important;
+    }
+    .fh-modal__head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #dadae2;
+    }
+    .fh-modal__title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0b1a2d;
+    }
+    .fh-modal__count {
+      margin: 0;
+      font-size: 13px;
+      color: #6b7684;
+    }
+    .fh-modal__count em {
+      font-style: normal;
+      color: #1c6fff;
+      font-weight: 700;
+    }
+    .fh-modal__close {
+      margin-left: auto;
+      width: 28px;
+      height: 28px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fh-modal__body {
+      padding: 16px 18px 18px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .fh-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .fh-table th,
+    .fh-table td {
+      border: 1px solid #dadae2;
+      height: 30px;
+      padding: 0 4px;
+      text-align: center;
+      color: #333d4b;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .fh-table thead th {
+      background: #e9f1fe;
+      font-weight: 600;
+      color: #0b1a2d;
+    }
+    .fh-table .fh-col-no { width: 40px; }
+    .fh-table .fh-col-date { width: auto; }
+    .fh-table .fh-col-cost { width: 62px; }
+    .fh-table .fh-col-grade { width: 56px; }
+  </style>
+</head>
+<body class="app-layout plan-detail-page facility-change-approval-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="mpd-page" aria-label="유지관리계획 상세">
+      <div class="fmd-crumb-row">
+        <button type="button" class="fmd-back-btn" id="facilityDrawerClose" aria-label="목록으로">
+          <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+        </button>
+        <a href="maintenance-plan-manage.html?tab=plan" class="fmd-home-btn" aria-label="유지관리계획 관리 목록">
+          <img src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+        </a>
+        <nav class="fmd-breadcrumb" aria-label="현재 위치">
+          <a href="facility-management.html">시스템 관리</a>
+          <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; 유지계획 관리 &gt; </span>
+          <span class="fmd-breadcrumb__current" id="planDetailCrumb">상세</span>
+        </nav>
+      </div>
+
+      <nav class="admin-sub-tabs" aria-label="시스템 관리 하위 메뉴">
+        <a href="facility-management.html" class="admin-sub-tabs__btn">시설물 관리</a>
+        <a href="maintenance-plan-manage.html" class="admin-sub-tabs__btn is-active" aria-current="page">유지관리계획 관리</a>
+        <a href="mooring-facility-management.html" class="admin-sub-tabs__btn">계류시설 관리</a>
+        <a href="facility-location-status.html" class="admin-sub-tabs__btn">시설물 위치 현황 관리</a>
+        <a href="drone-video-management.html" class="admin-sub-tabs__btn">드론 영상관리</a>
+        <a href="responsible-engineer.html" class="admin-sub-tabs__btn">책임기술자 관리</a>
+      </nav>
+
+      <div class="admin-detail-title-row">
+        <div class="admin-detail-title-row__lead">
+          <span class="admin-detail-title-row__icon" aria-hidden="true">
+            <img src="assets/main/maintenance-plan/icon-title.svg" alt="" width="24" height="24">
+          </span>
+          <h1 class="admin-detail-title-row__title" id="planDetailOwnerTitle">유지관리계획 상세</h1>
+          <span class="admin-detail-title-row__badge">유지관리계획 상세</span>
+        </div>
+      </div>
+
+      <!-- 유지관리계획 상세 본문 : 구조만 파일등록 방식으로 변경 -->
+      <div class="mpd-stack" id="facilityDrawer" aria-label="유지관리계획 상세">
+        <section class="mpd-panel" aria-labelledby="facilityDrawerTitle">
+          <div class="mpd-panel__head">
+            <span class="mpd-panel__mark" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+            </span>
+            <h2 class="mpd-panel__title" id="facilityDrawerTitle">유지관리계획 신청 내역</h2>
+          </div>
+
+          <div class="mpd-summary" aria-label="유지관리계획 신청 정보">
+            <div class="mpd-summary__row mpd-summary__row--full">
+              <div class="mpd-kv">
+                <div class="mpd-kv__label">관리기관</div>
+                <div class="mpd-kv__value" id="facilitySummaryAgency">-</div>
+              </div>
+            </div>
+
+            <div class="mpd-summary__row mpd-summary__row--full">
+              <div class="mpd-kv mpd-kv--title">
+                <div class="mpd-kv__label">제목</div>
+                <div class="mpd-kv__value" id="facilitySummaryTitle">-</div>
+              </div>
+            </div>
+
+            <div class="mpd-summary__row mpd-summary__row--full">
+              <div class="mpd-kv mpd-kv--content">
+                <div class="mpd-kv__label">신청 사유</div>
+                <div class="mpd-kv__value mpd-kv__value--plain" id="facilitySummaryContent">-</div>
+              </div>
+            </div>
+
+            <div class="mpd-summary__row mpd-summary__row--full">
+              <div class="mpd-kv">
+                <div class="mpd-kv__label">점검년도</div>
+                <div class="mpd-kv__value" id="facilitySummaryYear">-</div>
+              </div>
+            </div>
+
+            <div class="mpd-summary__row mpd-summary__row--full">
+              <div class="mpd-kv">
+                <div class="mpd-kv__label">유지관리계획 파일</div>
+                <div class="mpd-kv__value" id="facilitySummaryFile">
+                  <span id="facilitySummaryFileName">-</span>
+                  <button type="button" class="mpd-btn mpd-btn--history mpd-btn--file-download" id="facilitySummaryFileDownload" hidden>다운로드</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="mpd-summary__row">
+              <div class="mpd-kv mpd-kv--date">
+                <div class="mpd-kv__label">신청일자</div>
+                <div class="mpd-kv__value" id="facilitySummaryDate">-</div>
+              </div>
+              <div class="mpd-kv mpd-kv--status">
+                <div class="mpd-kv__label">결재상태</div>
+                <div class="mpd-kv__value" id="facilitySummaryStatus">-</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mpd-divider" aria-hidden="true"></div>
+
+          <!-- [선택 시설물 목록] 하단 표 추가 -->
+          <div class="mpd-list-block" aria-label="선택 시설물 목록">
+            <div class="mpd-results__head">
+              <div class="mpd-section-head">
+                <span class="mpd-panel__mark" aria-hidden="true">
+                  <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+                </span>
+                <h3 class="mpd-section-title">선택 시설물 수</h3>
+                <p class="mpd-section-count">총 <strong id="facilityCount">0</strong>개</p>
+              </div>
+            </div>
+
+            <div class="mpd-table-wrap facility-selected-table-wrap">
+              <table class="mpd-table mpd-table--facility-check" aria-label="선택 시설물">
+                <colgroup>
+                  <col class="col-no">
+                  <col class="col-org">
+                  <col class="col-port">
+                  <col class="col-subport">
+                  <col class="col-type">
+                  <col class="col-class">
+                  <col class="col-name">
+                  <col class="col-check">
+                  <col class="col-check">
+                  <col class="col-check">
+                  <col class="col-check">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">관리기관</th>
+                    <th scope="col">항</th>
+                    <th scope="col">세부항</th>
+                    <th scope="col">시설구분</th>
+                    <th scope="col">종</th>
+                    <th scope="col">시설물명</th>
+                    <th scope="col">정기안전점검</th>
+                    <th scope="col">정밀안전점검</th>
+                    <th scope="col">정밀안전진단</th>
+                    <th scope="col">성능평가</th>
+                  </tr>
+                </thead>
+                <tbody id="facilityTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mpd-footer-actions">
+            <button type="button" class="mpd-btn mpd-btn--history" id="planHistoryBtn">
+              <span class="mpd-btn__icon">
+                <img src="assets/service/main/figma/icon-history.svg" alt="" width="14" height="14">
+              </span>
+              결재이력
+            </button>
+            <button type="button" class="mpd-btn mpd-btn--register" id="planRegisterBtn">
+              <span class="mpd-btn__icon">
+                <img src="assets/admin-notices/icon-edit.svg" alt="" width="14" height="14">
+              </span>
+              계획등록
+            </button>
+            <button type="button" class="mpd-btn mpd-btn--approve" id="planApproveBtn" hidden>승인</button>
+            <button type="button" class="mpd-btn mpd-btn--reject" id="planRejectBtn" hidden>반려</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="facility-add-modal__overlay" id="facilityAddOverlay" hidden></div>
+  <aside class="mpd-panel facility-add-modal" id="facilityAddPanel" aria-labelledby="facilityAddTitle" aria-modal="true" aria-hidden="true" role="dialog" hidden>
+    <div class="mpd-panel__head mpd-panel__head--with-desc facility-add-modal__head">
+      <div class="facility-add-modal__title-group">
+        <h2 class="mpd-panel__title" id="facilityAddTitle">시설물 추가</h2>
+        <p class="mpd-panel__desc">검색 조건에 맞는 시설을 지도와 목록에서 확인합니다.</p>
+      </div>
+      <button type="button" class="facility-add-modal__close" id="facilityAddClose" aria-label="시설물 추가 닫기">
+        <img src="assets/facility-change-approval/icon-close.png" alt="" width="16" height="16">
+      </button>
+    </div>
+
+    <form class="mpd-filter facility-add-search" id="facilityAddSearchForm" role="search">
+      <div class="mpd-field">
+        <label for="facilityAddPortFilter">항</label>
+        <select id="facilityAddPortFilter" aria-label="항">
+          <option value="">전체</option>
+        </select>
+      </div>
+      <div class="mpd-field">
+        <label for="facilityAddSubportFilter">세부항</label>
+        <select id="facilityAddSubportFilter" aria-label="세부항">
+          <option value="">전체</option>
+        </select>
+      </div>
+      <div class="mpd-field">
+        <label for="facilityAddTypeFilter">시설구분</label>
+        <select id="facilityAddTypeFilter" aria-label="시설구분">
+          <option value="">전체</option>
+        </select>
+      </div>
+      <div class="mpd-field mpd-field--name">
+        <label for="facilityAddKeyword">시설물명</label>
+        <input type="text" id="facilityAddKeyword" placeholder="검색어를 입력해주세요." autocomplete="off" aria-label="시설명 검색">
+      </div>
+      <div class="mpd-filter-actions">
+        <button type="submit" class="mpd-btn mpd-btn--search">
+          <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+          검색하기
+        </button>
+      </div>
+    </form>
+
+    <div class="mpd-divider" aria-hidden="true"></div>
+
+    <div class="mpd-list-block mpd-list-block--add" id="facilityAddResultBlock">
+      <div class="mpd-results__head">
+        <div class="mpd-section-head">
+          <span class="mpd-panel__mark" aria-hidden="true">
+            <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+          </span>
+          <h3 class="mpd-section-title">검색결과</h3>
+          <p class="mpd-section-count">선택 가능 시설 <strong id="facilityAddCount">0</strong>개</p>
+        </div>
+      </div>
+
+      <div class="mpd-table-wrap facility-add-table-wrap">
+        <table class="mpd-table mpd-table--facility-add" aria-label="추가 가능 시설물">
+          <colgroup>
+            <col class="col-no">
+            <col class="col-org">
+            <col class="col-port">
+            <col class="col-subport">
+            <col class="col-type">
+            <col class="col-class">
+            <col class="col-name">
+            <col class="col-check">
+            <col class="col-check">
+            <col class="col-check">
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col"><span class="visually-hidden">선택</span></th>
+              <th scope="col">관리기관</th>
+              <th scope="col">항</th>
+              <th scope="col">세부항</th>
+              <th scope="col">시설구분</th>
+              <th scope="col">종</th>
+              <th scope="col">시설물명</th>
+              <th scope="col">정밀안전점검</th>
+              <th scope="col">정밀안전진단</th>
+              <th scope="col">성능평가</th>
+            </tr>
+          </thead>
+          <tbody id="facilityAddTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="facility-add-modal__footer">
+        <div class="mpd-add-actions facility-add-panel__foot">
+          <button type="button" class="mpd-btn mpd-btn--outline mpd-btn--add-cancel" id="facilityAddCancel">
+            <img src="assets/main/facility-management/icon-undo.svg" alt="" width="18" height="18">
+            취소
+          </button>
+          <button type="button" class="mpd-btn mpd-btn--outline mpd-btn--add-register" id="facilityAddRegister">
+            <img src="assets/main/facility-management/icon-select-register.svg" alt="" width="18" height="18">
+            선택 등록
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- [시설물 이력 팝업] -->
+  <div class="fh-modal__overlay" id="facilityHistoryOverlay" hidden></div>
+  <div class="fh-modal" id="facilityHistoryModal" role="dialog" aria-modal="true" aria-labelledby="facilityHistoryTitle" aria-hidden="true" hidden>
+    <div class="fh-modal__head">
+      <span class="mpd-panel__mark" aria-hidden="true">
+        <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+      </span>
+      <h2 class="fh-modal__title" id="facilityHistoryTitle">이력 목록</h2>
+      <p class="fh-modal__count" id="facilityHistoryCount">전체 <em>0</em>건</p>
+      <button type="button" class="fh-modal__close" id="facilityHistoryClose" aria-label="이력 목록 닫기">
+        <img src="assets/facility-change-approval/icon-close.png" alt="" width="16" height="16">
+      </button>
+    </div>
+    <div class="fh-modal__body">
+      <table class="fh-table" aria-label="시설물 점검진단 이력 목록">
+        <colgroup>
+          <col class="fh-col-no">
+          <col class="fh-col-date"><col class="fh-col-cost"><col class="fh-col-grade">
+          <col class="fh-col-date"><col class="fh-col-cost"><col class="fh-col-grade">
+          <col class="fh-col-date"><col class="fh-col-cost"><col class="fh-col-grade">
+          <col class="fh-col-date"><col class="fh-col-cost"><col class="fh-col-grade">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" rowspan="2">회차</th>
+            <th scope="colgroup" colspan="3">정기안전점검</th>
+            <th scope="colgroup" colspan="3">정밀안전점검</th>
+            <th scope="colgroup" colspan="3">정밀안전진단</th>
+            <th scope="colgroup" colspan="3">성능평가</th>
+          </tr>
+          <tr>
+            <th scope="col">점검일</th>
+            <th scope="col">비용(천원)</th>
+            <th scope="col">안전등급</th>
+            <th scope="col">점검일</th>
+            <th scope="col">비용(천원)</th>
+            <th scope="col">안전등급</th>
+            <th scope="col">점검일</th>
+            <th scope="col">비용(천원)</th>
+            <th scope="col">안전등급</th>
+            <th scope="col">점검일</th>
+            <th scope="col">비용(천원)</th>
+            <th scope="col">안전등급</th>
+          </tr>
+        </thead>
+        <tbody id="facilityHistoryBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="fca-drawer-overlay" id="planHistoryOverlay"></div>
+  <aside class="fca-drawer" id="planHistoryDrawer" aria-labelledby="planHistoryTitle" aria-hidden="true">
+    <div class="fca-drawer__top">
+      <header class="fca-drawer__head">
+        <h2 class="fca-drawer__title" id="planHistoryTitle">결재이력 조회</h2>
+        <button type="button" class="fca-drawer__close" id="planHistoryClose" aria-label="닫기">
+          <img src="assets/facility-change-approval/icon-close.png" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="fca-drawer__body" id="planHistoryBody"></div>
+    </div>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/maintenance-plan-manage.js?v=20260820a"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'maintenance-plan-manage' });
+
+    (function () {
+      var agency = document.getElementById('facilitySummaryAgency');
+      var title = document.getElementById('planDetailOwnerTitle');
+      if (agency && title && agency.textContent.trim() === '-') {
+        var txt = title.textContent.trim();
+        if (txt && txt !== '유지관리계획 상세') {
+          agency.textContent = txt.replace(/\s*유지관리계획\s*상세\s*$/, '') || '-';
+        }
+      }
+
+      var params = new URLSearchParams(location.search);
+      var fileName = params.get('file') || params.get('fileName');
+      var fileNameEl = document.getElementById('facilitySummaryFileName');
+      var downloadBtn = document.getElementById('facilitySummaryFileDownload');
+      if (fileName && fileNameEl) {
+        fileNameEl.textContent = fileName;
+        if (downloadBtn) downloadBtn.hidden = false;
+      }
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', function () {
+          alert('유지관리계획 파일을 다운로드합니다.');
+        });
+      }
+
+      // [뒤로가기 탭 고정] 상세 → 목록 복귀 시 항상 유지관리계획 탭 유지
+      var backBtn = document.getElementById('facilityDrawerClose');
+      if (backBtn) {
+        backBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          location.href = 'maintenance-plan-manage.html?tab=plan';
+        }, true);
+      }
+
+      // [시설물 이력 팝업] 시설물명 클릭 → 이력 목록 모달
+      var fhOverlay = document.getElementById('facilityHistoryOverlay');
+      var fhModal = document.getElementById('facilityHistoryModal');
+      var fhTitle = document.getElementById('facilityHistoryTitle');
+      var fhCount = document.getElementById('facilityHistoryCount');
+      var fhBody = document.getElementById('facilityHistoryBody');
+      var fhClose = document.getElementById('facilityHistoryClose');
+      var tbody = document.getElementById('facilityTableBody');
+
+      function fhSeed(str) {
+        var h = 0;
+        for (var i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+        return function () {
+          h = (h * 1664525 + 1013904223) >>> 0;
+          return h / 4294967296;
+        };
+      }
+
+      function fhPad(n) { return n < 10 ? '0' + n : String(n); }
+
+      function fhDateRange(year, rand) {
+        var m = 1 + Math.floor(rand() * 12);
+        var d = 1 + Math.floor(rand() * 28);
+        var span = 1 + Math.floor(rand() * 20);
+        var from = new Date(year, m - 1, d);
+        var to = new Date(year, m - 1, d + span);
+        function fmt(dt) { return dt.getFullYear() + '-' + fhPad(dt.getMonth() + 1) + '-' + fhPad(dt.getDate()); }
+        return fmt(from) + ' ~ ' + fmt(to);
+      }
+
+      function fhBuildHistory(name) {
+        var rand = fhSeed(name);
+        var total = 8 + Math.floor(rand() * 5); // 8~12회차
+        var grades = ['양호', '보통', 'B등급', 'A등급'];
+        var rows = [];
+        for (var i = 0; i < total; i++) {
+          var year = 2026 - i;
+          var row = {
+            no: i + 1,
+            regular: { date: fhDateRange(year, rand), cost: '0', grade: rand() < 0.5 ? '양호' : '보통' },
+            detailed: null, diagnosis: null, performance: null
+          };
+          if (i < 2 && rand() < 0.85) {
+            row.detailed = { date: fhDateRange(year, rand), cost: (30000 + Math.floor(rand() * 60000)).toLocaleString(), grade: grades[Math.floor(rand() * 3)] };
+          }
+          if (i === 0 && rand() < 0.6) {
+            row.diagnosis = { date: fhDateRange(year, rand), cost: (150000 + Math.floor(rand() * 200000)).toLocaleString(), grade: '세부사업' };
+          }
+          if (i === 0 && rand() < 0.3) {
+            row.performance = { date: fhDateRange(year, rand), cost: (80000 + Math.floor(rand() * 100000)).toLocaleString(), grade: grades[Math.floor(rand() * 2)] };
+          }
+          rows.push(row);
+        }
+        return rows;
+      }
+
+      function fhCells(entry) {
+        if (!entry) return '<td></td><td></td><td></td>';
+        return '<td>' + entry.date + '</td><td>' + entry.cost + '</td><td>' + entry.grade + '</td>';
+      }
+
+      function fhOpen(name) {
+        var rows = fhBuildHistory(name);
+        if (fhTitle) fhTitle.textContent = name + ' 이력 목록';
+        if (fhCount) fhCount.innerHTML = '전체 <em>' + rows.length + '</em>건';
+        if (fhBody) {
+          fhBody.innerHTML = rows.map(function (r) {
+            return '<tr><td>' + r.no + '</td>'
+              + fhCells(r.regular) + fhCells(r.detailed) + fhCells(r.diagnosis) + fhCells(r.performance)
+              + '</tr>';
+          }).join('');
+        }
+        if (fhOverlay) fhOverlay.hidden = false;
+        if (fhModal) {
+          fhModal.hidden = false;
+          fhModal.setAttribute('aria-hidden', 'false');
+        }
+      }
+
+      function fhCloseModal() {
+        if (fhOverlay) fhOverlay.hidden = true;
+        if (fhModal) {
+          fhModal.hidden = true;
+          fhModal.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      if (tbody) {
+        tbody.addEventListener('click', function (e) {
+          var td = e.target.closest('td');
+          if (!td || td.cellIndex !== 6) return; // 7번째 열 = 시설물명
+          var name = td.textContent.trim();
+          if (name) fhOpen(name);
+        });
+      }
+      if (fhClose) fhClose.addEventListener('click', fhCloseModal);
+      if (fhOverlay) fhOverlay.addEventListener('click', fhCloseModal);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && fhModal && !fhModal.hidden) fhCloseModal();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,918 @@
+/* 메인 대시보드 — Figma 224:4910, 한 화면(100vh) 맞춤 */
+
+html:has(body.facility-dash-page) {
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+}
+
+.facility-dash-page {
+  margin: 0;
+  min-width: 1440px;
+  min-height: 100vh;
+  height: auto;
+  overflow: visible;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  --gnb-inner-width: 1400px;
+  --gnb-height: 80px;
+  --gnb-subnav-height: 50px;
+}
+
+.facility-dash-page *,
+.facility-dash-page *::before,
+.facility-dash-page *::after {
+  box-sizing: border-box;
+}
+
+.facility-dash-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.facility-dash-page img {
+  display: block;
+  max-width: 100%;
+}
+
+.facility-dash-page button,
+.facility-dash-page input,
+.facility-dash-page select {
+  font-family: inherit;
+}
+
+.facility-dash-page .pg {
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+}
+
+.facility-dash-page .poms-site-footer {
+  margin-top: 0;
+  width: 100%;
+}
+
+.facility-dash-page #sidebar-root {
+  position: relative;
+  top: auto;
+  z-index: 1100;
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.facility-dash-page #sidebar-root img {
+  max-width: none;
+}
+
+.facility-dash-page #sidebar-root .gnb-wrap {
+  height: var(--gnb-height);
+  padding-top: 10px;
+}
+
+.facility-dash-page #sidebar-root .gnb,
+.facility-dash-page #sidebar-root .gnb.inner,
+.facility-dash-page #sidebar-root .inner.gnb,
+.facility-dash-page #sidebar-root .gnb-subnav__inner,
+.facility-dash-page #sidebar-root .gnb-mega__inner {
+  width: min(1400px, calc(100% - 40px));
+}
+
+/* Figma 224:5224 — 주메뉴는 헤더 아래 서브바, 항목 200px / 18px */
+.facility-dash-page #sidebar-root .gnb-subnav--home .gnb-subnav__item + .gnb-subnav__item {
+  position: relative;
+}
+
+.facility-dash-page #sidebar-root .gnb-subnav--home .gnb-subnav__item + .gnb-subnav__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background: #dadae2;
+}
+
+.facility-dash-page #sidebar-root .gnb-subnav--home .gnb-subnav__inner {
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.facility-dash-page #sidebar-root .gnb-subnav--home .gnb-subnav__item,
+.facility-dash-page #sidebar-root .gnb-subnav__item {
+  flex: 0 0 200px;
+  width: 200px;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  color: #111;
+  padding: 0 0 14px;
+  font-weight: 500;
+  border-bottom-color: transparent;
+}
+
+.facility-dash-page #sidebar-root .gnb-subnav--home .gnb-subnav__item.is-active,
+.facility-dash-page #sidebar-root .gnb-subnav--home .gnb-subnav__item:hover {
+  color: #1c6fff;
+  font-weight: 600;
+  border-bottom-color: #1c6fff;
+}
+
+.facility-dash-page .inner {
+  width: min(1400px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* ── 본문: 남은 뷰포트 높이에 맞춤 (Figma 1400 폭 유지) ── */
+.facility-dash-page .wrap.home-dashboard {
+  width: min(1400px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 16px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: calc(100vh - var(--gnb-height) - var(--gnb-subnav-height));
+  max-height: calc(100vh - var(--gnb-height) - var(--gnb-subnav-height));
+  overflow: hidden;
+  --dash-gap: 30px;
+  --dash-right-w: 384px;
+  --dash-left-w: auto;
+  --dash-col-h: auto;
+  --dash-map-h: auto;
+}
+
+.facility-dash-page .dash-page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.facility-dash-page .dash-page-title__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  flex-shrink: 0;
+}
+
+.facility-dash-page .dash-page-title__icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+
+.facility-dash-page .dash-page-title h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+/* 퀵메뉴 — gap 14, h 36, text 16 */
+.facility-dash-page .dash-quick-bar {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 14px;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.facility-dash-page .dash-quick-bar__item {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 36px;
+  min-width: 0;
+  padding: 6px 10px 6px 0;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.facility-dash-page .dash-quick-bar__item:hover,
+.facility-dash-page .dash-quick-bar__item.is-active {
+  background: rgba(28, 111, 255, 0.08);
+}
+
+.facility-dash-page .dash-quick-bar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  border-radius: 6px;
+  background: #fff;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.facility-dash-page .dash-quick-bar__icon img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* 좌/우 — Figma 224:4951: gap 30, 우 384, 동일 높이(지도 하단 = 게시판 하단) */
+.facility-dash-page .dash-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 384px;
+  align-items: stretch;
+  gap: 30px !important;
+  width: 100% !important;
+  max-width: 100%;
+  min-width: 0;
+  flex: 1 1 0;
+  min-height: 0;
+  height: auto;
+  overflow: hidden;
+}
+
+.facility-dash-page .dash-layout__left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  width: auto !important;
+  max-width: none !important;
+  flex: none !important;
+  height: 100% !important;
+  max-height: none !important;
+  gap: 0 !important;
+  overflow: hidden;
+  align-self: stretch;
+}
+
+.facility-dash-page .dash-layout__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  align-content: flex-start;
+  gap: 14px !important;
+  width: 384px !important;
+  flex: none !important;
+  min-width: 0;
+  min-height: 0;
+  height: 100% !important;
+  max-height: none !important;
+  overflow: hidden;
+  align-self: stretch;
+}
+
+/* 지도 — 우측과 같은 열 높이 채움 */
+.facility-dash-page .dash-map-hero {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100% !important;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.04);
+  background: #e8edf3;
+}
+
+.facility-dash-page .dash-map-hero__canvas,
+.facility-dash-page .dash-map-hero__leaflet {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.facility-dash-page .dash-map-hero__filters {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: auto;
+  min-height: 54px;
+  padding: 12px 14px;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 6px 6px 0 0;
+  box-shadow: none;
+}
+
+.facility-dash-page .dash-map-hero__fields {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+}
+
+.facility-dash-page .dash-map-hero__field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+}
+
+.facility-dash-page .dash-map-hero__field label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  letter-spacing: -0.28px;
+  white-space: nowrap;
+}
+
+.facility-dash-page .dash-map-hero__field--search {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+}
+
+.facility-dash-page .dash-map-hero__select,
+.facility-dash-page .dash-map-hero__input {
+  height: 30px;
+  min-height: 30px;
+  padding: 0 14px 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  color: #999;
+}
+
+.facility-dash-page .dash-map-hero__select {
+  flex: 1;
+  min-width: 0;
+  appearance: none;
+  background-image: url("../assets/main/dashboard/figma224/icon-angle-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  padding-right: 34px;
+}
+
+.facility-dash-page .dash-map-hero__search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 30px;
+}
+
+.facility-dash-page .dash-map-hero__input {
+  flex: 1;
+  min-width: 0;
+  padding-right: 20px;
+}
+
+.facility-dash-page .dash-map-hero__input::placeholder {
+  color: #999;
+}
+
+.facility-dash-page .dash-map-hero__search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #0d1c30;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.facility-dash-page .dash-map-hero__search-btn img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* 지도 도구 32px */
+.facility-dash-page .dash-map-tools {
+  top: 79px;
+  right: 14px;
+  width: 32px;
+  gap: 10px;
+}
+
+.facility-dash-page .dash-map-tools__btn {
+  width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+.facility-dash-page .dash-map-tools__btn span:not(.dash-map-tools__glyph) {
+  font-size: 7px;
+  font-weight: 500;
+}
+
+.facility-dash-page .dash-map-tools__stack {
+  width: 32px;
+  border-radius: 6px;
+}
+
+.facility-dash-page .dash-map-tools__icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* 검색결과 */
+.facility-dash-page .dash-map-results {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 14px;
+  border-radius: 0 0 6px 6px;
+  box-shadow: none;
+  gap: 6px;
+}
+
+.facility-dash-page .dash-map-results__scroll {
+  display: none;
+}
+
+.facility-dash-page .dash-map-results__count {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.34px;
+}
+
+.facility-dash-page .dash-map-results__count strong {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+}
+
+.facility-dash-page .dash-map-cards.map-result-list,
+.facility-dash-page .dash-map-cards {
+  gap: 10px;
+  overflow: hidden;
+  flex-wrap: nowrap;
+}
+
+.facility-dash-page .dash-map-cards .dash-map-card.map-result-list__item,
+.facility-dash-page .dash-map-cards .dash-map-card {
+  flex: 1 1 0 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+.facility-dash-page .dash-map-cards .dash-map-card__btn.map-result-list__link,
+.facility-dash-page .dash-map-cards .dash-map-card__btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 3px;
+  width: 100%;
+  height: auto !important;
+  min-height: 0;
+  padding: 16px 20px 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.facility-dash-page .dash-map-cards .dash-map-card__btn.map-result-list__link.is-selected,
+.facility-dash-page .dash-map-cards .dash-map-card__btn.is-selected,
+.facility-dash-page .dash-map-cards .dash-map-card__btn.map-result-list__link:hover,
+.facility-dash-page .dash-map-cards .dash-map-card__btn:hover {
+  border-color: #1c6fff;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.facility-dash-page .dash-map-card__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 2px;
+  width: 100%;
+}
+
+.facility-dash-page .dash-map-card__name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  width: 100%;
+  color: #111;
+}
+
+.facility-dash-page .dash-map-card__id {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.24px;
+  color: #6c788b;
+}
+
+.facility-dash-page .dash-map-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 0;
+}
+
+.facility-dash-page .dash-map-card__grade {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.facility-dash-page .dash-map-card__meta {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  color: #6c788b;
+}
+
+/* ── 우측 요약 — shrink, 게시판과 14px만 (Figma 224:5069) ── */
+.facility-dash-page .dash-summary-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  flex: 0 0 auto !important;
+  min-height: 0;
+  margin: 0;
+  height: auto !important;
+}
+
+.facility-dash-page .dash-summary-block__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.facility-dash-page .dash-summary-block__title .sec-bar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.facility-dash-page .dash-summary-block__title .sec-bar img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.facility-dash-page .dash-summary-block__title h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.34px;
+  line-height: 1.2;
+}
+
+.facility-dash-page .dash-summary-types {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 0 0 auto !important;
+  min-height: 0;
+}
+
+.facility-dash-page .dash-summary-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 0 0 auto !important;
+}
+
+.facility-dash-page .dash-summary-card .dash-type-btn--total {
+  height: 40px;
+  flex: 0 0 40px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid #1c6fff;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: rgba(28, 111, 255, 0.04);
+  gap: 20px;
+}
+
+.facility-dash-page .dash-summary-card .dash-type-btn--total .dash-type-btn__label,
+.facility-dash-page .dash-summary-card .dash-type-btn--total.is-active .dash-type-btn__label {
+  color: #1c6fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+}
+
+.facility-dash-page .dash-summary-card .dash-type-btn--total .dash-type-btn__value,
+.facility-dash-page .dash-summary-card .dash-type-btn--total.is-active .dash-type-btn__value {
+  color: #1c6fff;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+}
+
+.facility-dash-page .dash-summary-card .dash-type-btn--total .dash-type-btn__value i {
+  color: #111;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.facility-dash-page .dash-summary-card .dash-grade-rows,
+.facility-dash-page .dash-layout__right .dash-grade-rows {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  gap: 8px;
+  flex: 0 0 auto !important;
+  min-height: auto !important;
+  width: 100%;
+  margin: 0;
+  padding: 10px 20px 15px;
+  list-style: none;
+  border: 1px solid #1c6fff;
+  border-radius: 0 0 6px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+}
+
+.facility-dash-page .dash-layout__right .dash-grade-row {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  flex: 0 0 auto !important;
+  min-height: auto !important;
+  height: auto !important;
+  padding: 0;
+  border: none;
+}
+
+.facility-dash-page .dash-layout__right .dash-grade-row__divider {
+  display: block !important;
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: none;
+  border-top: 1px solid #dadae2;
+  flex-shrink: 0;
+}
+
+.facility-dash-page .dash-layout__right .dash-grade-row__track {
+  height: 6px;
+  border-radius: 100px;
+  background: #dadae2;
+  overflow: hidden;
+}
+
+.facility-dash-page .dash-layout__right .dash-grade-row__fill {
+  display: block;
+  height: 100%;
+  border-radius: 100px;
+}
+
+.facility-dash-page .dash-type-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+  flex: 0 0 auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.facility-dash-page .dash-type-list .dash-type-btn {
+  height: 40px !important;
+  flex: 0 0 40px !important;
+  min-height: 40px !important;
+  padding: 0 14px;
+  border: none;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.05);
+  gap: 20px;
+}
+
+.facility-dash-page .dash-type-list .dash-type-btn:hover {
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.facility-dash-page .dash-type-list .dash-type-btn.is-active {
+  border-color: transparent;
+  border-bottom-color: #dadae2;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.facility-dash-page .dash-type-list .dash-type-btn__label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  letter-spacing: -0.32px;
+}
+
+.facility-dash-page .dash-type-list .dash-type-btn.is-active .dash-type-btn__label {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.facility-dash-page .dash-type-list .dash-type-btn__value {
+  color: #6c788b;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+}
+
+.facility-dash-page .dash-type-list .dash-type-btn.is-active .dash-type-btn__value {
+  color: #1c6fff;
+}
+
+.facility-dash-page .dash-type-list .dash-type-btn__value i {
+  font-size: 10px;
+}
+
+.facility-dash-page .dash-type-btn__left {
+  gap: 10px;
+}
+
+.facility-dash-page .dash-type-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+  border-radius: 4px;
+  background: #f4f4fa;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.facility-dash-page .dash-type-btn__icon img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.facility-dash-page .dash-type-btn.is-active .dash-type-btn__icon,
+.facility-dash-page .dash-type-btn__icon--active {
+  background: rgba(28, 111, 255, 0.04);
+}
+
+/* 게시판 — 요약 바로 아래(14px), 지도 하단까지 채움 */
+.facility-dash-page .dash-layout__right .dash-tab-board {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  gap: 5px;
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__head {
+  border-bottom: 1px solid #dadae2;
+  flex-shrink: 0;
+  padding: 10px 0 0;
+  margin: 0;
+  justify-content: flex-start;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__tabs {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__tab {
+  flex: 1 1 0;
+  padding: 0 30px 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  letter-spacing: -0.32px;
+  text-align: center;
+  justify-content: center;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__tab.is-active {
+  color: #111;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom-color: #1c6fff;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__more {
+  display: none;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__body {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__panel {
+  display: none;
+  height: 100%;
+  min-height: 0;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__panel.is-active {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  min-height: 0;
+  height: 100%;
+  gap: 0;
+  flex: 1 1 0;
+  margin: 0;
+  padding: 0;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__item {
+  flex: 1 1 0;
+  min-height: 0;
+  height: auto;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__item:nth-child(n + 5) {
+  display: none;
+}
+
+.facility-dash-page .dash-layout__right .dash-tab-board__date {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+}
+
+/* 좁은 화면에서도 Figma 1400 폭 유지(가로 스크롤). 열 분리 레이아웃은 깨지 않음. */
+@media (max-width: 1100px) {
+  .facility-dash-page {
+    min-width: 1400px;
+  }
+}

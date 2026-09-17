@@ -1,0 +1,350 @@
+﻿/* 안전점검 관련자료 — type3 flat (게시판과 동일 셸) */
+
+.archive-safety-materials-page.fcr-flat-page .main-content,
+.archive-safety-materials-page.fcr-flat-page .type3-page {
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+.archive-safety-materials-page.fcr-flat-page .archive-board-tabs {
+  margin-top: -4px;
+}
+
+.archive-safety-materials-page.fcr-flat-page .archive-board-tabs__btn {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-results__side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-list-guide-note {
+  margin: 0;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-table-wrap {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-table .col-no {
+  width: 6%;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-table .col-title {
+  width: 24%;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-table .col-desc {
+  width: 42%;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-table .col-file {
+  width: 10%;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-table .col-date {
+  width: 18%;
+}
+
+.archive-safety-materials-page.fcr-flat-page .type3-table tbody td.col-title,
+.archive-safety-materials-page.fcr-flat-page .type3-table tbody td.col-desc {
+  text-align: left;
+  padding-left: 16px;
+  padding-right: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.archive-safety-materials-page .type3-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.archive-safety-materials-page .type3-table tbody tr.is-clickable:hover td {
+  background: #f7f9fc;
+}
+
+.archive-safety-materials-page .archive-file-attach {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.archive-safety-materials-page .archive-file-attach img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.archive-safety-materials-page .archive-file-attach:hover {
+  background: #f4f4fa;
+  border-color: #c5c5d0;
+  text-decoration: none;
+}
+
+/* ===== 모달 ===== */
+.archive-safety-materials-page .asm-modal__panel {
+  width: min(1200px, 100%);
+}
+
+.archive-safety-materials-page .asm-modal .fcr-modal__head-main {
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.archive-safety-materials-page .asm-modal__body {
+  gap: 20px;
+  padding: 20px 24px 8px;
+  overflow: auto;
+}
+
+.archive-safety-materials-page .asm-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.archive-safety-materials-page .asm-modal__field label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.archive-safety-materials-page .asm-modal__field input,
+.archive-safety-materials-page .asm-modal__field textarea {
+  width: 100%;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  background: #fff;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.archive-safety-materials-page .asm-modal__field input {
+  height: 44px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.archive-safety-materials-page .asm-modal__field textarea {
+  height: 200px;
+  min-height: 200px;
+  resize: vertical;
+}
+
+.archive-safety-materials-page .asm-modal__field input:focus,
+.archive-safety-materials-page .asm-modal__field textarea:focus {
+  border-color: #1c6fff;
+}
+
+.archive-safety-materials-page .asm-modal__file-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 38px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.archive-safety-materials-page .asm-modal__file-wrap[hidden],
+.archive-safety-materials-page .asm-modal__view-file[hidden],
+.archive-safety-materials-page .asm-modal__view-text[hidden],
+.archive-safety-materials-page .asm-modal__field input[hidden],
+.archive-safety-materials-page .asm-modal__field textarea[hidden],
+.archive-safety-materials-page .asm-modal__btn-primary[hidden],
+.archive-safety-materials-page .asm-modal__btn-cancel[hidden] {
+  display: none !important;
+}
+
+.archive-safety-materials-page .asm-modal__file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.archive-safety-materials-page .asm-modal__file-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.archive-safety-materials-page .asm-modal__file-btn {
+  flex-shrink: 0;
+  margin-left: auto;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  background: #f8fafc;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.archive-safety-materials-page .asm-modal__file-btn:hover {
+  background: #eef1f6;
+}
+
+.archive-safety-materials-page .asm-modal__view-text {
+  margin: 0;
+  padding: 14px 20px;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  line-height: normal;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.archive-safety-materials-page .asm-modal__view-text--multiline {
+  height: 200px;
+  min-height: 200px;
+  white-space: pre-wrap;
+  overflow: auto;
+}
+
+.archive-safety-materials-page .asm-modal__view-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 38px;
+  max-width: 100%;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  color: #1c6fff;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.archive-safety-materials-page .asm-modal__view-file:hover {
+  text-decoration: underline;
+}
+
+.archive-safety-materials-page .asm-modal__view-file:disabled {
+  color: #6c788b;
+  cursor: default;
+  text-decoration: none;
+}
+
+.archive-safety-materials-page .asm-modal__view-file img {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.archive-safety-materials-page .asm-modal__view-file span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.archive-safety-materials-page .asm-modal__foot {
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px 24px;
+}
+
+.archive-safety-materials-page .asm-modal__btn-cancel,
+.archive-safety-materials-page .asm-modal__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  min-width: 0;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.archive-safety-materials-page .asm-modal__btn-cancel {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.archive-safety-materials-page .asm-modal__btn-cancel:hover {
+  background: #f4f4fa;
+}
+
+.archive-safety-materials-page .asm-modal__btn-primary {
+  border: none;
+  border-radius: 8px;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.archive-safety-materials-page .asm-modal__btn-primary:hover {
+  background: #16304f;
+}
+
+.archive-safety-materials-page .asm-modal__btn-cancel img,
+.archive-safety-materials-page .asm-modal__btn-primary img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+

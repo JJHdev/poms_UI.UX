@@ -1,0 +1,347 @@
+@import url("common-modal.css");
+
+/**
+ * 홈 > 시설물 정보 / 안전등급 현황 모달 — Figma 138:6479
+ * 패널 1280×780 / backdrop navy 80% + blur / 연한 블루 테이블
+ */
+
+.facility-stats-modal--figma {
+  padding: 24px;
+  z-index: 3000;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__backdrop {
+  background: rgba(13, 31, 53, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.facility-stats-modal--figma .facility-stats-modal__panel {
+  width: min(1280px, 100%);
+  height: min(780px, calc(100vh - 48px));
+  max-height: calc(100vh - 48px);
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.facility-stats-modal--figma .facility-stats-modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 40px 50px 20px;
+  border-bottom: 0;
+  background: transparent;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__head-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: 24px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: rgba(28, 111, 255, 0.1);
+  color: #1c6fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__title-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: #0d1f35;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__title-icon {
+  position: relative;
+  display: inline-flex;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__title-icon-dot {
+  position: absolute;
+  top: 0;
+  left: 13px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(73, 112, 162, 0.2);
+  pointer-events: none;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__title-icon img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__baseline {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6c7275;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__desc {
+  margin: 0;
+  padding-left: 39px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #333;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(218, 218, 226, 0.5);
+  color: #153e85;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__close img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__close:hover,
+.facility-stats-modal--figma .facility-stats-modal__close:focus-visible {
+  background: rgba(218, 218, 226, 0.75);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #153e85;
+  transform: none;
+}
+
+.facility-stats-modal--figma .facility-stats-modal__body {
+  flex: 1;
+  min-height: 0;
+  padding: 0 50px 40px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.facility-stats-modal--figma .facility-stats-table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(73, 112, 162, 0.45) transparent;
+}
+
+.facility-stats-modal--figma .facility-stats-table-wrap::-webkit-scrollbar {
+  width: 10px;
+}
+
+.facility-stats-modal--figma .facility-stats-table-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.facility-stats-modal--figma .facility-stats-table-wrap::-webkit-scrollbar-thumb {
+  background: rgba(73, 112, 162, 0.2);
+  border-radius: 5px;
+}
+
+.facility-stats-modal--figma .facility-stats-table {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  color: #333;
+  border: 0;
+}
+
+.facility-stats-modal--figma .facility-stats-table__kind {
+  width: 200px;
+}
+
+.facility-stats-modal--figma .facility-stats-table__type {
+  width: 20%;
+}
+
+.facility-stats-modal--figma .facility-stats-table__count {
+  width: 14%;
+}
+
+.facility-stats-modal--figma .facility-stats-table th,
+.facility-stats-modal--figma .facility-stats-table td {
+  height: 44px;
+  padding: 10px;
+  border: 1px solid #dadae2 !important;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  font-weight: 400;
+  color: #333;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.facility-stats-modal--figma .facility-stats-table thead tr:first-child th {
+  height: 54px;
+  background: rgba(28, 111, 255, 0.1);
+  color: #111;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 10px 10px;
+}
+
+.facility-stats-modal--figma .facility-stats-table thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.facility-stats-modal--figma .facility-stats-table thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.facility-stats-modal--figma .facility-stats-table thead tr:first-child th[rowspan="2"] {
+  vertical-align: middle;
+}
+
+.facility-stats-modal--figma .facility-stats-table thead tr:nth-child(2) th {
+  height: auto;
+  background: #f6f9ff;
+  color: #6c788b;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* 본문: 종류 그룹 헤더 */
+.facility-stats-modal--figma .facility-stats-table tbody th.facility-stats-table__group {
+  background: #fff;
+  color: #111;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.facility-stats-modal--figma .facility-stats-table tbody td {
+  background: #fff;
+  color: #333;
+}
+
+/* 소계 — 연한 블루 배경 + 강조 숫자 */
+.facility-stats-modal--figma .facility-stats-table tbody tr.facility-stats-table__subtotal-row td {
+  background: #f6f9ff !important;
+  color: #0b50d0;
+  font-weight: 700;
+}
+
+.facility-stats-modal--figma .facility-stats-table tbody tr.facility-stats-table__subtotal-row td:first-child {
+  color: #333;
+}
+
+/* 합계/총계 — 빨간 강조 */
+.facility-stats-modal--figma .facility-stats-table tbody tr.facility-stats-table__total-row td {
+  background: rgba(208, 24, 24, 0.08) !important;
+  color: #d01818;
+  font-weight: 700;
+}
+
+/* 안전등급 현황 — 합계(맨 위) + 그룹당 7행(소계 → A~E·미실시) */
+.facility-stats-modal--figma .facility-stats-table--safety-grade .facility-stats-table__grade {
+  width: 12%;
+}
+
+.facility-stats-modal--figma .facility-stats-table--safety-grade .facility-stats-table__total {
+  width: 12%;
+}
+
+.facility-stats-modal--figma .facility-stats-table--safety-grade thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.facility-stats-modal--figma .facility-stats-table--safety-grade thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.facility-stats-modal--figma .facility-stats-table--safety-grade tbody tr.facility-stats-table__subtotal-row td {
+  background: #f6f9ff !important;
+  color: #0b50d0;
+  font-weight: 700;
+}
+
+.facility-stats-modal--figma .facility-stats-table--safety-grade tbody tr.facility-stats-table__subtotal-row td:nth-child(2),
+.facility-stats-modal--figma .facility-stats-table--safety-grade tbody tr.facility-stats-table__subtotal-row th + td {
+  color: #333;
+}
+
+.facility-stats-modal--figma .facility-stats-table--safety-grade tbody tr.facility-stats-table__total-row td {
+  background: rgba(208, 24, 24, 0.08) !important;
+  color: #d01818;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .facility-stats-modal--figma .facility-stats-modal__head,
+  .facility-stats-modal--figma .facility-stats-modal__body {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .facility-stats-modal--figma .facility-stats-modal__title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .facility-stats-modal--figma .facility-stats-modal__head {
+    padding: 24px 20px 12px;
+  }
+
+  .facility-stats-modal--figma .facility-stats-modal__body {
+    padding: 0 16px 24px;
+  }
+
+  .facility-stats-modal--figma .facility-stats-modal__title {
+    font-size: 22px;
+  }
+
+  .facility-stats-modal--figma .facility-stats-modal__desc {
+    padding-left: 0;
+    font-size: 14px;
+  }
+}

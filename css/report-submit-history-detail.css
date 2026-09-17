@@ -1,0 +1,509 @@
+/* 보고서 제출이력 상세 — fmd 쉘 + fca 결재이력 드로어 */
+
+.report-submit-history-detail-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  padding-left: 41px;
+  box-sizing: border-box;
+  background: #fff;
+  overflow: visible;
+}
+
+.report-submit-history-detail-page .fmd-panel__head {
+  justify-content: flex-start;
+}
+
+.rshd-panel__note {
+  margin: 0 0 0 auto;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1.2;
+}
+
+.report-submit-history-detail-page .fmd-btn--history {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+}
+
+.report-submit-history-detail-page .fmd-btn--history:hover {
+  background: #f4f4fa;
+}
+
+.report-submit-history-detail-page .fmd-btn--history img {
+  width: 18px;
+  height: 18px;
+}
+
+.rshd-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+}
+
+.rshd-facility-msg {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #6c788b;
+}
+
+.rshd-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.rshd-table {
+  width: 100%;
+  min-width: 1200px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 13px;
+}
+
+.rshd-table thead th {
+  height: 44px;
+  padding: 0 10px;
+  background: #f4f4fa;
+  border-bottom: 1px solid #dadae2;
+  color: #6c788b;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.rshd-table tbody td {
+  height: 44px;
+  padding: 0 10px;
+  border-bottom: 1px solid #ededed;
+  color: #111;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.rshd-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rshd-table tbody td.is-left {
+  text-align: left;
+}
+
+.rshd-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.report-submit-history-detail-page .fca-hist-summary__name {
+  max-width: 100%;
+  white-space: normal;
+}
+
+@media (max-width: 1200px) {
+  .rshd-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================================================
+   [2026 FLAT] inspection-agency.css 규격 통일 + 헤더 글씨 겹침 수정
+   ※ 되돌리려면 이 블록만 삭제하면 됩니다.
+   ======================================================================== */
+
+/* ── 1) 상단 액션 버튼 ───────────────────────────────────────────── */
+html body.report-submit-history-detail-page .admin-detail-title-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+}
+
+html body.report-submit-history-detail-page .admin-detail-title-row__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+html body.report-submit-history-detail-page .admin-detail-title-row__actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-left: auto !important;
+}
+
+html body.report-submit-history-detail-page .fmd-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  min-width: 96px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+html body.report-submit-history-detail-page .fmd-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+html body.report-submit-history-detail-page .fmd-btn:hover {
+  background: #f6f8fb !important;
+}
+
+/* ── 2) 패널 타이틀 ─────────────────────────────────────────────── */
+html body.report-submit-history-detail-page .fmd-panel {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html body.report-submit-history-detail-page .fmd-panel__head {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 32px !important;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.report-submit-history-detail-page .fmd-panel__title-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  flex: 0 0 32px !important;
+  border-radius: 8px !important;
+  background: #f6f9ff !important;
+  box-sizing: border-box;
+}
+
+html body.report-submit-history-detail-page .fmd-panel__title-icon img {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  object-fit: contain;
+}
+
+html body.report-submit-history-detail-page .fmd-panel__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+html body.report-submit-history-detail-page .fmd-panel__body {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.report-submit-history-detail-page .rshd-panel__note {
+  color: #6c788b !important;
+  font-size: 14px !important;
+  letter-spacing: -0.28px;
+}
+
+html body.report-submit-history-detail-page .rshd-panel__note strong {
+  color: #1c6fff !important;
+  font-weight: 600 !important;
+}
+
+/* ── 3) 제출 정보 메타 (report-registration-detail 규격) ──────────── */
+html body.report-submit-history-detail-page .rshd-meta-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100% !important;
+  border: 0 !important;
+  border-top: 1px solid #dadae2 !important;
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html body.report-submit-history-detail-page .rshd-meta-grid .fcd-meta__row {
+  display: flex !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 28px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.report-submit-history-detail-page .rshd-meta-grid .fcd-meta__label {
+  display: flex !important;
+  align-items: center !important;
+  width: 140px !important;
+  flex: 0 0 140px !important;
+  padding: 4px 14px !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: #f6f9ff !important;
+  color: #111 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  box-sizing: border-box;
+}
+
+html body.report-submit-history-detail-page .rshd-meta-grid .fcd-meta__value {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  padding: 4px 14px !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #333 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  word-break: keep-all !important;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+  html body.report-submit-history-detail-page .rshd-meta-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* ── 4) 신청내역 표 ─────────────────────────────────────────────── */
+html body.report-submit-history-detail-page .rshd-table-wrap {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  overflow-x: auto !important;
+}
+
+html body.report-submit-history-detail-page .rshd-table {
+  width: 100% !important;
+  min-width: 1240px !important;
+  margin: 0 !important;
+  table-layout: fixed !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent !important;
+  font-size: 13px !important;
+}
+
+/* 헤더: 두 줄까지 접히도록 (겹침 방지) */
+html body.report-submit-history-detail-page .rshd-table thead th {
+  height: auto !important;
+  min-height: 40px !important;
+  padding: 8px 8px !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #e9f1fe !important;
+  color: #111 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: break-word !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  box-sizing: border-box;
+}
+
+html body.report-submit-history-detail-page .rshd-table thead th:last-child {
+  border-right: 0 !important;
+}
+
+html body.report-submit-history-detail-page .rshd-table tbody td {
+  height: 32px !important;
+  max-height: 32px !important;
+  padding: 0 8px !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #333 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box;
+}
+
+html body.report-submit-history-detail-page .rshd-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+html body.report-submit-history-detail-page .rshd-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+html body.report-submit-history-detail-page .rshd-table tbody tr:hover td {
+  background: #f5f8fc !important;
+}
+
+html body.report-submit-history-detail-page .rshd-table tbody td.is-left {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  text-align: left !important;
+}
+
+html body.report-submit-history-detail-page .rshd-table tbody td > * {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* 컬럼 폭 — table-layout:fixed 기준 */
+html body.report-submit-history-detail-page .rshd-table .rshd-col-no { width: 48px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-portgbn { width: 84px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-mgmtgbn { width: 84px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-org { width: 120px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-sea { width: 76px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-port { width: 84px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-subport { width: 90px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-ftype { width: 80px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-fname { width: auto; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-sub1 { width: 130px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-sub2 { width: 190px; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-sub3 { width: 124px; }
+
+/* ── 5) 결재이력 드로어 ─────────────────────────────────────────── */
+html body.report-submit-history-detail-page .fca-drawer {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+html body.report-submit-history-detail-page .fca-drawer__head {
+  min-height: 0 !important;
+  padding: 22px 24px 14px !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+}
+
+html body.report-submit-history-detail-page .fca-drawer__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+/* ========================================================================
+   [2026-08-19f] 신청내역 표 최종 보정
+   - 본문 12px 유지
+   - 헤더만 13px 확대
+   - 지정 위치 줄바꿈
+   - 관리기관 폭 확대
+   ======================================================================== */
+html body.report-submit-history-detail-page .rshd-table-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+html body.report-submit-history-detail-page .rshd-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+}
+
+/* 헤더만 키움 */
+html body.report-submit-history-detail-page .rshd-table thead th {
+  padding: 7px 4px !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+
+/* 본문은 12px 유지 */
+html body.report-submit-history-detail-page .rshd-table tbody td {
+  padding: 0 5px !important;
+  font-size: 12px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* 제출현황 컬럼을 줄이고 관리기관을 넓힘 */
+html body.report-submit-history-detail-page .rshd-table .rshd-col-no      { width: 4% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-portgbn { width: 8% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-mgmtgbn { width: 7% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-org     { width: 15% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-sea     { width: 5% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-port    { width: 5.5% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-subport { width: 6.5% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-ftype   { width: 6% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-fname   { width: 10% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-sub1    { width: 8.5% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-sub2    { width: 14% !important; }
+html body.report-submit-history-detail-page .rshd-table .rshd-col-sub3    { width: 10.5% !important; }
+
+html body.report-submit-history-detail-page .rshd-table tbody td:nth-child(9) {
+  text-align: left !important;
+  padding-left: 8px !important;
+}
+

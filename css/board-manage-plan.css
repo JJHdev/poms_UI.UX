@@ -1,0 +1,73 @@
+/* 기본계획평면도 관리 — 사용자 plan-floor-page와 동일, 관리자 셸만 보정 */
+
+.board-manage-plan-page.fcr-flat-page .archive-board-tabs {
+  margin-top: 0;
+}
+
+.board-manage-plan-page .type3-btn--create {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 관리자 — 목록·미리보기 비율 및 패널 크기 축소 */
+.board-manage-plan-page .plan-floor-results {
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  column-gap: 16px;
+  row-gap: 12px;
+}
+
+.board-manage-plan-page.fcr-flat-page .plan-floor-results__head {
+  width: calc(42% - 8px);
+}
+
+.board-manage-plan-page.fcr-flat-page .plan-floor-results-panel {
+  gap: 12px;
+}
+
+.board-manage-plan-page.fcr-flat-page .type3-table .col-no {
+  width: 52px;
+}
+
+.board-manage-plan-page.fcr-flat-page .type3-table .col-action {
+  width: 108px;
+}
+
+.board-manage-plan-page .plan-floor-row-actions {
+  width: 84px;
+}
+
+.board-manage-plan-page .plan-floor-row-btn {
+  width: 40px;
+  height: 26px;
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+.board-manage-plan-page .plan-floor-detail__panel {
+  padding: 20px;
+}
+
+.board-manage-plan-page .plan-floor-detail__head {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.board-manage-plan-page .plan-floor-preview {
+  min-height: 240px;
+}
+
+.board-manage-plan-page .plan-floor-preview__empty {
+  min-height: 240px;
+  padding: 20px;
+}
+
+.board-manage-plan-page .plan-floor-preview__image {
+  min-height: 240px;
+  max-height: 340px;
+}
+
+.board-manage-plan-page .plan-floor-detail__panel.is-edit-mode .plan-floor-preview__image,
+.board-manage-plan-page .plan-floor-detail__panel.is-add-mode .plan-floor-preview__image {
+  max-height: 220px;
+}

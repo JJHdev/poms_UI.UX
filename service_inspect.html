@@ -1,0 +1,1649 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>점검보고서 등록 — POMS</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<link rel="stylesheet" href="css/service-inspect.css?v=20260819c">
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+</head>
+<body>
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">POMS 점검보고서 등록 페이지</h2>
+<div class="pg">
+
+  <div class="gnb-wrap">
+    <header class="gnb inner">
+      <a href="index.html" class="gnb-logo" aria-label="POMS 메인으로 이동">
+        <img class="gnb-logo__emblem" src="assets/service/main/figma/logo-emblem-light.svg" alt="">
+        <img class="gnb-logo__title" src="assets/service/main/figma/logo-text-light.svg" alt="항만시설물 유지관리시스템">
+      </a>
+      <div class="gnb-r">
+        <div class="gnb-user">
+          <div class="gnb-avatar" aria-hidden="true">한</div>
+          <span class="gnb-u">한국항만협회 사용자</span>
+        </div>
+        <button type="button" class="gnb-logout" aria-label="로그아웃">
+          <img src="assets/service/main/figma/icon-logout-dark.svg" alt="">
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <div class="steps-wrap">
+    <nav class="steps inner" aria-label="진행 단계">
+      <a class="step off" href="service_main.html">1. 대상 시설물 신청</a>
+      <div class="step on" aria-current="step">2. 점검보고서 등록</div>
+    </nav>
+  </div>
+
+  <div class="wrap">
+
+    <div class="page-title">
+      <span class="step-badge">STEP. 02</span>
+      <h1>점검보고서 등록</h1>
+    </div>
+
+    <!-- 용역 선택 (추가 버튼 없음) -->
+    <div class="yk-bar facility-list-card">
+      <div class="yk-left">
+        <span class="ttl">용역 선택</span>
+      </div>
+      <div class="yk-main">
+        <select class="yk-sel" id="serviceSelect" aria-label="용역 선택">
+          <option value="" selected disabled>선택</option>
+          <option value="과업(용역)명1">과업(용역)명1</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 시설 목록 -->
+    <section class="sec facility-list-sec" id="facilityListBlock" hidden>
+      <div class="sec-title sec-pad">
+        <span class="sec-bar" aria-hidden="true">
+          <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+        </span>
+        <h2>시설 목록</h2>
+        <span class="sec-count">총 <b>6</b>개소</span>
+      </div>
+      <div class="data-card-body">
+        <table class="svc-table facility-table">
+          <thead><tr>
+            <th class="c-no">번호</th>
+            <th class="c-200">항만구분</th>
+            <th class="c-120">관리구분</th>
+            <th class="c-200">관리기관</th>
+            <th class="c-74">해역</th>
+            <th class="c-74">항명</th>
+            <th class="c-100">세부항명</th>
+            <th class="c-100">시설구분</th>
+            <th class="c-flex">시설명</th>
+            <th class="c-80">상태</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td class="c-no num-cell">1</td>
+              <td class="c-200">국가관리연안항</td>
+              <td class="c-120">해양수산부</td>
+              <td class="c-200">포항지방해양수산청</td>
+              <td class="c-74">동해</td>
+              <td class="c-74">울릉항</td>
+              <td class="c-100">도동항</td>
+              <td class="c-100">계류시설</td>
+              <td class="c-flex">물양장(1)</td>
+              <td class="c-80"><span class="badge b-approve">승인</span></td>
+            </tr>
+            <tr>
+              <td class="c-no num-cell">2</td>
+              <td class="c-200">국가관리연안항</td>
+              <td class="c-120">해양수산부</td>
+              <td class="c-200">포항지방해양수산청</td>
+              <td class="c-74">동해</td>
+              <td class="c-74">울릉항</td>
+              <td class="c-100">도동항</td>
+              <td class="c-100">계류시설</td>
+              <td class="c-flex">물양장(2)</td>
+              <td class="c-80"><span class="badge b-approve">승인</span></td>
+            </tr>
+            <tr>
+              <td class="c-no num-cell">3</td>
+              <td class="c-200">국가관리연안항</td>
+              <td class="c-120">해양수산부</td>
+              <td class="c-200">포항지방해양수산청</td>
+              <td class="c-74">동해</td>
+              <td class="c-74">울릉항</td>
+              <td class="c-100">도동항</td>
+              <td class="c-100">외곽시설</td>
+              <td class="c-flex">남방파제</td>
+              <td class="c-80"><span class="badge b-approve">승인</span></td>
+            </tr>
+            <tr>
+              <td class="c-no num-cell">4</td>
+              <td class="c-200">국가관리연안항</td>
+              <td class="c-120">해양수산부</td>
+              <td class="c-200">포항지방해양수산청</td>
+              <td class="c-74">동해</td>
+              <td class="c-74">울릉항</td>
+              <td class="c-100">사동항</td>
+              <td class="c-100">계류시설</td>
+              <td class="c-flex">물양장</td>
+              <td class="c-80"><span class="badge b-approve">승인</span></td>
+            </tr>
+            <tr>
+              <td class="c-no num-cell">5</td>
+              <td class="c-200">국가관리연안항</td>
+              <td class="c-120">해양수산부</td>
+              <td class="c-200">포항지방해양수산청</td>
+              <td class="c-74">동해</td>
+              <td class="c-74">울릉항</td>
+              <td class="c-100">사동항</td>
+              <td class="c-100">외곽시설</td>
+              <td class="c-flex">북방파호안</td>
+              <td class="c-80"><span class="badge b-pending">임시저장</span></td>
+            </tr>
+            <tr>
+              <td class="c-no num-cell">6</td>
+              <td class="c-200">국가관리연안항</td>
+              <td class="c-120">해양수산부</td>
+              <td class="c-200">포항지방해양수산청</td>
+              <td class="c-74">동해</td>
+              <td class="c-74">울릉항</td>
+              <td class="c-100">사동항</td>
+              <td class="c-100">계류시설</td>
+              <td class="c-flex">사동항 동방파제</td>
+              <td class="c-80"><span class="badge b-approve">승인</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 점검이력 + 과업정보 -->
+    <div class="inspection-history-card" id="inspectionHistoryCard" hidden>
+      <div class="yk-bar hist-bar">
+        <div class="yk-left">
+          <span class="ttl">점검이력</span>
+        </div>
+        <div class="yk-main">
+          <div class="yk-controls">
+            <select class="yk-sel w-sel" id="workTypeSelect" aria-label="점검이력 선택">
+              <option value="" selected disabled>선택</option>
+              <option>정기안전점검(상반기)</option>
+              <option>정기안전점검(하반기)</option>
+              <option>성능평가</option>
+              <option>보수보강</option>
+              <option>정밀안전진단</option>
+              <option>정밀안전점검</option>
+            </select>
+            <button type="button" class="btn btn-dark" id="addInspectionBtn">
+              <img src="assets/service/main/figma/icon-plus.svg" alt="">
+              추가
+            </button>
+          </div>
+          <button type="button" class="btn btn-history" id="inspectApprovalHistoryOpen">
+            <img src="assets/service/main/figma/icon-history-dark.svg" alt="">
+            결재이력
+          </button>
+        </div>
+      </div>
+
+      <section class="sec task-info-sec">
+        <div class="sec-title sec-pad">
+          <span class="sec-bar" aria-hidden="true">
+            <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+          </span>
+          <h2>과업정보</h2>
+        </div>
+        <div class="data-card-body">
+          <table class="history-table svc-table">
+            <thead><tr>
+              <th class="c-140">점검일자</th>
+              <th class="c-180">점검기관</th>
+              <th class="c-120">점검자</th>
+              <th class="c-120">시설물상태</th>
+              <th class="c-flex">점검자의견</th>
+              <th class="c-200">첨부파일</th>
+              <th class="c-80">상태</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td class="c-140">2026-04-22</td>
+                <td class="c-180">포항지방해양수산청</td>
+                <td class="c-120">김길동</td>
+                <td class="c-120">-</td>
+                <td class="c-flex">-</td>
+                <td class="c-200">-</td>
+                <td class="c-80"><span class="badge b-pending">임시저장</span></td>
+              </tr>
+              <tr>
+                <td class="c-140">2026-04-22</td>
+                <td class="c-180">포항지방해양수산청</td>
+                <td class="c-120">나해양</td>
+                <td class="c-120">양호</td>
+                <td class="c-flex">상태 양호</td>
+                <td class="c-200">-</td>
+                <td class="c-80"><span class="badge b-pending">임시저장</span></td>
+              </tr>
+              <tr>
+                <td class="c-140">2026-04-22</td>
+                <td class="c-180">포항지방해양수산청</td>
+                <td class="c-120">김길동</td>
+                <td class="c-120">-</td>
+                <td class="c-flex">-</td>
+                <td class="c-200">-</td>
+                <td class="c-80"><span class="badge b-approve">승인</span></td>
+              </tr>
+              <tr>
+                <td class="c-140">2026-04-22</td>
+                <td class="c-180">포항지방해양수산청</td>
+                <td class="c-120">김길동</td>
+                <td class="c-120">-</td>
+                <td class="c-flex">-</td>
+                <td class="c-200">-</td>
+                <td class="c-80"><span class="badge b-pending">임시저장</span></td>
+              </tr>
+              <tr class="rejected-row">
+                <td class="c-140">2026-01-16</td>
+                <td class="c-180">포항지방해양수산청</td>
+                <td class="c-120">나해양</td>
+                <td class="c-120">양호</td>
+                <td class="c-flex">시설 양호</td>
+                <td class="c-200">-</td>
+                <td class="c-80"><span class="badge b-done">반려</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- 하단 탭 영역 -->
+    <section class="panel bottom-tabs" id="detailPanel" hidden>
+      <div class="bt-nav" role="tablist" aria-label="점검보고서 작성 탭">
+        <button type="button" class="bt on" role="tab" aria-selected="true" data-tab-target="history">점검이력정보</button>
+        <button type="button" class="bt" role="tab" aria-selected="false" data-tab-target="items">점검사항</button>
+        <button type="button" class="bt" role="tab" aria-selected="false" data-tab-target="photos">사진대지</button>
+        <button type="button" class="bt" role="tab" aria-selected="false" data-tab-target="report">결과보고서</button>
+      </div>
+
+      <div class="tab-panel-wrap">
+      <div class="tab-panel report-panel" data-tab-panel="history">
+        <!-- 정기안전점검(상·하반기) 이력 등록 뷰 -->
+        <div id="histRegularView">
+        <div class="form-panel-hd">
+          <div class="sec-title">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+            </span>
+            <h2>정밀안전(진단)점검이력</h2>
+          </div>
+        </div>
+        <div class="form-panel-bd">
+        <div class="fig-form">
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 점검진단 구분</div>
+            <div class="fig-val">
+              <select id="regKindSelect" disabled aria-label="점검진단구분" title="점검이력의 작업구분에 따라 자동 지정됩니다">
+                <option selected>정기안전점검(상반기)</option>
+                <option>정기안전점검(하반기)</option>
+                <option>정밀안전점검</option>
+                <option>정밀안전진단</option>
+                <option>성능평가</option>
+                <option>긴급점검</option>
+              </select>
+            </div>
+            <div class="fig-lbl"><span class="req">*</span> 점검진단 기관명</div>
+            <div class="fig-val"><input value="자체수행" aria-label="점검진단기관명"></div>
+            <div class="fig-lbl"><span class="req">*</span> 점검진단 기간</div>
+            <div class="fig-val">
+              <input type="date" value="2016-01-01" aria-label="점검진단 시작일">
+              <span class="date-sep">~</span>
+              <input type="date" value="2016-08-20" aria-label="점검진단 종료일">
+            </div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 책임기술자명</div>
+            <div class="fig-val"><input value="유지보" aria-label="책임기술자명"></div>
+            <div class="fig-lbl"><span class="req">*</span> 비용</div>
+            <div class="fig-val">
+              <input value="1200" aria-label="비용">
+              <span class="unit">천원(VAT)포함</span>
+            </div>
+            <div class="fig-lbl"><span class="req">*</span> 안전등급</div>
+            <div class="fig-val">
+              <select aria-label="안전등급">
+                <option>A등급</option>
+                <option selected>B등급</option>
+                <option>C등급</option>
+                <option>D등급</option>
+                <option>E등급</option>
+              </select>
+            </div>
+          </div>
+          <div class="fig-row fig-row-tall fig-row-full">
+            <div class="fig-lbl"><span class="req">*</span> 주요 점검진단결과</div>
+            <div class="fig-val"><textarea aria-label="주요점검진단결과">현재 안전상태는 제1~3종 시설물의 정기 안전점검 실시 결과에 따른 안전등급이 A~E등급인 시설물로 B등급에 해당하며, 제4~5종 시설물은 정기 안전점검 실시 결과에 따른 안전등급이 A~E등급인 시설물로 B등급에 해당함.</textarea></div>
+          </div>
+          <div class="fig-row fig-row-tall fig-row-full">
+            <div class="fig-lbl"><span class="req">*</span> 주요 보수보강(안)</div>
+            <div class="fig-val"><textarea aria-label="주요 보수보강(안)">현재 안전상태는 제1~3종 시설물의 정기 안전점검 실시 결과에 따른 안전등급이 A~E등급인 시설물로 B등급에 해당하며, 제4~5종 시설물은 정기 안전점검 실시 결과에 따른 안전등급이 A~E등급인 시설물로 B등급에 해당함.</textarea></div>
+          </div>
+          <div class="fig-row fig-row-half">
+            <div class="fig-lbl">작성자</div>
+            <div class="fig-val"><input value="봉만식" aria-label="작성자"></div>
+            <div class="fig-lbl">작성일</div>
+            <div class="fig-val"><input type="date" value="2015-12-20" aria-label="작성일"></div>
+          </div>
+        </div>
+
+        <div class="item-tech-section">
+          <div class="item-tech-head">
+            <div class="sec-title">
+              <span class="sec-bar" aria-hidden="true">
+                <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+              </span>
+              <h2>정밀안전(진단)점검이력</h2>
+            </div>
+            <button type="button" class="participant-add-btn" id="addHistTechBtn">+ 추가</button>
+          </div>
+          <div class="item-tech-table participant-tech-table hist-tech-table">
+            <table>
+              <thead><tr>
+                <th class="c-role">역할</th>
+                <th class="c-name">성명</th>
+                <th>생년월일</th>
+                <th>시작일</th>
+                <th>종료일</th>
+                <th class="c-days">일수</th>
+                <th class="c-rate">참여률</th>
+                <th class="c-status">상태</th>
+                <th class="c-mgmt" style="width:72px">관리</th>
+              </tr></thead>
+              <tbody id="histTechBody">
+                <tr>
+                  <td><input class="tech-input" value="책임기술자" aria-label="역할"></td>
+                  <td><input class="tech-input" value="유지보" aria-label="성명"></td>
+                  <td><input class="tech-input" value="1975-03-12" aria-label="생년월일"></td>
+                  <td><input class="tech-input" value="2016-01-01" aria-label="시작일"></td>
+                  <td><input class="tech-input" value="2016-08-20" aria-label="종료일"></td>
+                  <td><input class="tech-input" value="232" aria-label="일수"></td>
+                  <td><input class="tech-input" value="100%" aria-label="참여률"></td>
+                  <td><span class="badge b-done">반려</span></td>
+                  <td class="c"><button type="button" class="participant-delete-btn">삭제</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="form-panel-foot">정기안전점검표(점검사항·사진대지·결과보고서)는 위  탭에서 이어서 작성할 수 있습니다.</p>
+        </div>
+        </div>
+
+        <!-- 정밀안전진단·정밀안전점검·성능평가 이력 뷰 (조회=파란글씨 / 수정 시 입력폼) -->
+        <div id="histPrecisionView" hidden>
+          <div class="sec-title">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+            </span>
+            <h2>정밀안전(진단)점검·성능평가 이력</h2>
+          </div>
+          <div class="report-grid">
+            <div class="ifl"><span class="req">*</span>점검진단구분</div>
+            <div class="ifv"><input id="precKindInput" disabled value="정밀안전진단" aria-label="점검진단구분" title="점검이력의 작업구분에 따라 자동 지정됩니다" style="background:#EEF1F5;color:#667"></div>
+            <div class="ifl"><span class="req">*</span>점검진단기간</div>
+            <div class="ifv">
+              <div style="display:flex;align-items:center;gap:6px">
+                <input type="date" value="2018-01-01" aria-label="점검진단 시작일" style="flex:1;min-width:0">
+                <span style="color:#94A3B8">~</span>
+                <input type="date" value="2018-08-20" aria-label="점검진단 종료일" style="flex:1;min-width:0">
+              </div>
+            </div>
+            <div class="ifl"><span class="req">*</span>점검진단기관명</div>
+            <div class="ifv"><input value="자체수행" aria-label="점검진단기관명"></div>
+            <div class="ifl"><span class="req">*</span>종별</div>
+            <div class="ifv"><input value="2종" aria-label="종별"></div>
+            <div class="ifl"><span class="req">*</span>책임기술자명</div>
+            <div class="ifv"><input value="유지보" aria-label="책임기술자명"></div>
+            <div class="ifl"><span class="blank">_</span>비용</div>
+            <div class="ifv">
+              <div style="display:flex;align-items:center;gap:8px">
+                <input value="1500" aria-label="비용" style="flex:1;min-width:0">
+                <span style="color:#E24B4A;font-size:11px;white-space:nowrap">천원(VAT 포함)</span>
+              </div>
+            </div>
+            <div class="ifl"><span class="req">*</span>안전등급</div>
+            <div class="ifv wide-row">
+              <select aria-label="안전등급">
+                <option>A등급</option>
+                <option>B등급</option>
+                <option selected>C등급</option>
+                <option>D등급</option>
+                <option>E등급</option>
+              </select>
+            </div>
+            <div class="ifl"><span class="req">*</span>주요점검진단결과</div>
+            <div class="ifv wide-row"><textarea aria-label="주요점검진단결과">현재 안전상태는 제1~3종 시설물의 정기 안전점검 실시 결과에 따른 안전등급이 A~E등급인 시설물로 B등급에 해당하며, 제4~5종 시설물은 정기 안전점검 실시 결과에 따른 안전등급이 A~E등급인 시설물로 B등급에 해당함.</textarea></div>
+            <div class="ifl"><span class="req">*</span>주요 보수보강(안)</div>
+            <div class="ifv wide-row"><textarea aria-label="주요 보수보강(안)">현재 안전상태는 제1~3종 시설물의 정기 안전점검 실시 결과에 따른 안전등급이 A~E등급인 시설물로 B등급에 해당하며, 제4~5종 시설물은 정기 안전점검 실시 결과에 따른 안전등급이 A~E등급인 시설물로 B등급에 해당함.</textarea></div>
+            <div class="ifl"><span class="blank">_</span>작성자</div>
+            <div class="ifv"><input value="봉만식" aria-label="작성자"></div>
+            <div class="ifl"><span class="blank">_</span>작성일</div>
+            <div class="ifv"><input type="date" value="2017-12-20" aria-label="작성일"></div>
+          </div>
+          <div class="item-tech-head">
+            <div class="sec-title" style="margin:0;padding-top:0">
+              <span class="sec-bar" aria-hidden="true">
+                <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+              </span>
+              <h2>중대결함등</h2>
+            </div>
+            <button type="button" class="participant-add-btn" id="addPrecDefectBtn">+ 추가</button>
+          </div>
+          <table class="prec-defect-table participant-tech-table">
+            <thead><tr><th>부위/부재</th><th>결함구분</th><th>결함종류</th><th class="c" style="width:64px;text-align:center">관리</th></tr></thead>
+            <tbody id="precDefectBody">
+              <tr>
+                <td><input class="tech-input" value="상부슬래브" aria-label="부위/부재"></td>
+                <td><input class="tech-input" value="중대결함" aria-label="결함구분"></td>
+                <td><input class="tech-input" value="콘크리트 염해" aria-label="결함종류"></td>
+                <td style="text-align:center"><button type="button" class="participant-delete-btn">삭제</button></td>
+              </tr>
+              <tr>
+                <td><input class="tech-input" value="상부슬래브" aria-label="부위/부재"></td>
+                <td><input class="tech-input" value="중대결함" aria-label="결함구분"></td>
+                <td><input class="tech-input" value="콘크리트 염해" aria-label="결함종류"></td>
+                <td style="text-align:center"><button type="button" class="participant-delete-btn">삭제</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 첨부파일 -->
+          <div class="sec-title">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+            </span>
+            <h2>첨부파일</h2>
+          </div>
+          <div class="report-grid" style="margin-bottom:0">
+            <div class="ifl"><span class="blank">_</span>보고서</div>
+            <div class="ifv">
+              <div class="svc-file-slot" data-pdf-only="1">
+                <a href="#" class="svc-file-name">2018_정밀안전진단_보고서.pdf</a>
+                <span class="svc-file-hint">※ PDF만</span>
+                <button type="button" class="doc-btn svc-file-upload">업로드</button>
+                <input type="file" hidden accept=".pdf,application/pdf">
+              </div>
+            </div>
+            <div class="ifl"><span class="blank">_</span>외관조사망도</div>
+            <div class="ifv">
+              <div class="svc-file-slot">
+                <a href="#" class="svc-file-name">외관조사망도.dwg</a>
+                <button type="button" class="doc-btn svc-file-upload">업로드</button>
+                <input type="file" hidden>
+              </div>
+            </div>
+            <div class="ifl"><span class="blank">_</span>과업지시서</div>
+            <div class="ifv">
+              <div class="svc-file-slot">
+                <a href="#" class="svc-file-name">과업지시서.hwp</a>
+                <button type="button" class="doc-btn svc-file-upload">업로드</button>
+                <input type="file" hidden>
+              </div>
+            </div>
+            <div class="ifl"><span class="blank">_</span>수중조사결과</div>
+            <div class="ifv">
+              <div class="svc-file-slot">
+                <a href="#" class="svc-file-name">수중조사결과.pdf</a>
+                <button type="button" class="doc-btn svc-file-upload">업로드</button>
+                <input type="file" hidden>
+              </div>
+            </div>
+            <div class="ifl"><span class="blank">_</span>상태평가</div>
+            <div class="ifv">
+              <div class="svc-file-slot">
+                <a href="#" class="svc-file-name">상태평가.xlsx</a>
+                <button type="button" class="doc-btn svc-file-upload">업로드</button>
+                <input type="file" hidden>
+              </div>
+            </div>
+            <div class="ifl"><span class="blank">_</span>사진첩</div>
+            <div class="ifv">
+              <div class="svc-file-slot">
+                <a href="#" class="svc-file-name">사진첩.zip</a>
+                <button type="button" class="doc-btn svc-file-upload">업로드</button>
+                <input type="file" hidden>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 보수보강 실적 뷰 -->
+        <div id="histRepairView" hidden>
+          <div class="sec-title">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+            </span>
+            <h2>보수보강 실적</h2>
+          </div>
+          <div class="report-grid">
+            <div class="ifl"><span class="req">*</span>공사명</div>
+            <div class="ifv"><input value="2024년 광양항 (여수지역)" aria-label="공사명"></div>
+            <div class="ifl"><span class="req">*</span>점검년도</div>
+            <div class="ifv"><input value="2024" aria-label="점검년도"></div>
+            <div class="ifl"><span class="req">*</span>공사구분</div>
+            <div class="ifv"><input value="보수" aria-label="공사구분"></div>
+            <div class="ifl"><span class="req">*</span>공사기간</div>
+            <div class="ifv">
+              <div style="display:flex;align-items:center;gap:6px">
+                <input type="date" value="2024-05-16" aria-label="공사 시작일" style="flex:1;min-width:0">
+                <span style="color:#94A3B8">~</span>
+                <input type="date" value="2025-02-15" aria-label="공사 종료일" style="flex:1;min-width:0">
+              </div>
+            </div>
+            <div class="ifl"><span class="blank">_</span>관련점검진단</div>
+            <div class="ifv">
+              <div style="display:flex;align-items:center;gap:8px">
+                <input id="histRelatedInspection" value="정밀안전점검 (2022-05-19 ~ 2022-10-30)" aria-label="관련점검진단" style="flex:1;min-width:0" readonly>
+                <button type="button" class="doc-btn rel-ins-btn" onclick="window.openRepairRelatedInspectionModal&&window.openRepairRelatedInspectionModal('histRelatedInspection')">등록</button>
+              </div>
+            </div>
+            <div class="ifl"><span class="blank">_</span>계약방법</div>
+            <div class="ifv"><input value="일반경쟁" aria-label="계약방법"></div>
+            <div class="ifl"><span class="blank">_</span>설계자</div>
+            <div class="ifv"><input value="한국구조물안전연구원" aria-label="설계자"></div>
+            <div class="ifl"><span class="blank">_</span>시공자</div>
+            <div class="ifv"><input value="(유)다미종합건설" aria-label="시공자"></div>
+            <div class="ifl"><span class="blank">_</span>책임기술자</div>
+            <div class="ifv"><input value="김은성이사" aria-label="책임기술자"></div>
+            <div class="ifl"><span class="blank">_</span>공사감독</div>
+            <div class="ifv"><input value="김은성이사" aria-label="공사감독"></div>
+            <div class="ifl"><span class="req">*</span>부위</div>
+            <div class="ifv wide-row"><input value="방식커버" aria-label="부위"></div>
+            <div class="ifl"><span class="req">*</span>공사내역</div>
+            <div class="ifv wide-row"><input value="방식커버 보수" aria-label="공사내역"></div>
+            <div class="ifl"><span class="req">*</span>공사비</div>
+            <div class="ifv">
+              <div style="display:flex;align-items:center;gap:8px">
+                <input value="17,500" aria-label="공사비" style="flex:1;min-width:0">
+                <span style="color:#E24B4A;font-size:11px;white-space:nowrap">천원</span>
+              </div>
+            </div>
+            <div class="ifl"><span class="blank">_</span>내진보강</div>
+            <div class="ifv"><input value="미실시" aria-label="내진보강"></div>
+            <div class="ifl"><span class="blank">_</span>공사성격</div>
+            <div class="ifv"><input value="성능개선" aria-label="공사성격"></div>
+            <div class="ifl"><span class="blank">_</span>설계내역서</div>
+            <div class="ifv"><button type="button" class="doc-btn" onclick="alert('설계내역서를 다운로드합니다. (샘플)')">설계내역서</button></div>
+            <div class="ifl"><span class="blank">_</span>점검보고서</div>
+            <div class="ifv wide-row"><button type="button" class="doc-btn" onclick="alert('점검보고서를 다운로드합니다. (샘플)')">점검보고서</button></div>
+            <div class="ifl"><span class="blank">_</span>작성자</div>
+            <div class="ifv"><input value="이민형,황순기" aria-label="작성자"></div>
+            <div class="ifl"><span class="blank">_</span>작성일</div>
+            <div class="ifv"><input type="date" value="2024-02-18" aria-label="작성일"></div>
+          </div>
+          <div class="item-tech-head">
+            <div class="sec-title" style="margin:0;padding-top:0">
+              <span class="sec-bar" aria-hidden="true">
+                <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+              </span>
+              <h2>공사부위/부재</h2>
+            </div>
+            <button type="button" class="participant-add-btn" id="addRepairPartBtn">+ 추가</button>
+          </div>
+          <table class="prec-defect-table center participant-tech-table">
+            <thead><tr><th>공사부위/부재</th><th>보수보강공법</th><th>수량</th><th>단위</th><th>공사비(천원)</th><th class="c" style="width:64px">관리</th></tr></thead>
+            <tbody id="repairPartBody">
+              <tr>
+                <td><input class="tech-input" value="콘크리트 바닥판" aria-label="공사부위/부재"></td>
+                <td><input class="tech-input" value="단면보수공법" aria-label="보수보강공법"></td>
+                <td><input class="tech-input" value="424" aria-label="수량"></td>
+                <td><input class="tech-input" value="129" aria-label="단위"></td>
+                <td><input class="tech-input" value="55,074" aria-label="공사비(천원)"></td>
+                <td><button type="button" class="participant-delete-btn">삭제</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-panel insp-form" data-tab-panel="items" hidden>
+        <div class="form-panel-hd">
+          <div class="sec-title">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+            </span>
+            <h2>점검사항</h2>
+          </div>
+        </div>
+        <div class="form-panel-bd">
+
+        <div class="fig-form">
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 시설물명</div>
+            <div class="fig-val readonly">물양장(1)</div>
+            <div class="fig-lbl"><span class="req">*</span> 관리주체</div>
+            <div class="fig-val readonly">포항지방해양수산청</div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl">조사단위</div>
+            <div class="fig-val"><input value="-" aria-label="조사단위"></div>
+            <div class="fig-lbl">평가단위</div>
+            <div class="fig-val"><input value="-" aria-label="평가단위"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 준공 년월일</div>
+            <div class="fig-val"><input value="-" aria-label="준공 년월일"></div>
+            <div class="fig-lbl"><span class="req">*</span> 최종점검 년월일</div>
+            <div class="fig-val"><input value="-" aria-label="최종점검 년월일"></div>
+          </div>
+        </div>
+
+        <div class="check-tbl check-tbl-v2">
+          <table class="check-table-v2">
+            <colgroup>
+              <col class="col-check-group" style="width:120px">
+              <col class="col-check-item" style="width:180px">
+              <col class="col-result" style="width:70px">
+              <col class="col-result" style="width:70px">
+              <col class="col-result" style="width:70px">
+              <col class="col-opinion">
+              <col class="col-repair" style="width:130px">
+              <col class="col-photo" style="width:120px">
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="2" rowspan="2">점검항목</th>
+                <th colspan="3">점검결과</th>
+                <th rowspan="2">의견</th>
+                <th rowspan="2">보수 필요여부</th>
+                <th rowspan="2">사진첨부</th>
+              </tr>
+              <tr>
+                <th class="result-sub">양호</th>
+                <th class="result-sub">보통</th>
+                <th class="result-sub">불량</th>
+              </tr>
+            </thead>
+            <tbody>
+          <tr>
+            <th class="check-group" scope="rowgroup" rowspan="9">상부공 및 본체부</th>
+            <th class="check-item" scope="row"><span class="req">*</span>침하</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_0" value="양호" checked aria-label="침하 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_0" value="보통" aria-label="침하 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_0" value="불량" aria-label="침하 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="침하 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="침하 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>경사/전도</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_1" value="양호" checked aria-label="경사/전도 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_1" value="보통" aria-label="경사/전도 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_1" value="불량" aria-label="경사/전도 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="경사/전도 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="경사/전도 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>활동</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_2" value="양호" checked aria-label="활동 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_2" value="보통" aria-label="활동 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_2" value="불량" aria-label="활동 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="활동 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="활동 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>파손</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_3" value="양호" checked aria-label="파손 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_3" value="보통" aria-label="파손 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_3" value="불량" aria-label="파손 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="파손 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="파손 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>균열</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_4" value="양호" checked aria-label="균열 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_4" value="보통" aria-label="균열 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_4" value="불량" aria-label="균열 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="균열 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="균열 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>박리</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_5" value="양호" checked aria-label="박리 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_5" value="보통" aria-label="박리 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_5" value="불량" aria-label="박리 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="박리 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="박리 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>마모/침식</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_6" value="양호" checked aria-label="마모/침식 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_6" value="보통" aria-label="마모/침식 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_6" value="불량" aria-label="마모/침식 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="마모/침식 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="마모/침식 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>속채움재 유실</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_7" value="양호" checked aria-label="속채움재 유실 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_7" value="보통" aria-label="속채움재 유실 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_7" value="불량" aria-label="속채움재 유실 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="속채움재 유실 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="속채움재 유실 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>이격</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_8" value="양호" checked aria-label="이격 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_8" value="보통" aria-label="이격 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="upper_8" value="불량" aria-label="이격 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="이격 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="이격 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-group" scope="rowgroup" rowspan="3">부대시설</th>
+            <th class="check-item" scope="row"><span class="req">*</span>방충재</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_0" value="양호" checked aria-label="방충재 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_0" value="보통" aria-label="방충재 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_0" value="불량" aria-label="방충재 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="방충재 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="방충재 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>계선주</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_1" value="양호" checked aria-label="계선주 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_1" value="보통" aria-label="계선주 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_1" value="불량" aria-label="계선주 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="계선주 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="계선주 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>차막이</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_2" value="양호" checked aria-label="차막이 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_2" value="보통" aria-label="차막이 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="aux_2" value="불량" aria-label="차막이 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="차막이 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="차막이 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-group" scope="rowgroup" rowspan="3">기타</th>
+            <th class="check-item" scope="row"><span class="req">*</span>공중이 이용하는 부위</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_0" value="양호" checked aria-label="공중이 이용하는 부위 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_0" value="보통" aria-label="공중이 이용하는 부위 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_0" value="불량" aria-label="공중이 이용하는 부위 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="공중이 이용하는 부위 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="공중이 이용하는 부위 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>공중이용부위(유무)</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_1" value="양호" checked aria-label="공중이용부위(유무) 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_1" value="보통" aria-label="공중이용부위(유무) 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_1" value="불량" aria-label="공중이용부위(유무) 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="공중이용부위(유무) 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="공중이용부위(유무) 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+          <tr>
+            <th class="check-item" scope="row"><span class="req">*</span>공중이용부위(보수여부)</th>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_2" value="양호" checked aria-label="공중이용부위(보수여부) 양호"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_2" value="보통" aria-label="공중이용부위(보수여부) 보통"><span class="radio-view">O</span></label></td>
+            <td class="check-result-cell"><label class="check-radio-cell"><input type="radio" name="etc_2" value="불량" aria-label="공중이용부위(보수여부) 불량"><span class="radio-view">O</span></label></td>
+            <td class="check-opinion"><input class="check-opinion-input" value="-" aria-label="공중이용부위(보수여부) 의견"></td>
+            <td class="check-repair"><select class="check-repair-select" aria-label="공중이용부위(보수여부) 보수 필요여부"><option value="Y" selected>Y</option><option value="N">N</option></select></td>
+            <td class="check-photo"><span class="photo-attach"><button type="button" class="photo-btn" data-photo-button><i class="ti ti-camera-plus" aria-hidden="true"></i>등록</button><span class="photo-count">0개</span></span></td>
+          </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="fig-form" style="margin-top:14px">
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 점검일자</div>
+            <div class="fig-val"><input type="date" value="2026-03-03" aria-label="점검일자"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 상태</div>
+            <div class="fig-val">
+              <select aria-label="상태">
+                <option>양호</option>
+                <option>보통</option>
+                <option>불량</option>
+              </select>
+            </div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl">특이사항</div>
+            <div class="fig-val"><input value="-" aria-label="특이사항"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 점검자의견</div>
+            <div class="fig-val"><input value="-" aria-label="점검자의견"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 조치계획</div>
+            <div class="fig-val"><input value="-" aria-label="조치계획"></div>
+          </div>
+        </div>
+
+        <div class="item-tech-section">
+          <div class="item-tech-head">
+            <div class="sec-title" style="margin:0;padding-top:0">
+              <span class="sec-bar" aria-hidden="true">
+                <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+              </span>
+              <h2><span class="req">*</span>책임기술자</h2>
+            </div>
+          </div>
+          <div class="item-tech-table lead-tech-table">
+            <table>
+              <thead><tr><th class="c">소속</th><th class="c">직위</th><th class="c name-col">이름</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><input class="tech-input" value="-" aria-label="책임기술자 소속"></td>
+                  <td><input class="tech-input" value="-" aria-label="책임기술자 직위"></td>
+                  <td class="name-col"><input class="tech-input" value="-" aria-label="책임기술자 이름"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="item-tech-section">
+          <div class="item-tech-head">
+            <div class="sec-title" style="margin:0;padding-top:0">
+              <span class="sec-bar" aria-hidden="true">
+                <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+              </span>
+              <h2>참여기술자</h2>
+            </div>
+            <button type="button" class="participant-add-btn" id="addParticipantBtn">+ 추가</button>
+          </div>
+          <div class="item-tech-table participant-tech-table">
+            <table>
+              <thead><tr><th class="c">소속</th><th class="c">직위</th><th class="c">이름</th><th class="c" style="width:64px">관리</th></tr></thead>
+              <tbody id="participantBody">
+                <tr>
+                  <td><input class="tech-input" value="-" aria-label="참여기술자 소속"></td>
+                  <td><input class="tech-input" value="-" aria-label="참여기술자 직위"></td>
+                  <td><input class="tech-input" value="-" aria-label="참여기술자 이름"></td>
+                  <td class="c"><button type="button" class="participant-delete-btn">삭제</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="tab-panel photo-ledger" data-tab-panel="photos" hidden>
+        <div class="form-panel-hd">
+          <div class="sec-title">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+            </span>
+            <h2>사진대지</h2>
+          </div>
+        </div>
+        <div class="form-panel-bd">
+        <div class="ledger-top">
+          <strong class="ledger-title">물양장(1)</strong>
+          <span class="ledger-owner">포항지방해양수산청</span>
+        </div>
+        <div class="photo-register">
+          <div class="photo-upload-grid">
+            <div class="photo-card">
+              <div class="photo-card__frame"><img src="assets/sample-site-1.png" alt="상부공 및 본체부 사진"></div>
+              <div class="photo-card__body"><div class="photo-card__caption">상부공 및 본체부</div></div>
+            </div>
+            <div class="photo-card">
+              <div class="photo-card__frame"><img src="assets/sample-site-2.png" alt="상부공 및 본체부 사진"></div>
+              <div class="photo-card__body"><div class="photo-card__caption">상부공 및 본체부</div></div>
+            </div>
+          </div>
+          <input type="file" accept="image/*" data-photo-input hidden>
+        </div>
+        </div>
+      </div>
+
+      <div class="tab-panel report-panel" data-tab-panel="report" hidden>
+        <div class="form-panel-hd">
+          <div class="sec-title">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+            </span>
+            <h2>일반현황</h2>
+          </div>
+        </div>
+        <div class="form-panel-bd">
+        <div class="fig-form">
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 대행/자체</div>
+            <div class="fig-val"><div class="radio-line"><input type="radio" name="agencyType" checked><span>자체</span><input type="radio" name="agencyType"><span>대행</span></div></div>
+            <div class="fig-lbl"><span class="req">*</span> 용역명</div>
+            <div class="fig-val"><input value="-"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 점검기간</div>
+            <div class="fig-val"><input value="-"></div>
+            <div class="fig-lbl"><span class="req">*</span> 관리주체명</div>
+            <div class="fig-val"><input value="포항지방해양수산청" readonly></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 대표자</div>
+            <div class="fig-val"><input value="-"></div>
+            <div class="fig-lbl"><span class="req">*</span> 공동수급</div>
+            <div class="fig-val"><input value="-"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 계약방법</div>
+            <div class="fig-val"><input value="-"></div>
+            <div class="fig-lbl"><span class="req">*</span> 시설물 구분</div>
+            <div class="fig-val"><input value="-"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 종류</div>
+            <div class="fig-val"><input value="-"></div>
+            <div class="fig-lbl"><span class="req">*</span> 종별</div>
+            <div class="fig-val"><input value="-"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 준공일</div>
+            <div class="fig-val"><input value="-"></div>
+            <div class="fig-lbl"><span class="req">*</span> 점검금액(천원)</div>
+            <div class="fig-val"><input value="-"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 안전등급</div>
+            <div class="fig-val"><input value="-"></div>
+            <div class="fig-lbl"><span class="req">*</span> 시설물 위치</div>
+            <div class="fig-val"><input value="-"></div>
+          </div>
+          <div class="fig-row">
+            <div class="fig-lbl"><span class="req">*</span> 시설물 규모</div>
+            <div class="fig-val"><input value="-"></div>
+            <div class="fig-lbl"><span class="req">*</span> 시설물명</div>
+            <div class="fig-val"><input value="물양장(1)" readonly></div>
+          </div>
+        </div>
+
+        <div class="sec-title" style="margin-top:18px">
+          <span class="sec-bar" aria-hidden="true">
+            <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+          </span>
+          <h2>점검 실시결과 현황</h2>
+        </div>
+        <div class="result-table">
+          <div class="result-group">중대한 결함 등</div>
+          <div class="result-label"><span class="req">*</span>중대한 결함 유무</div><div class="result-field"><textarea>-</textarea></div>
+          <div class="result-label"><span class="req">*</span>공중이 이용하는 부위에 결함</div><div class="result-field"><textarea>-</textarea></div>
+          <div class="result-label wide-label"><span class="req">*</span>주요 점검 결과</div><div class="result-field wide-field"><textarea>-</textarea></div>
+          <div class="result-label wide-label"><span class="req">*</span>주요 보수ㆍ보강 계획</div><div class="result-field wide-field"><textarea>-</textarea></div>
+        </div>
+
+        <div class="report-tech-head">
+          <div class="sec-title" style="margin:0;padding-top:0">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+            </span>
+            <h2>책임(참여)기술자 현황</h2>
+          </div>
+          <button type="button" class="add-tech-btn" id="addTechBtn">+ 추가</button>
+        </div>
+        <div class="report-tech-table-wrap">
+          <table class="report-tech-table">
+            <colgroup>
+              <col span="4">
+            </colgroup>
+            <thead><tr>
+              <th class="c">구분</th>
+              <th class="c">성명</th>
+              <th class="c">과업참여기간</th>
+              <th class="c">기술등급</th>
+            </tr></thead>
+            <tbody id="techBody"><tr data-empty-tech><td colspan="4" class="tech-empty">등록된 기술자가 없습니다.</td></tr></tbody>
+          </table>
+        </div>
+
+        <div class="sec-title" style="margin-top:22px">
+          <span class="sec-bar" aria-hidden="true">
+            <img src="assets/service/main/figma/icon-section-bar.svg" alt="">
+          </span>
+          <h2>참고사항</h2>
+        </div>
+        <div class="reference-panel">
+          <textarea class="reference-box">-</textarea>
+        </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <hr class="panel-divider">
+
+    <section class="submit-bar" id="submitBar" hidden>
+      <p class="sub-note">등록 목록 확인 후 신청하기를 눌러 발주기관에 제출하세요.</p>
+      <div class="sub-acts">
+        <button type="button" class="sbtn delete">
+          <img src="assets/service/main/figma/icon-action-delete.svg" alt="">삭제
+        </button>
+        <button type="button" class="sbtn edit" id="editReportBtn">
+          <img src="assets/service/main/figma/icon-action-edit.svg" alt="">수정
+        </button>
+        <button type="button" class="sbtn save btn-ghost">
+          <img src="assets/service/main/figma/icon-temp-save.svg" alt="">임시저장
+        </button>
+        <button type="button" class="sbtn cancel" id="cancelReportBtn">취소</button>
+        <button type="button" class="sbtn submit btn-apply">
+          <img src="assets/service/main/figma/icon-apply.svg" alt="">신청하기
+        </button>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="approval-modal" id="inspectApprovalHistoryModal" aria-hidden="true">
+  <div class="approval-dialog" role="dialog" aria-modal="true" aria-labelledby="inspectApprovalHistoryTitle">
+    <div class="approval-head">
+      <h3 class="approval-title" id="inspectApprovalHistoryTitle">결재이력</h3>
+      <button type="button" class="approval-close" id="inspectApprovalHistoryClose" aria-label="닫기">
+        <img src="assets/service/approval-history/icon-close.svg" alt="" width="16" height="16">
+      </button>
+    </div>
+    <div class="approval-body">
+      <div class="approval-meta">
+        <span class="approval-meta-ico" aria-hidden="true">
+          <img src="assets/service/approval-history/icon-facility.png" alt="" width="36" height="36">
+        </span>
+        <div class="approval-meta-text">
+          <span class="approval-meta-name">물양장</span>
+          <div class="approval-meta-sub">
+            <span class="approval-meta-date">2026-11-04</span>
+            <span class="approval-meta-sep" aria-hidden="true"></span>
+            <span class="approval-meta-desc">정기안전점검(하반기)</span>
+          </div>
+        </div>
+      </div>
+      <div class="approval-table-wrap">
+        <table class="approval-table">
+          <thead>
+            <tr>
+              <th class="col-type">구분</th>
+              <th class="col-requester">요청자</th>
+              <th class="col-company">회사</th>
+              <th class="col-date">일자</th>
+              <th class="col-reviewer">검토자</th>
+              <th>의견</th>
+              <th class="col-status">상태</th>
+            </tr>
+          </thead>
+          <tbody id="inspectApprovalHistoryBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 관련 점검진단 선택 모달 (보수보강 실적) -->
+<div id="repairRelatedInspectionModal" class="repair-related-modal" hidden role="dialog" aria-modal="true" aria-labelledby="repairRelatedInspectionModalTitle">
+  <div class="repair-related-modal__backdrop" data-close-related-inspection-modal tabindex="-1" aria-hidden="true"></div>
+  <div class="repair-related-modal__panel">
+    <header class="repair-related-modal__head">
+      <h3 class="repair-related-modal__title" id="repairRelatedInspectionModalTitle">관련 점검진단 선택</h3>
+      <button type="button" class="repair-related-modal__close" data-close-related-inspection-modal aria-label="닫기">
+        <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+      </button>
+    </header>
+    <div class="repair-related-modal__stack">
+      <div class="repair-related-modal__body">
+        <form class="repair-related-search" id="repairRelatedSearchForm">
+          <div class="repair-related-search__row">
+            <div class="repair-related-search__field">
+              <label for="repairRelatedAgency">관리기관</label>
+              <select id="repairRelatedAgency" name="agency">
+                <option value="">전체</option>
+                <option value="경상북도">경상북도</option>
+                <option value="부산광역시">부산광역시</option>
+                <option value="여수광양항만공사">여수광양항만공사</option>
+              </select>
+            </div>
+            <div class="repair-related-search__field">
+              <label for="repairRelatedPort">항</label>
+              <select id="repairRelatedPort" name="port">
+                <option value="">전체</option>
+                <option value="포항항">포항항</option>
+                <option value="부산항">부산항</option>
+                <option value="여수항">여수항</option>
+                <option value="광양항">광양항</option>
+              </select>
+            </div>
+            <div class="repair-related-search__field">
+              <label for="repairRelatedSubPort">세부항</label>
+              <select id="repairRelatedSubPort" name="subPort">
+                <option value="">전체</option>
+                <option value="남방파제">남방파제</option>
+                <option value="북항">북항</option>
+                <option value="남항">남항</option>
+              </select>
+            </div>
+            <div class="repair-related-search__field">
+              <label for="repairRelatedFacilityType">시설구분</label>
+              <select id="repairRelatedFacilityType" name="facilityType">
+                <option value="">전체</option>
+                <option value="외곽시설">외곽시설</option>
+                <option value="계류시설">계류시설</option>
+                <option value="건축물">건축물</option>
+              </select>
+            </div>
+            <div class="repair-related-search__field repair-related-search__field--name">
+              <label for="repairRelatedFacilityName">시설물명</label>
+              <input type="text" id="repairRelatedFacilityName" name="facilityName" placeholder="시설물명 입력">
+            </div>
+            <div class="repair-related-search__actions">
+              <button type="button" class="btn-condition-reset" id="repairRelatedResetBtn">초기화</button>
+              <button type="submit" class="btn-condition-search" id="repairRelatedSearchBtn">검색</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="repair-related-modal__table-card">
+          <div class="repair-related-modal__table-wrap">
+            <table class="repair-related-table">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-no">No.</th>
+                  <th scope="col">점검일자</th>
+                  <th scope="col">점검구분</th>
+                  <th scope="col">등급</th>
+                  <th scope="col">조사기관</th>
+                  <th scope="col">부위/부재</th>
+                  <th scope="col">결함구분</th>
+                  <th scope="col">결함종류</th>
+                </tr>
+              </thead>
+              <tbody id="repairRelatedListBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+          <nav class="pagination repair-related-pagination" id="repairRelatedPagination" aria-label="관련 점검진단 페이지"></nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/facility-detail-repair-related.js"></script>
+<script>
+(() => {
+  const rows = [
+    ['신청', '홍길동', '해양수산부', '2026-05-12 15:00', '김해양', '점검보고서 내용을 확인하였습니다.', '승인'],
+    ['반려', '홍길동', '해양수산부', '2026-05-12 15:00', '김해양', '첨부파일을 확인해주세요.', '반려'],
+    ['신청', '홍길동', '해양수산부', '2026-05-12 15:00', '김해양', '-', '요청'],
+    ['재신청', '홍길동', '해양수산부', '2026-05-12 15:00', '김해양', '-', '요청'],
+    ['신청', '홍길동', '해양수산부', '2026-05-12 15:00', '나검토', '점검보고서와 첨부파일을 확인해주세요.', '요청'],
+  ];
+
+  const modal = document.getElementById('inspectApprovalHistoryModal');
+  const body = document.getElementById('inspectApprovalHistoryBody');
+
+  const statusClass = (status) => {
+    if (status === '승인') return 'approved';
+    if (status === '반려') return 'rejected';
+    return 'requested';
+  };
+
+  const typeClass = (type) => {
+    if (type === '반려') return 'is-reject';
+    if (type === '재신청') return 'is-reapply';
+    return '';
+  };
+
+  function renderRows() {
+    body.innerHTML = rows.map((row) => `
+      <tr>
+        <td class="col-type"><span class="approval-type ${typeClass(row[0])}">${row[0]}</span></td>
+        <td class="col-requester">${row[1]}</td>
+        <td class="col-company">${row[2]}</td>
+        <td class="col-date">${row[3]}</td>
+        <td class="col-reviewer">${row[4]}</td>
+        <td class="opinion">${row[5]}</td>
+        <td class="col-status"><span class="approval-status ${statusClass(row[6])}">${row[6]}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  function render() {
+    renderRows();
+  }
+
+  function activateTab(tabKey) {
+    document.querySelectorAll('[data-tab-target]').forEach((tab) => {
+      const active = tab.dataset.tabTarget === tabKey;
+      tab.classList.toggle('on', active);
+      tab.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-tab-panel]').forEach((panel) => {
+      panel.hidden = panel.dataset.tabPanel !== tabKey;
+    });
+  }
+
+  document.querySelectorAll('[data-tab-target]').forEach((tab) => {
+    tab.addEventListener('click', () => activateTab(tab.dataset.tabTarget));
+  });
+
+  const detailPanel = document.querySelector('.bottom-tabs');
+  const pageRoot = document.querySelector('.pg');
+  const facilityListBlock = document.getElementById('facilityListBlock');
+  const inspectionHistoryCard = document.getElementById('inspectionHistoryCard');
+  const submitBar = document.getElementById('submitBar');
+  const serviceSelect = document.getElementById('serviceSelect');
+
+  function setVisible(el, show) {
+    if (!el) return;
+    el.hidden = !show;
+  }
+
+  function hideDetail() {
+    setVisible(detailPanel, false);
+    setVisible(submitBar, false);
+    document.querySelectorAll('.history-table tbody tr').forEach((item) => item.classList.remove('sel'));
+    pageRoot?.classList.remove('create-mode', 'edit-mode');
+  }
+
+  function hideHistoryAndDetail() {
+    setVisible(inspectionHistoryCard, false);
+    hideDetail();
+    document.querySelectorAll('#facilityListBlock tbody tr').forEach((item) => item.classList.remove('sel'));
+  }
+
+  function showDetail(mode) {
+    setVisible(detailPanel, true);
+    setVisible(submitBar, true);
+    updateHistoryVariant();
+    setDetailMode(mode);
+    activateTab('history');
+    detailPanel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  serviceSelect?.addEventListener('change', () => {
+    const selected = Boolean(serviceSelect.value);
+    setVisible(facilityListBlock, selected);
+    hideHistoryAndDetail();
+    if (selected) {
+      facilityListBlock?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  function readTextForControl(control) {
+    if (control.matches('select')) return control.options[control.selectedIndex]?.textContent?.trim() || '-';
+    return control.value?.trim() || '-';
+  }
+
+  function ensureReadValue(control) {
+    let value = control.nextElementSibling;
+    if (!value?.classList.contains('read-value')) {
+      value = document.createElement('span');
+      value.className = 'read-value';
+      control.insertAdjacentElement('afterend', value);
+    }
+    value.textContent = readTextForControl(control);
+  }
+
+  function ensureRadioReadValue(line) {
+    let value = line.querySelector(':scope > .read-value');
+    if (!value) {
+      value = document.createElement('span');
+      value.className = 'read-value';
+      line.appendChild(value);
+    }
+    const checked = line.querySelector('input[type="radio"]:checked');
+    value.textContent = checked?.closest('label')?.textContent?.trim() || checked?.nextElementSibling?.textContent?.trim() || '-';
+  }
+
+  function syncReadValues() {
+    if (!detailPanel) return;
+    detailPanel.querySelectorAll('input:not([type="radio"]):not([type="file"]), textarea, select').forEach(ensureReadValue);
+    detailPanel.querySelectorAll('.radio-line').forEach(ensureRadioReadValue);
+    detailPanel.querySelectorAll('label.ct-cell').forEach((line) => {
+      let value = line.querySelector(':scope > .read-value');
+      if (!value) {
+        value = document.createElement('span');
+        value.className = 'read-value';
+        line.appendChild(value);
+      }
+      const checked = line.querySelector('input[type="radio"]:checked');
+      value.textContent = checked?.nextElementSibling?.textContent?.trim() || '-';
+    });
+  }
+
+  function setDetailMode(mode) {
+    const readOnly = mode === 'read';
+    if (readOnly) syncReadValues();
+    detailPanel?.classList.toggle('read-mode', readOnly);
+    detailPanel?.classList.toggle('is-readonly', readOnly);
+    pageRoot?.classList.toggle('create-mode', mode === 'create');
+    pageRoot?.classList.toggle('edit-mode', mode === 'edit');
+  }
+
+  document.querySelectorAll('#facilityListBlock tbody tr').forEach((row) => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('#facilityListBlock tbody tr').forEach((item) => item.classList.remove('sel'));
+      row.classList.add('sel');
+      setVisible(inspectionHistoryCard, true);
+      hideDetail();
+      inspectionHistoryCard?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  // 작업구분에 따른 이력 정보 뷰 전환 (정밀안전진단·정밀안전점검·성능평가 → 조회형 이력)
+  const workTypeSelect = document.getElementById('workTypeSelect');
+  const PRECISION_WORK_TYPES = ['정밀안전진단', '정밀안전점검', '성능평가'];
+  function updateHistoryVariant() {
+    const workType = workTypeSelect?.value || '';
+    const precision = PRECISION_WORK_TYPES.includes(workType);
+    const repair = workType === '보수보강';
+    document.getElementById('histRegularView')?.toggleAttribute('hidden', precision || repair);
+    document.getElementById('histPrecisionView')?.toggleAttribute('hidden', !precision);
+    document.getElementById('histRepairView')?.toggleAttribute('hidden', !repair);
+    detailPanel?.classList.toggle('precision-work', precision || repair);
+    if (precision) {
+      const kindEl = document.getElementById('precKindInput');
+      if (kindEl) kindEl.value = workType;
+    } else if (!repair) {
+      const regKind = document.getElementById('regKindSelect');
+      if (regKind && Array.from(regKind.options).some((o) => o.value === workType || o.textContent === workType)) {
+        regKind.value = workType;
+        Array.from(regKind.options).forEach((o) => { if (o.textContent === workType) o.selected = true; });
+      }
+    }
+    if (precision || repair) activateTab('history');
+    if (detailPanel?.classList.contains('is-readonly')) syncReadValues();
+  }
+  workTypeSelect?.addEventListener('change', updateHistoryVariant);
+
+  // 추가(신규) 시 빈 폼 / 이력 선택 시 샘플 데이터 복원
+  function stashDetailInputs() {
+    detailPanel?.querySelectorAll('input:not([type="radio"]):not([type="file"]):not([disabled]), textarea:not([disabled])').forEach((el) => {
+      el.dataset.orig = el.value;
+    });
+    detailPanel?.querySelectorAll('select:not([disabled])').forEach((el) => {
+      el.dataset.orig = String(el.selectedIndex);
+    });
+  }
+
+  function stashOrClearDetailInputs() {
+    detailPanel?.querySelectorAll('input:not([type="radio"]):not([type="file"]):not([disabled]), textarea:not([disabled])').forEach((el) => {
+      if (el.dataset.orig === undefined) el.dataset.orig = el.value;
+      el.value = '';
+    });
+    detailPanel?.querySelectorAll('select:not([disabled])').forEach((el) => {
+      if (el.dataset.orig === undefined) el.dataset.orig = String(el.selectedIndex);
+      el.selectedIndex = 0;
+    });
+  }
+
+  function restoreDetailInputs() {
+    detailPanel?.querySelectorAll('input:not([type="radio"]):not([type="file"]):not([disabled]), textarea:not([disabled])').forEach((el) => {
+      if (el.dataset.orig !== undefined) el.value = el.dataset.orig;
+    });
+    detailPanel?.querySelectorAll('select:not([disabled])').forEach((el) => {
+      if (el.dataset.orig !== undefined) el.selectedIndex = Number(el.dataset.orig);
+    });
+  }
+
+  document.querySelectorAll('.history-table tbody tr').forEach((row) => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('.history-table tbody tr').forEach((item) => item.classList.remove('sel'));
+      row.classList.add('sel');
+      restoreDetailInputs();
+      showDetail('read');
+    });
+  });
+
+  document.getElementById('addInspectionBtn')?.addEventListener('click', () => {
+    document.querySelectorAll('.history-table tbody tr').forEach((item) => item.classList.remove('sel'));
+    stashOrClearDetailInputs();
+    showDetail('create');
+  });
+
+  // 임시저장 → 조회 화면으로 전환
+  document.querySelector('.sbtn.save')?.addEventListener('click', () => {
+    if (pageRoot?.classList.contains('create-mode')) restoreDetailInputs();
+    alert('임시저장 되었습니다.');
+    setDetailMode('read');
+    detailPanel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // 점검 이력 정보 — 책임(참여)기술자 행 추가/삭제
+  document.getElementById('addHistTechBtn')?.addEventListener('click', () => {
+    const body = document.getElementById('histTechBody');
+    if (!body) return;
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><input class="tech-input" value="-" aria-label="역할"></td>
+      <td><input class="tech-input" value="-" aria-label="성명"></td>
+      <td><input class="tech-input" value="-" aria-label="생년월일"></td>
+      <td><input class="tech-input" value="-" aria-label="시작일"></td>
+      <td><input class="tech-input" value="-" aria-label="종료일"></td>
+      <td><input class="tech-input" value="-" aria-label="일수"></td>
+      <td><input class="tech-input" value="-" aria-label="참여률"></td>
+      <td><span class="badge b-pending">임시저장</span></td>
+      <td class="c"><button type="button" class="participant-delete-btn">삭제</button></td>
+    `;
+    body.appendChild(row);
+  });
+
+  document.getElementById('histTechBody')?.addEventListener('click', (event) => {
+    const button = event.target.closest('.participant-delete-btn');
+    if (!button) return;
+    button.closest('tr')?.remove();
+  });
+
+  // 정밀·성능평가 — 중대결함등 행 추가/삭제
+  document.getElementById('addPrecDefectBtn')?.addEventListener('click', () => {
+    const body = document.getElementById('precDefectBody');
+    if (!body) return;
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><input class="tech-input" value="-" aria-label="부위/부재"></td>
+      <td><input class="tech-input" value="-" aria-label="결함구분"></td>
+      <td><input class="tech-input" value="-" aria-label="결함종류"></td>
+      <td style="text-align:center"><button type="button" class="participant-delete-btn">삭제</button></td>
+    `;
+    body.appendChild(row);
+  });
+
+  document.getElementById('precDefectBody')?.addEventListener('click', (event) => {
+    const button = event.target.closest('.participant-delete-btn');
+    if (!button) return;
+    button.closest('tr')?.remove();
+  });
+
+  // 보수보강 — 공사부위/부재 행 추가/삭제
+  document.getElementById('addRepairPartBtn')?.addEventListener('click', () => {
+    const body = document.getElementById('repairPartBody');
+    if (!body) return;
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><input class="tech-input" value="-" aria-label="공사부위/부재"></td>
+      <td><input class="tech-input" value="-" aria-label="보수보강공법"></td>
+      <td><input class="tech-input" value="-" aria-label="수량"></td>
+      <td><input class="tech-input" value="-" aria-label="단위"></td>
+      <td><input class="tech-input" value="-" aria-label="공사비(천원)"></td>
+      <td><button type="button" class="participant-delete-btn">삭제</button></td>
+    `;
+    body.appendChild(row);
+  });
+
+  document.getElementById('repairPartBody')?.addEventListener('click', (event) => {
+    const button = event.target.closest('.participant-delete-btn');
+    if (!button) return;
+    button.closest('tr')?.remove();
+  });
+
+  document.getElementById('editReportBtn')?.addEventListener('click', () => {
+    stashDetailInputs();
+    setDetailMode('edit');
+  });
+
+  document.getElementById('cancelReportBtn')?.addEventListener('click', () => {
+    restoreDetailInputs();
+    setDetailMode('read');
+    document.querySelector('.bottom-tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  let activePhotoAttach = null;
+  document.querySelectorAll('[data-photo-button]').forEach((button) => {
+    button.addEventListener('click', () => {
+      activePhotoAttach = button.closest('.photo-attach');
+      activateTab('photos');
+      document.querySelector('[data-photo-input]')?.click();
+    });
+  });
+
+  document.querySelectorAll('[data-photo-input]').forEach((input) => {
+    input.addEventListener('change', () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const grid = document.querySelector('.photo-upload-grid');
+      const frame = input.closest('.photo-card')?.querySelector('.photo-card__frame');
+      let targetFrame = frame || [...document.querySelectorAll('.photo-card__frame')].find((item) => !item.querySelector('img'));
+      if (!targetFrame && grid) {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
+        card.innerHTML = '<div class="photo-card__frame"></div><div class="photo-card__body"><div class="photo-card__caption">등록 사진</div></div>';
+        grid.appendChild(card);
+        targetFrame = card.querySelector('.photo-card__frame');
+      }
+      if (!targetFrame) return;
+      const image = document.createElement('img');
+      image.alt = file.name;
+      image.src = URL.createObjectURL(file);
+      targetFrame.replaceChildren(image);
+      const count = activePhotoAttach?.querySelector('.photo-count');
+      if (count) count.textContent = '1개';
+      input.value = '';
+    });
+  });
+
+  document.getElementById('addParticipantBtn')?.addEventListener('click', () => {
+    const body = document.getElementById('participantBody');
+    if (!body) return;
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><input class="tech-input" value="-" aria-label="참여기술자 소속"></td>
+      <td><input class="tech-input" value="-" aria-label="참여기술자 직위"></td>
+      <td><input class="tech-input" value="-" aria-label="참여기술자 이름"></td>
+      <td class="c"><button type="button" class="participant-delete-btn">삭제</button></td>
+    `;
+    body.appendChild(row);
+  });
+
+  document.getElementById('participantBody')?.addEventListener('click', (event) => {
+    const button = event.target.closest('.participant-delete-btn');
+    if (!button) return;
+    button.closest('tr')?.remove();
+  });
+
+  document.getElementById('addTechBtn')?.addEventListener('click', () => {
+    const body = document.getElementById('techBody');
+    if (!body) return;
+    body.querySelector('[data-empty-tech]')?.remove();
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><input class="tech-input" value="-" aria-label="기술자 구분"></td>
+      <td><input class="tech-input" value="-" aria-label="기술자 성명"></td>
+      <td><input class="tech-input" value="-" aria-label="과업참여기간"></td>
+      <td>
+        <div class="tech-cell-with-act">
+          <input class="tech-input" value="-" aria-label="기술등급">
+          <button type="button" class="delete-tech-btn">삭제</button>
+        </div>
+      </td>
+    `;
+    body.appendChild(row);
+  });
+
+  document.getElementById('techBody')?.addEventListener('click', (event) => {
+    const button = event.target.closest('.delete-tech-btn');
+    if (!button) return;
+    const body = document.getElementById('techBody');
+    button.closest('tr')?.remove();
+    if (body && !body.children.length) {
+      body.innerHTML = '<tr data-empty-tech><td colspan="4" class="tech-empty">등록된 기술자가 없습니다.</td></tr>';
+    }
+  });
+
+  function openModal() {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    render();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  document.getElementById('inspectApprovalHistoryOpen')?.addEventListener('click', openModal);
+  document.getElementById('inspectApprovalHistoryClose')?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal?.classList.contains('open')) closeModal();
+  });
+
+  setDetailMode('read');
+
+  // 팝업 임베드 모드: 상세 탭 영역만 표시 (보고서 신청 페이지에서 사용)
+  if (new URLSearchParams(window.location.search).get('popup') === '1') {
+    document.querySelector('.pg')?.classList.add('popup-embed');
+    setVisible(detailPanel, true);
+    setVisible(submitBar, false);
+  }
+})();
+</script>
+<script>
+// 첨부파일 — 다운로드/업로드 (보고서는 PDF만 허용), 조회/수정 화면 공통
+(() => {
+  document.querySelectorAll('.svc-file-slot').forEach((slot) => {
+    const input = slot.querySelector('input[type="file"]');
+    const nameEl = slot.querySelector('.svc-file-name');
+    slot.querySelector('.svc-file-upload')?.addEventListener('click', () => input?.click());
+    input?.addEventListener('change', () => {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      if (slot.dataset.pdfOnly === '1' && !/\.pdf$/i.test(file.name)) {
+        alert('보고서는 PDF 파일만 업로드 가능합니다.');
+        input.value = '';
+        return;
+      }
+      const prevName = nameEl ? nameEl.textContent : '';
+      if (nameEl) nameEl.textContent = file.name;
+      alert(`기존 파일(${prevName})이 "${file.name}" 파일로 대체되었습니다. (샘플)`);
+      input.value = '';
+    });
+    nameEl?.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert(`"${nameEl.textContent}" 파일을 다운로드합니다. (샘플)`);
+    });
+  });
+})();
+</script>
+<script src="js/site-footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>보고서 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/facility-management-detail.css">
+  <link rel="stylesheet" href="css/facility-change-approval.css">
+  <link rel="stylesheet" href="css/facility-change-approval-detail.css">
+  <link rel="stylesheet" href="css/report-registration-manage.css">
+  <link rel="stylesheet" href="css/detail.css">
+  <link rel="stylesheet" href="css/facility-detail-repair.css">
+  <link rel="stylesheet" href="css/facility-detail-regular.css">
+  <link rel="stylesheet" href="css/facility-detail-precision.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-condition-search.css">
+  <link rel="stylesheet" href="css/admin-search-inline.css">
+  <link rel="stylesheet" href="css/report-registration-detail.css?v=20260814-1">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+
+    /* 점검 이력 / 보수보강 실적 등록 폼 (라벨-값 테이블) */
+    .detail-form-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .detail-form-table th {
+      width: 150px;
+      padding: 11px 14px;
+      background: #f8fafc;
+      color: #6b7280;
+      font-weight: 600;
+      text-align: left;
+      border-bottom: 1px solid #eef1f4;
+      vertical-align: top;
+    }
+    .detail-form-table td {
+      padding: 9px 14px;
+      color: #111827;
+      text-align: left;
+      border-bottom: 1px solid #eef1f4;
+      vertical-align: middle;
+    }
+    .detail-form-table tr:last-child th,
+    .detail-form-table tr:last-child td { border-bottom: none; }
+    .detail-form-table input[type="text"],
+    .detail-form-table input[type="number"],
+    .detail-form-table input[type="date"],
+    .detail-form-table select {
+      height: 34px;
+      padding: 0 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      color: #111827;
+      box-sizing: border-box;
+      width: min(260px, 100%);
+    }
+    .detail-form-table textarea {
+      width: 100%;
+      min-height: 84px;
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      color: #111827;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    .detail-form-table .form-inline { display: inline-flex; align-items: center; gap: 8px; flex-wrap: nowrap; white-space: nowrap; }
+    .detail-form-table .form-inline input[type="date"] { width: 150px; }
+    .detail-form-table .form-inline input[type="text"] { width: 140px; }
+    .detail-form-table .form-unit { font-size: 12.5px; color: #dc2626; white-space: nowrap; }
+    .detail-form-table .is-readonly-value { font-weight: 500; }
+
+    .detail-sub-title {
+      margin: 20px 0 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #111827;
+    }
+    .btn-doc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 12px;
+      border: 1px solid #16a34a;
+      border-radius: 6px;
+      background: #fff;
+      color: #15803d;
+      font-size: 12.5px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .btn-doc-link:hover { background: #f0fdf4; }
+    .btn-doc-file {
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #374151;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    /* FMS/POMS 데이터 범례 숨김 (관리자 페이지) */
+    .info-data-legend, .precision-modal__source, .precision-report-modal__source { display: none !important; }
+
+    /* 조회 모드 파란 글씨 → 검은색 */
+    #precisionSection input, #precisionSection select, #precisionSection textarea {
+      color: #111827;
+    }
+
+    /* 정기안전점검표 모달 내용 파란 글씨 → 검은색 */
+    #precisionReportModal .precision-report-modal__tab-panel td,
+    #precisionReportModal .precision-report-modal__tab-panel th,
+    #precisionReportModal .precision-report-modal__tab-panel span,
+    #precisionReportModal .precision-report-modal__tab-panel a,
+    #precisionReportModal .precision-report-modal__tab-panel button,
+    #precisionReportModal .precision-report-modal__tab-panel input,
+    #precisionReportModal .precision-report-modal__tab-panel select,
+    #precisionReportModal .precision-report-modal__tab-panel textarea {
+      color: #111827 !important;
+      -webkit-text-fill-color: #111827 !important;
+    }
+
+    .precision-modal__table th,
+    .precision-modal__table td {
+      padding: 4px 12px !important;
+      height: auto !important;
+      font-size: 13px;
+    }
+    .precision-modal__cell-input,
+    .precision-modal__cell-select,
+    .precision-modal__cell-textarea {
+      padding: 4px 8px !important;
+      height: 30px !important;
+      font-size: 13px !important;
+    }
+    .precision-modal__cell-textarea {
+      height: auto !important;
+      min-height: 48px !important;
+    }
+    #precisionEngineerTable th,
+    #precisionEngineerTable td,
+    #precisionDefectTable th,
+    #precisionDefectTable td,
+    .precision-files-table th,
+    .precision-files-table td { padding: 5px 10px; }
+
+    /* 첨부파일 (보고서/외관조사망도/과업지시서/수중조사결과/상태평가/사진첩) */
+    .precision-files-table th { width: 140px; }
+    .precision-file-slot { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .precision-file-slot__name {
+      font-size: 13px; color: #111827; text-decoration: underline; cursor: pointer;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+    }
+    .precision-file-slot__upload {
+      display: none;
+      margin-left: auto; flex-shrink: 0; height: 28px; padding: 0 12px;
+      border: 1px solid #d1d5db; border-radius: 6px; background: #fff;
+      font-size: 12px; font-weight: 600; color: #374151; cursor: pointer; font-family: inherit;
+    }
+    .precision-file-slot__upload:hover { background: #f3f4f6; }
+    .precision-file-slot__hint { display: none; font-size: 11px; color: #9ca3af; flex-shrink: 0; }
+    /* 편집 모드에서만 업로드 버튼 표시 */
+    body.is-precision-form-mode .precision-file-slot__upload { display: inline-block; }
+    body.is-precision-form-mode .precision-file-slot__hint { display: inline; }
+
+    .repair-register-head { margin: 20px 0 10px; }
+    .repair-register-head h4 { margin: 0; font-size: 13.5px; font-weight: 700; color: #1e4976; }
+    .detail-form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .detail-form-actions button {
+      min-width: 80px;
+      height: 32px;
+      padding: 0 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 6px;
+      box-sizing: border-box;
+      line-height: 1;
+    }
+
+    .report-repair-table td:nth-child(2),
+    .report-repair-table td:nth-child(4) { text-align: left; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page facility-change-approval-page fcd-detail-page report-registration-detail-page report-reg-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header__bar">
+        <div class="page-header__titles">
+          <h1 class="page-title" id="reportRegDetailTitle">보고서 등록 상세</h1>
+        </div>
+        <div class="page-header__actions">
+          <button type="button" class="fmd-btn fmd-btn--history" id="reportRegProcess">
+            <img src="assets/service/main/figma/icon-history.svg" alt="" width="18" height="18">
+            결재이력
+          </button>
+          <button type="button" class="fmd-btn fcd-btn fcd-btn--approve" id="reportRegApprove">승인</button>
+          <button type="button" class="fmd-btn fcd-btn fcd-btn--reject" id="reportRegReject">반려</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="fmd-stack" aria-labelledby="reportRegPanelTitle">
+      <section class="fmd-panel" id="reportRegSummarySection">
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title">용역제출 정보</h2>
+          <span class="visually-hidden" id="reportRegPanelTitle">보고서 상세</span>
+          <p class="rrd-panel__note" id="reportRegDetailSub"></p>
+        </div>
+        <div class="fmd-panel__body">
+          <div class="fcd-meta rrd-meta-grid" aria-label="용역제출 정보">
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">점검기관(ID)</div>
+              <div class="fcd-meta__value" id="reportRegCompany"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">점검구분</div>
+              <div class="fcd-meta__value" id="reportRegCheckName"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">제출일</div>
+              <div class="fcd-meta__value" id="reportRegSubmitDate"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">처리상태</div>
+              <div class="fcd-meta__value" id="reportRegStatus"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="fmd-panel" id="reportRegInfoSection">
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title">보고서 정보</h2>
+        </div>
+        <div class="fmd-panel__body">
+          <div class="fcd-meta rrd-meta-grid" aria-label="보고서 정보">
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">보고서명</div>
+              <div class="fcd-meta__value" id="reportRegReportName"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">작성자</div>
+              <div class="fcd-meta__value" id="reportRegWriter"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">점검일</div>
+              <div class="fcd-meta__value" id="reportRegCheckDate"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">점검의견</div>
+              <div class="fcd-meta__value" id="reportRegComment"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 정기안전점검: 점검 이력 폼 (사용자 페이지와 동일 구성) -->
+      <section class="fmd-panel report-type-section" id="precisionSection" hidden>
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-management/icon-section-facility.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title">정밀안전(진단)점검 이력</h2>
+        </div>
+        <div class="fmd-panel__body">
+
+        <form class="precision-modal__form" id="precisionDetailForm">
+          <table class="info-table precision-modal__table">
+            <tbody>
+              <tr>
+                <th>점검진단구분</th>
+                <td>
+                  <select class="precision-modal__cell-select" id="precisionCategory" name="category">
+                    <option value="정기안전점검(상반기)">정기안전점검(상반기)</option>
+                    <option value="정기안전점검(하반기)">정기안전점검(하반기)</option>
+                    <option value="성능평가">성능평가</option>
+                    <option value="정밀안전점검">정밀안전점검</option>
+                    <option value="정밀안전진단">정밀안전진단</option>
+                  </select>
+                </td>
+                <th>점검진단기간</th>
+                <td>
+                  <div class="precision-period-inputs">
+                    <input type="date" class="precision-modal__cell-input" id="precisionPeriodStart" name="periodStart">
+                    <span class="precision-period-inputs__sep">~</span>
+                    <input type="date" class="precision-modal__cell-input" id="precisionPeriodEnd" name="periodEnd">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>점검진단기관명</th>
+                <td><input type="text" class="precision-modal__cell-input" id="precisionAgency" name="agency"></td>
+                <th>종별</th>
+                <td><input type="text" class="precision-modal__cell-input" id="precisionClassType" name="classType"></td>
+              </tr>
+              <tr>
+                <th>책임기술자명</th>
+                <td><input type="text" class="precision-modal__cell-input" id="precisionEngineer" name="engineer"></td>
+                <th>비용</th>
+                <td>
+                  <div class="precision-cost-input">
+                    <input type="text" class="precision-modal__cell-input" id="precisionCost" name="cost">
+                    <span class="precision-cost-input__unit">천원(VAT 포함)</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>안전등급</th>
+                <td colspan="3">
+                  <select class="precision-modal__cell-select precision-modal__cell-select--wide" id="precisionGrade" name="grade">
+                    <option value="A등급">A등급</option>
+                    <option value="B등급">B등급</option>
+                    <option value="C등급">C등급</option>
+                    <option value="D등급">D등급</option>
+                    <option value="E등급">E등급</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>주요점검진단결과</th>
+                <td colspan="3"><textarea class="precision-modal__cell-textarea" id="precisionMainResult" name="mainResult" rows="2"></textarea></td>
+              </tr>
+              <tr>
+                <th>주요 보수보강(안)</th>
+                <td colspan="3"><textarea class="precision-modal__cell-textarea" id="precisionRepairPlan" name="repairPlan" rows="2"></textarea></td>
+              </tr>
+              <tr>
+                <th>작성자</th>
+                <td><input type="text" class="precision-modal__cell-input" id="precisionAuthor" name="author"></td>
+                <th>작성일</th>
+                <td><input type="date" class="precision-modal__cell-input" id="precisionCreatedDate" name="createdDate"></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+
+        <div id="precisionEngineerWrap" hidden>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin: 16px 0 8px;">
+            <h4 style="font-size: 14px; font-weight: 700; margin: 0;">책임(참여)기술자 현황</h4>
+            <div id="precisionEngineerActions" hidden>
+              <button type="button" class="btn-facility-add" id="precisionEngineerAddBtn">+ 행 추가</button>
+            </div>
+          </div>
+          <table class="info-table" id="precisionEngineerTable">
+            <thead>
+              <tr>
+                <th>역할</th>
+                <th>성명</th>
+                <th>생년월일</th>
+                <th>시작일</th>
+                <th>종료일</th>
+                <th>일수</th>
+                <th>참여률</th>
+                <th>기술등급</th>
+                <th id="precisionEngineerDeleteCol" hidden>삭제</th>
+              </tr>
+            </thead>
+            <tbody id="precisionEngineerBody"></tbody>
+          </table>
+        </div>
+
+        <div id="precisionDefectWrap" hidden>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin: 16px 0 8px;">
+            <h4 style="font-size: 14px; font-weight: 700; margin: 0;">중대결함등</h4>
+            <div id="precisionDefectActions" hidden>
+              <button type="button" class="btn-facility-add" id="precisionDefectAddBtn">+ 행 추가</button>
+            </div>
+          </div>
+          <table class="info-table" id="precisionDefectTable">
+            <thead>
+              <tr>
+                <th>부위/부재</th>
+                <th>결함구분</th>
+                <th>결함종류</th>
+                <th id="precisionDefectDeleteCol" hidden>삭제</th>
+              </tr>
+            </thead>
+            <tbody id="precisionDefectBody"></tbody>
+          </table>
+        </div>
+
+        <!-- 첨부파일 (성능평가/정밀안전진단/정밀안전점검) -->
+        <div id="precisionFilesWrap" hidden>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin: 16px 0 8px;">
+            <h4 style="font-size: 14px; font-weight: 700; margin: 0;">첨부파일</h4>
+          </div>
+          <table class="info-table precision-files-table">
+            <tbody>
+              <tr>
+                <th>보고서</th>
+                <td>
+                  <div class="precision-file-slot" data-pdf-only="1">
+                    <a href="#" class="precision-file-slot__name">2018_정밀안전진단_보고서.pdf</a>
+                    <span class="precision-file-slot__hint">※ PDF만 업로드 가능</span>
+                    <button type="button" class="precision-file-slot__upload">업로드</button>
+                    <input type="file" hidden accept=".pdf,application/pdf">
+                  </div>
+                </td>
+                <th>외관조사망도</th>
+                <td>
+                  <div class="precision-file-slot">
+                    <a href="#" class="precision-file-slot__name">외관조사망도.dwg</a>
+                    <button type="button" class="precision-file-slot__upload">업로드</button>
+                    <input type="file" hidden>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>과업지시서</th>
+                <td>
+                  <div class="precision-file-slot">
+                    <a href="#" class="precision-file-slot__name">과업지시서.hwp</a>
+                    <button type="button" class="precision-file-slot__upload">업로드</button>
+                    <input type="file" hidden>
+                  </div>
+                </td>
+                <th>수중조사결과</th>
+                <td>
+                  <div class="precision-file-slot">
+                    <a href="#" class="precision-file-slot__name">수중조사결과.pdf</a>
+                    <button type="button" class="precision-file-slot__upload">업로드</button>
+                    <input type="file" hidden>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>상태평가</th>
+                <td>
+                  <div class="precision-file-slot">
+                    <a href="#" class="precision-file-slot__name">상태평가.xlsx</a>
+                    <button type="button" class="precision-file-slot__upload">업로드</button>
+                    <input type="file" hidden>
+                  </div>
+                </td>
+                <th>사진첩</th>
+                <td>
+                  <div class="precision-file-slot">
+                    <a href="#" class="precision-file-slot__name">사진첩.zip</a>
+                    <button type="button" class="precision-file-slot__upload">업로드</button>
+                    <input type="file" hidden>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="precision-detail-page__foot" style="display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid #e5e7eb;">
+          <button type="button" class="btn-facility-excel" id="precisionReportBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+            정기안전점검표
+          </button>
+          <button type="button" class="btn-detail-primary" id="precisionEditBtn">편집</button>
+          <button type="button" class="btn-detail-primary btn-detail-primary--save" id="precisionSaveBtn" hidden>저장</button>
+          <button type="button" class="btn-detail-outline btn-detail-outline--danger" id="precisionDeleteBtn" hidden>삭제</button>
+          <button type="button" class="btn-detail-outline" id="precisionFormCancelBtn" hidden>취소</button>
+        </div>
+        </div>
+      </section>
+
+      <section class="fmd-panel report-type-section" id="repairInfoSection">
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-management/icon-section-facility.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title">보수보강 실적</h2>
+        </div>
+        <div class="fmd-panel__body">
+        <div id="repairRegisterBody"></div>
+        <div class="precision-detail-page__foot" style="display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid #e5e7eb;">
+          <button type="button" class="btn-detail-primary" id="repairEditBtn">편집</button>
+          <button type="button" class="btn-detail-primary btn-detail-primary--save" id="repairSaveBtn" hidden>저장</button>
+          <button type="button" class="btn-detail-outline btn-detail-outline--danger" id="repairDeleteBtn">삭제</button>
+          <button type="button" class="btn-detail-outline" id="repairCancelBtn" hidden>취소</button>
+        </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="fca-drawer-overlay" id="reportRegProcessOverlay" data-report-process-close></div>
+  <aside class="fca-drawer" id="reportRegProcessModal" aria-labelledby="reportRegProcessTitle" aria-hidden="true">
+    <div class="fca-drawer__top">
+      <header class="fca-drawer__head">
+        <h2 class="fca-drawer__title" id="reportRegProcessTitle">결재이력 조회</h2>
+        <button type="button" class="fca-drawer__close" data-report-process-close aria-label="닫기">
+          <img src="assets/facility-change-approval/icon-close.png" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="fca-drawer__body" id="reportRegProcessBody"></div>
+    </div>
+  </aside>
+
+  <div
+    id="repairStatusModal"
+    class="precision-report-modal repair-status-modal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="repairStatusModalTitle"
+  >
+    <div class="precision-report-modal__backdrop" data-close-repair-status tabindex="-1" aria-hidden="true"></div>
+    <div class="precision-report-modal__panel repair-status-modal__panel">
+      <header class="precision-report-modal__head">
+        <div class="precision-report-modal__head-main">
+          <h3 class="precision-report-modal__title" id="repairStatusModalTitle">보수보강이행현황</h3>
+        </div>
+        <button type="button" class="precision-report-modal__close" data-close-repair-status aria-label="닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="repair-status-modal__stack">
+        <div class="repair-status-modal__body">
+          <div class="repair-status-modal__table-wrap">
+            <table class="repair-status-table" id="repairStatusTable" aria-label="보수보강이행현황 목록">
+              <colgroup>
+                <col class="col-name">
+                <col class="col-cat">
+                <col class="col-type">
+                <col class="col-date">
+                <col class="col-date">
+                <col class="col-part">
+                <col class="col-content">
+                <col class="col-cost">
+                <col class="col-note">
+                <col class="col-view">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>시설물명</th>
+                  <th>구분</th>
+                  <th>공사구분</th>
+                  <th>시작일</th>
+                  <th>종료일</th>
+                  <th>공사부위</th>
+                  <th>공사내용</th>
+                  <th>공사비(천원)</th>
+                  <th>비고</th>
+                  <th>현황</th>
+                </tr>
+              </thead>
+              <tbody id="repairStatusBody"></tbody>
+            </table>
+          </div>
+
+          <nav class="pagination regular-pagination repair-status-pagination" id="repairStatusPagination" aria-label="보수보강이행현황 페이지"></nav>
+
+          <div class="repair-status-detail" id="repairStatusDetail" hidden>
+            <div class="repair-status-detail__title" id="repairStatusDetailTitle">보수보강 실적 상세</div>
+            <div class="repair-status-detail__grid" id="repairStatusDetailGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="precisionReportModal"
+    class="precision-report-modal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="precisionReportModalTitle"
+  >
+    <div class="precision-report-modal__backdrop" data-close-report-modal tabindex="-1" aria-hidden="true"></div>
+    <div class="precision-report-modal__panel">
+      <header class="precision-report-modal__head">
+        <div class="precision-report-modal__head-main">
+          <h3 class="precision-report-modal__title" id="precisionReportModalTitle">정기안전점검표</h3>
+        </div>
+        <button type="button" class="precision-report-modal__close" data-close-report-modal aria-label="닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="precision-report-modal__stack">
+        <div class="precision-report-modal__shell">
+          <div class="precision-report-modal__top">
+            <div class="precision-report-modal__toolbar">
+              <div class="precision-report-modal__toolbar-row">
+                <div class="precision-report-modal__tabs" role="tablist" aria-label="정기안전점검표 구성">
+                  <button type="button" class="precision-report-modal__tab is-active" role="tab" data-report-tab="items" aria-selected="true">점검사항</button>
+                  <button type="button" class="precision-report-modal__tab" role="tab" data-report-tab="photos" aria-selected="false">사진대지</button>
+                  <button type="button" class="precision-report-modal__tab" role="tab" data-report-tab="report" aria-selected="false">결과보고서</button>
+                </div>
+                <div class="precision-report-modal__legend" aria-label="데이터 출처">
+                  <span class="precision-report-modal__legend-item precision-report-modal__legend-item--fms">FMS 데이터 (읽기 전용) - 2026.05.20</span>
+                  <span class="precision-report-modal__legend-item precision-report-modal__legend-item--poms">POMS 데이터 (수정 가능)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="precision-report-modal__content">
+            <div class="precision-report-modal__tab-panel is-active" id="precisionReportPanelItems" role="tabpanel">
+              <div class="precision-report-modal__panel-hd">
+                <div class="precision-report-modal__panel-title">점검사항</div>
+              </div>
+              <div class="precision-report-modal__panel-bd">
+                <div class="precision-report-info-grid" aria-label="점검 기본정보">
+                  <div class="precision-report-info-grid__row">
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">시설물명</span>
+                      <span class="precision-report-info-field__val" id="precisionReportFacilityName">남방파제</span>
+                    </div>
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">관리주체</span>
+                      <span class="precision-report-info-field__val" id="precisionReportOwner">-</span>
+                    </div>
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">조사단위</span>
+                      <span class="precision-report-info-field__val" id="precisionReportSurveyUnit">-</span>
+                    </div>
+                  </div>
+                  <div class="precision-report-info-grid__row">
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">평가단위</span>
+                      <span class="precision-report-info-field__val" id="precisionReportEvalUnit">-</span>
+                    </div>
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">준공 년월일</span>
+                      <span class="precision-report-info-field__val" id="precisionReportCompletedDate">2026.02.14</span>
+                    </div>
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">최종점검 년월일</span>
+                      <span class="precision-report-info-field__val" id="precisionReportLastInspectionDate">2026.02.25</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="precision-report-modal__table-wrap">
+                  <table class="precision-report-items-table" aria-label="점검사항">
+                    <colgroup>
+                      <col class="col-group">
+                      <col class="col-item">
+                      <col class="col-result">
+                      <col class="col-result">
+                      <col class="col-result">
+                      <col class="col-opinion">
+                      <col class="col-repair">
+                      <col class="col-photo">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th scope="col" colspan="2" rowspan="2">점검항목</th>
+                        <th scope="col" colspan="3">점검결과</th>
+                        <th scope="col" rowspan="2">의견</th>
+                        <th scope="col" rowspan="2">보수 필요여부</th>
+                        <th scope="col" rowspan="2">사진첨부</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">양호</th>
+                        <th scope="col">보통</th>
+                        <th scope="col">불량</th>
+                      </tr>
+                    </thead>
+                    <tbody id="precisionReportItemsBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="precision-report-modal__tab-panel" id="precisionReportPanelPhotos" role="tabpanel" hidden>
+              <div class="precision-report-modal__panel-hd">
+                <div class="precision-report-modal__panel-title">사진대지</div>
+              </div>
+              <div class="precision-report-modal__panel-bd">
+                <div class="precision-report-photos">
+                  <div class="precision-report-photos__top">
+                    <span class="precision-report-photos__lbl">시설물명</span>
+                    <strong class="precision-report-photos__title" id="precisionReportPhotoFacility">남방파제</strong>
+                    <span class="precision-report-photos__lbl">관리주체</span>
+                    <span class="precision-report-photos__owner" id="precisionReportPhotoOwner">-</span>
+                  </div>
+                  <div class="precision-report-photos__grid" id="precisionReportPhotosGrid"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="precision-report-modal__tab-panel" id="precisionReportPanelReport" role="tabpanel" hidden></div>
+          </div>
+        </div>
+
+        <footer class="precision-report-modal__foot">
+          <div class="precision-report-modal__actions">
+            <button type="button" class="btn-form-secondary" id="precisionReportDownloadBtn">
+              <img src="assets/main/facility-form/icon-report-download.svg" alt="" width="18" height="18">
+              보고서 다운로드
+            </button>
+            <button type="button" class="btn-form-primary" id="precisionReportEditBtn">
+              <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+              수정하기
+            </button>
+            <button type="button" class="btn-form-ghost" id="precisionReportCancelBtn" hidden>취소</button>
+            <button type="button" class="btn-form-primary" id="precisionReportSaveBtn" hidden>
+              <img src="assets/main/facility-form/icon-save.svg" alt="" width="18" height="18">
+              저장하기
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- 관련 점검진단 선택 모달 (보수보강 편집 시 등록 버튼으로 열림) -->
+  <div
+    id="repairRelatedInspectionModal"
+    class="repair-related-modal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="repairRelatedInspectionModalTitle"
+  >
+    <div class="repair-related-modal__backdrop" data-close-related-inspection-modal tabindex="-1" aria-hidden="true"></div>
+    <div class="repair-related-modal__panel">
+      <header class="repair-related-modal__head">
+        <h3 class="repair-related-modal__title" id="repairRelatedInspectionModalTitle">관련 점검진단 선택</h3>
+        <button type="button" class="repair-related-modal__close" data-close-related-inspection-modal aria-label="닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="repair-related-modal__stack">
+        <div class="repair-related-modal__body">
+          <form class="repair-related-search" id="repairRelatedSearchForm">
+            <div class="repair-related-search__row">
+              <div class="repair-related-search__field">
+                <label for="repairRelatedAgency">관리기관</label>
+                <select id="repairRelatedAgency" name="agency">
+                  <option value="">전체</option>
+                  <option value="경상북도">경상북도</option>
+                  <option value="부산광역시">부산광역시</option>
+                  <option value="여수광양항만공사">여수광양항만공사</option>
+                </select>
+              </div>
+              <div class="repair-related-search__field">
+                <label for="repairRelatedPort">항</label>
+                <select id="repairRelatedPort" name="port">
+                  <option value="">전체</option>
+                  <option value="포항항">포항항</option>
+                  <option value="부산항">부산항</option>
+                  <option value="여수항">여수항</option>
+                  <option value="광양항">광양항</option>
+                </select>
+              </div>
+              <div class="repair-related-search__field">
+                <label for="repairRelatedSubPort">세부항</label>
+                <select id="repairRelatedSubPort" name="subPort">
+                  <option value="">전체</option>
+                  <option value="남방파제">남방파제</option>
+                  <option value="북항">북항</option>
+                  <option value="남항">남항</option>
+                </select>
+              </div>
+              <div class="repair-related-search__field">
+                <label for="repairRelatedFacilityType">시설구분</label>
+                <select id="repairRelatedFacilityType" name="facilityType">
+                  <option value="">전체</option>
+                  <option value="외곽시설">외곽시설</option>
+                  <option value="계류시설">계류시설</option>
+                  <option value="건축물">건축물</option>
+                </select>
+              </div>
+              <div class="repair-related-search__field repair-related-search__field--name">
+                <label for="repairRelatedFacilityName">시설물명</label>
+                <input type="text" id="repairRelatedFacilityName" name="facilityName" placeholder="시설물명 입력">
+              </div>
+              <div class="repair-related-search__actions">
+                <button type="button" class="btn-condition-reset" id="repairRelatedResetBtn">초기화</button>
+                <button type="submit" class="btn-condition-search" id="repairRelatedSearchBtn">검색</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="repair-related-modal__table-card">
+            <div class="repair-related-modal__table-wrap">
+              <table class="repair-related-table">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-no">No.</th>
+                    <th scope="col">점검일자</th>
+                    <th scope="col">점검구분</th>
+                    <th scope="col">등급</th>
+                    <th scope="col">조사기관</th>
+                    <th scope="col">부위/부재</th>
+                    <th scope="col">결함구분</th>
+                    <th scope="col">결함종류</th>
+                  </tr>
+                </thead>
+                <tbody id="repairRelatedListBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <nav class="pagination repair-related-pagination" id="repairRelatedPagination" aria-label="관련 점검진단 페이지"></nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/report-registration-data.js"></script>
+  <script src="js/report-registration-detail.js"></script>
+  <script src="js/facility-detail-repair-related.js"></script>
+  <script src="js/facility-detail-precision-data.js"></script>
+  <script src="js/report-precision-embed.js"></script>
+  <script src="js/facility-detail-precision-report.js"></script>
+  <script>
+    // 첨부파일 — 다운로드/업로드 (보고서는 PDF만 허용, 업로드는 편집 모드에서만 노출)
+    document.querySelectorAll('.precision-file-slot').forEach((slot) => {
+      const input = slot.querySelector('input[type="file"]');
+      const nameEl = slot.querySelector('.precision-file-slot__name');
+      slot.querySelector('.precision-file-slot__upload')?.addEventListener('click', () => input?.click());
+      input?.addEventListener('change', () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+        if (slot.dataset.pdfOnly === '1' && !/\.pdf$/i.test(file.name)) {
+          alert('보고서는 PDF 파일만 업로드 가능합니다.');
+          input.value = '';
+          return;
+        }
+        const prevName = nameEl ? nameEl.textContent : '';
+        if (nameEl) nameEl.textContent = file.name;
+        alert(`기존 파일(${prevName})이 "${file.name}" 파일로 대체되었습니다. (샘플)`);
+        input.value = '';
+      });
+      nameEl?.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert(`"${nameEl.textContent}" 파일을 다운로드합니다. (샘플)`);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+/* 세로 스크롤 유무에 따라 뷰포트 너비가 달라지지 않게 함 → 사이드바·본문 비율 통일 */
+:root {
+  /* Figma 메인 대시보드: 사이드바 300×940, top 40 */
+  --sidebar-width: 300px;
+  --sidebar-top: 40px;
+  --sidebar-height: 940px;
+}
+
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
+/* ===== App layout ===== */
+.app-layout {
+  min-height: 100vh;
+  background: #eef1f6;
+}
+
+#sidebar-root {
+  position: fixed;
+  left: 0;
+  top: var(--sidebar-top);
+  /* 지도 도구(500)·Leaflet 컨트롤보다 위 — 대시보드가 사이드바를 가리지 않음 */
+  z-index: 2000;
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  max-width: var(--sidebar-width);
+  height: var(--sidebar-height);
+  max-height: calc(100vh - var(--sidebar-top));
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding-top: 0;
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  min-width: 0;
+  min-height: 100vh;
+  padding: 40px 40px 40px 40px;
+  overflow-x: auto;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Sidebar (Figma 메인 대시보드) ===== */
+.sidebar {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
+  background: #0b1a2e;
+  border-top: 1px solid rgba(13, 31, 53, 0.5);
+  border-top-right-radius: 14px;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.14);
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  /* Figma Frame: x30 y80 → sidebar top40 → 내부 y40, padding x30 */
+  padding: 40px 30px 30px;
+  color: inherit;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.sidebar__brand-img {
+  display: block;
+  width: 228px;
+  max-width: 100%;
+  height: 40px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* 레거시 구조 호환 */
+.sidebar__logo {
+  display: none;
+}
+
+.sidebar__brand-text {
+  display: none;
+}
+
+.sidebar__divider {
+  height: 1px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+  border: none;
+}
+
+.sidebar__nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar__nav::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar__group {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 펼친 그룹: 상위 메뉴와 세부 패널을 겹쳐 연결 (Figma 23:31330) */
+.sidebar__group.has-sub.is-open {
+  gap: 0;
+}
+
+.sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 49.5px;
+  min-height: 49.5px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #3c4858;
+  box-shadow: none;
+  color: #d0d9e5;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.sidebar__item:hover {
+  background: #465466;
+  color: #e8eef6;
+}
+
+.sidebar__item.is-active {
+  background: linear-gradient(122deg, #ffffff 59%, #d3dfef 107%);
+  color: #0d1f35;
+  box-shadow: 0 8px 10px rgba(134, 145, 161, 0.25);
+}
+
+/* 펼침 + 비활성 상위 (Figma 예시02): #3d4959 */
+.sidebar__group.has-sub.is-open > .sidebar__item:not(.is-active) {
+  background: #3d4959;
+}
+
+.sidebar__item[data-has-sub] {
+  padding-right: 20px;
+  justify-content: space-between;
+}
+
+.sidebar__item-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.sidebar__item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  border-radius: 6px;
+  background: #243346;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.sidebar__item.is-active .sidebar__item-icon {
+  background: #0d1f35;
+}
+
+.sidebar__item-icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* 활성: 아이콘 박스(#0d1f35) 위 흰색 아이콘 (Figma) */
+.sidebar__item.is-active .sidebar__item-icon img {
+  filter: brightness(0) invert(1);
+}
+
+.sidebar__item-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar__chevron {
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.85;
+  transition: transform 0.2s;
+  background: none;
+  border: none;
+  transform: none;
+}
+
+.sidebar__chevron img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(1.4);
+}
+
+.sidebar__item.is-active .sidebar__chevron img {
+  filter: none;
+}
+
+.sidebar__group.is-open > .sidebar__item .sidebar__chevron {
+  transform: rotate(180deg);
+}
+
+/* 대표 메뉴가 세부 패널 border 위에 올라오도록 */
+.sidebar__group.has-sub.is-open > .sidebar__item {
+  position: relative;
+  z-index: 2;
+}
+
+.sidebar__sub {
+  list-style: none;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: -9px 0 0;
+  padding: 30px 20px 20px 50px;
+  background: #252f3d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0 0 10px 10px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.sidebar__sub-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0;
+  min-height: 17px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #8d9aac;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.sidebar__sub-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.sidebar__sub-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+}
+
+.sidebar__sub-chevron img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: brightness(1.1);
+  opacity: 0.85;
+}
+
+.sidebar__sub-link:hover {
+  color: #c5d0de;
+}
+
+.sidebar__sub-link.is-active {
+  color: #fff;
+}
+
+.sidebar__sub-link.is-active .sidebar__sub-chevron img {
+  filter: brightness(2);
+  opacity: 1;
+}
+
+.sidebar__sub-link.is-disabled {
+  color: rgba(141, 154, 172, 0.45);
+  cursor: default;
+}
+
+.sidebar__sub-link.is-disabled:hover {
+  color: rgba(141, 154, 172, 0.45);
+}
+
+.sidebar__group:not(.is-open) .sidebar__sub {
+  display: none;
+}
+
+.sidebar__footer {
+  margin-top: auto;
+  flex-shrink: 0;
+  height: 102px;
+  padding: 30px;
+  border-top: 1px solid #3c4858;
+  box-sizing: border-box;
+}
+
+/* 관리자 푸터 — 이름 + 결재대기 배지 (Figma 23:29498 / 23:36804) */
+.sidebar--admin .sidebar__footer,
+.sidebar--admin .sidebar__footer--admin {
+  height: auto;
+  min-height: 109px;
+}
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 0;
+  height: 42px;
+}
+
+.sidebar--admin .sidebar__user {
+  align-items: flex-start;
+  height: auto;
+  min-height: 42px;
+}
+
+.sidebar__user-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sidebar--admin .sidebar__user-info {
+  align-items: flex-start;
+}
+
+.sidebar--admin .sidebar__user-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  min-width: 0;
+}
+
+.sidebar--admin .sidebar__user-name {
+  flex: 0 0 auto;
+  line-height: 1.2;
+}
+
+/* 결재대기 배지 — bg rgba(255,255,255,0.2), radius 6, px 10 py 4 */
+.sidebar--admin .sidebar__approval-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sidebar--admin .sidebar__approval-badge:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.sidebar--admin .sidebar__approval-lead {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sidebar--admin .sidebar__approval-icon {
+  display: flex;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.sidebar--admin .sidebar__approval-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sidebar--admin .sidebar__approval-label {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.sidebar--admin .sidebar__approval-count {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.sidebar--admin .sidebar__approval-count strong {
+  font-weight: 800;
+  color: #c8a040;
+}
+
+.sidebar--admin .sidebar__notify {
+  display: none;
+}
+
+.sidebar__avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sidebar__avatar-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidebar__avatar-text {
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar__user-name {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__notify {
+  display: none;
+}
+
+.sidebar__logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: #243346;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  transition: background 0.2s;
+}
+
+.sidebar__logout:hover {
+  background: #2e4054;
+}
+
+.sidebar__logout-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar__logout-icon img,
+.sidebar__logout-icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

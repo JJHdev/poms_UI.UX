@@ -1,0 +1,315 @@
+/* 사용자 계정 관리 — 사용자 관리(Figma 196:2890) 플랫 레이아웃 */
+
+.user-account-page .type3-filter[hidden] {
+  display: none !important;
+}
+
+/* ===== 콘텐츠 탭 (개인정보/이력/접속) ===== */
+.user-account-page .ua-account-tabs {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border-bottom: 1px solid #dadae2;
+  background: transparent;
+}
+
+.user-account-page .ua-account-tabs__btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  padding: 0 20px 14px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  border-radius: 0;
+  background: transparent;
+  color: #6c788b;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.user-account-page .ua-account-tabs__btn:hover {
+  color: #111;
+  background: transparent;
+}
+
+.user-account-page .ua-account-tabs__btn.is-active {
+  border-bottom-color: #1c6fff;
+  background: transparent;
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+/* ===== 검색 필드 ===== */
+.user-account-page .type3-field--range {
+  flex: 0 1 320px;
+  min-width: 240px;
+  max-width: 360px;
+}
+
+.user-account-page .ua-date-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.user-account-page .ua-date-range em {
+  flex-shrink: 0;
+  font-style: normal;
+  color: #6c788b;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.user-account-page .ua-date-range input {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  color: #111;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.user-account-page .ua-date-range input:focus {
+  border-color: #1c6fff;
+}
+
+.user-account-page .type3-field input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  height: 34px;
+  padding: 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.user-account-page .type3-field input[type="text"]::placeholder {
+  color: #999;
+}
+
+.user-account-page .type3-field input[type="text"]:focus {
+  border-color: #1c6fff;
+}
+
+/* ===== 표 ===== */
+.user-account-page .ua-account-table {
+  table-layout: fixed;
+  min-width: 0;
+  width: 100%;
+  font-size: 13px;
+}
+
+.user-account-page .ua-account-table thead th,
+.user-account-page .ua-account-table tbody td {
+  height: 28px;
+  padding: 4px 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  line-height: normal;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.user-account-page .ua-account-table thead th {
+  background: rgba(28, 111, 255, 0.1);
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  font-weight: 500;
+  color: #111;
+}
+
+.user-account-page .ua-account-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+.user-account-page .ua-account-table thead th:last-child {
+  border-right: none;
+  border-radius: 0 6px 0 0;
+}
+
+.user-account-page .ua-account-table tbody td {
+  background: #fff;
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  color: #333;
+  font-weight: 400;
+}
+
+.user-account-page .ua-account-table tbody td:last-child {
+  border-right: none;
+}
+
+.user-account-page .ua-account-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.user-account-page .ua-account-table .col-no {
+  width: 56px;
+  max-width: 56px;
+}
+
+.user-account-page .ua-account-table .col-subject {
+  width: 16%;
+}
+
+.user-account-page .ua-account-table .col-ip {
+  width: 14%;
+}
+
+.user-account-page .ua-account-table .col-id {
+  width: 12%;
+}
+
+.user-account-page .ua-account-table .col-datetime {
+  width: 16%;
+}
+
+.user-account-page .ua-account-table .col-work {
+  width: auto;
+}
+
+.user-account-page .ua-account-table .col-menu {
+  width: auto;
+}
+
+.user-account-page .ua-account-table tbody td.col-menu {
+  text-align: left;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.user-account-page .ua-account-table .col-count {
+  width: 20%;
+}
+
+/* 접속자 수 조회: 번호 최소폭, 나머지 균등 */
+.user-account-page .ua-account-table--access .col-no {
+  width: 6%;
+  max-width: 72px;
+}
+
+.user-account-page .ua-account-table--access .col-datetime,
+.user-account-page .ua-account-table--access .col-count {
+  width: 47%;
+}
+
+.user-account-page .type3-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px 6px 0 0;
+}
+
+.user-account-page .type3-results-panel {
+  gap: 20px;
+}
+
+.user-account-page .type3-results-foot {
+  padding: 0;
+}
+
+.user-account-page .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.user-account-page .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.user-account-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+  border-color: transparent;
+  background: #fff;
+}
+
+.user-account-page .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.user-account-page .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff !important;
+  border: 1px solid #1c6fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.user-account-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.user-account-page .pagination__btn[data-page-move="next"],
+.user-account-page .pagination__btn[data-page-move="last"] {
+  transform: none;
+}
+
+.user-account-page .pagination__btn[data-page-move="next"] img,
+.user-account-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.user-account-page .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+@media (max-width: 1400px) {
+  .user-account-page .type3-filter--strip {
+    flex-wrap: wrap;
+  }
+
+  .user-account-page .type3-filter__fields {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>취약시설물 중점관리 상세 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/detail.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/facility-detail.css">
+  <link rel="stylesheet" href="css/facility-detail-regular.css">
+  <link rel="stylesheet" href="css/facility-detail-vulnerable.css">
+  <link rel="stylesheet" href="css/facility-detail-repair.css">
+  <link rel="stylesheet" href="css/facility-detail-precision.css">
+  <link rel="stylesheet" href="css/facility-form.css">
+  <link rel="stylesheet" href="css/facility-precision-figma.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; }
+
+    .vuln-fig-inline-btn {
+      flex-shrink: 0;
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid #dadae2;
+      border-radius: 6px;
+      background: #0b1a2e;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .vuln-fig-inline-btn:hover { background: #152a44; }
+
+    .prec-fig-form.is-readonly .vuln-fig-inline-btn { display: none; }
+
+    /* 조치계획 및 진행상황 — 셀 안에서 세로 가운데 정렬 */
+    #vulnerableDetailForm .prec-fig-row--full:has(#vulnerableActionPlanProgress) .prec-fig-val {
+      align-items: center;
+    }
+
+    #vulnerableActionPlanProgress {
+      height: auto !important;
+      max-height: 40px;
+      align-self: center;
+      line-height: 1.4;
+    }
+
+    .vuln-fig-media {
+      display: block;
+      width: 280px;
+      height: 180px;
+      max-width: 100%;
+      border: 1px solid #dadae2;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #f3f4f6;
+    }
+
+    .prec-fig-row--media .prec-fig-lbl,
+    .prec-fig-row--media .prec-fig-val {
+      height: auto;
+      min-height: 204px;
+      max-height: none;
+    }
+
+    .prec-fig-row--media .prec-fig-lbl {
+      width: 140px;
+      align-items: flex-start;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .prec-fig-row--media .prec-fig-val {
+      align-items: flex-start;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .vuln-fig-file-picker {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .vuln-fig-file-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vuln-fig-file-name {
+      font-size: 13px;
+      color: #6b7280;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .prec-fig-form.is-readonly .vuln-fig-file-picker { display: none; }
+    .prec-fig-form:not(.is-readonly) .vuln-fig-media-view { display: none; }
+
+    #vulnerableStageTable .prec-tech-input {
+      max-width: none;
+      text-align: left;
+    }
+
+    .facility-form-page #vulnerableStageTable .prec-tech-input[readonly] {
+      border: 0 !important;
+      background: transparent !important;
+      padding: 0 !important;
+      color: #1c6fff !important;
+      -webkit-text-fill-color: #1c6fff !important;
+    }
+  </style>
+  <script>
+    if (new URLSearchParams(window.location.search).get('embed') === '1') {
+      document.documentElement.classList.add('is-embed');
+      document.write('<style>'
+        + 'html.is-embed body{min-width:0!important;background:#fff!important}'
+        + 'html.is-embed #sidebar-root,html.is-embed .page-header,html.is-embed .detail-toolbar,html.is-embed .facility-detail-toolbar,html.is-embed .facility-summary,html.is-embed .detail-tabs,html.is-embed .info-data-legend{display:none!important}'
+        + 'html.is-embed .main-content{margin-left:0!important;padding:10px 14px 18px!important;min-width:0!important}'
+        + 'html.is-embed td,html.is-embed th,html.is-embed p,html.is-embed span,html.is-embed a,html.is-embed li,html.is-embed dt,html.is-embed dd,html.is-embed strong,html.is-embed label,html.is-embed input,html.is-embed textarea,html.is-embed select,html.is-embed div{color:#111827!important}'
+        + 'html.is-embed button span,html.is-embed button i{color:inherit!important}'
+        + 'html.is-embed *:not(button):not(button *){color:#111827!important;-webkit-text-fill-color:#111827!important}'
+        + 'html.is-embed button span,html.is-embed button i{-webkit-text-fill-color:inherit!important}'
+        + 'html.is-embed .prec-fig-form.is-readonly .prec-fig-text,html.is-embed .prec-fig-form.is-readonly .prec-fig-control,html.is-embed .prec-fig-form.is-readonly .precision-modal__cell-input,html.is-embed .prec-fig-form.is-readonly .precision-modal__cell-textarea,html.is-embed .prec-fig-form.is-readonly .precision-modal__cell-select,html.is-embed .prec-tech-table .prec-tech-input[readonly],html.is-embed .prec-tech-table tbody td{color:#1c6fff!important;-webkit-text-fill-color:#1c6fff!important}'
+        + 'html.is-embed #vulnerableEditBtn,html.is-embed #vulnerableDeleteBtn,html.is-embed #vulnerableSaveBtn,html.is-embed #vulnerableFormCancelBtn{display:none!important}'
+        + '</style>');
+    }
+  </script>
+</head>
+<body class="app-layout facility-detail-page facility-form-page precision-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <a href="facility-detail.html" class="btn-back" data-vulnerable-back aria-label="목록으로">
+        <img src="assets/main/facility-search/detail/figma177/icon-angle-down.svg" alt="" width="16" height="16">
+      </a>
+      <a href="facility.html" class="page-header__home" aria-label="시설물 정보 홈">
+        <span class="page-header__home-icon" aria-hidden="true">
+          <img class="page-header__home-icon-roof" src="assets/main/facility-search/detail/figma177/icon-home-roof.svg" alt="" width="15" height="8">
+          <img class="page-header__home-icon-body" src="assets/main/facility-search/detail/figma177/v1.svg" alt="" width="12" height="8">
+          <img class="page-header__home-icon-door" src="assets/main/facility-search/detail/figma177/v2.svg" alt="" width="6" height="7">
+        </span>
+      </a>
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="facility.html">시설물 정보</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <a href="facility-search.html">시설물 통합검색</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <a href="facility-detail.html" data-vulnerable-back>시설물 상세정보</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="breadcrumb__current" id="vulnerableDetailCrumbCurrent">취약시설물 중점관리 상세정보</span>
+      </nav>
+    </header>
+
+    <article class="facility-summary">
+      <div class="facility-summary__primary">
+        <div class="facility-summary__icon" aria-hidden="true">
+          <img src="assets/main/facility-search/detail/icon-facility.svg" alt="" width="24" height="24">
+        </div>
+        <h1 class="facility-summary__title" id="vulnerableDetailFacilityName">남방파제</h1>
+        <div class="facility-summary__meta-row">
+          <span class="facility-summary__location" id="vulnerableDetailFacilityAddress">부산광역시 중구 항만로</span>
+          <span class="facility-summary__meta-divider" aria-hidden="true"></span>
+          <span class="facility-summary__location" id="vulnerableDetailFacilityPort">부산항 북항</span>
+          <span class="facility-summary__badge-group">
+            <span class="tag tag--orange">2종 시설물</span>
+            <span class="tag tag--blue">외곽시설</span>
+          </span>
+        </div>
+      </div>
+      <div class="facility-summary__updated" aria-label="최종 수정일">
+        <span class="facility-summary__updated-label">최종 수정일</span>
+        <span class="facility-summary__updated-value">2026-07-27</span>
+      </div>
+    </article>
+
+    <div class="detail-shell">
+      <div class="detail-tabs" role="tablist" aria-label="시설물 상세 구성">
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="general" aria-selected="false">일반정보</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="precision" aria-selected="false">안전점검실적</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="repair" aria-selected="false">보수보강실적</button>
+        <button type="button" class="detail-tabs__btn is-active" role="tab" data-tab="vulnerable" aria-selected="true">취약시설물 중점관리</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="major-defect" aria-selected="false">중대결함 사후관리</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="history" aria-selected="false">이력정보</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="safety" aria-selected="false">안전시설현황</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="calculrate" aria-selected="false">대가산정</button>
+      </div>
+
+      <div class="info-data-legend" id="vulnerableModalSource" aria-label="데이터 출처">
+        <p class="info-data-legend__note">
+          ※ 종시설물 데이터는 FMS에서 자동으로 연동되며, 수정할 수 없습니다. FMS 연동 항목은 <em>파란색 글씨</em>로 구분됩니다.
+        </p>
+        <span class="info-data-legend__item info-data-legend__item--fms">FMS 데이터 (읽기 전용) - 2026.05.20</span>
+        <span class="info-data-legend__item info-data-legend__item--poms">POMS 데이터 (수정 가능)</span>
+      </div>
+
+      <div class="detail-tab-panel is-active" id="panel-vulnerable" role="tabpanel">
+      <section class="detail-section">
+        <div class="prec-fig-block">
+          <h3 class="detail-section__title">취약시설물 중점관리</h3>
+        </div>
+
+        <div class="prec-tech-section" id="vulnerableStageWrap">
+          <div class="prec-tech-section__head">
+            <h4 class="prec-tech-section__title">중점관리단계</h4>
+          </div>
+          <div class="prec-tech-table-wrap">
+            <table class="prec-tech-table" id="vulnerableStageTable" aria-label="중점관리단계">
+              <thead>
+                <tr>
+                  <th>중점관리단계</th>
+                  <th>기간</th>
+                  <th>조치계획 및 진행상황</th>
+                </tr>
+              </thead>
+              <tbody id="vulnerableStageBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prec-fig-block">
+          <form class="prec-fig-form precision-modal__form is-readonly" id="vulnerableDetailForm">
+            <div class="prec-fig-form__rows">
+              <div class="prec-fig-row">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">사용제한 여부</span>
+                  <span class="prec-fig-val">
+                    <input type="text" class="prec-fig-text precision-modal__cell-input" id="vulnerableUsageRestriction" name="usageRestriction" placeholder="내용을 입력해주세요.">
+                  </span>
+                </div>
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">관련점검진단</span>
+                  <span class="prec-fig-val">
+                    <input type="text" class="prec-fig-text precision-modal__cell-input" id="vulnerableRelatedInspection" name="relatedInspection" placeholder="내용을 입력해주세요.">
+                    <button type="button" class="vuln-fig-inline-btn" id="vulnerableRelatedInspectionBtn" hidden>등록</button>
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row prec-fig-row--full">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">주민공지 여부</span>
+                  <span class="prec-fig-val">
+                    <input type="text" class="prec-fig-text precision-modal__cell-input" id="vulnerableResidentNotice" name="residentNotice" placeholder="내용을 입력해주세요.">
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row prec-fig-row--media">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">사용제한</span>
+                  <span class="prec-fig-val">
+                    <div class="vuln-fig-media-view" id="vulnerableRestrictionView">
+                      <img class="vuln-fig-media" src="assets/sample-site-1.png" alt="사용제한 현황">
+                    </div>
+                    <div class="vuln-fig-file-picker" id="vulnerableRestrictionEdit" hidden>
+                      <input type="file" id="vulnerableRestrictionFile" accept="image/*" hidden>
+                      <div class="vuln-fig-file-row">
+                        <button type="button" class="vuln-fig-inline-btn" id="vulnerableRestrictionFileBtn">파일 선택</button>
+                        <span class="vuln-fig-file-name" id="vulnerableRestrictionFileName">선택된 파일 없음</span>
+                      </div>
+                      <div id="vulnerableRestrictionPreview">
+                        <img class="vuln-fig-media" src="assets/sample-site-1.png" alt="미리보기">
+                      </div>
+                    </div>
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row prec-fig-row--full">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">조치계획 및 진행상황</span>
+                  <span class="prec-fig-val">
+                    <textarea class="prec-fig-text precision-modal__cell-textarea" id="vulnerableActionPlanProgress" name="actionPlanProgress" rows="3" placeholder="내용을 입력해주세요."></textarea>
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">작성자</span>
+                  <span class="prec-fig-val prec-fig-val--locked">
+                    <input type="text" class="prec-fig-text precision-modal__cell-input" id="vulnerableAuthor" name="author" readonly>
+                  </span>
+                </div>
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">작성일</span>
+                  <span class="prec-fig-val prec-fig-val--locked">
+                    <input type="date" class="prec-fig-text precision-modal__cell-input" id="vulnerableCreatedDate" name="createdDate" readonly>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="precision-detail-page__foot">
+          <div class="form-card-toolbar__left"></div>
+          <div class="form-card-toolbar__right">
+            <button type="button" class="btn-form-ghost" id="vulnerableDeleteBtn">
+              <img src="assets/main/facility-form/icon-delete.svg" alt="" width="18" height="18">
+              삭제하기
+            </button>
+            <button type="button" class="btn-form-primary" id="vulnerableEditBtn">
+              <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+              수정하기
+            </button>
+            <button type="button" class="btn-form-ghost" id="vulnerableFormCancelBtn" hidden>취소</button>
+            <button type="button" class="btn-form-primary" id="vulnerableSaveBtn" hidden>
+              <img src="assets/main/facility-form/icon-save.svg" alt="" width="18" height="18">
+              저장하기
+            </button>
+          </div>
+        </div>
+      </section>
+      </div>
+    </div>
+  </main>
+
+  <div
+    id="repairRelatedInspectionModal"
+    class="repair-related-modal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="repairRelatedInspectionModalTitle"
+  >
+    <div class="repair-related-modal__backdrop" data-close-related-inspection-modal tabindex="-1" aria-hidden="true"></div>
+    <div class="repair-related-modal__panel">
+      <header class="repair-related-modal__head">
+        <h3 class="repair-related-modal__title" id="repairRelatedInspectionModalTitle">관련 점검진단 선택</h3>
+        <button type="button" class="repair-related-modal__close" data-close-related-inspection-modal aria-label="닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="repair-related-modal__stack">
+        <div class="repair-related-modal__body">
+          <form class="repair-related-search" id="repairRelatedSearchForm">
+            <div class="repair-related-search__row">
+              <div class="repair-related-search__field">
+                <label for="repairRelatedAgency">관리기관</label>
+                <select id="repairRelatedAgency" name="agency">
+                  <option value="">전체</option>
+                  <option value="경상북도">경상북도</option>
+                  <option value="부산광역시">부산광역시</option>
+                  <option value="여수광양항만공사">여수광양항만공사</option>
+                </select>
+              </div>
+              <div class="repair-related-search__field">
+                <label for="repairRelatedPort">항</label>
+                <select id="repairRelatedPort" name="port">
+                  <option value="">전체</option>
+                  <option value="포항항">포항항</option>
+                  <option value="부산항">부산항</option>
+                  <option value="여수항">여수항</option>
+                  <option value="광양항">광양항</option>
+                </select>
+              </div>
+              <div class="repair-related-search__field">
+                <label for="repairRelatedSubPort">세부항</label>
+                <select id="repairRelatedSubPort" name="subPort">
+                  <option value="">전체</option>
+                  <option value="남방파제">남방파제</option>
+                  <option value="북항">북항</option>
+                  <option value="남항">남항</option>
+                </select>
+              </div>
+              <div class="repair-related-search__field">
+                <label for="repairRelatedFacilityType">시설구분</label>
+                <select id="repairRelatedFacilityType" name="facilityType">
+                  <option value="">전체</option>
+                  <option value="외곽시설">외곽시설</option>
+                  <option value="계류시설">계류시설</option>
+                  <option value="건축물">건축물</option>
+                </select>
+              </div>
+              <div class="repair-related-search__field repair-related-search__field--name">
+                <label for="repairRelatedFacilityName">시설물명</label>
+                <input type="text" id="repairRelatedFacilityName" name="facilityName" placeholder="시설물명 입력">
+              </div>
+              <div class="repair-related-search__actions">
+                <button type="button" class="btn-condition-reset" id="repairRelatedResetBtn">초기화</button>
+                <button type="submit" class="btn-condition-search" id="repairRelatedSearchBtn">검색</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="repair-related-modal__table-card">
+            <div class="repair-related-modal__table-wrap">
+              <table class="repair-related-table">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-no">No.</th>
+                    <th scope="col">점검일자</th>
+                    <th scope="col">점검구분</th>
+                    <th scope="col">등급</th>
+                    <th scope="col">조사기관</th>
+                    <th scope="col">부위/부재</th>
+                    <th scope="col">결함구분</th>
+                    <th scope="col">결함종류</th>
+                  </tr>
+                </thead>
+                <tbody id="repairRelatedListBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <nav class="pagination repair-related-pagination" id="repairRelatedPagination" aria-label="관련 점검진단 페이지"></nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/facility-fs-shell.js"></script>
+  <script src="js/facility-detail-vulnerable-data.js"></script>
+  <script src="js/facility-vulnerable-detail.js"></script>
+  <script src="js/facility-detail-repair-related.js"></script>
+  <script>
+    PomsSidebar.mount('#sidebar-root', { active: 'facility-search' });
+  </script>
+  <script>
+    if (new URLSearchParams(window.location.search).get('embed') === '1') {
+      document.body.classList.add('is-embed');
+      const embedStyle = document.createElement('style');
+      embedStyle.textContent = 'body{min-width:0!important;background:#fff!important}body.is-embed #sidebar-root,body.is-embed .page-header,body.is-embed .detail-toolbar,body.is-embed .facility-detail-toolbar,body.is-embed .facility-summary{display:none!important}body.is-embed .main-content{margin-left:0!important;padding:10px 14px 18px!important;min-width:0!important}' +
+        'body.is-embed .prec-fig-form.is-readonly .prec-fig-text,body.is-embed .prec-fig-form.is-readonly .prec-fig-control,body.is-embed .prec-fig-form.is-readonly .precision-modal__cell-input,body.is-embed .prec-fig-form.is-readonly .precision-modal__cell-textarea,body.is-embed .prec-fig-form.is-readonly .precision-modal__cell-select,body.is-embed .prec-tech-table .prec-tech-input[readonly],body.is-embed .prec-tech-table tbody td{color:#1c6fff!important;-webkit-text-fill-color:#1c6fff!important}';
+      document.head.appendChild(embedStyle);
+
+      (function () {
+        const BLACK = '#111827';
+        const FMS_BLUE_SEL = '.prec-fig-form.is-readonly .prec-fig-text, .prec-fig-form.is-readonly .prec-fig-control, .prec-fig-form.is-readonly .precision-modal__cell-input, .prec-fig-form.is-readonly .precision-modal__cell-textarea, .prec-fig-form.is-readonly .precision-modal__cell-select, .prec-tech-table .prec-tech-input[readonly], #vulnerableStageTable tbody td';
+        const isFmsBlue = (el) => {
+          if (el.matches?.(FMS_BLUE_SEL) || el.closest?.(FMS_BLUE_SEL)) return true;
+          if (el.closest?.('#vulnerableDetailForm.is-readonly') && el.matches?.('input, textarea, select')) return true;
+          if (el.closest?.('#vulnerableStageTable') && el.matches?.('input, td')) return true;
+          return false;
+        };
+        const isBlack = (v) => { v = (v || '').toLowerCase(); return !v || v === BLACK || v === 'rgb(17, 24, 39)'; };
+        const fixInlineColors = () => {
+          document.querySelectorAll('[style]').forEach((el) => {
+            if (el.closest('button')) return;
+            if (isFmsBlue(el)) return;
+            if (!isBlack(el.style.getPropertyValue('color'))) el.style.setProperty('color', BLACK, 'important');
+            if (!isBlack(el.style.getPropertyValue('-webkit-text-fill-color'))) el.style.setProperty('-webkit-text-fill-color', BLACK, 'important');
+          });
+        };
+        fixInlineColors();
+        window.setTimeout(fixInlineColors, 0);
+        new MutationObserver(fixInlineColors).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['style'] });
+      })();
+    }
+  </script>
+</body>
+</html>

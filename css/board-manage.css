@@ -1,0 +1,11 @@
+/* 게시판 관리 — 사용자 게시판(archive-board) 화면을 관리자 셸에 그대로 사용 */
+
+.board-manage-page.archive-board-page.fcr-flat-page .archive-board-tabs {
+  margin-top: 0;
+}
+
+.board-manage-page .type3-btn--create {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

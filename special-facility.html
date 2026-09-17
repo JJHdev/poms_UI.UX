@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>특별관리시설 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/special-facility.css?v=13">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+</head>
+<body class="app-layout special-facility-page type3-port-page fcr-flat-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header__nav">
+        <a href="facility.html" class="page-header__home" aria-label="시설물 관리 홈">
+          <span class="page-header__home-icon" aria-hidden="true">
+            <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+            <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+            <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+          </span>
+        </a>
+      </div>
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="inspection-status.html">시설물 관리</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="breadcrumb__current">특별관리시설</span>
+      </nav>
+    </header>
+
+    <div class="type3-page special-page" aria-label="특별관리시설">
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text">특별관리시설</h1>
+      </div>
+
+      <div class="special-map-layout">
+        <section class="special-map-panel" aria-label="특별관리시설 지도">
+          <div class="special-map-panel__map" id="specialFacilityMap"></div>
+          <div class="special-map-panel__legend" aria-label="시설구분 범례">
+            <span><i class="special-map-dot special-map-dot--outer"></i>외곽시설</span>
+            <span><i class="special-map-dot special-map-dot--mooring"></i>계류시설</span>
+            <span><i class="special-map-dot special-map-dot--other"></i>기타시설</span>
+          </div>
+        </section>
+
+        <div class="special-side">
+          <div class="special-side-card">
+            <nav class="special-tabs" role="tablist" aria-label="특별관리시설 구분">
+              <button type="button" class="special-tabs__btn is-active" data-system-tab="multi" role="tab" aria-selected="true">다중이용시설</button>
+              <button type="button" class="special-tabs__btn" data-system-tab="vulnerable" role="tab" aria-selected="false">취약시설</button>
+              <button type="button" class="special-tabs__btn" data-system-tab="seismic" role="tab" aria-selected="false">출입통제구역</button>
+            </nav>
+
+            <section class="special-filter-panel" aria-label="검색조건">
+              <form id="specialFacilitySearchForm" class="special-filter type3-filter type3-filter--strip" novalidate>
+                <div class="special-filter-row">
+                  <div class="special-field type3-field">
+                    <label for="specialAgency">관리주체</label>
+                    <select id="specialAgency" name="agency">
+                      <option value="">전체</option>
+                      <option value="부산항만공사">부산항만공사</option>
+                      <option value="부산지방해양수산청">부산지방해양수산청</option>
+                      <option value="여수광양항만공사">여수광양항만공사</option>
+                      <option value="여수지방해양수산청">여수지방해양수산청</option>
+                      <option value="인천항만공사">인천항만공사</option>
+                      <option value="경상북도">경상북도</option>
+                    </select>
+                  </div>
+                  <div class="special-field type3-field">
+                    <label for="specialPort">년도</label>
+                    <select id="specialPort" name="year">
+                      <option value="">전체</option>
+                      <option value="2025">2025년</option>
+                      <option value="2024">2024년</option>
+                      <option value="2023">2023년</option>
+                    </select>
+                  </div>
+                  <div class="special-field type3-field">
+                    <label for="specialFacilityName">종구분</label>
+                    <select id="specialFacilityName" name="kindType">
+                      <option value="">전체</option>
+                      <option value="1종">1종</option>
+                      <option value="2종">2종</option>
+                      <option value="3종">3종</option>
+                      <option value="기타">기타</option>
+                    </select>
+                  </div>
+                  <div class="special-filter-actions">
+                    <button type="button" class="special-btn special-btn--reset type3-btn type3-btn--reset" id="specialFacilityResetBtn">
+                      <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                      초기화
+                    </button>
+                    <button type="submit" class="special-btn special-btn--search type3-btn type3-btn--search" id="specialFacilitySearchBtn">
+                      <img src="assets/main/facility-statistics/figma188/icon-search-clean.svg" alt="" width="18" height="18">
+                      검색하기
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </section>
+
+            <section class="special-results-panel" aria-labelledby="specialResultTitle">
+              <div class="special-results__head">
+                <div class="special-results__count">
+                  <span class="type3-results__bar-icon" aria-hidden="true">
+                    <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+                  </span>
+                  <h2 id="specialResultTitle" class="special-results__label">검색결과</h2>
+                  <p class="special-result-summary" id="specialFacilitySummary" aria-live="polite">총 <strong>0</strong>건</p>
+                </div>
+                <div class="special-results__side" hidden style="display: none;">
+                  <button type="button" class="type3-btn type3-btn--excel" id="specialFacilityExcelBtn" hidden style="display: none;">
+                    <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+                    엑셀 다운로드
+                  </button>
+                </div>
+              </div>
+              <div class="special-table-wrap">
+                <table class="special-table type3-table" aria-label="특별관리시설 조회결과">
+                  <thead>
+                    <tr>
+                      <th scope="col">연번</th>
+                      <th scope="col">항명</th>
+                      <th scope="col">세부항명</th>
+                      <th scope="col">구분</th>
+                      <th scope="col">시설명</th>
+                    </tr>
+                  </thead>
+                  <tbody id="specialFacilityTableBody"></tbody>
+                </table>
+              </div>
+              <div class="special-results-foot">
+                <nav class="pagination" id="specialFacilityPagination" aria-label="특별관리시설 페이지"></nav>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="js/user-table-utils.js"></script>
+  <script src="js/system-list-page.js"></script>
+  <script src="js/special-facility-data.js"></script>
+  <script src="js/special-facility.js?v=6"></script>
+</body>
+</html>

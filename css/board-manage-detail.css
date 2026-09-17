@@ -1,0 +1,12 @@
+/* 게시판 상세 — 사용자 게시판 상세 폼 + 관리자 수정/삭제 */
+
+.board-manage-detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.board-manage-detail-actions .detail-section__note {
+  margin: 0 8px 0 0;
+}

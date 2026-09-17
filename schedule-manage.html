@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일정관리 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/schedule-manage.css?v=20260820">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout admin-schedule-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="schedule-page" aria-label="일정관리">
+      <div class="schedule-title-row">
+        <span class="schedule-title-row__icon" aria-hidden="true">
+          <img src="assets/admin-notices/icon-calendar.svg" alt="">
+        </span>
+        <h1 class="schedule-title-row__title">캘린더 일정관리</h1>
+        <p class="schedule-title-row__desc">캘린더에서 일정을 등록, 수정, 삭제합니다.</p>
+      </div>
+
+      <div class="schedule-layout">
+        <aside class="schedule-side" aria-label="캘린더 선택">
+          <div class="mini-calendar">
+            <div class="mini-calendar__head">
+              <strong>2026년 8월</strong>
+              <div class="mini-calendar__nav">
+                <button type="button" aria-label="이전 달">
+                  <img src="assets/admin-schedule/icon-nav.svg" alt="" width="12" height="7">
+                </button>
+                <button type="button" aria-label="다음 달">
+                  <img src="assets/admin-schedule/icon-nav.svg" alt="" width="12" height="7">
+                </button>
+              </div>
+            </div>
+            <div class="mini-calendar__week">
+              <span class="sun">일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="sat">토</span>
+            </div>
+            <div class="mini-calendar__days">
+              <span class="sun muted">26</span><span class="muted">27</span><span class="muted">28</span><span class="muted">29</span><span class="muted">30</span><span class="muted">31</span><span class="sat">1</span>
+              <span class="sun">2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span class="sat">8</span>
+              <span class="sun">9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span class="sat">15</span>
+              <span class="sun">16</span><span>17</span><span>18</span><span>19</span><span class="today">20</span><span>21</span><span class="sat">22</span>
+              <span class="sun">23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span class="sat">29</span>
+              <span class="sun">30</span><span>31</span><span class="muted">1</span><span class="muted">2</span><span class="muted">3</span><span class="muted">4</span><span class="sat muted">5</span>
+            </div>
+          </div>
+
+          <div class="calendar-checks schedule-checks">
+            <label class="calendar-check">
+              <input type="checkbox" checked value="all">
+              <span class="calendar-check__mark calendar-check__mark--all"></span>
+              <strong>전체</strong>
+            </label>
+            <label class="calendar-check">
+              <input type="checkbox" checked value="1">
+              <span class="calendar-check__mark calendar-check__mark--general"></span>
+              <strong>일반</strong>
+            </label>
+            <label class="calendar-check">
+              <input type="checkbox" checked value="2">
+              <span class="calendar-check__mark calendar-check__mark--urgent"></span>
+              <strong>긴급</strong>
+            </label>
+            <label class="calendar-check">
+              <input type="checkbox" checked value="3">
+              <span class="calendar-check__mark calendar-check__mark--notice"></span>
+              <strong>긴급</strong>
+            </label>
+            <label class="calendar-check">
+              <input type="checkbox" checked value="4">
+              <span class="calendar-check__mark calendar-check__mark--work"></span>
+              <strong>긴급</strong>
+            </label>
+          </div>
+        </aside>
+
+        <section class="schedule-main" aria-label="2026년 8월 일정">
+          <div class="schedule-toolbar">
+            <div class="schedule-toolbar__left">
+              <button type="button" class="schedule-today" id="scheduleToday">오늘</button>
+              <div class="schedule-toolbar__nav">
+                <button type="button" class="schedule-nav-btn" id="schedulePrev" aria-label="이전 달">
+                  <img src="assets/admin-schedule/icon-nav.svg" alt="" width="12" height="7">
+                </button>
+                <button type="button" class="schedule-nav-btn" id="scheduleNext" aria-label="다음 달">
+                  <img src="assets/admin-schedule/icon-nav.svg" alt="" width="12" height="7">
+                </button>
+              </div>
+              <h2 id="scheduleRange">2026년 8월</h2>
+            </div>
+            <button type="button" class="schedule-add-btn" id="scheduleNew">
+              <img src="assets/admin-schedule/icon-plus.svg" alt="" width="10" height="10">
+              일정 추가
+            </button>
+          </div>
+
+          <div class="schedule-grid" aria-label="2026년 8월 일정표">
+            <div class="schedule-cell schedule-cell--head sun">일</div>
+            <div class="schedule-cell schedule-cell--head">월</div>
+            <div class="schedule-cell schedule-cell--head">화</div>
+            <div class="schedule-cell schedule-cell--head">수</div>
+            <div class="schedule-cell schedule-cell--head">목</div>
+            <div class="schedule-cell schedule-cell--head">금</div>
+            <div class="schedule-cell schedule-cell--head sat">토</div>
+
+            <div class="schedule-cell other"><span class="sun">26</span></div>
+            <div class="schedule-cell other"><span>27</span></div>
+            <div class="schedule-cell other"><span>28</span></div>
+            <div class="schedule-cell other"><span>29</span></div>
+            <div class="schedule-cell other"><span>30</span></div>
+            <div class="schedule-cell other"><span>31</span></div>
+            <div class="schedule-cell"><span class="sat">1</span></div>
+
+            <div class="schedule-cell"><span class="sun">2</span></div>
+            <div class="schedule-cell schedule-cell--events">
+              <span>3</span>
+              <button type="button" class="calendar-event schedule-event schedule-event--notice" data-schedule-id="s01" data-calendar="3">등록일 기준 로그 조회</button>
+              <button type="button" class="calendar-event schedule-event schedule-event--urgent" data-schedule-id="s02" data-calendar="2">정기점검 마감</button>
+            </div>
+            <div class="schedule-cell"><span>4</span></div>
+            <div class="schedule-cell"><span>5</span></div>
+            <div class="schedule-cell"><span>6</span></div>
+            <div class="schedule-cell"><span>7</span></div>
+            <div class="schedule-cell"><span class="sat">8</span></div>
+
+            <div class="schedule-cell"><span class="sun">9</span></div>
+            <div class="schedule-cell"><span>10</span></div>
+            <div class="schedule-cell schedule-cell--events">
+              <span>11</span>
+              <button type="button" class="calendar-event schedule-event schedule-event--urgent schedule-event--span-2" data-schedule-id="s03" data-calendar="2">정기점검 마감</button>
+            </div>
+            <div class="schedule-cell"><span>12</span></div>
+            <div class="schedule-cell"><span>13</span></div>
+            <div class="schedule-cell"><span>14</span></div>
+            <div class="schedule-cell"><span class="sat">15</span></div>
+
+            <div class="schedule-cell"><span class="sun">16</span></div>
+            <div class="schedule-cell"><span>17</span></div>
+            <div class="schedule-cell"><span>18</span></div>
+            <div class="schedule-cell"><span>19</span></div>
+            <div class="schedule-cell"><span>20</span></div>
+            <div class="schedule-cell"><span>21</span></div>
+            <div class="schedule-cell"><span class="sat">22</span></div>
+
+            <div class="schedule-cell"><span class="sun">23</span></div>
+            <div class="schedule-cell"><span>24</span></div>
+            <div class="schedule-cell"><span>25</span></div>
+            <div class="schedule-cell"><span>26</span></div>
+            <div class="schedule-cell"><span>27</span></div>
+            <div class="schedule-cell"><span>28</span></div>
+            <div class="schedule-cell"><span class="sat">29</span></div>
+
+            <div class="schedule-cell"><span class="sun">30</span></div>
+            <div class="schedule-cell"><span>31</span></div>
+            <div class="schedule-cell other"><span>1</span></div>
+            <div class="schedule-cell other"><span>2</span></div>
+            <div class="schedule-cell other"><span>3</span></div>
+            <div class="schedule-cell other"><span>4</span></div>
+            <div class="schedule-cell other"><span class="sat">5</span></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="mock-drawer-overlay" id="scheduleDrawerOverlay"></div>
+  <aside class="mock-drawer" id="scheduleDrawer" aria-labelledby="scheduleDrawerTitle" aria-hidden="true">
+    <header class="mock-drawer__head">
+      <div>
+        <h2 class="mock-drawer__title" id="scheduleDrawerTitle">일정 상세</h2>
+        <p class="mock-drawer__sub" id="scheduleDrawerSub">캘린더 일정을 선택하세요.</p>
+      </div>
+      <button type="button" class="mock-drawer__close" id="scheduleDrawerClose" aria-label="닫기">×</button>
+    </header>
+    <div class="mock-drawer__body">
+      <form class="mock-form">
+        <label class="mock-form-field">
+          <span>제목</span>
+          <input type="text" id="scheduleTitleInput" value="정기점검 마감">
+        </label>
+        <div class="mock-form-grid">
+          <label class="mock-form-field">
+            <span>캘린더</span>
+            <select id="scheduleCalendarInput">
+              <option value="1">일반</option>
+              <option value="2">긴급</option>
+              <option value="3">긴급</option>
+              <option value="4">긴급</option>
+            </select>
+          </label>
+          <label class="mock-form-field">
+            <span>구분</span>
+            <select id="scheduleCategoryInput">
+              <option value="time">시간일정</option>
+              <option value="allday">종일일정</option>
+            </select>
+          </label>
+        </div>
+        <label class="mock-form-field">
+          <span>장소</span>
+          <input type="text" id="scheduleLocationInput" value="POMS">
+        </label>
+        <div class="mock-form-grid">
+          <label class="mock-form-field">
+            <span>시작</span>
+            <input type="datetime-local" id="scheduleStartInput" value="2026-08-11T00:00">
+          </label>
+          <label class="mock-form-field">
+            <span>종료</span>
+            <input type="datetime-local" id="scheduleEndInput" value="2026-08-12T23:59">
+          </label>
+        </div>
+        <p class="mock-inline-note" id="scheduleDrawerMessage">일정 제목, 캘린더, 구분, 장소, 시작/종료를 입력합니다.</p>
+      </form>
+    </div>
+    <footer class="mock-drawer__foot">
+      <button type="button" class="btn-admin-reset mock-no-icon" id="scheduleDelete">삭제</button>
+      <button type="button" class="btn-admin-search" id="scheduleSave">저장</button>
+    </footer>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/schedule-manage.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'board-schedule' });
+  </script>
+
+  <script id="schedule-manage-filter-script">
+    (function () {
+      const checks = Array.from(document.querySelectorAll('.schedule-checks input[type="checkbox"]'));
+      const allCheck = checks.find((el) => el.value === 'all');
+      const categoryChecks = checks.filter((el) => el.value !== 'all');
+
+      function applyScheduleFilter() {
+        const enabled = new Set(
+          categoryChecks.filter((el) => el.checked).map((el) => el.value)
+        );
+
+        document.querySelectorAll('.schedule-event[data-calendar]').forEach((eventEl) => {
+          eventEl.style.display = enabled.has(eventEl.dataset.calendar) ? '' : 'none';
+        });
+
+        if (allCheck) {
+          allCheck.checked = categoryChecks.length > 0 && categoryChecks.every((el) => el.checked);
+          allCheck.indeterminate =
+            categoryChecks.some((el) => el.checked) && !categoryChecks.every((el) => el.checked);
+        }
+      }
+
+      if (allCheck) {
+        allCheck.addEventListener('change', function () {
+          categoryChecks.forEach((el) => {
+            el.checked = allCheck.checked;
+          });
+          allCheck.indeterminate = false;
+          applyScheduleFilter();
+        });
+      }
+
+      categoryChecks.forEach((el) => {
+        el.addEventListener('change', applyScheduleFilter);
+      });
+
+      applyScheduleFilter();
+    })();
+  </script>
+
+</body>
+</html>

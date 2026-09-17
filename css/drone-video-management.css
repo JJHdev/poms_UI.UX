@@ -1,0 +1,182 @@
+/* 드론 영상관리 — facility-management flat type3 패턴 */
+
+.drone-video-page.fcr-flat-page {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  margin: 0;
+  min-width: 1240px;
+}
+
+.drone-video-page.fcr-flat-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.drone-video-page .type3-page > .admin-sub-tabs {
+  margin-bottom: 0;
+}
+
+.drone-video-page .drone-filter-fields {
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+
+.drone-video-page .drone-filter-fields > .type3-field--grow {
+  flex: 1 1 280px;
+  max-width: 360px;
+}
+
+@media (max-width: 1400px) {
+  .drone-video-page .drone-filter-fields {
+    flex-wrap: wrap;
+  }
+
+  .drone-video-page .drone-filter-fields > .type3-field--grow {
+    flex: 1 1 240px;
+    max-width: none;
+  }
+}
+
+.drone-video-page .drone-btn-add {
+  height: 32px;
+  min-width: 0;
+  border-radius: 6px;
+}
+
+.drone-video-table {
+  min-width: 0;
+  table-layout: fixed;
+  width: 100%;
+  font-size: 13px;
+}
+
+.drone-video-table col.col-no { width: 64px; }
+.drone-video-table col.col-title { width: 32%; }
+.drone-video-table col.col-attach { width: auto; }
+.drone-video-table col.col-date { width: 140px; }
+.drone-video-table col.col-play { width: 120px; }
+
+.drone-video-page .type3-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* 시설물 관리(type3)와 동일 행 높이 32px */
+.drone-video-page .drone-video-table thead th,
+.drone-video-page .drone-video-table tbody td {
+  height: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  padding: 4px 8px;
+  font-size: 13px;
+  line-height: normal;
+  vertical-align: middle;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drone-video-page .col-title-link button {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+.drone-video-page .col-title-link button:hover {
+  color: #1c6fff;
+}
+
+.drone-video-page .drone-file-attach {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.drone-video-page .drone-file-attach img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.drone-video-page .drone-file-attach span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drone-video-page .drone-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background: #fff;
+  color: #0b1a2e;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.drone-video-page .drone-play-btn:hover {
+  border-color: #1c6fff;
+  color: #1c6fff;
+  background: #f4f8ff;
+}
+
+.drone-video-page .type3-results-foot,
+.drone-video-page .drone-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

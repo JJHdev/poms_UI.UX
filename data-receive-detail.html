@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자료수신 상세 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-detail.css">
+  <link rel="stylesheet" href="css/facility-add.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-detail.css?v=23">
+  <link rel="stylesheet" href="css/data-receive.css?v=7">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page facility-change-request-detail-page data-receive-detail-page type3-port-page fcr-detail-flat-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="type3-page" aria-label="자료수신 상세">
+      <header class="page-header">
+        <a href="data-receive.html" class="btn-back" id="receiveDetailBackBtn" aria-label="목록으로">
+          <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+        </a>
+        <a href="data-receive.html" class="page-header__home" aria-label="목록 홈">
+          <img class="page-header__home-icon" src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+        </a>
+        <nav class="breadcrumb" aria-label="현재 위치">
+          <a href="facility.html">시설물 관리</a>
+          <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+          <a href="data-receive.html">자료수신</a>
+          <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+          <span class="breadcrumb__current" id="receiveDetailCrumb">자료 상세</span>
+        </nav>
+      </header>
+
+      <div class="detail-shell">
+        <section class="detail-section" aria-labelledby="receiveDetailTitle">
+          <div class="detail-section__head">
+            <div class="type3-section-title">
+              <span class="type3-section-title__icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+              </span>
+              <h3 class="detail-section__title" id="receiveDetailTitle">자료 상세</h3>
+            </div>
+            <p class="detail-section__note">※ 수신된 유지관리 자료의 제목·내용·첨부파일을 확인합니다.</p>
+          </div>
+
+          <div class="fac-add-body receive-detail-body">
+            <div class="fac-add-grid receive-detail-grid">
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">관리기관</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="receiveDetailOrg" readonly>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">등록일자</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="receiveDetailDate" readonly>
+                </div>
+              </div>
+              <div class="fac-add-field fac-add-field--full">
+                <div class="fac-add-field__label">제목</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="receiveDetailSubject" readonly>
+                </div>
+              </div>
+              <div class="fac-add-field fac-add-field--full receive-detail-field--content">
+                <div class="fac-add-field__label">내용</div>
+                <div class="fac-add-field__control">
+                  <textarea class="fac-add-input" id="receiveDetailContent" readonly></textarea>
+                </div>
+              </div>
+              <div class="fac-add-field fac-add-field--full">
+                <div class="fac-add-field__label">첨부파일</div>
+                <div class="fac-add-field__control receive-detail-file">
+                  <div class="receive-file-picker" id="receiveDetailFileWrap">
+                    <img src="assets/main/facility-form/icon-file.svg" alt="" width="18" height="18">
+                    <a href="#" class="receive-file-link is-empty" id="receiveDetailFile">첨부된 파일 없음</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="fac-add-footer">
+          <button type="button" class="btn-fac-add-cancel" id="receiveDelete">삭제</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/data-receive-data.js"></script>
+  <script src="js/data-receive-detail.js"></script>
+</body>
+</html>

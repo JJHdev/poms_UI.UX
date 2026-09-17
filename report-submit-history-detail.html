@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>보고서 제출이력 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/facility-management-detail.css">
+  <link rel="stylesheet" href="css/facility-change-approval.css">
+  <link rel="stylesheet" href="css/facility-change-approval-detail.css">
+  <link rel="stylesheet" href="css/report-submit-history-detail.css?v=20260819f">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page facility-change-approval-page report-submit-history-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fmd-crumb-row">
+      <button type="button" class="fmd-back-btn" id="historyDetailBackBtn" aria-label="목록으로">
+        <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+      </button>
+      <a href="report-submit-history.html" class="fmd-home-btn" aria-label="보고서 제출이력 목록">
+        <img src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+      </a>
+      <nav class="fmd-breadcrumb" aria-label="현재 위치">
+        <a href="report-submit-history.html">용역사 관리</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; 보고서 제출이력 &gt; </span>
+        <span class="fmd-breadcrumb__current">상세</span>
+      </nav>
+    </div>
+
+    <div class="admin-detail-title-row">
+      <div class="admin-detail-title-row__lead">
+        <h1 class="admin-detail-title-row__title">보고서 제출이력 상세</h1>
+      </div>
+      <div class="admin-detail-title-row__actions">
+        <button type="button" class="fmd-btn fmd-btn--history" id="historyProcessButton">
+          <img src="assets/service/main/figma/icon-history.svg" alt="" width="18" height="18">
+          결재이력
+        </button>
+        <button type="button" class="fmd-btn fmd-btn--cancel" id="historyBackBottom">목록으로</button>
+      </div>
+    </div>
+
+    <div class="fmd-stack">
+      <section class="fmd-panel" aria-labelledby="historySummaryTitle">
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title" id="historySummaryTitle">제출 정보</h2>
+          <p class="rshd-panel__note" id="historyDetailSub"></p>
+        </div>
+        <div class="fmd-panel__body">
+          <div class="fcd-meta rshd-meta-grid" aria-label="제출 정보">
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">아이디</div>
+              <div class="fcd-meta__value" id="historyUserId"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">용역명</div>
+              <div class="fcd-meta__value" id="historyServiceName"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">수정일</div>
+              <div class="fcd-meta__value" id="historyLastDate"></div>
+            </div>
+            <div class="fcd-meta__row">
+              <div class="fcd-meta__label">진행단계</div>
+              <div class="fcd-meta__value" id="historyStatus"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="fmd-panel" aria-labelledby="historyDetailTitle">
+        <div class="fmd-panel__head">
+          <span class="fmd-panel__title-icon" aria-hidden="true">
+            <img src="assets/main/facility-management/icon-section-facility.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="fmd-panel__title" id="historyDetailTitle">신청내역</h2>
+          <p class="rshd-panel__note">신청 <strong id="historyFacilityCount">0</strong>개</p>
+        </div>
+        <div class="fmd-panel__body">
+          <p class="rshd-facility-msg" id="historyFacilityMessage"></p>
+          <div class="rshd-table-wrap">
+            <table class="rshd-table" aria-label="신청내역 목록">
+              <colgroup>
+                <col class="rshd-col-no">
+                <col class="rshd-col-portgbn">
+                <col class="rshd-col-mgmtgbn">
+                <col class="rshd-col-org">
+                <col class="rshd-col-sea">
+                <col class="rshd-col-port">
+                <col class="rshd-col-subport">
+                <col class="rshd-col-ftype">
+                <col class="rshd-col-fname">
+                <col class="rshd-col-sub1">
+                <col class="rshd-col-sub2">
+                <col class="rshd-col-sub3">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">번호</th>
+                  <th scope="col">항만구분</th>
+                  <th scope="col">관리구분</th>
+                  <th scope="col">관리기관</th>
+                  <th scope="col">해역</th>
+                  <th scope="col">항명</th>
+                  <th scope="col">세부항명</th>
+                  <th scope="col">시설구분</th>
+                  <th scope="col">시설명</th>
+                  <th scope="col">정기안전점검<br>제출현황</th>
+                  <th scope="col">정밀안전(진단)점검 및<br>성능평가 제출현황</th>
+                  <th scope="col">보수정보 제출현황</th>
+                </tr>
+              </thead>
+              <tbody id="historyFacilityBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="fca-drawer-overlay" id="historyDrawerOverlay"></div>
+  <aside class="fca-drawer" id="historyDrawer" aria-labelledby="historyDrawerTitle" aria-hidden="true">
+    <div class="fca-drawer__top">
+      <header class="fca-drawer__head">
+        <h2 class="fca-drawer__title" id="historyDrawerTitle">결재이력 조회</h2>
+        <button type="button" class="fca-drawer__close" id="historyDrawerClose" aria-label="닫기">
+          <img src="assets/facility-change-approval/icon-close.png" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="fca-drawer__body" id="historyDrawerBody"></div>
+    </div>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/report-submit-history-data.js"></script>
+  <script src="js/report-submit-history-detail.js"></script>
+</body>
+</html>

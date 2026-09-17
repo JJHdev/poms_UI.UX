@@ -1,0 +1,990 @@
+/* 안전점검기관 — 관리자 시안 기준(admin-notices.css 규격)으로 통일
+   ─ 이 파일은 fcr / admin-users / sra 공통 CSS 위에 덮어쓰는 오버라이드 레이어입니다.
+   ─ 되돌리려면 이 파일을 이전 버전으로 교체하면 됩니다. */
+
+/* ========================================================================
+   1) 카드(흰 박스) 제거 — 공지사항처럼 플랫 구조로
+   ======================================================================== */
+html body.inspection-agency-page .main-content .fcr-page,
+html body.inspection-agency-page .main-content .fcr-card,
+html body.inspection-agency-page .main-content .fcr-filter-panel,
+html body.inspection-agency-page .main-content .fcr-results-panel {
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+html body.inspection-agency-page .main-content .fcr-card::before,
+html body.inspection-agency-page .main-content .fcr-card::after {
+  content: none !important;
+}
+
+html body.inspection-agency-page .main-content .fcr-page,
+html body.inspection-agency-page .main-content .fcr-card {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  width: 100%;
+  min-width: 0;
+}
+
+html body.inspection-agency-page .main-content .fcr-results-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+/* 패널 사이 구분선 제거 */
+html body.inspection-agency-page .fcr-divider {
+  display: none !important;
+}
+
+/* ========================================================================
+   2) 섹션 타이틀 (검색조건)
+   ======================================================================== */
+html body.inspection-agency-page .fcr-filter-panel__head {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.inspection-agency-page .fcr-filter-panel__title-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  background: #f6f9ff !important;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+html body.inspection-agency-page .fcr-filter-panel__title-icon img {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  object-fit: contain;
+}
+
+html body.inspection-agency-page .fcr-filter-panel__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+/* ========================================================================
+   3) 검색 스트립
+   ======================================================================== */
+html body.inspection-agency-page .fcr-filter {
+  margin: 0 !important;
+  padding: 9px 10px 8px !important;
+  background: #f3f8fe !important;
+  border: 0 !important;
+  border-top: 1px solid #8d9aab !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html body.inspection-agency-page .fcr-filter-row {
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: 8px !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.inspection-agency-page .fcr-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.inspection-agency-page .fcr-field > label {
+  padding: 0 2px !important;
+  color: #6c788b !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+}
+
+html body.inspection-agency-page .fcr-field input[type="text"],
+html body.inspection-agency-page .fcr-field input[type="search"],
+html body.inspection-agency-page .fcr-field select {
+  width: 100% !important;
+  height: 34px !important;
+  padding: 0 14px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1;
+  outline: none;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html body.inspection-agency-page .fcr-field select {
+  padding-right: 32px !important;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #6c788b 50%),
+    linear-gradient(135deg, #6c788b 50%, transparent 50%) !important;
+  background-position: calc(100% - 18px) 15px, calc(100% - 13px) 15px !important;
+  background-size: 5px 5px, 5px 5px !important;
+  background-repeat: no-repeat !important;
+}
+
+html body.inspection-agency-page .fcr-field input::placeholder {
+  color: #999 !important;
+  font-size: 14px;
+}
+
+html body.inspection-agency-page .fcr-field input:focus,
+html body.inspection-agency-page .fcr-field select:focus {
+  border-color: #1c6fff !important;
+  box-shadow: none !important;
+}
+
+html body.inspection-agency-page .fcr-filter-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 검색 / 초기화 버튼 */
+html body.inspection-agency-page .fcr-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  font-family: inherit;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+html body.inspection-agency-page .fcr-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+html body.inspection-agency-page .fcr-btn--search {
+  min-width: 107px !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.inspection-agency-page .fcr-btn--search:hover {
+  background: #16304f !important;
+}
+
+html body.inspection-agency-page .fcr-btn--reset {
+  min-width: 96px !important;
+  border: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #6c788b !important;
+}
+
+html body.inspection-agency-page .fcr-btn--reset:hover {
+  background: #f6f8fb !important;
+}
+
+/* ========================================================================
+   4) 검색결과 헤더
+   ======================================================================== */
+html body.inspection-agency-page .fcr-results__head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  min-height: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.inspection-agency-page .fcr-results__count {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+html body.inspection-agency-page .fcr-results__bar-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+html body.inspection-agency-page .fcr-results__bar-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+html body.inspection-agency-page .fcr-results__label {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.32px;
+  line-height: 1.2 !important;
+}
+
+html body.inspection-agency-page .fcr-results__meta {
+  margin: 0 !important;
+  color: #6c788b !important;
+  font-size: 14px !important;
+  letter-spacing: -0.28px;
+  line-height: 1.2 !important;
+}
+
+html body.inspection-agency-page .fcr-results__meta strong {
+  color: #1c6fff !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================================================
+   5) 목록 테이블
+   ======================================================================== */
+html body.inspection-agency-page .fcr-table-wrap {
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px 6px 0 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.inspection-agency-page .agency-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  table-layout: fixed !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+}
+
+html body.inspection-agency-page .agency-table thead,
+html body.inspection-agency-page .agency-table tbody,
+html body.inspection-agency-page .agency-table tr {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.inspection-agency-page .agency-table thead th,
+html body.inspection-agency-page .agency-table tbody td {
+  height: 32px !important;
+  max-height: 32px !important;
+  padding: 0 8px !important;
+  font-size: 13px !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box;
+}
+
+html body.inspection-agency-page .agency-table thead th {
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111 !important;
+  font-weight: 500 !important;
+}
+
+html body.inspection-agency-page .agency-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+html body.inspection-agency-page .agency-table thead th:last-child {
+  border-right: 0 !important;
+  border-radius: 0 6px 0 0;
+}
+
+html body.inspection-agency-page .agency-table tbody td {
+  background: #fff !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333 !important;
+  font-weight: 400 !important;
+}
+
+html body.inspection-agency-page .agency-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+html body.inspection-agency-page .agency-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+html body.inspection-agency-page .agency-table tbody tr {
+  cursor: pointer;
+}
+
+html body.inspection-agency-page .agency-table tbody tr:hover td {
+  background: #f5f8fc !important;
+}
+
+html body.inspection-agency-page .agency-table tbody tr.is-selected td {
+  background: #eef4ff !important;
+}
+
+/* 셀 내부 요소는 줄높이 상속 해제 */
+html body.inspection-agency-page .agency-table tbody td > * {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* 좌측 정렬 셀 */
+html body.inspection-agency-page .agency-table tbody td.is-left {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  text-align: left !important;
+}
+
+/* 데이터 없음 */
+html body.inspection-agency-page .agency-table tbody tr.is-empty td,
+html body.inspection-agency-page .agency-table tbody td.is-empty {
+  height: 120px !important;
+  max-height: none !important;
+  line-height: 1.4 !important;
+  color: #8993a1 !important;
+  text-align: center !important;
+  cursor: default;
+}
+
+/* 컬럼 폭 */
+html body.inspection-agency-page .agency-table col.col-no,
+html body.inspection-agency-page .agency-table th.col-no,
+html body.inspection-agency-page .agency-table td.col-no {
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+
+html body.inspection-agency-page .agency-table .col-org {
+  width: 20%;
+}
+
+html body.inspection-agency-page .agency-table .col-name {
+  width: auto;
+}
+
+html body.inspection-agency-page .agency-table .col-usage {
+  width: 100px;
+}
+
+html body.inspection-agency-page .agency-table .col-phone {
+  width: 140px;
+}
+
+html body.inspection-agency-page .agency-table .col-login {
+  width: 120px;
+}
+
+html body.inspection-agency-page .agency-table .col-yn {
+  width: 100px;
+}
+
+/* 사용권한 배지 */
+html body.inspection-agency-page .agency-status {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 58px !important;
+  height: 20px !important;
+  padding: 0 10px !important;
+  border: 0 !important;
+  border-radius: 5px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  box-sizing: border-box;
+}
+
+html body.inspection-agency-page .agency-status--approved {
+  background: #f6f9ff !important;
+  color: #1c6fff !important;
+}
+
+html body.inspection-agency-page .agency-status--rejected {
+  background: #fef5f8 !important;
+  color: #e5002b !important;
+}
+
+html body.inspection-agency-page .agency-status--requested {
+  background: #f4f4fa !important;
+  color: #6c788b !important;
+}
+
+/* ========================================================================
+   6) 페이지네이션 (flat)
+   ======================================================================== */
+html body.inspection-agency-page .fcr-results-foot {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 20px 0 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.inspection-agency-page .pagination {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  margin: 0 !important;
+}
+
+html body.inspection-agency-page .pagination__btn {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html body.inspection-agency-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+}
+
+html body.inspection-agency-page .pagination__btn:disabled {
+  opacity: 1 !important;
+  cursor: default;
+}
+
+html body.inspection-agency-page .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400 !important;
+}
+
+html body.inspection-agency-page .pagination__btn[data-page-move] {
+  background-image: none !important;
+}
+
+html body.inspection-agency-page .pagination__btn[data-page-move] img {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain;
+}
+
+html body.inspection-agency-page .pagination__btn[data-page-move="next"] img,
+html body.inspection-agency-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1) !important;
+}
+
+html body.inspection-agency-page .pagination__btn:disabled img {
+  opacity: 0.35 !important;
+}
+
+html body.inspection-agency-page .pagination__btn svg {
+  display: none !important;
+}
+
+html body.inspection-agency-page .pagination__ellipsis {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  color: #6c788b !important;
+  font-size: 12px !important;
+}
+
+/* ========================================================================
+   7) 상세/수정 드로어 (ua-drawer)
+   ======================================================================== */
+html body.inspection-agency-page .ua-drawer {
+  width: min(560px, calc(100vw - 40px)) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+html body.inspection-agency-page .ua-drawer__head {
+  min-height: 0 !important;
+  padding: 22px 24px 14px !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+}
+
+html body.inspection-agency-page .ua-drawer__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+html body.inspection-agency-page .ua-drawer__close {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  cursor: pointer;
+}
+
+html body.inspection-agency-page .ua-drawer__close:hover {
+  background: #f6f8fb !important;
+}
+
+html body.inspection-agency-page .ua-drawer__close img {
+  display: block;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain;
+}
+
+html body.inspection-agency-page .ua-drawer__body {
+  padding: 18px 24px 20px !important;
+}
+
+html body.inspection-agency-page .ua-drawer-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+html body.inspection-agency-page .ua-drawer-row {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+html body.inspection-agency-page .ua-drawer-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0;
+  margin: 0 !important;
+}
+
+html body.inspection-agency-page .ua-drawer-field > label {
+  padding: 0 2px !important;
+  color: #6c788b !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+}
+
+html body.inspection-agency-page .ua-drawer-field input[type="text"],
+html body.inspection-agency-page .ua-drawer-field select,
+html body.inspection-agency-page .ua-drawer-phone input {
+  width: 100% !important;
+  height: 34px !important;
+  padding: 0 14px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1;
+  outline: none;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html body.inspection-agency-page .ua-drawer-field input[readonly] {
+  background: #f6f8fb !important;
+  color: #6c788b !important;
+}
+
+html body.inspection-agency-page .ua-drawer-field input:focus,
+html body.inspection-agency-page .ua-drawer-field select:focus,
+html body.inspection-agency-page .ua-drawer-phone input:focus {
+  border-color: #1c6fff !important;
+}
+
+html body.inspection-agency-page .ua-drawer-phone {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+html body.inspection-agency-page .ua-drawer-phone input {
+  text-align: center !important;
+}
+
+html body.inspection-agency-page .ua-drawer-phone__sep {
+  color: #6c788b !important;
+  font-size: 13px !important;
+  flex-shrink: 0;
+}
+
+/* 드로어 푸터 */
+html body.inspection-agency-page .ua-drawer__foot {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 18px !important;
+  padding: 14px 0 0 !important;
+  border-top: 1px solid #dadae2 !important;
+  background: #fff !important;
+}
+
+html body.inspection-agency-page .ua-drawer__message {
+  margin: 0 !important;
+  color: #6c788b !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+html body.inspection-agency-page .ua-drawer__actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  min-width: 96px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #6c788b !important;
+  font-family: inherit;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn img {
+  display: block;
+  width: 16px !important;
+  height: 16px !important;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+html body.inspection-agency-page .ua-drawer-btn--history {
+  background: #fff !important;
+  color: #111 !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn--history:hover {
+  border-color: #c3ccd8 !important;
+  background: #f6f8fb !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn--delete {
+  border-color: #e5002b !important;
+  background: #fef5f8 !important;
+  color: #e5002b !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn--delete:hover {
+  background: #fdeaf0 !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn--save {
+  border-color: #0b1a2d !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn--save:hover {
+  border-color: #16304f !important;
+  background: #16304f !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn--save img {
+  filter: brightness(0) invert(1);
+}
+
+/* ========================================================================
+   8) 결재이력 드로어 (sra-drawer)
+   ======================================================================== */
+html body.inspection-agency-page .sra-drawer-overlay {
+  z-index: 3000;
+  background: rgba(13, 31, 53, 0.2) !important;
+}
+
+html body.inspection-agency-page .sra-drawer {
+  z-index: 3001;
+  width: min(560px, calc(100vw - 40px)) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+html body.inspection-agency-page .sra-drawer__head {
+  min-height: 0 !important;
+  padding: 22px 24px 14px !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+}
+
+html body.inspection-agency-page .sra-drawer__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+html body.inspection-agency-page .sra-drawer__close {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+}
+
+html body.inspection-agency-page .sra-drawer__close:hover {
+  background: #f6f8fb !important;
+}
+
+html body.inspection-agency-page .sra-drawer__close img {
+  display: block;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain;
+}
+
+html body.inspection-agency-page .sra-drawer__body {
+  padding: 18px 24px 24px !important;
+}
+
+/* 결재이력 요청중 배지 */
+html body.inspection-agency-page .sra-hist-summary__status.is-requested {
+  background: #f4f4fa !important;
+  color: #6c788b !important;
+}
+
+/* 오버레이 공통 */
+html body.inspection-agency-page .mock-drawer-overlay,
+html body.inspection-agency-page .ua-drawer-overlay {
+  background: rgba(13, 31, 53, 0.2) !important;
+}
+
+/* ========================================================================
+   9) 유틸
+   ======================================================================== */
+.inspection-agency-page .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 1400px) {
+  html body.inspection-agency-page .fcr-filter-row {
+    flex-wrap: wrap !important;
+  }
+}
+
+/* ========================================================================
+   10) 간격 통일 + 행 높이 32px 강제
+   ======================================================================== */
+
+/* 검색조건 타이틀 ↔ 검색 스트립 간격을 다른 화면과 동일하게 (14px) */
+html body.inspection-agency-page .main-content .fcr-filter-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+html body.inspection-agency-page .fcr-filter-panel__head,
+html body.inspection-agency-page .fcr-filter,
+html body.inspection-agency-page .fcr-filter-row {
+  margin: 0 !important;
+}
+
+html body.inspection-agency-page .fcr-results__head {
+  margin: 0 !important;
+}
+
+/* 행 높이 32px — 공통 CSS(admin-users / fcr)의 값보다 우선 */
+html body.inspection-agency-page .fcr-table.admin-users-table.agency-table thead th,
+html body.inspection-agency-page .fcr-table.admin-users-table.agency-table tbody td,
+html body.inspection-agency-page table.agency-table thead th,
+html body.inspection-agency-page table.agency-table tbody td {
+  height: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 13px !important;
+  line-height: 32px !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+}
+
+html body.inspection-agency-page .fcr-table.admin-users-table.agency-table tbody tr,
+html body.inspection-agency-page table.agency-table tbody tr {
+  height: 32px !important;
+}
+
+/* 셀 안 배지/버튼이 행을 밀지 않도록 */
+html body.inspection-agency-page table.agency-table tbody td > * {
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+html body.inspection-agency-page table.agency-table .agency-status {
+  height: 20px !important;
+  line-height: 1 !important;
+}
+
+/* ========================================================================
+   11) 상세 드로어 푸터 — 한 줄 배치 + 아이콘 색상
+   ======================================================================== */
+
+/* 문구 + 버튼 3개를 한 줄에 */
+html body.inspection-agency-page .ua-drawer__foot {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+}
+
+html body.inspection-agency-page .ua-drawer__message {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  color: #6c788b !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+html body.inspection-agency-page .ua-drawer__actions {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  margin-left: auto !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-end !important;
+}
+
+/* 버튼 폭을 줄여 한 줄에 들어가게 */
+html body.inspection-agency-page .ua-drawer-btn {
+  min-width: 0 !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+  flex-shrink: 0 !important;
+}
+
+html body.inspection-agency-page .ua-drawer-btn img {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+/* 삭제하기 아이콘 → #e5002b */
+html body.inspection-agency-page .ua-drawer-btn--delete img {
+  filter: brightness(0) saturate(100%) invert(25.1%) sepia(29.2%) saturate(1116%)
+    hue-rotate(289deg) brightness(125.7%) contrast(263%) !important;
+}
+
+/* 저장하기 아이콘 → 흰색 */
+html body.inspection-agency-page .ua-drawer-btn--save img {
+  filter: brightness(0) invert(1) !important;
+}

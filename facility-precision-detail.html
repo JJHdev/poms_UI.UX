@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>정밀안전(진단)점검 상세 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/detail.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <link rel="stylesheet" href="css/facility-detail.css">
+  <link rel="stylesheet" href="css/facility-detail-regular.css">
+  <link rel="stylesheet" href="css/facility-detail-precision.css">
+  <link rel="stylesheet" href="css/facility-form.css">
+  <link rel="stylesheet" href="css/facility-precision-figma.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; }
+
+    /* 첨부파일 (보고서/외관조사망도/과업지시서/수중조사결과/상태평가/사진첩) */
+    .precision-files-table th { width: 140px; }
+    .precision-file-slot { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .precision-file-slot__name {
+      font-size: 13px; color: #1c6fff; text-decoration: underline; cursor: pointer;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+    }
+    .precision-file-slot__upload {
+      display: none;
+      margin-left: auto; flex-shrink: 0; height: 28px; padding: 0 12px;
+      border: 1px solid #dadae2; border-radius: 8px; background: #fff;
+      font-size: 12px; font-weight: 600; color: #374151; cursor: pointer; font-family: inherit;
+    }
+    .precision-file-slot__upload:hover { background: #f4f4fa; }
+    .precision-file-slot__hint { display: none; font-size: 11px; color: #9ca3af; flex-shrink: 0; }
+    /* 편집(등록) 모드에서만 업로드 버튼 표시 */
+    body.is-precision-form-mode .precision-file-slot__upload { display: inline-block; }
+    body.is-precision-form-mode .precision-file-slot__hint { display: inline; }
+
+    /* 정기안전점검표 팝업 — 탭과 같은 선 우측 범례 */
+    .precision-report-modal__legend {
+      flex-shrink: 0;
+      min-width: 0;
+    }
+  </style>
+  <script>
+    // 임베드 모드 (?embed=1) 조기 적용 — 팝업에는 상세 데이터만 표시
+    if (new URLSearchParams(window.location.search).get('embed') === '1') {
+      document.documentElement.classList.add('is-embed');
+      document.write('<style>'
+        + 'html.is-embed body{min-width:0!important;background:#fff!important}'
+        + 'html.is-embed #sidebar-root,html.is-embed .fs-lnb,html.is-embed .page-header,html.is-embed .detail-toolbar,html.is-embed .facility-detail-toolbar,html.is-embed .facility-summary,html.is-embed .detail-tabs,html.is-embed .info-data-legend{display:none!important}'
+        + 'html.is-embed .main-content{margin-left:0!important;padding:10px 14px 18px!important;min-width:0!important}'
+        + 'html.is-embed .fs-layout{display:block!important}html.is-embed .fd-content{max-width:none!important;width:100%!important}'
+        /* 전부 검은 글씨 (버튼 제외) */
+        + 'html.is-embed td,html.is-embed th,html.is-embed p,html.is-embed span,html.is-embed a,html.is-embed li,html.is-embed dt,html.is-embed dd,html.is-embed strong,html.is-embed label,html.is-embed input,html.is-embed textarea,html.is-embed select,html.is-embed div{color:#111827!important}'
+        + 'html.is-embed button span,html.is-embed button i{color:inherit!important}'
+        + 'html.is-embed *:not(button):not(button *){color:#111827!important;-webkit-text-fill-color:#111827!important}'
+        + 'html.is-embed button span,html.is-embed button i{-webkit-text-fill-color:inherit!important}'
+        /* FMS 데이터(파란색) — 상세정보 폼·기술자/결함 표·모달 상세값 */
+        + 'html.is-embed .prec-fig-form.is-readonly .prec-fig-text,html.is-embed .prec-fig-form.is-readonly .prec-fig-control,html.is-embed .prec-fig-form.is-readonly .precision-modal__cell-input,html.is-embed .prec-fig-form.is-readonly .precision-modal__cell-textarea,html.is-embed .prec-fig-form.is-readonly .precision-modal__cell-select,html.is-embed .prec-tech-input[readonly],html.is-embed #precisionEngineerTable .prec-tech-input,html.is-embed #precisionDefectTable .prec-tech-input,html.is-embed .precision-report-modal__legend-item--fms{color:#1c6fff!important;-webkit-text-fill-color:#1c6fff!important}'
+        /* 내부 팝업(정기안전점검표·보수보강이행현황) — 현재 팝업 크기 그대로 데이터만 교체된 것처럼 */
+        + 'html.is-embed .precision-report-modal{padding:24px!important;align-items:center!important;justify-content:center!important}'
+        + 'html.is-embed .precision-report-modal__backdrop{background:rgba(0,0,0,.2)!important}'
+        + 'html.is-embed .precision-report-modal__panel,html.is-embed .repair-status-modal__panel{width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;height:auto!important;max-height:calc(100vh - 48px)!important;margin:0 auto!important;border-radius:20px!important;box-shadow:0 12px 40px rgba(13,31,53,.18)!important}'
+        + 'html.is-embed .precision-report-modal__legend,html.is-embed .precision-report-modal__legend-note{display:none!important}'
+        /* 조회 전용 — 편집/삭제/추가 숨김 */
+        + 'html.is-embed #precisionEditBtn,html.is-embed #precisionDeleteBtn,html.is-embed #precisionReportEditBtn,html.is-embed #precisionReportSaveBtn,html.is-embed #precisionReportCancelBtn,html.is-embed #precisionDefectAddBtn{display:none!important}'
+        /* 조회 전용 — 첨부파일 업로드 버튼/안내 숨김 (다운로드는 유지) */
+        + 'html.is-embed .precision-file-slot__upload,html.is-embed .precision-file-slot__hint{display:none!important}'
+        + '</style>');
+    }
+  </script>
+</head>
+<body class="app-layout facility-detail-page facility-form-page precision-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시설물 정보 메뉴">
+        <div class="fs-lnb__title">
+          <span class="fs-lnb__title-text">시설물 정보</span>
+        </div>
+        <nav class="fs-lnb__nav">
+          <a class="fs-lnb__item is-active" href="facility-search.html" aria-current="page">
+            <span>시설물 통합검색</span>
+            <span class="fs-lnb__chevron ico-angle ico-angle--right" aria-hidden="true">
+              <span class="ico-angle__vec">
+                <img src="assets/main/facility-search/detail/figma224/icon-angle-down-lnb.svg" alt="">
+              </span>
+            </span>
+          </a>
+          <a class="fs-lnb__item" href="facility-condition-search.html">
+            <span>시설물 조건검색</span>
+            <span class="fs-lnb__chevron ico-angle ico-angle--right" aria-hidden="true">
+              <span class="ico-angle__vec">
+                <img src="assets/main/facility-search/detail/figma224/icon-angle-down-lnb.svg" alt="">
+              </span>
+            </span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="fd-content">
+    <header class="page-header">
+      <div class="page-header__nav">
+        <a href="facility-detail.html" class="btn-back" data-precision-back aria-label="목록으로">
+          <span class="ico-angle" aria-hidden="true">
+            <span class="ico-angle__vec">
+              <img src="assets/main/facility-search/detail/figma224/icon-angle-down.svg" alt="">
+            </span>
+          </span>
+        </a>
+        <a href="facility.html" class="page-header__home" aria-label="시설물 정보 홈">
+          <span class="page-header__home-icon" aria-hidden="true">
+            <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+            <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+            <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+          </span>
+        </a>
+      </div>
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="facility.html">시설물 정보</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <a href="facility-search.html">시설물 통합검색</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <a href="facility-detail.html" data-precision-back>시설물 상세정보</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="breadcrumb__current" id="precisionDetailCrumbCurrent">정밀안전(진단)점검 상세정보</span>
+      </nav>
+    </header>
+
+    <article class="facility-summary">
+      <div class="facility-summary__primary">
+        <div class="facility-summary__icon" aria-hidden="true">
+          <img src="assets/main/facility-search/detail/icon-facility.svg" alt="" width="24" height="24">
+        </div>
+        <h1 class="facility-summary__title" id="precisionDetailFacilityName">남방파제</h1>
+        <div class="facility-summary__meta-row">
+          <span class="facility-summary__location" id="precisionDetailFacilityAddress">부산광역시 중구 항만로</span>
+          <span class="facility-summary__meta-divider" aria-hidden="true"></span>
+          <span class="facility-summary__location" id="precisionDetailFacilityPort">부산항 북항</span>
+          <span class="facility-summary__badge-group">
+            <span class="tag tag--orange">2종 시설물</span>
+            <span class="tag tag--blue">외곽시설</span>
+          </span>
+        </div>
+      </div>
+      <div class="facility-summary__updated" aria-label="최종 수정일">
+        <span class="facility-summary__updated-label">최종 수정일</span>
+        <span class="facility-summary__updated-value">2026-07-27</span>
+      </div>
+    </article>
+
+    <div class="detail-shell">
+      <div class="detail-tabs" role="tablist" aria-label="시설물 상세 구성">
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="general" aria-selected="false">일반정보</button>
+        <button type="button" class="detail-tabs__btn is-active" role="tab" data-tab="precision" aria-selected="true">안전점검실적</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="repair" aria-selected="false">보수보강실적</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="vulnerable" aria-selected="false">취약시설물 중점관리</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="major-defect" aria-selected="false">중대결함 사후관리</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="history" aria-selected="false">이력정보</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="safety" aria-selected="false">안전시설현황</button>
+        <button type="button" class="detail-tabs__btn" role="tab" data-tab="calculrate" aria-selected="false">대가산정</button>
+      </div>
+
+      <div class="info-data-legend" id="precisionModalSource" aria-label="데이터 출처">
+        <p class="info-data-legend__note">
+          ※ 종시설물 데이터는 FMS에서 자동으로 연동되며, 수정할 수 없습니다. FMS 연동 항목은 <em>파란색 글씨</em>로 구분됩니다.
+        </p>
+        <div class="info-data-legend__badges">
+          <span class="info-data-legend__item info-data-legend__item--fms">FMS 데이터 (읽기 전용) - 2026.05.20</span>
+          <span class="info-data-legend__item info-data-legend__item--poms">POMS 데이터 (수정 가능)</span>
+        </div>
+      </div>
+
+      <div class="detail-tab-panel is-active" id="panel-precision" role="tabpanel">
+      <section class="detail-section">
+        <div class="prec-fig-block">
+          <h3 class="detail-section__title">정밀안전(진단)점검 이력</h3>
+          <form class="prec-fig-form precision-modal__form is-readonly" id="precisionDetailForm">
+            <div class="prec-fig-form__rows">
+              <div class="prec-fig-row">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">점검진단구분</span>
+                  <span class="prec-fig-val">
+                    <select class="prec-fig-control precision-modal__cell-select" id="precisionCategory" name="category">
+                      <option value="정기안전점검(상반기)">정기안전점검(상반기)</option>
+                      <option value="정기안전점검(하반기)">정기안전점검(하반기)</option>
+                      <option value="성능평가">성능평가</option>
+                      <option value="정밀안전점검">정밀안전점검</option>
+                      <option value="정밀안전진단">정밀안전진단</option>
+                      <option value="긴급점검">긴급점검</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">점검진단기간</span>
+                  <span class="prec-fig-val prec-fig-val--period">
+                    <input type="date" class="prec-fig-control precision-modal__cell-input" id="precisionPeriodStart" name="periodStart">
+                    <span class="prec-fig-sep">~</span>
+                    <input type="date" class="prec-fig-control precision-modal__cell-input" id="precisionPeriodEnd" name="periodEnd">
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">점검진단기관명</span>
+                  <span class="prec-fig-val">
+                    <input type="text" class="prec-fig-text precision-modal__cell-input" id="precisionAgency" name="agency" placeholder="내용을 입력해주세요.">
+                  </span>
+                </div>
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">종별</span>
+                  <span class="prec-fig-val prec-fig-val--locked">
+                    <input type="text" class="prec-fig-text precision-modal__cell-input" id="precisionClassType" name="classType" readonly>
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">책임기술자명</span>
+                  <span class="prec-fig-val">
+                    <input type="text" class="prec-fig-text precision-modal__cell-input" id="precisionEngineer" name="engineer" placeholder="내용을 입력해주세요.">
+                  </span>
+                </div>
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">비용</span>
+                  <span class="prec-fig-val prec-fig-val--cost">
+                    <input type="text" class="prec-fig-control prec-fig-control--cost precision-modal__cell-input" id="precisionCost" name="cost" placeholder="0">
+                    <span class="prec-fig-unit">천원<span class="prec-fig-unit__vat">(VAT 포함)</span></span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row prec-fig-row--span">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">안전등급</span>
+                  <span class="prec-fig-val">
+                    <select class="prec-fig-control precision-modal__cell-select" id="precisionGrade" name="grade">
+                      <option value="A등급">A등급</option>
+                      <option value="B등급">B등급</option>
+                      <option value="C등급">C등급</option>
+                      <option value="D등급">D등급</option>
+                      <option value="E등급">E등급</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row prec-fig-row--span">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">주요점검진단결과</span>
+                  <span class="prec-fig-val">
+                    <textarea class="prec-fig-text precision-modal__cell-textarea" id="precisionMainResult" name="mainResult" rows="1" placeholder="내용을 입력해주세요."></textarea>
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row prec-fig-row--span">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">주요 보수보강(안)</span>
+                  <span class="prec-fig-val">
+                    <textarea class="prec-fig-text precision-modal__cell-textarea" id="precisionRepairPlan" name="repairPlan" rows="1" placeholder="내용을 입력해주세요."></textarea>
+                  </span>
+                </div>
+              </div>
+
+              <div class="prec-fig-row">
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">작성자</span>
+                  <span class="prec-fig-val prec-fig-val--locked">
+                    <input type="text" class="prec-fig-text precision-modal__cell-input" id="precisionAuthor" name="author" readonly>
+                  </span>
+                </div>
+                <div class="prec-fig-field">
+                  <span class="prec-fig-lbl">작성일</span>
+                  <span class="prec-fig-val prec-fig-val--locked">
+                    <input type="date" class="prec-fig-text precision-modal__cell-input" id="precisionCreatedDate" name="createdDate" readonly>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="prec-tech-section" id="precisionEngineerWrap" hidden>
+          <div class="prec-tech-section__head">
+            <h4 class="prec-tech-section__title">책임(참여)기술자 현황</h4>
+            <div id="precisionEngineerActions" hidden>
+              <button type="button" class="prec-tech-add-btn" id="precisionEngineerAddBtn">
+                <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="18" height="18">
+                행 추가
+              </button>
+            </div>
+          </div>
+          <div class="prec-tech-table-wrap">
+            <table class="prec-tech-table" id="precisionEngineerTable">
+              <thead>
+                <tr>
+                  <th>역할</th>
+                  <th>성명</th>
+                  <th>생년월일</th>
+                  <th>시작일</th>
+                  <th>종료일</th>
+                  <th>일수</th>
+                  <th>참여율</th>
+                  <th>기술등급</th>
+                  <th class="prec-tech-table__mgmt" id="precisionEngineerDeleteCol" hidden>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="precisionEngineerBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prec-tech-section" id="precisionDefectWrap" hidden>
+          <div class="prec-tech-section__head">
+            <h4 class="prec-tech-section__title">중대결함등</h4>
+            <div id="precisionDefectActions" hidden>
+              <button type="button" class="prec-tech-add-btn" id="precisionDefectAddBtn">
+                <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="18" height="18">
+                행 추가
+              </button>
+            </div>
+          </div>
+          <div class="prec-tech-table-wrap">
+            <table class="prec-tech-table" id="precisionDefectTable">
+              <thead>
+                <tr>
+                  <th>부위/부재</th>
+                  <th>결함구분</th>
+                  <th>결함종류</th>
+                  <th class="prec-tech-table__mgmt" id="precisionDefectDeleteCol" hidden>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="precisionDefectBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="form-file-grid" id="precisionFilesWrap">
+          <div class="form-file-grid__head">
+            <h4>첨부파일</h4>
+          </div>
+          <div class="form-file-grid__rows">
+            <div class="form-file-grid__row">
+              <div class="form-file-field">
+                <span class="form-file-field__label">보고서</span>
+                <div class="form-file-picker precision-file-slot" data-pdf-only="1">
+                  <img src="assets/main/facility-form/icon-file.svg" alt="" width="18" height="18">
+                  <a href="#" class="precision-file-slot__name">2018 정밀안전진단 보고서.pdf (540KB)</a>
+                  <span class="precision-file-slot__hint">※ PDF만 업로드 가능</span>
+                  <button type="button" class="precision-file-slot__upload">파일선택</button>
+                  <input type="file" hidden accept=".pdf,application/pdf">
+                </div>
+              </div>
+              <div class="form-file-field">
+                <span class="form-file-field__label">외관조사망도</span>
+                <div class="form-file-picker precision-file-slot">
+                  <img src="assets/main/facility-form/icon-file.svg" alt="" width="18" height="18">
+                  <a href="#" class="precision-file-slot__name">외관조사망도.dwg (540KB)</a>
+                  <button type="button" class="precision-file-slot__upload">파일선택</button>
+                  <input type="file" hidden>
+                </div>
+              </div>
+              <div class="form-file-field">
+                <span class="form-file-field__label">과업지시서</span>
+                <div class="form-file-picker precision-file-slot">
+                  <img src="assets/main/facility-form/icon-file.svg" alt="" width="18" height="18">
+                  <a href="#" class="precision-file-slot__name">과업지시서.hwp (540KB)</a>
+                  <button type="button" class="precision-file-slot__upload">파일선택</button>
+                  <input type="file" hidden>
+                </div>
+              </div>
+            </div>
+            <div class="form-file-grid__row">
+              <div class="form-file-field">
+                <span class="form-file-field__label">수중조사결과</span>
+                <div class="form-file-picker precision-file-slot">
+                  <img src="assets/main/facility-form/icon-file.svg" alt="" width="18" height="18">
+                  <a href="#" class="precision-file-slot__name">수중조사결과.pdf (540KB)</a>
+                  <button type="button" class="precision-file-slot__upload">파일선택</button>
+                  <input type="file" hidden>
+                </div>
+              </div>
+              <div class="form-file-field">
+                <span class="form-file-field__label">상태평가</span>
+                <div class="form-file-picker precision-file-slot">
+                  <img src="assets/main/facility-form/icon-file.svg" alt="" width="18" height="18">
+                  <a href="#" class="precision-file-slot__name">상태평가.xlsx (540KB)</a>
+                  <button type="button" class="precision-file-slot__upload">파일선택</button>
+                  <input type="file" hidden>
+                </div>
+              </div>
+              <div class="form-file-field">
+                <span class="form-file-field__label">사진첩</span>
+                <div class="form-file-picker precision-file-slot">
+                  <img src="assets/main/facility-form/icon-file.svg" alt="" width="18" height="18">
+                  <a href="#" class="precision-file-slot__name">사진첩.zip (540KB)</a>
+                  <button type="button" class="precision-file-slot__upload">파일선택</button>
+                  <input type="file" hidden>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="precision-detail-page__foot">
+          <div class="form-card-toolbar__left">
+            <button type="button" class="btn-form-secondary" id="precisionReportBtn">
+              <img src="assets/main/facility-form/icon-doc.svg" alt="" width="18" height="18">
+              정기안전점검표
+            </button>
+            <button type="button" class="btn-form-secondary" id="precisionRepairStatusBtn">
+              <img src="assets/main/facility-form/icon-doc.svg" alt="" width="18" height="18">
+              보수보강이행현황
+            </button>
+          </div>
+          <div class="form-card-toolbar__right">
+            <button type="button" class="btn-form-ghost" id="precisionDeleteBtn">
+              <img src="assets/main/facility-form/icon-delete.svg" alt="" width="18" height="18">
+              삭제하기
+            </button>
+            <button type="button" class="btn-form-primary" id="precisionEditBtn">
+              <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+              수정하기
+            </button>
+            <button type="button" class="btn-form-ghost" id="precisionFormCancelBtn" hidden>취소</button>
+            <button type="button" class="btn-form-primary" id="precisionSaveBtn" hidden>
+              <img src="assets/main/facility-form/icon-save.svg" alt="" width="18" height="18">
+              저장하기
+            </button>
+          </div>
+        </div>
+      </section>
+      </div>
+    </div>
+      </div><!-- /.fd-content -->
+    </div><!-- /.fs-layout -->
+  </main>
+
+
+  <div
+    id="repairStatusModal"
+    class="precision-report-modal repair-status-modal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="repairStatusModalTitle"
+  >
+    <div class="precision-report-modal__backdrop" data-close-repair-status tabindex="-1" aria-hidden="true"></div>
+    <div class="precision-report-modal__panel repair-status-modal__panel">
+      <header class="precision-report-modal__head">
+        <div class="precision-report-modal__head-main">
+          <h3 class="precision-report-modal__title" id="repairStatusModalTitle">보수보강이행현황</h3>
+        </div>
+        <button type="button" class="precision-report-modal__close" data-close-repair-status aria-label="닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="repair-status-modal__stack">
+        <div class="repair-status-modal__body">
+          <div class="repair-status-modal__table-wrap">
+            <table class="repair-status-table" id="repairStatusTable" aria-label="보수보강이행현황 목록">
+              <colgroup>
+                <col class="col-name">
+                <col class="col-cat">
+                <col class="col-type">
+                <col class="col-date">
+                <col class="col-date">
+                <col class="col-part">
+                <col class="col-content">
+                <col class="col-cost">
+                <col class="col-note">
+                <col class="col-view">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>시설물명</th>
+                  <th>구분</th>
+                  <th>공사구분</th>
+                  <th>시작일</th>
+                  <th>종료일</th>
+                  <th>공사부위</th>
+                  <th>공사내용</th>
+                  <th>공사비(천원)</th>
+                  <th>비고</th>
+                  <th>현황</th>
+                </tr>
+              </thead>
+              <tbody id="repairStatusBody"></tbody>
+            </table>
+          </div>
+
+          <nav class="pagination regular-pagination repair-status-pagination" id="repairStatusPagination" aria-label="보수보강이행현황 페이지"></nav>
+
+          <div class="repair-status-detail" id="repairStatusDetail" hidden>
+            <div class="repair-status-detail__title" id="repairStatusDetailTitle">보수보강 실적 상세</div>
+            <div class="repair-status-detail__grid" id="repairStatusDetailGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="precisionReportModal"
+    class="precision-report-modal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="precisionReportModalTitle"
+  >
+    <div class="precision-report-modal__backdrop" data-close-report-modal tabindex="-1" aria-hidden="true"></div>
+    <div class="precision-report-modal__panel">
+      <header class="precision-report-modal__head">
+        <div class="precision-report-modal__head-main">
+          <h3 class="precision-report-modal__title" id="precisionReportModalTitle">정기안전점검표</h3>
+        </div>
+        <button type="button" class="precision-report-modal__close" data-close-report-modal aria-label="닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="precision-report-modal__stack">
+        <div class="precision-report-modal__shell">
+          <div class="precision-report-modal__top">
+            <div class="precision-report-modal__toolbar">
+              <div class="precision-report-modal__toolbar-row">
+                <div class="precision-report-modal__tabs" role="tablist" aria-label="정기안전점검표 구성">
+                  <button type="button" class="precision-report-modal__tab is-active" role="tab" data-report-tab="items" aria-selected="true">점검사항</button>
+                  <button type="button" class="precision-report-modal__tab" role="tab" data-report-tab="photos" aria-selected="false">사진대지</button>
+                  <button type="button" class="precision-report-modal__tab" role="tab" data-report-tab="report" aria-selected="false">결과보고서</button>
+                </div>
+                <div class="precision-report-modal__legend" aria-label="데이터 출처">
+                  <span class="precision-report-modal__legend-item precision-report-modal__legend-item--fms">FMS 데이터 (읽기 전용) - 2026.05.20</span>
+                  <span class="precision-report-modal__legend-item precision-report-modal__legend-item--poms">POMS 데이터 (수정 가능)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="precision-report-modal__content">
+            <div class="precision-report-modal__tab-panel is-active" id="precisionReportPanelItems" role="tabpanel">
+              <div class="precision-report-modal__panel-hd">
+                <div class="precision-report-modal__panel-title">점검사항</div>
+              </div>
+              <div class="precision-report-modal__panel-bd">
+                <div class="precision-report-info-grid" aria-label="점검 기본정보">
+                  <div class="precision-report-info-grid__row">
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">시설물명</span>
+                      <span class="precision-report-info-field__val" id="precisionReportFacilityName">남방파제</span>
+                    </div>
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">관리주체</span>
+                      <span class="precision-report-info-field__val" id="precisionReportOwner">-</span>
+                    </div>
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">조사단위</span>
+                      <span class="precision-report-info-field__val" id="precisionReportSurveyUnit">-</span>
+                    </div>
+                  </div>
+                  <div class="precision-report-info-grid__row">
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">평가단위</span>
+                      <span class="precision-report-info-field__val" id="precisionReportEvalUnit">-</span>
+                    </div>
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">준공 년월일</span>
+                      <span class="precision-report-info-field__val" id="precisionReportCompletedDate">2026.02.14</span>
+                    </div>
+                    <div class="precision-report-info-field">
+                      <span class="precision-report-info-field__lbl">최종점검 년월일</span>
+                      <span class="precision-report-info-field__val" id="precisionReportLastInspectionDate">2026.02.25</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="precision-report-modal__table-wrap">
+                  <table class="precision-report-items-table" aria-label="점검사항">
+                    <colgroup>
+                      <col class="col-group">
+                      <col class="col-item">
+                      <col class="col-result">
+                      <col class="col-result">
+                      <col class="col-result">
+                      <col class="col-opinion">
+                      <col class="col-repair">
+                      <col class="col-photo">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th scope="col" colspan="2" rowspan="2">점검항목</th>
+                        <th scope="col" colspan="3">점검결과</th>
+                        <th scope="col" rowspan="2">의견</th>
+                        <th scope="col" rowspan="2">보수 필요여부</th>
+                        <th scope="col" rowspan="2">사진첨부</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">양호</th>
+                        <th scope="col">보통</th>
+                        <th scope="col">불량</th>
+                      </tr>
+                    </thead>
+                    <tbody id="precisionReportItemsBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="precision-report-modal__tab-panel" id="precisionReportPanelPhotos" role="tabpanel" hidden>
+              <div class="precision-report-modal__panel-hd">
+                <div class="precision-report-modal__panel-title">사진대지</div>
+              </div>
+              <div class="precision-report-modal__panel-bd">
+                <div class="precision-report-photos">
+                  <div class="precision-report-photos__top">
+                    <span class="precision-report-photos__lbl">시설물명</span>
+                    <strong class="precision-report-photos__title" id="precisionReportPhotoFacility">남방파제</strong>
+                    <span class="precision-report-photos__lbl">관리주체</span>
+                    <span class="precision-report-photos__owner" id="precisionReportPhotoOwner">-</span>
+                  </div>
+                  <div class="precision-report-photos__grid" id="precisionReportPhotosGrid"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="precision-report-modal__tab-panel" id="precisionReportPanelReport" role="tabpanel" hidden></div>
+          </div>
+        </div>
+
+        <footer class="precision-report-modal__foot">
+          <div class="precision-report-modal__actions">
+            <button type="button" class="btn-form-secondary" id="precisionReportDownloadBtn">
+              <img src="assets/main/facility-form/icon-report-download.svg" alt="" width="18" height="18">
+              보고서 다운로드
+            </button>
+            <button type="button" class="btn-form-primary" id="precisionReportEditBtn">
+              <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+              수정하기
+            </button>
+            <button type="button" class="btn-form-ghost" id="precisionReportCancelBtn" hidden>취소</button>
+            <button type="button" class="btn-form-primary" id="precisionReportSaveBtn" hidden>
+              <img src="assets/main/facility-form/icon-save.svg" alt="" width="18" height="18">
+              저장하기
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/facility-detail-precision-data.js"></script>
+  <script src="js/facility-precision-detail.js"></script>
+  <script src="js/facility-detail-precision-report.js"></script>
+  <script>
+    PomsSidebar.mount('#sidebar-root', { active: 'facility-search' });
+  </script>
+  <script>
+    // 첨부파일 — 다운로드/업로드 (보고서는 PDF만 허용)
+    document.querySelectorAll('.precision-file-slot').forEach((slot) => {
+      const input = slot.querySelector('input[type="file"]');
+      const nameEl = slot.querySelector('.precision-file-slot__name');
+      slot.querySelector('.precision-file-slot__upload')?.addEventListener('click', () => input?.click());
+      input?.addEventListener('change', () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+        if (slot.dataset.pdfOnly === '1' && !/\.pdf$/i.test(file.name)) {
+          alert('보고서는 PDF 파일만 업로드 가능합니다.');
+          input.value = '';
+          return;
+        }
+        const prevName = nameEl && !nameEl.classList.contains('is-empty')
+          ? (nameEl.textContent || '').trim()
+          : '';
+        if (nameEl) {
+          nameEl.textContent = file.name;
+          nameEl.classList.remove('is-empty');
+          if (!nameEl.getAttribute('href')) nameEl.setAttribute('href', '#');
+        }
+        if (prevName) {
+          alert(`기존 파일(${prevName})이 "${file.name}" 파일로 대체되었습니다. (샘플)`);
+        } else {
+          alert(`"${file.name}" 파일이 첨부되었습니다. (샘플)`);
+        }
+        input.value = '';
+      });
+      nameEl?.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (nameEl.classList.contains('is-empty') || !(nameEl.textContent || '').trim()) return;
+        if (slot.dataset.pdfOnly === '1') {
+          alert('안전점검보고서에서 신청하여 승인 후 다운로드가 가능합니다.');
+        } else {
+          alert('다운로드 권한이 없습니다.');
+        }
+      });
+    });
+  </script>
+  <script>
+    // 임베드 모드 (?embed=1) — 팝업(iframe) 표시용: 사이드바/헤더/목록으로 숨김
+    if (new URLSearchParams(window.location.search).get('embed') === '1') {
+      document.body.classList.add('is-embed');
+      const embedStyle = document.createElement('style');
+      embedStyle.textContent = 'body{min-width:0!important;background:#fff!important}body.is-embed #sidebar-root,body.is-embed .fs-lnb,body.is-embed .page-header,body.is-embed .detail-toolbar,body.is-embed .facility-detail-toolbar,body.is-embed .facility-summary,body.is-embed .detail-tabs,body.is-embed .info-data-legend{display:none!important}body.is-embed .main-content{margin-left:0!important;padding:10px 14px 18px!important;min-width:0!important}body.is-embed .fs-layout{display:block!important}body.is-embed .fd-content{max-width:none!important;width:100%!important}' +
+        /* 정기안전점검표/보수보강이행현황 팝업 — Figma와 동일한 1200px 비율 */
+        'body.is-embed .precision-report-modal__legend,body.is-embed .precision-report-modal__legend-note{display:none!important}' +
+        'body.is-embed .precision-report-modal{padding:24px!important;align-items:center!important;justify-content:center!important}' +
+        'body.is-embed .precision-report-modal__backdrop{background:rgba(0,0,0,.2)!important}' +
+        'body.is-embed .precision-report-modal__panel,body.is-embed .repair-status-modal__panel{width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;height:auto!important;max-height:calc(100vh - 48px)!important;margin:0 auto!important;border-radius:20px!important;box-shadow:0 12px 40px rgba(13,31,53,.18)!important}' +
+        /* FMS 데이터(파란색) 유지 — 상세정보 폼 포함 */
+        'body.is-embed .prec-fig-form.is-readonly .prec-fig-text,body.is-embed .prec-fig-form.is-readonly .prec-fig-control,body.is-embed .prec-fig-form.is-readonly .precision-modal__cell-input,body.is-embed .prec-fig-form.is-readonly .precision-modal__cell-textarea,body.is-embed .prec-fig-form.is-readonly .precision-modal__cell-select,body.is-embed .prec-tech-input[readonly],body.is-embed #precisionEngineerTable .prec-tech-input,body.is-embed #precisionDefectTable .prec-tech-input,body.is-embed .precision-report-modal__legend-item--fms{color:#1c6fff!important;-webkit-text-fill-color:#1c6fff!important}';
+      document.head.appendChild(embedStyle);
+
+      // JS가 인라인 style + !important 로 칠한 파란 글씨(input/select 등)를 검정으로 강제 (동적 변경 감시 포함)
+      // FMS 데이터 영역(상세정보 폼·모달)은 파란색 유지
+      (function () {
+        const BLACK = '#111827';
+        const FMS_BLUE_SEL = '.prec-fig-form.is-readonly .prec-fig-text, .prec-fig-form.is-readonly .prec-fig-control, .prec-fig-form.is-readonly .precision-modal__cell-input, .prec-fig-form.is-readonly .precision-modal__cell-textarea, .prec-fig-form.is-readonly .precision-modal__cell-select, .prec-tech-input[readonly], #precisionEngineerTable .prec-tech-input, #precisionDefectTable .prec-tech-input, .precision-report-modal__legend-item--fms';
+        const isFmsBlue = (el) => {
+          if (el.matches?.(FMS_BLUE_SEL) || el.closest?.(FMS_BLUE_SEL)) return true;
+          if (el.closest?.('#precisionDetailForm.is-readonly') && el.matches?.('input, textarea, select')) return true;
+          if (el.closest?.('#precisionEngineerTable, #precisionDefectTable') && el.matches?.('input')) return true;
+          return false;
+        };
+        const isBlack = (v) => { v = (v || '').toLowerCase(); return !v || v === BLACK || v === 'rgb(17, 24, 39)'; };
+        const fixInlineColors = () => {
+          document.querySelectorAll('[style]').forEach((el) => {
+            if (el.closest('button')) return;
+            if (isFmsBlue(el)) return;
+            if (!isBlack(el.style.getPropertyValue('color'))) el.style.setProperty('color', BLACK, 'important');
+            if (!isBlack(el.style.getPropertyValue('-webkit-text-fill-color'))) el.style.setProperty('-webkit-text-fill-color', BLACK, 'important');
+          });
+        };
+        fixInlineColors();
+        window.setTimeout(fixInlineColors, 0);
+        new MutationObserver(fixInlineColors).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['style'] });
+      })();
+    }
+  </script>
+</body>
+</html>
