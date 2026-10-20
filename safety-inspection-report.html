@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>안전점검보고서 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/safety-inspection-report.css?v=7">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+</head>
+<body class="app-layout safety-inspection-report-page type3-port-page fcr-flat-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header__nav">
+        <a href="archive.html" class="page-header__home" aria-label="자료실 홈">
+          <span class="page-header__home-icon" aria-hidden="true">
+            <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+            <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+            <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+          </span>
+        </a>
+      </div>
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="archive.html">자료실</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="breadcrumb__current">안전점검보고서</span>
+      </nav>
+    </header>
+
+    <div class="type3-page" aria-label="안전점검보고서">
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text">안전점검보고서</h1>
+      </div>
+
+      <section class="type3-filter-strip safety-report-filter-strip" aria-label="검색조건">
+        <form class="type3-filter type3-filter--strip safety-report-filter" id="reportSearchForm" novalidate onsubmit="return false;">
+          <div class="type3-filter__fields safety-report-filter__fields">
+            <div class="type3-filter-row">
+              <div class="type3-field">
+                <label for="reportYear">점검년도</label>
+                <select id="reportYear" name="year">
+                  <option value="">전체</option>
+                  <option value="2026" selected>2026</option>
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                </select>
+              </div>
+              <div class="type3-field">
+                <label for="reportAgency">관리기관</label>
+                <select id="reportAgency" name="agency">
+                  <option value="">전체</option>
+                  <option value="부산지방해양수산청">부산지방해양수산청</option>
+                  <option value="여수지방해양수산청">여수지방해양수산청</option>
+                  <option value="여수광양항만공사">여수광양항만공사</option>
+                  <option value="인천항만공사">인천항만공사</option>
+                  <option value="부산항만공사">부산항만공사</option>
+                  <option value="경상북도">경상북도</option>
+                </select>
+              </div>
+              <div class="type3-field">
+                <label for="reportFacilityType">시설구분</label>
+                <select id="reportFacilityType" name="facilityType">
+                  <option value="">전체</option>
+                  <option value="계류시설">계류시설</option>
+                  <option value="안벽시설">안벽시설</option>
+                  <option value="외곽시설">외곽시설</option>
+                  <option value="건축물">건축물</option>
+                  <option value="교통시설">교통시설</option>
+                  <option value="기타">기타</option>
+                </select>
+              </div>
+              <div class="type3-field">
+                <label for="reportClassType">종구분</label>
+                <select id="reportClassType" name="classType">
+                  <option value="">전체</option>
+                  <option value="1종">1종</option>
+                  <option value="2종">2종</option>
+                  <option value="기타">기타</option>
+                </select>
+              </div>
+              <div class="type3-field">
+                <label for="reportPort">항</label>
+                <select id="reportPort" name="port">
+                  <option value="">전체</option>
+                  <option value="부산항">부산항</option>
+                  <option value="여수항">여수항</option>
+                  <option value="광양항">광양항</option>
+                  <option value="인천항">인천항</option>
+                  <option value="거문도항">거문도항</option>
+                  <option value="구룡포항">구룡포항</option>
+                </select>
+              </div>
+            </div>
+            <div class="type3-filter-row">
+              <div class="type3-field">
+                <label for="reportSubPort">세부항</label>
+                <select id="reportSubPort" name="subPort">
+                  <option value="">전체</option>
+                  <option value="감천항">감천항</option>
+                  <option value="여천항">여천항</option>
+                  <option value="광양항">광양항</option>
+                  <option value="신항">신항</option>
+                  <option value="북항">북항</option>
+                  <option value="남항">남항</option>
+                  <option value="연안부두">연안부두</option>
+                  <option value="거문도항">거문도항</option>
+                  <option value="구룡포항">구룡포항</option>
+                </select>
+              </div>
+              <div class="type3-field">
+                <label for="reportInspectType">점검구분</label>
+                <select id="reportInspectType" name="inspectType">
+                  <option value="">전체</option>
+                  <option value="정밀안전진단">정밀안전진단</option>
+                  <option value="정밀안전점검">정밀안전점검</option>
+                  <option value="성능평가">성능평가</option>
+                </select>
+              </div>
+              <div class="type3-field type3-field--grow">
+                <label for="reportFacilityName">시설물명</label>
+                <input type="text" id="reportFacilityName" name="facilityName" placeholder="검색어를 입력해주세요.">
+              </div>
+            </div>
+          </div>
+          <div class="type3-filter-actions safety-report-filter-actions">
+            <button type="button" class="type3-btn type3-btn--reset" id="reportResetBtn">
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+            <button type="submit" class="type3-btn type3-btn--search" id="reportSearchBtn">
+              <img src="assets/main/facility-statistics/figma188/icon-search-clean.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="type3-results-panel" aria-labelledby="reportResultTitle">
+        <div class="type3-results__head">
+          <div class="type3-results__count">
+            <span class="type3-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+            </span>
+            <h2 id="reportResultTitle" class="type3-results__label">조회결과</h2>
+            <p class="type3-results__meta">총 <strong id="reportResultCount">0</strong>건</p>
+          </div>
+          <div class="type3-results__side">
+            <p class="type3-list-guide-note">※ 보고서 미리보기·다운로드 신청·결재이력을 확인할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="type3-table-wrap">
+          <table class="type3-table safety-report-table" aria-label="안전점검보고서 조회결과">
+            <thead>
+              <tr>
+                <th scope="col" class="col-no">번호</th>
+                <th scope="col" class="col-year">점검년도</th>
+                <th scope="col" class="col-agency">관리기관</th>
+                <th scope="col" class="col-port">항명</th>
+                <th scope="col" class="col-subport">세부항명</th>
+                <th scope="col" class="col-class">종구분</th>
+                <th scope="col" class="col-ftype">시설구분</th>
+                <th scope="col" class="col-name">시설명</th>
+                <th scope="col" class="col-itype">점검구분</th>
+                <th scope="col" class="col-report">보고서</th>
+                <th scope="col" class="col-request">다운로드 신청</th>
+                <th scope="col" class="col-history">결재이력</th>
+              </tr>
+            </thead>
+            <tbody id="reportTableBody"></tbody>
+          </table>
+        </div>
+        <div class="type3-results-foot">
+          <nav class="pagination" id="reportPagination" aria-label="페이지 이동"></nav>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- 다운로드 신청 모달 -->
+  <div class="fcr-modal" id="reportRequestModal" hidden role="dialog" aria-modal="true" aria-labelledby="reportRequestModalTitle">
+    <div class="fcr-modal__backdrop" data-close-report-request tabindex="-1" aria-hidden="true"></div>
+    <div class="fcr-modal__panel report-request-modal__panel" role="document">
+      <header class="fcr-modal__head">
+        <div class="fcr-modal__head-main">
+          <h2 class="fcr-modal__title" id="reportRequestModalTitle">다운로드 신청</h2>
+          <p class="fcr-modal__sub" id="reportRequestSub"></p>
+        </div>
+        <button type="button" class="fcr-modal__close" data-close-report-request aria-label="다운로드 신청 닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="fcr-modal__stack">
+        <div class="fcr-modal__body report-request-modal__body">
+          <label class="report-request-label" for="reportRequestReason">신청이유</label>
+          <textarea
+            id="reportRequestReason"
+            class="report-request-reason"
+            rows="5"
+            placeholder="다운로드 신청 이유를 입력해 주세요."
+          ></textarea>
+        </div>
+        <footer class="fcr-modal__foot">
+          <button type="button" class="fcr-modal__btn-close" data-close-report-request>취소</button>
+          <button type="button" class="fcr-modal__btn-primary" id="reportRequestSubmitBtn">신청</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- 결재이력 팝업 -->
+  <div class="fcr-modal" id="reportHistoryModal" hidden role="dialog" aria-modal="true" aria-labelledby="reportHistoryModalTitle">
+    <div class="fcr-modal__backdrop" data-close-report-history tabindex="-1" aria-hidden="true"></div>
+    <div class="fcr-modal__panel report-history-modal__panel" role="document">
+      <header class="fcr-modal__head">
+        <div class="fcr-modal__head-main">
+          <h2 class="fcr-modal__title" id="reportHistoryModalTitle">결재이력</h2>
+          <p class="fcr-modal__sub" id="reportHistorySub"></p>
+        </div>
+        <button type="button" class="fcr-modal__close" data-close-report-history aria-label="결재이력 닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="fcr-modal__stack">
+        <div class="fcr-modal__body">
+          <div class="fcr-modal__board">
+            <div class="fcr-modal__table-wrap">
+              <table class="fcr-history-table report-history-table" aria-label="결재이력 목록">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width:140px">구분</th>
+                    <th scope="col" style="width:170px">일자</th>
+                    <th scope="col">내용</th>
+                  </tr>
+                </thead>
+                <tbody id="reportHistoryBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <footer class="fcr-modal__foot">
+          <button type="button" class="fcr-modal__btn-close" data-close-report-history>닫기</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- 보고서 VIEW 모달 -->
+  <div id="reportViewModal" class="report-view-modal" hidden role="dialog" aria-modal="true" aria-labelledby="reportViewTitle">
+    <div class="report-view-modal__backdrop" data-close-report-view></div>
+    <div class="report-view-modal__panel">
+      <header class="report-view-modal__head">
+        <h3 id="reportViewTitle">보고서 VIEW</h3>
+        <button type="button" class="report-view-modal__close" data-close-report-view aria-label="닫기">&times;</button>
+      </header>
+      <div class="report-view-modal__body report-view-modal__body--pdf">
+        <iframe
+          id="reportViewFrame"
+          class="report-view-pdf"
+          title="보고서 PDF 미리보기"
+        ></iframe>
+      </div>
+      <footer class="report-view-modal__foot">
+        <button type="button" class="btn-view-close" data-close-report-view>닫기</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/user-table-utils.js"></script>
+  <script src="js/safety-inspection-report-data.js"></script>
+  <script src="js/safety-inspection-report.js"></script>
+</body>
+</html>

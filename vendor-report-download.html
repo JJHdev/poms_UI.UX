@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>용역사 보고서 다운로드 신청 관리 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/inspection-status.css?v=20260810p">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/safety-report-approval.css">
+  <link rel="stylesheet" href="css/facility-change-approval.css">
+  <link rel="stylesheet" href="css/vendor-report-download.css?v=20260818b">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout inspection-status-page safety-report-approval-page facility-change-approval-page vendor-report-download-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="insp-status-page">
+        <section class="insp-filter-panel" aria-labelledby="vrdFilterTitle">
+          <div class="insp-filter-panel__head">
+            <div class="insp-filter-panel__head-main">
+              <span class="insp-filter-panel__title-icon" aria-hidden="true">
+                <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+              </span>
+              <h2 id="vrdFilterTitle" class="insp-filter-panel__title">검색조건</h2>
+            </div>
+          </div>
+          <form class="insp-filter" id="vrdSearchForm" novalidate>
+            <div class="insp-filter__row vrd-filter-row">
+              <div class="insp-field insp-field--name">
+                <label for="fltName">시설명</label>
+                <input type="text" id="fltName" name="facilityName" placeholder="시설명을 입력하세요." autocomplete="off">
+              </div>
+              <div class="insp-field insp-field--sm">
+                <label for="fltPort">항명</label>
+                <select id="fltPort" name="port">
+                  <option value="">전체</option>
+                </select>
+              </div>
+              <div class="insp-field insp-field--sm">
+                <label for="fltSubPort">세부항명</label>
+                <select id="fltSubPort" name="subPort">
+                  <option value="">전체</option>
+                </select>
+              </div>
+              <div class="insp-field">
+                <label for="fltKind">점검진단구분</label>
+                <select id="fltKind" name="kind">
+                  <option value="">전체</option>
+                </select>
+              </div>
+              <div class="insp-field">
+                <label for="fltInspector">점검자</label>
+                <input type="text" id="fltInspector" name="inspector" placeholder="점검자명을 입력하세요." autocomplete="off">
+              </div>
+              <div class="insp-filter-actions">
+                <button type="submit" class="insp-btn insp-btn--search" id="fltSearchBtn">
+                  <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                  검색하기
+                </button>
+                <button type="button" class="insp-btn insp-btn--reset" id="fltResetBtn">
+                  <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                  초기화
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <div class="insp-divider" aria-hidden="true"></div>
+
+        <section class="insp-results-panel" aria-labelledby="vrdResultTitle">
+          <div class="insp-results__head">
+            <div class="insp-results__count">
+              <span class="insp-results__bar-icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+              </span>
+              <h2 id="vrdResultTitle" class="insp-results__label">검색결과</h2>
+              <p class="insp-results__meta">총 <strong id="vrdResultCount">0</strong>건</p>
+            </div>
+          </div>
+
+          <div class="insp-status-table-wrap">
+            <table class="insp-status-table sra-table vrd-table" aria-label="보고서 다운로드 신청 목록">
+              <colgroup>
+                <col class="col-no">
+                <col class="col-datetime">
+                <col class="col-org">
+                <col class="col-port">
+                <col class="col-subport">
+                <col class="col-ftype">
+                <col class="col-fname">
+                <col class="col-date">
+                <col class="col-check">
+                <col class="col-insp">
+                <col class="col-state">
+                <col class="col-status">
+                <col class="col-history">
+                <col class="col-action">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-no">번호</th>
+                  <th scope="col" class="col-datetime">신청일시</th>
+                  <th scope="col" class="col-org">관리기관</th>
+                  <th scope="col" class="col-port">항명</th>
+                  <th scope="col" class="col-subport">세부항명</th>
+                  <th scope="col" class="col-ftype">시설구분</th>
+                  <th scope="col" class="col-fname">시설명</th>
+                  <th scope="col" class="col-date">점검일자</th>
+                  <th scope="col" class="col-check">점검진단구분</th>
+                  <th scope="col" class="col-insp">점검기관</th>
+                  <th scope="col" class="col-state">시설물상태</th>
+                  <th scope="col" class="col-status">상태</th>
+                  <th scope="col" class="col-history">결재이력</th>
+                  <th scope="col" class="col-action">승인/반려</th>
+                </tr>
+              </thead>
+              <tbody id="vrdBody"></tbody>
+            </table>
+          </div>
+
+          <div class="insp-results-foot">
+            <nav class="pagination" id="vrdPaging" aria-label="페이지 이동"></nav>
+            <label class="visually-hidden" for="vrdPageSize">페이지당 표시 건수</label>
+            <select id="vrdPageSize" class="pagination-page-size" aria-label="페이지당 표시 건수" hidden>
+              <option value="10" selected>10 / page</option>
+            </select>
+          </div>
+        </section>
+    </div>
+  </main>
+
+  <!-- 반려 사유 입력 팝업 -->
+  <div class="sra-modal" id="vrdRejectModal" hidden role="dialog" aria-modal="true" aria-labelledby="vrdRejectTitle">
+    <div class="sra-modal__backdrop" data-close-reject aria-hidden="true"></div>
+    <div class="sra-modal__panel">
+      <header class="sra-modal__head">
+        <h3 class="sra-modal__title" id="vrdRejectTitle">다운로드 신청 반려</h3>
+        <button type="button" class="sra-modal__close" data-close-reject aria-label="닫기">&times;</button>
+      </header>
+      <div class="sra-modal__body">
+        <p class="sra-modal__sub" id="vrdRejectSub"></p>
+        <div class="sra-modal__label">반려 사유<span class="req">*</span></div>
+        <textarea class="sra-modal__textarea" id="vrdRejectReason" placeholder="반려 사유를 입력하세요.&#10;예) 신청 사유가 불충분합니다. 활용 목적을 구체적으로 작성해 재신청 바랍니다."></textarea>
+      </div>
+      <footer class="sra-modal__foot">
+        <button type="button" class="sra-modal__btn sra-modal__btn--cancel" data-close-reject>취소</button>
+        <button type="button" class="sra-modal__btn sra-modal__btn--danger" id="vrdRejectSubmit">반려 처리</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 결재이력 드로어 -->
+  <div class="fca-drawer-overlay" id="histDrawerOverlay" data-close-history></div>
+  <aside class="fca-drawer" id="histDrawer" aria-labelledby="histDrawerTitle" aria-hidden="true">
+    <div class="fca-drawer__top">
+      <header class="fca-drawer__head">
+        <h2 class="fca-drawer__title" id="histDrawerTitle">결재이력 조회</h2>
+        <button type="button" class="fca-drawer__close" data-close-history aria-label="닫기">
+          <img src="assets/facility-change-approval/icon-close.png" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="fca-drawer__body" id="histDrawerBody"></div>
+    </div>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/vendor-report-download.js"></script>
+</body>
+</html>

@@ -1,0 +1,1179 @@
+/* 용역사(service_inspect) 점검이력정보·점검사항·사진대지·결과보고서 톤
+   — 수정/추가 폼 공통 (내용은 HTML 원본 유지, 스타일만)
+   ※ 대가산정 탭 스타일은 css/facility-detail-calculate.css 에서 관리 */
+
+/* ===== Field tables → fig-row / if-meta ===== */
+.facility-form-page .info-table.precision-modal__table,
+.facility-form-page .info-table.repair-modal__table,
+.facility-form-page .info-table.vulnerable-modal__table:not(:has(thead)),
+.facility-form-page .info-table.major-defect-modal__table {
+  width: 100%;
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  font-size: 14px;
+  background: transparent;
+  table-layout: fixed;
+}
+
+.facility-form-page .info-table.precision-modal__table th,
+.facility-form-page .info-table.precision-modal__table td,
+.facility-form-page .info-table.repair-modal__table th,
+.facility-form-page .info-table.repair-modal__table td,
+.facility-form-page .info-table.vulnerable-modal__table:not(:has(thead)) th,
+.facility-form-page .info-table.vulnerable-modal__table:not(:has(thead)) td,
+.facility-form-page .info-table.major-defect-modal__table th,
+.facility-form-page .info-table.major-defect-modal__table td {
+  min-height: 34px;
+  height: 34px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #dadae2;
+  border-width: 0.5px 0.5px 0.5px 0;
+  background: #fff;
+}
+
+.facility-form-page .info-table.precision-modal__table th,
+.facility-form-page .info-table.repair-modal__table th,
+.facility-form-page .info-table.vulnerable-modal__table:not(:has(thead)) th,
+.facility-form-page .info-table.major-defect-modal__table th {
+  width: 160px;
+  min-width: 120px;
+  background: rgba(28, 111, 255, 0.04);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.facility-form-page .info-table.precision-modal__table--3col {
+  table-layout: fixed;
+}
+
+.facility-form-page .info-table.precision-modal__table--3col th {
+  width: 140px;
+  min-width: 120px;
+}
+
+.facility-form-page .info-table.precision-modal__table--3col td {
+  width: auto;
+}
+
+.facility-form-page .precision-modal__form.is-add-mode .precision-modal__cell-textarea,
+.facility-form-page .precision-modal__form.is-edit-mode .precision-modal__cell-textarea {
+  min-height: 24px !important;
+  height: 24px;
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.facility-form-page .precision-modal__form:not(.is-readonly) td:has(#precisionClassType),
+.facility-form-page .precision-modal__form:not(.is-readonly) td:has(#precisionAuthor),
+.facility-form-page .precision-modal__form:not(.is-readonly) td:has(#precisionCreatedDate) {
+  background: #f7f7f8;
+}
+
+.facility-form-page .precision-modal__form:not(.is-readonly) #precisionClassType,
+.facility-form-page .precision-modal__form:not(.is-readonly) #precisionAuthor,
+.facility-form-page .precision-modal__form:not(.is-readonly) #precisionCreatedDate {
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  height: auto;
+  min-height: 0;
+}
+
+.facility-form-page .precision-modal__cell-input::placeholder,
+.facility-form-page .precision-modal__cell-textarea::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.facility-form-page .precision-cost-input__unit .vat {
+  color: #1c6fff;
+  font-size: 13px;
+}
+
+body.is-precision-add-mode .detail-section__head .facility-summary__legend,
+body.is-precision-add-mode #precisionModalSource {
+  display: none !important;
+}
+
+.facility-form-page .info-table.precision-modal__table tr > :first-child,
+.facility-form-page .info-table.repair-modal__table tr > :first-child,
+.facility-form-page .info-table.vulnerable-modal__table:not(:has(thead)) tr > :first-child,
+.facility-form-page .info-table.major-defect-modal__table tr > :first-child {
+  border-left-width: 0.5px;
+  border-radius: 12px 0 0 12px;
+}
+
+.facility-form-page .info-table.precision-modal__table tr > :last-child,
+.facility-form-page .info-table.repair-modal__table tr > :last-child,
+.facility-form-page .info-table.vulnerable-modal__table:not(:has(thead)) tr > :last-child,
+.facility-form-page .info-table.major-defect-modal__table tr > :last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+/* ===== Form pages shell ===== */
+.facility-form-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 40px;
+}
+
+.facility-form-page .page-header {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.facility-form-page .page-header__lead {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Figma 154:3778 — 높이 70 세로형 << 버튼 */
+.facility-form-page a.btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  height: 70px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 14px;
+  background: rgba(13, 31, 53, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  text-decoration: none;
+  color: #fff;
+  box-sizing: border-box;
+  transition: background 0.2s;
+}
+
+.facility-form-page a.btn-back:hover {
+  background: rgba(13, 31, 53, 0.7);
+}
+
+.facility-form-page a.btn-back img {
+  display: block;
+  /* Figma Component 28 안 Vector inset — 실제 << 크기 ~13×11 */
+  width: 13px;
+  height: 11px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.facility-form-page a.btn-back svg {
+  width: 13px;
+  height: 11px;
+  stroke: #fff;
+}
+
+.facility-form-page .page-header__bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 70px;
+  padding: 10px 14px 10px 24px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.facility-form-page .page-header__titles {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.facility-form-page .page-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.56px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.facility-form-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 4px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #a4afc0;
+  line-height: 1;
+}
+
+.facility-form-page .breadcrumb a,
+.facility-form-page .breadcrumb__sep {
+  color: #a4afc0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.facility-form-page .breadcrumb__current {
+  color: #6c788b;
+  font-weight: 500;
+}
+
+.facility-form-page .breadcrumb a:hover {
+  color: #1c6fff;
+}
+
+.facility-form-page .detail-toolbar {
+  display: none;
+}
+
+.facility-form-page .facility-summary {
+  display: block;
+  height: 100px;
+  padding: 10px 24px;
+  margin-bottom: 0;
+  background: #fff;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.facility-form-page .facility-summary__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+  flex-wrap: nowrap;
+}
+
+.facility-form-page .facility-summary__primary {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.facility-form-page .facility-summary__title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.facility-form-page .facility-summary__icon {
+  width: auto;
+  height: auto;
+  padding: 10px;
+  border-radius: 4px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+  flex-shrink: 0;
+}
+
+.facility-form-page .facility-summary__icon img,
+.facility-form-page .facility-summary__icon svg {
+  display: block;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.facility-form-page .facility-summary__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.facility-form-page .facility-summary__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  margin: 0 0 -2px;
+}
+
+.facility-form-page .facility-summary__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+  font-size: 14px;
+  width: 100%;
+}
+
+.facility-form-page .facility-summary__location {
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.facility-form-page .facility-summary__meta-divider {
+  display: inline-block;
+  width: 0;
+  height: 10px;
+  border-left: 1px solid #dadae2;
+  flex-shrink: 0;
+}
+
+.facility-form-page .facility-summary__badge-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 18px;
+}
+
+.facility-form-page .tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.facility-form-page .tag--orange {
+  background: rgba(239, 201, 75, 0.15);
+  color: #d4a50a;
+}
+
+.facility-form-page .tag--blue {
+  background: rgba(28, 111, 255, 0.15);
+  color: #1c6fff;
+}
+
+.facility-form-page .facility-summary__dates {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.04);
+  border: none;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.facility-form-page .facility-summary__date-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.facility-form-page .facility-summary__date-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6c788b;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.facility-form-page .facility-summary__date-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.facility-form-page .facility-summary__dates .facility-summary__date-cell:last-child .facility-summary__date-label,
+.facility-form-page .facility-summary__dates .facility-summary__date-cell:last-child .facility-summary__date-value {
+  color: #6c788b;
+}
+
+.facility-form-page .facility-summary__dates-gap {
+  display: block;
+  width: 0;
+  align-self: stretch;
+  margin: 0;
+  border-left: 1px solid #dadae2;
+  background: transparent;
+}
+
+.facility-form-page .info-data-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 0.5px solid #dadae2;
+  background: #fff;
+}
+
+.facility-form-page .info-data-legend__item--fms {
+  color: #1c6fff;
+  border-color: rgba(28, 111, 255, 0.35);
+  background: rgba(28, 111, 255, 0.05);
+}
+
+/* Form body card (tab-panel-wrap) */
+.facility-form-page .detail-tab-panel {
+  display: block;
+  background: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 20px 24px 24px;
+  margin-bottom: 0;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.facility-form-page .detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+}
+
+.facility-form-page .form-card-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.facility-form-page .form-card-toolbar__left,
+.facility-form-page .form-card-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.facility-form-page .form-card-toolbar__left:empty {
+  display: none;
+}
+
+.facility-form-page .form-card-toolbar__right {
+  margin-left: auto;
+}
+
+.facility-form-page .form-card-toolbar__left .detail-section__title {
+  margin: 0;
+  padding: 0;
+}
+
+.facility-form-page .btn-form-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.facility-form-page .btn-form-secondary:hover {
+  background: #f9f9fa;
+}
+
+.facility-form-page .btn-form-secondary img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.facility-form-page .btn-form-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  background: #fff;
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.facility-form-page .btn-form-ghost:hover {
+  background: #f9f9fa;
+}
+
+.facility-form-page .btn-form-ghost img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.7;
+}
+
+.facility-form-page .btn-form-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 8px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* display:inline-flex 가 hidden 속성을 덮어쓰지 않도록 */
+.facility-form-page .btn-form-primary[hidden],
+.facility-form-page .btn-form-ghost[hidden],
+.facility-form-page .btn-form-secondary[hidden] {
+  display: none !important;
+}
+
+.facility-form-page .btn-form-primary:hover {
+  background: #152a44;
+}
+
+.facility-form-page .btn-form-primary img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.facility-form-page .detail-section__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding: 0;
+  background: transparent;
+}
+
+.facility-form-page .detail-section__head .precision-modal__source,
+.facility-form-page .detail-section__head .repair-modal__source,
+.facility-form-page .detail-section__head .facility-summary__legend {
+  margin: 0 0 0 auto;
+  margin-bottom: 0;
+  gap: 0;
+}
+
+.facility-form-page .detail-section__head .facility-summary__legend,
+.facility-form-page .detail-section__head .info-data-legend {
+  margin-left: auto;
+  flex-shrink: 0;
+  max-width: min(560px, 100%);
+}
+
+.facility-form-page .detail-section__head .info-data-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px 10px;
+  margin: 0;
+}
+
+.facility-form-page .detail-section__head .info-data-legend__note {
+  margin: 0;
+  width: 100%;
+  font-size: 12px;
+  color: #6c788b;
+  line-height: 1.3;
+  text-align: right;
+}
+
+.facility-form-page .detail-section__head .info-data-legend__note em {
+  font-style: normal;
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.facility-form-page .detail-section > .detail-section__title {
+  padding: 0;
+  margin: 0;
+}
+
+.facility-form-page .prec-fig-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.facility-form-page .prec-fig-block > .detail-section__title {
+  margin: 0;
+}
+
+.facility-form-page .detail-section__title {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.facility-form-page .precision-modal__form,
+.facility-form-page .repair-modal__form,
+.facility-form-page .vulnerable-modal__form,
+.facility-form-page .major-defect-modal__form {
+  padding: 0;
+}
+
+/* 범례 직후 첫 필드 간격만 축소 */
+.facility-form-page .detail-section__head + .precision-modal__form > .info-table.precision-modal__table,
+.facility-form-page .detail-section__head + .repair-modal__form > .info-table.repair-modal__table,
+.facility-form-page .detail-section__head + .vulnerable-modal__form > .info-table.vulnerable-modal__table,
+.facility-form-page .detail-section__head + .major-defect-modal__form > .info-table.major-defect-modal__table {
+  border-spacing: 0 10px;
+  margin-top: 0;
+}
+
+.facility-form-page .detail-section__block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.facility-form-page #precisionEngineerWrap,
+.facility-form-page #precisionDefectWrap,
+.facility-form-page #precisionFilesWrap,
+.facility-form-page .repair-modal__parts-wrap,
+.facility-form-page .major-defect-modal__action-wrap {
+  padding: 0;
+}
+
+.facility-form-page #precisionEngineerWrap > div:first-child,
+.facility-form-page #precisionDefectWrap > div:first-child,
+.facility-form-page #precisionFilesWrap > .form-file-grid__head,
+.facility-form-page .repair-modal__parts-wrap > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 !important;
+}
+
+.facility-form-page #precisionEngineerWrap h4,
+.facility-form-page #precisionDefectWrap h4,
+.facility-form-page #precisionFilesWrap h4,
+.facility-form-page .repair-modal__parts-wrap h4 {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #111;
+  letter-spacing: -0.32px;
+  margin: 0 !important;
+}
+
+.facility-form-page:not(.precision-detail-page) .precision-detail-page__foot,
+.facility-form-page .repair-detail-page__foot,
+.facility-form-page .vulnerable-detail-page__foot,
+.facility-form-page .major-defect-detail-page__foot {
+  display: none;
+}
+
+/* Inputs inside fig-val cells — borderless like service_inspect */
+.facility-form-page .precision-modal__cell-input,
+.facility-form-page .precision-modal__cell-select,
+.facility-form-page .precision-modal__cell-textarea,
+.facility-form-page .repair-modal__cell-input,
+.facility-form-page .repair-modal__cell-select,
+.facility-form-page .repair-modal__cell-textarea,
+.facility-form-page .vulnerable-modal__cell-input,
+.facility-form-page .vulnerable-modal__cell-select,
+.facility-form-page .vulnerable-modal__cell-textarea,
+.facility-form-page .major-defect-modal__cell-input,
+.facility-form-page .major-defect-modal__cell-select,
+.facility-form-page .major-defect-modal__cell-textarea {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  color: #111;
+  font-size: 14px !important;
+  font-weight: 500;
+  box-shadow: none !important;
+  font-family: inherit;
+}
+
+.facility-form-page .precision-modal__cell-textarea,
+.facility-form-page .repair-modal__cell-textarea,
+.facility-form-page .vulnerable-modal__cell-textarea,
+.facility-form-page .major-defect-modal__cell-textarea {
+  min-height: 64px !important;
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.facility-form-page .precision-modal__form:not(.is-readonly) .precision-modal__cell-input:not(:disabled):not([readonly]),
+.facility-form-page .precision-modal__form:not(.is-readonly) .precision-modal__cell-textarea:not([readonly]),
+.facility-form-page .precision-modal__form.is-edit-mode .precision-modal__cell-select:not(:disabled),
+.facility-form-page .precision-modal__form.is-add-mode .precision-modal__cell-select:not(:disabled),
+.facility-form-page .repair-modal__form:not(.is-readonly) .repair-modal__cell-input:not(:disabled):not([readonly]),
+.facility-form-page .repair-modal__form:not(.is-readonly) .repair-modal__cell-textarea:not([readonly]),
+.facility-form-page .repair-modal__form.is-edit-mode .repair-modal__cell-select:not(:disabled),
+.facility-form-page .repair-modal__form.is-add-mode .repair-modal__cell-select:not(:disabled),
+.facility-form-page .vulnerable-modal__form:not(.is-readonly) .vulnerable-modal__cell-input:not(:disabled):not([readonly]),
+.facility-form-page .vulnerable-modal__form:not(.is-readonly) .vulnerable-modal__cell-textarea:not([readonly]),
+.facility-form-page .vulnerable-modal__form.is-edit-mode .vulnerable-modal__cell-select:not(:disabled),
+.facility-form-page .vulnerable-modal__form.is-add-mode .vulnerable-modal__cell-select:not(:disabled),
+.facility-form-page .major-defect-modal__form:not(.is-readonly) .major-defect-modal__cell-input:not(:disabled):not([readonly]),
+.facility-form-page .major-defect-modal__form:not(.is-readonly) .major-defect-modal__cell-textarea:not([readonly]),
+.facility-form-page .major-defect-modal__form.is-edit-mode .major-defect-modal__cell-select:not(:disabled),
+.facility-form-page .major-defect-modal__form.is-add-mode .major-defect-modal__cell-select:not(:disabled) {
+  height: 30px;
+  min-height: 30px;
+  padding: 0 12px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px;
+  background: #fff !important;
+  box-sizing: border-box;
+}
+
+.facility-form-page .precision-modal__form:not(.is-readonly) .precision-modal__cell-textarea:not([readonly]),
+.facility-form-page .repair-modal__form:not(.is-readonly) .repair-modal__cell-textarea:not([readonly]),
+.facility-form-page .vulnerable-modal__form:not(.is-readonly) .vulnerable-modal__cell-textarea:not([readonly]),
+.facility-form-page .major-defect-modal__form:not(.is-readonly) .major-defect-modal__cell-textarea:not([readonly]) {
+  height: auto;
+  min-height: 64px !important;
+  padding: 8px 12px !important;
+}
+
+.facility-form-page .precision-modal__form:not(.is-readonly) td:has(input[readonly]),
+.facility-form-page .precision-modal__form:not(.is-readonly) td:has(input:disabled),
+.facility-form-page .repair-modal__form:not(.is-readonly) td:has(input[readonly]),
+.facility-form-page .vulnerable-modal__form:not(.is-readonly) td:has(input[readonly]),
+.facility-form-page .major-defect-modal__form:not(.is-readonly) td:has(input[readonly]) {
+  background: #f7f7f8;
+}
+
+.facility-form-page .precision-modal__cell-input:focus,
+.facility-form-page .precision-modal__cell-textarea:focus,
+.facility-form-page .precision-modal__cell-select:focus:not(:disabled),
+.facility-form-page .repair-modal__cell-input:focus,
+.facility-form-page .repair-modal__cell-textarea:focus,
+.facility-form-page .repair-modal__cell-select:focus:not(:disabled),
+.facility-form-page .vulnerable-modal__cell-input:focus,
+.facility-form-page .vulnerable-modal__cell-textarea:focus,
+.facility-form-page .vulnerable-modal__cell-select:focus:not(:disabled),
+.facility-form-page .major-defect-modal__cell-input:focus,
+.facility-form-page .major-defect-modal__cell-textarea:focus,
+.facility-form-page .major-defect-modal__cell-select:focus:not(:disabled) {
+  outline: none;
+  border-color: #1c6fff !important;
+  box-shadow: none !important;
+}
+
+.facility-form-page .btn-detail-primary,
+.facility-form-page .btn-detail-add {
+  height: 34px;
+  padding: 0 18px;
+  border-radius: 8px;
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.facility-form-page .btn-detail-primary:hover,
+.facility-form-page .btn-detail-add:hover {
+  background: #152a44;
+}
+
+.facility-form-page .btn-detail-outline {
+  height: 34px;
+  padding: 0 18px;
+  border-radius: 8px;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.facility-form-page .btn-detail-outline:hover {
+  background: #f9f9fa;
+}
+
+.facility-form-page .btn-detail-outline--danger {
+  color: #6c788b;
+}
+
+.facility-form-page .btn-detail-primary--save {
+  background: #0b1a2e;
+}
+
+.facility-form-page .btn-detail-primary--save:hover {
+  background: #152a44;
+}
+
+.facility-form-page .btn-facility-add {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.facility-form-page .btn-facility-add:hover {
+  background: #f9f9fa;
+}
+
+.facility-form-page .precision-cost-input,
+.facility-form-page .repair-cost-input,
+.facility-form-page .major-defect-cost-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.facility-form-page .precision-cost-input__unit,
+.facility-form-page .repair-cost-input__unit,
+.facility-form-page .major-defect-cost-input__unit {
+  font-size: 14px;
+  color: #111;
+  white-space: nowrap;
+}
+
+.facility-form-page .precision-cost-input__unit .vat,
+.facility-form-page .repair-cost-input__unit--vat {
+  color: #1c6fff;
+  font-size: 13px;
+}
+
+.facility-form-page .precision-period-inputs,
+.facility-form-page .repair-period-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.facility-form-page .precision-period-inputs__sep,
+.facility-form-page .repair-period-inputs__sep {
+  flex-shrink: 0;
+  color: #111;
+}
+
+.facility-form-page .precision-period-inputs .precision-modal__cell-input,
+.facility-form-page .repair-period-inputs .repair-modal__cell-input {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.facility-form-page .precision-modal__form:not(.is-readonly) .precision-cost-input .precision-modal__cell-input,
+.facility-form-page .repair-modal__form:not(.is-readonly) .repair-cost-input .repair-modal__cell-input {
+  width: 120px;
+  flex: 0 0 120px;
+}
+
+/* 첨부파일 — Figma 파일 선택 그리드 */
+.facility-form-page .info-table.precision-files-table {
+  display: none;
+}
+
+.facility-form-page .form-file-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.facility-form-page .form-file-grid__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.facility-form-page .form-file-grid__row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.facility-form-page .form-file-field {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.facility-form-page .form-file-field__label {
+  padding: 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.facility-form-page .form-file-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 8px 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.facility-form-page .form-file-picker > img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.facility-form-page .form-file-picker .precision-file-slot__upload {
+  display: none;
+  flex-shrink: 0;
+  height: auto;
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid #1c6fff;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.facility-form-page .form-file-picker .precision-file-slot__upload:hover {
+  background: rgba(28, 111, 255, 0.1);
+}
+
+body.is-precision-form-mode .form-file-picker .precision-file-slot__upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.facility-form-page .form-file-field .precision-file-slot__hint {
+  display: none;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 12px;
+  color: #1c6fff;
+}
+
+body.is-precision-form-mode .form-file-field .precision-file-slot__hint {
+  display: block;
+}
+
+.facility-form-page .precision-file-slot__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #1c6fff;
+  text-decoration: underline;
+}
+
+.facility-form-page .precision-file-slot__name.is-empty {
+  color: #999;
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.facility-form-page .precision-file-slot__name.is-empty::before {
+  content: '첨부된 파일 없음';
+}
+
+/* Secondary / list tables */
+.facility-form-page .inspection-table,
+.facility-form-page .major-defect-action-table,
+.facility-form-page #precisionEngineerTable,
+.facility-form-page #precisionDefectTable,
+.facility-form-page .vulnerable-modal__table:has(thead),
+.facility-form-page .repair-parts-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.facility-form-page .inspection-table thead th,
+.facility-form-page .major-defect-action-table thead th,
+.facility-form-page #precisionEngineerTable thead th,
+.facility-form-page #precisionDefectTable thead th,
+.facility-form-page .vulnerable-modal__table:has(thead) thead th,
+.facility-form-page .repair-parts-table thead th {
+  height: 44px;
+  padding: 10px;
+  background: #6c788b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-right: 0.5px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.facility-form-page .inspection-table thead th:last-child,
+.facility-form-page .major-defect-action-table thead th:last-child,
+.facility-form-page #precisionEngineerTable thead th:last-child,
+.facility-form-page #precisionDefectTable thead th:last-child,
+.facility-form-page .vulnerable-modal__table:has(thead) thead th:last-child,
+.facility-form-page .repair-parts-table thead th:last-child {
+  border-right: none;
+}
+
+.facility-form-page .inspection-table tbody td,
+.facility-form-page .major-defect-action-table tbody td,
+.facility-form-page #precisionEngineerTable tbody td,
+.facility-form-page #precisionDefectTable tbody td,
+.facility-form-page .vulnerable-modal__table:has(thead) tbody td,
+.facility-form-page .repair-parts-table tbody td {
+  height: 44px;
+  padding: 10px;
+  border: none;
+  border-bottom: 0.5px solid #dadae2;
+  border-right: 0.5px solid #dadae2;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.facility-form-page .inspection-table tbody td:last-child,
+.facility-form-page .major-defect-action-table tbody td:last-child,
+.facility-form-page #precisionEngineerTable tbody td:last-child,
+.facility-form-page #precisionDefectTable tbody td:last-child,
+.facility-form-page .vulnerable-modal__table:has(thead) tbody td:last-child,
+.facility-form-page .repair-parts-table tbody td:last-child {
+  border-right: none;
+}
+
+.facility-form-page .inspection-table tbody tr:last-child td,
+.facility-form-page .major-defect-action-table tbody tr:last-child td,
+.facility-form-page #precisionEngineerTable tbody tr:last-child td,
+.facility-form-page #precisionDefectTable tbody tr:last-child td,
+.facility-form-page .vulnerable-modal__table:has(thead) tbody tr:last-child td,
+.facility-form-page .repair-parts-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 책임(참여)기술자 현황 — 셀 구분선 제거, 입력칸만 보더로 구분 */
+.facility-form-page #precisionEngineerTable thead th,
+.facility-form-page #precisionEngineerTable tbody td {
+  border-right: none;
+  border-bottom: none;
+}
+
+.facility-form-page #precisionEngineerTable .precision-modal__cell-input {
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 10px !important;
+  border: 0.5px solid #dadae2 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-sizing: border-box;
+}
+
+.facility-form-page #precisionEngineerTable .precision-modal__cell-input:focus {
+  border-color: #1c6fff !important;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(28, 111, 255, 0.12) !important;
+}
+
+.facility-form-page #precisionEngineerTable .precision-modal__cell-input[readonly] {
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.facility-form-page .participant-add-btn,
+.facility-form-page .add-tech-btn {
+  height: 32px;
+  padding: 0 12px;
+  border: 0.5px solid #0d1f35;
+  border-radius: 8px;
+  background: #fff;
+  color: #0d1f35;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.facility-form-page #precisionEngineerTable .btn-detail-outline,
+.facility-form-page #precisionDefectTable .btn-detail-outline,
+.facility-form-page .repair-parts-table .btn-detail-outline {
+  height: 30px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.facility-form-page .major-defect-action-table tfoot th,
+.facility-form-page .major-defect-action-table tfoot td {
+  padding: 10px;
+  background: #f9f9fa;
+  border-top: 0.5px solid #dadae2;
+  text-align: left;
+}

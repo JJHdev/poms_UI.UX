@@ -1,0 +1,145 @@
+@import url("common-modal.css");
+
+/* 시설물 정보 / 안전등급 현황 — full-page (modal → page) */
+
+.facility-info-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+/* ===== Page header ===== */
+.facility-info-page .page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.facility-info-page .page-header__bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 70px;
+  padding: 10px 14px 10px 24px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.facility-info-page .page-header__titles {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.facility-info-page .page-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.56px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.facility-info-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 4px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.facility-info-page .breadcrumb a {
+  color: #a4afc0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.facility-info-page .breadcrumb a:hover {
+  color: #6c788b;
+}
+
+.facility-info-page .breadcrumb__sep {
+  color: #a4afc0;
+  font-weight: 500;
+}
+
+.facility-info-page .breadcrumb__current {
+  color: #6c788b;
+  font-weight: 500;
+}
+
+/* ===== Content area ===== */
+.facility-info-page .facility-info-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== Panel (white card) ===== */
+.facility-info-page .facility-info-panel {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.facility-info-page .facility-stats-modal--page {
+  position: static;
+  padding: 0;
+  z-index: auto;
+}
+
+.facility-info-page .facility-stats-modal--page .facility-stats-modal__panel {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  background: #fff;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Modal-only elements — hidden on page */
+.facility-info-page .facility-stats-modal__backdrop,
+.facility-info-page .facility-stats-modal__close {
+  display: none !important;
+}
+
+.facility-info-page .facility-stats-modal__head {
+  padding-top: 40px;
+}
+
+@media (max-width: 1200px) {
+  .facility-info-page .facility-stats-modal--page .facility-stats-modal__head,
+  .facility-info-page .facility-stats-modal--page .facility-stats-modal__body {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .facility-info-page .facility-stats-modal--page .facility-stats-modal__head {
+    padding: 24px 20px 12px;
+  }
+
+  .facility-info-page .facility-stats-modal--page .facility-stats-modal__body {
+    padding: 0 16px 24px;
+  }
+}

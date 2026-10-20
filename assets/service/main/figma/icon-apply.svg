@@ -1,0 +1,7 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Figma: 20px box, glyph inset 18.75% 15% 16.25% 20% → 14px -->
+  <g transform="translate(4, 3.75)">
+    <path d="M8.78867 13.5L0.500009 5.21683L13.5 0.500014L8.78867 13.5Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M5.6383 10.3555L13.4997 0.500014L3.64968 8.36137L2.34037 11.6648L5.6383 10.3555Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

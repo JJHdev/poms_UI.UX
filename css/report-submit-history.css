@@ -1,0 +1,667 @@
+/* 보고서 제출이력 — 첨부 시안 기준 정리
+   공통 inspection-status / safety-report-approval CSS 위에 덮어쓰는 전용 오버라이드 */
+
+/* ========================================================================
+   1) 전체 레이아웃 — 카드 느낌 제거, 플랫 구조
+   ======================================================================== */
+html body.report-submit-history-page .main-content .insp-status-page,
+html body.report-submit-history-page .main-content .insp-filter-panel,
+html body.report-submit-history-page .main-content .insp-results-panel {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.report-submit-history-page .main-content .insp-status-page {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+html body.report-submit-history-page .main-content .insp-filter-panel,
+html body.report-submit-history-page .main-content .insp-results-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+html body.report-submit-history-page .main-content .insp-filter-panel {
+  gap: 14px !important;
+}
+
+html body.report-submit-history-page .insp-divider {
+  display: none !important;
+}
+
+/* ========================================================================
+   2) 검색조건 타이틀
+   ======================================================================== */
+html body.report-submit-history-page .insp-filter-panel__head,
+html body.report-submit-history-page .insp-filter-panel__head-main {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.report-submit-history-page .insp-filter-panel__title-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  flex: 0 0 32px !important;
+  border-radius: 8px !important;
+  background: #f6f9ff !important;
+  box-sizing: border-box !important;
+}
+
+html body.report-submit-history-page .insp-filter-panel__title-icon img {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  object-fit: contain !important;
+}
+
+html body.report-submit-history-page .insp-filter-panel__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.4px !important;
+}
+
+/* ========================================================================
+   3) 검색 영역
+   ======================================================================== */
+html body.report-submit-history-page .insp-filter {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 9px 10px 8px !important;
+  border: 0 !important;
+  border-top: 1px solid #8d9aab !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: #f3f8fe !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+html body.report-submit-history-page .rsh-filter-row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-end !important;
+  gap: 8px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.report-submit-history-page .rsh-filter-row > .insp-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.report-submit-history-page .rsh-field--id {
+  flex: 1.08 1 0 !important;
+}
+
+html body.report-submit-history-page .rsh-field--service {
+  flex: 1.20 1 0 !important;
+}
+
+html body.report-submit-history-page .rsh-field--select {
+  flex: 0.66 1 0 !important;
+}
+
+html body.report-submit-history-page .rsh-field--facility {
+  flex: 1.20 1 0 !important;
+}
+
+html body.report-submit-history-page .insp-field > label {
+  margin: 0 !important;
+  padding: 0 2px !important;
+  color: #6c788b !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+}
+
+html body.report-submit-history-page .insp-field input[type="text"],
+html body.report-submit-history-page .insp-field input[type="search"],
+html body.report-submit-history-page .insp-field select {
+  width: 100% !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background-color: #fff !important;
+  color: #111 !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+html body.report-submit-history-page .insp-field select {
+  padding-right: 32px !important;
+  cursor: pointer !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #6c788b 50%),
+    linear-gradient(135deg, #6c788b 50%, transparent 50%) !important;
+  background-position: calc(100% - 18px) 15px, calc(100% - 13px) 15px !important;
+  background-size: 5px 5px, 5px 5px !important;
+  background-repeat: no-repeat !important;
+}
+
+html body.report-submit-history-page .insp-field input::placeholder {
+  color: #999 !important;
+  opacity: 1 !important;
+}
+
+html body.report-submit-history-page .insp-field input:focus,
+html body.report-submit-history-page .insp-field select:focus {
+  border-color: #1c6fff !important;
+  box-shadow: none !important;
+}
+
+html body.report-submit-history-page .insp-filter-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.report-submit-history-page .insp-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  padding: 0 14px !important;
+  border-radius: 6px !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  box-shadow: none !important;
+}
+
+html body.report-submit-history-page .insp-btn img {
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+html body.report-submit-history-page .insp-btn--search {
+  min-width: 96px !important;
+  border: 1px solid #0b1a2d !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.report-submit-history-page .insp-btn--reset {
+  min-width: 88px !important;
+  border: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #6c788b !important;
+}
+
+/* ========================================================================
+   4) 검색결과 헤더
+   ======================================================================== */
+html body.report-submit-history-page .insp-results__head {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.report-submit-history-page .insp-results__count {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+html body.report-submit-history-page .rsh-results__bar-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+}
+
+html body.report-submit-history-page .rsh-results__bar-icon img {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain !important;
+}
+
+html body.report-submit-history-page .insp-results__label {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.32px !important;
+}
+
+html body.report-submit-history-page .insp-results__meta {
+  margin: 0 !important;
+  color: #6c788b !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.28px !important;
+}
+
+html body.report-submit-history-page .insp-results__meta strong {
+  color: #1c6fff !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================================================
+   5) 테이블 — 시안의 32px 행 높이 / 연한 파랑 헤더
+   ======================================================================== */
+html body.report-submit-history-page .insp-status-table-wrap {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+html body.report-submit-history-page .rsh-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  table-layout: fixed !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+}
+
+html body.report-submit-history-page .rsh-table thead th,
+html body.report-submit-history-page .rsh-table tbody td {
+  height: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  padding: 0 8px !important;
+  font-size: 13px !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box !important;
+}
+
+html body.report-submit-history-page .rsh-table thead th {
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #e9f1fe !important;
+  color: #111 !important;
+  font-weight: 500 !important;
+}
+
+html body.report-submit-history-page .rsh-table thead th:last-child {
+  border-right: 0 !important;
+}
+
+html body.report-submit-history-page .rsh-table tbody td {
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #333 !important;
+  font-weight: 400 !important;
+}
+
+html body.report-submit-history-page .rsh-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+html body.report-submit-history-page .rsh-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+html body.report-submit-history-page .rsh-table tbody tr {
+  height: 32px !important;
+  cursor: pointer !important;
+}
+
+html body.report-submit-history-page .rsh-table tbody tr:hover td {
+  background: #f5f8fc !important;
+}
+
+html body.report-submit-history-page .rsh-table td.is-left {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  text-align: left !important;
+}
+
+html body.report-submit-history-page .rsh-table tbody td > * {
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+/* 컬럼 비율 */
+html body.report-submit-history-page .rsh-table .col-no { width: 48px !important; }
+html body.report-submit-history-page .rsh-table .col-id { width: 126px !important; }
+html body.report-submit-history-page .rsh-table .col-service { width: auto !important; }
+html body.report-submit-history-page .rsh-table .col-date { width: 98px !important; }
+html body.report-submit-history-page .rsh-table .col-count { width: 96px !important; }
+html body.report-submit-history-page .rsh-table .col-stage { width: 96px !important; }
+html body.report-submit-history-page .rsh-table .col-progress { width: 136px !important; }
+
+/* 단계 체크 — 시안의 파란 원 + 흰 체크 */
+html body.report-submit-history-page .history-stage {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  color: transparent !important;
+  box-sizing: border-box !important;
+  vertical-align: middle !important;
+}
+
+html body.report-submit-history-page .history-stage.is-done {
+  border: 0 !important;
+  background: #145b9c !important;
+  color: #fff !important;
+}
+
+html body.report-submit-history-page .history-stage.is-done svg {
+  display: block !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+/* ========================================================================
+   6) 페이지네이션
+   ======================================================================== */
+html body.report-submit-history-page .insp-results-foot {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 14px 0 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.report-submit-history-page .pagination {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  margin: 0 !important;
+}
+
+html body.report-submit-history-page .pagination__btn {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html body.report-submit-history-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+}
+
+html body.report-submit-history-page .pagination__btn:disabled {
+  opacity: 1 !important;
+  cursor: default !important;
+}
+
+html body.report-submit-history-page .pagination__btn.is-active {
+  z-index: 2 !important;
+  border-color: #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+}
+
+html body.report-submit-history-page .pagination__btn[data-page-move] img {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain !important;
+}
+
+html body.report-submit-history-page .pagination__btn[data-page-move="next"] img,
+html body.report-submit-history-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1) !important;
+}
+
+html body.report-submit-history-page .pagination__btn:disabled img {
+  opacity: 0.35 !important;
+}
+
+html body.report-submit-history-page .pagination__btn svg {
+  display: none !important;
+}
+
+html body.report-submit-history-page .pagination__ellipsis {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  color: #6c788b !important;
+  font-size: 12px !important;
+}
+
+/* ========================================================================
+   7) 유틸 / 좁은 화면 대응
+   ======================================================================== */
+.report-submit-history-page .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 1500px) {
+  html body.report-submit-history-page .rsh-filter-row {
+    flex-wrap: wrap !important;
+  }
+
+  html body.report-submit-history-page .rsh-filter-row > .insp-field {
+    flex: 1 1 150px !important;
+  }
+
+  html body.report-submit-history-page .rsh-filter-row > .insp-filter-actions {
+    margin-left: auto !important;
+  }
+}
+
+/* ========================================================================
+   [2026 FLAT 정렬] inspection-agency.css 규격과 어긋난 값 교정
+   ※ 되돌리려면 이 블록만 삭제하면 됩니다.
+   ======================================================================== */
+
+/* 1) 검색 스트립 간격 — 필드/버튼 gap 8px */
+html body.report-submit-history-page .rsh-filter-row {
+  gap: 8px !important;
+}
+
+html body.report-submit-history-page .insp-filter-actions {
+  gap: 8px !important;
+}
+
+/* 2) 입력 좌우 여백 14px */
+html body.report-submit-history-page .insp-field input[type="text"],
+html body.report-submit-history-page .insp-field input[type="search"],
+html body.report-submit-history-page .insp-field select {
+  padding: 0 14px !important;
+}
+
+html body.report-submit-history-page .insp-field select {
+  padding-right: 32px !important;
+}
+
+/* 3) 검색/초기화 버튼 규격 */
+html body.report-submit-history-page .insp-btn {
+  padding: 0 16px !important;
+  border: 0 !important;
+}
+
+html body.report-submit-history-page .insp-btn--search {
+  min-width: 107px !important;
+  border: 0 !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.report-submit-history-page .insp-btn--search img {
+  filter: brightness(0) invert(1);
+}
+
+html body.report-submit-history-page .insp-btn--search:hover {
+  background: #16304f !important;
+}
+
+html body.report-submit-history-page .insp-btn--reset {
+  min-width: 96px !important;
+  border: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #6c788b !important;
+}
+
+html body.report-submit-history-page .insp-btn--reset:hover {
+  background: #f6f8fb !important;
+}
+
+/* 4) 검색결과 헤더 */
+html body.report-submit-history-page .insp-results__head {
+  justify-content: space-between !important;
+  gap: 16px !important;
+}
+
+html body.report-submit-history-page .rsh-results__bar-icon svg,
+html body.report-submit-history-page .rsh-results__bar-icon img {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain !important;
+}
+
+/* 5) 표 래퍼 상단만 라운드 + 헤더 모서리 처리 */
+html body.report-submit-history-page .insp-status-table-wrap {
+  border-radius: 6px 6px 0 0 !important;
+  background: transparent !important;
+}
+
+html body.report-submit-history-page .rsh-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+html body.report-submit-history-page .rsh-table thead th:last-child {
+  border-radius: 0 6px 0 0;
+}
+
+/* 6) 선택 행 / 데이터 없음 */
+html body.report-submit-history-page .rsh-table tbody tr.is-selected td {
+  background: #eef4ff !important;
+}
+
+html body.report-submit-history-page .rsh-table tbody tr.is-empty td,
+html body.report-submit-history-page .rsh-table tbody td.is-empty {
+  height: 120px !important;
+  max-height: none !important;
+  line-height: 1.4 !important;
+  color: #8993a1 !important;
+  text-align: center !important;
+  cursor: default !important;
+}
+
+/* 7) 페이지네이션 상단 여백 20px + 활성 테두리 */
+html body.report-submit-history-page .insp-results-foot {
+  padding: 20px 0 0 !important;
+}
+
+html body.report-submit-history-page .pagination__btn.is-active {
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400 !important;
+}
+
+html body.report-submit-history-page .pagination__btn[data-page-move] {
+  background-image: none !important;
+}

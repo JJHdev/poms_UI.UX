@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시스템 자료 상세 | POMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-detail.css">
+  <link rel="stylesheet" href="css/facility-add.css">
+  <link rel="stylesheet" href="css/facility-change-request-detail.css">
+  <link rel="stylesheet" href="css/archive-notice.css">
+  <style>
+    body { font-family: "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page facility-change-request-detail-page archive-notice-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header__lead">
+        <a href="system-archive.html" class="btn-back" id="archiveMatDetailBackBtn" aria-label="목록으로">
+          <img src="assets/main/facility-search/detail/icon-back.svg" alt="" width="24" height="24">
+        </a>
+        <div class="page-header__bar">
+          <div class="page-header__titles">
+            <h1 class="page-title">시스템 자료 상세</h1>
+            <nav class="breadcrumb" aria-label="현재 위치">
+              <a href="archive.html">자료실</a>
+              <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+              <a href="system-archive.html">시스템 자료실</a>
+              <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+              <span class="breadcrumb__current" id="archiveMatDetailCrumb">시스템 자료 상세</span>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="detail-shell">
+      <section class="detail-section notice-detail-section" aria-labelledby="archiveMatDetailSectionTitle">
+        <div class="detail-section__head">
+          <h3 class="detail-section__title" id="archiveMatDetailSectionTitle">시스템 자료 상세</h3>
+        </div>
+
+        <form class="notice-detail-form" novalidate>
+          <div class="fac-add-grid notice-detail-grid">
+            <div class="fac-add-field fac-add-field--full">
+              <div class="fac-add-field__label">제목</div>
+              <div class="fac-add-field__control">
+                <input type="text" class="fac-add-input" id="archiveMatDetailSubject" readonly>
+              </div>
+            </div>
+
+            <div class="notice-detail-meta">
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">작성자</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="archiveMatDetailAuthor" readonly>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">작성일</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="archiveMatDetailDate" readonly>
+                </div>
+              </div>
+              <div class="fac-add-field">
+                <div class="fac-add-field__label">조회수</div>
+                <div class="fac-add-field__control">
+                  <input type="text" class="fac-add-input" id="archiveMatDetailViews" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="fac-add-field fac-add-field--full">
+              <div class="fac-add-field__label">공지기간</div>
+              <div class="fac-add-field__control">
+                <input type="text" class="fac-add-input" id="archiveMatDetailPeriod" readonly>
+              </div>
+            </div>
+
+            <div class="fac-add-field fac-add-field--full">
+              <div class="fac-add-field__label">구분</div>
+              <div class="fac-add-field__control">
+                <input type="text" class="fac-add-input" id="archiveMatDetailCategory" readonly>
+              </div>
+            </div>
+
+            <div class="fac-add-field fac-add-field--full">
+              <div class="fac-add-field__label">내용</div>
+              <div class="fac-add-field__control">
+                <div class="fac-add-input notice-detail-body" id="archiveMatDetailBody"></div>
+              </div>
+            </div>
+
+            <div class="fac-add-field fac-add-field--full">
+              <div class="fac-add-field__label">첨부파일</div>
+              <div class="fac-add-field__control">
+                <button type="button" class="fac-add-file-picker__btn" id="archiveMatDetailFile">첨부파일 없음</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/archive-materials-data.js"></script>
+  <script src="js/system-archive-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#map_sat_clip)">
+    <path d="M2.5 10C2.5 10.9849 2.69399 11.9602 3.0709 12.8701C3.44781 13.7801 4.00026 14.6069 4.6967 15.3033C5.39314 15.9997 6.21993 16.5522 7.12987 16.9291C8.03982 17.306 9.01509 17.5 10 17.5C10.9849 17.5 11.9602 17.306 12.8701 16.9291C13.7801 16.5522 14.6069 15.9997 15.3033 15.3033C15.9997 14.6069 16.5522 13.7801 16.9291 12.8701C17.306 11.9602 17.5 10.9849 17.5 10C17.5 8.01088 16.7098 6.10322 15.3033 4.6967C13.8968 3.29018 11.9891 2.5 10 2.5C8.01088 2.5 6.10322 3.29018 4.6967 4.6967C3.29018 6.10322 2.5 8.01088 2.5 10Z" stroke="#111111" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 7.5H17" stroke="#111111" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 12.5H17" stroke="#111111" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9.583 2.5C8.18 4.75 7.435 7.348 7.435 10C7.435 12.652 8.18 15.25 9.583 17.5" stroke="#111111" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10.417 2.5C11.821 4.75 12.565 7.348 12.565 10C12.565 12.652 11.821 15.25 10.417 17.5" stroke="#111111" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <defs>
+    <clipPath id="map_sat_clip">
+      <rect width="20" height="20" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>

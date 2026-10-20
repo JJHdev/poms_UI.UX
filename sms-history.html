@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>발송이력 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/sms-history.css?v=20260814-2">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout sms-history-page-root">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="sms-history-page" aria-label="발송이력 관리">
+
+      <div class="sms-history-section-title">
+        <span class="sms-history-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="sms-history-section-title__text">검색기간</h1>
+        <span class="sms-history-section-title__badge">등록일 기준 로그 조회</span>
+      </div>
+
+      <section class="sms-history-filter-strip" aria-label="검색기간">
+        <form class="sms-history-filter" id="smsHistorySearchForm" role="search" novalidate>
+          <div class="sms-history-field sms-history-field--date">
+            <label>날짜선택</label>
+            <div class="sms-history-date-range">
+              <label class="sms-history-date-input-wrap" for="startDate">
+                <input type="date" id="startDate" name="startDate">
+                <img src="assets/sms-history/icon-calendar.svg" alt="" width="18" height="18">
+              </label>
+              <span class="sms-history-date-sep" aria-hidden="true">~</span>
+              <label class="sms-history-date-input-wrap" for="endDate">
+                <input type="date" id="endDate" name="endDate">
+                <img src="assets/sms-history/icon-calendar.svg" alt="" width="18" height="18">
+              </label>
+            </div>
+          </div>
+
+          <div class="sms-history-filter-actions">
+            <button type="submit" class="sms-history-btn sms-history-btn--search">
+              <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="sms-history-btn sms-history-btn--reset" id="smsHistoryResetBtn">
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="sms-history-results" aria-labelledby="smsHistoryListTitle">
+        <div class="sms-history-results__head">
+          <div class="sms-history-results__count">
+            <span class="sms-history-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+            </span>
+            <h2 id="smsHistoryListTitle" class="sms-history-results__label">조회결과</h2>
+            <p class="sms-history-results__meta">총 <strong id="smsHistoryResultCount">0</strong>건</p>
+          </div>
+          <p class="sms-history-results__hint">※ 행을 클릭하면 해당 등록일의 수신자별 발송상세를 확인할 수 있습니다.</p>
+        </div>
+
+        <div class="sms-history-table-wrap">
+          <table class="sms-history-table" aria-label="발송이력 목록">
+            <thead>
+              <tr>
+                <th scope="col" class="col-no">번호</th>
+                <th scope="col" class="col-insert-date">등록일</th>
+                <th scope="col" class="col-reserve-date">예약전송</th>
+                <th scope="col">메세지</th>
+              </tr>
+            </thead>
+            <tbody id="smsHistoryBody"></tbody>
+          </table>
+        </div>
+
+        <div class="sms-history-results-foot">
+          <nav class="pagination" id="smsHistoryPagination" aria-label="페이지 이동"></nav>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="sms-history-overlay" id="smsHistoryOverlay" hidden data-close-sms-history></div>
+  <aside class="sms-history-drawer" id="smsHistoryModal" role="dialog" aria-modal="true"
+    aria-labelledby="smsHistoryDetailTitle" aria-hidden="true">
+    <div class="sms-history-drawer__top">
+      <header class="sms-history-drawer__head">
+        <div>
+          <h2 class="sms-history-drawer__title" id="smsHistoryDetailTitle">발송이력 상세</h2>
+          <p class="sms-history-drawer__desc" id="smsHistoryDetailDesc">수신자별 발송 로그를 확인합니다.</p>
+        </div>
+        <button type="button" class="sms-history-drawer__close" data-close-sms-history aria-label="닫기">
+          <img src="assets/sms-send/icon-close.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="sms-history-drawer__body">
+        <div class="sms-history-detail-summary" id="smsHistoryDetailSummary"></div>
+        <div class="sms-history-detail-table-wrap">
+          <table class="sms-history-detail-table" aria-label="수신자별 발송 상세">
+            <thead>
+              <tr>
+                <th scope="col" class="col-receiver">수신자</th>
+                <th scope="col" class="col-phone">수신번호</th>
+                <th scope="col" class="col-message-id">메세지 ID</th>
+                <th scope="col">메세지</th>
+              </tr>
+            </thead>
+            <tbody id="smsHistoryDetailBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <footer class="sms-history-drawer__foot">
+      <button type="button" class="btn-sms-history-close" data-close-sms-history>닫기</button>
+    </footer>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/sms-history.js"></script>
+  <script>
+    (function () {
+      var resetBtn = document.getElementById('smsHistoryResetBtn');
+      var form = document.getElementById('smsHistorySearchForm');
+      if (!resetBtn || !form) return;
+      resetBtn.addEventListener('click', function () {
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>

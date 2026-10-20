@@ -1,0 +1,841 @@
+/* 관리자 상단 헤더 + GNB — 사용자 페이지(sidebar2)와 동일 1400 비율 */
+@import url("fs-lnb.css");
+
+:root {
+  --admin-gnb-inner-width: 1400px; /* [2026] 콘텐츠 1400 + 양옆 260 (1920 기준) */
+  --admin-chrome-header: 80px;
+  --admin-chrome-nav: 50px;
+  --admin-chrome-height: 130px;
+}
+
+body.admin-topnav-layout {
+  min-width: 1440px;
+  background: #fff;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+body.admin-topnav-layout #sidebar-root {
+  position: sticky;
+  top: 0;
+  left: auto;
+  right: auto;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  z-index: 1100;
+  display: block;
+  overflow: visible;
+  padding: 0;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+body.admin-topnav-layout .main-content {
+  width: min(var(--admin-gnb-inner-width), calc(100% - 40px));
+  margin: 0 auto;
+  margin-left: auto;
+  min-width: 0;
+  min-height: calc(100vh - var(--admin-chrome-height));
+  padding: 28px 0 40px;
+  box-sizing: border-box;
+  background: #fff;
+  overflow-x: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.admin-chrome {
+  width: 100%;
+  background: #fff;
+}
+
+.admin-chrome__inner {
+  width: min(var(--admin-gnb-inner-width), calc(100% - 40px));
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ===== Header — 사용자 GNB(sidebar2) 80px ===== */
+.admin-chrome__header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--admin-chrome-header);
+  padding-top: 10px;
+  background: #fff;
+  border-bottom: 1px solid #ededed;
+  box-sizing: border-box;
+}
+
+.admin-chrome__header .admin-chrome__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 16px;
+}
+
+.admin-chrome__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.admin-chrome__logo-emblem {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-chrome__logo-text {
+  display: block;
+  width: auto;
+  height: 16px;
+  max-width: 192px;
+  object-fit: contain;
+}
+
+.admin-chrome__tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.admin-chrome__user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-chrome__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1c6fff;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.admin-chrome__user-name {
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.admin-chrome__approval {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 3px 8px;
+  border: none;
+  border-radius: 100px;
+  background: #243346;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.admin-chrome__approval:hover {
+  background: #1a2633;
+}
+
+.admin-chrome__approval-label {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.admin-chrome__approval-count {
+  color: #efc94b;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.admin-chrome__logout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.admin-chrome__logout:hover {
+  background: #f8f9fb;
+}
+
+.admin-chrome__logout img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* ===== GNB — 사용자 서브내비 50px / 1200 폭 ===== */
+.admin-chrome__nav {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: var(--admin-chrome-nav);
+  background: #fff;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.admin-chrome__nav-inner {
+  display: flex;
+  align-items: stretch;
+  width: min(var(--admin-gnb-inner-width), calc(100% - 40px));
+  height: 100%;
+  border-bottom: 1px solid #dadae2;
+  margin-bottom: -1px;
+}
+
+.admin-chrome__link {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 100%;
+  padding: 0 8px 10px 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.admin-chrome__link:hover {
+  color: #1c6fff;
+}
+
+.admin-chrome__link.is-active {
+  color: #1c6fff;
+  font-weight: 600;
+  border-bottom-color: #1c6fff;
+}
+
+/* ===== 시스템 관리 세부 메뉴 탭 (전체 폭 균등) ===== */
+.admin-sub-tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+  height: 34px;
+  flex-shrink: 0;
+  margin: 0 0 14px;
+  box-sizing: border-box;
+}
+
+.admin-sub-tabs__btn {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 34px;
+  padding: 6px 4px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #999;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.admin-sub-tabs__btn:hover {
+  color: #6c788b;
+  background: rgba(28, 111, 255, 0.08);
+}
+
+.admin-sub-tabs__btn.is-active {
+  background: #1c6fff;
+  color: #fff;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* ===== 사용자관리형 세부 탭 (고정 폭, 늘어나지 않음) ===== */
+.ua-sub-tabs {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  height: 34px;
+  flex-shrink: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.ua-sub-tabs__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 200px;
+  height: 34px;
+  padding: 6px 20px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #999;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ua-sub-tabs__btn:hover {
+  color: #6c788b;
+  background: rgba(28, 111, 255, 0.08);
+}
+
+.ua-sub-tabs__btn.is-active {
+  background: #1c6fff;
+  color: #fff;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+  .admin-chrome__user-name {
+    display: none;
+  }
+
+  .admin-chrome__link {
+    font-size: 13px;
+    padding-right: 4px;
+  }
+
+  .admin-sub-tabs__btn,
+  .ua-sub-tabs__btn {
+    font-size: 14px;
+  }
+}
+
+/* ===== Detail crumb row (shared — matches facility-management-detail) ===== */
+/* Back btn sits just outside content; main-content reserves space so it isn't clipped */
+body.admin-topnav-layout .main-content:has(.fmd-crumb-row) {
+  overflow: visible;
+  padding-left: 41px;
+  box-sizing: border-box;
+}
+
+body.admin-flat-page.admin-topnav-layout .main-content:has(.fmd-crumb-row) {
+  overflow: visible;
+}
+
+.fmd-crumb-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 4px 0; /* 위·아래 합 8px */
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.fmd-back-btn {
+  position: absolute;
+  top: 4px;
+  left: -41px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; /* 가로 32px */
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  flex-shrink: 0;
+  overflow: visible;
+  z-index: 2;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.fmd-back-btn:hover {
+  border-color: #1c6fff;
+  background: #f8f9fb;
+}
+
+.fmd-back-btn img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  transform: rotate(90deg);
+}
+
+.fmd-home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.fmd-home-btn:hover {
+  border-color: #1c6fff;
+  background: #f8f9fb;
+}
+
+.fmd-home-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.fmd-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1 1 auto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: #6c788b;
+}
+
+.fmd-breadcrumb a {
+  color: #a4afc0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.fmd-breadcrumb a:hover {
+  color: #1c6fff;
+}
+
+.fmd-breadcrumb__sep {
+  color: #a4afc0;
+  white-space: nowrap;
+}
+
+.fmd-breadcrumb__current {
+  color: #6c788b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Title + actions row under crumb/tabs */
+.admin-detail-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  width: 100%;
+  min-height: 36px;
+  flex-shrink: 0;
+}
+
+.admin-detail-title-row__lead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.admin-detail-title-row__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-detail-title-row__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(28, 111, 255, 0.08);
+  color: #1c6fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.24px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.admin-detail-title-row__badge.is-unregistered {
+  background: transparent;
+  padding: 0;
+  height: auto;
+  color: #6c788b;
+}
+
+.admin-detail-title-row__badge.is-approved {
+  background: transparent;
+  padding: 0;
+  height: auto;
+  color: #1c6fff;
+}
+
+.admin-detail-title-row__badge.is-requested {
+  background: transparent;
+  padding: 0;
+  height: auto;
+  color: #d97706;
+}
+
+.admin-detail-title-row__badge.is-rejected {
+  background: transparent;
+  padding: 0;
+  height: auto;
+  color: #dc2626;
+}
+
+.admin-detail-title-row__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+/* Tertiary underline tabs (links OK) */
+.ua-account-tabs {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-shrink: 0;
+  border-bottom: 1px solid #dadae2;
+  background: transparent;
+}
+
+.ua-account-tabs__btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  padding: 0 30px 14px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  border-radius: 0;
+  background: transparent;
+  color: #6c788b;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.ua-account-tabs__btn:hover {
+  color: #111;
+  background: transparent;
+}
+
+.ua-account-tabs__btn.is-active {
+  border-bottom-color: #1c6fff;
+  background: transparent;
+  color: #111;
+  font-weight: 600;
+}
+
+/* ===================================================================
+   [2026 GNB MEGA] 상단 메뉴 메가드롭다운 — Figma 250:3327
+   =================================================================== */
+
+.admin-gnb-wrap {
+  position: relative;
+  width: 100%;
+  z-index: 1200;
+}
+
+/* ── 라벨 바 ── */
+.admin-gnb {
+  background: linear-gradient(90deg, rgba(28, 111, 255, 0.03), rgba(28, 111, 255, 0.03)), #fff;
+  overflow: visible;
+}
+
+.admin-gnb .admin-gnb__inner {
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.admin-gnb__item {
+  position: relative;
+  flex: 0 0 200px;
+  width: 200px;
+  min-width: 200px;
+  display: flex;
+  align-items: stretch;
+}
+
+/* 라벨 사이 세로 구분선 */
+.admin-gnb__item + .admin-gnb__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background: #dadae2;
+}
+
+.admin-gnb__item > .admin-chrome__link {
+  flex: 1 1 auto;
+  width: 100%;
+  padding: 0 0 14px;
+  align-items: flex-end;
+  justify-content: center;
+  color: #111;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.36px;
+}
+
+.admin-gnb__item > .admin-chrome__link:hover,
+.admin-gnb__item > .admin-chrome__link.is-active {
+  color: #1c6fff;
+  font-weight: 600;
+  border-bottom-color: #1c6fff;
+}
+
+/* ── 드롭다운 패널 ── */
+.admin-gnb__mega {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 3;
+  background: #fff;
+  border-bottom: 1px solid #dadae2;
+  box-shadow: 0 12px 24px rgba(13, 28, 48, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+.admin-gnb-wrap.is-open .admin-gnb__mega {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.admin-gnb__mega-inner {
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.admin-gnb__col {
+  flex: 0 0 200px;
+  width: 200px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: 14px;
+  padding: 20px 0 24px;
+  border-left: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.admin-gnb__col + .admin-gnb__col {
+  margin-left: -1px; /* 인접 열 이중선 합치기 */
+}
+
+.admin-gnb__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-gnb__sub-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  word-break: keep-all;
+  box-sizing: border-box;
+}
+
+.admin-gnb__sub-link--wrap {
+  align-items: flex-start;
+  white-space: normal;
+}
+
+.admin-gnb__sub-link::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #333;
+}
+
+.admin-gnb__sub-link--wrap::before {
+  margin-top: 8px;
+}
+
+.admin-gnb__sub-link:hover,
+.admin-gnb__sub-link:focus-visible,
+.admin-gnb__sub-link.is-active {
+  color: #1c6fff;
+  font-weight: 500;
+  outline: none;
+}
+
+.admin-gnb__sub-link:hover::before,
+.admin-gnb__sub-link:focus-visible::before,
+.admin-gnb__sub-link.is-active::before {
+  width: 4px;
+  height: 4px;
+  background: #1c6fff;
+}
+
+/* ── 본문 딤 처리 ── */
+.admin-gnb-wrap::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--admin-chrome-height);
+  bottom: 0;
+  z-index: 1;
+  background: rgba(17, 17, 17, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0.15s;
+}
+
+.admin-gnb-wrap.is-open::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 1100px) {
+  .admin-gnb__item > .admin-chrome__link {
+    font-size: 15px;
+  }
+
+  .admin-gnb__sub-link {
+    font-size: 14px;
+    padding: 0 14px;
+  }
+}
+
+/* ===== LNB 상세페이지 보정 =====
+   좌측 LNB가 있는 상세화면에서는 본문 폭을 줄이지 않고,
+   뒤로가기/홈 버튼을 오른쪽 본문 영역 안에서 정상 흐름으로 배치한다. */
+body.admin-topnav-layout .main-content:has(.fs-layout .fmd-crumb-row) {
+  padding-left: 0;
+  overflow: visible;
+}
+
+body.admin-topnav-layout .fs-layout .fmd-back-btn {
+  position: static;
+  top: auto;
+  left: auto;
+  margin: 0;
+  flex: 0 0 32px;
+}
+
+/* 목록 화면 공통: 뒤로/홈은 본문 상단에 고정 배치 */
+body.admin-topnav-layout .fs-manage > .fmd-crumb-row:first-child {
+  margin: 0;
+}

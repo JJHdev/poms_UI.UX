@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>점검보고서 등록 | POMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/vendor.css">
+  <link rel="stylesheet" href="css/inspection-report.css">
+  <style>
+    body { font-family: "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content main-content--vendor">
+    <div class="vendor-page vendor-page--inspection">
+      <header class="vendor-page-header">
+        <div class="vendor-page-header__text">
+          <h1 class="vendor-page-header__title">점검보고서 등록</h1>
+          <p class="vendor-page-header__desc">신청된 대상 시설물의 점검 이력을 조회하고 보고서를 등록합니다.</p>
+        </div>
+        <button type="button" class="btn-approval-history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          결재이력 보기
+        </button>
+      </header>
+
+      <section class="vendor-svc-bar" aria-label="용역 선택">
+        <div class="vendor-svc-bar__field">
+          <label for="serviceSelect">용역 선택</label>
+          <select id="serviceSelect" name="service">
+            <option value="test" selected>2025년 부산항 정기안전점검 용역</option>
+            <option value="2025-02">2025년 인천항 정밀안전진단 용역</option>
+          </select>
+        </div>
+        <button type="button" class="btn-svc-inquiry">조회</button>
+        <button type="button" class="btn-svc-reset">용역 초기화</button>
+      </section>
+
+      <!-- 대상 시설물 목록 (상단) -->
+      <section class="report-section" aria-labelledby="facilityListTitle">
+        <div class="report-section__head">
+          <div class="report-section__title-wrap">
+            <span class="report-section__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/>
+                <path d="M5 12H2a10 10 0 0 0 20 0h-3"/>
+              </svg>
+            </span>
+            <h2 id="facilityListTitle" class="report-section__title">대상 시설물 목록</h2>
+          </div>
+          <span class="report-section__meta" id="facilityCount"><em>6</em>개 시설</span>
+        </div>
+        <div class="report-section__body">
+          <div class="report-table-scroll report-table-scroll--facility-list">
+            <table class="report-table">
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>항만구분</th>
+                  <th>관리구분</th>
+                  <th>관리기관</th>
+                  <th>해역</th>
+                  <th>항명</th>
+                  <th>세부항명</th>
+                  <th>시설구분</th>
+                  <th>시설</th>
+                  <th>상태</th>
+                </tr>
+              </thead>
+              <tbody id="facilityListBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 점검 이력 + 선택된 시설 정보 (시설 선택 후 표시) -->
+      <div class="inspection-split" id="inspectionSplit" hidden>
+        <section class="report-section" aria-labelledby="historyTitle">
+          <div class="report-section__head">
+            <div class="report-section__title-wrap">
+              <span class="report-section__icon report-section__icon--clock" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </span>
+              <h2 id="historyTitle" class="report-section__title">점검 이력</h2>
+            </div>
+            <div class="report-section__controls">
+              <select id="inspectionType" aria-label="점검 유형">
+                <option value="regular" selected>정기안전점검</option>
+                <option value="precise">정밀안전점검</option>
+                <option value="emergency">긴급점검</option>
+              </select>
+              <button type="button" class="btn-add" id="btnAddInspection">+ 추가</button>
+            </div>
+          </div>
+          <div class="report-section__body">
+            <div class="report-table-scroll">
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>점검일자</th>
+                    <th>점검기관</th>
+                    <th>점검자</th>
+                    <th>시설물상태</th>
+                    <th>점검자의견</th>
+                    <th>첨부파일</th>
+                    <th>상태</th>
+                  </tr>
+                </thead>
+                <tbody id="inspectionHistoryBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="report-section inspection-split__detail" id="facilityDetailSection" aria-labelledby="detailTitle" hidden>
+          <div class="report-section__head">
+            <div class="report-section__title-wrap">
+              <span class="report-section__icon report-section__icon--building" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/>
+                </svg>
+              </span>
+              <h2 id="detailTitle" class="report-section__title">선택된 시설 정보</h2>
+            </div>
+            <div class="report-section__controls report-section__controls--spacer" aria-hidden="true"></div>
+          </div>
+          <div class="report-section__body" id="facilityDetail"></div>
+        </section>
+      </div>
+
+      <section class="inspection-detail" id="inspectionDetailSection" aria-label="점검 상세" hidden>
+        <div class="inspection-tabs" role="tablist" aria-label="점검보고서 구성">
+          <button type="button" class="inspection-tab is-active" role="tab" aria-selected="true" data-tab="items" id="tabItems">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            점검사항
+          </button>
+          <button type="button" class="inspection-tab" role="tab" aria-selected="false" data-tab="photos" id="tabPhotos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            사진대지
+          </button>
+          <button type="button" class="inspection-tab" role="tab" aria-selected="false" data-tab="report" id="tabReport">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>
+            결과보고서
+          </button>
+        </div>
+
+        <div class="inspection-tab-panel" id="panelItems" role="tabpanel" aria-labelledby="tabItems">
+          <div class="inspection-facility-form" id="inspectionFacilityForm" hidden>
+            <div class="inspection-facility-form__row">
+              <div class="inspection-facility-form__field">
+                <span class="inspection-facility-form__label">시설물명</span>
+                <span class="inspection-facility-form__value" id="formFacilityName"></span>
+              </div>
+              <div class="inspection-facility-form__field">
+                <span class="inspection-facility-form__label">관리주체</span>
+                <span class="inspection-facility-form__value" id="formFacilityOwner"></span>
+              </div>
+            </div>
+            <div class="inspection-facility-form__row">
+              <div class="inspection-facility-form__field">
+                <span class="inspection-facility-form__label">조사단위</span>
+                <div class="inspection-facility-form__control">
+                  <input type="text" id="facilitySurveyUnit" class="inspection-facility-form__input" placeholder="조사단위 내용">
+                </div>
+              </div>
+              <div class="inspection-facility-form__field">
+                <span class="inspection-facility-form__label">평가단위</span>
+                <div class="inspection-facility-form__control">
+                  <input type="text" id="facilityEvalUnit" class="inspection-facility-form__input" placeholder="평가단위 내용">
+                </div>
+              </div>
+            </div>
+            <div class="inspection-facility-form__row">
+              <div class="inspection-facility-form__field">
+                <span class="inspection-facility-form__label inspection-facility-form__label--stack">
+                  <span class="inspection-facility-form__label-main">준공</span>
+                  <span class="inspection-facility-form__label-sub">년월일</span>
+                </span>
+                <div class="inspection-facility-form__control inspection-facility-form__control--date">
+                  <div class="inspection-date-field inspection-date-field--compact">
+                    <input type="date" id="facilityCompleted" class="inspection-facility-form__input inspection-facility-form__input--date">
+                    <span class="inspection-date-field__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="inspection-facility-form__field">
+                <span class="inspection-facility-form__label inspection-facility-form__label--stack">
+                  <span class="inspection-facility-form__label-main">최종점검</span>
+                  <span class="inspection-facility-form__label-sub">년월일</span>
+                </span>
+                <div class="inspection-facility-form__control inspection-facility-form__control--date">
+                  <div class="inspection-date-field inspection-date-field--compact">
+                    <input type="date" id="facilityLastInspection" class="inspection-facility-form__input inspection-facility-form__input--date">
+                    <span class="inspection-date-field__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="report-section inspection-items-card">
+            <div class="report-section__body">
+              <div class="report-table-scroll">
+                <table class="report-table inspection-items-table">
+                  <thead>
+                    <tr>
+                      <th>구분</th>
+                      <th>점검항목</th>
+                      <th>점검결과</th>
+                      <th>의견</th>
+                      <th>보수필요여부</th>
+                      <th>사진첨부</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inspectionItemsBody"></tbody>
+                </table>
+              </div>
+              <div class="inspection-items-extra">
+                <div class="inspection-extra-form">
+                  <div class="inspection-extra-form__row inspection-extra-form__row--date">
+                    <label class="inspection-extra-form__label" for="inspectionDate">
+                      점검일자<span class="required" aria-hidden="true">*</span>
+                    </label>
+                    <div class="inspection-extra-form__control inspection-extra-form__control--date">
+                      <div class="inspection-date-field">
+                        <input type="date" id="inspectionDate" class="inspection-date-input" placeholder="YYYY-MM-DD">
+                        <span class="inspection-date-field__icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="inspection-extra-form__row">
+                    <label class="inspection-extra-form__label" for="specialNotes">특이사항</label>
+                    <div class="inspection-extra-form__control">
+                      <textarea id="specialNotes" class="inspection-extra-form__textarea" rows="3" placeholder="특이사항 내용을 입력하세요."></textarea>
+                    </div>
+                  </div>
+                  <div class="inspection-extra-form__row">
+                    <label class="inspection-extra-form__label" for="inspectorOpinion">점검자의견</label>
+                    <div class="inspection-extra-form__control">
+                      <textarea id="inspectorOpinion" class="inspection-extra-form__textarea" rows="3" placeholder="점검자 의견 내용을 입력하세요."></textarea>
+                    </div>
+                  </div>
+                  <div class="inspection-extra-form__footer">
+                    <p class="inspection-required-note">* 표시는 필수 입력 항목입니다.</p>
+                    <div class="inspection-items-actions">
+                      <button type="button" class="btn-draft" id="btnItemsDraft">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                          <polyline points="17 21 17 13 7 13 7 21"/>
+                          <polyline points="7 3 7 8 15 8"/>
+                        </svg>
+                        임시저장
+                      </button>
+                      <button type="button" class="btn-submit btn-submit--dark" id="btnItemsSave">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                          <line x1="22" y1="2" x2="11" y2="13"/>
+                          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                        저장하기
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="inspection-tab-panel is-hidden" id="panelPhotos" role="tabpanel" aria-labelledby="tabPhotos" hidden>
+          <p class="inspection-tab-placeholder">사진대지 화면 (준비 중)</p>
+        </div>
+        <div class="inspection-tab-panel is-hidden" id="panelReport" role="tabpanel" aria-labelledby="tabReport" hidden>
+          <p class="inspection-tab-placeholder">결과보고서 화면 (준비 중)</p>
+        </div>
+      </section>
+    </div>
+
+    <footer class="vendor-footer vendor-footer--inspection" id="inspectionPageFooter" hidden>
+      <div class="vendor-footer__actions">
+        <button type="button" class="btn-draft" id="btnDraft">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/>
+            <polyline points="7 3 7 8 15 8"/>
+          </svg>
+          임시저장
+        </button>
+        <button type="button" class="btn-submit btn-submit--dark" id="btnSubmit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          신청하기
+        </button>
+      </div>
+    </footer>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-vendor.js"></script>
+  <script src="js/vendor-inspection.js"></script>
+  <script>
+    PomsSidebarVendor.mount('#sidebar-root', { active: 'inspection-report' });
+  </script>
+</body>
+</html>

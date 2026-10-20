@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>안전점검기관 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/admin-users.css">
+  <link rel="stylesheet" href="css/safety-report-approval.css">
+  <link rel="stylesheet" href="css/inspection-agency.css?v=20260814-4">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout facility-change-request-page admin-users-page inspection-agency-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fcr-page">
+      <div class="fcr-card">
+        <section class="fcr-filter-panel" aria-labelledby="agencySearchTitle">
+          <div class="fcr-filter-panel__head">
+            <span class="fcr-filter-panel__title-icon" aria-hidden="true">
+              <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+            </span>
+            <h2 id="agencySearchTitle" class="fcr-filter-panel__title">검색조건</h2>
+          </div>
+          <form id="agencySearchForm" class="fcr-filter" role="search" novalidate>
+            <div class="fcr-filter-row admin-users-filter-row">
+              <div class="fcr-field">
+                <label for="agencyCompanyFilter">기관명</label>
+                <input type="text" id="agencyCompanyFilter" name="company" placeholder="기관명을 입력하세요." autocomplete="off">
+              </div>
+              <div class="fcr-field">
+                <label for="agencyManagerFilter">담당자명</label>
+                <input type="text" id="agencyManagerFilter" name="manager" placeholder="담당자명을 입력하세요." autocomplete="off">
+              </div>
+              <div class="fcr-field">
+                <label for="agencyStatusFilter">사용권한</label>
+                <select id="agencyStatusFilter" name="status">
+                  <option value="">전체</option>
+                  <option value="Y">승인</option>
+                  <option value="N">반려</option>
+                  <option value="R">요청중</option>
+                </select>
+              </div>
+              <div class="fcr-filter-actions">
+                <button type="submit" class="fcr-btn fcr-btn--search" id="agencySearch">
+                  <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                  검색하기
+                </button>
+                <button type="button" class="fcr-btn fcr-btn--reset" id="agencyReset">
+                  <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                  초기화
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <div class="fcr-divider" aria-hidden="true"></div>
+
+        <section class="fcr-results-panel" aria-labelledby="agencyResultsTitle">
+          <div class="fcr-results__head">
+            <div class="fcr-results__count">
+              <span class="fcr-results__bar-icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+              </span>
+              <h2 id="agencyResultsTitle" class="fcr-results__label">검색결과</h2>
+              <p class="fcr-results__meta">총 <strong id="agencyResultCount">0</strong>건</p>
+            </div>
+          </div>
+
+          <div class="fcr-table-wrap">
+            <table class="fcr-table admin-users-table agency-table" aria-label="안전점검기관 검색결과">
+              <colgroup>
+                <col class="col-no" style="width:48px">
+                <col class="col-org">
+                <col class="col-name">
+                <col class="col-usage">
+                <col class="col-phone">
+                <col class="col-login">
+                <col class="col-yn">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-no">번호</th>
+                  <th scope="col" class="col-org">기관명</th>
+                  <th scope="col" class="col-name">담당자명(ID)</th>
+                  <th scope="col" class="col-usage">직급</th>
+                  <th scope="col" class="col-phone">전화번호</th>
+                  <th scope="col" class="col-login">최종접속일</th>
+                  <th scope="col" class="col-yn">사용권한</th>
+                </tr>
+              </thead>
+              <tbody id="agencyTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="fcr-results-foot">
+            <nav class="pagination" id="agencyPagination" aria-label="페이지 이동"></nav>
+            <label class="visually-hidden" for="agencyPageSize">페이지당 표시 건수</label>
+            <select id="agencyPageSize" class="pagination-page-size" aria-label="페이지당 표시 건수" hidden>
+              <option value="10" selected>10 / page</option>
+            </select>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- 기관 상세/수정 (오른쪽 드로어 — 사용자 관리 디자인) -->
+  <div class="mock-drawer-overlay ua-drawer-overlay" id="agencyDetailOverlay" data-agency-detail-close></div>
+  <aside class="mock-drawer ua-drawer" id="agencyDetailModal" aria-labelledby="agencyDetailTitle" aria-hidden="true">
+    <header class="ua-drawer__head">
+      <h2 class="ua-drawer__title" id="agencyDetailTitle">기관 상세/수정</h2>
+      <button type="button" class="ua-drawer__close" id="agencyDetailClose" data-agency-detail-close aria-label="닫기">
+        <img src="assets/admin-users/icon-close.svg" alt="" width="16" height="16">
+      </button>
+    </header>
+
+    <div class="ua-drawer__body">
+      <form class="ua-drawer-form" id="agencyForm" novalidate>
+        <input type="hidden" id="agencySelectedId">
+
+        <div class="ua-drawer-field">
+          <label for="agencyUserId">ID</label>
+          <input type="text" id="agencyUserId" readonly>
+        </div>
+
+        <div class="ua-drawer-row">
+          <div class="ua-drawer-field">
+            <label for="agencyUserName">담당자명</label>
+            <input type="text" id="agencyUserName" placeholder="내용을 입력하세요." autocomplete="off">
+          </div>
+          <div class="ua-drawer-field">
+            <label for="agencyPosition">직급</label>
+            <input type="text" id="agencyPosition" placeholder="내용을 입력하세요." autocomplete="off">
+          </div>
+        </div>
+
+        <div class="ua-drawer-field">
+          <label for="agencyCompanyName">기관명</label>
+          <input type="text" id="agencyCompanyName" placeholder="내용을 입력하세요." autocomplete="off">
+        </div>
+
+        <div class="ua-drawer-field">
+          <label id="agencyPhoneLabel">전화번호</label>
+          <div class="ua-drawer-phone" role="group" aria-labelledby="agencyPhoneLabel">
+            <input type="text" id="agencyTel1" inputmode="numeric" maxlength="3" aria-label="전화번호 앞자리">
+            <span class="ua-drawer-phone__sep" aria-hidden="true">-</span>
+            <input type="text" id="agencyTel2" inputmode="numeric" maxlength="4" aria-label="전화번호 중간자리">
+            <span class="ua-drawer-phone__sep" aria-hidden="true">-</span>
+            <input type="text" id="agencyTel3" inputmode="numeric" maxlength="4" aria-label="전화번호 뒷자리">
+          </div>
+        </div>
+
+        <div class="ua-drawer-row">
+          <div class="ua-drawer-field">
+            <label for="agencyUseYn">사용권한</label>
+            <select id="agencyUseYn">
+              <option value="Y">승인</option>
+              <option value="R">요청중</option>
+              <option value="N">반려</option>
+            </select>
+          </div>
+          <div class="ua-drawer-field">
+            <label for="agencyConnectDate">최종접속일</label>
+            <input type="text" id="agencyConnectDate" readonly>
+          </div>
+        </div>
+      </form>
+
+      <footer class="ua-drawer__foot">
+        <p class="ua-drawer__message" id="agencyMessage">※ 기관 정보 확인 후 저장하거나 삭제처리합니다.</p>
+        <div class="ua-drawer__actions">
+          <button type="button" class="ua-drawer-btn ua-drawer-btn--history" id="agencyProcessHistory">결재이력</button>
+          <button type="button" class="ua-drawer-btn ua-drawer-btn--delete" id="agencyDelete">
+            <img src="assets/admin-notices/icon-delete2.svg" alt="" width="18" height="18">
+            삭제하기
+          </button>
+          <button type="button" class="ua-drawer-btn ua-drawer-btn--save" id="agencySave">
+            <img src="assets/admin-users/icon-save-check.svg" alt="" width="18" height="18">
+            저장하기
+          </button>
+        </div>
+      </footer>
+    </div>
+  </aside>
+
+  <!-- 결재이력 (오른쪽 슬라이드 — 안전점검보고서 승인/반려 디자인) -->
+  <div class="sra-drawer-overlay" id="agencyDrawerOverlay" data-agency-history-close></div>
+  <aside class="sra-drawer" id="agencyDrawer" aria-labelledby="agencyDrawerTitle" aria-hidden="true">
+    <div class="sra-drawer__top">
+      <header class="sra-drawer__head">
+        <h2 class="sra-drawer__title" id="agencyDrawerTitle">결재이력 조회</h2>
+        <button type="button" class="sra-drawer__close" id="agencyDrawerClose" data-agency-history-close aria-label="닫기">
+          <img src="assets/safety-report-approval/icon-close.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+      <div class="sra-drawer__body" id="agencyDrawerBody"></div>
+    </div>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/inspection-agency.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'vendor-agency' });
+  </script>
+</body>
+</html>

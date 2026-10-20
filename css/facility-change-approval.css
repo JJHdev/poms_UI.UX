@@ -1,0 +1,711 @@
+/* 시설물 변경요청 관리 — type3 flat */
+
+.facility-change-approval-page {
+  margin: 0;
+  min-width: 1240px;
+}
+
+/* ===== Internal underline tabs ===== */
+.facility-change-approval-page .ua-account-tabs {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border-bottom: 1px solid #dadae2;
+  background: transparent;
+}
+
+.facility-change-approval-page .ua-account-tabs__btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  padding: 0 20px 14px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  border-radius: 0;
+  background: transparent;
+  color: #6c788b;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.facility-change-approval-page .ua-account-tabs__btn:hover {
+  color: #111;
+  background: transparent;
+}
+
+.facility-change-approval-page .ua-account-tabs__btn.is-active {
+  border-bottom-color: #1c6fff;
+  background: transparent;
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.facility-change-approval-page .fca-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.facility-change-approval-page .fca-panel[hidden] {
+  display: none !important;
+}
+
+/* ===== Filter rows ===== */
+.facility-change-approval-page .fca-filter.type3-filter--strip {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.facility-change-approval-page .fca-filter-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.facility-change-approval-page .fca-filter-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* 1줄: 관리기관·항명·세부항명·요청구분 — 초기화 오른쪽까지 4등분 */
+.facility-change-approval-page .fca-filter-row:not(.fca-filter-row--bottom) {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.facility-change-approval-page .fca-filter-row:not(.fca-filter-row--bottom) > .type3-field {
+  flex: none;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+.facility-change-approval-page .fca-filter-row:not(.fca-filter-row--bottom) > .type3-field select {
+  width: 100%;
+  max-width: none;
+}
+
+.facility-change-approval-page .fca-filter-row > .type3-field {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+}
+
+/* 요청일자 끝 = 1줄 항명 칸 끝 (4등분 중 앞 2칸 + gap) */
+.facility-change-approval-page .fca-filter-row--bottom > .type3-field--range {
+  flex: 0 0 calc(50% - 4px);
+  width: calc(50% - 4px);
+  max-width: none;
+  min-width: 0;
+}
+
+.facility-change-approval-page .fca-filter-row--bottom > .type3-field--grow {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+}
+
+.facility-change-approval-page .fca-filter-row--bottom > .type3-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  margin-left: 0;
+}
+
+.facility-change-approval-page .type3-filter-strip {
+  min-height: 0;
+  padding: 12px 0;
+}
+
+/* ===== Date range ===== */
+.fca-date-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 34px;
+  min-width: 0;
+}
+
+.fca-date-range em {
+  flex: 0 0 auto;
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.fca-date-range input[type="date"] {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 34px;
+  padding: 0 14px 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.fca-date-range input[type="date"]:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+/* ===== Table — fit 1200 content, no horizontal scroll ===== */
+.facility-change-approval-page .type3-table-wrap {
+  overflow-x: hidden;
+}
+
+.facility-change-approval-page .fca-table {
+  width: 100%;
+  min-width: 0 !important;
+  max-width: 100%;
+  table-layout: fixed;
+}
+
+.facility-change-approval-page .fca-table col.col-no { width: 3%; }
+.facility-change-approval-page .fca-table col.col-datetime { width: 8.5%; }
+.facility-change-approval-page .fca-table col.col-reqtype { width: 9.5%; }
+.facility-change-approval-page .fca-table col.col-manage { width: 5.5%; }
+.facility-change-approval-page .fca-table col.col-agency { width: 9.5%; }
+.facility-change-approval-page .fca-table col.col-port { width: 5%; }
+.facility-change-approval-page .fca-table col.col-subport { width: 5.5%; }
+.facility-change-approval-page .fca-table col.col-ftype { width: 5.5%; }
+.facility-change-approval-page .fca-table col.col-fname { width: 9.5%; }
+.facility-change-approval-page .fca-table col.col-person { width: 5%; }
+.facility-change-approval-page .fca-table col.col-reason { width: 11%; }
+.facility-change-approval-page .fca-table col.col-status { width: 5%; }
+.facility-change-approval-page .fca-table col.col-history { width: 9%; }
+
+.facility-change-approval-page .fca-table--demolish col.col-agency { width: 14%; }
+.facility-change-approval-page .fca-table--demolish col.col-fname { width: 14%; }
+.facility-change-approval-page .fca-table--demolish col.col-reason { width: auto; }
+
+.facility-change-approval-page .fca-table thead th,
+.facility-change-approval-page .fca-table tbody td {
+  height: 32px;
+  padding: 2px 3px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facility-change-approval-page .fca-table tbody td {
+  color: #333;
+}
+
+.facility-change-approval-page .fca-table tbody tr[data-id] {
+  cursor: pointer;
+}
+
+.facility-change-approval-page .fca-table tbody tr[data-id]:hover td {
+  background: #f8fafc;
+}
+
+.facility-change-approval-page .fca-table .col-reason,
+.facility-change-approval-page .fca-table td.col-reason {
+  text-align: left;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+/* ===== Status badges ===== */
+.fca-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.fca-status--requested {
+  background: rgba(239, 201, 75, 0.15);
+  color: #d4a50a;
+}
+
+.fca-status--approved {
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+}
+
+.fca-status--rejected {
+  background: rgba(230, 0, 45, 0.04);
+  color: #e6002d;
+}
+
+/* ===== History button ===== */
+.fca-hist-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: 100%;
+  height: 26px;
+  padding: 2px 6px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.fca-hist-btn:hover {
+  background: #f4f4fa;
+  border-color: #c8cfd9;
+}
+
+.facility-change-approval-page .type3-results-foot {
+  justify-content: center;
+}
+
+@media (max-width: 1600px) {
+  .facility-change-approval-page .fca-filter-row--bottom {
+    flex-wrap: wrap;
+  }
+
+  .facility-change-approval-page .fca-filter-row:not(.fca-filter-row--bottom) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .facility-change-approval-page .fca-filter-row--bottom > .type3-field--range {
+    flex: 0 0 calc(50% - 4px);
+    width: calc(50% - 4px);
+    max-width: none;
+  }
+
+  .facility-change-approval-page .fca-filter-row--bottom > .type3-field--grow {
+    flex: 1 1 220px;
+    width: auto;
+    max-width: none;
+  }
+
+  .facility-change-approval-page .fca-filter-row--bottom > .type3-filter-actions {
+    margin-left: auto;
+  }
+}
+
+/* ===== History drawer — Figma 166:5862 ===== */
+body:has(.fca-drawer-overlay.is-open) #sidebar-root,
+body:has(.fca-drawer.is-open) #sidebar-root {
+  z-index: 1000;
+}
+
+.facility-change-approval-page .fca-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+.facility-change-approval-page .fca-drawer-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.facility-change-approval-page .fca-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3001;
+  display: flex;
+  flex-direction: column;
+  width: 560px;
+  max-width: 100vw;
+  height: min(980px, 100vh);
+  max-height: 100vh;
+  background: #fff;
+  border-radius: 14px 0 0 14px;
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.25),
+    4px 4px 5px rgba(0, 0, 0, 0.15),
+    4px 4px 7px rgba(0, 0, 0, 0.04);
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  box-sizing: border-box;
+}
+
+.facility-change-approval-page .fca-drawer.is-open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.facility-change-approval-page .fca-drawer__top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  flex: 1 1 auto;
+  padding-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.facility-change-approval-page .fca-drawer__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 30px 24px 20px;
+  border-bottom: 1px solid #ededed;
+  border-radius: 14px 0 0 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.facility-change-approval-page .fca-drawer__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.48px;
+  line-height: 1.2;
+}
+
+.facility-change-approval-page .fca-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: #dadae2;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.facility-change-approval-page .fca-drawer__close img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.facility-change-approval-page .fca-drawer__close:hover {
+  background: #cbccd6;
+}
+
+.facility-change-approval-page .fca-drawer__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 0 24px;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.fca-hist-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fca-hist-summary__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.fca-hist-summary__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.fca-hist-summary__name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.36px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.fca-hist-summary__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  min-width: 0;
+}
+
+.fca-hist-summary__type {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.fca-hist-summary__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.fca-hist-summary__status.is-requested {
+  background: rgba(239, 201, 75, 0.15);
+  color: #d4a50a;
+}
+
+.fca-hist-summary__status.is-approved {
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+}
+
+.fca-hist-summary__status.is-rejected {
+  background: rgba(230, 0, 45, 0.04);
+  color: #e6002d;
+}
+
+.fca-hist-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.fca-hist-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.fca-hist-row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 44px;
+}
+
+.fca-hist-row__label {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  flex-shrink: 0;
+  padding: 10px 20px;
+  background: rgba(28, 111, 255, 0.04);
+  border: 1px solid #dadae2;
+  border-radius: 12px 0 0 12px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  white-space: nowrap;
+}
+
+.fca-hist-row__value {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fca-hist-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.fca-hist-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid #dadae2;
+  background: rgba(108, 120, 139, 0.04);
+}
+
+.fca-hist-card.is-done {
+  border-color: #1c6fff;
+  background: rgba(28, 111, 255, 0.05);
+}
+
+.fca-hist-card.is-reject {
+  border-color: #e6002d;
+  background: rgba(230, 0, 45, 0.05);
+}
+
+.fca-hist-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.fca-hist-card__left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fca-hist-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 2px 8px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(108, 120, 139, 0.15);
+  font-size: 12px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.fca-hist-card.is-done .fca-hist-card__badge {
+  background: rgba(28, 111, 255, 0.15);
+  color: #1c6fff;
+}
+
+.fca-hist-card.is-reject .fca-hist-card__badge {
+  background: rgba(230, 0, 45, 0.12);
+  color: #e6002d;
+}
+
+.fca-hist-card__by {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.fca-hist-card__org {
+  font-weight: 600;
+  color: #6c788b;
+}
+
+.fca-hist-card__date {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fca-hist-card__note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.fca-hist-card__note-tag {
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+.fca-hist-card__note-text {
+  font-weight: 400;
+  color: #6c788b;
+  min-width: 0;
+}

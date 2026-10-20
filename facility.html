@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>홈 대시보드 | POMS 시설물 정보</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/facility-dashboard-figma.css?v=20260819a">
+  <link rel="stylesheet" href="css/site-footer.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="css/facility-map-modal.css">
+</head>
+<body class="facility-dash-page">
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">POMS 메인 대시보드</h2>
+
+<div class="pg">
+  <div id="sidebar-root"></div>
+
+  <main class="wrap home-dashboard">
+    <div class="dash-page-title">
+      <span class="dash-page-title__icon" aria-hidden="true">
+        <img src="assets/main/dashboard/figma224/icon-page-title.svg" alt="" width="24" height="24">
+      </span>
+      <h1>항만시설물 지도</h1>
+    </div>
+
+    <nav class="dash-quick-bar" aria-label="퀵메뉴">
+      <a href="facility-search.html" class="dash-quick-bar__item is-active">
+        <span class="dash-quick-bar__icon" aria-hidden="true">
+          <img src="assets/main/dashboard/figma224/icon-quick-search.svg" alt="" width="16" height="16">
+        </span>
+        <span class="dash-quick-bar__label">통합검색</span>
+      </a>
+      <a href="facility-condition-search.html" class="dash-quick-bar__item">
+        <span class="dash-quick-bar__icon" aria-hidden="true">
+          <img src="assets/main/dashboard/figma224/icon-quick-filter.svg" alt="" width="16" height="16">
+        </span>
+        <span class="dash-quick-bar__label">조건검색</span>
+      </a>
+      <a href="inspection-status.html" class="dash-quick-bar__item">
+        <span class="dash-quick-bar__icon" aria-hidden="true">
+          <img src="assets/main/dashboard/figma224/icon-quick-inspect.svg" alt="" width="16" height="16">
+        </span>
+        <span class="dash-quick-bar__label">점검정보 현황</span>
+      </a>
+      <a href="maintenance-plan.html" class="dash-quick-bar__item">
+        <span class="dash-quick-bar__icon" aria-hidden="true">
+          <img src="assets/main/dashboard/figma224/icon-quick-plan.svg" alt="" width="16" height="16">
+        </span>
+        <span class="dash-quick-bar__label">유지관리 계획</span>
+      </a>
+    </nav>
+
+    <div class="dash-layout">
+      <div class="dash-layout__left">
+        <section
+          class="dash-map-hero"
+          aria-labelledby="dash-map-heading"
+          data-map-embed-src="https://www.openstreetmap.org/export/embed.html?bbox=129.004%2C35.068%2C129.098%2C35.154&amp;layer=mapnik"
+        >
+          <h2 id="dash-map-heading" class="visually-hidden">항만시설물 지도</h2>
+          <div class="dash-map-hero__canvas">
+            <div id="facility-map-leaflet-inline" class="dash-map-hero__leaflet" role="presentation" aria-hidden="true"></div>
+
+            <form class="dash-map-hero__filters" id="dash-map-form" action="#" method="get" novalidate>
+              <div class="dash-map-hero__fields">
+                <div class="dash-map-hero__field">
+                  <label for="dash-map-filter-type">시설 유형</label>
+                  <select id="dash-map-filter-type" name="facilityType" class="dash-map-hero__select">
+                    <option value="">전체</option>
+                    <option value="1">1종 시설물</option>
+                    <option value="2">2종 시설물</option>
+                    <option value="3">3종 시설물</option>
+                    <option value="etc">기타</option>
+                  </select>
+                </div>
+                <div class="dash-map-hero__field">
+                  <label for="dash-map-filter-port">항만·구역</label>
+                  <select id="dash-map-filter-port" name="port" class="dash-map-hero__select">
+                    <option value="">전체</option>
+                    <option value="busan-n">부산항 북항</option>
+                    <option value="busan-s">부산항 신항</option>
+                    <option value="incheon">인천항</option>
+                    <option value="ulsan">울산항</option>
+                  </select>
+                </div>
+                <div class="dash-map-hero__field dash-map-hero__field--search">
+                  <label for="dash-map-search-input">시설물 검색</label>
+                  <div class="dash-map-hero__search">
+                    <input
+                      type="search"
+                      id="dash-map-search-input"
+                      name="q"
+                      class="dash-map-hero__input"
+                      placeholder="시설물명"
+                      autocomplete="off"
+                      enterkeyhint="search"
+                    >
+                    <button type="submit" class="dash-map-hero__search-btn">
+                      <img src="assets/main/dashboard/figma224/icon-search-btn.svg" alt="" width="18" height="18">
+                      검색
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="dash-map-tools" aria-label="지도 도구">
+              <button type="button" class="dash-map-tools__btn" data-map-tool="distance" title="거리">
+                <span class="dash-map-tools__glyph" aria-hidden="true">
+                  <img src="assets/main/dashboard/figma224/icon-map-distance.svg" alt="" width="18" height="18">
+                </span>
+                <span>거리</span>
+              </button>
+              <button type="button" class="dash-map-tools__btn" data-map-tool="area" title="면적">
+                <span class="dash-map-tools__glyph" aria-hidden="true">
+                  <img src="assets/main/dashboard/figma224/icon-map-area.svg" alt="" width="16" height="16">
+                </span>
+                <span>면적</span>
+              </button>
+              <div class="dash-map-tools__stack">
+                <button type="button" class="dash-map-tools__icon" data-map-tool="zoom-in" aria-label="확대">
+                  <img src="assets/main/dashboard/figma224/icon-map-zoom-in.svg" alt="" width="12" height="12">
+                </button>
+                <button type="button" class="dash-map-tools__icon" data-map-tool="zoom-out" aria-label="축소">
+                  <img src="assets/main/dashboard/figma224/icon-map-zoom-out.svg" alt="" width="20" height="20">
+                </button>
+              </div>
+              <button type="button" class="dash-map-tools__btn" data-map-tool="satellite" title="위성">
+                <span class="dash-map-tools__glyph" aria-hidden="true">
+                  <img src="assets/main/dashboard/figma224/icon-map-satellite.svg" alt="" width="20" height="20">
+                </span>
+                <span>위성</span>
+              </button>
+              <button type="button" class="dash-map-tools__btn" data-map-tool="drone" title="드론">
+                <span class="dash-map-tools__glyph" aria-hidden="true">
+                  <img src="assets/main/dashboard/figma224/icon-map-drone.svg" alt="" width="16" height="16">
+                </span>
+                <span>드론</span>
+              </button>
+            </div>
+
+            <div class="dash-map-results">
+              <div class="dash-map-results__head">
+                <div class="dash-map-results__count">
+                  <span>검색결과</span>
+                  <strong id="dash-map-result-count">0건</strong>
+                </div>
+                <div class="dash-map-results__actions">
+                  <button type="button" class="dash-map-results__btn dash-map-results__btn--primary" id="dash-map-detail-btn" disabled aria-disabled="true">
+                    <img src="assets/main/dashboard/figma224/icon-btn-detail.svg" alt="" width="18" height="18">
+                    상세보기
+                  </button>
+                  <button type="button" class="dash-map-results__btn" id="facility-map-open-modal" aria-haspopup="dialog" aria-controls="facility-map-modal">
+                    <img src="assets/main/dashboard/figma224/icon-btn-enlarge.svg" alt="" width="18" height="18">
+                    지도 크게보기
+                  </button>
+                </div>
+              </div>
+              <ul class="dash-map-cards map-result-list" id="dash-map-result-list" role="list"></ul>
+              <p class="dash-map-results__empty" id="dash-map-result-empty" hidden>조건에 맞는 시설물이 없습니다.</p>
+              <div class="dash-map-results__scroll" aria-hidden="true">
+                <span class="dash-map-results__scroll-track"></span>
+                <span class="dash-map-results__scroll-thumb"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="dash-layout__right">
+        <div class="dash-summary-block">
+          <div class="dash-summary-block__title">
+            <span class="sec-bar" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+            </span>
+            <h2>시설물 정보 요약</h2>
+          </div>
+
+          <div id="facility-type-group" class="dash-summary-types" role="group" aria-label="시설물 유형 선택">
+            <div class="dash-summary-card">
+              <button type="button" class="facility-type-btn dash-type-btn dash-type-btn--total is-active" data-facility-type="all" aria-pressed="true">
+                <span class="dash-type-btn__left">
+                  <span class="dash-type-btn__icon dash-type-btn__icon--active" aria-hidden="true">
+                    <img src="assets/main/dashboard/figma224/icon-type-all.svg" alt="" width="18" height="18">
+                  </span>
+                  <span class="dash-type-btn__label">총 시설물</span>
+                </span>
+                <span class="dash-type-btn__value"><em>1,636</em><i>건</i></span>
+              </button>
+              <div class="dash-grade-rows" id="dash-grade-rows" role="list" aria-label="등급별 현황 막대"></div>
+            </div>
+
+            <div class="dash-type-list">
+              <button type="button" class="facility-type-btn dash-type-btn" data-facility-type="type1" aria-pressed="false">
+                <span class="dash-type-btn__left">
+                  <span class="dash-type-btn__icon" aria-hidden="true">
+                    <img src="assets/main/dashboard/figma224/icon-type-1.svg" alt="" width="18" height="18">
+                  </span>
+                  <span class="dash-type-btn__label">1종 시설물</span>
+                </span>
+                <span class="dash-type-btn__value"><em>332</em><i>건</i></span>
+              </button>
+              <button type="button" class="facility-type-btn dash-type-btn" data-facility-type="type2" aria-pressed="false">
+                <span class="dash-type-btn__left">
+                  <span class="dash-type-btn__icon" aria-hidden="true">
+                    <img src="assets/main/dashboard/figma224/icon-type-2.svg" alt="" width="18" height="18">
+                  </span>
+                  <span class="dash-type-btn__label">2종 시설물</span>
+                </span>
+                <span class="dash-type-btn__value"><em>332</em><i>건</i></span>
+              </button>
+              <button type="button" class="facility-type-btn dash-type-btn" data-facility-type="type3" aria-pressed="false">
+                <span class="dash-type-btn__left">
+                  <span class="dash-type-btn__icon" aria-hidden="true">
+                    <img src="assets/main/dashboard/figma224/icon-type-3.svg" alt="" width="18" height="18">
+                  </span>
+                  <span class="dash-type-btn__label">3종 시설물</span>
+                </span>
+                <span class="dash-type-btn__value"><em>332</em><i>건</i></span>
+              </button>
+              <button type="button" class="facility-type-btn dash-type-btn" data-facility-type="other" aria-pressed="false">
+                <span class="dash-type-btn__left">
+                  <span class="dash-type-btn__icon" aria-hidden="true">
+                    <img src="assets/main/dashboard/figma224/icon-type-other.svg" alt="" width="18" height="18">
+                  </span>
+                  <span class="dash-type-btn__label">기타 시설물</span>
+                </span>
+                <span class="dash-type-btn__value"><em>332</em><i>건</i></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-tab-board" id="dash-board-tabs">
+          <div class="dash-tab-board__head">
+            <div class="dash-tab-board__tabs" role="tablist" aria-label="게시판 및 안전점검 관련자료">
+              <button type="button" class="dash-tab-board__tab is-active" role="tab" id="dash-tab-notice" aria-selected="true" aria-controls="dash-panel-notice" data-tab="notice">게시판</button>
+              <button type="button" class="dash-tab-board__tab" role="tab" id="dash-tab-maint" aria-selected="false" aria-controls="dash-panel-maint" data-tab="maint">안전점검 관련자료</button>
+            </div>
+            <a href="archive-board.html" class="dash-tab-board__more" id="dash-tab-board-more">더보기+</a>
+          </div>
+          <div class="dash-tab-board__body">
+            <div class="dash-tab-board__panel is-active" role="tabpanel" id="dash-panel-notice" aria-labelledby="dash-tab-notice">
+              <ul class="dash-tab-board__list">
+                <li class="dash-tab-board__item">
+                  <a href="archive-board.html?open=%ED%95%AD%EB%A7%8C%EB%B2%95%20%EC%8B%9C%ED%96%89%EB%A0%B9%20%EA%B3%A0%EC%8B%9C%EB%AC%B8.pdf" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">01</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">항만법 시행령 일부개정령[2024.05.10] 고시문</span>
+                      <span class="dash-tab-board__new">NEW</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-05-10">2024-05-10</time>
+                </li>
+                <li class="dash-tab-board__item">
+                  <a href="archive-board.html?open=%ED%95%AD%EB%A7%8C%EC%8B%9C%EC%84%A4%20%EC%9C%A0%EC%A7%80%EA%B4%80%EB%A6%AC%20%EC%A7%80%EC%B9%A8_v2.0.pdf" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">02</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">항만시설 유지관리 지침 개정(v2.0)</span>
+                      <span class="dash-tab-board__new">NEW</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-04-01">2024-04-01</time>
+                </li>
+                <li class="dash-tab-board__item">
+                  <a href="archive-board.html?open=%EC%8B%9C%EC%84%A4%EB%AC%BC%20%EC%95%88%EC%A0%84%EC%A0%90%EA%B2%80%20%EC%9A%94%EB%A0%B9.pdf" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">03</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">항만시설물 정기점검 및 안전점검 요령</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-03-25">2024-03-25</time>
+                </li>
+                <li class="dash-tab-board__item">
+                  <a href="archive-board.html?open=%EC%BD%98%ED%81%AC%EB%A6%AC%ED%8A%B8%20%EA%B5%AC%EC%A1%B0%EB%AC%BC%20%EC%9C%A0%EC%A7%80%EA%B4%80%EB%A6%AC%20%EA%B8%B0%EC%A4%80.hwp" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">04</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">콘크리트 구조물 유지관리 기준(2023년 개정)</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-03-12">2024-03-12</time>
+                </li>
+                <li class="dash-tab-board__item">
+                  <a href="archive-board.html?open=%ED%95%AD%EB%A7%8C%EC%8B%9C%EC%84%A4%20%EC%84%A4%EA%B3%84%EA%B8%B0%EC%A4%80(2023).pdf" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">05</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">항만시설 설계기준(KDS 64 10 00:2023)</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-02-20">2024-02-20</time>
+                </li>
+              </ul>
+            </div>
+            <div class="dash-tab-board__panel" role="tabpanel" id="dash-panel-maint" aria-labelledby="dash-tab-maint" hidden>
+              <ul class="dash-tab-board__list">
+                <li class="dash-tab-board__item">
+                  <a href="archive-safety-materials.html?open=%EC%A0%95%EA%B8%B0%EC%95%88%EC%A0%84%EC%A0%90%EA%B2%80%20%EC%88%98%ED%96%89%20%EB%A7%A4%EB%89%B4%EC%96%BC" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">01</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">정기안전점검 수행 매뉴얼</span>
+                      <span class="dash-tab-board__new">NEW</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-05-12">2024-05-12</time>
+                </li>
+                <li class="dash-tab-board__item">
+                  <a href="archive-safety-materials.html?open=%EC%A0%95%EB%B0%80%EC%95%88%EC%A0%84%EC%A0%90%EA%B2%80%20%ED%98%84%EC%9E%A5%20%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">02</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">정밀안전점검 현장 체크리스트</span>
+                      <span class="dash-tab-board__new">NEW</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-04-28">2024-04-28</time>
+                </li>
+                <li class="dash-tab-board__item">
+                  <a href="archive-safety-materials.html?open=%ED%95%AD%EB%A7%8C%EC%8B%9C%EC%84%A4%20%EC%95%88%EC%A0%84%EB%93%B1%EA%B8%89%20%ED%8C%90%EC%A0%95%20%EA%B8%B0%EC%A4%80" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">03</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">항만시설 안전등급 판정 기준</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-04-10">2024-04-10</time>
+                </li>
+                <li class="dash-tab-board__item">
+                  <a href="archive-safety-materials.html?open=%EC%A0%90%EA%B2%80%EA%B2%B0%EA%B3%BC%20%EB%B3%B4%EA%B3%A0%EC%84%9C%20%EC%9E%91%EC%84%B1%20%EC%98%88%EC%8B%9C" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">04</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">점검결과 보고서 작성 예시</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-03-18">2024-03-18</time>
+                </li>
+                <li class="dash-tab-board__item">
+                  <a href="archive-safety-materials.html?open=%EC%99%B8%EA%B3%BD%EC%8B%9C%EC%84%A4%20%EC%A0%90%EA%B2%80%20%EC%A0%90%EA%B2%80%ED%91%9C" class="dash-tab-board__link">
+                    <span class="dash-tab-board__num">05</span>
+                    <span class="dash-tab-board__title">
+                      <span class="dash-tab-board__text">외곽시설 점검 점검표</span>
+                    </span>
+                  </a>
+                  <time class="dash-tab-board__date" datetime="2024-03-05">2024-03-05</time>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+  <!-- 지도 모달 -->
+  <!-- 지도 크게보기 — Figma 118:2506 -->
+  <div
+    id="facility-map-modal"
+    class="map-modal"
+    data-map-embed-src="https://www.openstreetmap.org/export/embed.html?bbox=129.004%2C35.068%2C129.098%2C35.154&amp;layer=mapnik"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="facility-map-modal-title"
+  >
+    <div class="map-modal__panel map-modal__panel--fullscreen">
+      <div class="map-modal__map-full" id="facility-map-modal-frame">
+        <div id="facility-map-leaflet" class="map-modal__leaflet" role="presentation" aria-hidden="true"></div>
+
+        <div class="dash-map-tools map-modal__tools" aria-label="지도 도구">
+          <button type="button" class="dash-map-tools__btn" data-map-tool="distance" title="거리">
+            <span class="dash-map-tools__glyph" aria-hidden="true">
+              <img src="assets/main/dashboard/map/Group%20239673%20(1).svg" alt="" width="18" height="18">
+            </span>
+            <span>거리</span>
+          </button>
+          <button type="button" class="dash-map-tools__btn" data-map-tool="area" title="면적">
+            <span class="dash-map-tools__glyph" aria-hidden="true">
+              <img src="assets/main/dashboard/map/Group%20239750%20(1).svg" alt="" width="16" height="16">
+            </span>
+            <span>면적</span>
+          </button>
+          <div class="dash-map-tools__stack">
+            <button type="button" class="dash-map-tools__icon" data-map-tool="zoom-in" aria-label="확대">
+              <img src="assets/main/dashboard/map/Group%20239748%20(1).svg" alt="" width="12" height="12">
+            </button>
+            <button type="button" class="dash-map-tools__icon" data-map-tool="zoom-out" aria-label="축소">
+              <img src="assets/main/dashboard/map/Vector%20(1).svg" alt="" width="20" height="20">
+            </button>
+          </div>
+          <button type="button" class="dash-map-tools__btn" data-map-tool="satellite" title="위성">
+            <span class="dash-map-tools__glyph" aria-hidden="true">
+              <img src="assets/main/dashboard/map/Component%202%20(1).svg" alt="" width="20" height="20">
+            </span>
+            <span>위성</span>
+          </button>
+          <button type="button" class="dash-map-tools__btn" data-map-tool="drone" title="드론">
+            <span class="dash-map-tools__glyph" aria-hidden="true">
+              <img src="assets/main/dashboard/map/Group%20239751%20(1).svg" alt="" width="16" height="16">
+            </span>
+            <span>드론</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="map-modal__side">
+        <header class="map-modal__side-head">
+          <div class="map-modal__side-titles">
+            <h2 id="facility-map-modal-title" class="map-modal__side-title">시설물 위치</h2>
+            <p class="map-modal__side-subtitle" id="facility-map-modal-subtitle">검색 조건에 맞는 시설을 지도와 목록에서 확인합니다.</p>
+          </div>
+          <button type="button" class="map-modal__side-close" data-close-map-modal aria-label="지도 창 닫기">
+            <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+          </button>
+        </header>
+
+        <div class="map-modal__side-body">
+          <form class="map-modal__side-filters" id="facility-map-modal-form" action="#" method="get" novalidate>
+            <div class="map-modal__side-filter-group">
+              <div class="map-modal__side-row">
+                <div class="map-modal__side-field">
+                  <label for="map-filter-type">시설유형</label>
+                  <select id="map-filter-type" name="facilityType" class="map-modal__side-select">
+                    <option value="">전체</option>
+                    <option value="1">1종 시설물</option>
+                    <option value="2">2종 시설물</option>
+                    <option value="3">3종 시설물</option>
+                    <option value="etc">기타</option>
+                  </select>
+                </div>
+                <div class="map-modal__side-field">
+                  <label for="map-filter-port">항만 · 구역</label>
+                  <select id="map-filter-port" name="port" class="map-modal__side-select">
+                    <option value="">전체</option>
+                    <option value="busan-n">부산항 북항</option>
+                    <option value="busan-s">부산항 신항</option>
+                    <option value="incheon">인천항</option>
+                    <option value="ulsan">울산항</option>
+                  </select>
+                </div>
+              </div>
+              <div class="map-modal__side-field map-modal__side-field--full">
+                <label for="map-search-input">시설물 검색</label>
+                <input
+                  type="search"
+                  id="map-search-input"
+                  name="q"
+                  class="map-modal__side-input"
+                  placeholder="시설물명을 입력하세요."
+                  autocomplete="off"
+                  enterkeyhint="search"
+                >
+              </div>
+            </div>
+            <button type="submit" class="map-modal__side-search">
+              <img src="assets/main/dashboard/map/Component%201.svg" alt="" width="22" height="22">
+              검색하기
+            </button>
+          </form>
+
+          <div class="map-modal__side-results" aria-labelledby="map-results-heading">
+            <div class="map-modal__side-results-head">
+              <h3 id="map-results-heading" class="visually-hidden">검색 결과</h3>
+              <div class="map-modal__side-count">
+                <span class="map-modal__side-count-label">검색결과</span>
+                <span class="map-modal__side-count-meta">
+                  <span class="map-modal__side-count-prefix">총 </span>
+                  <strong id="map-result-count" data-count-format="number">0</strong>
+                  <span class="map-modal__side-count-suffix">건</span>
+                </span>
+              </div>
+            </div>
+            <div class="map-modal__side-list-wrap">
+              <ul class="map-modal__cards" id="map-result-list" role="list"></ul>
+              <p class="map-modal__side-empty" id="map-result-empty" hidden>조건에 맞는 시설물이 없습니다.</p>
+            </div>
+            <button type="button" class="map-modal__side-detail" id="map-modal-detail-btn" disabled aria-disabled="true">
+              <img src="assets/main/dashboard/map/Component%204.svg" alt="" width="22" height="22">
+              상세보기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시설물 정보 모달 -->
+  <div
+    id="facility-info-modal"
+    class="dash-facility-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="facility-info-modal-title"
+  >
+    <div class="dash-facility-modal__backdrop" data-close-facility-info-modal tabindex="-1" aria-hidden="true"></div>
+    <div class="dash-facility-modal__panel" role="document">
+      <header class="dash-facility-modal__head">
+        <div class="dash-facility-modal__titles">
+          <p class="dash-facility-modal__eyebrow">항만시설물 통계</p>
+          <h2 class="dash-facility-modal__title" id="facility-info-modal-title">시설물정보 (2022.12 기준)</h2>
+        </div>
+        <button type="button" class="dash-facility-modal__close" data-close-facility-info-modal aria-label="닫기">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </header>
+      <div class="dash-facility-modal__body">
+        <div class="dash-facility-modal__table-scroll">
+          <table class="dash-facility-info-table" aria-label="시설물 정보 통계">
+            <thead>
+              <tr>
+                <th scope="colgroup" colspan="3">구분</th>
+                <th scope="col" rowspan="2">국가관리</th>
+                <th scope="col" rowspan="2">지자체 관리</th>
+                <th scope="col" rowspan="2">항만공사</th>
+              </tr>
+              <tr>
+                <th scope="col">종류</th>
+                <th scope="col">시설구분</th>
+                <th scope="col">개소</th>
+              </tr>
+            </thead>
+            <tbody id="facility-info-modal-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <footer class="dash-facility-modal__foot">
+        <button type="button" class="dash-facility-modal__btn" data-close-facility-info-modal>닫기</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    PomsSidebar.mount('#sidebar-root', { active: 'home' });
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="js/facility-map-modal.js"></script>
+  <script src="js/facility-info-modal-data.js"></script>
+  <script src="js/facility-dashboard.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/related-sites-data.js"></script>
+  <script src="js/site-footer.js"></script>
+</body>
+</html>

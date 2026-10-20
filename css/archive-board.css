@@ -1,0 +1,477 @@
+/* 게시판 — type3 flat (공지사항·자료수신과 동일 셸) */
+
+.archive-board-page.fcr-flat-page .main-content,
+.archive-board-page.fcr-flat-page .type3-page:not(.home-subpage__type3) {
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+/* ===== 탭 — 하단 보더 / 활성 파란 밑줄 ===== */
+.archive-board-tabs {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border-bottom: 1px solid #dadae2;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.archive-board-tabs__btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  padding: 0 8px 12px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #6c788b;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.archive-board-tabs__btn:hover {
+  color: #111;
+  background: transparent;
+}
+
+.archive-board-tabs__btn.is-active {
+  border-bottom-color: #1c6fff;
+  background: transparent;
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.archive-board-page.fcr-flat-page .archive-board-tabs {
+  margin-top: -4px;
+}
+
+.archive-board-page.fcr-flat-page .type3-results__side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.archive-board-page.fcr-flat-page .type3-list-guide-note {
+  margin: 0;
+}
+
+.archive-board-page.fcr-flat-page .type3-table-wrap {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.archive-board-page.fcr-flat-page .type3-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.archive-board-page.fcr-flat-page .type3-table .col-no {
+  width: 5%;
+}
+
+.archive-board-page.fcr-flat-page .type3-table .col-title {
+  width: 22%;
+}
+
+.archive-board-page.fcr-flat-page .type3-table .col-desc {
+  width: 30%;
+}
+
+.archive-board-page.fcr-flat-page .type3-table .col-writer,
+.archive-board-page.fcr-flat-page .type3-table .col-date,
+.archive-board-page.fcr-flat-page .type3-table .col-size {
+  width: 11%;
+}
+
+.archive-board-page.fcr-flat-page .type3-table .col-file {
+  width: 9%;
+}
+
+.archive-board-page.fcr-flat-page .type3-table tbody td.col-title,
+.archive-board-page.fcr-flat-page .type3-table tbody td.col-desc {
+  text-align: left;
+  padding-left: 16px;
+  padding-right: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.archive-board-page .type3-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.archive-board-page .type3-table tbody tr.is-clickable:hover td {
+  background: #f7f9fc;
+}
+
+.archive-board-page .archive-file-attach {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.archive-board-page .archive-file-attach img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.archive-board-page .archive-file-attach:hover {
+  background: #f4f4fa;
+  border-color: #c5c5d0;
+  text-decoration: none;
+}
+
+/* ===== 모달 — Figma 154:7784 ===== */
+.archive-board-page .asm-modal__panel {
+  width: min(1200px, 100%);
+}
+
+.archive-board-page .asm-modal .fcr-modal__head-main {
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.archive-board-page .asm-modal__sub {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 4px 0;
+}
+
+.archive-board-page .asm-modal__sub-category,
+.archive-board-page .asm-modal__sub-date {
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.archive-board-page .asm-modal__sub-divider {
+  display: inline-block;
+  width: 0;
+  height: 10px;
+  border-left: 1px solid #6c788b;
+  flex-shrink: 0;
+}
+
+.archive-board-page .asm-modal__sub-divider[hidden] {
+  display: none !important;
+}
+
+.archive-board-page .asm-modal__body {
+  gap: 20px;
+  padding: 20px 24px 8px;
+  overflow: auto;
+}
+
+.archive-board-page .asm-modal__meta {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.archive-board-page .asm-modal__meta[hidden] {
+  display: none !important;
+}
+
+.archive-board-page .asm-modal__meta-cell {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+}
+
+.archive-board-page .asm-modal__meta-label {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 140px;
+  height: 100%;
+  padding: 10px 20px;
+  border: 1px solid #dadae2;
+  background: rgba(28, 111, 255, 0.04);
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.archive-board-page .asm-modal__meta-cell:first-child .asm-modal__meta-label {
+  border-radius: 12px 0 0 12px;
+}
+
+.archive-board-page .asm-modal__meta-value {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 10px 20px;
+  border: 1px solid #dadae2;
+  border-left: none;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.archive-board-page .asm-modal__meta-cell + .asm-modal__meta-cell .asm-modal__meta-label {
+  border-left: none;
+}
+
+.archive-board-page .asm-modal__meta-cell:last-child .asm-modal__meta-value {
+  border-radius: 0 12px 12px 0;
+}
+
+.archive-board-page .asm-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.archive-board-page .asm-modal__field label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.archive-board-page .asm-modal__field textarea {
+  width: 100%;
+  height: 200px;
+  min-height: 200px;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  background: #fff;
+  box-sizing: border-box;
+  outline: none;
+  resize: vertical;
+}
+
+.archive-board-page .asm-modal__field textarea:focus {
+  border-color: #1c6fff;
+}
+
+.archive-board-page .asm-modal__file-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 38px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.archive-board-page .asm-modal__file-wrap[hidden],
+.archive-board-page .asm-modal__view-file[hidden],
+.archive-board-page .asm-modal__view-text[hidden],
+.archive-board-page .asm-modal__field textarea[hidden],
+.archive-board-page .asm-modal__btn-primary[hidden],
+.archive-board-page .asm-modal__btn-cancel[hidden] {
+  display: none !important;
+}
+
+.archive-board-page .asm-modal__file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.archive-board-page .asm-modal__file-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.archive-board-page .asm-modal__file-btn {
+  flex-shrink: 0;
+  margin-left: auto;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  background: #f8fafc;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.archive-board-page .asm-modal__file-btn:hover {
+  background: #eef1f6;
+}
+
+.archive-board-page .asm-modal__view-text {
+  margin: 0;
+  height: 200px;
+  min-height: 200px;
+  padding: 14px 20px;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  line-height: normal;
+  overflow: auto;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.archive-board-page .asm-modal__view-text--multiline {
+  white-space: pre-wrap;
+}
+
+.archive-board-page .asm-modal__view-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 38px;
+  max-width: 100%;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  color: #1c6fff;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.archive-board-page .asm-modal__view-file:hover {
+  text-decoration: underline;
+}
+
+.archive-board-page .asm-modal__view-file:disabled {
+  color: #6c788b;
+  cursor: default;
+  text-decoration: none;
+}
+
+.archive-board-page .asm-modal__view-file img {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.archive-board-page .asm-modal__view-file span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.archive-board-page .asm-modal__foot {
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px 24px;
+}
+
+.archive-board-page .asm-modal__btn-cancel,
+.archive-board-page .asm-modal__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  min-width: 0;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.archive-board-page .asm-modal__btn-cancel {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.archive-board-page .asm-modal__btn-cancel:hover {
+  background: #f4f4fa;
+}
+
+.archive-board-page .asm-modal__btn-primary {
+  border: none;
+  border-radius: 8px;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.archive-board-page .asm-modal__btn-primary:hover {
+  background: #16304f;
+}
+
+.archive-board-page .asm-modal__btn-cancel img,
+.archive-board-page .asm-modal__btn-primary img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}

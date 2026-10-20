@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물 조건검색 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/user-table.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <link rel="stylesheet" href="css/facility-condition-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body class="app-layout facility-search-page facility-condition-search-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시설물 정보 메뉴">
+        <div class="fs-lnb__title">
+          <span class="fs-lnb__title-text">시설물 정보</span>
+        </div>
+        <nav class="fs-lnb__nav">
+          <a class="fs-lnb__item" href="facility-search.html">
+            <span>시설물 통합검색</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item is-active" href="facility-condition-search.html" aria-current="page">
+            <span>시설물 조건검색</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+        </nav>
+      </aside>
+
+      <div class="fs-condition">
+    <header class="page-header">
+      <div class="page-header__nav">
+        <a href="facility.html" class="page-header__home" aria-label="시설물 정보 홈">
+          <span class="page-header__home-icon" aria-hidden="true">
+            <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+            <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+            <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+          </span>
+        </a>
+      </div>
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="facility.html">시설물 정보</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="breadcrumb__current">시설물 조건검색</span>
+      </nav>
+    </header>
+
+    <section class="condition-page" aria-labelledby="conditionPageTitle">
+      <div class="condition-page__head">
+        <span class="condition-page__title-icon-wrap" aria-hidden="true">
+          <img class="condition-page__title-icon" src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="condition-page__title" id="conditionPageTitle">조건검색</h1>
+      </div>
+
+      <form id="conditionSearchForm" class="condition-search-form" novalidate>
+        <section class="condition-step" aria-labelledby="conditionStep01Title">
+          <div class="condition-step__head">
+            <span class="condition-step__badge">STEP. 01</span>
+            <h2 id="conditionStep01Title" class="condition-step__title">검색조건</h2>
+          </div>
+
+          <div class="condition-step__body">
+            <div class="condition-filters">
+              <div class="condition-filters__row">
+                <div class="condition-field condition-field--fixed">
+                  <label for="filterAgency">관리주체</label>
+                  <select id="filterAgency" name="agency">
+                    <option value="">전체</option>
+                    <option value="부산지방해양수산청">부산지방해양수산청</option>
+                    <option value="여수지방해양수산청">여수지방해양수산청</option>
+                    <option value="여수광양항만공사">여수광양항만공사</option>
+                    <option value="경상북도">경상북도</option>
+                    <option value="부산항만공사">부산항만공사</option>
+                    <option value="인천항만공사">인천항만공사</option>
+                    <option value="울산항만공사">울산항만공사</option>
+                    <option value="제주특별자치도">제주특별자치도</option>
+                  </select>
+                </div>
+                <div class="condition-field condition-field--fixed">
+                  <label for="filterPort">항</label>
+                  <select id="filterPort" name="port">
+                    <option value="">전체</option>
+                    <option value="부산항">부산항</option>
+                    <option value="거문도항">거문도항</option>
+                    <option value="광양항">광양항</option>
+                    <option value="구룡포항">구룡포항</option>
+                    <option value="여수항">여수항</option>
+                    <option value="인천항">인천항</option>
+                    <option value="목포항">목포항</option>
+                    <option value="울산항">울산항</option>
+                    <option value="포항항">포항항</option>
+                    <option value="제주항">제주항</option>
+                  </select>
+                </div>
+                <div class="condition-field condition-field--fixed">
+                  <label for="filterSubPort">세부항</label>
+                  <select id="filterSubPort" name="subPort">
+                    <option value="">전체</option>
+                    <option value="감천항">감천항</option>
+                    <option value="거문도항">거문도항</option>
+                    <option value="광양항">광양항</option>
+                    <option value="구룡포항">구룡포항</option>
+                    <option value="여천항">여천항</option>
+                    <option value="북항">북항</option>
+                    <option value="남항">남항</option>
+                    <option value="신항">신항</option>
+                    <option value="연안부두">연안부두</option>
+                    <option value="감만항">감만항</option>
+                    <option value="신선대">신선대</option>
+                    <option value="대불">대불</option>
+                    <option value="본항">본항</option>
+                    <option value="온산항">온산항</option>
+                    <option value="영일만항">영일만항</option>
+                    <option value="구항">구항</option>
+                    <option value="내항">내항</option>
+                  </select>
+                </div>
+                <div class="condition-field condition-field--fixed">
+                  <label for="filterFacilityType">시설구분</label>
+                  <select id="filterFacilityType" name="facilityType">
+                    <option value="">전체</option>
+                    <option value="계류시설">계류시설</option>
+                    <option value="안벽시설">안벽시설</option>
+                    <option value="외곽시설">외곽시설</option>
+                    <option value="교량시설">교량시설</option>
+                  </select>
+                </div>
+                <div class="condition-field">
+                  <label for="filterClassType">종별구분</label>
+                  <select id="filterClassType" name="classType">
+                    <option value="">전체</option>
+                    <option value="1종">1종</option>
+                    <option value="2종">2종</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </div>
+                <div class="condition-field">
+                  <label for="filterClassType2">종별구분</label>
+                  <select id="filterClassType2" name="classType2">
+                    <option value="">전체</option>
+                    <option value="1종">1종</option>
+                    <option value="2종">2종</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="condition-filters__row condition-filters__row--secondary">
+                <div class="condition-field condition-field--range">
+                  <label for="filterYearFrom">점검기간</label>
+                  <div class="condition-range">
+                    <div class="condition-range__input-wrap">
+                      <input type="date" id="filterYearFrom" name="yearFrom" value="" aria-label="점검기간 시작">
+                      <button type="button" class="condition-range__picker" aria-label="시작일 선택" data-date-target="filterYearFrom">
+                        <img src="assets/main/facility-condition-search/Component%201-1%20(2).svg" alt="" width="20" height="20">
+                      </button>
+                    </div>
+                    <span class="condition-range__sep">~</span>
+                    <div class="condition-range__input-wrap">
+                      <input type="date" id="filterYearTo" name="yearTo" value="" aria-label="점검기간 종료">
+                      <button type="button" class="condition-range__picker" aria-label="종료일 선택" data-date-target="filterYearTo">
+                        <img src="assets/main/facility-condition-search/Component%201-1%20(2).svg" alt="" width="20" height="20">
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="condition-field condition-field--fixed">
+                  <label for="filterSeismic">내진설계적용여부</label>
+                  <select id="filterSeismic" name="seismic">
+                    <option value="">전체</option>
+                    <option value="적용">적용</option>
+                    <option value="미적용">미적용</option>
+                  </select>
+                </div>
+                <div class="condition-field condition-field--fixed">
+                  <label for="filterGrade">상태등급</label>
+                  <select id="filterGrade" name="grade">
+                    <option value="">전체</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                  </select>
+                </div>
+                <div class="condition-field condition-field--name">
+                  <label for="filterName">시설물명</label>
+                  <input type="text" id="filterName" name="name" placeholder="시설물명을 입력하세요.">
+                </div>
+              </div>
+            </div>
+
+            <div class="condition-multi">
+              <div class="condition-multi__head">
+                <h3 class="condition-multi__title">선택된 검색조건</h3>
+                <span class="condition-multi__line" aria-hidden="true"></span>
+              </div>
+              <div class="condition-multi__list" id="multiConditionList" aria-live="polite">
+                <p class="condition-multi__empty">위에서 검색조건을 선택하세요.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="condition-step" aria-labelledby="conditionStep02Title">
+          <div class="condition-step__head">
+            <span class="condition-step__badge">STEP. 02</span>
+            <h2 id="conditionStep02Title" class="condition-step__title">세부현황</h2>
+          </div>
+          <div class="condition-step__body condition-step__body--plain">
+            <div class="condition-detail-groups" id="conditionDetailGroups"></div>
+          </div>
+        </section>
+
+        <section class="condition-step condition-step--output" aria-labelledby="conditionStep03Title">
+          <div class="condition-step__head">
+            <span class="condition-step__badge">STEP. 03</span>
+            <h2 id="conditionStep03Title" class="condition-step__title">출력내용 (순서)</h2>
+          </div>
+          <div class="condition-step__body condition-step__body--plain">
+            <ul class="condition-output-list" id="conditionOutputList"></ul>
+          </div>
+        </section>
+
+        <div class="condition-actions">
+          <div class="condition-actions__divider" aria-hidden="true"></div>
+          <div class="condition-search-panel__toolbar">
+            <button type="submit" class="btn-condition-search">
+              <img src="assets/main/facility-condition-search/Component%201%20(3).svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="btn-condition-reset" id="conditionResetBtn">
+              <img src="assets/main/facility-condition-search/Group%20239763.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+      </div><!-- /.fs-condition -->
+    </div><!-- /.fs-layout -->
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/user-table-utils.js"></script>
+  <script src="js/facility-condition-search-data.js"></script>
+  <script src="js/facility-condition-search.js"></script>
+  <script>
+    PomsSidebar.mount('#sidebar-root', { active: 'facility-filter' });
+  </script>
+</body>
+</html>

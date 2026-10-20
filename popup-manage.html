@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>팝업관리 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/admin-popup.css?v=20260814-1312">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout admin-popup-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="ntc-page" aria-label="팝업관리">
+
+        <div class="ntc-section-title">
+          <span class="ntc-section-title__icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h1 class="ntc-section-title__text">검색조건</h1>
+        </div>
+
+        <section class="ntc-filter-strip" aria-label="검색조건">
+          <form class="ntc-filter" id="popupSearchForm" role="search" novalidate>
+            <div class="ntc-field ntc-field--title">
+              <label for="popupKeywordFilter">제목</label>
+              <input
+                type="search"
+                id="popupKeywordFilter"
+                name="title"
+                placeholder="검색어를 입력하세요."
+                autocomplete="off"
+              >
+            </div>
+            <div class="ntc-field ntc-field--status">
+              <label for="popupStatusFilter">노출상태</label>
+              <select id="popupStatusFilter" name="status">
+                <option value="전체">전체</option>
+                <option value="게시중">게시중</option>
+                <option value="예약">예약</option>
+                <option value="종료">종료</option>
+                <option value="미노출">미노출</option>
+              </select>
+            </div>
+            <div class="ntc-filter-actions">
+              <button type="submit" class="ntc-btn ntc-btn--search">
+                <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                검색하기
+              </button>
+              <button type="button" class="ntc-btn ntc-btn--reset" id="popupResetBtn">
+                <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                초기화
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="ntc-results" aria-labelledby="popupResultsTitle">
+          <div class="ntc-results__head">
+            <div class="ntc-results__count">
+              <span class="ntc-results__bar-icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+              </span>
+              <h2 id="popupResultsTitle" class="ntc-results__label">검색결과</h2>
+              <p class="ntc-results__meta">총 <strong id="popupResultCount">0</strong>건</p>
+            </div>
+            <button type="button" class="ntc-btn ntc-btn--create" id="popupNew">
+              <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="18" height="18">
+              팝업 등록
+            </button>
+          </div>
+
+          <div class="ntc-table-wrap">
+            <table class="ntc-table" aria-label="팝업 검색결과">
+              <thead>
+                <tr>
+                  <th scope="col" class="popup-col-no">번호</th>
+                  <th scope="col" class="popup-col-title">제목</th>
+                  <th scope="col" class="popup-col-period">노출기간</th>
+                  <th scope="col" class="popup-col-status">게시상태</th>
+                  <th scope="col" class="popup-col-image">이미지</th>
+                </tr>
+              </thead>
+              <tbody id="popupTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="ntc-results-foot">
+            <nav class="pagination" id="popupPagination" aria-label="페이지 이동"></nav>
+          </div>
+        </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/popup-manage.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'board-popup' });
+  </script>
+
+</body>
+</html>

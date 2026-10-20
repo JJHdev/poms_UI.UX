@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>책임기술자 관리 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/responsible-engineer.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-change-request-page type3-port-page fcr-flat-page responsible-engineer-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="type3-page" aria-label="책임기술자 관리">
+      <nav class="admin-sub-tabs" aria-label="시스템 관리 하위 메뉴">
+        <a href="facility-management.html" class="admin-sub-tabs__btn">시설물 관리</a>
+        <a href="maintenance-plan-manage.html" class="admin-sub-tabs__btn">유지관리계획 관리</a>
+        <a href="mooring-facility-management.html" class="admin-sub-tabs__btn">계류시설 관리</a>
+        <a href="facility-location-status.html" class="admin-sub-tabs__btn">시설물 위치 현황 관리</a>
+        <a href="drone-video-management.html" class="admin-sub-tabs__btn">드론 영상관리</a>
+        <a href="responsible-engineer.html" class="admin-sub-tabs__btn is-active" aria-current="page">책임기술자 관리</a>
+      </nav>
+
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text" id="engineerFilterTitle">검색조건</h1>
+      </div>
+
+      <section class="type3-filter-strip" aria-label="검색조건">
+        <form class="type3-filter type3-filter--strip" id="engineerSearchForm" role="search" novalidate>
+          <div class="type3-filter__fields engineer-filter-fields">
+            <div class="type3-field">
+              <label for="engineerSearchDept">담당부서</label>
+              <select id="engineerSearchDept" name="department">
+                <option value="">전체</option>
+                <option value="시설관리팀">시설관리팀</option>
+                <option value="구조설계팀">구조설계팀</option>
+                <option value="안전점검팀">안전점검팀</option>
+                <option value="유지관리팀">유지관리팀</option>
+                <option value="점검팀">점검팀</option>
+                <option value="기술지원팀">기술지원팀</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--sm">
+              <label for="engineerSearchCategory">구분</label>
+              <select id="engineerSearchCategory" name="category">
+                <option value="">전체</option>
+                <option value="책임">책임</option>
+                <option value="참여">참여</option>
+                <option value="기타">기타</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--sm">
+              <label for="engineerSearchField">분야</label>
+              <select id="engineerSearchField" name="field">
+                <option value="">전체</option>
+                <option value="토목">토목</option>
+                <option value="구조">구조</option>
+                <option value="항만">항만</option>
+                <option value="시설">시설</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--sm">
+              <label for="engineerSearchEdu">교육이수여부</label>
+              <select id="engineerSearchEdu" name="eduStatus">
+                <option value="">전체</option>
+                <option value="O">O</option>
+                <option value="X">X</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--sm">
+              <label for="engineerSearchGrade">기술등급</label>
+              <select id="engineerSearchGrade" name="grade">
+                <option value="">전체</option>
+                <option value="초급">초급</option>
+                <option value="중급">중급</option>
+                <option value="고급">고급</option>
+                <option value="미가입">미가입</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--grow">
+              <label for="engineerSearchName">성명</label>
+              <input type="text" id="engineerSearchName" name="name" placeholder="성명을 입력하세요." autocomplete="off">
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search" id="engineerSearchBtn">
+              <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="type3-btn type3-btn--reset" id="engineerResetBtn">
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="type3-results-panel" aria-labelledby="engineerResultTitle">
+        <div class="type3-results__head">
+          <div class="type3-results__count">
+            <span class="type3-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="8" height="14">
+            </span>
+            <h2 id="engineerResultTitle" class="type3-results__label">검색결과</h2>
+            <p class="type3-results__meta">총 <strong id="engineerResultCount">0</strong>건</p>
+          </div>
+          <button type="button" class="type3-btn type3-btn--create engineer-btn-add" id="engineerAddBtn">
+            <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="18" height="18">
+            추가
+          </button>
+        </div>
+
+        <div class="type3-table-wrap">
+          <table class="type3-table engineer-table" aria-label="책임기술자 검색결과">
+            <colgroup>
+              <col class="col-no">
+              <col class="col-org">
+              <col class="col-name">
+              <col class="col-dept">
+              <col class="col-category">
+              <col class="col-field">
+              <col class="col-career">
+              <col class="col-edu">
+              <col class="col-edu-date">
+              <col class="col-assoc">
+              <col class="col-grade">
+              <col class="col-file">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">소속</th>
+                <th scope="col">성명</th>
+                <th scope="col">담당부서</th>
+                <th scope="col">구분</th>
+                <th scope="col">분야</th>
+                <th scope="col">경력</th>
+                <th scope="col">교육이수여부</th>
+                <th scope="col">교육이수일자</th>
+                <th scope="col">건설기술인협회</th>
+                <th scope="col">기술등급</th>
+                <th scope="col">첨부파일</th>
+              </tr>
+            </thead>
+            <tbody id="engineerTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="type3-results-foot engineer-results-foot">
+          <nav class="pagination" id="engineerPagination" aria-label="페이지 이동"></nav>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/responsible-engineer-data.js"></script>
+  <script src="js/responsible-engineer.js"></script>
+</body>
+</html>

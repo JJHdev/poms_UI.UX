@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판 관리 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/archive-board.css?v=3">
+  <link rel="stylesheet" href="css/board-manage.css?v=20260820b">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout archive-board-page type3-port-page fcr-flat-page board-manage-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="type3-page" aria-label="게시판">
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text">게시판</h1>
+      </div>
+
+      <div class="archive-board-tabs" role="tablist" aria-label="자료 구분">
+        <button type="button" class="archive-board-tabs__btn is-active" data-board-tab="law" role="tab" aria-selected="true">법/지침/규정</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="forms" role="tab" aria-selected="false">각종서식</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="software" role="tab" aria-selected="false">매뉴얼 등</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="plan" role="tab" aria-selected="false">기본계획평면도</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="materials" role="tab" aria-selected="false">안전점검 관련자료</button>
+        <button type="button" class="archive-board-tabs__btn" data-board-tab="etc" role="tab" aria-selected="false">기타</button>
+      </div>
+
+      <section class="type3-filter-strip" aria-label="검색조건">
+        <form class="type3-filter type3-filter--strip" id="boardManageSearchForm" novalidate>
+          <div class="type3-filter__fields">
+            <div class="type3-field type3-field--grow">
+              <label for="boardManageKeyword">내용</label>
+              <input type="text" id="boardManageKeyword" name="content" placeholder="내용을 입력해주세요." autocomplete="off">
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search" id="boardManageSearchBtn">
+              <img src="assets/main/facility-statistics/figma188/icon-search-clean.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="type3-results-panel" aria-labelledby="boardManageResultsTitle">
+        <div class="type3-results__head">
+          <div class="type3-results__count">
+            <span class="type3-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+            </span>
+            <h2 id="boardManageResultsTitle" class="type3-results__label">조회결과</h2>
+            <p class="type3-results__meta">총 <strong id="boardManageResultCount">0</strong>건</p>
+          </div>
+          <div class="type3-results__side">
+            <p class="type3-list-guide-note">※ 행을 클릭하면 자료 상세로 이동합니다.</p>
+            <button type="button" class="type3-btn type3-btn--create" id="boardManageNewBtn">
+              <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="16" height="16">
+              게시글 등록
+            </button>
+          </div>
+        </div>
+
+        <div class="type3-table-wrap">
+          <table class="type3-table archive-board-table" aria-label="게시판 조회결과">
+            <thead>
+              <tr>
+                <th scope="col" class="col-no">번호</th>
+                <th scope="col" class="col-title">제목</th>
+                <th scope="col" class="col-desc">내용</th>
+                <th scope="col" class="col-writer">등록자</th>
+                <th scope="col" class="col-date">등록일</th>
+                <th scope="col" class="col-file">첨부파일</th>
+                <th scope="col" class="col-size">파일크기</th>
+              </tr>
+            </thead>
+            <tbody id="boardManageTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="type3-results-foot">
+          <nav class="pagination" id="boardManagePagination" aria-label="페이지 이동"></nav>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/user-table-utils.js"></script>
+  <script src="js/board-manage-data.js?v=20260820b"></script>
+  <script src="js/board-manage.js?v=20260820c"></script>
+</body>
+</html>

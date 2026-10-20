@@ -1,0 +1,665 @@
+/* 조건검색 결과 — Figma 셸 (facility-search / condition-search와 동일 1400 밴드) */
+
+.facility-condition-result-page.facility-search-page {
+  --gnb-inner-width: 1400px;
+  --fs-lnb-w: 234px;
+  --fs-gap: 30px;
+  min-width: 1440px;
+  background: #fff;
+}
+
+.facility-condition-result-page .main-content {
+  display: block;
+  gap: 0;
+  padding-top: 18px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.facility-condition-result-page .fs-condition {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 1136px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== Header: inline back + home + breadcrumb ===== */
+.facility-condition-result-page .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+}
+
+.facility-condition-result-page .page-header__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.facility-condition-result-page a.btn-back {
+  position: static;
+  top: auto;
+  left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: visible;
+  font-size: 0;
+  color: transparent;
+}
+
+.facility-condition-result-page a.btn-back:hover {
+  border-color: #1c6fff;
+}
+
+.facility-condition-result-page .ico-angle {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.facility-condition-result-page .btn-back .ico-angle {
+  transform: rotate(90deg);
+}
+
+.facility-condition-result-page .ico-angle__vec {
+  position: absolute;
+  inset: 34.37% 17.7% 30.21% 17.71%;
+}
+
+.facility-condition-result-page .ico-angle__vec img,
+.facility-condition-result-page a.btn-back img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+  transform: none;
+}
+
+.facility-condition-result-page .page-header__home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.facility-condition-result-page .page-header__home:hover {
+  border-color: #1c6fff;
+}
+
+.facility-condition-result-page .page-header__home-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.facility-condition-result-page .page-header__home-icon-roof,
+.facility-condition-result-page .page-header__home-icon-body,
+.facility-condition-result-page .page-header__home-icon-door {
+  position: absolute;
+  display: block;
+}
+
+.facility-condition-result-page .page-header__home-icon-roof {
+  top: 12.5%;
+  right: 12.5%;
+  bottom: 50%;
+  left: 12.5%;
+}
+
+.facility-condition-result-page .page-header__home-icon-body {
+  top: 50%;
+  right: 20.83%;
+  bottom: 12.5%;
+  left: 20.83%;
+}
+
+.facility-condition-result-page .page-header__home-icon-door {
+  top: 54.17%;
+  right: 37.5%;
+  bottom: 12.5%;
+  left: 37.5%;
+}
+
+.facility-condition-result-page .page-header__home-icon img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+}
+
+.facility-condition-result-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.facility-condition-result-page .breadcrumb a {
+  color: #a4afc0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.facility-condition-result-page .breadcrumb__sep {
+  color: #a4afc0;
+  font-weight: 500;
+}
+
+.facility-condition-result-page .breadcrumb__current {
+  color: #6c788b;
+  font-weight: 500;
+}
+
+.facility-condition-result-page .breadcrumb a:hover {
+  color: #1c6fff;
+}
+
+/* ===== Results panel (facility-search) ===== */
+.facility-condition-result-page .results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.facility-condition-result-page .results-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.facility-condition-result-page .results-panel__head-main {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.facility-condition-result-page .results-panel__bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.facility-condition-result-page .results-panel__bar img {
+  display: block;
+  width: 8px;
+  height: 14px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.facility-condition-result-page .results-count {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.2;
+}
+
+.facility-condition-result-page .results-count__label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.32px;
+}
+
+.facility-condition-result-page .results-count__meta {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  letter-spacing: -0.28px;
+}
+
+.facility-condition-result-page .results-count__meta strong {
+  font-weight: 600;
+  color: #1c6fff;
+}
+
+.facility-condition-result-page .btn-excel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.facility-condition-result-page .btn-excel img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.facility-condition-result-page .btn-excel:hover {
+  background: #f4f4fa;
+  border-color: #c5c5d0;
+}
+
+/* ===== Category filters (facility-search search-filters) ===== */
+.facility-condition-result-page .search-filters {
+  width: 100%;
+  background: rgba(28, 111, 255, 0.05);
+  border-top: 1px solid #1c6fff;
+  border-bottom: 1px solid #8d9aac;
+  box-sizing: border-box;
+}
+
+.facility-condition-result-page .search-filters__row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+.facility-condition-result-page .filter-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 6px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.facility-condition-result-page .filter-field > label {
+  display: block;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.facility-condition-result-page .filter-field > select {
+  width: 100%;
+  height: 34px;
+  padding: 0 36px 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff url("../assets/main/facility-condition-search/angle-down%20(4).svg") no-repeat right 10px center;
+  background-size: 20px 20px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  appearance: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.facility-condition-result-page .filter-field > select:focus {
+  border-color: #1c6fff;
+}
+
+.facility-condition-result-page .search-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding-bottom: 0;
+}
+
+.facility-condition-result-page .btn-search {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 6px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.facility-condition-result-page .btn-search img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.facility-condition-result-page .btn-search:hover {
+  background: #16304f;
+}
+
+/* ===== Table ===== */
+.facility-condition-result-page .data-table-wrap {
+  width: 100%;
+  margin: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: auto;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.facility-condition-result-page .data-table,
+.facility-condition-result-page .condition-table {
+  width: 100%;
+  min-width: 720px;
+  table-layout: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+  border: none;
+}
+
+.facility-condition-result-page .condition-table thead th {
+  height: 32px;
+  padding: 0 10px;
+  background: rgba(28, 111, 255, 0.1);
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 30px;
+  box-sizing: border-box;
+}
+
+.facility-condition-result-page .condition-table thead th:last-child {
+  border-right: none;
+}
+
+.facility-condition-result-page .condition-table .col-no {
+  width: 80px;
+  vertical-align: middle;
+}
+
+/* No 열: 헤더+필터행 병합, 필터행 배경 */
+.facility-condition-result-page .condition-table thead th.col-no[rowspan] {
+  background: rgba(28, 111, 255, 0.1);
+}
+
+.facility-condition-result-page .condition-table thead tr.condition-table-filter-row th,
+.facility-condition-result-page .condition-table thead th.condition-table-filter {
+  height: auto;
+  min-height: 36px;
+  padding: 6px 8px;
+  background: rgba(28, 111, 255, 0.05);
+  vertical-align: middle;
+}
+
+.facility-condition-result-page .condition-table tbody td {
+  height: 32px;
+  padding: 0 10px;
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facility-condition-result-page .condition-table tbody td:last-child {
+  border-right: none;
+}
+
+.facility-condition-result-page .condition-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.facility-condition-result-page .condition-table tbody tr:hover td {
+  background: #f8fafc;
+}
+
+.facility-condition-result-page .condition-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.facility-condition-result-page .condition-table tbody tr.is-selected td,
+.facility-condition-result-page .condition-table tbody tr.is-selected:hover td {
+  background: rgba(28, 111, 255, 0.08);
+}
+
+.condition-table-filter__inner {
+  position: relative;
+}
+
+.condition-table-filter__input {
+  width: 100%;
+  min-width: 72px;
+  height: 28px;
+  padding: 0 26px 0 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 12px;
+  color: #111;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.condition-table-filter__input:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+.condition-table-filter__clear {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.condition-table-filter__clear:hover {
+  background: #f3f4f6;
+  color: #111;
+}
+
+/* ===== Foot / pagination (facility-search) ===== */
+.facility-condition-result-page .results-panel__foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 100%;
+}
+
+.facility-condition-result-page .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 0;
+  margin: 0;
+}
+
+.facility-condition-result-page .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.facility-condition-result-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+}
+
+.facility-condition-result-page .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.facility-condition-result-page .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff;
+  border-color: #1c6fff;
+  color: #1c6fff;
+}
+
+.facility-condition-result-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.facility-condition-result-page .pagination__btn[data-page-move='next'] img,
+.facility-condition-result-page .pagination__btn[data-page-move='last'] img {
+  transform: scaleX(-1);
+}
+
+.facility-condition-result-page .pagination__btn svg {
+  display: none;
+}
+
+.condition-grade-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.condition-grade-badge--a {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #22c55e;
+}
+
+.condition-grade-badge--b {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: 1px solid #3b82f6;
+}
+
+.condition-grade-badge--c {
+  background: #ffedd5;
+  color: #c2410c;
+  border: 1px solid #f97316;
+}
+
+.condition-grade-badge--d {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #ef4444;
+}
+
+.condition-grade-badge--e {
+  background: #f3e8ff;
+  color: #7e22ce;
+  border: 1px solid #a855f7;
+}

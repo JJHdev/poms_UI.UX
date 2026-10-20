@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사용자 관리 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/admin-users.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-search-page facility-change-request-page type3-port-page fcr-flat-page admin-users-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="사용자 관리 메뉴">
+        <div class="fs-lnb__title">
+          <h2 class="fs-lnb__title-text">사용자 관리</h2>
+        </div>
+        <nav class="fs-lnb__nav" data-admin-sub-tabs="1" aria-label="사용자 관리 하위 메뉴">
+          <a href="admin-users.html" class="fs-lnb__item is-active" aria-current="page">
+            <span>사용자 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="user-account.html" class="fs-lnb__item">
+            <span>사용자 계정 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="type3-page fs-manage" aria-label="사용자 관리">
+
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text">검색조건</h1>
+      </div>
+
+      <section class="type3-filter-strip" aria-label="검색조건">
+        <form class="type3-filter type3-filter--strip" id="uaSearchForm" role="search" novalidate>
+          <div class="type3-filter__fields">
+            <div class="type3-field type3-field--w240">
+              <label for="uaUserName">사용자명</label>
+              <select id="uaUserName" name="userName">
+                <option value="">전체</option>
+                <option value="목포지방해양수산청">목포지방해양수산청</option>
+                <option value="02_전진범">02_전진범</option>
+                <option value="01_김관리">01_김관리</option>
+                <option value="03_이점검">03_이점검</option>
+                <option value="05_최잠금">05_최잠금</option>
+              </select>
+            </div>
+            <div class="type3-field">
+              <label for="uaUseYn">사용유무</label>
+              <select id="uaUseYn" name="useYn">
+                <option value="">전체</option>
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+              </select>
+            </div>
+            <div class="type3-field">
+              <label for="uaUseGbn">사용구분</label>
+              <select id="uaUseGbn" name="useGbn">
+                <option value="">전체</option>
+                <option value="0">시스템관리자</option>
+                <option value="1">시설물담당자</option>
+                <option value="2">위탁기관</option>
+                <option value="4">해양수산부</option>
+                <option value="8">용역사</option>
+                <option value="9">민간시설관리주체</option>
+              </select>
+            </div>
+            <div class="type3-field">
+              <label for="uaLockYn">계정잠김</label>
+              <select id="uaLockYn" name="lockYn">
+                <option value="">전체</option>
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+              </select>
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search">
+              <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="type3-btn type3-btn--reset" id="uaResetBtn">
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="type3-results-panel" aria-labelledby="uaResultsTitle">
+        <div class="type3-results__head">
+          <div class="type3-results__count">
+            <span class="type3-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="8" height="14">
+            </span>
+            <h2 id="uaResultsTitle" class="type3-results__label">검색결과</h2>
+            <p class="type3-results__meta">총 <strong id="uaResultCount">0</strong>건</p>
+          </div>
+          <button type="button" class="type3-btn type3-btn--create" id="uaRegisterBtn">
+            <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="18" height="18">
+            사용자 등록
+          </button>
+        </div>
+
+        <div class="type3-table-wrap">
+          <table class="type3-table admin-users-table" aria-label="사용자 검색결과">
+            <thead>
+              <tr>
+                <th scope="col" class="col-no">번호</th>
+                <th scope="col" class="col-name">사용자명</th>
+                <th scope="col" class="col-id">사용자ID</th>
+                <th scope="col" class="col-org">관리기관</th>
+                <th scope="col" class="col-phone">전화번호</th>
+                <th scope="col" class="col-usage">사용구분</th>
+                <th scope="col" class="col-login">최종접속일</th>
+                <th scope="col" class="col-yn">사용</th>
+                <th scope="col" class="col-yn">잠금</th>
+              </tr>
+            </thead>
+            <tbody id="uaTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="type3-results-foot">
+          <nav class="pagination" id="uaPagination" aria-label="페이지 이동"></nav>
+        </div>
+      </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="mock-drawer-overlay ua-drawer-overlay" id="userDrawerOverlay"></div>
+  <aside class="mock-drawer ua-drawer" id="userDrawer" aria-labelledby="userDrawerTitle" aria-hidden="true">
+    <header class="ua-drawer__head">
+      <h2 class="ua-drawer__title" id="userDrawerTitle">사용자 상세/수정</h2>
+      <button type="button" class="ua-drawer__close" id="userDrawerClose" aria-label="닫기">
+        <img src="assets/admin-users/icon-close.svg" alt="" width="16" height="16">
+      </button>
+    </header>
+
+    <div class="ua-drawer__body">
+      <form class="ua-drawer-form" id="userDrawerForm">
+        <div class="ua-drawer-field">
+          <label for="drawerUserId">사용자 ID</label>
+          <div class="ua-drawer-field__control ua-drawer-field__control--with-action">
+            <input type="text" id="drawerUserId" placeholder="내용을 입력하세요." autocomplete="off">
+            <button type="button" class="ua-drawer-btn-check" id="userIdCheck" hidden>중복확인</button>
+          </div>
+        </div>
+
+        <div class="ua-drawer-field">
+          <label for="drawerUserPassword">비밀번호</label>
+          <div class="ua-drawer-field__control ua-drawer-field__control--with-action">
+            <input type="password" id="drawerUserPassword" placeholder="내용을 입력하세요." autocomplete="new-password">
+            <button type="button" class="ua-drawer-btn-reset" id="userPasswordReset">암호재설정</button>
+          </div>
+        </div>
+
+        <div class="ua-drawer-field">
+          <label for="drawerUserName">사용자명</label>
+          <input type="text" id="drawerUserName" placeholder="내용을 입력하세요." autocomplete="off">
+        </div>
+
+        <div class="ua-drawer-field">
+          <label id="drawerPhoneLabel">전화번호</label>
+          <div class="ua-drawer-phone" role="group" aria-labelledby="drawerPhoneLabel">
+            <input type="text" id="drawerUserPhone1" inputmode="numeric" maxlength="3" aria-label="전화번호 앞자리">
+            <span class="ua-drawer-phone__sep" aria-hidden="true">-</span>
+            <input type="text" id="drawerUserPhone2" inputmode="numeric" maxlength="4" aria-label="전화번호 중간자리">
+            <span class="ua-drawer-phone__sep" aria-hidden="true">-</span>
+            <input type="text" id="drawerUserPhone3" inputmode="numeric" maxlength="4" aria-label="전화번호 뒷자리">
+          </div>
+        </div>
+
+        <div class="ua-drawer-row">
+          <div class="ua-drawer-field">
+            <label for="drawerUserUsage">사용구분</label>
+            <select id="drawerUserUsage">
+              <option value="">전체</option>
+              <option value="0">시스템관리자</option>
+              <option value="1">시설물담당자</option>
+              <option value="2">위탁기관</option>
+              <option value="4">해양수산부</option>
+              <option value="8">용역사</option>
+              <option value="9">민간시설관리주체</option>
+            </select>
+          </div>
+          <div class="ua-drawer-field">
+            <label for="drawerUserOrg">관리기관</label>
+            <select id="drawerUserOrg">
+              <option value="">전체</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="ua-drawer-row">
+          <div class="ua-drawer-field">
+            <label for="drawerUserIp">사용자 IP</label>
+            <select id="drawerUserIp">
+              <option value="">전체</option>
+            </select>
+          </div>
+          <div class="ua-drawer-field">
+            <label for="drawerUserUseYn">사용유무</label>
+            <select id="drawerUserUseYn">
+              <option value="">전체</option>
+              <option value="Y">Y</option>
+              <option value="N">N</option>
+            </select>
+          </div>
+        </div>
+      </form>
+
+      <footer class="ua-drawer__foot">
+        <p class="ua-drawer__message" id="userDrawerMessage">※ 사용자 정보 확인 후 저장하거나 삭제처리합니다.</p>
+        <div class="ua-drawer__actions">
+          <button type="button" class="ua-drawer-btn ua-drawer-btn--delete" id="userDrawerDelete">
+            <img src="assets/admin-users/icon-delete-gray.svg" alt="" width="18" height="18">
+            삭제하기
+          </button>
+          <button type="button" class="ua-drawer-btn ua-drawer-btn--save" id="userDrawerSave">
+            <img src="assets/admin-users/icon-save-check.svg" alt="" width="18" height="18">
+            저장하기
+          </button>
+        </div>
+      </footer>
+    </div>
+  </aside>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-users-data.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/admin-users.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'system-users' });
+  </script>
+</body>
+</html>

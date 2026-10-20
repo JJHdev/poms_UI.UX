@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자료처리 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/data-process.css?v=20260820b">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; }
+  </style>
+</head>
+<body class="app-layout facility-search-page facility-change-request-page data-process-page type3-port-page fcr-flat-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시설물 관리 메뉴">
+        <div class="fs-lnb__title">
+          <span class="fs-lnb__title-text">시설물 관리</span>
+        </div>
+        <nav class="fs-lnb__nav">
+          <a class="fs-lnb__item" href="inspection-status.html">
+            <span>점검정보현황</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="safety-grade-status.html">
+            <span>안전 등급현황</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="facility-statistics.html">
+            <span>시설물통계</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="special-facility.html">
+            <span>특별관리시설</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="type3-port-facility.html" hidden>
+            <span>제 3종 항만시설물</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="facility-change-request.html">
+            <span>시설물 정보변경 요청</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="data-receive.html">
+            <span>자료수신</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item is-active" href="data-process.html" aria-current="page">
+            <span>자료처리</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="stats-process.html">
+            <span>통계처리</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+        </nav>
+      </aside>
+
+      <div class="fs-manage">
+        <header class="page-header">
+          <div class="page-header__nav">
+            <a href="facility.html" class="page-header__home" aria-label="시설물 관리 홈">
+              <span class="page-header__home-icon" aria-hidden="true">
+                <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+                <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+                <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+              </span>
+            </a>
+          </div>
+          <nav class="breadcrumb" aria-label="현재 위치">
+            <a href="inspection-status.html">시설물 관리</a>
+            <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+            <span class="breadcrumb__current">자료처리</span>
+          </nav>
+        </header>
+
+        <div class="dp-page" aria-label="자료처리">
+          <div class="dp-page__title">
+            <span class="dp-page__title-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+            </span>
+            <h1 class="dp-page__title-text">자료선택</h1>
+          </div>
+
+          <div class="dp-steps">
+            <section class="dp-step" aria-labelledby="processWorkTitle">
+              <div class="dp-step__head">
+                <span class="dp-step__badge">STEP. 01</span>
+                <h2 id="processWorkTitle" class="dp-step__title">작업 선택</h2>
+              </div>
+              <div class="dp-step__body">
+                <div class="dp-step__fields">
+                  <div class="dp-field">
+                    <label for="processWork">작업구분</label>
+                    <select id="processWork" aria-label="작업구분">
+                      <option value="">선택</option>
+                      <option value="1" selected>일괄갱신</option>
+                    </select>
+                  </div>
+                  <div class="dp-field">
+                    <label for="processTemplate">양식구분</label>
+                    <select id="processTemplate">
+                      <option value="">선택</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="button" class="dp-btn dp-btn--ghost" id="processTemplateDownload" disabled>
+                  <img src="assets/main/data-process/icon-download.svg" alt="" width="18" height="18">
+                  양식 다운로드
+                </button>
+              </div>
+            </section>
+
+            <section class="dp-step" aria-labelledby="processFileTitle">
+              <div class="dp-step__head">
+                <span class="dp-step__badge">STEP. 02</span>
+                <h2 id="processFileTitle" class="dp-step__title">파일 선택</h2>
+              </div>
+              <div class="dp-step__body">
+                <div class="dp-step__fields">
+                  <div class="dp-field">
+                    <span class="dp-field__label">엑셀파일</span>
+                    <div class="dp-file-picker">
+                      <input type="file" id="processExcelFile" accept=".xlsx" disabled hidden>
+                      <button type="button" class="dp-file-picker__btn" id="processExcelBtn" disabled>파일 선택</button>
+                      <span class="dp-file-picker__name" id="processExcelName">선택된 파일 없음</span>
+                    </div>
+                  </div>
+                  <div class="dp-field">
+                    <span class="dp-field__label">첨부파일</span>
+                    <div class="dp-file-picker">
+                      <input type="file" id="processAttachFile" accept=".tar" disabled hidden>
+                      <button type="button" class="dp-file-picker__btn" id="processAttachBtn" disabled>파일 선택</button>
+                      <span class="dp-file-picker__name" id="processAttachName">선택된 파일 없음</span>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="dp-btn dp-btn--primary" id="processUpload">
+                  <img src="assets/main/data-process/icon-upload.svg" alt="" width="18" height="18">
+                  파일 업로드
+                </button>
+              </div>
+            </section>
+
+            <section class="dp-step" aria-labelledby="processTitle">
+              <div class="dp-step__head">
+                <span class="dp-step__badge">STEP. 03</span>
+                <h2 id="processTitle" class="dp-step__title">처리결과</h2>
+              </div>
+              <div class="dp-result-box" id="processResult">작업구분과 양식구분을 선택하고 파일을 업로드하면 처리결과가 표시됩니다.</div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/data-process.js"></script>
+</body>
+</html>

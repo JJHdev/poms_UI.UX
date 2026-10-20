@@ -1,0 +1,428 @@
+/* ===== Facility add (시설물 추가) ===== */
+
+.fac-add-page {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.fac-add-page__head {
+  padding: 14px 20px;
+  background: #fafbfc;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.fac-add-page__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.fac-add-body {
+  border-top: 1px solid #d1d5db;
+}
+
+.fac-add-files {
+  border-top: 1px solid #d1d5db;
+}
+
+.fac-add-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fac-add-field {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  min-height: 34px;
+  border-bottom: 1px solid #d1d5db;
+  border-right: 1px solid #d1d5db;
+}
+
+.fac-add-field:nth-child(3n) {
+  border-right: none;
+}
+
+.fac-add-field--span-2 {
+  grid-column: span 2;
+}
+
+.fac-add-field--full {
+  grid-column: 1 / -1;
+  border-right: none;
+}
+
+.fac-add-field__label {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f9fafb;
+  color: #4b5563;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  border-right: 1px solid #e5e7eb;
+}
+
+.fac-add-field__label .req {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+.fac-add-field__control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 10px;
+  background: #fff;
+}
+
+.fac-add-field__control--stack {
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 시설구분과 무관한 항목 — 회색 고정(해당없음) */
+.fac-add-input.is-locked,
+.fac-add-select.is-locked {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+
+/* 시설구분별 등록 항목 — 아코디언 박스 제거: 선택된 시설구분의 항목만 표시 */
+.fac-acc-list {
+  display: block;
+  margin: 0;
+}
+
+.fac-acc {
+  display: none;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  background: #fff;
+}
+
+.fac-acc.is-open {
+  display: block;
+}
+
+.fac-acc__head {
+  display: none;
+}
+
+.fac-acc__head:hover {
+  background: #e8eef6;
+}
+
+.fac-acc__chev {
+  transition: transform 0.2s ease;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.fac-acc.is-open .fac-acc__chev {
+  transform: rotate(180deg);
+}
+
+.fac-acc__body {
+  display: block;
+}
+
+.fac-acc__inner {
+  min-height: 0;
+  overflow: visible;
+}
+
+.fac-acc__inner .fac-add-grid {
+  padding: 0;
+}
+
+.fac-acc__note {
+  margin: 0;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+/* 시설구분별 등록 항목 구분 헤더 */
+.fac-add-divider {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 9px 12px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e4976;
+}
+
+.fac-add-divider small {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.fac-add-field__control--stack .fac-add-select,
+.fac-add-field__control--stack .fac-add-input {
+  width: 50%;
+  flex: 1 1 50%;
+  min-width: 0;
+}
+
+.fac-add-input,
+.fac-add-select {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #111827;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.fac-add-select {
+  appearance: none;
+  padding-right: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.fac-add-input:focus,
+.fac-add-select:focus {
+  outline: none;
+  border-color: #93c5fd;
+}
+
+.fac-add-input.is-disabled,
+.fac-add-input:disabled {
+  background: #e5e7eb;
+  color: #6b7280;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+.fac-add-inline-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #374151;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fac-add-inline-check input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: #1e4976;
+}
+
+.fac-add-file-row {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr) 120px;
+  min-height: 88px;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.fac-add-file-row:last-child {
+  border-bottom: none;
+}
+
+.fac-add-file-row__label {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f9fafb;
+  color: #4b5563;
+  font-size: 12px;
+  font-weight: 600;
+  border-right: 1px solid #e5e7eb;
+}
+
+.fac-add-file-row__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-right: 1px solid #d1d5db;
+}
+
+.fac-add-file-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fac-add-file-picker__btn {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #f9fafb;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.fac-add-file-picker__name {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.fac-add-file-drop {
+  padding: 10px 12px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 4px;
+  background: #f8fafc;
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.fac-add-file-row__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 8px;
+}
+
+.btn-fac-file-delete {
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 4px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-fac-file-delete:hover {
+  background: #1d4ed8;
+}
+
+.fac-add-file-row__hint {
+  font-size: 11px;
+  color: #64748b;
+  text-align: center;
+}
+
+.fac-add-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  border-top: 1px solid #e5e7eb;
+  background: #fafbfc;
+}
+
+.btn-fac-add-cancel {
+  min-width: 88px;
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-fac-add-save {
+  min-width: 88px;
+  height: 40px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 6px;
+  background: #1e4976;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-fac-add-save:hover {
+  background: #2563a8;
+}
+
+.btn-fac-add-edit {
+  min-width: 88px;
+  height: 40px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 6px;
+  background: #1e4976;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-fac-add-edit:hover {
+  background: #2563a8;
+}
+
+.btn-fac-add-edit[hidden],
+.btn-fac-add-save[hidden] {
+  display: none;
+}
+
+.facility-add-inline.is-readonly .fac-add-input:not(.is-disabled):disabled,
+.facility-add-inline.is-readonly .fac-add-select:disabled {
+  background: #f9fafb;
+  color: #374151;
+  opacity: 1;
+  -webkit-text-fill-color: #374151;
+}
+
+@media (max-width: 1200px) {
+  .fac-add-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fac-add-field,
+  .fac-add-field--span-2,
+  .fac-add-field--full {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+
+  .fac-add-file-row {
+    grid-template-columns: 1fr;
+  }
+
+  .fac-add-file-row__label {
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .fac-add-file-row__body {
+    border-right: none;
+  }
+}

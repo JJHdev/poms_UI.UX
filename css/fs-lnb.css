@@ -1,0 +1,157 @@
+/* 페이지 LNB 공통 — 크기·위치 고정 (Figma 224:4516, 폭 234 / gap 30) */
+
+:root {
+  --fs-lnb-w: 234px;
+  --fs-gap: 30px;
+}
+
+/* LNB가 있는 본문: 상단 여백 통일 → 페이지 전환 시 LNB 세로 위치 고정 */
+html body.app-layout .main-content:has(.fs-layout),
+html body.admin-topnav-layout .main-content:has(.fs-layout),
+html body.facility-search-page .main-content:has(.fs-layout),
+html body.facility-detail-page .main-content:has(.fs-layout),
+html body.fcr-flat-page .main-content:has(.fs-layout),
+html body.facility-management-page .main-content:has(.fs-layout),
+html body.loc-status-page .main-content:has(.fs-layout),
+html body.mooring-facility-page .main-content:has(.fs-layout),
+html body.maintenance-plan-manage-page .main-content:has(.fs-layout) {
+  padding-top: 18px !important;
+  padding-bottom: 40px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box;
+}
+
+.fs-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fs-gap, 30px) !important;
+  width: 100%;
+  min-width: 0;
+}
+
+.fs-lnb,
+.home-facility-lnb {
+  flex: 0 0 var(--fs-lnb-w, 234px) !important;
+  width: var(--fs-lnb-w, 234px) !important;
+  min-width: var(--fs-lnb-w, 234px) !important;
+  max-width: var(--fs-lnb-w, 234px) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+.fs-lnb__title,
+.home-facility-lnb__title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 80px !important;
+  min-height: 80px !important;
+  max-height: 80px !important;
+  padding: 27px 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #0b1a2e;
+  border: 1px solid #dadae2;
+}
+
+.fs-lnb__title::before,
+.home-facility-lnb__title::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url("../assets/main/facility-search/figma224/lnb-title-bg.png") center bottom / cover no-repeat;
+  mix-blend-mode: hard-light;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.fs-lnb__title-text,
+.home-facility-lnb__title-text {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.44px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.fs-lnb__nav,
+.home-facility-lnb__nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fs-lnb__item[hidden],
+.fs-lnb__item[href="type3-port-facility.html"] {
+  display: none !important;
+}
+
+.fs-lnb__item,
+.home-facility-lnb__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  width: 100%;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  padding: 10px 14px 10px 30px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-top: none;
+  color: #333;
+  font-size: 16px !important;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.fs-lnb__nav .fs-lnb__item:first-child,
+.home-facility-lnb__nav .home-facility-lnb__item:first-child {
+  border-top: 1px solid #dadae2;
+}
+
+.fs-lnb__item:hover,
+.home-facility-lnb__item:hover {
+  background: #f8f9fb;
+  color: #111;
+}
+
+.fs-lnb__item.is-active,
+.home-facility-lnb__item.is-active {
+  background: rgba(28, 111, 255, 0.06);
+  color: #333;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.fs-lnb__chevron,
+.home-facility-lnb__chevron {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  object-fit: contain;
+  box-sizing: border-box;
+}
+
+.fs-manage {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 1136px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

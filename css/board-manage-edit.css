@@ -1,0 +1,12 @@
+/* 게시판 등록/수정 — 공지사항 수정 화면 톤 */
+
+.board-manage-edit-page.is-insert #btnBoardDelete {
+  display: none;
+}
+
+.board-manage-edit-page .ne-cell-select {
+  height: 28px;
+  padding: 0 6px;
+  border: 1px solid #e5e8ee;
+  background: #fff;
+}

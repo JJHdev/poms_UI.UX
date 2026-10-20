@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 수정 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-notice-edit.css">
+  <link rel="stylesheet" href="css/board-manage-edit.css?v=20260820d">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout notice-edit-page board-manage-edit-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <form class="ne-stack" id="boardEditForm" novalidate>
+      <section class="ne-title-card" aria-label="게시글 수정">
+        <div class="ne-title-card__left">
+          <span class="ne-title-card__icon" aria-hidden="true">
+            <img src="assets/admin-notices/icon-notice.svg" alt="" width="20" height="20">
+          </span>
+          <h2 class="ne-title-card__title" id="boardEditPageTitle">상세 내용 수정</h2>
+        </div>
+
+        <div class="ne-title-card__actions">
+          <button type="button" class="ne-btn ne-btn--cancel" id="btnBoardCancel">
+            <img src="assets/admin-notices/icon-cancel.svg" alt="" width="14" height="14">
+            취소
+          </button>
+          <button type="button" class="ne-btn ne-btn--delete" id="btnBoardDelete">
+            <img src="assets/admin-notices/icon-delete2.svg" alt="" width="16" height="16">
+            삭제
+          </button>
+          <button type="button" class="ne-btn ne-btn--save" id="btnBoardSave">
+            <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+            <span id="btnBoardSaveText">수정하기</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="ne-panel">
+        <div class="ne-meta-row">
+          <div class="ne-meta-cell ne-meta-cell--label">구분</div>
+          <div class="ne-meta-cell ne-meta-cell--value">
+            <select class="ne-cell-select" id="fieldCategory" name="category" aria-label="구분">
+              <option value="law">법/지침/규정</option>
+              <option value="forms">각종서식</option>
+              <option value="software">매뉴얼 등</option>
+              <option value="plan">기본계획평면도</option>
+              <option value="materials">안전점검 관련자료</option>
+              <option value="etc">기타</option>
+            </select>
+          </div>
+
+          <div class="ne-meta-cell ne-meta-cell--label">등록자</div>
+          <div class="ne-meta-cell ne-meta-cell--value">
+            <input type="text" class="ne-cell-input" id="fieldWriter" name="writer" aria-label="등록자">
+          </div>
+
+          <div class="ne-meta-cell ne-meta-cell--label">등록일</div>
+          <div class="ne-meta-cell ne-meta-cell--value ne-meta-cell--last">
+            <input type="text" class="ne-cell-input" id="fieldDate" name="date" aria-label="등록일">
+          </div>
+        </div>
+
+        <div class="ne-title-row">
+          <div class="ne-title-label"><label for="fieldTitle">제목</label></div>
+          <div class="ne-title-value">
+            <input type="text" class="ne-cell-input" id="fieldTitle" name="title" placeholder="게시글 제목을 입력하세요." required>
+          </div>
+        </div>
+
+        <div class="ne-content-head"><label for="fieldContent">내용</label></div>
+
+        <div class="ne-content-body">
+          <div class="ne-rte notice-rte">
+            <div class="notice-rte__editor" id="fieldContent" contenteditable="true" role="textbox" aria-multiline="true" aria-label="게시글 내용"></div>
+          </div>
+        </div>
+
+        <div class="ne-attach-row">
+          <span class="ne-attach-label">첨부파일</span>
+          <div class="ne-attach-value">
+            <button type="button" class="ne-attach__add" id="btnAddFile">파일 추가</button>
+            <div class="ne-attach__list" id="attachList"></div>
+          </div>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <input type="file" id="fileInput" class="sr-only" accept=".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.zip,.png,.jpg,.jpeg" hidden>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/board-manage-data.js?v=20260820b"></script>
+  <script src="js/board-manage-edit.js?v=20260820d"></script>
+</body>
+</html>

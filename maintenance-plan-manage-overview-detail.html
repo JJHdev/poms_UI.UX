@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>총괄표 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/inspection-status.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/maintenance-plan-manage.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-search-page facility-change-request-page type3-port-page fcr-flat-page inspection-status-page maintenance-plan-manage-page overview-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시스템 관리 메뉴">
+        <div class="fs-lnb__title">
+          <h2 class="fs-lnb__title-text">시스템 관리</h2>
+        </div>
+        <nav class="fs-lnb__nav" data-admin-sub-tabs="1" aria-label="시스템 관리 하위 메뉴">
+          <a href="facility-management.html" class="fs-lnb__item">
+            <span>시설물 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="maintenance-plan-manage.html?tab=overview" class="fs-lnb__item is-active" aria-current="page">
+            <span>유지관리계획 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="mooring-facility-management.html" class="fs-lnb__item">
+            <span>계류시설 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="facility-location-status.html" class="fs-lnb__item">
+            <span>시설물 위치 현황 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="drone-video-management.html" class="fs-lnb__item">
+            <span>드론 영상관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="responsible-engineer.html" class="fs-lnb__item">
+            <span>책임기술자 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="type3-page fs-manage" aria-label="총괄표 상세">
+        <div class="fmd-crumb-row">
+          <a href="maintenance-plan-manage.html?tab=overview" class="fmd-back-btn" aria-label="총괄표로">
+            <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+          </a>
+          <a href="maintenance-plan-manage.html?tab=overview" class="fmd-home-btn" aria-label="유지관리계획 관리">
+            <img src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+          </a>
+          <nav class="fmd-breadcrumb" aria-label="현재 위치">
+            <a href="facility-management.html">시스템 관리</a>
+            <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; </span>
+            <a href="maintenance-plan-manage.html?tab=overview">유지관리계획 관리</a>
+            <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; </span>
+            <a href="maintenance-plan-manage.html?tab=overview">총괄표</a>
+            <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; </span>
+            <span class="fmd-breadcrumb__current" id="overviewDetailCrumb">총괄표 상세</span>
+          </nav>
+        </div>
+
+        <div class="admin-detail-title-row">
+          <div class="admin-detail-title-row__lead">
+            <span class="admin-detail-title-row__icon" aria-hidden="true">
+              <img src="assets/main/maintenance-plan/icon-title.svg" alt="" width="24" height="24">
+            </span>
+            <h1 class="admin-detail-title-row__title" id="overviewDetailTitle">총괄표 상세</h1>
+            <span class="admin-detail-title-row__badge" id="overviewDetailTarget">상세</span>
+          </div>
+        </div>
+
+        <div class="type3-section-title">
+          <span class="type3-section-title__icon" aria-hidden="true">
+            <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+          </span>
+          <h2 class="type3-section-title__text">검색조건</h2>
+        </div>
+
+        <input type="hidden" id="overviewYear" value="">
+
+        <section class="type3-filter-strip" aria-label="검색조건">
+          <form class="type3-filter type3-filter--strip" id="overviewDetailFilterForm" role="search">
+            <div class="type3-filter__fields mpm-overview-filter-fields">
+              <div class="type3-field type3-field--grow">
+                <label for="overviewDetailName">시설물명</label>
+                <input type="text" id="overviewDetailName" placeholder="시설물명을 입력하세요." autocomplete="off">
+              </div>
+              <div class="type3-field" id="overviewDetailTypeField" hidden>
+                <label for="overviewDetailType">점검구분</label>
+                <select id="overviewDetailType">
+                  <option value="">전체</option>
+                  <option value="plan">유지관리계획</option>
+                  <option value="regular">정기안전점검</option>
+                  <option value="precision">정밀안전점검</option>
+                  <option value="diagnosis">정밀안전진단</option>
+                  <option value="eval">성능평가</option>
+                </select>
+              </div>
+              <div class="type3-field" id="overviewDetailStatusField">
+                <label for="overviewDetailStatus">상태</label>
+                <select id="overviewDetailStatus">
+                  <option value="">전체</option>
+                  <option value="실시">실시</option>
+                  <option value="미실시">미실시</option>
+                </select>
+              </div>
+            </div>
+            <div class="type3-filter-actions">
+              <button type="submit" class="type3-btn type3-btn--search" data-search="overview-detail">
+                <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                검색하기
+              </button>
+              <button type="button" class="type3-btn type3-btn--reset" data-reset="overview-detail">
+                <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                초기화
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="type3-results-panel" aria-labelledby="overviewDetailResultsTitle">
+          <div class="type3-results__head">
+            <div class="type3-results__count">
+              <span class="type3-results__bar-icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="8" height="14">
+              </span>
+              <h2 id="overviewDetailResultsTitle" class="type3-results__label">검색결과</h2>
+              <p class="type3-results__meta">총 <strong id="overviewDetailSummaryTotal">0</strong>건</p>
+            </div>
+            <button type="button" class="type3-btn type3-btn--excel" id="overviewDetailExcelBtn">
+              <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+              엑셀 다운로드
+            </button>
+          </div>
+          <div class="type3-table-wrap insp-status-table-wrap">
+            <table class="type3-table insp-overview-detail__table" aria-label="총괄표 상세 목록">
+              <thead id="overviewDetailTableHead"></thead>
+              <tbody id="overviewDetailTableBody"></tbody>
+            </table>
+          </div>
+          <div class="type3-results-foot">
+            <nav class="pagination" id="overviewDetailPagination" aria-label="총괄표 상세 페이지"></nav>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/inspection-status-data.js"></script>
+  <script src="js/inspection-status.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'maintenance-plan-manage' });
+  </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사용자 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-user-detail.css">
+  <link rel="stylesheet" href="css/admin-search-inline.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout user-detail-page" id="userDetailPage">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fmd-crumb-row">
+      <a href="admin-users.html" class="fmd-back-btn" id="userDetailBackBtn" aria-label="목록으로">
+        <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+      </a>
+      <a href="admin-users.html" class="fmd-home-btn" aria-label="사용자 관리 목록">
+        <img src="assets/main/facility-statistics/figma188/icon-home-clean.svg" alt="" width="18" height="18">
+      </a>
+      <nav class="fmd-breadcrumb" aria-label="현재 위치">
+        <a href="admin-users.html">시스템 관리</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true"> &gt; 사용자 관리 &gt; </span>
+        <span class="fmd-breadcrumb__current" id="breadcrumbCurrent">사용자 상세</span>
+      </nav>
+    </div>
+
+    <div class="admin-detail-title-row">
+      <div class="admin-detail-title-row__lead">
+        <h1 class="admin-detail-title-row__title" id="pageTitle">사용자 상세</h1>
+      </div>
+    </div>
+
+    <section class="user-summary-card" aria-label="사용자 요약">
+      <div class="user-summary-card__profile">
+        <span class="user-summary-card__avatar" id="summaryAvatar" aria-hidden="true">항</span>
+        <div>
+          <h2 class="user-summary-card__name" id="summaryName">한국항만협회</h2>
+          <p class="user-summary-card__meta" id="summaryMeta">
+            ID: <span id="summaryId">jc010</span> · <span id="summaryOrg">인천지역항만수산청</span>
+          </p>
+        </div>
+      </div>
+      <div class="user-summary-card__stats">
+        <div class="user-summary-stat">
+          <span class="user-summary-stat__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <span class="user-summary-stat__label">사용자구분</span>
+          <span class="user-summary-stat__value user-summary-stat__value--active" id="statUsage">사용중(활성)</span>
+        </div>
+        <div class="user-summary-stat">
+          <span class="user-summary-stat__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <span class="user-summary-stat__label">계정 잠금</span>
+          <span class="user-summary-stat__value" id="statLock">해제</span>
+        </div>
+        <div class="user-summary-stat">
+          <span class="user-summary-stat__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </span>
+          <span class="user-summary-stat__label">최종 접속일</span>
+          <span class="user-summary-stat__value" id="statLastLogin">2025-05-16</span>
+        </div>
+        <div class="user-summary-stat">
+          <span class="user-summary-stat__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <span class="user-summary-stat__label">최초 가입일</span>
+          <span class="user-summary-stat__value" id="statJoinDate">2023-01-05</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="user-detail-grid" id="userDetailGrid">
+      <section class="user-detail-card" aria-labelledby="basicInfoTitle">
+        <h3 id="basicInfoTitle" class="user-detail-card__title">기본정보</h3>
+        <dl class="user-detail-fields">
+          <div class="user-detail-field user-detail-field--required">
+            <dt>사용자ID<span class="req" aria-hidden="true">*</span></dt>
+            <dd>
+              <span class="field-view" id="fieldId">jc010</span>
+              <input type="text" class="field-edit user-detail-input" id="fieldIdInput" autocomplete="off">
+            </dd>
+          </div>
+          <div class="user-detail-field user-detail-field--required">
+            <dt>사용자명<span class="req" aria-hidden="true">*</span></dt>
+            <dd>
+              <span class="field-view" id="fieldDisplayName">한국항만협회</span>
+              <input type="text" class="field-edit user-detail-input" id="fieldDisplayNameInput" autocomplete="name">
+            </dd>
+          </div>
+          <div class="user-detail-field user-detail-field--password user-detail-field--required">
+            <dt>비밀번호<span class="req" aria-hidden="true">*</span></dt>
+            <dd class="user-detail-password">
+              <span class="field-view user-detail-password__mask" id="fieldPasswordView" aria-label="비밀번호">**********</span>
+              <div class="field-edit user-detail-password__edit">
+                <input type="password" class="user-detail-input" id="fieldPasswordInput" value="**********" readonly aria-label="비밀번호">
+                <button type="button" class="btn-pw-reset" id="btnPasswordReset">비밀번호 초기화</button>
+              </div>
+            </dd>
+          </div>
+          <div class="user-detail-field user-detail-field--required">
+            <dt>사용자IP<span class="req" aria-hidden="true">*</span></dt>
+            <dd>
+              <span class="field-view" id="fieldIp">192.168.10.25</span>
+              <input type="text" class="field-edit user-detail-input" id="fieldIpInput" autocomplete="off">
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="user-detail-card" aria-labelledby="affiliationTitle">
+        <h3 id="affiliationTitle" class="user-detail-card__title">소속 및 구분</h3>
+        <dl class="user-detail-fields">
+          <div class="user-detail-field"><dt>사용자구분</dt><dd id="fieldUsageBadge"></dd></div>
+          <div class="user-detail-field">
+            <dt>권한기관</dt>
+            <dd>
+              <span class="field-view" id="fieldOrg">인천지역항만수산청</span>
+              <input type="text" class="field-edit user-detail-input" id="fieldOrgInput">
+            </dd>
+          </div>
+          <div class="user-detail-field">
+            <dt>소속부서</dt>
+            <dd>
+              <span class="field-view" id="fieldDept">항만시설과</span>
+              <input type="text" class="field-edit user-detail-input" id="fieldDeptInput">
+            </dd>
+          </div>
+          <div class="user-detail-field">
+            <dt>직책</dt>
+            <dd>
+              <span class="field-view" id="fieldPosition">시설물 담당자</span>
+              <input type="text" class="field-edit user-detail-input" id="fieldPositionInput">
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="user-detail-card" aria-labelledby="accountTitle">
+        <h3 id="accountTitle" class="user-detail-card__title">계정 및 권한</h3>
+        <dl class="user-detail-fields">
+          <div class="user-detail-field user-detail-field--required">
+            <dt>사용유무<span class="req" aria-hidden="true">*</span></dt>
+            <dd>
+              <div class="toggle-group" role="group" aria-label="사용유무" id="toggleUse">
+                <button type="button" class="toggle-group__btn" data-value="Y">사용(Y)</button>
+                <button type="button" class="toggle-group__btn" data-value="N">미사용(N)</button>
+              </div>
+            </dd>
+          </div>
+          <div class="user-detail-field user-detail-field--required">
+            <dt>계정잠금<span class="req" aria-hidden="true">*</span></dt>
+            <dd>
+              <div class="toggle-group" role="group" aria-label="계정잠금" id="toggleLock">
+                <button type="button" class="toggle-group__btn" data-value="Y">잠금(Y)</button>
+                <button type="button" class="toggle-group__btn" data-value="N">정상(N)</button>
+              </div>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="user-detail-card" aria-labelledby="accessTitle">
+        <h3 id="accessTitle" class="user-detail-card__title">접속 정보</h3>
+        <dl class="user-detail-fields">
+          <div class="user-detail-field"><dt>최종 접속일</dt><dd id="fieldLastLogin">2025-05-16</dd></div>
+          <div class="user-detail-field"><dt>최초 가입일</dt><dd id="fieldJoinDate">2023-01-05</dd></div>
+          <div class="user-detail-field"><dt>접속 횟수</dt><dd id="fieldLoginCount">284회</dd></div>
+        </dl>
+      </section>
+    </div>
+
+    <div class="user-detail-actions">
+      <button type="button" class="btn-user-cancel" id="btnCancel" hidden>취소</button>
+      <button type="button" class="btn-user-edit" id="btnEdit">수정</button>
+      <button type="button" class="btn-user-save" id="btnSave" hidden>저장</button>
+      <button type="button" class="btn-user-delete" id="btnDelete">삭제</button>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-users-data.js"></script>
+  <script src="js/admin-user-detail.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'system-users' });
+  </script>
+</body>
+</html>

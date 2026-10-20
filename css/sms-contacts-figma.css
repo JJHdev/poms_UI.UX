@@ -1,0 +1,1790 @@
+/* ===== SMS 연락처 관리 (연락처관리) — Figma 23:35184 (SMS-2) ===== */
+
+.sms-contacts-page-root .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+/* ===== Page header ===== */
+.sms-contacts-page-root .page-header {
+  margin: 0;
+}
+
+.sms-contacts-page-root .page-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 70px;
+  padding: 10px 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .page-header__titles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.sms-contacts-page-root .page-header__title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.sms-contacts-page-root .page-header__title-icon-img {
+  display: block;
+  width: 24px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.sms-contacts-page-root .page-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.48px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sms-contacts-page-root .page-header__crumb {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 4px 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sms-contacts-page-root .page-header__date {
+  flex-shrink: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f4f4fa;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ===== Page / layout ===== */
+.sms-contacts-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.sms-contacts-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Reusable mono-color icon (recolors any svg asset via mask) */
+.icon-mask {
+  display: inline-block;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.icon-mask--add {
+  width: 18px;
+  height: 18px;
+  -webkit-mask-image: url("../assets/sms-send/icon-add.svg");
+  mask-image: url("../assets/sms-send/icon-add.svg");
+}
+
+/* ===== 그룹관리 (left panel) ===== */
+.sms-contacts-group-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 2px 2px rgba(0, 0, 0, 0.03),
+    0 5px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sms-contacts-group-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 40px 10px 30px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.sms-contacts-group-panel__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.36px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sms-contacts-group-panel__hint {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.sms-contacts-group-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 6px 20px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.sms-contacts-group-panel__foot {
+  flex-shrink: 0;
+  padding: 6px 20px 20px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.76)
+  );
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 2px 2px rgba(0, 0, 0, 0.03),
+    0 5px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sms-contacts-page-root .btn-sms-group-add {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 100%;
+  height: 38px;
+  padding: 0 20px;
+  border: 1px solid #4970a2;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #4970a2;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .btn-sms-group-add:hover {
+  background: rgba(73, 112, 162, 0.06);
+}
+
+.sms-contacts-page-root .sms-group-tip {
+  margin: 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(28, 111, 255, 0.05);
+  color: #1c6fff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sms-group-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sms-group-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: rgba(73, 112, 162, 0.1);
+  color: #4970a2;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s;
+}
+
+.sms-group-item:hover {
+  background: rgba(73, 112, 162, 0.18);
+}
+
+.sms-group-item.is-active {
+  background: #4970a2;
+  color: #fff;
+  font-weight: 700;
+}
+
+.sms-contacts-page-root .sms-group-item__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.sms-contacts-page-root .sms-group-item__count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 23px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #fff;
+  color: #4970a2;
+  font-size: 10px;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+.sms-group-item__menu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.sms-contacts-page-root .sms-group-item__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.35;
+  cursor: pointer;
+}
+
+.sms-group-item__menu-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.sms-group-item__menu-btn:hover,
+.sms-group-item:hover .sms-group-item__menu-btn {
+  opacity: 1;
+}
+
+.sms-group-item__menu-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.sms-group-item.is-active .sms-group-item__menu-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sms-group-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  min-width: 96px;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(13, 31, 53, 0.15);
+}
+
+.sms-group-menu[hidden] {
+  display: none;
+}
+
+.sms-group-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 14px;
+  border: none;
+  background: none;
+  font-size: 13px;
+  text-align: left;
+  color: #374151;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.sms-group-menu button:hover {
+  background: #f4f4fa;
+}
+
+.sms-group-menu button.is-danger {
+  color: #ef4444;
+}
+
+/* ===== 수신자 목록 (right panel) ===== */
+.sms-contacts-main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.sms-contacts-main__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.76)
+  );
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 2px 2px rgba(0, 0, 0, 0.03),
+    0 5px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sms-contacts-main__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px 10px;
+  background: transparent;
+  border-bottom: none;
+  flex-shrink: 0;
+}
+
+.sms-contacts-main__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sms-contacts-main__title-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sms-contacts-main__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.36px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sms-contacts-main__title span {
+  font-weight: 600;
+}
+
+.btn-sms-contact-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-sms-contact-add img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.btn-sms-contact-add:hover {
+  border-color: #1c6fff;
+  color: #1c6fff;
+}
+
+/* Filter row — override admin-search-inline !important rules */
+.sms-contacts-page-root .sms-contacts-filters {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  padding: 4px 24px 6px;
+  margin: 0;
+  background: transparent;
+  backdrop-filter: none;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.sms-contacts-page-root .sms-contacts-field {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: none !important;
+}
+
+.sms-contacts-page-root .sms-contacts-field--name {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+}
+
+.sms-contacts-page-root .sms-contacts-filters .sms-contacts-name-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: 38px;
+  grid-template-columns: none !important;
+}
+
+.sms-contacts-field label {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: auto;
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sms-contacts-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 38px;
+}
+
+.sms-contacts-name-row .sms-contacts-select-wrap {
+  flex: 0 0 118px;
+}
+
+.sms-contacts-name-row input[type="text"] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sms-contacts-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 38px;
+}
+
+.sms-contacts-field:not(.sms-contacts-field--name) .sms-contacts-select-wrap {
+  width: 180px;
+  max-width: 180px;
+  flex: 0 0 180px;
+  min-width: 180px;
+}
+
+/* 직급·담당여부 — :not() 규칙(0,3,0)보다 특이도 높게 축소 */
+.sms-contacts-page-root .sms-contacts-field.sms-contacts-field--compact .sms-contacts-select-wrap {
+  width: 88px;
+  max-width: 88px;
+  flex: 0 0 88px;
+  min-width: 88px;
+}
+
+.sms-contacts-page-root .sms-contacts-field.sms-contacts-field--compact .sms-contacts-select-wrap select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding-left: 10px;
+  padding-right: 26px;
+}
+
+.sms-contacts-select-wrap select,
+.sms-contacts-name-row input[type="text"] {
+  width: 100%;
+  height: 38px;
+  padding: 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  box-sizing: border-box;
+}
+
+.sms-contacts-select-wrap select {
+  padding-right: 40px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.sms-contacts-name-row input[type="text"] {
+  font-size: 13px;
+}
+
+.sms-contacts-select-wrap select:focus,
+.sms-contacts-name-row input[type="text"]:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+.sms-contacts-name-row input[type="text"]::placeholder {
+  color: #6c788b;
+  font-weight: 300;
+}
+
+.sms-contacts-select-wrap img {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.btn-sms-contacts-search {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  height: 38px;
+  padding: 0 18px;
+  margin-left: auto;
+  border: none;
+  border-radius: 10px;
+  background: #0d1f35;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-sms-contacts-search img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.btn-sms-contacts-search:hover {
+  background: #1a334f;
+}
+
+/* Alpha tabs */
+.sms-alpha-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 24px 14px;
+  margin: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.sms-alpha-tab {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.sms-alpha-tab.is-active {
+  border-color: #0d1f35;
+  background: #0d1f35;
+  color: #fff;
+  font-weight: 700;
+}
+
+.sms-alpha-tab:hover:not(.is-active) {
+  border-color: #1c6fff;
+  color: #1c6fff;
+}
+
+/* Table */
+.sms-contacts-page-root .sms-contacts-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 0 20px 8px;
+  border: none;
+  border-radius: 0;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sms-contacts-page-root .sms-contacts-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  font-size: 13px;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th {
+  height: 40px;
+  padding: 8px 6px;
+  background: #4970a2;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-check {
+  width: 44px;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-name {
+  width: 11%;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-phone {
+  width: 16%;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-agency {
+  width: auto;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-position {
+  width: 10%;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-assigned {
+  width: 8%;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-action {
+  width: 132px;
+}
+
+.sms-contacts-page-root .btn-sms-edit,
+.sms-contacts-page-root .btn-sms-delete {
+  width: 58px;
+  flex-shrink: 0;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody td {
+  height: 32px;
+  padding: 8px 6px;
+  background: #fff;
+  border: none;
+  border-top: none;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody td:last-child {
+  border-radius: 0 10px 10px 0;
+  overflow: visible;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody tr:hover td {
+  background: #f8fafc;
+}
+
+.sms-contacts-page-root .sms-contacts-table input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #1c6fff;
+  cursor: pointer;
+}
+
+.sms-contacts-empty td {
+  height: 200px;
+  color: #6c788b;
+  font-weight: 400;
+  text-align: center !important;
+  border-radius: 10px !important;
+}
+
+.sms-contacts-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.btn-sms-edit,
+.btn-sms-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 60px;
+  height: 29px;
+  padding: 0;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.btn-sms-edit {
+  border: 0.5px solid #1c6fff;
+  color: #1c6fff;
+}
+
+.btn-sms-edit:hover {
+  background: rgba(28, 111, 255, 0.06);
+}
+
+.btn-sms-edit svg {
+  width: 14px;
+  height: 14px;
+}
+
+.btn-sms-delete {
+  border: 0.5px solid #0d1f35;
+  color: #0d1f35;
+}
+
+.btn-sms-delete img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.btn-sms-delete:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.btn-sms-delete:hover img {
+  filter: brightness(0) saturate(100%) invert(37%) sepia(74%) saturate(2476%) hue-rotate(339deg) brightness(96%) contrast(93%);
+}
+
+/* Pagination (centered, no page-size select) */
+.sms-contacts-pagination-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px 16px;
+}
+
+.sms-contacts-pagination-wrap .pagination {
+  gap: 0;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+  transform: none;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn:first-child,
+.sms-contacts-pagination-wrap .pagination__btn:last-child {
+  margin-left: 0;
+  border-radius: 0;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff !important;
+  border: 1px solid #1c6fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn:hover:not(:disabled):not(.is-active) {
+  z-index: 1;
+  border-color: transparent;
+  color: #1c6fff;
+  background: #fff;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn[data-page-move] {
+  font-size: inherit;
+  color: inherit;
+  background-color: #fff;
+  background-image: none;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn[data-page-move="next"],
+.sms-contacts-pagination-wrap .pagination__btn[data-page-move="last"] {
+  transform: none;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn[data-page-move="next"] img,
+.sms-contacts-pagination-wrap .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.sms-contacts-pagination-wrap .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn svg {
+  display: none;
+}
+
+.sms-contacts-pagination-wrap .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+/* Bulk action footer bar */
+.sms-contacts-foot-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 24px;
+  border-radius: 16px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.76)
+  );
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 2px 2px rgba(0, 0, 0, 0.03),
+    0 5px 5px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.sms-contacts-foot-bar__count {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.sms-contacts-foot-bar__count strong {
+  font-weight: 700;
+  color: #1c6fff;
+}
+
+.sms-contacts-foot-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btn-sms-bulk-move,
+.btn-sms-bulk-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-sms-bulk-move svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-sms-bulk-add img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.btn-sms-bulk-move {
+  background: #8c9aac;
+}
+
+.btn-sms-bulk-move:hover:not(:disabled) {
+  background: #0d1f35;
+}
+
+.btn-sms-bulk-add {
+  background: #1c6fff;
+}
+
+.btn-sms-bulk-add:hover:not(:disabled) {
+  background: #1557d6;
+}
+
+.btn-sms-bulk-move:disabled,
+.btn-sms-bulk-add:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== Modal polish (drawer look, base rules live in sms-contacts.css) ===== */
+.sms-contacts-page-root .sms-modal__backdrop {
+  background: rgba(13, 31, 53, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.sms-contacts-page-root .sms-modal__panel {
+  box-shadow: 0 8px 24px rgba(13, 31, 53, 0.25);
+}
+
+.sms-contacts-page-root .sms-modal__head {
+  padding: 24px 30px 16px;
+  border-bottom: none;
+}
+
+.sms-contacts-page-root .sms-modal__title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #0d1f35;
+}
+
+.sms-contacts-page-root .sms-modal__body {
+  padding: 8px 30px 20px;
+}
+
+.sms-contacts-page-root .sms-modal__field label,
+.sms-contacts-page-root .sms-modal__field-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6c788b;
+}
+
+.sms-contacts-page-root .sms-modal__field input,
+.sms-contacts-page-root .sms-modal__field select {
+  height: 38px;
+  padding: 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.sms-contacts-page-root .sms-modal__field input:focus,
+.sms-contacts-page-root .sms-modal__field select:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+.sms-contacts-page-root .sms-modal__foot {
+  padding: 14px 30px 24px;
+  border-top: none;
+  background: transparent;
+}
+
+.sms-contacts-page-root .btn-sms-modal-cancel {
+  height: 38px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  color: #6c788b;
+  font-weight: 700;
+}
+
+.sms-contacts-page-root .btn-sms-modal-cancel:hover {
+  border-color: #1c6fff;
+  color: #1c6fff;
+}
+
+.sms-contacts-page-root .btn-sms-modal-submit {
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 10px;
+  background: #0d1f35;
+  font-weight: 700;
+}
+
+.sms-contacts-page-root .btn-sms-modal-submit:hover {
+  background: #1a334f;
+}
+
+@media (max-width: 1200px) {
+  .sms-contacts-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sms-contacts-filters {
+    gap: 14px;
+  }
+}
+
+/* ===== Screenshot-aligned redesign v1 ===== */
+.sms-contacts-page-root .main-content {
+  padding-top: 41px;
+  gap: 16px;
+}
+
+.sms-contacts-page-root .page-header__bar {
+  height: 58px;
+  padding: 8px 20px;
+  border-radius: 12px;
+}
+
+.sms-contacts-page-root .page-title {
+  font-size: 22px;
+}
+
+.btn-sms-header-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: #1c6fff;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sms-contacts-layout {
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.sms-contacts-group-panel,
+.sms-contacts-main__card {
+  border-radius: 12px;
+  background: #fff;
+}
+
+.sms-contacts-group-panel__head {
+  padding: 18px 16px 10px;
+}
+
+.sms-contacts-group-panel__title-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.group-title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: #eef4ff;
+  color: #1c6fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sms-contacts-group-panel__title,
+.sms-contacts-main__title {
+  font-size: 15px;
+}
+
+.sms-contacts-group-panel__hint {
+  font-size: 11px;
+}
+
+.sms-contacts-group-panel__body {
+  gap: 10px;
+  padding: 0 16px 12px;
+}
+
+.sms-contacts-page-root .sms-group-tip {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.sms-group-list {
+  gap: 6px;
+}
+
+.sms-group-item {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.sms-group-item.is-active {
+  background: linear-gradient(90deg, #1c6fff 0%, #184fb6 100%);
+}
+
+.sms-contacts-group-panel__foot {
+  padding: 8px 16px 16px;
+  background: #fff;
+  box-shadow: none;
+}
+
+.sms-contacts-page-root .btn-sms-group-add {
+  justify-content: center;
+  height: 34px;
+  border-color: #dadae2;
+  color: #111827;
+  font-size: 12px;
+}
+
+.sms-contacts-main {
+  gap: 0;
+}
+
+.sms-contacts-main__head {
+  padding: 18px 18px 8px;
+}
+
+.sms-contacts-main__title-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.sms-contacts-page-root .sms-contacts-filters {
+  gap: 8px;
+  padding: 2px 18px 8px;
+}
+
+.sms-contacts-page-root .sms-contacts-field {
+  display: block !important;
+}
+
+.sms-contacts-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+}
+
+.sms-contacts-name-row .sms-contacts-select-wrap {
+  display: none;
+}
+
+.sms-contacts-name-row {
+  height: 34px;
+}
+
+.sms-contacts-select-wrap,
+.sms-contacts-select-wrap select,
+.sms-contacts-name-row input[type="text"] {
+  height: 34px;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.sms-contacts-name-row input[type="text"] {
+  width: 138px;
+}
+
+.sms-contacts-field:not(.sms-contacts-field--name) .sms-contacts-select-wrap {
+  width: 168px;
+  min-width: 168px;
+  max-width: 168px;
+}
+
+.sms-contacts-page-root .sms-contacts-field.sms-contacts-field--compact .sms-contacts-select-wrap {
+  width: 166px;
+  min-width: 166px;
+  max-width: 166px;
+}
+
+.btn-sms-contacts-search {
+  height: 34px;
+  border-radius: 7px;
+  padding: 0 14px;
+  font-size: 12px;
+}
+
+.sms-alpha-tabs {
+  gap: 5px;
+  padding: 8px 18px 12px;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.sms-alpha-tab {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 7px;
+  font-size: 11px;
+}
+
+.sms-alpha-tab.is-active {
+  border-color: #1c6fff;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.sms-contacts-result-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px 8px;
+}
+
+.sms-contacts-result-text {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.sms-contacts-result-text strong {
+  color: #1c6fff;
+}
+
+.sms-contacts-result-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sms-contacts-result-actions .btn-sms-bulk-move,
+.sms-contacts-result-actions .btn-sms-contact-add {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 7px;
+  background: #fff;
+  color: #111827;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.sms-contacts-page-root .sms-contacts-table-wrap {
+  padding: 0 18px 8px;
+}
+
+.sms-contacts-page-root .sms-contacts-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 11px;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th {
+  height: 36px;
+  padding: 6px 5px;
+  background: #eaf2ff;
+  border: 1px solid #d8e1ef;
+  color: #111827;
+  font-size: 11px;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th:first-child {
+  border-radius: 7px 0 0 0;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th:last-child {
+  border-radius: 0 7px 0 0;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody td {
+  height: 32px;
+  padding: 5px;
+  border: 1px solid #e2e7ef;
+  border-top: 0;
+  border-radius: 0 !important;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody tr:hover td {
+  background: #f8fbff;
+}
+
+.btn-sms-edit,
+.btn-sms-delete {
+  width: 42px !important;
+  height: 24px;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+.btn-sms-delete {
+  border-color: #ff4d5e;
+  color: #ff4d5e;
+}
+
+.sms-contacts-pagination-wrap {
+  padding: 10px 18px 16px;
+}
+
+.sms-contacts-pagination-wrap .pagination__btn {
+  width: 26px;
+  min-width: 26px;
+  height: 26px;
+  font-size: 10px;
+}
+
+.sms-contacts-foot-bar--legacy {
+  display: none !important;
+}
+
+@media (max-width: 1450px) {
+  .sms-contacts-layout { grid-template-columns: 235px minmax(0, 1fr); }
+  .sms-contacts-field:not(.sms-contacts-field--name) .sms-contacts-select-wrap,
+  .sms-contacts-page-root .sms-contacts-field.sms-contacts-field--compact .sms-contacts-select-wrap {
+    width: 140px;
+    min-width: 140px;
+    max-width: 140px;
+  }
+}
+
+/* ===== v2 tuning ===== */
+.sms-contacts-page-root .main-content {
+  gap: 18px;
+  padding-top: 22px;
+  padding-bottom: 28px;
+}
+
+.sms-contacts-page-root .page-header__bar {
+  height: 74px;
+  padding: 10px 18px 10px 18px;
+}
+
+.sms-contacts-page-root .page-title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sms-contacts-layout {
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.sms-contacts-group-panel,
+.sms-contacts-main__card {
+  min-height: calc(100vh - 170px);
+}
+
+.sms-contacts-group-panel__head {
+  padding: 18px 20px 8px;
+}
+
+.sms-contacts-group-panel__title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.group-title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: #1c6fff;
+  flex-shrink: 0;
+}
+.group-title-icon svg { width: 20px; height: 20px; display:block; }
+
+.sms-contacts-group-panel__body {
+  padding: 8px 16px;
+}
+
+.sms-group-list { gap: 10px; }
+
+.sms-group-item {
+  height: 44px;
+  padding: 0 16px;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.sms-contacts-page-root .sms-group-item__name {
+  flex: 0 1 auto;
+  max-width: calc(100% - 70px);
+}
+
+.sms-contacts-page-root .sms-group-item__count {
+  margin-left: 0;
+  margin-right: auto;
+  min-width: 24px;
+  height: 20px;
+  font-size: 11px;
+}
+
+.sms-group-item__menu { margin-left: 8px; }
+
+.sms-contacts-group-panel__foot {
+  padding: 10px 16px 16px;
+}
+
+.sms-contacts-page-root .btn-sms-group-add {
+  justify-content: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 14px;
+  font-size: 15px;
+  color: #2f4057;
+  border-color: #d4dae4;
+}
+.sms-contacts-page-root .btn-sms-group-add__icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  color: #6c788b;
+}
+.sms-contacts-page-root .btn-sms-group-add__icon svg { width: 16px; height: 16px; display:block; }
+
+.sms-contacts-main__head {
+  padding: 18px 18px 8px;
+}
+.sms-contacts-main__title {
+  font-size: 20px;
+}
+
+.sms-contacts-page-root .sms-contacts-filters {
+  gap: 8px !important;
+  padding: 6px 18px 10px;
+}
+
+.sms-contacts-field label {
+  font-size: 15px;
+}
+
+.sms-contacts-page-root .sms-contacts-field--name {
+  flex: 1 1 240px !important;
+}
+.sms-contacts-page-root .sms-contacts-field:not(.sms-contacts-field--name) .sms-contacts-select-wrap {
+  width: 198px;
+  max-width: 198px;
+  flex: 0 0 198px;
+  min-width: 198px;
+}
+.sms-contacts-page-root .sms-contacts-field.sms-contacts-field--compact .sms-contacts-select-wrap {
+  width: 128px;
+  max-width: 128px;
+  flex: 0 0 128px;
+  min-width: 128px;
+}
+.sms-contacts-select-wrap,
+.sms-contacts-select-wrap select,
+.sms-contacts-name-row,
+.sms-contacts-name-row input[type="text"],
+.btn-sms-contacts-search {
+  height: 42px;
+}
+.sms-contacts-select-wrap select,
+.sms-contacts-name-row input[type="text"] {
+  font-size: 14px;
+  border-radius: 10px;
+}
+.sms-contacts-name-row input[type="text"]::placeholder,
+.sms-contacts-select-wrap select {
+  color: #6c788b;
+}
+
+.btn-sms-contacts-search {
+  min-width: 108px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+.sms-alpha-tabs {
+  gap: 8px;
+  padding: 8px 18px 14px;
+}
+.sms-alpha-tab {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 9px;
+  font-size: 13px;
+}
+
+.sms-contacts-result-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 18px 10px;
+  padding-top: 12px;
+  border-top: 1px solid #e8edf4;
+}
+.sms-contacts-result-text {
+  margin: 0;
+  font-size: 15px;
+  color: #6c788b;
+}
+.sms-contacts-result-text strong {
+  color: #1c6fff;
+  font-weight: 700;
+}
+.sms-contacts-result-actions {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.sms-contacts-page-root .btn-sms-bulk-move,
+.sms-contacts-page-root .btn-sms-contact-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.sms-contacts-page-root .btn-sms-bulk-move {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #2f4057;
+}
+.sms-contacts-page-root .btn-sms-contact-add {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #2f4057;
+}
+.btn-inline-icon {
+  display:inline-flex;
+  width:16px;
+  height:16px;
+  color:inherit;
+}
+.btn-inline-icon svg { width:16px; height:16px; display:block; }
+
+.sms-contacts-page-root .sms-contacts-table-wrap {
+  padding: 0 18px 8px;
+}
+.sms-contacts-page-root .sms-contacts-table {
+  font-size: 14px;
+}
+.sms-contacts-page-root .sms-contacts-table thead th {
+  height: 42px;
+  font-size: 14px;
+}
+.sms-contacts-page-root .sms-contacts-table tbody td {
+  height: 32px;
+  font-size: 14px;
+}
+.sms-contacts-page-root .sms-contacts-table .col-action {
+  width: 124px;
+}
+
+.sms-contacts-actions {
+  gap: 6px;
+}
+.sms-contacts-actions img,
+.sms-contacts-actions svg,
+.btn-sms-edit img,
+.btn-sms-edit svg,
+.btn-sms-delete img,
+.btn-sms-delete svg {
+  display: none !important;
+}
+.btn-sms-edit,
+.btn-sms-delete {
+  width: 52px;
+  height: 30px;
+  gap: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sms-contacts-pagination-wrap {
+  padding: 8px 18px 18px;
+}
+
+.sms-contacts-foot-bar--legacy {
+  display: none !important;
+}
+
+@media (min-width: 1440px) {
+  .sms-contacts-layout {
+    grid-template-columns: 340px minmax(0, 1fr);
+  }
+  .sms-contacts-page-root .sms-contacts-field:not(.sms-contacts-field--name) .sms-contacts-select-wrap {
+    width: 210px;
+    max-width: 210px;
+    flex-basis: 210px;
+    min-width: 210px;
+  }
+}
+
+/* ===== v3 fixes ===== */
+.sms-contacts-page-root .main-content {
+  padding-top: 41px !important;
+}
+
+.sms-contacts-page-root .sms-contacts-filters {
+  align-items: flex-end !important;
+}
+
+.sms-contacts-page-root .btn-sms-contacts-search {
+  align-self: flex-end !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.sms-contacts-page-root #btnBulkMoveTop,
+.sms-contacts-page-root #btnBulkMoveTop:hover:not(:disabled),
+.sms-contacts-page-root #btnBulkMoveTop:focus-visible:not(:disabled) {
+  border: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #2f4057 !important;
+  box-shadow: none !important;
+}
+
+.sms-contacts-page-root #btnBulkMoveTop:disabled {
+  border: 1px solid #e5e7eb !important;
+  background: #f8fafc !important;
+  color: #9aa5b4 !important;
+  opacity: 1 !important;
+  cursor: not-allowed !important;
+}
+
+.sms-contacts-page-root #btnBulkMoveTop:focus-visible {
+  outline: 2px solid rgba(28, 111, 255, 0.25);
+  outline-offset: 2px;
+}

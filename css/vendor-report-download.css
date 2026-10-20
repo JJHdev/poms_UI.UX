@@ -1,0 +1,785 @@
+@import url("common-modal.css");
+
+/* 용역사 보고서 다운로드 신청 관리 — 가로스크롤 없이 한 화면 맞춤 */
+
+.vendor-report-download-page .vrd-filter-row {
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.vendor-report-download-page .vrd-filter-row > .insp-field {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+
+.vendor-report-download-page .vrd-filter-row > .insp-field--name {
+  flex: 1.4 1 180px;
+}
+
+.vendor-report-download-page .vrd-filter-row > .insp-filter-actions {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.vendor-report-download-page .insp-status-table-wrap {
+  overflow-x: hidden;
+}
+
+.vendor-report-download-page .insp-status-table.vrd-table {
+  width: 100%;
+  min-width: 0 !important;
+  max-width: 100%;
+  table-layout: fixed;
+  font-size: 12px;
+}
+
+.vendor-report-download-page .vrd-table thead th {
+  height: auto;
+  min-height: 44px;
+  padding: 6px 3px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.25;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.vendor-report-download-page .vrd-table tbody td {
+  height: 36px;
+  padding: 2px 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+/* 헤더 문구 기준으로 열 비율 배분 */
+.vendor-report-download-page .vrd-table .col-no { width: 3%; }
+.vendor-report-download-page .vrd-table .col-datetime { width: 8.5%; }
+.vendor-report-download-page .vrd-table .col-org { width: 7.5%; }
+.vendor-report-download-page .vrd-table .col-port { width: 4.5%; }
+.vendor-report-download-page .vrd-table .col-subport { width: 5.5%; }
+.vendor-report-download-page .vrd-table .col-ftype { width: 5%; }
+.vendor-report-download-page .vrd-table .col-fname { width: 9%; }
+.vendor-report-download-page .vrd-table .col-date { width: 6.5%; }
+.vendor-report-download-page .vrd-table .col-check { width: 8%; }
+.vendor-report-download-page .vrd-table .col-insp { width: 6.5%; }
+.vendor-report-download-page .vrd-table .col-state { width: 5.5%; }
+.vendor-report-download-page .vrd-table .col-status { width: 4%; }
+.vendor-report-download-page .vrd-table .col-history { width: 6.5%; }
+.vendor-report-download-page .vrd-table .col-action { width: 12%; }
+
+.vendor-report-download-page .vrd-table td.is-left {
+  text-align: left;
+}
+
+.vendor-report-download-page .vrd-table .sra-tbl-btn {
+  height: 26px;
+  min-width: 0;
+  padding: 0 6px;
+  font-size: 12px;
+}
+
+.vendor-report-download-page .vrd-table .sra-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.vendor-report-download-page .vrd-table td:nth-child(13),
+.vendor-report-download-page .vrd-table td:nth-child(14) {
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.vendor-report-download-page .fca-hist-summary__name {
+  max-width: 100%;
+  white-space: normal;
+}
+
+
+/* ========================================================================
+   [2026 FLAT] inspection-agency.css 규격 그대로 이식 (admin-notices 기준)
+   ※ 되돌리려면 이 블록만 삭제하면 됩니다.
+   ======================================================================== */
+
+/* ========================================================================
+   1) 카드(흰 박스) 제거 — 플랫 구조
+   ======================================================================== */
+html body.vendor-report-download-page .main-content .insp-status-page,
+html body.vendor-report-download-page .main-content .insp-filter-panel,
+html body.vendor-report-download-page .main-content .insp-results-panel {
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+html body.vendor-report-download-page .main-content .insp-status-page {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  width: 100%;
+  min-width: 0;
+}
+
+html body.vendor-report-download-page .main-content .insp-results-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+/* 패널 사이 구분선 제거 */
+html body.vendor-report-download-page .insp-divider {
+  display: none !important;
+}
+
+/* ========================================================================
+   2) 섹션 타이틀 (검색조건)
+   ======================================================================== */
+html body.vendor-report-download-page .insp-filter-panel__head {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.vendor-report-download-page .insp-filter-panel__head-main {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+html body.vendor-report-download-page .insp-filter-panel__title-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  background: #f6f9ff !important;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+html body.vendor-report-download-page .insp-filter-panel__title-icon img {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  object-fit: contain;
+}
+
+html body.vendor-report-download-page .insp-filter-panel__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+/* ========================================================================
+   3) 검색 스트립
+   ======================================================================== */
+html body.vendor-report-download-page .insp-filter {
+  margin: 0 !important;
+  padding: 9px 10px 8px !important;
+  background: #f3f8fe !important;
+  border: 0 !important;
+  border-top: 1px solid #8d9aab !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html body.vendor-report-download-page .vrd-filter-row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-end !important;
+  gap: 8px !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.vendor-report-download-page .insp-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.vendor-report-download-page .insp-field--name {
+  flex: 1.4 1 0 !important;
+}
+
+html body.vendor-report-download-page .insp-field--sm {
+  flex: 0.7 1 0 !important;
+}
+
+html body.vendor-report-download-page .insp-field > label {
+  padding: 0 2px !important;
+  margin: 0 !important;
+  color: #6c788b !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+html body.vendor-report-download-page .insp-field input[type="text"],
+html body.vendor-report-download-page .insp-field input[type="search"],
+html body.vendor-report-download-page .insp-field select {
+  width: 100% !important;
+  height: 34px !important;
+  padding: 0 14px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1;
+  outline: none;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html body.vendor-report-download-page .insp-field select {
+  padding-right: 32px !important;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #6c788b 50%),
+    linear-gradient(135deg, #6c788b 50%, transparent 50%) !important;
+  background-position: calc(100% - 18px) 15px, calc(100% - 13px) 15px !important;
+  background-size: 5px 5px, 5px 5px !important;
+  background-repeat: no-repeat !important;
+}
+
+html body.vendor-report-download-page select::-ms-expand {
+  display: none;
+}
+
+html body.vendor-report-download-page .insp-field input::placeholder {
+  color: #999 !important;
+  font-size: 14px;
+}
+
+html body.vendor-report-download-page .insp-field input:focus,
+html body.vendor-report-download-page .insp-field select:focus {
+  border-color: #1c6fff !important;
+  box-shadow: none !important;
+}
+
+html body.vendor-report-download-page .insp-filter-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 검색 / 초기화 버튼 */
+html body.vendor-report-download-page .insp-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  font-family: inherit;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+html body.vendor-report-download-page .insp-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+html body.vendor-report-download-page .insp-btn--search {
+  min-width: 107px !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.vendor-report-download-page .insp-btn--search img {
+  filter: brightness(0) invert(1);
+}
+
+html body.vendor-report-download-page .insp-btn--search:hover {
+  background: #16304f !important;
+}
+
+html body.vendor-report-download-page .insp-btn--reset {
+  min-width: 96px !important;
+  border: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #6c788b !important;
+}
+
+html body.vendor-report-download-page .insp-btn--reset:hover {
+  background: #f6f8fb !important;
+}
+
+/* ========================================================================
+   4) 검색결과 헤더
+   ======================================================================== */
+html body.vendor-report-download-page .insp-results__head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  min-height: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.vendor-report-download-page .insp-results__count {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+html body.vendor-report-download-page .insp-results__bar-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+html body.vendor-report-download-page .insp-results__bar-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+html body.vendor-report-download-page .insp-results__label {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.32px;
+  line-height: 1.2 !important;
+}
+
+html body.vendor-report-download-page .insp-results__meta {
+  margin: 0 !important;
+  color: #6c788b !important;
+  font-size: 14px !important;
+  letter-spacing: -0.28px;
+  line-height: 1.2 !important;
+}
+
+html body.vendor-report-download-page .insp-results__meta strong {
+  color: #1c6fff !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================================================
+   5) 목록 테이블 (14열 밀집 — 폰트/패딩만 축소 적용)
+   ======================================================================== */
+html body.vendor-report-download-page .insp-status-table-wrap {
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px 6px 0 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.vendor-report-download-page .vrd-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  table-layout: fixed !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 12px !important;
+}
+
+html body.vendor-report-download-page .vrd-table thead,
+html body.vendor-report-download-page .vrd-table tbody,
+html body.vendor-report-download-page .vrd-table tr {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.vendor-report-download-page .vrd-table thead th,
+html body.vendor-report-download-page .vrd-table tbody td {
+  height: 32px !important;
+  max-height: 32px !important;
+  padding: 0 4px !important;
+  font-size: 12px !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box;
+}
+
+html body.vendor-report-download-page .vrd-table thead th {
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111 !important;
+  font-weight: 500 !important;
+}
+
+html body.vendor-report-download-page .vrd-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+html body.vendor-report-download-page .vrd-table thead th:last-child {
+  border-right: 0 !important;
+  border-radius: 0 6px 0 0;
+}
+
+html body.vendor-report-download-page .vrd-table tbody td {
+  background: #fff !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333 !important;
+  font-weight: 400 !important;
+}
+
+html body.vendor-report-download-page .vrd-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+html body.vendor-report-download-page .vrd-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+html body.vendor-report-download-page .vrd-table tbody tr:hover td {
+  background: #f5f8fc !important;
+}
+
+html body.vendor-report-download-page .vrd-table tbody tr.is-selected td {
+  background: #eef4ff !important;
+}
+
+/* 셀 내부 요소는 줄높이 상속 해제 */
+html body.vendor-report-download-page .vrd-table tbody td > * {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* 좌측 정렬 셀 */
+html body.vendor-report-download-page .vrd-table tbody td.is-left {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  text-align: left !important;
+}
+
+/* 데이터 없음 */
+html body.vendor-report-download-page .vrd-table tbody tr.is-empty td,
+html body.vendor-report-download-page .vrd-table tbody td.is-empty {
+  height: 120px !important;
+  max-height: none !important;
+  line-height: 1.4 !important;
+  color: #8993a1 !important;
+  text-align: center !important;
+  cursor: default;
+}
+
+/* 버튼이 들어가는 열은 잘리지 않게 */
+html body.vendor-report-download-page .vrd-table td.col-history,
+html body.vendor-report-download-page .vrd-table td.col-action,
+html body.vendor-report-download-page .vrd-table td:nth-child(13),
+html body.vendor-report-download-page .vrd-table td:nth-child(14) {
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+/* 표 안 버튼 */
+html body.vendor-report-download-page .vrd-table .sra-tbl-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 24px !important;
+  min-width: 0 !important;
+  padding: 0 8px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  color: #6c788b !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+html body.vendor-report-download-page .vrd-table .sra-tbl-btn--approve {
+  border-color: #0b1a2d !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.vendor-report-download-page .vrd-table .sra-tbl-btn--reject {
+  border-color: #e5002b !important;
+  background: #fff !important;
+  color: #e5002b !important;
+}
+
+/* 상태 배지 */
+html body.vendor-report-download-page .vrd-table .sra-badge,
+html body.vendor-report-download-page .vrd-table .insp-badge,
+html body.vendor-report-download-page .vrd-table .agency-status {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 58px !important;
+  height: 20px !important;
+  padding: 0 10px !important;
+  border: 0 !important;
+  border-radius: 5px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  box-sizing: border-box;
+}
+
+/* ========================================================================
+   6) 페이지네이션 (flat)
+   ======================================================================== */
+html body.vendor-report-download-page .insp-results-foot {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 20px 0 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.vendor-report-download-page .pagination {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  margin: 0 !important;
+}
+
+html body.vendor-report-download-page .pagination__btn {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html body.vendor-report-download-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+}
+
+html body.vendor-report-download-page .pagination__btn:disabled {
+  opacity: 1 !important;
+  cursor: default;
+}
+
+html body.vendor-report-download-page .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400 !important;
+}
+
+html body.vendor-report-download-page .pagination__btn[data-page-move] {
+  background-image: none !important;
+}
+
+html body.vendor-report-download-page .pagination__btn[data-page-move] img {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain;
+}
+
+html body.vendor-report-download-page .pagination__btn[data-page-move="next"] img,
+html body.vendor-report-download-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1) !important;
+}
+
+html body.vendor-report-download-page .pagination__btn:disabled img {
+  opacity: 0.35 !important;
+}
+
+html body.vendor-report-download-page .pagination__btn svg {
+  display: none !important;
+}
+
+html body.vendor-report-download-page .pagination__ellipsis {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  color: #6c788b !important;
+  font-size: 12px !important;
+}
+
+/* ========================================================================
+   7) 반려 사유 모달
+   ======================================================================== */
+html body.vendor-report-download-page .sra-modal__panel {
+  border: 0 !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+html body.vendor-report-download-page .sra-modal__head {
+  padding: 22px 24px 14px !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+}
+
+html body.vendor-report-download-page .sra-modal__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+html body.vendor-report-download-page .sra-modal__textarea {
+  border: 1px solid #dadae2 !important;
+  border-radius: 14px !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+html body.vendor-report-download-page .sra-modal__textarea:focus {
+  border-color: #1c6fff !important;
+}
+
+html body.vendor-report-download-page .sra-modal__foot {
+  border-top: 1px solid #dadae2 !important;
+  background: #fff !important;
+}
+
+html body.vendor-report-download-page .sra-modal__btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 96px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  color: #6c788b !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+html body.vendor-report-download-page .sra-modal__btn--danger {
+  border-color: #e5002b !important;
+  background: #fff !important;
+  color: #e5002b !important;
+}
+
+/* ========================================================================
+   8) 결재이력 드로어
+   ======================================================================== */
+html body.vendor-report-download-page .fca-drawer {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+html body.vendor-report-download-page .fca-drawer__head {
+  min-height: 0 !important;
+  padding: 22px 24px 14px !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+}
+
+html body.vendor-report-download-page .fca-drawer__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}

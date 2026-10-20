@@ -1,0 +1,1248 @@
+/* 연락처 관리 — 관리자 시안 기준 (admin-notices.css 동일 규격, 자체 완결형) */
+
+/* ===== 레이아웃 ===== */
+/* 폭/양옆 여백(1400 + 260×2)은 admin-topnav.css의 .main-content 규칙이 담당 */
+.sms-contacts-page-root .main-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.sms-contacts-page-root .sms-contacts-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.sms-contacts-page-root .sms-contacts-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+/* ===== 섹션 타이틀 ===== */
+.sms-contacts-page-root .sms-contacts-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+}
+
+.sms-contacts-page-root .sms-contacts-section-title__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.sms-contacts-page-root .sms-contacts-section-title__icon img,
+.sms-contacts-page-root .sms-contacts-section-title__icon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.sms-contacts-page-root .sms-contacts-section-title__text {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sms-contacts-page-root .sms-contacts-section-title__hint {
+  margin: 0;
+  color: #6c788b;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* ===== 좌측 : 그룹관리 ===== */
+.sms-contacts-page-root .sms-contacts-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sms-contacts-page-root .sms-group-tip {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 6px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .sms-group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sms-contacts-page-root .sms-group-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 6px 0 20px;
+  border-radius: 6px;
+  background: #e9f1fe;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .sms-group-item:hover {
+  background: #dfeafc;
+}
+
+.sms-contacts-page-root .sms-group-item__name {
+  flex: 0 1 auto;
+  min-width: 0;
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sms-contacts-page-root .sms-group-item__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #fff;
+  color: #6c788b;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* 선택된 그룹 */
+.sms-contacts-page-root .sms-group-item.is-active {
+  background: linear-gradient(90deg, #1b6cf9 0%, #11449d 100%);
+}
+
+.sms-contacts-page-root .sms-group-item.is-active .sms-group-item__name {
+  color: #fff;
+  font-weight: 600;
+}
+
+.sms-contacts-page-root .sms-group-item.is-active .sms-group-item__count {
+  background: #fff;
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.sms-contacts-page-root .sms-group-item.is-active .sms-group-item__menu-btn {
+  color: #fff;
+}
+
+/* 케밥 메뉴 */
+.sms-contacts-page-root .sms-group-item__menu {
+  position: relative;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.sms-contacts-page-root .sms-group-item__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #8993a1;
+  cursor: pointer;
+}
+
+.sms-contacts-page-root .sms-group-item__menu-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.sms-contacts-page-root .sms-group-item__menu-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sms-contacts-page-root .sms-group-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  min-width: 96px;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.sms-contacts-page-root .sms-group-menu[hidden] {
+  display: none;
+}
+
+.sms-contacts-page-root .sms-group-menu button {
+  display: block;
+  width: 100%;
+  padding: 7px 14px;
+  border: 0;
+  background: none;
+  color: #333;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sms-contacts-page-root .sms-group-menu button:hover {
+  background: #f5f8fc;
+}
+
+.sms-contacts-page-root .sms-group-menu button.is-danger {
+  color: #e5002b;
+}
+
+/* 그룹 추가 버튼 */
+.sms-contacts-page-root .btn-sms-group-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  height: 36px;
+  margin-top: 6px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .btn-sms-group-add:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+.sms-contacts-page-root .btn-sms-group-add svg,
+.sms-contacts-page-root .btn-sms-group-add img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  color: #6c788b;
+  flex-shrink: 0;
+}
+
+/* ===== 우측 : 연락처 목록 ===== */
+.sms-contacts-page-root .sms-contacts-main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* 검색 스트립 */
+.sms-contacts-page-root .sms-contacts-filter-strip {
+  padding: 9px 10px 8px;
+  background: #f3f8fe;
+  border-top: 1px solid #8d9aab;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .sms-contacts-filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.sms-contacts-page-root .sms-contacts-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sms-contacts-page-root .sms-contacts-field--name {
+  flex: 1 1 200px;
+}
+
+.sms-contacts-page-root .sms-contacts-field--select {
+  flex: 0 1 162px;
+  width: 162px;
+}
+
+.sms-contacts-page-root .sms-contacts-field > label {
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sms-contacts-page-root .sms-contacts-field input[type="text"],
+.sms-contacts-page-root .sms-contacts-field input[type="search"] {
+  width: 100%;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sms-contacts-page-root .sms-contacts-field input::placeholder {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.sms-contacts-page-root .sms-contacts-field input:focus,
+.sms-contacts-page-root .sms-contacts-field select:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+/* 셀렉트 */
+.sms-contacts-page-root .sms-contacts-select-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.sms-contacts-page-root .sms-contacts-select-wrap select {
+  width: 100%;
+  height: 34px;
+  padding: 0 32px 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sms-contacts-page-root .sms-contacts-select-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  width: 9px;
+  height: 9px;
+  margin-top: -6px;
+  border-right: 1.6px solid #6c788b;
+  border-bottom: 1.6px solid #6c788b;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.sms-contacts-page-root .sms-contacts-select-wrap img {
+  display: none;
+}
+
+/* 검색 버튼 */
+.sms-contacts-page-root .btn-sms-contacts-search {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 0 0 107px;
+  min-width: 107px;
+  height: 34px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #0b1a2d;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .btn-sms-contacts-search:hover {
+  background: #16304f;
+}
+
+.sms-contacts-page-root .btn-sms-contacts-search img,
+.sms-contacts-page-root .btn-sms-contacts-search svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* 스트립 아래 영역(좌우 10px 인셋) */
+.sms-contacts-page-root .sms-contacts-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 10px;
+  min-width: 0;
+}
+
+/* ===== 초성 탭 ===== */
+.sms-contacts-page-root .sms-alpha-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sms-contacts-page-root .sms-alpha-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 37px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .sms-alpha-tab:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+.sms-contacts-page-root .sms-alpha-tab.is-active {
+  min-width: 49px;
+  border-color: #1c6fff;
+  background: #f6f9ff;
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+/* ===== 검색결과 헤더 ===== */
+.sms-contacts-page-root .sms-contacts-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 30px;
+}
+
+.sms-contacts-page-root .sms-contacts-results__count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sms-contacts-page-root .sms-contacts-results__bar-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sms-contacts-page-root .sms-contacts-results__bar-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-contacts-page-root .sms-contacts-results__label {
+  margin: 0;
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.sms-contacts-page-root .sms-contacts-results__meta {
+  margin: 0;
+  color: #6c788b;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+}
+
+.sms-contacts-page-root .sms-contacts-results__meta strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.sms-contacts-page-root .sms-contacts-results__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* 그룹이동 / 인원추가 */
+.sms-contacts-page-root .btn-sms-bulk-move,
+.sms-contacts-page-root .btn-sms-contact-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 106px;
+  height: 30px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .btn-sms-bulk-move:hover:not(:disabled),
+.sms-contacts-page-root .btn-sms-contact-add:hover:not(:disabled) {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+.sms-contacts-page-root .btn-sms-bulk-move:disabled,
+.sms-contacts-page-root .btn-sms-contact-add:disabled {
+  background: #ededed;
+  color: #a0a8b4;
+  cursor: default;
+}
+
+.sms-contacts-page-root .btn-sms-bulk-move svg,
+.sms-contacts-page-root .btn-sms-contact-add svg,
+.sms-contacts-page-root .btn-inline-icon svg,
+.sms-contacts-page-root .btn-sms-bulk-move img,
+.sms-contacts-page-root .btn-sms-contact-add img,
+.sms-contacts-page-root .btn-inline-icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sms-contacts-page-root .btn-sms-bulk-move:disabled .btn-inline-icon img {
+  opacity: 0.4;
+}
+
+/* 그룹이동: 활성 상태일 때 아이콘을 검정으로 */
+.sms-contacts-page-root .btn-sms-bulk-move:not(:disabled) .btn-inline-icon img {
+  filter: brightness(0) saturate(100%);
+}
+
+.sms-contacts-page-root .btn-sms-bulk-move:disabled .btn-inline-icon img {
+  filter: grayscale(1);
+}
+
+.sms-contacts-page-root .btn-inline-icon {
+  display: inline-flex;
+  align-items: center;
+  color: #6c788b;
+}
+
+.sms-contacts-page-root .btn-sms-bulk-move:disabled .btn-inline-icon {
+  color: #a0a8b4;
+}
+
+/* ===== 목록 테이블 ===== */
+.sms-contacts-page-root .sms-contacts-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px 6px 0 0;
+}
+
+.sms-contacts-page-root .sms-contacts-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead,
+.sms-contacts-page-root .sms-contacts-table tbody,
+.sms-contacts-page-root .sms-contacts-table tr {
+  border: 0 !important;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th,
+.sms-contacts-page-root .sms-contacts-table tbody td {
+  height: 32px;
+  max-height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th {
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111;
+  font-weight: 500;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+.sms-contacts-page-root .sms-contacts-table thead th:last-child {
+  border-right: 0 !important;
+  border-radius: 0 6px 0 0;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody td {
+  background: #fff;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333;
+  font-weight: 400;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.sms-contacts-page-root .sms-contacts-table tbody tr.is-selected td {
+  background: #eef4ff;
+}
+
+/* 컬럼 폭 */
+.sms-contacts-page-root .sms-contacts-table .col-check {
+  width: 40px;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-name {
+  width: 100px;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-phone {
+  width: 140px;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-agency {
+  width: auto;
+}
+
+.sms-contacts-page-root .sms-contacts-table .col-position,
+.sms-contacts-page-root .sms-contacts-table .col-assigned,
+.sms-contacts-page-root .sms-contacts-table .col-action {
+  width: 100px;
+}
+
+/* 셀 내부 요소는 줄높이 상속 해제 */
+.sms-contacts-page-root .sms-contacts-table tbody td > * {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* 체크박스 */
+.sms-contacts-page-root .sms-contacts-table input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  vertical-align: middle;
+  accent-color: #1c6fff;
+  cursor: pointer;
+}
+
+/* 담당 여부 */
+.sms-contacts-page-root .sms-badge {
+  display: inline;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #333;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.sms-contacts-page-root .sms-badge--yes,
+.sms-contacts-page-root .sms-badge--no {
+  color: #333;
+}
+
+/* 작업 버튼 (수정 / 삭제) */
+.sms-contacts-page-root .sms-contacts-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.sms-contacts-page-root .btn-row-edit,
+.sms-contacts-page-root .btn-row-del,
+.sms-contacts-page-root .btn-sms-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  width: auto;
+  height: 23px;
+  padding: 0 8px;
+  border: 1px solid #1c6fff;
+  border-radius: 5px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sms-contacts-page-root .btn-row-del,
+.sms-contacts-page-root .btn-sms-icon.is-danger,
+.sms-contacts-page-root .btn-sms-icon[data-action="delete"] {
+  border-color: #e5002b;
+  background: #fef5f8;
+  color: #e5002b;
+}
+
+.sms-contacts-page-root .btn-row-edit:hover,
+.sms-contacts-page-root .btn-sms-icon:hover {
+  background: #e9f1fe;
+}
+
+.sms-contacts-page-root .btn-row-del:hover,
+.sms-contacts-page-root .btn-sms-icon.is-danger:hover,
+.sms-contacts-page-root .btn-sms-icon[data-action="delete"]:hover {
+  background: #fdeaf0;
+}
+
+/* 작업 버튼은 텍스트만 (아이콘 제거) */
+.sms-contacts-page-root .sms-contacts-table .col-action svg,
+.sms-contacts-page-root .sms-contacts-table .col-action img,
+.sms-contacts-page-root .btn-row-edit svg,
+.sms-contacts-page-root .btn-row-edit img,
+.sms-contacts-page-root .btn-row-del svg,
+.sms-contacts-page-root .btn-row-del img,
+.sms-contacts-page-root .btn-sms-icon svg,
+.sms-contacts-page-root .btn-sms-icon img {
+  display: none !important;
+}
+
+/* 데이터 없음 */
+.sms-contacts-page-root .sms-contacts-table .sms-contacts-empty td,
+.sms-contacts-page-root .sms-contacts-table .is-empty td {
+  height: 120px;
+  max-height: none;
+  line-height: 1.4;
+  color: #8993a1;
+  text-align: center !important;
+  cursor: default;
+}
+
+/* ===== 페이지네이션 (flat) ===== */
+.sms-contacts-page-root .sms-contacts-pagination-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0 0;
+}
+
+.sms-contacts-page-root .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.sms-contacts-page-root .pagination__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  transform: none;
+}
+
+.sms-contacts-page-root .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.sms-contacts-page-root .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.sms-contacts-page-root .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.sms-contacts-page-root .pagination__btn[data-page-move] {
+  font-size: inherit;
+  color: inherit;
+  background-color: #fff;
+  background-image: none;
+}
+
+.sms-contacts-page-root .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sms-contacts-page-root .pagination__btn[data-page-move="next"],
+.sms-contacts-page-root .pagination__btn[data-page-move="last"] {
+  transform: none;
+}
+
+.sms-contacts-page-root .pagination__btn[data-page-move="next"] img,
+.sms-contacts-page-root .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.sms-contacts-page-root .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.sms-contacts-page-root .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+/* ===== 모달 (그룹 추가 / 연락처 추가 / 그룹 이동) ===== */
+.sms-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: block;
+}
+
+.sms-modal[hidden] {
+  display: none !important;
+}
+
+.sms-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 31, 53, 0.2);
+}
+
+.sms-modal__panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(560px, calc(100vw - 32px));
+  height: 100vh;
+  max-height: 100vh;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sms-modal__panel--wide {
+  width: min(620px, calc(100vw - 32px));
+}
+
+.sms-modal__panel > form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+.sms-modal__head {
+  padding: 22px 24px 14px;
+  border-bottom: 1px solid #dadae2;
+  flex-shrink: 0;
+}
+
+.sms-modal__title {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.sms-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.sms-modal__field {
+  margin-bottom: 14px;
+}
+
+.sms-modal__field:last-child {
+  margin-bottom: 0;
+}
+
+.sms-modal__field > label,
+.sms-modal__field-label {
+  display: block;
+  margin-bottom: 6px;
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sms-modal__field input[type="text"],
+.sms-modal__field select {
+  width: 100%;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.sms-modal__field input[type="text"]:focus,
+.sms-modal__field select:focus {
+  border-color: #1c6fff;
+}
+
+.sms-modal__field input[type="text"]::placeholder {
+  color: #999;
+}
+
+.sms-modal__field input[type="radio"] {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  flex: 0 0 auto;
+  accent-color: #1c6fff;
+}
+
+.sms-modal__field--row {
+  display: flex;
+  gap: 18px;
+}
+
+.sms-modal__radio,
+.sms-modal__field .sms-modal__radio {
+  display: inline-flex !important;
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+  gap: 6px;
+  margin: 0 !important;
+  color: #333;
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sms-modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 14px 24px;
+  border-top: 1px solid #dadae2;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.btn-sms-modal-cancel,
+.btn-sms-modal-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-sms-modal-cancel:hover {
+  background: #f6f8fb;
+}
+
+.btn-sms-modal-submit {
+  border-color: #0b1a2d;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.btn-sms-modal-submit:hover {
+  border-color: #16304f;
+  background: #16304f;
+}
+
+/* ===== 연락처 선택 (문자전송 화면에서 사용) ===== */
+.sms-picker-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sms-picker-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #f3f8fe;
+  border-top: 1px solid #8d9aab;
+  border-bottom: 1px solid #dadae2;
+}
+
+.sms-picker-toolbar__info {
+  color: #333;
+  font-size: 14px;
+}
+
+.sms-picker-toolbar__info strong {
+  color: #1c6fff;
+}
+
+.sms-picker-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-sms-picker-cancel,
+.btn-sms-picker-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-sms-picker-submit {
+  border-color: #0b1a2d;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.sms-picker-panel {
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.sms-modal__panel--picker {
+  width: min(960px, calc(100vw - 32px));
+}
+
+.sms-contact-picker-modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px 14px;
+  border-bottom: 1px solid #dadae2;
+}
+
+.sms-contact-picker-modal__desc {
+  margin: 6px 0 0;
+  color: #6c788b;
+  font-size: 13px;
+}
+
+.sms-contact-picker-modal__desc strong {
+  color: #1c6fff;
+}
+
+.sms-contact-picker-modal__close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sms-contact-picker-modal__close:hover {
+  background: #f6f8fb;
+}
+
+.sms-contact-picker-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 16px 24px 20px;
+  overflow: auto;
+}
+
+/* ===== 유틸 ===== */
+.visually-hidden,
+.sms-contacts-foot-bar--legacy {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 1400px) {
+  .sms-contacts-page-root .sms-contacts-layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .sms-contacts-page-root .sms-contacts-filter {
+    flex-wrap: wrap;
+  }
+}

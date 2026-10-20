@@ -1,0 +1,1420 @@
+/* FMS 연계이력 — 승인/반려(type3 flat)과 동일 톤 */
+
+.fms-history-page {
+  margin: 0;
+  min-width: 1240px;
+}
+
+.fms-history-page .fms-filter-fields > .type3-field {
+  flex: 0 0 180px;
+  width: 180px;
+  max-width: 180px;
+}
+
+.fms-history-page .fms-filter-fields > .type3-field--sm {
+  flex: 0 0 140px;
+  width: 140px;
+  max-width: 140px;
+}
+
+.fms-history-page .fms-filter-fields > .type3-field--grow {
+  flex: 1 1 200px;
+  width: auto;
+  max-width: 280px;
+}
+
+.fms-history-page .fms-filter-fields > .type3-field--range {
+  flex: 0 1 320px;
+  width: auto;
+  max-width: 360px;
+}
+
+.fms-date-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+}
+
+.fms-date-range em {
+  flex: 0 0 auto;
+  font-style: normal;
+  font-size: 14px;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.fms-date-range input[type="date"] {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.fms-date-range input[type="date"]:focus {
+  outline: none;
+  border-color: #1c6fff;
+}
+
+.fms-history-page .type3-results-foot {
+  justify-content: center;
+}
+
+.fms-history-page .fms-excel-btn {
+  height: 32px;
+  min-width: 0;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.fms-history-page .fms-excel-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+/* ===== Table — fit content, no horizontal scroll ===== */
+.fms-history-page .type3-table-wrap {
+  overflow-x: hidden;
+}
+
+.fms-history-page .fms-table {
+  width: 100%;
+  min-width: 0 !important;
+  max-width: 100%;
+  table-layout: fixed;
+}
+
+.fms-history-page .fms-table col.col-no { width: 5%; }
+.fms-history-page .fms-table col.col-fmsno { width: 13%; }
+.fms-history-page .fms-table col.col-fmsname { width: 16%; }
+.fms-history-page .fms-table col.col-pomsname { width: 16%; }
+.fms-history-page .fms-table col.col-match { width: 14%; }
+.fms-history-page .fms-table col.col-view { width: 12%; }
+.fms-history-page .fms-table col.col-hist { width: 13%; }
+.fms-history-page .fms-table col.col-date { width: 11%; }
+
+.fms-history-page .fms-table thead th,
+.fms-history-page .fms-table tbody td {
+  height: 32px;
+  padding: 2px 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fms-history-page .fms-table tbody td {
+  color: #333;
+}
+
+@media (max-width: 1600px) {
+  .fms-history-page .type3-filter--strip {
+    flex-wrap: wrap;
+  }
+
+  .fms-history-page .fms-filter-fields > .type3-field,
+  .fms-history-page .fms-filter-fields > .type3-field--sm,
+  .fms-history-page .fms-filter-fields > .type3-field--grow,
+  .fms-history-page .fms-filter-fields > .type3-field--range {
+    flex: 1 1 180px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* ===== FMS 상세 — 시스템 관리(facility-management-detail) 패턴 ===== */
+.fms-detail-page .fmd-section__head {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fms-detail-page .fms-section-note {
+  margin: 0 0 0 auto;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1.2;
+}
+
+.fms-detail-page .fmd-section__body {
+  gap: 14px;
+}
+
+.fms-detail-page .ua-account-tabs {
+  margin: 0;
+  padding: 0;
+}
+
+.fms-detail-page .ua-account-tabs[hidden] {
+  display: none;
+}
+
+.fms-detail-page .fms-tab-content {
+  width: 100%;
+}
+
+.fms-detail-page .fmd-input[readonly] {
+  background: #f8f9fb;
+  color: #333;
+  cursor: default;
+}
+
+.fms-detail-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.fms-detail-note {
+  margin: 0;
+  padding: 0 4px;
+  font-size: 13px;
+  color: #6c788b;
+  line-height: 1.4;
+}
+
+.fms-search-block {
+  width: 100%;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #dadae2;
+}
+
+.fms-search-row .fmd-field--range {
+  grid-column: span 1;
+}
+
+.fms-detail-page .fms-date-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.fms-detail-page .fms-date-range em {
+  flex: 0 0 auto;
+  font-style: normal;
+  font-size: 14px;
+  color: #6c788b;
+}
+
+.fms-detail-page .fms-date-range .fmd-input {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0 12px;
+}
+
+.fms-search-actions__btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.fms-search-actions__btns .fmd-btn {
+  height: 34px;
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+.fms-search-actions__btns .fmd-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.fms-results-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+}
+
+.fms-results-head__label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.3px;
+}
+
+.fms-results-head__meta {
+  margin: 0;
+  font-size: 13px;
+  color: #6c788b;
+}
+
+.fms-results-head__meta strong {
+  color: #1c6fff;
+  font-weight: 700;
+}
+
+.fms-detail-table-shell {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.fms-detail-table,
+.fms-spec-table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.fms-detail-table {
+  font-size: 13px;
+}
+
+.fms-detail-table thead th {
+  height: 32px;
+  padding: 6px 8px;
+  background: rgba(28, 111, 255, 0.1);
+  border: 0;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.fms-detail-table thead th:last-child {
+  border-right: 0;
+}
+
+.fms-detail-table tbody td {
+  height: 32px;
+  padding: 4px 8px;
+  background: #fff;
+  border: 0;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  color: #333;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.fms-detail-table tbody td:last-child {
+  border-right: 0;
+}
+
+.fms-detail-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.fms-detail-table td.is-empty {
+  color: #6c788b;
+  font-weight: 400;
+}
+
+.fms-spec-table {
+  font-size: 12px;
+}
+
+.fms-spec-table th,
+.fms-spec-table td {
+  padding: 8px 6px;
+  border: 0;
+  border-bottom: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  vertical-align: middle;
+  text-align: center;
+  word-break: keep-all;
+  box-sizing: border-box;
+}
+
+.fms-spec-table th {
+  background: rgba(28, 111, 255, 0.04);
+  color: #111;
+  font-weight: 500;
+}
+
+.fms-spec-table td {
+  background: #fff;
+  color: #333;
+}
+
+.fms-spec-table tr > :last-child {
+  border-right: 0;
+}
+
+.fms-spec-table tr:last-child th,
+.fms-spec-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.fms-match-table thead th:last-child,
+.fms-match-table tbody td:last-child {
+  width: 72px;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+/* ========================================================================
+   [2026 FLAT] inspection-agency.css 규격 통일 오버라이드
+   ※ 되돌리려면 이 블록만 삭제하면 됩니다.
+   ======================================================================== */
+
+/* ── 1) 페이지 컨테이너 ───────────────────────────────────────────── */
+html body.fms-history-page .main-content .type3-page,
+html body.fms-history-page .main-content .type3-filter-strip,
+html body.fms-history-page .main-content .type3-results-panel {
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+html body.fms-history-page .main-content .type3-page {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  width: 100%;
+  min-width: 0;
+}
+
+html body.fms-history-page .main-content .type3-results-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+/* ── 2) 섹션 타이틀 (검색조건) ───────────────────────────────────── */
+html body.fms-history-page .type3-section-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.fms-history-page .type3-section-title__icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  flex: 0 0 32px !important;
+  border-radius: 8px !important;
+  background: #f6f9ff !important;
+  box-sizing: border-box;
+}
+
+html body.fms-history-page .type3-section-title__icon img {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  object-fit: contain;
+}
+
+html body.fms-history-page .type3-section-title__text {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+}
+
+/* ── 3) 검색 스트립 ─────────────────────────────────────────────── */
+html body.fms-history-page .type3-filter--strip {
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: 8px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 9px 10px 8px !important;
+  border: 0 !important;
+  border-top: 1px solid #8d9aab !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: #f3f8fe !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html body.fms-history-page .fms-filter-fields {
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: 8px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.fms-history-page .fms-filter-fields > .type3-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  flex: 1 1 0 !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+html body.fms-history-page .fms-filter-fields > .type3-field--grow {
+  flex: 1.2 1 0 !important;
+}
+
+html body.fms-history-page .fms-filter-fields > .type3-field--range {
+  flex: 1.8 1 0 !important;
+}
+
+html body.fms-history-page .fms-filter-fields > .type3-field--sm {
+  flex: 0.7 1 0 !important;
+}
+
+html body.fms-history-page .type3-field > label {
+  margin: 0 !important;
+  padding: 0 2px !important;
+  color: #6c788b !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+html body.fms-history-page .type3-field input[type="text"],
+html body.fms-history-page .type3-field input[type="search"],
+html body.fms-history-page .type3-field input[type="date"],
+html body.fms-history-page .type3-field select,
+html body.fms-history-page .fms-date-range input[type="date"] {
+  width: 100% !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  padding: 0 14px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background-color: #fff !important;
+  color: #111 !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+html body.fms-history-page .fms-date-range input[type="date"] {
+  flex: 1 1 0 !important;
+  padding: 0 10px !important;
+}
+
+html body.fms-history-page .fms-date-range {
+  gap: 6px !important;
+}
+
+html body.fms-history-page .fms-date-range em {
+  color: #6c788b !important;
+  font-size: 14px !important;
+}
+
+html body.fms-history-page .type3-field select {
+  padding-right: 32px !important;
+  cursor: pointer !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #6c788b 50%),
+    linear-gradient(135deg, #6c788b 50%, transparent 50%) !important;
+  background-position: calc(100% - 18px) 15px, calc(100% - 13px) 15px !important;
+  background-size: 5px 5px, 5px 5px !important;
+  background-repeat: no-repeat !important;
+}
+
+html body.fms-history-page select::-ms-expand {
+  display: none;
+}
+
+html body.fms-history-page .type3-field input::placeholder {
+  color: #999 !important;
+  opacity: 1 !important;
+}
+
+html body.fms-history-page .type3-field input:focus,
+html body.fms-history-page .type3-field select:focus,
+html body.fms-history-page .fms-date-range input[type="date"]:focus {
+  border-color: #1c6fff !important;
+  box-shadow: none !important;
+}
+
+/* ── 4) 검색 / 초기화 버튼 ──────────────────────────────────────── */
+html body.fms-history-page .type3-filter-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.fms-history-page .type3-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  font-family: inherit;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+html body.fms-history-page .type3-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+html body.fms-history-page .type3-btn--search {
+  min-width: 107px !important;
+  border: 0 !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.fms-history-page .type3-btn--search img {
+  filter: brightness(0) invert(1);
+}
+
+html body.fms-history-page .type3-btn--search:hover {
+  background: #16304f !important;
+}
+
+html body.fms-history-page .type3-btn--reset {
+  min-width: 96px !important;
+  border: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #6c788b !important;
+}
+
+html body.fms-history-page .type3-btn--reset:hover {
+  background: #f6f8fb !important;
+}
+
+/* 엑셀 다운로드 */
+html body.fms-history-page .fms-excel-btn {
+  height: 34px !important;
+  min-width: 0 !important;
+  padding: 0 16px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #6c788b !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+html body.fms-history-page .fms-excel-btn:hover {
+  background: #f6f8fb !important;
+}
+
+/* ── 5) 검색결과 헤더 ───────────────────────────────────────────── */
+html body.fms-history-page .type3-results__head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  min-height: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.fms-history-page .type3-results__count {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+html body.fms-history-page .type3-results__bar-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+html body.fms-history-page .type3-results__bar-icon img {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain !important;
+}
+
+html body.fms-history-page .type3-results__label {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.32px;
+  line-height: 1.2 !important;
+}
+
+html body.fms-history-page .type3-results__meta {
+  margin: 0 !important;
+  color: #6c788b !important;
+  font-size: 14px !important;
+  letter-spacing: -0.28px;
+  line-height: 1.2 !important;
+}
+
+html body.fms-history-page .type3-results__meta strong {
+  color: #1c6fff !important;
+  font-weight: 600 !important;
+}
+
+/* ── 6) 목록 테이블 ─────────────────────────────────────────────── */
+html body.fms-history-page .type3-table-wrap {
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px 6px 0 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.fms-history-page .fms-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  table-layout: fixed !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+}
+
+html body.fms-history-page .fms-table thead th,
+html body.fms-history-page .fms-table tbody td {
+  height: 32px !important;
+  max-height: 32px !important;
+  padding: 0 8px !important;
+  font-size: 13px !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box;
+}
+
+html body.fms-history-page .fms-table thead th {
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #e9f1fe !important;
+  color: #111 !important;
+  font-weight: 500 !important;
+}
+
+html body.fms-history-page .fms-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+html body.fms-history-page .fms-table thead th:last-child {
+  border-right: 0 !important;
+  border-radius: 0 6px 0 0;
+}
+
+html body.fms-history-page .fms-table tbody td {
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #333 !important;
+  font-weight: 400 !important;
+}
+
+html body.fms-history-page .fms-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+html body.fms-history-page .fms-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+html body.fms-history-page .fms-table tbody tr:hover td {
+  background: #f5f8fc !important;
+}
+
+html body.fms-history-page .fms-table tbody td.is-left {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  text-align: left !important;
+}
+
+html body.fms-history-page .fms-table tbody td > * {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* 버튼이 들어가는 열은 잘리지 않게 */
+html body.fms-history-page .fms-table td:nth-child(5),
+html body.fms-history-page .fms-table td:nth-child(6),
+html body.fms-history-page .fms-table td:nth-child(7) {
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+/* 표 안 버튼 (sra-tbl-btn) */
+html body.fms-history-page .fms-table .sra-actions {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+}
+
+html body.fms-history-page .fms-table tbody td .sra-tbl-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 24px !important;
+  min-width: 0 !important;
+  padding: 0 10px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #6c788b !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+/* 등록 — 포인트 블루 */
+html body.fms-history-page .fms-table tbody td .sra-tbl-btn--approve {
+  border-color: #1c6fff !important;
+  background: #1c6fff !important;
+  color: #fff !important;
+}
+
+html body.fms-history-page .fms-table tbody td .sra-tbl-btn--approve:hover {
+  border-color: #0d5ae0 !important;
+  background: #0d5ae0 !important;
+}
+
+/* 삭제 — 레드 아웃라인 */
+html body.fms-history-page .fms-table tbody td .sra-tbl-btn--reject {
+  border-color: #e5002b !important;
+  background: #fff !important;
+  color: #e5002b !important;
+}
+
+html body.fms-history-page .fms-table tbody td .sra-tbl-btn--reject:hover {
+  background: #fef5f8 !important;
+}
+
+/* 데이터보기 / 변경이력 — 회색 아웃라인 */
+html body.fms-history-page .fms-table tbody td .sra-tbl-btn--history {
+  border-color: #dadae2 !important;
+  background: #fff !important;
+  color: #6c788b !important;
+}
+
+html body.fms-history-page .fms-table tbody td .sra-tbl-btn--history:hover {
+  background: #f6f8fb !important;
+}
+
+/* 데이터 없음 */
+html body.fms-history-page .fms-table tbody tr.is-empty td,
+html body.fms-history-page .fms-table tbody td.is-empty {
+  height: 120px !important;
+  max-height: none !important;
+  line-height: 1.4 !important;
+  color: #8993a1 !important;
+  text-align: center !important;
+  cursor: default;
+}
+
+/* ── 7) 페이지네이션 ────────────────────────────────────────────── */
+html body.fms-history-page .type3-results-foot {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 20px 0 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.fms-history-page .pagination {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  margin: 0 !important;
+}
+
+html body.fms-history-page .pagination__btn {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html body.fms-history-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+}
+
+html body.fms-history-page .pagination__btn:disabled {
+  opacity: 1 !important;
+  cursor: default;
+}
+
+html body.fms-history-page .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400 !important;
+}
+
+html body.fms-history-page .pagination__btn[data-page-move] {
+  background-image: none !important;
+}
+
+html body.fms-history-page .pagination__btn[data-page-move] img {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  object-fit: contain;
+}
+
+html body.fms-history-page .pagination__btn[data-page-move="next"] img,
+html body.fms-history-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1) !important;
+}
+
+html body.fms-history-page .pagination__btn:disabled img {
+  opacity: 0.35 !important;
+}
+
+html body.fms-history-page .pagination__btn svg {
+  display: none !important;
+}
+
+html body.fms-history-page .pagination__ellipsis {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  color: #6c788b !important;
+  font-size: 12px !important;
+}
+
+/* ── 8) 좁은 화면 ───────────────────────────────────────────────── */
+@media (max-width: 1600px) {
+  html body.fms-history-page .type3-filter--strip {
+    flex-wrap: wrap !important;
+  }
+
+  html body.fms-history-page .fms-filter-fields {
+    flex-wrap: wrap !important;
+  }
+
+  html body.fms-history-page .fms-filter-fields > .type3-field {
+    flex: 1 1 180px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  html body.fms-history-page .type3-filter-actions {
+    margin-left: auto !important;
+  }
+}
+
+/* ========================================================================
+   [2026 FLAT — FMS 상세] 표 헤더 #e9f1fe + 글자 잘림/겹침 해소
+   ※ 되돌리려면 이 블록만 삭제하면 됩니다.
+   ======================================================================== */
+
+/* ── 1) 섹션 타이틀 ─────────────────────────────────────────────── */
+html body.fms-detail-page .fmd-section {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html body.fms-detail-page .fmd-section__head {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 32px !important;
+  margin: 0 0 14px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+html body.fms-detail-page .fmd-section__icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  flex: 0 0 32px !important;
+  border-radius: 8px !important;
+  background: #f6f9ff !important;
+  box-sizing: border-box;
+}
+
+html body.fms-detail-page .fmd-section__icon img {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  object-fit: contain;
+}
+
+html body.fms-detail-page .fmd-section__title {
+  margin: 0 !important;
+  color: #111 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+html body.fms-detail-page .fms-section-note {
+  margin: 0 !important;
+  color: #6c788b !important;
+  font-size: 14px !important;
+  letter-spacing: -0.28px;
+  line-height: 1.3 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+}
+
+html body.fms-detail-page .admin-detail-title-row__badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 22px !important;
+  padding: 0 10px !important;
+  border: 0 !important;
+  border-radius: 5px !important;
+  background: #e9f1fe !important;
+  color: #1c6fff !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+/* ── 2) 탭 ─────────────────────────────────────────────────────── */
+html body.fms-detail-page .ua-account-tabs {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 0 !important;
+  width: 100% !important;
+  margin: 0 0 14px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body.fms-detail-page .ua-account-tabs button,
+html body.fms-detail-page .ua-account-tabs a {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 38px !important;
+  padding: 0 18px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #6c788b !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+html body.fms-detail-page .ua-account-tabs button:hover,
+html body.fms-detail-page .ua-account-tabs a:hover {
+  color: #1c6fff !important;
+}
+
+html body.fms-detail-page .ua-account-tabs button.is-active,
+html body.fms-detail-page .ua-account-tabs button[aria-selected="true"],
+html body.fms-detail-page .ua-account-tabs a.is-active,
+html body.fms-detail-page .ua-account-tabs a[aria-selected="true"] {
+  color: #1c6fff !important;
+  font-weight: 600 !important;
+  box-shadow: inset 0 -2px 0 0 #1c6fff !important;
+}
+
+/* ── 3) 표 공통 래퍼 ────────────────────────────────────────────── */
+html body.fms-detail-page .fms-detail-table-shell {
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  overflow-x: auto !important;
+}
+
+/* ── 4) 제원 표(fms-spec-table) — 글자 다 보이게 ─────────────────── */
+html body.fms-detail-page .fms-spec-table {
+  width: 100% !important;
+  table-layout: auto !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  font-size: 13px !important;
+}
+
+html body.fms-detail-page .fms-spec-table th,
+html body.fms-detail-page .fms-spec-table td {
+  padding: 8px 10px !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: break-word !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  box-sizing: border-box;
+}
+
+/* 하위 헤더(단일 셀) — 연한 톤 */
+html body.fms-detail-page .fms-spec-table th {
+  background: #f3f8fe !important;
+  color: #111 !important;
+  font-weight: 500 !important;
+}
+
+/* 상위 그룹 헤더 / 좌측 라벨(병합 셀) — 진한 톤 */
+html body.fms-detail-page .fms-spec-table th[colspan],
+html body.fms-detail-page .fms-spec-table th[rowspan] {
+  background: #e9f1fe !important;
+}
+
+html body.fms-detail-page .fms-spec-table td {
+  background: #fff !important;
+  color: #333 !important;
+  font-weight: 400 !important;
+}
+
+html body.fms-detail-page .fms-spec-table tr > :last-child {
+  border-right: 0 !important;
+}
+
+html body.fms-detail-page .fms-spec-table tr:last-child th,
+html body.fms-detail-page .fms-spec-table tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+/* ── 5) 목록형 표(fms-detail-table) ─────────────────────────────── */
+html body.fms-detail-page .fms-detail-table {
+  width: auto !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  font-size: 13px !important;
+}
+
+html body.fms-detail-page .fms-detail-table thead th {
+  height: 32px !important;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #e9f1fe !important;
+  color: #111 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  box-sizing: border-box;
+}
+
+html body.fms-detail-page .fms-detail-table thead th:last-child {
+  border-right: 0 !important;
+}
+
+html body.fms-detail-page .fms-detail-table tbody td {
+  height: 32px !important;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #333 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  box-sizing: border-box;
+}
+
+html body.fms-detail-page .fms-detail-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+html body.fms-detail-page .fms-detail-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+html body.fms-detail-page .fms-detail-table tbody tr:hover td {
+  background: #f5f8fc !important;
+}
+
+html body.fms-detail-page .fms-detail-table td.is-left {
+  text-align: left !important;
+}
+
+html body.fms-detail-page .fms-detail-table td.is-empty {
+  padding: 40px 10px !important;
+  color: #8993a1 !important;
+}
+
+/* ── 6) 상세 입력/검색 블록 ─────────────────────────────────────── */
+html body.fms-detail-page .fmd-input,
+html body.fms-detail-page .fms-date-range .fmd-input {
+  height: 34px !important;
+  padding: 0 14px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #111 !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+html body.fms-detail-page .fmd-input:focus {
+  border-color: #1c6fff !important;
+}
+
+html body.fms-detail-page .fmd-input[readonly] {
+  background: #f8f9fb !important;
+  color: #333 !important;
+  cursor: default;
+}
+
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  min-width: 96px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #6c788b !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--search,
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--primary {
+  min-width: 107px !important;
+  border-color: #0b1a2d !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--search img,
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--primary img {
+  filter: brightness(0) invert(1);
+}
+
+/* ── 7) 검색결과 헤더 ───────────────────────────────────────────── */
+html body.fms-detail-page .fms-results-head__label {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.32px !important;
+}
+
+html body.fms-detail-page .fms-results-head__meta {
+  font-size: 14px !important;
+  letter-spacing: -0.28px !important;
+}
+
+html body.fms-detail-page .fms-results-head__meta strong {
+  color: #1c6fff !important;
+  font-weight: 600 !important;
+}
+
+/* ── 8) 넓은 표는 가로 스크롤로 — 세로 한 글자씩 쌓임 방지 ───────── */
+html body.fms-detail-page .fms-detail-table-shell {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+html body.fms-detail-page .fms-detail-table col {
+  width: auto !important;
+}
+
+html body.fms-detail-page .fms-detail-table thead th,
+html body.fms-detail-page .fms-detail-table tbody td {
+  min-width: 90px !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* 날짜/번호처럼 짧은 값은 조금 좁게 */
+html body.fms-detail-page .fms-detail-table thead th:first-child,
+html body.fms-detail-page .fms-detail-table tbody td:first-child {
+  min-width: 56px !important;
+}
+
+/* 가로 스크롤바 */
+html body.fms-detail-page .fms-detail-table-shell::-webkit-scrollbar {
+  height: 10px;
+}
+
+html body.fms-detail-page .fms-detail-table-shell::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #c9d2de;
+}
+
+html body.fms-detail-page .fms-detail-table-shell::-webkit-scrollbar-track {
+  background: #f3f8fe;
+}
+
+/* 상세제원 표는 화면 폭에 맞추되 필요 시 가로 스크롤 */
+html body.fms-detail-page .fms-spec-table {
+  min-width: 100% !important;
+}
+
+/* ── 9) 변경이력 검색 블록 — 버튼 색상 + 하단 여백 ────────────────── */
+html body.fms-detail-page .fms-search-block {
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid #dadae2 !important;
+}
+
+/* 검색하기 — 다크 네이비 */
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--edit {
+  min-width: 107px !important;
+  border: 1px solid #0b1a2d !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--edit img {
+  filter: brightness(0) invert(1);
+}
+
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--edit:hover {
+  border-color: #16304f !important;
+  background: #16304f !important;
+}
+
+/* 초기화 — 회색 아웃라인 */
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--cancel {
+  min-width: 96px !important;
+  border: 1px solid #dadae2 !important;
+  background: #fff !important;
+  color: #6c788b !important;
+}
+
+html body.fms-detail-page .fms-search-actions__btns .fmd-btn--cancel:hover {
+  background: #f6f8fb !important;
+}

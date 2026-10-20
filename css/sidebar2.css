@@ -1,0 +1,624 @@
+@import url("common-modal.css");
+@import url("fs-lnb.css");
+
+/* POMS 공통 GNB — 콘텐츠 1400 기준(Figma 224) */
+
+:root {
+  --gnb-inner-width: 1400px;
+  --gnb-height: 80px;
+  --gnb-subnav-height: 50px;
+}
+
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
+.app-layout {
+  min-height: 100vh;
+  min-width: 1440px;
+  background: #eef1f6;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+.app-layout.facility-search-page,
+.app-layout.facility-condition-search-page,
+.app-layout.facility-condition-result-page,
+.app-layout.facility-detail-page,
+.app-layout.facility-statistics-page,
+.app-layout.type3-port-page,
+.app-layout.type3-survey-detail-page {
+  background: #fff;
+}
+
+#sidebar-root {
+  position: sticky;
+  top: 0;
+  left: auto;
+  z-index: 1100;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  display: block;
+  overflow: visible;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.main-content {
+  width: min(var(--gnb-inner-width), calc(100% - 40px));
+  margin: 0 auto;
+  min-width: 0;
+  min-height: calc(100vh - var(--gnb-height));
+  padding: 28px 0 40px;
+  overflow-x: auto;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+#sidebar-root:has(.gnb-subnav) ~ .main-content {
+  min-height: calc(100vh - var(--gnb-height) - var(--gnb-subnav-height));
+}
+
+/* ── GNB ── */
+.gnb-wrap {
+  width: 100%;
+  height: var(--gnb-height);
+  flex-shrink: 0;
+  background: #fff;
+  border-bottom: 1px solid #ededed;
+  display: flex;
+  align-items: center;
+  padding-top: 14px;
+  position: relative;
+  z-index: 1100;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.gnb,
+.gnb.inner,
+.inner.gnb {
+  height: 100%;
+  width: min(var(--gnb-inner-width), calc(100% - 40px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gnb-left {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 100%;
+  min-width: 0;
+}
+
+.gnb-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  height: 34px;
+  text-decoration: none;
+}
+
+.gnb-logo__emblem {
+  display: block;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.gnb-logo__title {
+  display: block;
+  height: 16px;
+  width: auto;
+  max-width: 192px;
+  object-fit: contain;
+}
+
+.gnb-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+}
+
+.gnb-nav__drop {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.gnb-nav__drop::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 14px;
+  display: none;
+}
+
+.gnb-nav__drop:hover::after,
+.gnb-nav__drop:focus-within::after {
+  display: block;
+}
+
+.gnb-nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 128px;
+  height: 100%;
+  padding-top: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #8d9aac;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.gnb-nav__item:hover,
+.gnb-nav__drop:hover .gnb-nav__item,
+.gnb-nav__drop:focus-within .gnb-nav__item {
+  color: #1c6fff;
+}
+
+.gnb-nav__item.is-active {
+  color: #1c6fff;
+  font-weight: 500;
+  border-bottom-color: transparent;
+}
+
+.gnb-nav__drop:hover .gnb-nav__item.is-active,
+.gnb-nav__drop:focus-within .gnb-nav__item.is-active {
+  color: #1c6fff;
+}
+
+.gnb-nav__panel {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 1110;
+  min-width: 200px;
+  padding: 8px 0;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(13, 28, 48, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+.gnb-nav__drop:hover .gnb-nav__panel,
+.gnb-nav__drop:focus-within .gnb-nav__panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.gnb-nav__sub {
+  display: block;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  letter-spacing: -0.26px;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+}
+
+.gnb-nav__sub:hover,
+.gnb-nav__sub:focus-visible {
+  background: rgba(28, 111, 255, 0.06);
+  color: #1c6fff;
+  outline: none;
+}
+
+.gnb-r {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.gnb-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gnb-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1c6fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.gnb-u {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.gnb-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.gnb-logout img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.gnb-logout:hover {
+  background: #f8f9fb;
+}
+
+/* ── 서브탭 (시설물정보) ── */
+.gnb-subnav {
+  width: 100%;
+  height: var(--gnb-subnav-height);
+  background: rgba(28, 111, 255, 0.03);
+  border-bottom: 1px solid #dadae2;
+  display: flex;
+  align-items: flex-end;
+  box-sizing: border-box;
+  overflow: visible;
+  position: relative;
+  z-index: 1200;
+}
+
+.gnb-subnav__inner {
+  width: min(var(--gnb-inner-width), calc(100% - 40px));
+  margin: 0 auto -1px;
+  height: calc(100% + 1px);
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+.gnb-subnav__item {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 10px 14px;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.gnb-subnav__item.is-active {
+  color: #1c6fff;
+  font-weight: 600;
+  border-bottom-color: #1c6fff;
+}
+
+.gnb-subnav__item:hover:not(.is-active) {
+  color: #1c6fff;
+}
+
+/* ── Figma 224:4538 메가 드롭다운 ── */
+.gnb-subnav--mega {
+  overflow: visible;
+}
+
+.gnb-subnav--mega .gnb-subnav__item {
+  flex: 0 0 200px;
+  width: 200px;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  color: #111;
+  font-weight: 500;
+  padding: 0 0 14px;
+  position: relative;
+}
+
+.gnb-subnav--mega .gnb-subnav__item + .gnb-subnav__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background: #dadae2;
+}
+
+.gnb-subnav--mega .gnb-subnav__inner {
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.gnb-subnav--mega .gnb-subnav__item.is-active,
+.gnb-subnav--mega .gnb-subnav__item:hover {
+  color: #1c6fff;
+  font-weight: 600;
+  border-bottom-color: #1c6fff;
+}
+
+.gnb-mega {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 3;
+  background: #fff;
+  border-bottom: 1px solid #dadae2;
+  box-shadow: 0 12px 24px rgba(13, 28, 48, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+.gnb-subnav--mega:hover .gnb-mega,
+.gnb-subnav--mega:focus-within .gnb-mega {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.gnb-mega__inner {
+  width: min(var(--gnb-inner-width), calc(100% - 40px));
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.gnb-mega__col {
+  flex: 0 0 200px;
+  width: 200px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: 14px;
+  padding: 20px 0 24px;
+  border-left: 1px solid #dadae2;
+  border-right: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.gnb-mega__col + .gnb-mega__col {
+  margin-left: -1px; /* 인접 열 이중선 합치기 */
+}
+
+/* 제 3종 항만시설물 — 메뉴에서 숨김 (삭제하지 않음) */
+.gnb-mega__link[hidden],
+.gnb-nav__sub[hidden],
+.gnb-subnav__item[hidden],
+.fs-lnb__item[hidden],
+.gnb-mega__link[href="type3-port-facility.html"],
+.gnb-nav__sub[href="type3-port-facility.html"],
+.gnb-subnav__item[href="type3-port-facility.html"],
+.fs-lnb__item[href="type3-port-facility.html"] {
+  display: none !important;
+}
+
+.gnb-mega__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  word-break: keep-all;
+  box-sizing: border-box;
+}
+
+.gnb-mega__link--wrap {
+  align-items: flex-start;
+  white-space: normal;
+}
+
+.gnb-mega__link::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #333;
+  flex-shrink: 0;
+}
+
+.gnb-mega__link--wrap::before {
+  margin-top: 8px;
+}
+
+.gnb-mega__link:hover,
+.gnb-mega__link:focus-visible,
+.gnb-mega__link.is-active {
+  color: #1c6fff;
+  font-weight: 500;
+  outline: none;
+}
+
+.gnb-mega__link:hover::before,
+.gnb-mega__link:focus-visible::before,
+.gnb-mega__link.is-active::before {
+  width: 4px;
+  height: 4px;
+  background: #1c6fff;
+}
+
+.gnb-mega-dim {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: calc(var(--gnb-height) + var(--gnb-subnav-height));
+  bottom: 0;
+  z-index: 1;
+  background: rgba(17, 17, 17, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0.15s;
+}
+
+.gnb-subnav--mega:hover .gnb-mega-dim,
+.gnb-subnav--mega:focus-within .gnb-mega-dim {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 1280px) {
+  .app-layout {
+    min-width: 0;
+  }
+
+  .gnb,
+  .gnb.inner,
+  .main-content,
+  .gnb-subnav__inner,
+  .gnb-mega__inner {
+    width: calc(100% - 32px);
+  }
+
+  .gnb-nav__item {
+    width: auto;
+    padding: 0 14px;
+  }
+
+  .gnb-subnav__item {
+    font-size: 15px;
+    padding-bottom: 12px;
+  }
+
+  .gnb-subnav--mega .gnb-subnav__item,
+  .gnb-mega__col {
+    flex: 0 0 180px;
+    width: 180px;
+  }
+
+  .gnb-mega__link {
+    font-size: 15px;
+    padding: 0 14px;
+  }
+}
+
+/* ===== Icon clipping fix (user pages) =====
+   Figma224 back/home은 overflow:hidden + object-fit:fill 조합에서 스트로크가 잘림 */
+.app-layout a.btn-back,
+.app-layout .page-header__home,
+.app-layout .page-header__home-icon,
+.app-layout .ico-angle,
+.app-layout .type3-section-title__icon,
+.app-layout .type3-page__title-icon-wrap,
+.app-layout .type3-btn,
+.app-layout .type3-results__bar-icon,
+.app-layout .fs-lnb__chevron {
+  overflow: visible !important;
+}
+
+.app-layout .ico-angle {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+}
+
+.app-layout .ico-angle__vec {
+  position: static !important;
+  inset: auto !important;
+  display: block;
+  width: 10px !important;
+  height: 6px !important;
+  line-height: 0;
+}
+
+.app-layout .ico-angle__vec img {
+  position: static !important;
+  inset: auto !important;
+  display: block;
+  width: 10px !important;
+  height: 6px !important;
+  max-width: none;
+  object-fit: contain !important;
+}
+
+.app-layout a.btn-back > img {
+  width: 16px !important;
+  height: 16px !important;
+  object-fit: contain !important;
+}
+
+.app-layout .page-header__home-icon img,
+.app-layout .page-header__home > img.page-header__home-icon {
+  object-fit: contain !important;
+}
+
+.app-layout .type3-section-title__icon img,
+.app-layout .type3-page__title-icon {
+  object-fit: contain !important;
+  overflow: visible;
+}
+
+.app-layout .type3-btn img,
+.app-layout .type3-results__bar-icon img,
+.app-layout .pagination__btn img {
+  object-fit: contain !important;
+  overflow: visible;
+}

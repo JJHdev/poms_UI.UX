@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시설물 통합검색 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/user-table.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+</head>
+<body class="app-layout facility-search-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시설물 정보 메뉴">
+        <div class="fs-lnb__title">
+          <span class="fs-lnb__title-text">시설물 정보</span>
+        </div>
+        <nav class="fs-lnb__nav">
+          <a class="fs-lnb__item is-active" href="facility-search.html" aria-current="page">
+            <span>시설물 통합검색</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="facility-condition-search.html">
+            <span>시설물 조건검색</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+        </nav>
+      </aside>
+
+      <section class="fs-search" aria-label="통합검색">
+        <header class="page-header">
+          <div class="page-header__nav">
+            <a href="facility.html" class="page-header__home" aria-label="시설물 정보 홈">
+              <span class="page-header__home-icon" aria-hidden="true">
+                <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+                <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+                <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+              </span>
+            </a>
+          </div>
+          <nav class="breadcrumb" aria-label="현재 위치">
+            <a href="facility.html">시설물 정보</a>
+            <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+            <span class="breadcrumb__current">시설물 통합검색</span>
+          </nav>
+        </header>
+        <div class="search-panel" aria-labelledby="searchPanelTitle">
+          <div class="search-panel__head">
+            <span class="search-panel__title-icon-wrap" aria-hidden="true">
+              <img class="search-panel__title-icon" src="assets/main/facility-search/figma224/icon-title.svg" alt="" width="24" height="24">
+            </span>
+            <h1 class="search-panel__title" id="searchPanelTitle">통합검색</h1>
+          </div>
+
+          <form class="search-filters" id="searchForm" novalidate>
+            <div class="search-filters__row">
+              <div class="filter-field filter-field--agency">
+                <label for="agency">관리기관</label>
+                <select id="agency" name="agency">
+                  <option value="">전체</option>
+                  <option value="mokpo" selected>목포지방해양수산청</option>
+                  <option value="busan">부산항만공사</option>
+                  <option value="yeosu">여수광양항만공사</option>
+                  <option value="incheon">인천항만공사</option>
+                </select>
+              </div>
+              <div class="filter-field filter-field--grow">
+                <label for="port">항</label>
+                <select id="port" name="port">
+                  <option value="">전체</option>
+                  <option value="busan">부산항</option>
+                  <option value="yeosu">여수항</option>
+                  <option value="incheon">인천항</option>
+                </select>
+              </div>
+              <div class="filter-field filter-field--grow">
+                <label for="subPort">세부항</label>
+                <select id="subPort" name="subPort">
+                  <option value="">전체</option>
+                  <option value="north">북항</option>
+                  <option value="south">남항</option>
+                </select>
+              </div>
+              <div class="filter-field filter-field--grow">
+                <label for="usage">사용구분</label>
+                <select id="usage" name="usage">
+                  <option value="">전체</option>
+                  <option value="mooring">계류시설</option>
+                  <option value="outer">외곽시설</option>
+                  <option value="building">건축물</option>
+                  <option value="traffic">교통시설</option>
+                  <option value="etc">기타</option>
+                </select>
+              </div>
+              <div class="filter-field filter-field--grow">
+                <label for="typeClass">종별구분</label>
+                <select id="typeClass" name="typeClass">
+                  <option value="">전체</option>
+                  <option value="1">1종</option>
+                  <option value="2">2종</option>
+                  <option value="etc">기타</option>
+                </select>
+              </div>
+              <div class="filter-field filter-field--name">
+                <label for="facilityName">시설물명</label>
+                <input type="text" id="facilityName" name="facilityName" placeholder="검색어를 입력해주세요.">
+              </div>
+              <div class="search-actions">
+                <button type="submit" class="btn-search">
+                  <img src="assets/main/facility-search/icon-search.svg" alt="" width="18" height="18">
+                  검색하기
+                </button>
+                <button type="button" class="btn-reset" id="resetBtn">
+                  <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                  초기화
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="results-panel" aria-labelledby="resultsTitle">
+          <div class="results-panel__head">
+            <span class="results-panel__bar" aria-hidden="true">
+              <img src="assets/service/main/figma/icon-section-bar.svg" alt="" width="8" height="14">
+            </span>
+            <p class="results-count" id="resultsTitle">
+              <span class="results-count__label">검색결과</span>
+              <span class="results-count__meta">총 <strong id="resultCount">0</strong>건</span>
+            </p>
+            <button type="button" class="insp-btn insp-btn--excel" id="facilitySearchExcelBtn">
+              <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+              엑셀 다운로드
+            </button>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <colgroup>
+                <col class="col-no">
+                <col class="col-name">
+                <col class="col-agency">
+                <col class="col-address">
+                <col class="col-type">
+                <col class="col-class">
+                <col class="col-built">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-no">번호</th>
+                  <th scope="col" class="col-name">시설물명</th>
+                  <th scope="col" class="col-agency">관리주체</th>
+                  <th scope="col" class="col-address">주소</th>
+                  <th scope="col" class="col-type">시설물 종류</th>
+                  <th scope="col" class="col-class">종별</th>
+                  <th scope="col" class="col-built">준공연도</th>
+                </tr>
+              </thead>
+              <tbody id="resultTableBody"></tbody>
+            </table>
+          </div>
+          <div class="results-panel__foot">
+            <nav class="pagination" id="facilitySearchPagination" aria-label="페이지 이동"></nav>
+            <label class="visually-hidden" for="facilitySearchPageSize">페이지당 표시 건수</label>
+            <select id="facilitySearchPageSize" class="crud-page-size" aria-label="페이지당 표시 건수" hidden></select>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/user-table-utils.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    PomsSidebar.mount('#sidebar-root', { active: 'facility-search' });
+  </script>
+</body>
+</html>

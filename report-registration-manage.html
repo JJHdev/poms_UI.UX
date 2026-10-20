@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>보고서 등록관리 | POMS 관리자</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/report-registration-manage.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/admin-search-inline.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout report-reg-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <section class="mock-stack">
+      <div class="mock-panel" aria-labelledby="reportRegListTitle">
+        <div class="mock-filter mock-filter--report-reg">
+          <label>
+            <span>관리기관</span>
+            <select id="reportRegManageFilter">
+              <option value="">전체</option>
+              <option value="BS">부산지방해양수산청</option>
+              <option value="IC">인천지방해양수산청</option>
+              <option value="YS">여수지방해양수산청</option>
+              <option value="999">기타</option>
+            </select>
+          </label>
+          <label>
+            <span>점검구분</span>
+            <select id="reportRegCheckFilter">
+              <option value="">점검구분</option>
+              <option value="100">정기안전점검</option>
+              <option value="200">정밀안전점검</option>
+              <option value="300">정밀안전진단</option>
+              <option value="400">긴급점검</option>
+              <option value="MNT">보수정보</option>
+            </select>
+          </label>
+          <button type="button" class="btn-admin-search" id="reportRegSearch">검색</button>
+        </div>
+
+        <div class="mock-table-meta">
+          <p id="reportRegResultText">검색결과 <strong>0</strong>건</p>
+        </div>
+
+        <div class="mock-table-wrap">
+          <table class="mock-table mock-table--fit mock-table--compact report-reg-table">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>관리주체</th>
+                <th>항명</th>
+                <th>세부항명</th>
+                <th>시설물명</th>
+                <th>종구분</th>
+                <th>시설종류</th>
+                <th>점검기관(ID)</th>
+                <th>점검구분</th>
+              </tr>
+            </thead>
+            <tbody id="reportRegTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination-foot">
+          <nav class="pagination" id="reportRegPagination" aria-label="페이지 이동"></nav>
+          <label class="visually-hidden" for="reportRegPageSize">페이지당 표시 건수</label>
+          <select id="reportRegPageSize" class="pagination-page-size" aria-label="페이지당 표시 건수">
+            <option value="10">10 / page</option>
+            <option value="20">20 / page</option>
+            <option value="50">50 / page</option>
+          </select>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="mock-modal mock-modal--report-reg" id="reportRegDetailModal" role="dialog" aria-modal="true" aria-labelledby="reportRegDetailTitle" hidden>
+    <div class="mock-modal__backdrop" data-report-reg-close></div>
+    <div class="mock-modal__dialog mock-modal__dialog--report-reg">
+      <header class="mock-modal__head">
+        <div>
+          <h2 id="reportRegDetailTitle">보고서 상세</h2>
+          <p class="mock-modal__sub" id="reportRegDetailSub">목록 행을 선택하면 제출 정보를 확인합니다.</p>
+        </div>
+        <button type="button" class="mock-modal__close" data-report-reg-close aria-label="닫기">×</button>
+      </header>
+
+      <div class="mock-modal__body mock-modal__body--report-reg">
+        <section class="report-reg-section" id="reportRegSummarySection">
+          <div class="report-reg-section__head">
+            <h3>용역제출 정보</h3>
+          </div>
+          <dl class="report-reg-summary">
+            <div>
+              <dt>점검기관(ID)</dt>
+              <dd id="reportRegCompany"></dd>
+            </div>
+            <div>
+              <dt>점검구분</dt>
+              <dd id="reportRegCheckName"></dd>
+            </div>
+            <div>
+              <dt>제출일</dt>
+              <dd id="reportRegSubmitDate"></dd>
+            </div>
+            <div>
+              <dt>처리상태</dt>
+              <dd id="reportRegStatus"></dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="report-reg-section" id="reportRegInfoSection">
+          <div class="report-reg-section__head">
+            <h3>보고서 정보</h3>
+          </div>
+          <dl class="report-reg-info">
+            <div>
+              <dt>보고서명</dt>
+              <dd id="reportRegReportName"></dd>
+            </div>
+            <div>
+              <dt>작성자</dt>
+              <dd id="reportRegWriter"></dd>
+            </div>
+            <div>
+              <dt>점검일</dt>
+              <dd id="reportRegCheckDate"></dd>
+            </div>
+            <div>
+              <dt>점검의견</dt>
+              <dd id="reportRegComment"></dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="report-reg-section report-type-section" id="repairInfoSection">
+          <div class="report-reg-section__head">
+            <h3>보수정보</h3>
+            <div class="report-reg-actions">
+              <button type="button" class="btn-admin-reset mock-no-icon" id="repairInlineEdit">편집</button>
+              <button type="button" class="btn-admin-search mock-no-icon" id="repairInlineAdd">추가</button>
+            </div>
+          </div>
+          <div class="mock-table-wrap report-reg-detail-table-wrap">
+            <table class="mock-table mock-table--fit mock-table--compact report-reg-detail-table report-repair-table">
+              <thead>
+                <tr>
+                  <th>보수년도</th>
+                  <th>공사명</th>
+                  <th>보수보강부위</th>
+                  <th>공사내역</th>
+                  <th>공사기간</th>
+                  <th>공사업체</th>
+                </tr>
+              </thead>
+              <tbody id="repairInfoBody"></tbody>
+            </table>
+          </div>
+          <form class="report-reg-inline-form" id="repairInlineForm" hidden>
+            <input type="hidden" id="repairInlineEditIndex">
+            <label>
+              <span>보수년도</span>
+              <input type="number" id="repairInlineYear" min="1900" max="2100" required>
+            </label>
+            <label>
+              <span>공사명</span>
+              <input type="text" id="repairInlineWorkName" required>
+            </label>
+            <label>
+              <span>보수보강부위</span>
+              <input type="text" id="repairInlinePart" required>
+            </label>
+            <label>
+              <span>공사내역</span>
+              <textarea id="repairInlineContent" required></textarea>
+            </label>
+            <label>
+              <span>공사기간</span>
+              <div class="report-reg-date-range">
+                <input type="date" id="repairInlineStartDate" required>
+                <em>-</em>
+                <input type="date" id="repairInlineEndDate" required>
+              </div>
+            </label>
+            <label>
+              <span>공사업체</span>
+              <input type="text" id="repairInlineContractor" required>
+            </label>
+            <div class="report-reg-form-actions">
+              <button type="submit" class="btn-admin-search mock-no-icon">저장</button>
+              <button type="button" class="btn-admin-reset mock-no-icon report-reg-danger" id="repairInlineDelete">삭제</button>
+              <button type="button" class="btn-admin-reset mock-no-icon" id="repairInlineCancel">취소</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="report-reg-section report-type-section" id="regularInspectionSection" hidden>
+          <div class="report-reg-section__head">
+            <h3>정기안전점검</h3>
+            <div class="report-reg-actions">
+              <button type="button" class="btn-admin-search mock-no-icon" id="regularDownloadButton">보고서 다운로드</button>
+              <button type="button" class="btn-admin-search mock-no-icon" id="regularEditButton">편집</button>
+              <button type="button" class="btn-admin-reset mock-no-icon report-reg-danger" id="regularCancelButton">취소</button>
+            </div>
+          </div>
+          <div class="report-reg-tabs" role="tablist" aria-label="정기안전점검 보고서 구성">
+            <button type="button" class="report-reg-tab is-active" role="tab" aria-selected="true" data-regular-tab="items">점검사항</button>
+            <button type="button" class="report-reg-tab" role="tab" aria-selected="false" data-regular-tab="photos">사진대지</button>
+            <button type="button" class="report-reg-tab" role="tab" aria-selected="false" data-regular-tab="result">결과보고서</button>
+          </div>
+          <div class="report-reg-tab-panel" data-regular-panel="items">
+            <div class="report-reg-navy-grid" id="regularItemsPanel"></div>
+          </div>
+          <div class="report-reg-tab-panel" data-regular-panel="photos" hidden>
+            <div id="regularPhotosPanel"></div>
+          </div>
+          <div class="report-reg-tab-panel" data-regular-panel="result" hidden>
+            <div class="report-reg-navy-grid" id="regularResultPanel"></div>
+          </div>
+        </section>
+
+        <section class="report-reg-section report-type-section" id="emergencyInspectionSection" hidden>
+          <div class="report-reg-section__head">
+            <h3>긴급점검</h3>
+            <div class="report-reg-actions">
+              <button type="button" class="btn-admin-reset mock-no-icon" id="emergencyEditButton">편집</button>
+              <button type="button" class="btn-admin-search mock-no-icon" id="emergencyAddButton">추가</button>
+            </div>
+          </div>
+          <div class="mock-table-wrap report-reg-detail-table-wrap">
+            <table class="mock-table mock-table--fit mock-table--compact report-reg-detail-table emergency-table">
+              <thead>
+                <tr>
+                  <th rowspan="2">점검일자</th>
+                  <th rowspan="2">점검구분</th>
+                  <th rowspan="2">등급</th>
+                  <th rowspan="2">조사기간</th>
+                  <th rowspan="2">보고서</th>
+                  <th colspan="5">부록</th>
+                </tr>
+                <tr>
+                  <th>계측지시서</th>
+                  <th>외관조사망도</th>
+                  <th>수중조사결과</th>
+                  <th>상태평가</th>
+                  <th>사진첩</th>
+                </tr>
+              </thead>
+              <tbody id="emergencyInfoBody"></tbody>
+            </table>
+          </div>
+          <form class="report-reg-inline-form" id="emergencyForm" hidden>
+            <label>
+              <span>점검년도</span>
+              <input type="number" id="emergencyYear" min="1900" max="2100">
+            </label>
+            <label>
+              <span>점검구분</span>
+              <select id="emergencyType">
+                <option value="긴급점검">긴급점검</option>
+              </select>
+            </label>
+            <label>
+              <span>상태등급</span>
+              <select id="emergencyGrade">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+            </label>
+            <label>
+              <span>상태지수</span>
+              <input type="text" id="emergencyScore">
+            </label>
+            <label>
+              <span>점검일자</span>
+              <input type="date" id="emergencyDate">
+            </label>
+            <label>
+              <span>점검기관</span>
+              <input type="text" id="emergencyAgency">
+            </label>
+            <label>
+              <span>점검책임자</span>
+              <input type="text" id="emergencyManager">
+            </label>
+            <div class="report-reg-form-actions">
+              <button type="submit" class="btn-admin-search mock-no-icon">저장</button>
+              <button type="button" class="btn-admin-reset mock-no-icon" id="emergencyCancelButton">취소</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <footer class="mock-modal__foot">
+        <button type="button" class="btn-admin-reset mock-no-icon" id="reportRegProcess">결재이력</button>
+        <button type="button" class="btn-admin-search mock-no-icon" id="reportRegApprove">승인</button>
+        <button type="button" class="btn-admin-reset mock-no-icon report-reg-reject" id="reportRegReject">반려</button>
+        <button type="button" class="btn-admin-reset mock-no-icon" data-report-reg-close>닫기</button>
+      </footer>
+    </div>
+  </section>
+
+  <section class="mock-modal mock-modal--repair-form" id="repairFormModal" role="dialog" aria-modal="true" aria-labelledby="repairFormTitle" hidden>
+    <div class="mock-modal__backdrop" data-repair-form-close></div>
+    <div class="mock-modal__dialog mock-modal__dialog--repair-form">
+      <header class="mock-modal__head">
+        <div>
+          <h2 id="repairFormTitle">보수정보 추가</h2>
+          <p class="mock-modal__sub">보수년도, 공사명, 보수보강부위, 공사내역, 공사기간, 공사업체를 입력합니다.</p>
+        </div>
+        <button type="button" class="mock-modal__close" data-repair-form-close aria-label="닫기">×</button>
+      </header>
+      <form class="mock-modal__body mock-form repair-form" id="repairForm">
+        <input type="hidden" id="repairEditIndex">
+        <label class="mock-form-field">
+          <span>보수년도</span>
+          <input type="number" id="repairYear" min="1900" max="2100" required>
+        </label>
+        <label class="mock-form-field">
+          <span>공사명</span>
+          <input type="text" id="repairWorkName" required>
+        </label>
+        <label class="mock-form-field">
+          <span>보수보강부위</span>
+          <input type="text" id="repairPart" required>
+        </label>
+        <label class="mock-form-field">
+          <span>공사내역</span>
+          <textarea id="repairContent" required></textarea>
+        </label>
+        <div class="mock-form-grid">
+          <label class="mock-form-field">
+            <span>시작일</span>
+            <input type="date" id="repairStartDate" required>
+          </label>
+          <label class="mock-form-field">
+            <span>종료일</span>
+            <input type="date" id="repairEndDate" required>
+          </label>
+        </div>
+        <label class="mock-form-field">
+          <span>공사업체</span>
+          <input type="text" id="repairContractor" required>
+        </label>
+      </form>
+      <footer class="mock-modal__foot">
+        <button type="submit" form="repairForm" class="btn-admin-search mock-no-icon">저장</button>
+        <button type="button" class="btn-admin-reset mock-no-icon" data-repair-form-close>닫기</button>
+      </footer>
+    </div>
+  </section>
+
+  <section class="mock-modal mock-modal--report-process" id="reportRegProcessModal" role="dialog" aria-modal="true" aria-labelledby="reportRegProcessTitle" hidden>
+    <div class="mock-modal__backdrop" data-report-process-close></div>
+    <div class="mock-modal__dialog mock-modal__dialog--report-process">
+      <header class="mock-modal__head">
+        <div>
+          <p class="mock-modal__eyebrow">결재이력</p>
+          <h2 id="reportRegProcessTitle">결재이력 조회</h2>
+          <p class="mock-modal__sub" id="reportRegProcessSub">선택 보고서의 결재 이력입니다.</p>
+        </div>
+        <button type="button" class="mock-modal__close" data-report-process-close aria-label="닫기">×</button>
+      </header>
+      <div class="mock-modal__body">
+        <div class="mock-table-wrap">
+          <table class="mock-table mock-table--fit mock-table--compact approval-history-table">
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>요청자</th>
+                <th>요청자 회사명</th>
+                <th>요청일자</th>
+                <th>검토자</th>
+                <th>의견</th>
+                <th>상태</th>
+              </tr>
+            </thead>
+            <tbody id="reportRegProcessBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination-foot pagination-foot--approval">
+          <nav class="pagination" id="reportRegProcessPagination" aria-label="결재이력 페이지 이동"></nav>
+          <label class="visually-hidden" for="reportRegProcessPageSize">페이지당 표시 건수</label>
+          <select id="reportRegProcessPageSize" class="pagination-page-size" aria-label="페이지당 표시 건수">
+            <option value="5">5 / page</option>
+            <option value="10">10 / page</option>
+            <option value="20">20 / page</option>
+          </select>
+        </div>
+      </div>
+      <footer class="mock-modal__foot">
+        <button type="button" class="btn-admin-reset mock-no-icon" data-report-process-close>닫기</button>
+      </footer>
+    </div>
+  </section>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/report-registration-manage.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'vendor-report-reg' });
+  </script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연락처 관리 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/sms-contacts.css?v=20260814-7">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout sms-contacts-page-root">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="sms-contacts-page" aria-label="연락처 관리">
+      <div class="sms-contacts-layout">
+
+        <!-- ===== 좌측 : 그룹관리 ===== -->
+        <section class="sms-contacts-group" aria-labelledby="smsGroupTitle">
+          <div class="sms-contacts-section-title">
+            <span class="sms-contacts-section-title__icon" aria-hidden="true">
+              <img src="assets/admin-notices/icon-group.svg" alt="" width="22" height="22">
+            </span>
+            <h2 id="smsGroupTitle" class="sms-contacts-section-title__text">그룹관리</h2>
+            <p class="sms-contacts-section-title__hint">(90자 이내)</p>
+          </div>
+
+          <p class="sms-group-tip">그룹을 선택하면 해당 연락처 목록이 표시됩니다.<br>그룹명 오른쪽 메뉴에서 그룹을 수정·삭제할 수 있습니다.</p>
+
+          <ul class="sms-group-list" id="smsGroupList"></ul>
+
+          <button type="button" class="btn-sms-group-add" id="btnGroupAdd">
+            <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="16" height="16" aria-hidden="true">
+            <span>그룹 추가</span>
+          </button>
+        </section>
+
+        <!-- ===== 우측 : 연락처 목록 ===== -->
+        <section class="sms-contacts-main" aria-labelledby="smsContactListTitle">
+          <div class="sms-contacts-section-title">
+            <span class="sms-contacts-section-title__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3.5 6.5h11M3.5 11h7M3.5 15.5h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="16.5" cy="15" r="3.5" stroke="currentColor" stroke-width="1.7"/><path d="M19.2 17.7L21.5 20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <h2 id="smsContactListTitle" class="sms-contacts-section-title__text">연락처 목록 (<span id="smsContactGroupLabel">전체</span>)</h2>
+          </div>
+
+          <!-- 검색조건 -->
+          <section class="sms-contacts-filter-strip" aria-label="연락처 검색조건">
+            <form id="smsContactFilterForm" class="sms-contacts-filter" role="search" novalidate>
+              <div class="sms-contacts-field sms-contacts-field--name">
+                <label for="filterName">이름</label>
+                <input type="text" id="filterName" name="filterName" placeholder="이름을 입력해주세요." autocomplete="off">
+              </div>
+
+              <div class="sms-contacts-field sms-contacts-field--select">
+                <label for="filterGroup">그룹</label>
+                <div class="sms-contacts-select-wrap">
+                  <select id="filterGroup">
+                    <option value="">전체</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sms-contacts-field sms-contacts-field--select">
+                <label for="filterAgency">관리기관</label>
+                <div class="sms-contacts-select-wrap">
+                  <select id="filterAgency">
+                    <option value="">전체</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sms-contacts-field sms-contacts-field--select">
+                <label for="filterPosition">직급</label>
+                <div class="sms-contacts-select-wrap">
+                  <select id="filterPosition">
+                    <option value="">전체</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-sms-contacts-search">
+                <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                검색하기
+              </button>
+
+            </form>
+          </section>
+
+          <div class="sms-contacts-body">
+            <!-- 초성 탭 -->
+            <div class="sms-alpha-tabs" id="smsAlphaTabs" role="tablist" aria-label="이름 초성 필터"></div>
+
+            <!-- 검색결과 헤더 -->
+            <div class="sms-contacts-results__head">
+              <div class="sms-contacts-results__count">
+                <span class="sms-contacts-results__bar-icon" aria-hidden="true">
+                  <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+                </span>
+                <h3 class="sms-contacts-results__label">검색결과</h3>
+                <p class="sms-contacts-results__meta"><strong id="smsBulkCountInline">0</strong>명 선택됨</p>
+              </div>
+              <div class="sms-contacts-results__actions">
+                <button type="button" class="btn-sms-bulk-move" id="btnBulkMoveTop" disabled>
+                  <span class="btn-inline-icon" aria-hidden="true"><img src="assets/admin-notices/icon-group-move.svg" alt="" width="20" height="20"></span>
+                  그룹이동
+                </button>
+                <button type="button" class="btn-sms-contact-add" id="btnContactAdd">
+                  <span class="btn-inline-icon" aria-hidden="true"><img src="assets/admin-notices/icon-group-add.svg" alt="" width="20" height="20"></span>
+                  인원추가
+                </button>
+              </div>
+            </div>
+
+            <!-- 목록 -->
+            <div class="sms-contacts-table-wrap">
+              <table class="sms-contacts-table" aria-label="연락처 목록">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-check"><input type="checkbox" id="smsCheckAll" aria-label="전체 선택"></th>
+                    <th scope="col" class="col-name">이름</th>
+                    <th scope="col" class="col-phone">전화번호</th>
+                    <th scope="col" class="col-agency">관리기관</th>
+                    <th scope="col" class="col-position">직급</th>
+                    <th scope="col" class="col-assigned">담당</th>
+                    <th scope="col" class="col-action">작업</th>
+                  </tr>
+                </thead>
+                <tbody id="smsContactBody"></tbody>
+              </table>
+            </div>
+
+            <div class="sms-contacts-pagination-wrap">
+              <nav class="pagination" id="smsContactPagination" aria-label="페이지 이동"></nav>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- 그룹 추가/수정 모달 -->
+  <div class="sms-modal" id="groupModal" hidden role="dialog" aria-modal="true" aria-labelledby="groupModalTitle">
+    <div class="sms-modal__backdrop" data-close-modal></div>
+    <div class="sms-modal__panel">
+      <div class="sms-modal__head">
+        <h3 class="sms-modal__title" id="groupModalTitle">그룹 추가</h3>
+      </div>
+      <form id="groupModalForm">
+        <div class="sms-modal__body">
+          <div class="sms-modal__field">
+            <label for="groupModalName">그룹명</label>
+            <input type="text" id="groupModalName" required placeholder="그룹명을 입력하세요.">
+          </div>
+        </div>
+        <div class="sms-modal__foot">
+          <button type="button" class="btn-sms-modal-cancel" data-close-modal>취소</button>
+          <button type="submit" class="btn-sms-modal-submit">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 연락처 추가/수정 모달 -->
+  <div class="sms-modal" id="contactModal" hidden role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <div class="sms-modal__backdrop" data-close-modal></div>
+    <div class="sms-modal__panel sms-modal__panel--wide">
+      <div class="sms-modal__head">
+        <h3 class="sms-modal__title" id="contactModalTitle">연락처 추가</h3>
+      </div>
+      <form id="contactModalForm">
+        <div class="sms-modal__body">
+          <div class="sms-modal__field">
+            <label for="contactModalName">이름</label>
+            <input type="text" id="contactModalName" required placeholder="이름을 입력하세요.">
+          </div>
+          <div class="sms-modal__field">
+            <label for="contactModalPhone">전화번호</label>
+            <input type="text" id="contactModalPhone" required placeholder="010-0000-0000">
+          </div>
+          <div class="sms-modal__field">
+            <label for="contactModalAgency">관리기관</label>
+            <select id="contactModalAgency" required></select>
+          </div>
+          <div class="sms-modal__field">
+            <label for="contactModalPosition">직급</label>
+            <select id="contactModalPosition" required></select>
+          </div>
+          <div class="sms-modal__field">
+            <label for="contactModalGroup">그룹</label>
+            <select id="contactModalGroup" required></select>
+          </div>
+          <div class="sms-modal__field">
+            <span class="sms-modal__field-label">시설물 담당 여부</span>
+            <div class="sms-modal__field--row">
+              <label class="sms-modal__radio"><input type="radio" name="contactAssigned" value="yes" checked> 담당</label>
+              <label class="sms-modal__radio"><input type="radio" name="contactAssigned" value="no"> 미담당</label>
+            </div>
+          </div>
+        </div>
+        <div class="sms-modal__foot">
+          <button type="button" class="btn-sms-modal-cancel" data-close-modal>취소</button>
+          <button type="submit" class="btn-sms-modal-submit">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 그룹 이동 모달 -->
+  <div class="sms-modal" id="moveModal" hidden role="dialog" aria-modal="true" aria-labelledby="moveModalTitle">
+    <div class="sms-modal__backdrop" data-close-modal></div>
+    <div class="sms-modal__panel">
+      <div class="sms-modal__head">
+        <h3 class="sms-modal__title" id="moveModalTitle">그룹으로 이동</h3>
+      </div>
+      <form id="moveModalForm">
+        <div class="sms-modal__body">
+          <div class="sms-modal__field">
+            <label for="moveModalGroup">이동할 그룹</label>
+            <select id="moveModalGroup" required></select>
+          </div>
+        </div>
+        <div class="sms-modal__foot">
+          <button type="button" class="btn-sms-modal-cancel" data-close-modal>취소</button>
+          <button type="submit" class="btn-sms-modal-submit">이동</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/sms-contacts-data.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/sms-contacts.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <g transform="translate(3 4)">
+    <svg width="18" height="16" viewBox="0 0 19.5 17.5" preserveAspectRatio="none">
+      <path d="M9.75 15.25L6.75 13.75L0.75 16.75V3.75L6.75 0.750001L12.75 3.75L18.75 0.750001V8.25" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </g>
+  <g transform="translate(9 4)">
+    <svg width="1.5" height="13" viewBox="0 0 1.5 14.5" preserveAspectRatio="none">
+      <path d="M0.75 0.75V13.75" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </g>
+  <g transform="translate(15 7)">
+    <svg width="1.5" height="5.5" viewBox="0 0 1.5 7" preserveAspectRatio="none">
+      <path d="M0.75 0.75V6.25" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </g>
+  <g transform="translate(16 15)">
+    <svg width="6" height="6.8" viewBox="0 0 7.5 8.50064" preserveAspectRatio="none">
+      <path d="M5.871 5.87164C6.29065 5.45212 6.57646 4.91757 6.69229 4.3356C6.80812 3.75364 6.74876 3.15039 6.52173 2.60216C6.29469 2.05393 5.91017 1.58534 5.41681 1.25565C4.92344 0.92597 4.34338 0.75 3.75 0.75C3.15662 0.75 2.57656 0.92597 2.0832 1.25565C1.58983 1.58534 1.20531 2.05393 0.978277 2.60216C0.75124 3.15039 0.691883 3.75364 0.807712 4.3356C0.923541 4.91757 1.20935 5.45212 1.629 5.87164C2.047 6.29064 2.754 6.91664 3.75 7.75064C4.801 6.86064 5.509 6.23464 5.871 5.87164Z" fill="#568BD0" stroke="#568BD0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </g>
+  <g transform="translate(19 18)">
+    <svg width="1.5" height="1.5" viewBox="0 0 1.5 1.51" preserveAspectRatio="none">
+      <path d="M0.75 0.75V0.76" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </g>
+</svg>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 등록 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-detail.css">
+  <link rel="stylesheet" href="css/facility-add.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-detail.css?v=24">
+  <link rel="stylesheet" href="css/archive-notice.css?v=4">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout facility-detail-page facility-change-request-detail-page archive-notice-detail-page archive-notice-register-page type3-port-page fcr-detail-flat-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="type3-page" aria-label="공지사항 등록">
+      <header class="page-header">
+        <div class="page-header__nav">
+          <a href="archive.html" class="btn-back" id="noticeRegisterBackBtn" aria-label="목록으로">
+            <span class="ico-angle" aria-hidden="true">
+              <span class="ico-angle__vec">
+                <img src="assets/main/facility-search/detail/figma224/icon-angle-down.svg" alt="">
+              </span>
+            </span>
+          </a>
+          <a href="archive.html" class="page-header__home" aria-label="자료실 홈">
+            <span class="page-header__home-icon" aria-hidden="true">
+              <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+              <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+              <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+            </span>
+          </a>
+        </div>
+        <nav class="breadcrumb" aria-label="현재 위치">
+          <a href="archive.html">자료실</a>
+          <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+          <a href="archive.html">공지사항</a>
+          <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+          <span class="breadcrumb__current">공지사항 등록</span>
+        </nav>
+      </header>
+
+      <div class="detail-shell">
+        <section class="detail-section" aria-labelledby="noticeRegisterSectionTitle">
+          <div class="detail-section__head">
+            <div class="type3-section-title">
+              <span class="type3-section-title__icon" aria-hidden="true">
+                <img src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+              </span>
+              <h3 class="detail-section__title" id="noticeRegisterSectionTitle">공지 등록</h3>
+            </div>
+            <p class="detail-section__note">※ 제목과 내용을 입력한 뒤 등록합니다.</p>
+          </div>
+
+          <form id="noticeRegisterForm" novalidate>
+            <div class="fac-add-body notice-detail-body">
+              <div class="fac-add-grid notice-detail-grid">
+                <div class="fac-add-field fac-add-field--full">
+                  <div class="fac-add-field__label">제목<span class="req" aria-hidden="true">*</span></div>
+                  <div class="fac-add-field__control">
+                    <input type="text" class="fac-add-input" id="noticeRegisterSubject" name="subject" placeholder="제목을 입력하세요." required>
+                  </div>
+                </div>
+
+                <div class="fac-add-field">
+                  <div class="fac-add-field__label">작성자</div>
+                  <div class="fac-add-field__control">
+                    <input type="text" class="fac-add-input" id="noticeRegisterAuthor" name="author" value="관리자">
+                  </div>
+                </div>
+                <div class="fac-add-field">
+                  <div class="fac-add-field__label">작성일</div>
+                  <div class="fac-add-field__control">
+                    <input type="text" class="fac-add-input" id="noticeRegisterDate" name="date" readonly>
+                  </div>
+                </div>
+                <div class="fac-add-field">
+                  <div class="fac-add-field__label">조회수</div>
+                  <div class="fac-add-field__control">
+                    <input type="text" class="fac-add-input" id="noticeRegisterViews" name="views" value="0" readonly>
+                  </div>
+                </div>
+                <div class="fac-add-field">
+                  <div class="fac-add-field__label">공지기간</div>
+                  <div class="fac-add-field__control">
+                    <input type="text" class="fac-add-input" id="noticeRegisterPeriod" name="period" placeholder="예: 2026-05-08 ~ 2026-12-31">
+                  </div>
+                </div>
+
+                <div class="fac-add-field fac-add-field--full notice-detail-field--content">
+                  <div class="fac-add-field__label">내용<span class="req" aria-hidden="true">*</span></div>
+                  <div class="fac-add-field__control">
+                    <textarea class="fac-add-input notice-register-body" id="noticeRegisterBody" name="body" placeholder="내용을 입력하세요." required></textarea>
+                  </div>
+                </div>
+
+                <div class="fac-add-field fac-add-field--full">
+                  <div class="fac-add-field__label">첨부파일</div>
+                  <div class="fac-add-field__control notice-detail-file">
+                    <div class="notice-register-file">
+                      <input type="file" id="noticeRegisterFileInput" hidden>
+                      <button type="button" class="type3-btn type3-btn--create" id="noticeRegisterFileBtn">파일 선택</button>
+                      <span class="notice-register-file__name" id="noticeRegisterFileName">선택된 파일 없음</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fac-add-footer">
+              <button type="button" class="btn-fac-add-cancel" id="noticeRegisterCancelBtn">취소</button>
+              <button type="submit" class="btn-fac-add-save" id="noticeRegisterSaveBtn">등록</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/archive.js"></script>
+</body>
+</html>

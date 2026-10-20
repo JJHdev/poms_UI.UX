@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유지관리계획 총괄 | POMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/archive.css">
+  <link rel="stylesheet" href="css/admin-search-inline.css">
+  <style>
+    body { font-family: "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+</head>
+<body class="app-layout maintenance-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <h1 class="archive-page-title">자료실</h1>
+
+    <section class="notice-board maintenance-board" aria-labelledby="maintenanceBoardTitle">
+      <div class="notice-board__head">
+        <div class="notice-board__intro">
+          <div class="notice-board__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"/>
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 8H20"/>
+              <path d="M8 12h8M8 16h5"/>
+            </svg>
+          </div>
+          <div class="notice-board__intro-text">
+            <h2 id="maintenanceBoardTitle">유지관리계획 총괄</h2>
+            <p>관리주체별 유지관리계획의 제출 내용과 승인 상태를 조회합니다.</p>
+          </div>
+        </div>
+        <div class="notice-board__actions">
+          <button type="button" class="maintenance-btn maintenance-btn--outline" id="maintenanceSummaryBtn">유지관리계획 총괄표</button>
+          <button type="button" class="btn-register" id="maintenanceAddBtn">+ 추가</button>
+        </div>
+      </div>
+
+      <form class="maintenance-filter" id="maintenanceFilterForm" role="search">
+        <label>
+          <span>관리주체</span>
+          <select id="filterEntity" disabled>
+            <option value="부산청" selected>부산청</option>
+          </select>
+        </label>
+        <label>
+          <span>점검년도</span>
+          <select id="filterYear">
+            <option value="2026" selected>2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+          </select>
+        </label>
+        <label>
+          <span>승인 상태</span>
+          <select id="filterStatus">
+            <option value="" selected>전체</option>
+            <option value="승인">승인</option>
+            <option value="대기중">대기중</option>
+            <option value="반려">반려</option>
+          </select>
+        </label>
+        <label class="maintenance-filter__title">
+          <span>제목</span>
+          <input type="search" id="filterTitle" placeholder="제목을 입력하세요" autocomplete="off">
+        </label>
+        <div class="maintenance-filter__actions">
+          <button type="submit" class="maintenance-btn maintenance-btn--primary">검색</button>
+          <button type="button" class="maintenance-btn maintenance-btn--outline" id="maintenanceResetBtn">초기화</button>
+        </div>
+      </form>
+
+      <div class="maintenance-table-meta">
+        <p>전체 <strong id="maintenanceTotalCount">14</strong>건</p>
+        <span>검색결과 <strong id="maintenanceResultCount">14</strong>건 중 <span id="maintenancePageInfo">(1/2)</span> 페이지</span>
+      </div>
+
+      <div class="notice-table-wrap maintenance-table-wrap">
+        <table class="notice-table maintenance-table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-no">번호</th>
+              <th scope="col" class="col-year">점검년도</th>
+              <th scope="col" class="col-title">제목</th>
+              <th scope="col" class="col-file">첨부파일</th>
+              <th scope="col" class="col-date">등록일자</th>
+              <th scope="col" class="col-status">승인상태</th>
+            </tr>
+          </thead>
+          <tbody id="maintenanceTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="notice-board__foot">
+        <p class="maintenance-count"><strong id="maintenanceRange">1-10</strong> / <span id="maintenanceTotalLabel">14</span>건</p>
+        <nav class="pagination" aria-label="페이지 이동">
+          <button type="button" class="pagination__btn" data-page-move="first" disabled aria-label="첫 페이지">
+            <img src="assets/main/facility-search/arrow-double-right.svg" alt="" width="14" height="14">
+          </button>
+          <button type="button" class="pagination__btn" data-page-move="prev" disabled aria-label="이전 페이지">
+            <img src="assets/main/facility-search/arrow-right.svg" alt="" width="14" height="14">
+          </button>
+          <button type="button" class="pagination__btn is-active" aria-current="page">1</button>
+          <button type="button" class="pagination__btn">2</button>
+          <button type="button" class="pagination__btn" data-page-move="next" aria-label="다음 페이지">
+            <img src="assets/main/facility-search/arrow-right.svg" alt="" width="14" height="14">
+          </button>
+          <button type="button" class="pagination__btn" data-page-move="last" aria-label="마지막 페이지">
+            <img src="assets/main/facility-search/arrow-double-right.svg" alt="" width="14" height="14">
+          </button>
+        </nav>
+      </div>
+    </section>
+
+    <section class="maintenance-detail-panel" id="maintenanceDetailPanel" aria-labelledby="maintenanceDetailTitle" hidden>
+      <div class="maintenance-detail-panel__head">
+        <div>
+          <h2 id="maintenanceDetailTitle">유지관리계획 상세</h2>
+          <p id="maintenanceDetailSub">목록에서 항목을 선택하거나 추가 버튼으로 신규 신청 내용을 입력합니다.</p>
+        </div>
+        <span class="maintenance-mode-badge" id="maintenanceModeBadge">조회</span>
+      </div>
+
+      <div class="maintenance-detail-form">
+        <label class="maintenance-form-row">
+          <span>관리주체 <em>*</em></span>
+          <select id="detailEntity" disabled>
+            <option value="부산청" selected>부산청</option>
+          </select>
+        </label>
+        <label class="maintenance-form-row">
+          <span>점검년도 <em>*</em></span>
+          <select id="detailYear">
+            <option value="2026" selected>2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+          </select>
+        </label>
+        <label class="maintenance-form-row">
+          <span>제목 <em>*</em></span>
+          <input type="text" id="detailTitle" placeholder="제목을 입력하세요">
+        </label>
+        <label class="maintenance-form-row maintenance-form-row--textarea">
+          <span>내용</span>
+          <textarea id="detailContent" rows="4" placeholder="내용을 입력하세요"></textarea>
+        </label>
+        <div class="maintenance-form-row">
+          <span>시설물 등록</span>
+          <div class="maintenance-inline-actions">
+            <button type="button" class="maintenance-btn maintenance-btn--danger-outline" id="facilityRegisterBtn">등록하기</button>
+            <small id="facilitySelectionText">선택된 시설물이 없습니다.</small>
+          </div>
+        </div>
+        <div class="maintenance-form-row">
+          <span>첨부파일</span>
+          <div class="maintenance-file-row">
+            <input type="text" id="detailFileText" readonly>
+            <button type="button" class="maintenance-btn maintenance-btn--outline">파일선택</button>
+            <small>(용량 : 1GB 미만)</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="maintenance-detail-actions">
+        <button type="button" class="maintenance-btn maintenance-btn--outline" id="approvalHistoryBtn">결재이력</button>
+        <button type="button" class="maintenance-btn maintenance-btn--primary" id="submitPlanBtn">신청</button>
+        <button type="button" class="maintenance-btn maintenance-btn--danger-outline" id="deletePlanBtn">삭제</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="maintenance-modal-overlay is-hidden" id="facilityOverlay" role="dialog" aria-labelledby="facilityModalTitle" aria-modal="true" aria-hidden="true">
+    <section class="maintenance-modal" id="facilityModal">
+      <header class="maintenance-modal__head">
+        <div>
+          <h2 id="facilityModalTitle">시설물 추가</h2>
+          <p>유지관리계획에 추가할 시설물을 검색하고 점검 유형을 선택하세요.</p>
+        </div>
+        <button type="button" class="maintenance-modal__close" id="facilityCloseBtn" aria-label="닫기">×</button>
+      </header>
+
+      <form class="maintenance-filter maintenance-filter--modal" id="facilityFilterForm">
+        <label><span>관리주체</span><select disabled><option selected>부산청</option></select></label>
+        <label><span>항</span><select id="facilityPort"><option selected>전체</option><option>1항</option><option>2항</option><option>3항</option></select></label>
+        <label><span>세부항</span><select id="facilitySubport"><option selected>전체</option><option>계선시설</option><option>건축물</option><option>외곽시설</option><option>장비</option><option>교량</option></select></label>
+        <label><span>시설구분</span><select id="facilityCategory"><option selected>전체</option><option>계류</option><option>건축물</option><option>외곽시설</option><option>장비</option><option>교량</option></select></label>
+        <label class="maintenance-filter__title"><span>시설물명</span><input type="search" id="facilityKeyword" placeholder="시설물명 입력" autocomplete="off"></label>
+        <div class="maintenance-filter__actions">
+          <button type="submit" class="maintenance-btn maintenance-btn--primary">검색</button>
+          <button type="button" class="maintenance-btn maintenance-btn--outline" id="facilityResetBtn">초기화</button>
+        </div>
+      </form>
+
+      <div class="maintenance-table-meta maintenance-table-meta--modal">
+        <p>검색 결과</p>
+        <span>전체 <strong id="facilityTotalCount">80</strong>개소</span>
+      </div>
+
+      <div class="maintenance-facility-table-wrap">
+        <table class="maintenance-facility-table">
+          <thead>
+            <tr>
+              <th scope="col"><input type="checkbox" id="facilityCheckAll" aria-label="전체 선택"></th>
+              <th scope="col">시설물명</th>
+              <th scope="col">항</th>
+              <th scope="col">세부항</th>
+              <th scope="col">시설구분</th>
+              <th scope="col">점검유형</th>
+            </tr>
+          </thead>
+          <tbody id="facilityTableBody"></tbody>
+        </table>
+      </div>
+
+      <footer class="maintenance-modal__foot">
+        <p>* 유지관리계획 종류를 선택해야 시설물을 추가할 수 있습니다.</p>
+        <div>
+          <button type="button" class="maintenance-btn maintenance-btn--outline" id="facilityCancelBtn">취소</button>
+          <button type="button" class="maintenance-btn maintenance-btn--primary" id="facilityAddBtn">선택 추가</button>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/maintenance-plan.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'archive-maintenance' });
+  </script>
+</body>
+</html>
