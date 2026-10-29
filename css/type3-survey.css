@@ -1,0 +1,833 @@
+/* ===== 제 3종 항만시설물 — 3종시설물 실태조사 (fcr 계열) ===== */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.type3-port-page .fcr-field:has(.type3-keyword-group),
+.type3-port-page .fcr-field:has(.type3-range-group),
+.type3-port-page .fcr-field:has(.type3-scale-group) {
+  height: auto;
+  min-height: 38px;
+  align-items: center;
+}
+
+.type3-keyword-group {
+  display: flex;
+  gap: 6px;
+  width: auto;
+  min-width: 0;
+}
+
+/* 검색항목 선택칸·검색어 입력칸 비율 조정 (목록/현황 검색조건) */
+.type3-port-page .fcr-field--grow > .type3-keyword-group select {
+  flex: 0 0 110px;
+  width: 110px;
+  min-width: 110px;
+  max-width: 110px;
+}
+
+.type3-port-page .fcr-field .type3-keyword-group input[type="text"] {
+  flex: 0 0 340px;
+  width: 340px;
+  min-width: 340px;
+  max-width: 340px;
+}
+
+/* 선택·검색어: 라벨 밀착 + 동일 입력 너비 */
+.type3-port-page .insp-sys-filter__row > .fcr-field:not(.type3-field--wide):not(.type3-field--scale) {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+}
+
+.type3-port-page .insp-sys-filter__row > .fcr-field--grow {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+}
+
+.type3-guide-note {
+  margin: 0 0 12px;
+}
+
+/* FMS 안내문구와 동일 형식 */
+.type3-port-page .type3-list-guide-note,
+.type3-survey-detail-page .type3-list-guide-note {
+  margin: 0;
+  width: auto;
+  max-width: 100%;
+  font-size: 12px;
+  color: #6c788b;
+  line-height: 1.6;
+  text-align: right;
+  flex-shrink: 1;
+}
+
+.type3-port-page .type3-list-guide-note em,
+.type3-survey-detail-page .type3-list-guide-note em {
+  font-style: normal;
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.type3-port-page .type3-results-head-side,
+.type3-survey-detail-page .type3-results-head-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-left: auto;
+}
+
+/* 페이지네이션 중앙 */
+.type3-port-page .type3-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 0;
+  position: static;
+}
+
+.type3-port-page .type3-results-foot .pagination {
+  justify-self: center;
+}
+
+.type3-port-page .type3-btn-create {
+  gap: 4px;
+  min-width: 180px;
+  height: 38px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 10px;
+  background: #1c6fff;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.type3-port-page .type3-btn-create:hover {
+  background: #0f5de0;
+}
+
+.type3-port-page .type3-btn-create img {
+  width: 20px;
+  height: 20px;
+}
+
+.type3-results-total {
+  margin: 0;
+  font-size: 13px;
+  color: #6c788b;
+}
+
+.type3-results-total strong {
+  color: #0d1f35;
+  font-weight: 700;
+}
+
+#type3SurveyListView,
+#type3SurveyDetailView,
+#type3SurveyCreateView {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#type3SurveyListView[hidden],
+#type3SurveyDetailView[hidden],
+#type3SurveyCreateView[hidden] {
+  display: none !important;
+}
+
+/* 목록 행 클릭 */
+.type3-survey-row {
+  cursor: pointer;
+}
+
+.type3-survey-row:hover td {
+  background: #f0f6fc;
+}
+
+/* 상세 화면 */
+.type3-detail-toolbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.type3-detail-toolbar .fcr-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.type3-detail-info-body {
+  padding: 20px 30px 24px;
+}
+
+.type3-port-page .fcr-panel:has(> .type3-detail-info-body:only-child) .fcr-panel__body {
+  border-radius: 16px;
+}
+
+.type3-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.type3-info-table th,
+.type3-info-table td {
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+.type3-info-table th {
+  width: 130px;
+  background: #f8fafc;
+  color: #374151;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.type3-info-table td {
+  color: #111827;
+  background: #fff;
+}
+
+.type3-info-file {
+  color: #1e4976;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* STEP 인디케이터 */
+.type3-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 20px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.type3-steps__line {
+  flex: 0 1 120px;
+  height: 2px;
+  margin: 0 4px;
+  background: #e5e7eb;
+}
+
+.type3-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border: 2px solid #e5e7eb;
+  border-radius: 999px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.type3-step:hover {
+  border-color: #cbd5e1;
+}
+
+.type3-step__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #eef2f6;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.type3-step__label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.type3-step.is-active {
+  border-color: #1e4976;
+  color: #1e4976;
+}
+
+.type3-step.is-active .type3-step__badge {
+  background: #1e4976;
+  color: #fff;
+}
+
+.type3-field--wide .type3-keyword-group select:last-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.type3-step-filter .type3-field--scale {
+  flex: 1 1 auto;
+}
+
+.type3-range-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.type3-range-group select {
+  flex: 1;
+  min-width: 0;
+}
+
+.type3-range-sep {
+  color: #9ca3af;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.type3-field--scale {
+  grid-column: 1 / -1;
+}
+
+.type3-scale-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+
+.type3-scale-group input[type="number"] {
+  width: 90px;
+  flex: 0 0 auto;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.type3-keyword-group select,
+.type3-range-group select {
+  height: 38px;
+  padding: 0 36px 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("../assets/main/facility-statistics/angle-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px 18px;
+  box-sizing: border-box;
+}
+
+.type3-keyword-group input[type="text"] {
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  background: #fff;
+  box-sizing: border-box;
+  flex: 0 0 340px;
+  width: 340px;
+  min-width: 340px;
+  max-width: 340px;
+}
+
+/* 진행상태 — 약 5글자(+화살표) */
+.type3-port-page .insp-sys-filter .fcr-field--sm select {
+  flex: 0 0 calc(5em + 34px);
+  width: calc(5em + 34px);
+  max-width: calc(5em + 34px);
+  min-width: calc(5em + 34px);
+  padding: 0 28px 0 8px;
+  background-position: right 6px center;
+  background-size: 16px 16px;
+}
+
+.type3-scale-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.type3-scale-group .type3-scale-label + input {
+  margin-left: 2px;
+}
+
+.type3-scale-group .type3-scale-label:not(:first-child) {
+  margin-left: 16px;
+}
+
+/* 시설물명 링크 (STEP 03) */
+.type3-facility-link {
+  color: #0073c9;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* 테이블 미세 조정 */
+.type3-survey-table .col-no,
+.type3-step-table .col-no,
+.type3-status-table .col-no,
+.type3-history-table .col-no {
+  width: 52px;
+}
+
+/* ===== 등록 화면 (신규 관리번호 생성) ===== */
+
+.type3-form-input {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  color: #111827;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 260px;
+}
+
+.type3-form-input:read-only {
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.type3-form-input:focus {
+  border-color: #1e4976;
+  outline: none;
+}
+
+.type3-form-input--file {
+  max-width: none;
+  height: auto;
+  padding: 6px 10px;
+}
+
+.type3-form-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.type3-create-count {
+  margin: 0;
+  font-size: 13px;
+  color: #374151;
+}
+
+.type3-create-count strong {
+  font-size: 16px;
+  color: #1e4976;
+}
+
+.type3-create-bulk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.type3-create-bulk[hidden] {
+  display: none !important;
+}
+
+.type3-create-bulk .type3-form-input {
+  max-width: 200px;
+}
+
+.type3-col-check {
+  width: 40px;
+}
+
+.type3-col-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: #1e4976;
+  cursor: pointer;
+}
+
+.type3-cell-input {
+  width: 100%;
+  min-width: 110px;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 12.5px;
+  font-family: inherit;
+  color: #111827;
+  box-sizing: border-box;
+}
+
+.type3-cell-input:focus {
+  border-color: #1e4976;
+  outline: none;
+}
+
+.type3-create-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* ===== 실태조사 현황 탭 ===== */
+
+.type3-status-row.is-selected td {
+  background: #fff9c2;
+}
+
+.type3-status-row.is-selected:hover td {
+  background: #fef3a0;
+}
+
+.type3-history-head-side {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.type3-history-note {
+  margin: 0;
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.type3-history-note strong {
+  color: #d97706;
+  font-weight: 700;
+}
+
+.type3-select-btn {
+  height: 28px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 4px;
+  background: #1e4976;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.type3-select-btn:hover {
+  background: #163a60;
+}
+
+/* ===== 실태조사 결과 팝업 — fcr / 정기안전점검표 모달 톤 ===== */
+
+.type3-report-modal .type3-report-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(1100px, 100%);
+  max-height: calc(100vh - 48px);
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.type3-report-modal .fcr-modal__head {
+  padding: 20px 24px;
+  background: #fff;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.type3-report-modal .fcr-modal__title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.56px;
+}
+
+.type3-report-modal .fcr-modal__sub {
+  font-size: 16px;
+  font-weight: 400;
+  color: #6c788b;
+}
+
+.type3-report-modal .fcr-modal__body.type3-report-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 20px 24px 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #fff;
+}
+
+/* 기본정보 — 정기안전점검표 info 톤 */
+.type3-report-modal .type3-report-info {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background: transparent;
+  table-layout: fixed;
+}
+
+.type3-report-modal .type3-report-info th,
+.type3-report-modal .type3-report-info td {
+  min-height: 44px;
+  height: auto;
+  padding: 10px 20px;
+  font-size: 14px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #dadae2;
+  border-width: 0.5px 0.5px 0.5px 0;
+  background: #fff;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.type3-report-modal .type3-report-info th {
+  width: 160px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #111;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.type3-report-modal .type3-report-info td {
+  color: #111;
+  font-weight: 400;
+  text-align: left;
+}
+
+.type3-report-modal .type3-report-info tr > :first-child {
+  border-left-width: 0.5px;
+  border-radius: 12px 0 0 12px;
+}
+
+.type3-report-modal .type3-report-info tr > :last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+/* 평가/결과 표 — 표 자체 스크롤 없이 body 전체 스크롤 */
+.type3-report-modal .type3-report-table-wrap {
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+  margin: 0;
+}
+
+.type3-report-modal .type3-report-eval,
+.type3-report-modal .type3-report-result {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+  border: none;
+  margin: 0;
+  table-layout: fixed;
+}
+
+.type3-report-modal .type3-report-eval thead th,
+.type3-report-modal .type3-report-eval tbody th,
+.type3-report-modal .type3-report-result th {
+  padding: 10px 8px;
+  background: rgba(28, 111, 255, 0.1);
+  border: none;
+  border-bottom: 0.5px solid #dadae2;
+  border-right: 0.5px solid #dadae2;
+  color: #111;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  white-space: normal;
+  line-height: 1.3;
+  box-sizing: border-box;
+}
+
+.type3-report-modal .type3-report-eval thead th:last-child,
+.type3-report-modal .type3-report-eval tbody th:last-child,
+.type3-report-modal .type3-report-result tr > :last-child {
+  border-right: none;
+}
+
+.type3-report-modal .type3-report-eval tbody td,
+.type3-report-modal .type3-report-result td {
+  padding: 10px 8px;
+  border: none;
+  border-bottom: 0.5px solid #dadae2;
+  border-right: 0.5px solid #dadae2;
+  color: #111;
+  text-align: center;
+  vertical-align: middle;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+.type3-report-modal .type3-report-eval tbody td:last-child,
+.type3-report-modal .type3-report-result td:last-child {
+  border-right: none;
+}
+
+.type3-report-modal .type3-report-eval tbody tr:last-child td,
+.type3-report-modal .type3-report-eval tbody tr:last-child th,
+.type3-report-modal .type3-report-result tbody tr:last-child td,
+.type3-report-modal .type3-report-result tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.type3-report-modal .type3-report-eval__col-item {
+  width: 24%;
+}
+
+.type3-report-modal .type3-report-eval__col-opinion {
+  width: 30%;
+}
+
+.type3-report-modal .type3-report-eval__col-repair {
+  width: 52px;
+}
+
+.type3-report-modal .type3-report-eval__col-grade,
+.type3-report-modal .type3-report-eval__col-na {
+  width: 7%;
+}
+
+.type3-report-modal .type3-report-eval .type3-report-eval__repair,
+.type3-report-modal .type3-report-eval tbody td:nth-child(3) {
+  width: 52px;
+  max-width: 56px;
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: 12px;
+}
+
+.type3-report-modal .type3-report-eval thead tr:nth-child(2) th {
+  font-size: 12px;
+  padding: 8px 4px;
+}
+
+.type3-report-modal .type3-report-result .type3-report-result__group {
+  width: 88px;
+  font-weight: 600;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.type3-report-modal .type3-report-result th[scope="row"]:not(.type3-report-result__group) {
+  width: 110px;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.type3-report-modal .type3-report-result td.is-left,
+.type3-report-modal .type3-report-eval td.is-left,
+.type3-report-modal #type3ReportOpinion {
+  text-align: left;
+  white-space: pre-line;
+  line-height: 1.55;
+}
+
+.type3-report-check {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+}
+
+.type3-report-safety {
+  font-weight: 700;
+}
+
+.type3-report-safety.is-warn {
+  color: #dc2626;
+}
+
+.type3-report-modal .fcr-modal__foot.type3-report-foot,
+.type3-report-modal .type3-report-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px 24px;
+  border-top: none;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.type3-report-modal .type3-report-foot .fcr-btn--search {
+  min-width: 92px;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.type3-report-modal .type3-report-foot .fcr-btn--search:hover {
+  background: #16304f;
+}
+
+.type3-report-modal .type3-report-foot .fcr-modal__btn-close {
+  min-width: 92px;
+  height: 40px;
+  border: 1px solid #0d1f35;
+  border-radius: 10px;
+  background: #fff;
+  color: #0d1f35;
+  font-size: 14px;
+  font-weight: 700;
+}

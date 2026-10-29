@@ -1,0 +1,27 @@
+(function () {
+  var KEY = 'poms_mobile_auth';
+  window.pomsMobileLogout = function () {
+    try { sessionStorage.removeItem(KEY); } catch (e) {}
+    ['pomsInspectRecords', 'pomsInspectPeriodFlags'].forEach(function (storageKey) {
+      try { localStorage.removeItem(storageKey); } catch (e) {}
+      try { sessionStorage.removeItem(storageKey); } catch (e) {}
+    });
+    window.location.replace('mobile_login.html');   // 로그아웃 후 뒤로가기로 메인이 안 뜨게
+  };
+  function isDemoUser(id) {
+    id = String(id || '');
+    if (id === 'test') return true;
+    return /^test(0[1-9]|[1-4][0-9]|50)$/.test(id);
+  }
+  try {
+    var raw = sessionStorage.getItem(KEY);
+    var session = raw ? JSON.parse(raw) : null;
+    if (!session || !isDemoUser(session.id)) {
+      try { sessionStorage.removeItem(KEY); } catch (e2) {}
+      window.location.replace('mobile_login.html');
+    }
+  } catch (e) {
+    try { sessionStorage.removeItem(KEY); } catch (e2) {}
+    window.location.replace('mobile_login.html');
+  }
+})();

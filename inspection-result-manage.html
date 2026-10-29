@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>점검결과 등록관리 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin-mock.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/admin-users.css">
+  <link rel="stylesheet" href="css/inspection-result-manage.css?v=20260814-1">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout facility-change-request-page admin-users-page inspection-result-manage-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fcr-page">
+      <div class="fcr-card">
+        <div class="ua-account-tabs" role="tablist" aria-label="점검결과 등록관리 탭">
+          <button type="button" class="ua-account-tabs__btn is-active" role="tab" data-tab="application" aria-selected="true">시설물신청관리</button>
+          <button type="button" class="ua-account-tabs__btn" role="tab" data-tab="report" aria-selected="false">보고서 등록관리</button>
+        </div>
+
+        <!-- 시설물신청관리 -->
+        <div class="result-manage-panel is-active" data-panel="application" role="tabpanel">
+          <section class="fcr-results-panel" aria-labelledby="requestResultsTitle">
+            <div class="fcr-results__head">
+              <div class="fcr-results__count">
+                <span class="fcr-results__bar-icon" aria-hidden="true">
+                  <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+                </span>
+                <h2 id="requestResultsTitle" class="fcr-results__label">검색결과</h2>
+                <p class="fcr-results__meta">총 <strong id="requestResultCount">0</strong>건</p>
+              </div>
+            </div>
+
+            <div class="fcr-table-wrap">
+              <table class="fcr-table admin-users-table result-manage-table" aria-label="시설물신청관리 목록">
+                <colgroup>
+                  <col class="col-no" style="width:48px">
+                  <col class="col-id">
+                  <col class="col-org">
+                  <col class="col-name">
+                  <col class="col-login">
+                  <col class="col-yn">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-no">번호</th>
+                    <th scope="col" class="col-id">ID</th>
+                    <th scope="col" class="col-org">업체명</th>
+                    <th scope="col" class="col-name">용역명</th>
+                    <th scope="col" class="col-login">신청일</th>
+                    <th scope="col" class="col-yn">신청개수</th>
+                  </tr>
+                </thead>
+                <tbody id="requestTableBody"></tbody>
+              </table>
+            </div>
+
+            <div class="fcr-results-foot">
+              <nav class="pagination" id="requestPagination" aria-label="페이지 이동"></nav>
+              <label class="visually-hidden" for="requestPageSize">페이지당 표시 건수</label>
+              <select id="requestPageSize" class="pagination-page-size" aria-label="페이지당 표시 건수" hidden>
+                <option value="10" selected>10 / page</option>
+              </select>
+            </div>
+          </section>
+        </div>
+
+        <!-- 보고서 등록관리 -->
+        <div class="result-manage-panel" data-panel="report" role="tabpanel" hidden>
+          <section class="fcr-filter-panel" aria-labelledby="reportSearchTitle">
+            <div class="fcr-filter-panel__head">
+              <span class="fcr-filter-panel__title-icon" aria-hidden="true">
+                <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+              </span>
+              <h2 id="reportSearchTitle" class="fcr-filter-panel__title">검색조건</h2>
+            </div>
+            <form id="reportSearchForm" class="fcr-filter" role="search" novalidate>
+              <div class="fcr-filter-row admin-users-filter-row result-manage-filter-row">
+                <div class="fcr-field">
+                  <label for="reportRegManageFilter">관리기관</label>
+                  <select id="reportRegManageFilter" name="manage">
+                    <option value="">전체</option>
+                    <option value="BS">부산지방해양수산청</option>
+                    <option value="IC">인천지방해양수산청</option>
+                    <option value="YS">여수지방해양수산청</option>
+                    <option value="999">기타</option>
+                  </select>
+                </div>
+                <div class="fcr-field">
+                  <label for="reportRegPortFilter">항명</label>
+                  <select id="reportRegPortFilter" name="port">
+                    <option value="">전체</option>
+                  </select>
+                </div>
+                <div class="fcr-field">
+                  <label for="reportRegSubPortFilter">세부항명</label>
+                  <select id="reportRegSubPortFilter" name="subPort">
+                    <option value="">전체</option>
+                  </select>
+                </div>
+                <div class="fcr-field">
+                  <label for="reportRegCheckFilter">점검구분</label>
+                  <select id="reportRegCheckFilter" name="check">
+                    <option value="">전체</option>
+                    <option value="101">정기안전점검(상반기)</option>
+                    <option value="102">정기안전점검(하반기)</option>
+                    <option value="PE">성능평가</option>
+                    <option value="300">정밀안전진단</option>
+                    <option value="200">정밀안전점검</option>
+                    <option value="MNT">보수보강</option>
+                  </select>
+                </div>
+                <div class="fcr-filter-actions">
+                  <button type="submit" class="fcr-btn fcr-btn--search" id="reportRegSearch">
+                    <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+                    검색하기
+                  </button>
+                  <button type="button" class="fcr-btn fcr-btn--reset" id="reportRegReset">
+                    <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+                    초기화
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <div class="fcr-divider" aria-hidden="true"></div>
+
+          <section class="fcr-results-panel" aria-labelledby="reportResultsTitle">
+            <div class="fcr-results__head">
+              <div class="fcr-results__count">
+                <span class="fcr-results__bar-icon" aria-hidden="true">
+                  <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+                </span>
+                <h2 id="reportResultsTitle" class="fcr-results__label">검색결과</h2>
+                <p class="fcr-results__meta">총 <strong id="reportRegResultCount">0</strong>건</p>
+              </div>
+            </div>
+
+            <div class="fcr-table-wrap">
+              <table class="fcr-table admin-users-table result-manage-table result-manage-table--report" aria-label="보고서 등록관리 목록">
+                <colgroup>
+                  <col class="col-no" style="width:48px">
+                  <col class="col-org">
+                  <col class="col-port">
+                  <col class="col-subport">
+                  <col class="col-fname">
+                  <col class="col-class">
+                  <col class="col-ftype">
+                  <col class="col-agency">
+                  <col class="col-check">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-no">번호</th>
+                    <th scope="col" class="col-org">관리주체</th>
+                    <th scope="col" class="col-port">항명</th>
+                    <th scope="col" class="col-subport">세부항명</th>
+                    <th scope="col" class="col-fname">시설물명</th>
+                    <th scope="col" class="col-class">종구분</th>
+                    <th scope="col" class="col-ftype">시설종류</th>
+                    <th scope="col" class="col-agency">점검기관(ID)</th>
+                    <th scope="col" class="col-check">점검구분</th>
+                  </tr>
+                </thead>
+                <tbody id="reportRegTableBody"></tbody>
+              </table>
+            </div>
+
+            <div class="fcr-results-foot">
+              <nav class="pagination" id="reportRegPagination" aria-label="페이지 이동"></nav>
+              <label class="visually-hidden" for="reportRegPageSize">페이지당 표시 건수</label>
+              <select id="reportRegPageSize" class="pagination-page-size" aria-label="페이지당 표시 건수" hidden>
+                <option value="10" selected>10 / page</option>
+              </select>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-mock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/vendor-application-data.js"></script>
+  <script src="js/report-registration-data.js"></script>
+  <script src="js/inspection-result-manage.js"></script>
+</body>
+</html>

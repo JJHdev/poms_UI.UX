@@ -1,0 +1,553 @@
+/* 개인정보처리방침 — Figma 255:3352 */
+
+.privacy-policy-page {
+  --pv-blue: #0066cc;
+  --pv-blue-hover: #005bb5;
+  --pv-blue-dark: #003668;
+  --pv-navy: #0d2744;
+  --pv-text: #333333;
+  --pv-text-light: #555555;
+  --pv-text-muted: #888888;
+  --pv-line: #d0d0d0;
+  --pv-line-soft: #e0e0e0;
+  --pv-gray-bg: #f7f8fa;
+  --pv-page-bg: #f8f9fb;
+  --pv-card-head: #f2f2f2;
+  --pv-content: 1140px;
+  --pv-btn-radius: 4px;
+  margin: 0;
+  background: #ffffff;
+  color: var(--pv-text);
+  font-family: "Noto Sans KR", "Pretendard", system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 홈 헤더(home.css) 사용 — 본문 컨테이너만 방침 폭 유지 */
+body.page-home.privacy-policy-page {
+  background: #ffffff;
+  color: var(--pv-text);
+  font-family: "Noto Sans KR", "Pretendard", system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+body.page-home.privacy-policy-page > .container#container {
+  width: min(var(--pv-content), calc(100% - 40px));
+  max-width: var(--pv-content);
+  margin: 0 auto;
+  padding: 36px 0 80px;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.privacy-policy-page .pv_guide[id] {
+  scroll-margin-top: 24px;
+}
+
+.privacy-policy-page .accNav {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ===== Layout ===== */
+.privacy-policy-page .content {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.privacy-policy-page .hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.privacy-policy-page .titleCenter {
+  margin: 0 0 24px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.52px;
+  line-height: 1.45;
+  color: #111111;
+}
+
+/* ===== Intro box ===== */
+.privacy-policy-page .pv_tit {
+  position: relative;
+  margin: 0 0 36px;
+  padding: 28px 36px 24px;
+  background: var(--pv-gray-bg);
+  border: 1px solid var(--pv-line-soft);
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--pv-text);
+  word-break: keep-all;
+}
+
+.privacy-policy-page .pv_tit::before,
+.privacy-policy-page .pv_tit::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--pv-blue);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.privacy-policy-page .pv_tit::before {
+  top: 10px;
+  left: 10px;
+  border-width: 4px 0 0 4px;
+}
+
+.privacy-policy-page .pv_tit::after {
+  right: 10px;
+  bottom: 10px;
+  border-width: 0 4px 4px 0;
+}
+
+.privacy-policy-page .pv_tit__easy {
+  display: block;
+  width: 100%;
+  margin: 18px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.32px;
+  color: #111111;
+  cursor: pointer;
+}
+
+.privacy-policy-page .pv_tit__easy span {
+  font-weight: 700;
+}
+
+.privacy-policy-page .pv_text_blue {
+  color: var(--pv-blue);
+}
+
+.privacy-policy-page .font-weight-bold {
+  font-weight: 700;
+}
+
+.privacy-policy-page .font-weight-normal {
+  font-weight: 400;
+}
+
+.privacy-policy-page .pv_guide {
+  margin-top: 36px;
+}
+
+/* ===== Section area (gray bg from TOC) ===== */
+.privacy-policy-page .pv-sections {
+  background: var(--pv-page-bg);
+  margin-top: 36px;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 36px max(20px, calc(50vw - min(var(--pv-content), calc(100% - 40px)) / 2)) 80px;
+}
+
+.privacy-policy-page .pv-sections .pv_guide {
+  margin-top: 36px;
+}
+
+.privacy-policy-page .pv-sections .pv_guide:first-child {
+  margin-top: 0;
+}
+
+/* ===== Labeling ===== */
+.privacy-policy-page .pv_label_head,
+.privacy-policy-page .pv_toc_head {
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--pv-blue);
+  letter-spacing: -0.34px;
+}
+
+.privacy-policy-page .pv_label_grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--pv-line);
+  border-left: 1px solid var(--pv-line);
+  background: #ffffff;
+}
+
+.privacy-policy-page .pv_label_card {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  border-right: 1px solid var(--pv-line);
+  border-bottom: 1px solid var(--pv-line);
+  background: #ffffff;
+}
+
+.privacy-policy-page .pv_label_card--empty {
+  min-height: 280px;
+  border-right: 1px solid var(--pv-line);
+  border-bottom: 1px solid var(--pv-line);
+  background: #ffffff;
+}
+
+.privacy-policy-page .pv_label_card__title {
+  margin: 0;
+  padding: 11px 8px;
+  background: var(--pv-card-head);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: -0.28px;
+  border-bottom: 1px solid var(--pv-line);
+}
+
+.privacy-policy-page .pv_label_card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: 14px 12px 12px;
+}
+
+.privacy-policy-page .pv_label_card .labelingImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  margin-bottom: 6px;
+}
+
+.privacy-policy-page .pv_label_card .labelingImg img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.privacy-policy-page .pv_label_card__text {
+  flex: 1 1 auto;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--pv-text-light);
+  text-align: center;
+  word-break: keep-all;
+}
+
+.privacy-policy-page .pv_label_card .linkBox {
+  width: 100%;
+  margin-top: 12px;
+  min-height: 32px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--pv-btn-radius);
+}
+
+.privacy-policy-page .pv_label_foot {
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--pv-text-muted);
+}
+
+/* ===== TOC ===== */
+.privacy-policy-page .pv_toc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 48px;
+  padding: 24px 28px;
+  background: #ffffff;
+  border: 1px solid var(--pv-line-soft);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.privacy-policy-page .pv_toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.privacy-policy-page .pv_toc li {
+  margin: 6px 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--pv-text);
+}
+
+.privacy-policy-page .pv_toc a {
+  color: var(--pv-text);
+  text-decoration: none;
+}
+
+.privacy-policy-page .pv_toc a:hover {
+  color: var(--pv-blue);
+  text-decoration: underline;
+}
+
+/* ===== Section title ===== */
+.privacy-policy-page .pv_guide_tit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  color: var(--pv-blue);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.privacy-policy-page .pv_guide_tit > span {
+  min-width: 0;
+}
+
+.privacy-policy-page .pv_guide_tit .icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.privacy-policy-page .pv_guide_tit img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ===== Section card ===== */
+.privacy-policy-page .pv_guide_des {
+  padding: 28px 32px 32px;
+  background: #ffffff;
+  border: 1px solid var(--pv-line-soft);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--pv-text);
+  word-break: keep-all;
+}
+
+.privacy-policy-page .pv_guide_des ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.privacy-policy-page .pv_guide_des ol > li {
+  margin: 10px 0;
+}
+
+.privacy-policy-page .pv_guide_des ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.privacy-policy-page .pv_guide_note {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--pv-text-light);
+  line-height: 1.55;
+}
+
+.privacy-policy-page .pv_internet_box {
+  margin: 12px 0 0;
+  padding: 14px 16px;
+  background: #f8f9fa;
+  border: 1px solid #dddddd;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--pv-text);
+}
+
+.privacy-policy-page .pv_internet_box a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== Buttons ===== */
+.privacy-policy-page .clickBoxSetting {
+  margin-top: 10px;
+}
+
+.privacy-policy-page .linkBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 38px;
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: var(--pv-btn-radius);
+  background: var(--pv-blue);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.privacy-policy-page .linkBox:hover {
+  background: var(--pv-blue-hover);
+}
+
+.privacy-policy-page .linkBox--narrow {
+  width: 250px;
+  max-width: 100%;
+}
+
+.privacy-policy-page .linkBox--wide {
+  width: min(480px, 100%);
+  max-width: 100%;
+}
+
+.privacy-policy-page .pv_proc_btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 24px;
+}
+
+.privacy-policy-page .pv_proc_btns .linkBox {
+  width: min(520px, 100%);
+  margin-top: 0;
+  min-height: 44px;
+  border-radius: var(--pv-btn-radius);
+}
+
+.privacy-policy-page .linkBox--proc {
+  background: var(--pv-blue);
+}
+
+.privacy-policy-page .linkBox--search {
+  background: var(--pv-navy);
+}
+
+.privacy-policy-page .linkBox--search:hover {
+  background: #162a45;
+}
+
+.privacy-policy-page .pv_btn_row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.privacy-policy-page .pv_btn_row .linkBox {
+  width: auto;
+  min-width: 250px;
+  margin-top: 0;
+}
+
+/* ===== Tables ===== */
+.privacy-policy-page .table-box {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.privacy-policy-page .table-box table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.privacy-policy-page .table-box th,
+.privacy-policy-page .table-box td {
+  border: 1px solid var(--pv-line);
+  padding: 10px 8px;
+  vertical-align: middle;
+  word-break: keep-all;
+}
+
+.privacy-policy-page .table-box thead th,
+.privacy-policy-page .table-box th {
+  background: var(--pv-card-head);
+  color: #111111;
+  font-weight: 700;
+  text-align: center;
+}
+
+.privacy-policy-page .table-box td {
+  text-align: center;
+  background: #ffffff;
+}
+
+.privacy-policy-page #policySelect {
+  margin-top: 8px;
+  min-width: 280px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--pv-line);
+  border-radius: 4px;
+  background: #ffffff;
+  font-size: 12px;
+  font-family: inherit;
+}
+
+.privacy-policy-page .revisionTbody img {
+  max-width: 100%;
+  height: auto;
+}
+
+.privacy-policy-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.privacy-policy-page .pv_guide_des a,
+.privacy-policy-page .pv_label_card a,
+.privacy-policy-page .pv_tit a {
+  color: var(--pv-text);
+  text-decoration: none;
+}
+
+/* ===== Flowchart (Figma asset) ===== */
+.privacy-policy-page .pv_flow {
+  margin: 8px 0 20px;
+  padding: 0;
+}
+
+.privacy-policy-page .pv_flowchart-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .privacy-policy-page .titleCenter {
+    font-size: 22px;
+  }
+
+  .privacy-policy-page .pv_label_grid,
+  .privacy-policy-page .pv_toc {
+    grid-template-columns: 1fr;
+  }
+}

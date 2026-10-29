@@ -1,0 +1,323 @@
+/* ===== POMS Mobile Login ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body.mobile-login-page {
+  height: 100%;
+  overflow: hidden;
+  font-family: "Noto Sans KR", system-ui, -apple-system, sans-serif;
+  background: #e8ecf1;
+  color: #111827;
+}
+
+.mobile-login {
+  --login-ellipse-w: min(280px, 68vw);
+  --login-ellipse-h: 56px;
+  --login-header-h: 45dvh;
+  width: 100%;
+  max-width: 430px;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+}
+
+/* 헤더: 화면 45%, 내용 세로·가로 중앙 */
+.mobile-login__hero {
+  flex: 0 0 var(--login-header-h);
+  height: var(--login-header-h);
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px calc(var(--login-ellipse-h) / 2 + 16px);
+  background: #0a2d5c;
+  color: #fff;
+  text-align: center;
+}
+
+/* 헤더 맨 아래 중앙만: 좁은 흰 타원 (끝까지 닿지 않음) */
+.mobile-login__curve {
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  height: 0;
+  margin-top: calc(var(--login-ellipse-h) / -2);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.mobile-login__curve::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: var(--login-ellipse-w);
+  height: var(--login-ellipse-h);
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 50%;
+}
+
+.mobile-login__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  background: transparent;
+}
+
+.mobile-login__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.mobile-login__icon svg {
+  width: 34px;
+  height: 34px;
+  color: #fff;
+}
+
+.mobile-login__title {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.mobile-login__subtitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+}
+
+.mobile-login__demo {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f0f7fc;
+  font-size: 11px;
+  line-height: 1.55;
+  color: #4b5563;
+}
+
+.mobile-login__message {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.mobile-login__message.is-error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+/* 본문: 한 화면 고정 (스크롤 없음) */
+.mobile-login__body {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: calc(var(--login-ellipse-h) / 2 + 4px) 20px 8px;
+  background: #fff;
+}
+
+.mobile-login__form {
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
+
+.mobile-login__field {
+  margin-bottom: 12px;
+}
+
+.mobile-login__field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.mobile-login__field input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111827;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.mobile-login__field input::placeholder {
+  color: #9ca3af;
+}
+
+.mobile-login__field input:focus {
+  outline: none;
+  border-color: #0c3d6e;
+  box-shadow: 0 0 0 3px rgba(12, 61, 110, 0.12);
+}
+
+.mobile-login__submit {
+  width: 100%;
+  height: 46px;
+  margin-top: 2px;
+  border: none;
+  border-radius: 10px;
+  background: #0a2d5c;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.mobile-login__submit:hover {
+  opacity: 0.95;
+}
+
+.mobile-login__submit:active {
+  transform: scale(0.99);
+}
+
+.mobile-login__remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.mobile-login__remember input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  accent-color: #0a2d5c;
+  cursor: pointer;
+}
+
+/* Notice — 내용 높이만큼만 */
+.mobile-login__notice {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 0;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  background: #eff6ff;
+}
+
+.mobile-login__notice-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0c3d6e;
+}
+
+.mobile-login__notice-title::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3b82f6;
+  flex-shrink: 0;
+}
+
+.mobile-login__notice-list {
+  margin: 0;
+  padding: 0 0 0 14px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #374151;
+}
+
+.mobile-login__notice-list li {
+  margin-bottom: 6px;
+}
+
+.mobile-login__notice-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Footer */
+.mobile-login__footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px calc(10px + env(safe-area-inset-bottom, 0px));
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #fff;
+}
+
+.mobile-login__footer svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 431px) {
+  body.mobile-login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .mobile-login {
+    height: min(900px, calc(100dvh - 48px));
+    max-height: 900px;
+    border-radius: 20px;
+  }
+
+}

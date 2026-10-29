@@ -1,0 +1,597 @@
+/* 일정관리 — Figma 265:5901 기준
+   공통 레이아웃: sidebar.css / admin-topnav.css / admin-mock.css
+*/
+
+.admin-schedule-page {
+  background: #fff;
+  color: #202733;
+}
+
+.admin-schedule-page .main-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.admin-schedule-page input,
+.admin-schedule-page select,
+.admin-schedule-page button {
+  font-family: inherit;
+}
+
+/* ===== 본문 ===== */
+.admin-schedule-page .schedule-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== 페이지 타이틀 ===== */
+.admin-schedule-page .schedule-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+}
+
+.admin-schedule-page .schedule-title-row__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.admin-schedule-page .schedule-title-row__icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.admin-schedule-page .schedule-title-row__title {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.admin-schedule-page .schedule-title-row__desc {
+  margin: 0;
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ===== 캘린더 2단 레이아웃 ===== */
+.admin-schedule-page .schedule-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+}
+
+.admin-schedule-page .schedule-side,
+.admin-schedule-page .schedule-main {
+  min-width: 0;
+}
+
+.admin-schedule-page .schedule-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== 미니 캘린더 ===== */
+.admin-schedule-page .mini-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 260px;
+  padding: 14px 10px;
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.admin-schedule-page .mini-calendar__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.admin-schedule-page .mini-calendar__head strong {
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.admin-schedule-page .mini-calendar__nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.admin-schedule-page .mini-calendar__nav button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.admin-schedule-page .mini-calendar__nav button:first-child img {
+  transform: rotate(90deg);
+}
+
+.admin-schedule-page .mini-calendar__nav button:last-child img {
+  transform: rotate(-90deg);
+}
+
+.admin-schedule-page .mini-calendar__nav img {
+  display: block;
+  width: 11px;
+  height: 6px;
+}
+
+.admin-schedule-page .mini-calendar__week,
+.admin-schedule-page .mini-calendar__days {
+  display: grid;
+  grid-template-columns: repeat(7, 34px);
+  justify-content: start;
+  text-align: center;
+}
+
+.admin-schedule-page .mini-calendar__week span,
+.admin-schedule-page .mini-calendar__days span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  box-sizing: border-box;
+  font-size: 12px;
+  line-height: normal;
+}
+
+.admin-schedule-page .mini-calendar__week {
+  color: #6c788b;
+  font-weight: 400;
+}
+
+.admin-schedule-page .mini-calendar__days {
+  color: #333;
+  font-weight: 400;
+}
+
+.admin-schedule-page .mini-calendar .sun {
+  color: #e6002d;
+}
+
+.admin-schedule-page .mini-calendar .sat {
+  color: #1c6fff;
+}
+
+.admin-schedule-page .mini-calendar .muted {
+  color: rgba(108, 120, 139, 0.4);
+}
+
+.admin-schedule-page .mini-calendar .sun.muted {
+  color: rgba(230, 0, 45, 0.4);
+}
+
+.admin-schedule-page .mini-calendar .sat.muted {
+  color: rgba(28, 111, 255, 0.4);
+}
+
+.admin-schedule-page .mini-calendar .today {
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+  background: #ededed;
+  color: #333;
+  font-weight: 400;
+}
+
+/* ===== 캘린더 구분 체크 ===== */
+.admin-schedule-page .schedule-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 260px;
+}
+
+.admin-schedule-page .schedule-checks .calendar-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 14px 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.admin-schedule-page .schedule-checks .calendar-check input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.admin-schedule-page .schedule-checks .calendar-check__mark {
+  position: relative;
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #cbd3dd;
+  border-radius: 2px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.admin-schedule-page .schedule-checks .calendar-check strong {
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.admin-schedule-page .schedule-checks input:checked + .calendar-check__mark {
+  border-color: transparent;
+}
+
+.admin-schedule-page .schedule-checks input:checked + .calendar-check__mark::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  width: 6px;
+  height: 4px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg);
+  box-sizing: border-box;
+}
+
+.admin-schedule-page .schedule-checks input[value="all"]:checked + .calendar-check__mark {
+  background: #000;
+  border-color: #000;
+}
+
+.admin-schedule-page .schedule-checks input[value="1"]:checked + .calendar-check__mark {
+  background: #00bf47;
+  border-color: #00bf47;
+}
+
+.admin-schedule-page .schedule-checks input[value="2"]:checked + .calendar-check__mark {
+  background: #ef3b5b;
+  border-color: #ef3b5b;
+}
+
+.admin-schedule-page .schedule-checks input[value="3"]:checked + .calendar-check__mark {
+  background: #1c6fff;
+  border-color: #1c6fff;
+}
+
+.admin-schedule-page .schedule-checks input[value="4"]:checked + .calendar-check__mark {
+  background: #7646fd;
+  border-color: #7646fd;
+}
+
+.admin-schedule-page .schedule-checks input:indeterminate + .calendar-check__mark {
+  border-color: #000;
+  background: #000;
+}
+
+.admin-schedule-page .schedule-checks input:indeterminate + .calendar-check__mark::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  width: 6px;
+  height: 0;
+  border-left: 0;
+  border-bottom: 1.5px solid #fff;
+  transform: none;
+}
+
+/* ===== 메인 캘린더 툴바 ===== */
+.admin-schedule-page .schedule-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  margin-bottom: 14px;
+}
+
+.admin-schedule-page .schedule-toolbar__left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-schedule-page .schedule-toolbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-schedule-page .schedule-toolbar h2 {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.admin-schedule-page .schedule-today,
+.admin-schedule-page .schedule-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.admin-schedule-page .schedule-today {
+  min-width: 58px;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.admin-schedule-page .schedule-nav-btn {
+  width: 34px;
+  padding: 8px;
+}
+
+.admin-schedule-page .schedule-nav-btn img {
+  display: block;
+  width: 11px;
+  height: 6px;
+}
+
+.admin-schedule-page #schedulePrev img {
+  transform: rotate(90deg);
+}
+
+.admin-schedule-page #scheduleNext img {
+  transform: rotate(-90deg);
+}
+
+.admin-schedule-page .schedule-today:hover,
+.admin-schedule-page .schedule-nav-btn:hover {
+  background: #f6f8fb;
+}
+
+.admin-schedule-page .schedule-add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 6px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.admin-schedule-page .schedule-add-btn img {
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+.admin-schedule-page .schedule-add-btn:hover {
+  background: #16304f;
+}
+
+/* ===== 메인 캘린더 ===== */
+.admin-schedule-page .schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: 34px repeat(6, 90px);
+  width: 100%;
+  overflow: visible;
+  border: 1px solid #dadae2;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.admin-schedule-page .schedule-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 10px;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  box-sizing: border-box;
+}
+
+.admin-schedule-page .schedule-cell--head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 10px 20px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.admin-schedule-page .schedule-cell .sun,
+.admin-schedule-page .schedule-cell--head.sun {
+  color: #e6002d;
+}
+
+.admin-schedule-page .schedule-cell .sat,
+.admin-schedule-page .schedule-cell--head.sat {
+  color: #1c6fff;
+}
+
+.admin-schedule-page .schedule-cell.other > span {
+  color: rgba(108, 120, 139, 0.4);
+}
+
+.admin-schedule-page .schedule-cell.other > span.sun {
+  color: rgba(230, 0, 45, 0.4);
+}
+
+.admin-schedule-page .schedule-cell.other > span.sat {
+  color: rgba(28, 111, 255, 0.4);
+}
+
+.admin-schedule-page .schedule-cell > span {
+  flex-shrink: 0;
+}
+
+/* 일정 칩 */
+.admin-schedule-page .schedule-cell .schedule-event {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 3px 4px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: left;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.admin-schedule-page .schedule-event--general {
+  background: rgba(0, 191, 71, 0.15);
+  color: #00bf47;
+}
+
+.admin-schedule-page .schedule-event--urgent {
+  background: rgba(239, 59, 91, 0.15);
+  color: #ef3b5b;
+}
+
+.admin-schedule-page .schedule-event--notice {
+  background: rgba(28, 111, 255, 0.15);
+  color: #1c6fff;
+}
+
+.admin-schedule-page .schedule-event--work {
+  background: rgba(118, 70, 253, 0.15);
+  color: #7646fd;
+}
+
+.admin-schedule-page .schedule-cell:has(.schedule-event--span-2) {
+  overflow: visible;
+  z-index: 2;
+}
+
+.admin-schedule-page .schedule-cell:has(.schedule-event--span-2) + .schedule-cell {
+  background: transparent;
+}
+
+.admin-schedule-page .schedule-event--span-2 {
+  position: relative;
+  z-index: 2;
+  width: calc(200% + 1px);
+  max-width: none;
+}
+
+/* ===== 상세 Drawer ===== */
+.admin-schedule-page #scheduleDrawerOverlay {
+  z-index: 3000 !important;
+}
+
+.admin-schedule-page #scheduleDrawer {
+  z-index: 3001 !important;
+}
+
+@media (max-width: 1500px) {
+  .admin-schedule-page .schedule-layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .admin-schedule-page .mini-calendar,
+  .admin-schedule-page .schedule-checks {
+    width: 100%;
+  }
+
+  .admin-schedule-page .mini-calendar__week,
+  .admin-schedule-page .mini-calendar__days {
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+  }
+
+  .admin-schedule-page .mini-calendar__week span,
+  .admin-schedule-page .mini-calendar__days span {
+    width: auto;
+  }
+
+  .admin-schedule-page .schedule-grid {
+    grid-template-rows: 34px repeat(6, 84px);
+  }
+
+  .admin-schedule-page .schedule-title-row__desc {
+    white-space: normal;
+  }
+}

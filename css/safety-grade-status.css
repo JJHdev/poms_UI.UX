@@ -1,0 +1,1550 @@
+@import url("common-modal.css");
+
+/* 안전등급현황 — type3 flat (정보변경/자료수신 톤) */
+
+.safety-grade-status-page.fcr-flat-page {
+  background: #fff;
+}
+
+.safety-grade-status-page.fcr-flat-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-status-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.safety-grade-status-page.fcr-flat-page .type3-filter-strip .grade-filter,
+.safety-grade-status-page.fcr-flat-page form.grade-filter.type3-filter--strip {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-filter__row.type3-filter__fields,
+.safety-grade-status-page.fcr-flat-page .type3-filter__fields.grade-filter__row,
+.safety-grade-status-page.fcr-flat-page .grade-filter .type3-filter__fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex: 0 1 auto;
+  min-width: 0;
+  width: auto;
+  flex-wrap: nowrap;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-field--category {
+  flex: 0 1 auto;
+  min-width: 0;
+  width: auto;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-field__label {
+  display: block;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-category-box {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 8px 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  height: 100%;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-filter-actions.type3-filter-actions,
+.safety-grade-status-page.fcr-flat-page .grade-filter-actions {
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-btn {
+  height: 34px;
+  border-radius: 6px;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-btn--search {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-btn--search:hover {
+  background: #16304f;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-btn--excel {
+  height: 32px;
+  padding: 0 18px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  width: 100%;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-results__count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-results__left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  min-width: 0;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-results__label {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-results__meta {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6c788b;
+  letter-spacing: -0.26px;
+  line-height: 1.2;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-note {
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #f7f9fc;
+  font-size: 12px;
+  color: #6c788b;
+  line-height: 1.4;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-status-guide-note {
+  margin: 0;
+  font-size: 13px;
+  color: #6c788b;
+  line-height: 1.5;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-table-scroll {
+  overflow-x: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table.type3-table {
+  width: 100%;
+  min-width: 0 !important;
+  table-layout: fixed;
+}
+
+/* 관리주체 열을 조금 넓히고 등급·계 열은 균등 축소 */
+.safety-grade-status-page.fcr-flat-page .grade-summary-table col.col-agency,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table th.col-port,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table td.col-port,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table thead tr:first-child th:first-child,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tbody td:first-child,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tfoot td:first-child {
+  width: 18%;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table thead tr:first-child th[colspan],
+.safety-grade-status-page.fcr-flat-page .grade-summary-table thead tr:nth-child(2) th,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tbody td:not(:first-child):not(:last-child),
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tfoot td:not(:first-child):not(:last-child) {
+  width: auto;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table thead tr:first-child th:last-child,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tbody td:last-child,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tfoot td:last-child {
+  width: 10%;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table th,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table td {
+  height: 28px;
+  padding: 2px 4px;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table thead th {
+  height: 28px;
+  padding: 2px 4px;
+  background: #e8f1ff;
+  color: #111;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table thead tr:first-child th:first-child {
+  border-radius: 5px 0 0 0;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table thead tr:first-child th:last-child {
+  border-radius: 0 5px 0 0;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table thead tr:nth-child(2) th {
+  background: #f3f8ff;
+  color: #6c788b;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 4px;
+  border-right: 1px solid #dadae2;
+}
+
+/* 기타(2단 헤더 마지막) ↔ 계 사이 구분선 유지 — type3 last-child 무력화 */
+.safety-grade-status-page.fcr-flat-page .grade-summary-table.type3-table thead tr:nth-child(2) th:last-child {
+  border-right: 1px solid #dadae2 !important;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table.type3-table thead tr:first-child > th:last-child,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table.type3-table tbody td:last-child,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table.type3-table tfoot td:last-child {
+  border-right: none !important;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tfoot td,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table .grade-total-row td {
+  height: 28px;
+  padding: 2px 4px;
+  background: #e8f1ff !important;
+  font-size: 12px;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tfoot tr:last-child td:first-child,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table .grade-total-row td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table tfoot tr:last-child td:last-child,
+.safety-grade-status-page.fcr-flat-page .grade-summary-table .grade-total-row td:last-child {
+  border-radius: 0 0 5px 0;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table:not(:has(tfoot tr)) tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-summary-table:not(:has(tfoot tr)) tbody tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-modal__panel {
+  border-radius: 14px;
+  box-shadow: none;
+  border: 1px solid #dadae2;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-modal__filters {
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-modal__table-card,
+.safety-grade-status-page.fcr-flat-page .grade-modal__table-wrap {
+  border-radius: 6px;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-detail-table thead th {
+  height: 32px;
+  padding: 4px 8px;
+  background: #e8f1ff;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-detail-table tbody td {
+  height: 32px;
+  padding: 4px 8px;
+  font-size: 13px;
+}
+
+.safety-grade-status-page.fcr-flat-page .grade-detail-table tbody td.is-left {
+  text-align: left;
+  padding-left: 10px;
+}
+
+/* 상세현황 — 목록(안전등급현황)과 동일 fcr-flat 셸 */
+.safety-grade-detail-page.fcr-flat-page {
+  background: #fff;
+}
+
+.safety-grade-detail-page.fcr-flat-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.safety-grade-detail-page.fcr-flat-page .grade-detail-page,
+.safety-grade-detail-page.fcr-flat-page .type3-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  overflow: visible;
+}
+
+.safety-grade-detail-page.fcr-flat-page .type3-section-title__text strong {
+  font-weight: 600;
+  color: #1c6fff;
+  margin-left: 6px;
+}
+
+.safety-grade-detail-page.fcr-flat-page .grade-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.safety-grade-detail-page.fcr-flat-page .grade-table-scroll--detail {
+  overflow-x: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  max-height: none;
+}
+
+.safety-grade-detail-page.fcr-flat-page .grade-detail-table,
+.safety-grade-detail-page.fcr-flat-page .grade-detail-table.type3-table {
+  width: 100%;
+  min-width: 0 !important;
+  table-layout: fixed;
+}
+
+.safety-grade-detail-page .type3-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 8px 0 0;
+}
+
+.safety-grade-detail-page .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.safety-grade-detail-page .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.safety-grade-detail-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+}
+
+.safety-grade-detail-page .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.safety-grade-detail-page .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff !important;
+  border: 1px solid #1c6fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.safety-grade-detail-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.safety-grade-detail-page .pagination__btn[data-page-move="next"] img,
+.safety-grade-detail-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.safety-grade-detail-page .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.safety-grade-detail-page .pagination__btn svg {
+  display: none;
+}
+
+.safety-grade-detail-page .grade-detail-table .col-no {
+  width: 48px;
+  max-width: 48px;
+  min-width: 48px;
+  box-sizing: border-box;
+}
+
+.safety-grade-detail-page.fcr-flat-page .grade-detail-table thead th {
+  height: 28px;
+  padding: 2px 4px;
+  background: #e8f1ff;
+  color: #111;
+  font-weight: 500;
+  font-size: 12px;
+  white-space: nowrap;
+  position: static;
+}
+
+.safety-grade-detail-page.fcr-flat-page .grade-detail-table tbody td {
+  height: 32px;
+  padding: 2px 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.safety-grade-detail-page.fcr-flat-page .grade-detail-table tbody td.is-left {
+  text-align: left;
+  padding-left: 8px;
+}
+
+/* ===== legacy page header (unused on flat) ===== */
+.safety-grade-status-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+/* ===== Page header (시설물통합검색) ===== */
+.safety-grade-status-page .page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.safety-grade-status-page .page-header__bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 70px;
+  padding: 10px 14px 10px 24px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.safety-grade-status-page .page-header__titles {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.safety-grade-status-page .page-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.56px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.safety-grade-status-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 4px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.safety-grade-status-page .breadcrumb a {
+  color: #a4afc0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.safety-grade-status-page .breadcrumb__sep {
+  color: #a4afc0;
+  font-weight: 500;
+}
+
+.safety-grade-status-page .breadcrumb__current {
+  color: #6c788b;
+  font-weight: 500;
+}
+
+.safety-grade-status-page .breadcrumb a:hover {
+  color: #1c6fff;
+}
+
+/* ===== Page stack ===== */
+.grade-status-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.grade-status-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 24px 30px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.grade-divider {
+  flex-shrink: 0;
+  width: 100%;
+  height: 0;
+  border: 0;
+  border-top: 1px solid #dadae2;
+}
+
+/* ===== Filter (점검정보현황 패턴) ===== */
+.grade-filter-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.grade-filter-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.grade-filter-panel__head-main {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.grade-filter-panel__title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.grade-filter-panel__title-icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.grade-filter-panel__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.36px;
+  line-height: 1.2;
+}
+
+.grade-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.grade-filter__row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+}
+
+.grade-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.grade-field--category {
+  flex: 0 1 auto;
+}
+
+.grade-field__label {
+  display: block;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.grade-filter-actions {
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.grade-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.grade-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.grade-btn--search {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.grade-btn--search:hover {
+  background: #16304f;
+}
+
+.grade-btn--excel {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+}
+
+.grade-btn--excel:hover {
+  background: #f4f4fa;
+  border-color: #c5c5d0;
+}
+
+/* ===== Results ===== */
+.grade-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  width: 100%;
+}
+
+.grade-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  flex-wrap: wrap;
+}
+
+.grade-results__left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  min-width: 0;
+}
+
+.grade-results__count {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  min-width: 0;
+}
+
+.grade-results__label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.grade-results__meta {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+}
+
+.grade-results__meta strong {
+  font-weight: 600;
+  color: #1c6fff;
+}
+
+/* ===== Search filter ===== */
+.grade-category-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 10px 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 10px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.grade-check {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  min-width: 0;
+  padding: 10px;
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.grade-check input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.grade-check__box {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #dadae2;
+  border-radius: 2px;
+  background: #fff;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.grade-check input:checked + .grade-check__box {
+  border: none;
+  background: url("../assets/main/facility-statistics/check-on.svg") center / contain no-repeat;
+}
+
+.grade-check__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.grade-check.is-disabled,
+.grade-category-item.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.grade-check.is-disabled input,
+.grade-category-item.is-disabled input {
+  cursor: not-allowed;
+}
+
+.grade-summary-note {
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #f4f4fa;
+  font-size: 12px;
+  color: #6c788b;
+  line-height: 1.4;
+}
+
+.grade-status-guide-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: #6c788b;
+  line-height: 1.5;
+}
+
+/* ===== Summary table (시설물통계 통계내역) ===== */
+.grade-table-scroll {
+  overflow-x: auto;
+  border: 1px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.grade-table-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.grade-table-scroll--detail {
+  overflow: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  border: none;
+  border-radius: 0;
+}
+
+.grade-summary-table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  color: #333;
+}
+
+.grade-summary-table th,
+.grade-summary-table td {
+  height: auto;
+  padding: 10px;
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.grade-summary-table thead th {
+  background: rgba(28, 111, 255, 0.1);
+  color: #111;
+  font-weight: 500;
+  font-size: 14px;
+  border-color: #dadae2;
+  padding: 12px 10px 10px;
+  white-space: nowrap;
+}
+
+.grade-summary-table thead tr:first-child th:first-child {
+  border-radius: 12px 0 0 0;
+}
+
+.grade-summary-table thead tr:first-child th:last-child {
+  border-radius: 0 12px 0 0;
+  border-right: 0;
+}
+
+.grade-summary-table thead tr:nth-child(2) th {
+  background: #f6f9ff;
+  color: #6c788b;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 12px 10px 10px;
+}
+
+.grade-summary-table tbody td {
+  background: #fff;
+  color: #333;
+  font-weight: 400;
+}
+
+/* 표 맨 끝 열(계)만 우측 border 제거 — 2단 헤더의 기타에는 유지 */
+.grade-summary-table thead tr:first-child > th:last-child,
+.grade-summary-table tbody td:last-child,
+.grade-summary-table tbody th:last-child,
+.grade-summary-table tfoot td:last-child {
+  border-right: 0;
+}
+
+.grade-summary-table thead tr:nth-child(2) th:last-child {
+  border-right: 1px solid #dadae2;
+}
+
+.grade-summary-table.type3-table thead tr:nth-child(2) th:last-child {
+  border-right: 1px solid #dadae2 !important;
+}
+
+.grade-summary-table tbody tr.is-clickable {
+  cursor: default;
+}
+
+.grade-summary-table tbody tr.is-selected td {
+  background: #f6f9ff;
+}
+
+.grade-summary-table .col-port {
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+}
+
+.grade-summary-table tfoot td,
+.grade-summary-table .grade-total-row td {
+  padding: 10px;
+  border: none;
+  border-right: 1px solid #dadae2;
+  background: rgba(28, 111, 255, 0.1) !important;
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  border-bottom: none;
+}
+
+.grade-summary-table tfoot tr:last-child td:first-child,
+.grade-summary-table .grade-total-row td:first-child {
+  border-radius: 0 0 0 12px;
+}
+
+.grade-summary-table tfoot tr:last-child td:last-child,
+.grade-summary-table .grade-total-row td:last-child {
+  border-radius: 0 0 12px 0;
+  border-right: 0;
+}
+
+.grade-summary-table:not(:has(tfoot tr)) tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 12px;
+}
+
+.grade-summary-table:not(:has(tfoot tr)) tbody tr:last-child td:last-child {
+  border-radius: 0 0 12px 0;
+  border-right: 0;
+}
+
+.grade-summary-table:not(:has(tfoot tr)) tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.grade-summary-table tfoot .col-port,
+.grade-summary-table .grade-total-row .col-port {
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+}
+
+.grade-summary-table td.grade-click-cell,
+.grade-summary-table [data-grade],
+.grade-summary-table [data-grade-all] {
+  cursor: pointer;
+  color: #333;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.grade-summary-table .col-port[data-grade-all] {
+  font-weight: 600;
+  color: #333;
+}
+
+.grade-summary-table [data-grade]:hover,
+.grade-summary-table [data-grade-all]:hover,
+.grade-summary-table td.grade-click-cell:hover {
+  background: #f6f9ff;
+  color: #333;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.grade-empty-cell {
+  padding: 28px 16px !important;
+  text-align: center;
+  color: #8c9aac;
+  background: #fafbfc !important;
+  border-right: 0 !important;
+}
+
+.grade-badge {
+  display: inline;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.grade-badge--a,
+.grade-badge--b,
+.grade-badge--c,
+.grade-badge--d,
+.grade-badge--e,
+.grade-badge--other,
+.grade-badge--good,
+.grade-badge--normal,
+.grade-badge--poor {
+  background: transparent;
+  color: inherit;
+  border: 0;
+}
+
+/* ===== Detail modal (총괄표 상세 / 시설물 정보 모달 패턴) ===== */
+body.grade-modal-open {
+  overflow: hidden;
+}
+
+.grade-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.grade-modal[hidden] {
+  display: none !important;
+}
+
+.grade-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.grade-modal__panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(1200px, 100%);
+  max-width: 1200px;
+  max-height: calc(100vh - 48px);
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(13, 31, 53, 0.18);
+  overflow: hidden;
+}
+
+.grade-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-shrink: 0;
+  padding: 20px 24px;
+  background: #fff;
+  border-bottom: 1px solid #d1d1d1;
+  box-sizing: border-box;
+}
+
+.grade-modal__head-main {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.grade-modal__title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.56px;
+  line-height: 1.2;
+}
+
+.grade-modal__title strong {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+}
+
+.grade-modal__title strong:empty {
+  display: none;
+}
+
+.grade-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #dadae2;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.grade-modal__close img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.grade-modal__close:hover {
+  background: #c8c8d0;
+}
+
+.grade-modal__stack {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.grade-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px 24px 20px;
+  background: #fff;
+}
+
+.grade-modal__filters {
+  margin: 0;
+  padding: 12px 14px;
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.grade-modal__filter-row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.grade-modal__filter-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  flex: 0 1 140px;
+  min-width: 0;
+}
+
+.grade-modal__filter-field--grow {
+  flex: 0 1 240px;
+  min-width: 0;
+}
+
+.grade-modal__filter-field label {
+  margin: 0;
+  padding: 0 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6c788b;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.grade-modal__filter-field select,
+.grade-modal__filter-field input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  height: 38px;
+  padding: 0 28px 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  color: #111;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.grade-modal__filter-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("../assets/main/facility-statistics/angle-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px 12px;
+  cursor: pointer;
+}
+
+.grade-modal__filter-field--grow input[type="text"] {
+  width: 100%;
+  max-width: none;
+  padding-right: 12px;
+}
+
+.grade-modal__filter-field select:focus,
+.grade-modal__filter-field input[type="text"]:focus {
+  border-color: #1c6fff;
+}
+
+.grade-modal__filter-actions {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.grade-modal__table-card {
+  flex: 0 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0.5px solid #dadae2;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.grade-modal__table-wrap {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: min(480px, calc(100vh - 320px));
+  width: 100%;
+  overflow: auto;
+  margin: 0;
+  background: #fff;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(73, 112, 162, 0.35) transparent;
+}
+
+.grade-modal__table-wrap::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.grade-modal__table-wrap::-webkit-scrollbar-thumb {
+  background: rgba(73, 112, 162, 0.25);
+  border-radius: 4px;
+}
+
+.grade-detail-table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 12px;
+}
+
+.grade-detail-table thead th {
+  height: 36px;
+  padding: 6px 8px;
+  background: rgba(28, 111, 255, 0.1);
+  border: none;
+  border-bottom: 0.5px solid #dadae2;
+  border-right: 0.5px solid #dadae2;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.grade-detail-table thead th:last-child {
+  border-right: none;
+}
+
+.grade-detail-table tbody td {
+  height: 32px;
+  padding: 6px 8px;
+  border: none;
+  border-bottom: 0.5px solid #dadae2;
+  border-right: 0.5px solid #dadae2;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.grade-detail-table tbody td:last-child {
+  border-right: none;
+}
+
+.grade-detail-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.grade-detail-table tbody tr:hover td {
+  background: rgba(28, 111, 255, 0.04);
+}
+
+.grade-modal__foot {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  min-height: 38px;
+}
+
+.grade-modal__pagination {
+  grid-column: 2;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.grade-modal__foot-actions {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.grade-modal .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+  transform: none;
+}
+
+.grade-modal .pagination__btn:first-child,
+.grade-modal .pagination__btn:last-child {
+  margin-left: 0;
+  border-radius: 0;
+}
+
+.grade-modal .pagination__btn:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+  border-color: transparent;
+  background: #fff;
+  z-index: 1;
+}
+
+.grade-modal .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.grade-modal .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff !important;
+  border: 1px solid #1c6fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.grade-modal .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.grade-modal .pagination__btn[data-page-move="next"] img,
+.grade-modal .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.grade-modal .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.grade-modal__btn-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  min-width: 96px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.grade-modal__btn-close:hover {
+  background: #f9f9fa;
+}
+
+@media (max-width: 1200px) {
+  .grade-category-box {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 38px;
+  }
+
+  .grade-modal__filter-actions {
+    margin-left: 0;
+  }
+}
+

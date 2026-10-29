@@ -1,0 +1,388 @@
+@import url("common-modal.css");
+
+/* 안전점검보고서 — type3 flat (자료실·정보변경 요청과 동일 셸) */
+
+.safety-inspection-report-page.fcr-flat-page .main-content,
+.safety-inspection-report-page.fcr-flat-page .type3-page {
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+.safety-inspection-report-page.fcr-flat-page .safety-report-filter-strip {
+  min-height: 0;
+  padding: 12px 0;
+  overflow: hidden;
+}
+
+.safety-inspection-report-page.fcr-flat-page .safety-report-filter {
+  align-items: flex-end;
+}
+
+.safety-inspection-report-page.fcr-flat-page .safety-report-filter__fields {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.safety-inspection-report-page.fcr-flat-page .safety-report-filter .type3-filter-row {
+  flex-wrap: nowrap;
+}
+
+.safety-inspection-report-page.fcr-flat-page .safety-report-filter .type3-field {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.safety-inspection-report-page.fcr-flat-page .safety-report-filter .type3-field--grow {
+  flex: 2.4 1 0;
+}
+
+.safety-inspection-report-page.fcr-flat-page .safety-report-filter-actions {
+  flex: 0 0 auto;
+  align-self: flex-end;
+  padding-bottom: 0;
+}
+
+.safety-inspection-report-page.fcr-flat-page .safety-report-filter select.is-placeholder {
+  color: #999;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table-wrap {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-no {
+  width: 4%;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-year {
+  width: 6%;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-agency {
+  width: 11%;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-port,
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-subport,
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-class,
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-ftype {
+  width: 6%;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-itype {
+  width: 9%;
+  white-space: nowrap;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-name {
+  width: 10%;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-report,
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-request,
+.safety-inspection-report-page.fcr-flat-page .type3-table .col-history {
+  width: 8%;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table thead th,
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td {
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: 13px;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td.col-name {
+  text-align: center;
+  padding-left: 4px;
+  padding-right: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td.col-itype {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td.col-agency,
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td.col-port,
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td.col-subport {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td.col-report,
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td.col-request,
+.safety-inspection-report-page.fcr-flat-page .type3-table tbody td.col-history {
+  padding: 4px 2px;
+  overflow: hidden;
+}
+
+.safety-inspection-report-page.fcr-flat-page .type3-list-guide-note {
+  margin: 0;
+}
+
+/* 테이블 액션 버튼 */
+.safety-inspection-report-page .safety-report-view-btn,
+.safety-inspection-report-page .safety-report-download-btn,
+.safety-inspection-report-page .safety-report-request-btn,
+.safety-inspection-report-page .safety-report-history-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 28px;
+  padding: 0 4px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  box-sizing: border-box;
+}
+
+.safety-inspection-report-page .safety-report-view-btn img,
+.safety-inspection-report-page .safety-report-download-btn img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.safety-inspection-report-page .safety-report-view-btn:hover,
+.safety-inspection-report-page .safety-report-download-btn:hover,
+.safety-inspection-report-page .safety-report-request-btn:hover,
+.safety-inspection-report-page .safety-report-history-btn:hover {
+  background: #f4f4fa;
+  border-color: #c5c5d0;
+}
+
+.safety-inspection-report-page .safety-report-request-btn.is-requested {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: #dadae2;
+  color: #999;
+  cursor: default;
+}
+
+.safety-inspection-report-page .safety-report-request-btn.is-approved-done {
+  background: rgba(28, 111, 255, 0.04);
+  border-color: #1c6fff;
+  color: #1c6fff;
+  cursor: default;
+}
+
+/* 다운로드 신청 모달 */
+.safety-inspection-report-page .report-request-modal__panel {
+  width: min(560px, 100%);
+}
+
+.safety-inspection-report-page .report-request-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 24px;
+}
+
+.safety-inspection-report-page .report-request-label {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+
+.safety-inspection-report-page .report-request-reason {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  line-height: 1.5;
+  color: #111;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.safety-inspection-report-page .report-request-reason:focus {
+  outline: none;
+  border-color: #1c6fff;
+  box-shadow: 0 0 0 2px rgba(28, 111, 255, 0.12);
+}
+
+.safety-inspection-report-page .report-request-reason::placeholder {
+  color: #999;
+}
+
+.safety-inspection-report-page .fcr-modal__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 92px;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s;
+}
+
+.safety-inspection-report-page .fcr-modal__btn-primary:hover {
+  background: #16304f;
+}
+
+/* 결재이력 모달 */
+.safety-inspection-report-page .report-history-modal__panel {
+  width: min(900px, 100%);
+}
+
+.safety-inspection-report-page .report-history-table td.is-left {
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.safety-inspection-report-page .report-history-table .is-reject {
+  color: #e24b4a;
+  font-weight: 700;
+}
+
+.safety-inspection-report-page .report-history-table td.empty,
+.safety-inspection-report-page .report-history-table td.is-empty {
+  padding: 28px 12px;
+  color: #9ca3af;
+}
+
+/* 보고서 VIEW 모달 */
+.report-view-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.report-view-modal[hidden] {
+  display: none;
+}
+
+.report-view-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 31, 53, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.report-view-modal__panel {
+  position: relative;
+  width: min(860px, 94vw);
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.15), 4px 4px 7px rgba(0, 0, 0, 0.04);
+}
+
+.report-view-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid #dadae2;
+  background: #f8fafc;
+}
+
+.report-view-modal__head h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.report-view-modal__close {
+  border: none;
+  background: none;
+  font-size: 22px;
+  line-height: 1;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.report-view-modal__body {
+  padding: 18px 20px;
+  overflow-y: auto;
+}
+
+.report-view-modal__body--pdf {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.report-view-pdf {
+  width: 100%;
+  height: 76vh;
+  border: none;
+  background: #525659;
+}
+
+.report-view-modal__foot {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-top: 1px solid #dadae2;
+}
+
+.btn-view-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 92px;
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid #0d1f35;
+  border-radius: 10px;
+  background: #fff;
+  color: #0d1f35;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}

@@ -1,0 +1,126 @@
+/* 사용자 페이지 테이블 — 페이징·정렬 공통 */
+
+.user-table-foot,
+.crud-results-foot,
+.insp-sys-list-foot,
+.insp-overview-detail-foot,
+.notice-board__foot,
+.results-panel__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 4px;
+}
+
+.user-table-foot .pagination,
+.crud-results-foot .pagination,
+.insp-sys-list-foot .pagination,
+.insp-overview-detail-foot .pagination,
+.notice-board__foot .pagination,
+.results-panel__foot .pagination,
+.system-pagination {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+}
+
+.insp-sys-list-foot__side,
+.insp-overview-detail-foot__side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.insp-sys-page-size,
+.page-size-select,
+.crud-page-size {
+  height: 36px;
+  min-width: 112px;
+  padding: 0 32px 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #374151;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 10px center no-repeat;
+  appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.system-sort {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.system-sort i {
+  position: relative;
+  width: 7px;
+  height: 10px;
+  opacity: 0.7;
+  flex: 0 0 auto;
+}
+
+.system-sort i::before,
+.system-sort i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+}
+
+.system-sort i::before {
+  top: 0;
+  border-bottom: 4px solid currentColor;
+}
+
+.system-sort i::after {
+  bottom: 0;
+  border-top: 4px solid currentColor;
+}
+
+.system-sort.is-asc i::after,
+.system-sort.is-desc i::before {
+  opacity: 0.24;
+}
+
+.results-panel__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 4px;
+}
+
+.results-panel__foot .pagination {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+}
+
+.grade-panel__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  margin-top: 4px;
+}
+
+.grade-panel__foot .pagination {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+}

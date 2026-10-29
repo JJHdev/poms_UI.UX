@@ -1,0 +1,323 @@
+@import url("common-modal.css");
+
+/* ===== Facility detail — vulnerable (취약시설물 중점관리) ===== */
+
+.vulnerable-section__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.regular-table-wrap--vulnerable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 6px;
+}
+
+.inspection-table--vulnerable-history {
+  min-width: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.inspection-table--vulnerable-history col.col-no { width: 6.349%; }
+.inspection-table--vulnerable-history col.col-date { width: 12%; }
+.inspection-table--vulnerable-history col.col-author { width: 10%; }
+.inspection-table--vulnerable-history col.col-plan { width: 45%; }
+.inspection-table--vulnerable-history col.col-restrict { width: 13.325%; }
+.inspection-table--vulnerable-history col.col-notice { width: 13.326%; }
+
+.inspection-table--vulnerable-history thead th {
+  font-size: 14px;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inspection-table--vulnerable-history tbody td {
+  font-size: 14px;
+  padding: 0 10px;
+  text-align: center;
+  white-space: nowrap;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inspection-table--vulnerable-history tbody td.is-left {
+  text-align: left;
+}
+
+.vulnerable-list-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.vulnerable-list-foot .pagination {
+  justify-content: center;
+}
+
+.vulnerable-list-foot__right {
+  display: none;
+}
+
+.vulnerable-list-foot__total {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.vulnerable-list-foot__size select {
+  height: 30px;
+  min-width: 120px;
+  padding: 0 32px 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+  font-size: 13px;
+  font-family: inherit;
+  color: #374151;
+  appearance: none;
+}
+
+body.vulnerable-modal-open {
+  overflow: hidden;
+}
+
+.vulnerable-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.vulnerable-modal[hidden],
+.vulnerable-modal__row-action-plan[hidden],
+.vulnerable-modal__foot-actions [hidden] {
+  display: none !important;
+}
+
+.vulnerable-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.vulnerable-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(880px, 100%);
+  max-height: calc(100vh - 48px);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+}
+
+.vulnerable-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.vulnerable-modal__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.vulnerable-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.vulnerable-modal__close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.vulnerable-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px 24px 24px;
+}
+
+.vulnerable-modal__table {
+  table-layout: fixed;
+}
+
+.vulnerable-modal__table th {
+  width: 120px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.vulnerable-modal__table td {
+  background: #fff;
+}
+
+.vulnerable-modal__cell-input,
+.vulnerable-modal__cell-textarea,
+.vulnerable-modal__cell-select {
+  width: 100%;
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #111827;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.vulnerable-modal__cell-select {
+  padding-right: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+  cursor: default;
+}
+
+.vulnerable-modal__form.is-edit-mode .vulnerable-modal__cell-select:not(:disabled),
+.vulnerable-modal__form.is-add-mode .vulnerable-modal__cell-select:not(:disabled) {
+  padding-right: 28px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.vulnerable-modal__form.is-readonly .vulnerable-modal__cell-select {
+  background-image: none;
+  padding-right: 10px;
+}
+
+.vulnerable-modal__cell-textarea {
+  display: block;
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.vulnerable-modal__form:not(.is-readonly) .vulnerable-modal__cell-input:not(:disabled):not([readonly]),
+.vulnerable-modal__form:not(.is-readonly) .vulnerable-modal__cell-textarea:not([readonly]),
+.vulnerable-modal__form.is-edit-mode .vulnerable-modal__cell-select:not(:disabled),
+.vulnerable-modal__form.is-add-mode .vulnerable-modal__cell-select:not(:disabled) {
+  border-color: #d1d5db;
+  background-color: #fff;
+}
+
+.vulnerable-modal__cell-input:focus,
+.vulnerable-modal__cell-textarea:focus,
+.vulnerable-modal__cell-select:focus:not(:disabled) {
+  outline: none;
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.vulnerable-modal__form.is-readonly .vulnerable-modal__cell-input,
+.vulnerable-modal__form.is-readonly .vulnerable-modal__cell-textarea,
+.vulnerable-modal__form.is-readonly .vulnerable-modal__cell-select {
+  pointer-events: none;
+  opacity: 1;
+  color: #111827;
+  font-weight: 400;
+  -webkit-text-fill-color: #111827;
+}
+
+.vulnerable-modal__form.is-edit-mode .vulnerable-modal__cell-input[readonly],
+.vulnerable-modal__form.is-edit-mode .vulnerable-modal__cell-input:disabled,
+.vulnerable-modal__form.is-add-mode .vulnerable-modal__cell-input[readonly],
+.vulnerable-modal__form.is-add-mode .vulnerable-modal__cell-input:disabled {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  -webkit-text-fill-color: #6b7280;
+}
+
+.vulnerable-modal__field-with-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vulnerable-modal__field-with-btn .vulnerable-modal__cell-input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.vulnerable-modal__inline-btn {
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #f9fafb;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.vulnerable-modal__inline-btn:hover {
+  background: #f3f4f6;
+}
+
+.vulnerable-modal__foot {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.vulnerable-modal__foot-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.inspection-table--vulnerable-history tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.inspection-table--vulnerable-history tbody tr.is-clickable:hover {
+  background: #f9fafb;
+}
+
+.inspection-table--vulnerable-history tbody tr.is-clickable:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+}

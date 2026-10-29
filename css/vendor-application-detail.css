@@ -1,0 +1,693 @@
+/* 시설물신청 상세 — 관리자 시안 기준(플랫 메타 그리드 + 공지사항 표 규격) */
+
+.vendor-application-detail-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+  background: #fff;
+  overflow: visible;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== 상단 액션 버튼 ===== */
+.vendor-application-detail-page .fmd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 96px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+.vendor-application-detail-page .fmd-btn img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.vendor-application-detail-page .fmd-btn--history {
+  background: #fff;
+  color: #111;
+}
+
+.vendor-application-detail-page .fmd-btn--history:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+
+/* ===== 패널 헤드 ===== */
+.vendor-application-detail-page .fmd-panel__head {
+  justify-content: flex-start;
+}
+
+.vendor-application-detail-page .fmd-panel__title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.vendor-application-detail-page .fmd-panel__title-icon img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.vad-panel__note {
+  margin: 0 0 0 auto;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.vad-panel__note strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+/* ===== 메타 그리드 (플랫 격자) ===== */
+.vad-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+}
+
+.vad-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  border-top: 1px solid #dadae2;
+  border-left: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.vad-meta__row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  min-height: 28px;
+}
+
+.vad-meta__label {
+  display: flex;
+  align-items: center;
+  width: 122px;
+  flex-shrink: 0;
+  padding: 4px 14px;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  background: #f6f9ff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.vad-meta__value {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 4px 14px;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.3;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+/* 3열을 채우기 위한 빈 칸 */
+.vad-meta__row--filler {
+  display: block;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* 값 셀 안의 입력 요소 */
+.vad-meta__input,
+.vad-meta__select {
+  width: 100%;
+  min-width: 0;
+  height: 22px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #333;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.3;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.vad-meta__input[readonly] {
+  color: #333;
+  cursor: default;
+}
+
+.vad-meta__select {
+  padding-right: 22px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #6c788b 50%),
+    linear-gradient(135deg, #6c788b 50%, transparent 50%);
+  background-position: calc(100% - 10px) 9px, calc(100% - 5px) 9px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* 파일 다운로드 등 링크 */
+.vad-meta__value a {
+  color: #1c6fff;
+  text-decoration: none;
+}
+
+.vad-meta__value a:hover {
+  text-decoration: underline;
+}
+
+/* ===== 신청 시설물 목록 ===== */
+.vad-table-wrap {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: transparent;
+}
+
+.vad-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
+  font-size: 13px;
+}
+
+.vad-table thead th,
+.vad-table tbody td {
+  height: 32px;
+  max-height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.vad-table thead th {
+  background: #e9f1fe;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  color: #111;
+  font-weight: 500;
+}
+
+.vad-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+.vad-table thead th:last-child {
+  border-right: 0;
+  border-radius: 0 6px 0 0;
+}
+
+.vad-table tbody td {
+  background: #fff;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  color: #333;
+  font-weight: 400;
+}
+
+.vad-table tbody td:last-child {
+  border-right: 0;
+}
+
+.vad-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.vad-table tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 6px;
+}
+
+.vad-table tbody tr:last-child td:last-child {
+  border-radius: 0 0 6px 0;
+}
+
+.vad-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.vad-table tbody td.is-left {
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: left;
+}
+
+.vad-table .col-no,
+.vad-table thead th:first-child {
+  width: 48px;
+}
+
+/* 데이터 없음 */
+.vad-table tbody tr.is-empty td,
+.vad-table tbody td.is-empty {
+  height: 120px;
+  max-height: none;
+  line-height: 1.4;
+  color: #8993a1;
+  text-align: center !important;
+}
+
+/* ===== 페이지네이션 (flat) ===== */
+.vad-facility-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 0;
+}
+
+.vendor-application-detail-page .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.vendor-application-detail-page .pagination__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+  transform: none;
+}
+
+.vendor-application-detail-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.vendor-application-detail-page .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.vendor-application-detail-page .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.vendor-application-detail-page .pagination__btn[data-page-move] {
+  background-image: none;
+}
+
+.vendor-application-detail-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.vendor-application-detail-page .pagination__btn[data-page-move="next"] img,
+.vendor-application-detail-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.vendor-application-detail-page .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.vendor-application-detail-page .pagination__btn svg {
+  display: none;
+}
+
+.vendor-application-detail-page .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+/* ===== 결재이력 드로어 ===== */
+.vendor-application-detail-page .fca-drawer {
+  width: min(560px, calc(100vw - 40px));
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+}
+
+.vendor-application-detail-page .fca-drawer-overlay {
+  background: rgba(13, 31, 53, 0.2);
+}
+
+.vendor-application-detail-page .fca-drawer__head {
+  min-height: 0;
+  padding: 22px 24px 14px;
+  border-bottom: 1px solid #dadae2;
+  background: #fff;
+}
+
+.vendor-application-detail-page .fca-drawer__title {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.vendor-application-detail-page .fca-drawer__close {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.vendor-application-detail-page .fca-drawer__close:hover {
+  background: #f6f8fb;
+}
+
+.vendor-application-detail-page .fca-drawer__close img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.vendor-application-detail-page .fca-drawer__body {
+  padding: 18px 24px 24px;
+}
+
+.vendor-application-detail-page .fca-hist-summary__name {
+  max-width: 100%;
+  white-space: normal;
+}
+
+@media (max-width: 1400px) {
+  .vad-meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vad-meta__row--filler {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .vad-meta-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ===== 승인 / 반려 처리 ===== */
+.vendor-application-detail-page .vad-approve-btn {
+  min-width: 88px;
+  border-color: #1c6fff;
+  background: #1c6fff;
+  color: #fff;
+}
+
+.vendor-application-detail-page .vad-approve-btn:hover {
+  border-color: #155fdc;
+  background: #155fdc;
+}
+
+.vendor-application-detail-page .vad-reject-btn {
+  min-width: 88px;
+  border-color: #e6002d;
+  background: #fff;
+  color: #e6002d;
+}
+
+.vendor-application-detail-page .vad-reject-btn:hover {
+  background: #fff5f7;
+}
+
+.vad-review-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.vad-review-status.is-pending {
+  background: #f4f4fa;
+  color: #6c788b;
+}
+
+.vad-review-status.is-approved {
+  background: rgba(28,111,255,.08);
+  color: #1c6fff;
+}
+
+.vad-review-status.is-rejected {
+  background: rgba(230,0,45,.06);
+  color: #e6002d;
+}
+
+/* ===== 반려 사유 입력 모달 ===== */
+.vad-reject-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0,0,0,.28);
+}
+
+.vad-reject-modal.open {
+  display: flex;
+}
+
+.vad-reject-dialog {
+  width: min(460px, calc(100vw - 40px));
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.18);
+  overflow: hidden;
+}
+
+.vad-reject-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid #ededed;
+}
+
+.vad-reject-title {
+  margin: 0;
+  color: #111;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.vad-reject-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f4f4fa;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.vad-reject-close:hover {
+  background: #e9edf3;
+}
+
+.vad-reject-body {
+  padding: 18px 20px;
+}
+
+.vad-reject-label {
+  display: block;
+  margin: 0 0 8px;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.vad-reject-label .req {
+  color: #e6002d;
+}
+
+.vad-reject-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px 14px;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.vad-reject-textarea::placeholder {
+  color: #9aa4b2;
+}
+
+.vad-reject-textarea:focus {
+  border-color: #1c6fff;
+}
+
+.vad-reject-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 20px 20px;
+}
+
+.vad-reject-actions button {
+  min-width: 82px;
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.vad-reject-cancel {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #333;
+}
+
+.vad-reject-cancel:hover {
+  background: #f6f8fb;
+}
+
+.vad-reject-submit {
+  border: 1px solid #e6002d;
+  background: #e6002d;
+  color: #fff;
+}
+
+.vad-reject-submit:hover {
+  border-color: #c90027;
+  background: #c90027;
+}
+
+/* 기존 vendor-application-detail.js 호환용: 화면에는 노출하지 않음 */
+.vad-meta__select--compat {
+  display: none !important;
+}
+

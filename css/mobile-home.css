@@ -1,0 +1,156 @@
+/* ===== POMS Mobile Home ===== */
+
+.mobile-home__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.mobile-stat-card {
+  padding: 16px 14px;
+  background: var(--mobile-white);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.mobile-stat-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.mobile-stat-card__icon--blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.mobile-stat-card__icon--orange {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.mobile-stat-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-stat-card__label {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mobile-muted);
+}
+
+.mobile-stat-card__value {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--mobile-text);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.mobile-stat-card__value em {
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mobile-muted);
+  margin-left: 2px;
+}
+
+.mobile-home__section-title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mobile-text);
+}
+
+.mobile-menu {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-menu__link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 14px;
+  background: var(--mobile-white);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s;
+}
+
+.mobile-menu__link:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-menu__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.mobile-menu__icon--blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.mobile-menu__icon--green {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.mobile-menu__icon--orange {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.mobile-menu__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.mobile-menu__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-menu__title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mobile-text);
+}
+
+.mobile-menu__desc {
+  margin: 0;
+  font-size: 12px;
+  color: var(--mobile-muted);
+  line-height: 1.45;
+}
+
+.mobile-menu__chevron {
+  flex-shrink: 0;
+  color: #d1d5db;
+}
+
+.mobile-menu__chevron svg {
+  width: 20px;
+  height: 20px;
+}

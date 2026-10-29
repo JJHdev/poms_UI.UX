@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 상세 | POMS 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-notice-detail.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout notice-detail-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fmd-crumb-row">
+      <button type="button" class="fmd-back-btn" id="noticeBackBtn" aria-label="목록으로">
+        <img src="assets/main/facility-statistics/figma188/icon-angle-down-clean.svg" alt="" width="16" height="16">
+      </button>
+      <nav class="fmd-breadcrumb" aria-label="현재 위치">
+        <a href="admin-notices.html">게시판 관리</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <a href="admin-notices.html">공지사항</a>
+        <span class="fmd-breadcrumb__sep" aria-hidden="true">&gt;</span>
+        <span class="fmd-breadcrumb__current">공지사항 상세</span>
+      </nav>
+    </div>
+
+    <div class="nd-stack">
+      <section class="nd-title-card" aria-label="공지 제목">
+        <div class="nd-title-card__left">
+          <span class="nd-title-card__icon" aria-hidden="true">
+            <img src="assets/admin-notices/icon-notice.svg" alt="" width="20" height="20">
+          </span>
+          <h2 class="nd-title-card__title" id="noticeDetailTitle">공지사항 #49</h2>
+          <span class="nd-title-card__badge" id="noticePinBadge" hidden>상단고정</span>
+        </div>
+        <div class="nd-title-card__actions">
+          <button type="button" class="nd-btn nd-btn--delete" id="btnNoticeDelete">
+            <img src="assets/admin-notices/icon-delete2.svg" alt="" width="16" height="16">
+            삭제
+          </button>
+          <button type="button" class="nd-btn nd-btn--edit" id="btnNoticeEdit">
+            <img src="assets/admin-notices/icon-edit.svg" alt="" width="18" height="18">
+            수정하기
+          </button>
+        </div>
+      </section>
+
+      <section class="nd-panel">
+        <div class="nd-panel__meta">
+          <div class="nd-meta-row">
+            <div class="nd-meta-cell nd-meta-cell--label nd-meta-cell--first">작성자</div>
+            <div class="nd-meta-cell nd-meta-cell--value" data-field="author">관리자</div>
+            <div class="nd-meta-cell nd-meta-cell--label">작성일</div>
+            <div class="nd-meta-cell nd-meta-cell--value" data-field="date">2026-01-15 09:00</div>
+            <div class="nd-meta-cell nd-meta-cell--label">상단고정</div>
+            <div class="nd-meta-cell nd-meta-cell--value" data-field="pinned">고정</div>
+            <div class="nd-meta-cell nd-meta-cell--label">노출여부</div>
+            <div class="nd-meta-cell nd-meta-cell--value" data-field="visible">노출</div>
+            <div class="nd-meta-cell nd-meta-cell--label">조회수</div>
+            <div class="nd-meta-cell nd-meta-cell--value nd-meta-cell--last" data-field="views">99</div>
+          </div>
+        </div>
+
+        <div class="nd-content-head">내용</div>
+
+        <div class="nd-panel__body">
+          <div class="nd-content" id="noticeDetailBody"></div>
+        </div>
+
+        <div class="nd-panel__attach" id="noticeAttachRow">
+          <span class="nd-attach-label">첨부파일</span>
+          <a href="#" class="nd-attach-link" id="noticeAttach">
+            <img src="assets/admin-notices/icon-attach.svg" alt="" width="18" height="18">
+            <span id="noticeAttachText">POMS_운영관리_지침.pdf (540KB)</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/admin-notices-data.js"></script>
+  <script src="js/admin-notice-detail.js"></script>
+  <script>
+    PomsSidebarAdmin.mount('#sidebar-root', { active: 'board-notice' });
+  </script>
+</body>
+</html>

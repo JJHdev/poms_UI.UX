@@ -1,0 +1,190 @@
+/* 계류시설 관리 — facility-management flat type3 패턴 */
+
+.mooring-facility-page.fcr-flat-page {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  margin: 0;
+  min-width: 1240px;
+}
+
+.mooring-facility-page.fcr-flat-page .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.mooring-facility-page .type3-page > .admin-sub-tabs {
+  margin-bottom: 0;
+}
+
+.mooring-facility-page .mooring-filter-fields {
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+
+.mooring-facility-page .mooring-filter-fields > .type3-field {
+  flex: 0 1 160px;
+  max-width: 200px;
+}
+
+.mooring-facility-page .mooring-filter-fields > .type3-field--sm {
+  flex: 0 1 120px;
+  max-width: 140px;
+}
+
+.mooring-facility-page .mooring-filter-fields > .type3-field--capacity {
+  flex: 0 1 170px;
+  max-width: 200px;
+}
+
+.mooring-facility-page .mooring-filter-fields > .type3-field--grow {
+  flex: 1 1 200px;
+  max-width: 280px;
+}
+
+@media (max-width: 1600px) {
+  .mooring-facility-page .mooring-filter-fields {
+    flex-wrap: wrap;
+  }
+
+  .mooring-facility-page .mooring-filter-fields > .type3-field,
+  .mooring-facility-page .mooring-filter-fields > .type3-field--sm,
+  .mooring-facility-page .mooring-filter-fields > .type3-field--capacity,
+  .mooring-facility-page .mooring-filter-fields > .type3-field--grow {
+    flex: 1 1 160px;
+    max-width: none;
+  }
+}
+
+/* ===== Table — 시설물 관리(type3)와 동일 행 높이 32px ===== */
+.mooring-facility-page .mooring-table {
+  min-width: 0;
+  table-layout: fixed;
+  width: 100%;
+  font-size: 13px;
+}
+
+.mooring-facility-page .mooring-table col.col-no { width: 56px; }
+.mooring-facility-page .mooring-table col.col-name { width: 16%; }
+/* 관리주체·항명·세부항명 — 최장 텍스트(+패딩)에 맞춤 */
+.mooring-facility-page .mooring-table col.col-agency { width: 140px; } /* 부산지방해양수산청 */
+.mooring-facility-page .mooring-table col.col-port { width: 72px; } /* 거문도항·구룡포항 */
+.mooring-facility-page .mooring-table col.col-subport { width: 76px; } /* 세부항명 헤더·연안부두 */
+.mooring-facility-page .mooring-table col.col-address { width: calc(22% + 82px); } /* 축소분 흡수 */
+.mooring-facility-page .mooring-table col.col-type { width: 7%; }
+.mooring-facility-page .mooring-table col.col-class { width: 56px; }
+.mooring-facility-page .mooring-table col.col-year { width: 100px; }
+.mooring-facility-page .mooring-table col.col-mooring { width: 160px; } /* 180 → 160 */
+
+.mooring-facility-page .type3-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.mooring-facility-page .mooring-table thead th,
+.mooring-facility-page .mooring-table tbody td {
+  height: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  padding: 4px 8px;
+  font-size: 13px;
+  line-height: normal;
+  vertical-align: middle;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mooring-facility-page .mooring-table tbody td:nth-child(2),
+.mooring-facility-page .mooring-table tbody td:nth-child(6) {
+  text-align: left;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* ===== 접안능력구간 — 셀렉트 (행 높이 32px에 맞춤) ===== */
+.mooring-facility-page .mooring-table tbody td.col-mooring {
+  overflow: visible;
+  padding: 0 8px;
+}
+
+.mooring-capacity-select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 24px;
+  padding: 0 26px 0 8px;
+  border: 1px solid #dadae2;
+  border-radius: 4px;
+  background-color: #fff;
+  background-image: url("../assets/main/facility-statistics/figma188/icon-angle-down-clean.svg");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 14px 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.mooring-capacity-select:focus {
+  border-color: #1c6fff;
+}
+
+.mooring-facility-page .type3-results-foot {
+  justify-content: center;
+}
+
+.mooring-save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.mooring-save-btn {
+  height: 38px;
+  min-width: 107px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 6px;
+  background: #0b1a2e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mooring-save-btn:hover {
+  background: #16304f;
+}
+
+.mooring-save-btn img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

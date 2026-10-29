@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제 3종 항만시설물 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/sidebar2.css">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-survey.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css?v=20260819a">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; }
+  </style>
+  <link rel="stylesheet" href="css/pagination.css?v=20260812p">
+</head>
+<body class="app-layout facility-search-page type3-port-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시설물 관리 메뉴">
+        <div class="fs-lnb__title">
+          <span class="fs-lnb__title-text">시설물 관리</span>
+        </div>
+        <nav class="fs-lnb__nav">
+          <a class="fs-lnb__item" href="inspection-status.html">
+            <span>점검정보현황</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="safety-grade-status.html">
+            <span>안전 등급현황</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="facility-statistics.html">
+            <span>시설물통계</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="special-facility.html">
+            <span>특별관리시설</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item is-active" href="type3-port-facility.html" aria-current="page" hidden>
+            <span>제 3종 항만시설물</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="facility-change-request.html">
+            <span>시설물 정보변경 요청</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="data-receive.html">
+            <span>자료수신</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="data-process.html">
+            <span>자료처리</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+          <a class="fs-lnb__item" href="stats-process.html">
+            <span>통계처리</span>
+            <img class="fs-lnb__chevron" src="assets/main/facility-search/figma224/icon-lnb-chevron.svg" alt="" width="16" height="16">
+          </a>
+        </nav>
+      </aside>
+
+      <div class="fs-manage">
+        <header class="page-header">
+          <div class="page-header__nav">
+            <a href="facility.html" class="page-header__home" aria-label="시설물 관리 홈">
+              <span class="page-header__home-icon" aria-hidden="true">
+                <span class="page-header__home-icon-roof"><img src="assets/main/facility-search/detail/figma224/icon-home-roof.svg" alt=""></span>
+                <span class="page-header__home-icon-body"><img src="assets/main/facility-search/detail/figma224/icon-home-body.svg" alt=""></span>
+                <span class="page-header__home-icon-door"><img src="assets/main/facility-search/detail/figma224/icon-home-door.svg" alt=""></span>
+              </span>
+            </a>
+          </div>
+          <nav class="breadcrumb" aria-label="현재 위치">
+            <a href="inspection-status.html">시설물 관리</a>
+            <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+            <span class="breadcrumb__current">제 3종 항만시설물</span>
+          </nav>
+        </header>
+
+        <div class="type3-page" aria-label="제 3종 항만시설물">
+          <div class="type3-page__title">
+            <span class="type3-page__title-icon-wrap" aria-hidden="true">
+              <img class="type3-page__title-icon" src="assets/main/facility-statistics/figma188/icon-title-clean.svg" alt="" width="24" height="24">
+            </span>
+            <h1 class="type3-page__heading">제 3종 항만시설물</h1>
+          </div>
+
+          <nav class="insp-status-tabs" role="tablist" aria-label="제 3종 항만시설물 탭">
+            <button type="button" class="insp-status-tabs__btn is-active" role="tab" data-tab="survey" aria-selected="true">3종시설물 실태조사</button>
+            <button type="button" class="insp-status-tabs__btn" role="tab" data-tab="survey-status" aria-selected="false">3종시설물 실태조사 현황</button>
+          </nav>
+
+        <!-- 3종시설물 실태조사 -->
+        <div class="insp-status-panel is-active" data-panel="survey" role="tabpanel">
+          <div id="type3SurveyListView">
+            <section class="type3-filter-strip" aria-label="검색조건">
+              <form class="type3-filter type3-filter--strip" id="type3SurveySearchForm" novalidate onsubmit="return false;">
+                <div class="type3-filter__fields">
+                  <div class="type3-field">
+                    <label for="type3SurveyAgency">조사기관</label>
+                    <select id="type3SurveyAgency">
+                      <option value="">전체</option>
+                      <option value="해양수산부" selected>해양수산부</option>
+                      <option value="부산지방해양수산청">부산지방해양수산청</option>
+                      <option value="여수지방해양수산청">여수지방해양수산청</option>
+                      <option value="인천항만공사">인천항만공사</option>
+                      <option value="부산항만공사">부산항만공사</option>
+                    </select>
+                  </div>
+                  <div class="type3-field">
+                    <label for="type3SurveyFacilityType">시설물종류</label>
+                    <select id="type3SurveyFacilityType">
+                      <option value="">전체</option>
+                      <option value="기타건축물">기타건축물</option>
+                      <option value="기타토목시설">기타토목시설</option>
+                    </select>
+                  </div>
+                  <div class="type3-field">
+                    <label for="type3SurveyStatus">진행상태</label>
+                    <select id="type3SurveyStatus">
+                      <option value="">전체</option>
+                      <option value="조사중">조사중</option>
+                      <option value="조사완료">조사완료</option>
+                    </select>
+                  </div>
+                  <div class="type3-field type3-field--grow">
+                    <label for="type3SurveyKeyword">검색어</label>
+                    <div class="type3-keyword-group">
+                      <select id="type3SurveyKeywordField" aria-label="검색 항목">
+                        <option value="name">시설물명</option>
+                        <option value="manageNo">관리번호</option>
+                      </select>
+                      <input type="text" id="type3SurveyKeyword" placeholder="검색어를 입력하세요">
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="type3-btn type3-btn--search" id="type3SurveySearchBtn">
+                  <img src="assets/main/facility-statistics/figma188/icon-search-clean.svg" alt="" width="18" height="18">
+                  검색하기
+                </button>
+              </form>
+            </section>
+
+            <section class="type3-results-panel" aria-labelledby="type3SurveyListTitle">
+              <div class="type3-results__head">
+                <div class="type3-results__count">
+                  <span class="type3-results__bar-icon" aria-hidden="true">
+                    <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="14" height="14">
+                  </span>
+                  <h2 id="type3SurveyListTitle" class="type3-results__label">검색결과</h2>
+                  <p class="type3-results__meta">총 <strong id="type3SurveyTotal">0</strong>건</p>
+                </div>
+                <div class="type3-results__side">
+                  <p class="type3-list-guide-note">※ 행을 클릭하면 실태조사 세부내용을 조회할 수 있습니다.</p>
+                  <button type="button" class="type3-btn type3-btn--create" id="type3SurveyAddBtn">
+                    <img src="assets/main/archive-safety/icon-plus-dark.svg" alt="" width="18" height="18">
+                    신규 관리번호 생성
+                  </button>
+                </div>
+              </div>
+              <div class="type3-table-wrap">
+                <table class="type3-table type3-survey-table" aria-label="실태조사 목록">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="col-no">No</th>
+                      <th scope="col" class="col-manage-no">관리번호</th>
+                      <th scope="col" class="col-agency">조사기관</th>
+                      <th scope="col" class="col-period">입력기간</th>
+                      <th scope="col" class="col-dept">담당부서</th>
+                      <th scope="col" class="col-manager">담당자</th>
+                      <th scope="col" class="type3-col-facilities">시설물명</th>
+                      <th scope="col" class="type3-col-types">시설물종류</th>
+                      <th scope="col" class="col-facility-count">시설물수</th>
+                      <th scope="col" class="col-status">상태</th>
+                    </tr>
+                  </thead>
+                  <tbody id="type3SurveyTableBody"></tbody>
+                </table>
+              </div>
+              <div class="type3-results-foot">
+                <nav class="pagination" id="type3SurveyPagination" aria-label="실태조사 목록 페이지"></nav>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- 3종시설물 실태조사 현황 -->
+        <div class="insp-status-panel" data-panel="survey-status" role="tabpanel" hidden>
+          <section class="type3-filter-strip" aria-label="검색조건">
+            <form class="type3-filter type3-filter--strip" id="type3StatusSearchForm" novalidate onsubmit="return false;">
+              <div class="type3-filter__fields">
+                <div class="type3-field">
+                  <label for="type3StatusAgency">조사기관</label>
+                  <select id="type3StatusAgency">
+                    <option value="">전체</option>
+                    <option value="해양수산부" selected>해양수산부</option>
+                    <option value="부산지방해양수산청">부산지방해양수산청</option>
+                    <option value="여수지방해양수산청">여수지방해양수산청</option>
+                    <option value="인천항만공사">인천항만공사</option>
+                    <option value="부산항만공사">부산항만공사</option>
+                  </select>
+                </div>
+                <div class="type3-field">
+                  <label for="type3StatusFacilityType">시설물종류</label>
+                  <select id="type3StatusFacilityType">
+                    <option value="">전체</option>
+                    <option value="기타건축물">기타건축물</option>
+                    <option value="기타토목시설">기타토목시설</option>
+                  </select>
+                </div>
+                <div class="type3-field">
+                  <label for="type3StatusProgress">진행상태</label>
+                  <select id="type3StatusProgress">
+                    <option value="">전체</option>
+                    <option value="조사중">조사중</option>
+                    <option value="조사완료">조사완료</option>
+                  </select>
+                </div>
+                <div class="type3-field type3-field--grow">
+                  <label for="type3StatusKeyword">검색어</label>
+                  <div class="type3-keyword-group">
+                    <select id="type3StatusKeywordField" aria-label="검색 항목">
+                      <option value="name">시설물명</option>
+                      <option value="manageNo">관리번호</option>
+                    </select>
+                    <input type="text" id="type3StatusKeyword" placeholder="검색어를 입력하세요">
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="type3-btn type3-btn--search" id="type3StatusSearchBtn">
+                <img src="assets/main/facility-statistics/figma188/icon-search-clean.svg" alt="" width="18" height="18">
+                검색하기
+              </button>
+            </form>
+          </section>
+
+          <section class="type3-results-panel" aria-labelledby="type3StatusListTitle">
+            <div class="type3-results__head">
+              <div class="type3-results__count">
+                <h2 id="type3StatusListTitle" class="type3-results__label">검색결과</h2>
+                <p class="type3-results__meta">총 <strong id="type3StatusTotal">0</strong>건</p>
+              </div>
+              <div class="type3-results__side">
+                <p class="type3-list-guide-note">※ 시설물명을 클릭하면 해당 시설물의 실태조사 이력을 조회할 수 있습니다.</p>
+                <button type="button" class="type3-btn type3-btn--excel" id="type3StatusExcelBtn">
+                  <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+                  엑셀 다운로드
+                </button>
+              </div>
+            </div>
+            <div class="type3-table-wrap">
+              <table class="type3-table type3-status-table" aria-label="실태조사 현황 목록">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-no">No</th>
+                    <th scope="col">시설물명</th>
+                    <th scope="col">시설물종류</th>
+                    <th scope="col">관리주체</th>
+                    <th scope="col" class="col-assignee">조사담당자</th>
+                    <th scope="col">조사횟수</th>
+                    <th scope="col">최근조사일</th>
+                    <th scope="col">최근조사결과</th>
+                    <th scope="col">최근조사번호</th>
+                    <th scope="col" class="col-built">준공일</th>
+                    <th scope="col">지정유무</th>
+                  </tr>
+                </thead>
+                <tbody id="type3StatusTableBody"></tbody>
+              </table>
+            </div>
+            <div class="type3-results-foot">
+              <nav class="pagination" id="type3StatusPagination" aria-label="실태조사 현황 페이지"></nav>
+            </div>
+          </section>
+
+          <section class="type3-results-panel" id="type3HistorySection" aria-labelledby="type3HistoryTitle" hidden>
+            <div class="type3-divider" aria-hidden="true"></div>
+            <div class="type3-results__head">
+              <div class="type3-results__count">
+                <h2 id="type3HistoryTitle" class="type3-results__label"></h2>
+              </div>
+              <div class="type3-results__side">
+                <p class="type3-history-note"><strong>선택버튼을 클릭</strong>하면 실태조사 세부내용을 조회할 수 있습니다.</p>
+                <button type="button" class="type3-btn type3-btn--excel" id="type3HistoryExcelBtn">
+                  <img src="assets/main/facility-statistics/icon-excel.svg" alt="" width="18" height="18">
+                  엑셀 다운로드
+                </button>
+              </div>
+            </div>
+            <div class="type3-table-wrap">
+              <table class="type3-table type3-history-table" aria-label="시설물 실태조사 이력">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-no">No</th>
+                    <th scope="col">관리번호</th>
+                    <th scope="col">조사일자</th>
+                    <th scope="col">조사담당자</th>
+                    <th scope="col">책임기술자</th>
+                    <th scope="col">점수</th>
+                    <th scope="col">안전상태</th>
+                    <th scope="col">긴급안전점검</th>
+                    <th scope="col">정밀안전진단</th>
+                    <th scope="col">안전조치</th>
+                    <th scope="col">중대결함</th>
+                    <th scope="col">상태</th>
+                    <th scope="col">선택</th>
+                  </tr>
+                </thead>
+                <tbody id="type3HistoryTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 실태조사 결과 — 공통 팝업(fcr / 정기안전점검표) 톤 -->
+  <div class="fcr-modal type3-report-modal" id="type3ReportModal" hidden role="dialog" aria-modal="true" aria-labelledby="type3ReportModalTitle">
+    <div class="fcr-modal__backdrop" data-close-type3-report tabindex="-1" aria-hidden="true"></div>
+    <div class="fcr-modal__panel type3-report-panel" role="document">
+      <header class="fcr-modal__head">
+        <div class="fcr-modal__head-main">
+          <h2 class="fcr-modal__title" id="type3ReportModalTitle">3종시설물 실태조사</h2>
+          <p class="fcr-modal__sub" id="type3ReportModalSub"></p>
+        </div>
+        <button type="button" class="fcr-modal__close" data-close-type3-report aria-label="닫기">
+          <img src="assets/main/dashboard/map/Component%201-1.svg" alt="" width="16" height="16">
+        </button>
+      </header>
+
+      <div class="fcr-modal__stack">
+        <div class="fcr-modal__body type3-report-body">
+          <table class="type3-report-info" aria-label="실태조사 기본정보">
+            <tbody>
+              <tr>
+                <th scope="row">시설물명</th>
+                <td colspan="3" id="type3ReportName"></td>
+              </tr>
+              <tr>
+                <th scope="row">시설물종류</th>
+                <td colspan="3" id="type3ReportType"></td>
+              </tr>
+              <tr>
+                <th scope="row">실태조사일</th>
+                <td id="type3ReportDate"></td>
+                <th scope="row">실태조사담당자</th>
+                <td id="type3ReportAssignee"></td>
+              </tr>
+              <tr>
+                <th scope="row">관리주체</th>
+                <td colspan="3" id="type3ReportOwner"></td>
+              </tr>
+              <tr>
+                <th scope="row">책임기술자</th>
+                <td colspan="3" id="type3ReportEngineer"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="type3-report-table-wrap">
+            <table class="type3-report-eval" aria-label="평가항목 및 결과">
+              <colgroup>
+                <col class="type3-report-eval__col-item">
+                <col class="type3-report-eval__col-opinion">
+                <col class="type3-report-eval__col-repair">
+                <col span="5" class="type3-report-eval__col-grade">
+                <col class="type3-report-eval__col-na">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" rowspan="2" class="type3-report-eval__item">평가항목</th>
+                  <th scope="colgroup" colspan="2">조사결과</th>
+                  <th scope="colgroup" colspan="6">평가결과</th>
+                </tr>
+                <tr>
+                  <th scope="col" class="type3-report-eval__opinion">조사자 의견</th>
+                  <th scope="col" class="type3-report-eval__repair">보수<br>필요</th>
+                  <th scope="col">a<br>(10)</th>
+                  <th scope="col">b<br>(8)</th>
+                  <th scope="col">c<br>(5)</th>
+                  <th scope="col">d<br>(2)</th>
+                  <th scope="col">e<br>(0)</th>
+                  <th scope="col">해당<br>없음</th>
+                </tr>
+              </thead>
+              <tbody id="type3ReportEvalBody"></tbody>
+            </table>
+          </div>
+
+          <div class="type3-report-table-wrap">
+            <table class="type3-report-result" aria-label="평가결과">
+              <tbody>
+                <tr>
+                  <th scope="row" rowspan="3" class="type3-report-result__group">평가결과</th>
+                  <th scope="row">종합점수</th>
+                  <td id="type3ReportScore"></td>
+                  <th scope="row">안전상태</th>
+                  <td><span class="type3-report-safety" id="type3ReportSafety"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">긴급안전점검</th>
+                  <td id="type3ReportUrgent"></td>
+                  <th scope="row">중대결함</th>
+                  <td id="type3ReportDefect"></td>
+                </tr>
+                <tr>
+                  <th scope="row">정밀안전진단</th>
+                  <td id="type3ReportDiagnosis"></td>
+                  <th scope="row">안전조치</th>
+                  <td id="type3ReportAction"></td>
+                </tr>
+                <tr>
+                  <th scope="row" colspan="2">종합의견 및 특기사항</th>
+                  <td colspan="3" id="type3ReportOpinion"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <footer class="fcr-modal__foot type3-report-foot">
+          <button type="button" class="fcr-btn fcr-btn--search" id="type3ReportPrintBtn">인쇄</button>
+          <button type="button" class="fcr-modal__btn-close" data-close-type3-report>닫기</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/user-table-utils.js"></script>
+  <script src="js/type3-survey-data.js"></script>
+  <script src="js/type3-survey.js?v=20260819a"></script>
+</body>
+</html>

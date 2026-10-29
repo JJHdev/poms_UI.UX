@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>사용자 상세 시안 | POMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", system-ui, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    .mockup-badge {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 99;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #f59e0b;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar-mock {
+      width: 240px;
+      flex-shrink: 0;
+      background: #0f2744;
+      color: #fff;
+      padding: 24px 16px;
+    }
+    .sidebar-mock__logo {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 32px;
+    }
+    .sidebar-mock__item {
+      height: 36px;
+      margin-bottom: 6px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+    }
+    .sidebar-mock__item--active { background: #1a6fd4; }
+    .main {
+      flex: 1;
+      padding: 28px 36px 40px;
+      min-width: 0;
+    }
+    .page-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .page-title {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .breadcrumb {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .breadcrumb a { color: #6b7280; text-decoration: none; }
+    .breadcrumb__current { color: #111827; font-weight: 600; }
+    .toolbar { margin-bottom: 20px; }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+    }
+    .summary__profile {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .summary__avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .summary__name { margin: 0 0 4px; font-size: 18px; font-weight: 700; }
+    .summary__meta { margin: 0; font-size: 13px; color: #6b7280; line-height: 1.5; }
+    .summary__stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px 28px;
+      flex: 1;
+      max-width: 640px;
+    }
+    .stat__label { font-size: 11px; color: #9ca3af; }
+    .stat__value { font-size: 13px; font-weight: 600; }
+    .stat__value--blue { color: #2563eb; }
+    .design-note {
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #eff6ff;
+      border: 1px dashed #93c5fd;
+      font-size: 12px;
+      color: #1e40af;
+      line-height: 1.5;
+    }
+    .form-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 28px 32px 32px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .form-card__title {
+      margin: 0 0 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .form-rows {
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .form-row__label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .form-row__control input,
+    .form-row__control select {
+      width: 100%;
+      height: 40px;
+      padding: 0 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      color: #111827;
+    }
+    .form-row__control input::placeholder { color: #9ca3af; }
+    .form-row__control select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+    .password-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .password-row input { flex: 1; min-width: 0; }
+    .btn-pw-reset {
+      flex-shrink: 0;
+      height: 40px;
+      padding: 0 16px;
+      border: none;
+      border-radius: 8px;
+      background: #1e3a5f;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .btn {
+      height: 42px;
+      padding: 0 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+    }
+    .btn--outline { border: 1px solid #374151; background: #fff; color: #111827; }
+    .btn--primary { border: none; background: #2563eb; color: #fff; }
+    .btn--danger { border: 1px solid #ef4444; background: #fff; color: #ef4444; }
+  </style>
+</head>
+<body>
+  <span class="mockup-badge">디자인 시안 (미적용)</span>
+  <div class="layout">
+    <aside class="sidebar-mock" aria-hidden="true">
+      <div class="sidebar-mock__logo">해양수산부 POMS<br><span style="font-weight:400;opacity:.7;font-size:11px">관리자</span></div>
+      <div class="sidebar-mock__item sidebar-mock__item--active"></div>
+      <div class="sidebar-mock__item"></div>
+      <div class="sidebar-mock__item"></div>
+    </aside>
+
+    <main class="main">
+      <header class="page-head">
+        <h1 class="page-title">사용자 상세</h1>
+        <nav class="breadcrumb">
+          <a href="#">시스템 관리</a> &gt;
+          <a href="#">사용자 관리</a> &gt;
+          <span class="breadcrumb__current">사용자 상세</span>
+        </nav>
+      </header>
+
+      <div class="toolbar">
+        <span class="btn-back">← 목록으로</span>
+      </div>
+
+      <p class="design-note">
+        <strong>배치 제안:</strong> 상단 요약 카드는 유지하고, 기존 2×2 읽기 전용 카드 영역을 아래 단일 입력 폼 카드로 교체합니다. 필드 순서·라벨·플레이스홀더는 제공 이미지와 동일합니다.
+      </p>
+
+      <section class="summary" aria-hidden="true">
+        <div class="summary__profile">
+          <span class="summary__avatar">항</span>
+          <div>
+            <h2 class="summary__name">한국항만협회</h2>
+            <p class="summary__meta">jc010<br>인천지역항만수산청</p>
+          </div>
+        </div>
+        <div class="summary__stats">
+          <div><span class="stat__label">사용자구분</span><br><span class="stat__value stat__value--blue">사용중(활성)</span></div>
+          <div><span class="stat__label">계정 잠금</span><br><span class="stat__value">해제</span></div>
+          <div><span class="stat__label">최종 접속일</span><br><span class="stat__value">2025-05-16</span></div>
+          <div><span class="stat__label">최초 가입일</span><br><span class="stat__value">2023-01-05</span></div>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <h3 class="form-card__title">사용자 정보</h3>
+        <div class="form-rows">
+          <div class="form-row">
+            <label class="form-row__label" for="m-user-id">사용자ID</label>
+            <div class="form-row__control">
+              <input id="m-user-id" type="text" placeholder="사용자 ID 입력" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row__label" for="m-user-name">사용자명</label>
+            <div class="form-row__control">
+              <input id="m-user-name" type="text" placeholder="사용자명 입력" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <span class="form-row__label">비밀번호</span>
+            <div class="form-row__control">
+              <div class="password-row">
+                <input type="text" placeholder="비밀번호 입력" readonly>
+                <button type="button" class="btn-pw-reset">비밀번호 초기화</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row__label" for="m-phone">전화번호</label>
+            <div class="form-row__control">
+              <input id="m-phone" type="text" placeholder="전화번호 입력" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row__label" for="m-usage-type">사용구분</label>
+            <div class="form-row__control">
+              <select id="m-usage-type" disabled>
+                <option>위탁기관</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row__label" for="m-org">관리기관</label>
+            <div class="form-row__control">
+              <select id="m-org" disabled>
+                <option>책임관리자</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row__label" for="m-ip">사용자IP</label>
+            <div class="form-row__control">
+              <input id="m-ip" type="text" placeholder="사용자 IP 입력" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row__label" for="m-active">사용유무</label>
+            <div class="form-row__control">
+              <select id="m-active" disabled>
+                <option>사용</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn--outline">수정</button>
+          <button type="button" class="btn btn--primary">저장</button>
+          <button type="button" class="btn btn--danger">삭제</button>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

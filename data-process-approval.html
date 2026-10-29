@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자료처리 승인/반려 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/data-process-approval.css?v=20260820b">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-change-request-page type3-port-page fcr-flat-page data-process-approval-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="type3-page" aria-label="자료처리 승인/반려">
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text">검색조건</h1>
+      </div>
+
+      <section class="type3-filter-strip" aria-label="검색조건">
+        <form class="type3-filter type3-filter--strip" id="dataApprovalSearchForm" novalidate>
+          <div class="type3-filter__fields dpa-filter-fields">
+            <div class="type3-field">
+              <label for="dataApprovalForm">양식구분</label>
+              <select id="dataApprovalForm" name="formType">
+                <option value="">전체</option>
+                <option value="시설물 일반정보">시설물 일반정보</option>
+                <option value="정기안전점검">정기안전점검</option>
+                <option value="안전시설현황">안전시설현황</option>
+              </select>
+            </div>
+            <div class="type3-field">
+              <label for="dataApprovalAgency">관리기관</label>
+              <select id="dataApprovalAgency" name="agency">
+                <option value="">전체</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--sm">
+              <label for="dataApprovalStatus">처리상태</label>
+              <select id="dataApprovalStatus" name="status">
+                <option value="">전체</option>
+                <option value="pending">승인대기</option>
+                <option value="rejected">반려</option>
+                <option value="completed">처리완료</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--grow">
+              <label for="dataApprovalFile">파일명</label>
+              <input type="text" id="dataApprovalFile" name="fileName" placeholder="파일명을 입력하세요." autocomplete="off">
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search" id="dataApprovalSearchBtn">
+              <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="type3-btn type3-btn--reset" id="dataApprovalResetBtn">
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="type3-results-panel" aria-labelledby="dataApprovalResultTitle">
+        <div class="type3-results__head">
+          <div class="type3-results__count">
+            <span class="type3-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="8" height="14">
+            </span>
+            <h2 id="dataApprovalResultTitle" class="type3-results__label">검색결과</h2>
+            <p class="type3-results__meta">총 <strong id="dataApprovalResultCount">0</strong>건</p>
+          </div>
+        </div>
+
+        <div class="type3-table-wrap">
+          <table class="type3-table dpa-table" aria-label="자료처리 신청 목록">
+            <colgroup>
+              <col class="col-no">
+              <col class="col-work">
+              <col class="col-form">
+              <col class="col-agency">
+              <col class="col-person">
+              <col class="col-file">
+              <col class="col-datetime">
+              <col class="col-status">
+              <col class="col-report">
+              <col class="col-action">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col">번호</th>
+                <th scope="col">작업구분</th>
+                <th scope="col">양식구분</th>
+                <th scope="col">관리기관</th>
+                <th scope="col">신청자</th>
+                <th scope="col">엑셀파일</th>
+                <th scope="col">신청일시</th>
+                <th scope="col">처리상태</th>
+                <th scope="col">파일</th>
+                <th scope="col">승인/반려</th>
+              </tr>
+            </thead>
+            <tbody id="dataApprovalTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="type3-results-foot">
+          <nav class="pagination" id="dataApprovalPagination" aria-label="페이지 이동"></nav>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/user-table-utils.js"></script>
+  <script src="js/data-process-approval.js?v=20260728a"></script>
+</body>
+</html>

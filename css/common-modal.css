@@ -1,0 +1,58 @@
+/**
+ * 팝업 형태 모달 — 전체 패널 border-radius 14px
+ * (슬라이드 드로어·전체화면 맵은 제외)
+ */
+:is(
+  .cr-modal__panel,
+  .fcr-modal__panel,
+  .fcd-modal__panel,
+  .sra-modal__panel,
+  .vrd-modal__panel,
+  .vrd-modal__panel--sm,
+  .asm-modal__panel,
+  .vmd-modal__panel,
+  .grade-modal__panel,
+  .home-notice-modal__panel,
+  .facility-stats-modal__panel,
+  .map-modal__panel,
+  .map-modal__panel--detail,
+  .map-modal__dialog,
+  .dash-facility-modal__panel,
+  .drone-video-modal__panel,
+  .major-defect-modal__panel,
+  .repair-modal__panel,
+  .repair-related-modal__panel,
+  .vulnerable-modal__panel,
+  .precision-modal__panel,
+  .precision-report-modal__panel,
+  .repair-status-modal__panel,
+  .vendor-add-modal__panel,
+  .report-request-modal__panel,
+  .report-history-modal__panel,
+  .report-view-modal__panel,
+  .loc-map-modal__dialog,
+  .plan-floor-viewer__dialog,
+  .insp-overview-detail__panel,
+  .facility-stats-modal--figma .facility-stats-modal__panel,
+  .facility-info-page .facility-stats-modal--page .facility-stats-modal__panel,
+  .home-archive-modal--figma .home-notice-modal__panel,
+  .safety-grade-status-page.fcr-flat-page .grade-modal__panel,
+  .report-registration-detail-page .repair-related-modal__panel,
+  .sra-page-root .vrd-modal__panel,
+  html body.vendor-report-download-page .sra-modal__panel
+) {
+  border-radius: 14px !important;
+}
+
+/* 관리자 중앙 미리보기 팝업 */
+#popupPreviewModal .mock-modal__dialog,
+.popup-detail-page .mock-modal__dialog {
+  border-radius: 14px !important;
+}
+
+/* 전체화면 맵 모달은 radius 유지(0) */
+.map-modal--fullscreen .map-modal__panel,
+.map-modal--fullscreen .map-modal__panel.map-modal__panel--fullscreen,
+.map-modal__panel.map-modal__panel--fullscreen {
+  border-radius: 0 !important;
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>계류시설 관리 | POMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin-topnav.css">
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" href="css/facility-change-request.css">
+  <link rel="stylesheet" href="css/type3-port-facility.css">
+  <link rel="stylesheet" href="css/facility-change-request-flat.css">
+  <link rel="stylesheet" href="css/mooring-facility-management.css?v=20260820c">
+  <link rel="stylesheet" href="css/facility-search.css">
+  <style>
+    body { font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1240px; }
+  </style>
+</head>
+<body class="app-layout facility-search-page facility-change-request-page type3-port-page fcr-flat-page mooring-facility-page">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <div class="fs-layout">
+      <aside class="fs-lnb" aria-label="시스템 관리 메뉴">
+        <div class="fs-lnb__title">
+          <h2 class="fs-lnb__title-text">시스템 관리</h2>
+        </div>
+        <nav class="fs-lnb__nav" data-admin-sub-tabs="1" aria-label="시스템 관리 하위 메뉴">
+          <a href="facility-management.html" class="fs-lnb__item">
+            <span>시설물 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="maintenance-plan-manage.html" class="fs-lnb__item">
+            <span>유지관리계획 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="mooring-facility-management.html" class="fs-lnb__item is-active" aria-current="page">
+            <span>계류시설 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="facility-location-status.html" class="fs-lnb__item">
+            <span>시설물 위치 현황 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="drone-video-management.html" class="fs-lnb__item">
+            <span>드론 영상관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+          <a href="responsible-engineer.html" class="fs-lnb__item">
+            <span>책임기술자 관리</span>
+            <span class="fs-lnb__chevron" aria-hidden="true">›</span>
+          </a>
+        </nav>
+      </aside>
+
+      <div class="type3-page fs-manage" aria-label="계류시설 관리">
+
+      <div class="type3-section-title">
+        <span class="type3-section-title__icon" aria-hidden="true">
+          <img src="assets/main/facility-search/icon-condition.svg" alt="" width="24" height="24">
+        </span>
+        <h1 class="type3-section-title__text" id="mooringSearchTitle">검색조건</h1>
+      </div>
+
+      <section class="type3-filter-strip" aria-label="검색조건">
+        <form class="type3-filter type3-filter--strip" id="mooringSearchForm" novalidate>
+          <div class="type3-filter__fields mooring-filter-fields">
+            <div class="type3-field">
+              <label for="mooringAgency">관리기관</label>
+              <select id="mooringAgency" name="agency">
+                <option value="">전체</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--sm">
+              <label for="mooringPort">항</label>
+              <select id="mooringPort" name="port">
+                <option value="">전체</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--sm">
+              <label for="mooringSubPort">세부항</label>
+              <select id="mooringSubPort" name="subPort">
+                <option value="">전체</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--sm">
+              <label for="mooringClass">종별구분</label>
+              <select id="mooringClass" name="classType">
+                <option value="">전체</option>
+                <option value="1종">1종</option>
+                <option value="2종">2종</option>
+                <option value="기타">기타</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--capacity">
+              <label for="mooringCapacity">접안능력구간</label>
+              <select id="mooringCapacity" name="capacityRange">
+                <option value="">전체</option>
+                <option value="NONE">미선택</option>
+                <option value="1,000톤 미만">1,000톤 미만</option>
+                <option value="1,000~3,000톤">1,000~3,000톤</option>
+                <option value="3,000~5,000톤">3,000~5,000톤</option>
+                <option value="5,000~10,000톤">5,000~10,000톤</option>
+                <option value="10,000톤 이상">10,000톤 이상</option>
+              </select>
+            </div>
+            <div class="type3-field type3-field--grow">
+              <label for="mooringName">시설물명</label>
+              <input type="text" id="mooringName" name="facilityName" placeholder="검색어를 입력해주세요." autocomplete="off">
+            </div>
+          </div>
+          <div class="type3-filter-actions">
+            <button type="submit" class="type3-btn type3-btn--search">
+              <img src="assets/main/facility-statistics/icon-search.svg" alt="" width="18" height="18">
+              검색하기
+            </button>
+            <button type="button" class="type3-btn type3-btn--reset" id="mooringResetBtn">
+              <img src="assets/main/facility-search/icon-reset.svg" alt="" width="18" height="18">
+              초기화
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="type3-results-panel" aria-labelledby="mooringResultsTitle">
+        <div class="type3-results__head">
+          <div class="type3-results__count">
+            <span class="type3-results__bar-icon" aria-hidden="true">
+              <img src="assets/main/facility-statistics/figma188/icon-section-bar-clean.svg" alt="" width="8" height="14">
+            </span>
+            <h2 id="mooringResultsTitle" class="type3-results__label">검색결과</h2>
+            <p class="type3-results__meta">총 <strong id="mooringResultCount">0</strong>건</p>
+          </div>
+        </div>
+
+        <div class="type3-table-wrap">
+          <table class="type3-table mooring-table" aria-label="기타시설물 접안능력구간 목록">
+            <colgroup>
+              <col class="col-no">
+              <col class="col-name">
+              <col class="col-agency">
+              <col class="col-port">
+              <col class="col-subport">
+              <col class="col-address">
+              <col class="col-type">
+              <col class="col-class">
+              <col class="col-year">
+              <col class="col-mooring">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">시설물명</th>
+                <th scope="col">관리주체</th>
+                <th scope="col">항명</th>
+                <th scope="col">세부항명</th>
+                <th scope="col">주소</th>
+                <th scope="col">시설물 종류</th>
+                <th scope="col">종별</th>
+                <th scope="col">준공연도</th>
+                <th scope="col">접안능력구간</th>
+              </tr>
+            </thead>
+            <tbody id="mooringTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="type3-results-foot">
+          <nav class="pagination" id="mooringPagination" aria-label="페이지 이동"></nav>
+          <label class="visually-hidden" for="mooringPageSize">페이지당 표시 건수</label>
+          <select id="mooringPageSize" class="visually-hidden" aria-label="페이지당 표시 건수" tabindex="-1">
+            <option value="10" selected>10 / page</option>
+            <option value="20">20 / page</option>
+            <option value="50">50 / page</option>
+          </select>
+        </div>
+
+        <div class="mooring-save-bar">
+          <button type="button" class="type3-btn mooring-save-btn" id="mooringSaveBtn">
+            <img src="assets/main/facility-management/icon-save.svg" alt="" width="18" height="18">
+            저장하기
+          </button>
+        </div>
+      </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/mooring-facility-management.js?v=20260820a"></script>
+</body>
+</html>

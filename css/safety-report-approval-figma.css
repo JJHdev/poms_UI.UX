@@ -1,0 +1,2285 @@
+@import url("common-modal.css");
+
+/* 승인/반려 관리 공통 — Figma 23:34547 / 23:36140 */
+
+.sra-page-root .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+/* ===== Page header ===== */
+.sra-page-root .page-header {
+  margin: 0;
+}
+
+.sra-page-root .page-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 70px;
+  padding: 10px 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.sra-page-root .page-header__titles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.sra-page-root .page-header__title-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.sra-page-root .page-header__title-icon-bg {
+  position: absolute;
+  top: 2px;
+  left: 8px;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sra-page-root .page-header__title-icon-img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.sra-page-root .page-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.48px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sra-page-root .page-header__crumb {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 4px 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sra-page-root .page-header__date {
+  flex-shrink: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f4f4fa;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ===== Page stack ===== */
+.sra-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sra-page-root [data-fca-panel],
+.sra-page-root [data-panel] {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sra-page-root [data-fca-panel][hidden],
+.sra-page-root [data-panel][hidden] {
+  display: none !important;
+}
+
+/* ===== Tabs (user-account 동일) ===== */
+.sra-page-root .ua-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sra-page-root .ua-tabs__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 14px;
+  background: #d3dfef;
+  color: #8c9aac;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.sra-page-root .ua-tabs__btn.is-active {
+  background: #fff;
+  border: 1px solid #0d1f35;
+  color: #0d1f35;
+  font-weight: 700;
+}
+
+.sra-page-root .ua-tabs__btn:not(.is-active):hover {
+  background: #c5d4e8;
+  color: #6c788b;
+}
+
+/* ===== Search panel ===== */
+.sra-search-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.sra-search-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 40px 10px 30px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.sra-search-panel__title-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.sra-search-panel__title-icon-bg {
+  position: absolute;
+  inset: 0;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.sra-search-panel__title-icon-img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sra-search-panel__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.36px;
+  line-height: 1.2;
+}
+
+.sra-search-panel__body {
+  padding: 6px 40px 20px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.76) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0 0 16px 16px;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 2px 2px rgba(0, 0, 0, 0.03),
+    0 5px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sra-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  min-height: 38px;
+  max-width: 100%;
+}
+
+.sra-filters--stacked {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.sra-filter-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.sra-filter-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  width: 100%;
+}
+
+.sra-filter-row .sra-filter-field {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+}
+
+.sra-filters--stacked .sra-filter-actions {
+  margin-left: 0;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+/* 요청일자 + 버튼 한 줄 — 버튼은 오른쪽 고정 */
+.sra-filter-row--bottom {
+  flex-wrap: nowrap;
+}
+
+.sra-filter-row--bottom .sra-filter-actions {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.sra-filter-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  height: 38px;
+}
+
+.sra-filter-field--range {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+}
+
+/* 두 번째 줄도 동일: 라벨 밀착 + 동일 입력 너비 */
+.sra-filters--stacked .sra-filter-row:last-of-type .sra-filter-field:not(.sra-filter-field--range) {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+}
+
+.sra-filters--stacked .sra-filter-row:last-of-type .sra-filter-field--range {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+}
+
+.sra-date-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 38px;
+}
+
+.sra-date-range em {
+  flex-shrink: 0;
+  font-style: normal;
+  color: #6c788b;
+  font-size: 14px;
+}
+
+.sra-date-range input[type="date"] {
+  flex: 0 0 140px;
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  color: #111;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.sra-date-range input[type="date"]:focus {
+  border-color: #4970a2;
+}
+
+.sra-filter-field label {
+  flex: 0 0 auto;
+  width: auto;
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sra-filter-field:not(.sra-filter-field--range) select,
+.sra-filter-field:not(.sra-filter-field--range) input {
+  flex: 0 0 180px;
+  width: 180px;
+  max-width: 180px;
+  min-width: 180px;
+  height: 38px;
+  padding: 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background-color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  color: #111;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.sra-filter-field select,
+.sra-filter-field:not(.sra-filter-field--range) select {
+  padding-right: 40px;
+  background-color: #fff;
+  background-image: url("../assets/sidebar-manage/angle-down%20(6).svg");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+/* 점검년도 약 5글자 / 처리상태 약 8글자 / 시설물명 확장 */
+#approvalSearchForm .sra-filter-field--chars5:not(.sra-filter-field--range) select,
+.sra-filter-field.sra-filter-field--chars5:not(.sra-filter-field--range) select {
+  flex: 0 0 calc(5em + 34px) !important;
+  width: calc(5em + 34px) !important;
+  max-width: calc(5em + 34px) !important;
+  min-width: calc(5em + 34px) !important;
+  padding-left: 8px;
+  padding-right: 28px;
+  background-position: right 6px center;
+  background-size: 16px 16px;
+}
+
+#approvalSearchForm .sra-filter-field--chars8:not(.sra-filter-field--range) select,
+.sra-filter-field.sra-filter-field--chars8:not(.sra-filter-field--range) select {
+  flex: 0 0 calc(8em + 34px) !important;
+  width: calc(8em + 34px) !important;
+  max-width: calc(8em + 34px) !important;
+  min-width: calc(8em + 34px) !important;
+  padding-left: 10px;
+  padding-right: 32px;
+  background-position: right 8px center;
+  background-size: 18px 18px;
+}
+
+#approvalSearchForm .sra-filter-field--wide:not(.sra-filter-field--range) input,
+.sra-filter-field.sra-filter-field--wide:not(.sra-filter-field--range) input {
+  flex: 0 0 360px !important;
+  width: 360px !important;
+  max-width: 360px !important;
+  min-width: 360px !important;
+}
+
+.sra-filter-field select:focus,
+.sra-filter-field input:focus {
+  border-color: #4970a2;
+}
+
+.sra-filter-field input::placeholder {
+  color: #9aa3b2;
+}
+
+.sra-filter-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex: 1 0 auto;
+  min-width: max-content;
+  margin-left: auto;
+}
+
+/* 한 줄 검색(용역사 보고서 다운로드·제출이력) — 항명·세부항명 등 compact 축소, 검색 동일 선상 */
+.sra-filters--inline {
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+.sra-filters--inline .sra-filter-field--compact select {
+  flex: 0 0 120px;
+  width: 120px;
+  max-width: 120px;
+  min-width: 120px;
+}
+
+.sra-filters--inline .sra-filter-actions {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.sra-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.sra-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sra-btn--search {
+  border: none;
+  background: #0d1f35;
+  color: #fff;
+}
+
+.sra-btn--search:hover {
+  background: #152a44;
+}
+
+.sra-btn--reset {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.sra-btn--reset:hover {
+  background: #f8fafc;
+}
+
+/* ===== Results ===== */
+.sra-results {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sra-results__count {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.sra-results__label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.sra-results__meta {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+}
+
+.sra-results__meta strong {
+  font-weight: 500;
+  color: #c8a040;
+}
+
+.sra-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px 10px 10px 10px;
+}
+
+.sra-table {
+  width: 100%;
+  min-width: 1280px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.sra-table--wide {
+  min-width: 1720px;
+}
+
+.sra-table--fit {
+  min-width: 0;
+  width: 100%;
+}
+
+.sra-table--fit .sra-col-no { width: 48px; }
+.sra-table--fit .sra-col-work { width: 76px; }
+.sra-table--fit .sra-col-form { width: 132px; }
+.sra-table--fit .sra-col-org { width: 148px; }
+.sra-table--fit .sra-col-person { width: 120px; }
+.sra-table--fit .sra-col-file { width: auto; }
+.sra-table--fit .sra-col-datetime { width: 138px; }
+.sra-table--fit .sra-col-status { width: 80px; }
+.sra-table--fit .sra-col-report { width: 112px; }
+.sra-table--fit .sra-col-action { width: 104px; }
+
+/* 자료처리 — 양식구분·신청일시 전문 표시 */
+.sra-table--fit .sra-col-form,
+.sra-table--fit .sra-col-datetime {
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* 시설물 변경요청 — 헤더는 전부 표시, 요청사유만 말줄임 */
+.sra-table--fca {
+  font-size: 13px;
+}
+
+.sra-table--fca thead th {
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 13px;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+.sra-table--fca tbody td {
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 13px;
+}
+
+.sra-table--fca .sra-col-no { width: 44px; }
+.sra-table--fca .sra-col-datetime { width: 122px; }
+.sra-table--fca .sra-col-reqtype { width: 118px; }
+.sra-table--fca .sra-col-manage { width: 72px; }
+.sra-table--fca .sra-col-org { width: 118px; }
+.sra-table--fca .sra-col-port { width: 56px; }
+.sra-table--fca .sra-col-subport { width: 68px; }
+.sra-table--fca .sra-col-ftype { width: 68px; }
+.sra-table--fca .sra-col-fname { width: 100px; }
+.sra-table--fca .sra-col-person { width: 56px; }
+.sra-table--fca .sra-col-reason {
+  width: 72px;
+  max-width: 72px;
+}
+.sra-table--fca .sra-col-status { width: 52px; }
+.sra-table--fca .sra-col-action { width: 100px; }
+.sra-table--fca .sra-col-history { width: 84px; }
+
+.sra-table--fca tbody td.sra-cell-reason {
+  max-width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sra-table--fca .sra-tbl-btn {
+  height: 30px;
+  font-size: 12px;
+}
+
+.sra-table--fca .sra-tbl-btn--approve,
+.sra-table--fca .sra-tbl-btn--reject {
+  min-width: 34px;
+  padding: 0 6px;
+}
+
+.sra-table--fca .sra-tbl-btn--history {
+  padding: 0 10px;
+}
+
+/* 보고서 등록관리 — 가로스크롤 없음, 헤더 전부 표시, 번호↓·점검기관 여유 */
+.sra-table-wrap:has(.sra-table--report-reg),
+.sra-table-wrap:has(.sra-table--vrd) {
+  overflow-x: hidden;
+}
+
+.sra-table--report-reg {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 0;
+  font-size: 13px;
+}
+
+.sra-table--report-reg thead th {
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.sra-table--report-reg tbody td {
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 13px;
+}
+
+.sra-table--report-reg .sra-col-no,
+.sra-table--report-reg th:first-child,
+.sra-table--report-reg td:first-child {
+  width: 24px;
+  max-width: 24px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.sra-table--report-reg .sra-col-org { width: 13%; }
+.sra-table--report-reg .sra-col-port { width: 7%; }
+.sra-table--report-reg .sra-col-subport { width: 8%; }
+.sra-table--report-reg .sra-col-fname { width: 15%; }
+.sra-table--report-reg .sra-col-class { width: 6%; }
+.sra-table--report-reg .sra-col-ftype { width: 8%; }
+.sra-table--report-reg .sra-col-agency-id { width: 19%; }
+.sra-table--report-reg .sra-col-check { width: 12%; }
+
+.sra-table--report-reg tbody td:nth-child(8) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 용역사 보고서 다운로드 — 번호·항명·세부항명·시설구분만 약간 축소, 시설명은 소폭 확대 */
+.sra-table--vrd {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 0;
+  font-size: 13px;
+}
+
+.sra-table--vrd thead th {
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.sra-table--vrd tbody td {
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: 13px;
+}
+
+.sra-table--vrd .sra-col-no { width: 3%; }
+.sra-table--vrd .sra-col-datetime { width: 9%; }
+.sra-table--vrd .sra-col-org { width: 9%; }
+.sra-table--vrd .sra-col-port { width: 4.5%; }
+.sra-table--vrd .sra-col-subport { width: 5.5%; }
+.sra-table--vrd .sra-col-ftype { width: 5%; }
+.sra-table--vrd .sra-col-fname { width: 11%; }
+.sra-table--vrd .sra-col-date { width: 7%; }
+.sra-table--vrd .sra-col-check { width: 9%; }
+.sra-table--vrd .sra-col-insp { width: 7%; }
+.sra-table--vrd .sra-col-state { width: 5.5%; }
+.sra-table--vrd .sra-col-status { width: 4.5%; }
+.sra-table--vrd .sra-col-history { width: 6.5%; }
+.sra-table--vrd .sra-col-action { width: 9%; }
+
+.sra-table--vrd tbody td:nth-child(7) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 보고서 제출이력 — 번호↓, 용역명↑ */
+.sra-table-wrap:has(.sra-table--history) {
+  overflow-x: hidden;
+}
+
+.sra-table--history {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 0;
+  font-size: 13px;
+}
+
+.sra-table--history thead th {
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.sra-table--history tbody td {
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 13px;
+}
+
+.sra-table--history .sra-col-no,
+.sra-table--history th:first-child,
+.sra-table--history td:first-child {
+  width: 32px;
+  max-width: 32px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.sra-table--history .sra-col-id { width: 12%; }
+.sra-table--history .sra-col-service { width: 36%; }
+.sra-table--history .sra-col-date { width: 10%; }
+.sra-table--history .sra-col-count { width: 8%; }
+.sra-table--history .sra-col-stage { width: 7%; }
+.sra-table--history .sra-col-progress { width: 14%; }
+
+.sra-table thead th {
+  height: 32px;
+  padding: 0 8px;
+  background: #4970a2;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sra-table thead th:first-child {
+  border-radius: 12px 0 0 0;
+}
+
+.sra-table thead th:last-child {
+  border-radius: 0 10px 0 0;
+}
+
+.sra-table tbody td {
+  height: 32px;
+  padding: 0 8px;
+  background: #fff;
+  border: none;
+  border-bottom: 0.7px solid #dadae2;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.sra-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.sra-table tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 10px;
+}
+
+.sra-table tbody tr:last-child td:last-child {
+  border-radius: 0 0 10px 0;
+}
+
+.sra-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.sra-table td.is-left {
+  text-align: center;
+}
+
+.sra-table tbody td:has(.sra-actions),
+.sra-table tbody td:has(.sra-tbl-btn),
+.sra-table tbody td:has(.sra-done-label) {
+  overflow: visible;
+}
+
+.sra-col-no { width: 56px; }
+.sra-col-year { width: 80px; }
+.sra-col-agency { width: 160px; }
+.sra-col-name { width: 160px; }
+.sra-col-type { width: 120px; }
+.sra-col-requester { width: 140px; }
+.sra-col-date { width: 140px; }
+.sra-col-status { width: 100px; }
+.sra-col-report { width: 130px; }
+.sra-col-action { width: 120px; }
+.sra-col-history { width: 110px; }
+
+/* Status */
+.sra-status {
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+}
+
+.sra-status--pending {
+  color: #111;
+}
+
+.sra-status--requested {
+  color: #c8a040;
+}
+
+.sra-status--approved {
+  color: #1c6fff;
+}
+
+.sra-status--rejected {
+  color: #e6002d;
+}
+
+.sra-status--downloaded,
+.sra-status--completed {
+  color: #6c788b;
+}
+
+/* Table action buttons */
+.sra-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+.sra-tbl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.sra-tbl-btn--approve {
+  min-width: 39px;
+  border: 0.5px solid #1c6fff;
+  color: #1c6fff;
+}
+
+.sra-tbl-btn--approve:hover {
+  background: #eff5ff;
+}
+
+.sra-tbl-btn--reject {
+  min-width: 39px;
+  border: 0.5px solid #e6002d;
+  color: #e6002d;
+}
+
+.sra-tbl-btn--reject:hover {
+  background: #fff1f3;
+}
+
+.sra-tbl-btn--history {
+  padding: 0 18px;
+  border: 0.5px solid #0d1f35;
+  color: #0d1f35;
+  font-weight: 500;
+}
+
+.sra-tbl-btn--history:hover {
+  background: #f3f5f8;
+}
+
+.sra-tbl-btn--download {
+  padding: 0 12px;
+  border: 0.5px solid #0d1f35;
+  color: #0d1f35;
+  font-weight: 500;
+}
+
+.sra-tbl-btn--download:hover {
+  background: #f3f5f8;
+}
+
+.sra-done-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #9aa3b2;
+  white-space: nowrap;
+}
+
+.sra-table tbody tr.is-downloaded td,
+.sra-table tbody tr.is-downloaded td *,
+.sra-table tbody tr.is-completed td,
+.sra-table tbody tr.is-completed td * {
+  color: #9aa3b2;
+}
+
+.sra-table tbody tr.is-downloaded .sra-tbl-btn--download,
+.sra-table tbody tr.is-completed .sra-tbl-btn--download {
+  border-color: #dadae2;
+  color: #9aa3b2;
+}
+
+.sra-table tbody tr.is-downloaded .sra-tbl-btn--history,
+.sra-table tbody tr.is-completed .sra-tbl-btn--history {
+  border-color: #dadae2;
+  color: #9aa3b2;
+}
+
+/* Results foot */
+.sra-results__foot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding-top: 4px;
+}
+
+.sra-results__foot .pagination {
+  gap: 0;
+}
+
+.sra-results__foot .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+  transform: none;
+}
+
+.sra-results__foot .pagination__btn:first-child,
+.sra-results__foot .pagination__btn:last-child {
+  margin-left: 0;
+  border-radius: 0;
+}
+
+.sra-results__foot .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff !important;
+  border: 1px solid #1c6fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.sra-results__foot .pagination__btn:hover:not(:disabled):not(.is-active) {
+  z-index: 1;
+  border-color: transparent;
+  color: #1c6fff;
+  background: #fff;
+}
+
+.sra-results__foot .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.sra-results__foot .pagination__btn[data-page-move] {
+  font-size: inherit;
+  color: inherit;
+  background-color: #fff;
+  background-image: none;
+  transform: none;
+}
+
+.sra-results__foot .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.sra-results__foot .pagination__btn[data-page-move="next"] img,
+.sra-results__foot .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.sra-results__foot .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.sra-results__foot .pagination__btn svg {
+  display: none;
+}
+
+.sra-results__foot .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+/* ===== 결재이력 드로어 (Figma 23:36140) ===== */
+/* 사이드바(z-index: 2000)보다 위에 두어 사이드바까지 흐리게 보이도록 함 */
+body:has(.sra-drawer-overlay.is-open) #sidebar-root,
+body:has(.sra-drawer.is-open) #sidebar-root {
+  z-index: 1000;
+}
+
+.sra-page-root .sra-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(13, 31, 53, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+.sra-page-root .sra-drawer-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.sra-page-root .sra-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+  z-index: 3001;
+  width: 550px;
+  max-width: 100vw;
+  height: 980px;
+  max-height: 100vh;
+  padding: 40px 30px 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 0;
+  border-radius: 16px 0 0 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+}
+
+.sra-page-root .sra-drawer.is-open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.sra-page-root .sra-drawer__top {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.sra-page-root .sra-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.sra-page-root .sra-drawer__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #0d1f35;
+  line-height: 1.2;
+}
+
+.sra-page-root .sra-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  background: #dadae2;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sra-page-root .sra-drawer__close img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.sra-page-root .sra-drawer__close:hover {
+  background: #cbccd6;
+}
+
+.sra-page-root .sra-drawer__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.sra-hist-summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.sra-hist-summary__icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sra-hist-summary__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sra-hist-summary__type {
+  font-size: 12px;
+  font-weight: 400;
+  color: #111;
+  letter-spacing: -0.24px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sra-hist-summary__sep {
+  font-size: 12px;
+  font-weight: 100;
+  color: #111;
+  letter-spacing: -0.24px;
+  line-height: 1.2;
+}
+
+.sra-hist-summary__status {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sra-hist-summary__status.is-pending {
+  color: #c8a040;
+}
+
+.sra-hist-summary__status.is-requested {
+  color: #c8a040;
+}
+
+.sra-hist-summary__status.is-approved,
+.sra-hist-summary__status.is-downloaded {
+  color: #1c6fff;
+}
+
+.sra-hist-summary__status.is-rejected {
+  color: #e6002d;
+}
+
+.sra-hist-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.sra-hist-row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 38px;
+}
+
+.sra-hist-row__label {
+  display: flex;
+  align-items: center;
+  width: 160px;
+  flex-shrink: 0;
+  padding: 0 20px;
+  background: #f4f4fa;
+  border: 1px solid #dadae2;
+  border-radius: 12px 0 0 12px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  white-space: nowrap;
+}
+
+.sra-hist-row__value {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 20px;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sra-hist-row:first-child .sra-hist-row__value {
+  font-weight: 500;
+}
+
+.sra-hist-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.sra-hist-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid #dadae2;
+  background: #f9f9fa;
+}
+
+.sra-hist-card.is-reject {
+  border-color: #e6002d;
+  background: rgba(230, 0, 45, 0.05);
+}
+
+.sra-hist-card.is-done {
+  border-color: #1c6fff;
+  background: rgba(28, 111, 255, 0.05);
+}
+
+.sra-hist-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.sra-hist-card__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sra-hist-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  border-radius: 100px;
+  border: 1px solid #c5cbd5;
+  background: rgba(108, 120, 139, 0.08);
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: normal;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.sra-hist-card.is-done .sra-hist-card__badge {
+  border-color: #1c6fff;
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+}
+
+.sra-hist-card.is-reject .sra-hist-card__badge {
+  border-color: #e6002d;
+  background: rgba(230, 0, 45, 0.04);
+  color: #e6002d;
+}
+
+.sra-hist-card__by {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sra-hist-card__date {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sra-hist-card__note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 38px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  font-size: 14px;
+  color: #6c788b;
+  line-height: normal;
+  word-break: keep-all;
+}
+
+.sra-hist-card__note-tag {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: #6c788b;
+}
+
+.sra-hist-card__note-text {
+  font-weight: 500;
+  color: #6c788b;
+}
+
+.sra-hist-card.is-reject .sra-hist-card__note {
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.sra-hist-card.is-reject .sra-hist-card__note-tag,
+.sra-hist-card.is-reject .sra-hist-card__note-text {
+  color: #b91c1c;
+}
+
+/* 기관 상세 드로어 폼 */
+.sra-drawer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.sra-drawer-form .mock-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sra-drawer-form .mock-form-field > span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.sra-drawer-form input,
+.sra-drawer-form select {
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.sra-drawer-form select {
+  padding-right: 40px;
+  background-image: url("../assets/sidebar-manage/angle-down%20(6).svg");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.sra-drawer-form .mock-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sra-drawer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.sra-drawer-note {
+  margin: 0;
+  font-size: 13px;
+  color: #6c788b;
+}
+
+#agencyDrawer {
+  z-index: 3002;
+}
+
+#agencyDrawerOverlay {
+  z-index: 3001;
+}
+
+/* ===== Reject modal ===== */
+.sra-page-root .vrd-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.sra-page-root .vrd-modal[hidden] {
+  display: none !important;
+}
+
+.sra-page-root .vrd-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.sra-page-root .vrd-modal__panel {
+  position: relative;
+  width: min(1000px, 100%);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+}
+
+.sra-page-root .vrd-modal__panel--sm {
+  width: min(520px, 100%);
+}
+
+.sra-page-root .vrd-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sra-page-root .vrd-modal__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.sra-page-root .vrd-modal__close {
+  border: none;
+  background: transparent;
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+  line-height: 1;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.sra-page-root .vrd-modal__close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.sra-page-root .vrd-modal__body {
+  padding: 18px 20px;
+}
+
+.sra-page-root .vrd-modal__sub {
+  font-size: 12.5px;
+  color: #6b7280;
+  margin: 0 0 10px;
+}
+
+.sra-page-root .vrd-modal__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.sra-page-root .vrd-modal__label .req {
+  color: #e6002d;
+  margin-left: 2px;
+}
+
+.sra-page-root .vrd-modal__textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #111827;
+  padding: 10px 12px;
+  resize: vertical;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+.sra-page-root .vrd-modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 14px 20px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.sra-page-root .vrd-modal__btn {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.sra-page-root .vrd-modal__btn--cancel {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.sra-page-root .vrd-modal__btn--danger {
+  background: #e6002d;
+  border: none;
+  color: #fff;
+}
+
+@media (max-width: 1400px) {
+  .sra-filters {
+    flex-wrap: wrap;
+  }
+
+  .sra-filters--stacked {
+    flex-wrap: wrap;
+  }
+
+  .sra-filters--inline {
+    flex-wrap: nowrap;
+  }
+
+  .sra-filter-field {
+    flex: 1 1 calc(50% - 12px);
+    max-width: none;
+  }
+
+  .sra-filters--inline .sra-filter-field {
+    flex: 0 0 auto;
+    max-width: none;
+  }
+
+  .sra-filter-field--range {
+    flex: 1 1 calc(50% - 12px);
+    max-width: none;
+    min-width: 0;
+  }
+
+  .sra-filter-row {
+    flex-wrap: wrap;
+  }
+
+  .sra-filter-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .sra-filters--inline .sra-filter-actions {
+    width: auto;
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+}
+
+
+/* ========================================================================
+   FMS 연계이력 전용
+   ======================================================================== */
+
+.fms-history-page .main-content {
+  gap: 20px;
+}
+
+.fms-history-page .page-header__bar {
+  height: 70px;
+  padding: 12px 24px;
+  border-radius: 14px;
+}
+
+.fms-history-page .page-header__titles {
+  gap: 12px;
+}
+
+.fms-history-page .page-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+}
+
+.fms-history-page .page-header__crumb {
+  font-size: 14px;
+}
+
+/* 검색조건 + 검색결과를 한 카드로 */
+.fms-history-page .sra-page {
+  display: block;
+  padding: 18px 20px 20px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.fms-history-page .sra-search-panel,
+.fms-history-page .sra-results {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 검색조건: 첫 줄 제목, 둘째 줄 필터 */
+.fms-history-page .sra-search-panel {
+  display: block;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.fms-history-page .sra-search-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.fms-history-page .sra-search-panel__title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+}
+
+.fms-history-page .fms-search-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border: 1px solid #2f7df6;
+  border-radius: 5px;
+  color: #2f7df6;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.fms-history-page .fms-search-icon::before,
+.fms-history-page .fms-search-icon::after {
+  content: none !important;
+  display: none !important;
+}
+
+.fms-history-page .fms-search-icon svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+.fms-history-page .sra-search-panel__body {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.fms-history-page .sra-filters {
+  display: grid;
+  grid-template-columns:
+    minmax(170px, 1.1fr)
+    minmax(310px, 1.6fr)
+    minmax(130px, 0.8fr)
+    minmax(170px, 1fr)
+    auto;
+  align-items: end;
+  gap: 12px;
+  min-height: 0;
+}
+
+.fms-history-page .sra-filter-field,
+.fms-history-page .sra-filter-field--range {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 7px;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  max-width: none;
+}
+
+.fms-history-page .sra-filter-field label {
+  width: auto;
+  margin: 0;
+  color: #6c788b;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.fms-history-page .sra-filter-field:not(.sra-filter-field--range) input,
+.fms-history-page .sra-filter-field:not(.sra-filter-field--range) select {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  flex: 0 0 auto;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.fms-history-page .sra-filter-field:not(.sra-filter-field--range) select {
+  padding-right: 34px;
+  background-position: right 9px center;
+  background-size: 16px 16px;
+}
+
+.fms-history-page .sra-date-range {
+  display: grid;
+  grid-template-columns: minmax(135px, 1fr) auto minmax(135px, 1fr);
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 40px;
+}
+
+.fms-history-page .sra-date-range input[type="date"] {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  flex: 0 0 auto;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.fms-history-page .sra-filter-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  width: auto;
+  min-width: max-content;
+  margin-left: 0;
+}
+
+.fms-history-page .sra-filter-actions .sra-btn {
+  height: 40px;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.fms-history-page .sra-filter-actions .sra-btn img {
+  width: 15px;
+  height: 15px;
+}
+
+.fms-history-page .sra-btn--search {
+  background: #0d1f35;
+  color: #fff;
+}
+
+.fms-history-page .sra-btn--reset {
+  border-color: #d9dee7;
+  color: #647183;
+}
+
+/* 검색결과 */
+.fms-history-page .sra-results {
+  margin-top: 16px;
+  gap: 12px;
+}
+
+.fms-history-page .sra-results__head {
+  margin: 0;
+}
+
+.fms-history-page .sra-results__label {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.fms-history-page .sra-results__meta {
+  font-size: 13px;
+}
+
+.fms-history-page .sra-results__meta strong {
+  color: #2f7df6;
+}
+
+.fms-history-page .sra-btn--excel {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* 표 */
+.fms-history-page .sra-table-wrap:has(.sra-table--fms) {
+  overflow-x: hidden;
+  border: 1px solid #d7deea;
+  border-radius: 14px;
+}
+
+.fms-history-page .sra-table--fms {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.fms-history-page .sra-table--fms thead th {
+  height: 32px;
+  padding: 8px 6px;
+  border-right: 1px solid #d7deea;
+  background: #eaf2fd;
+  color: #27384d;
+  font-size: 13px;
+  font-weight: 700;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.fms-history-page .sra-table--fms thead th:last-child {
+  border-right: 0;
+}
+
+.fms-history-page .sra-table--fms tbody td {
+  height: 32px;
+  padding: 7px 6px;
+  border-right: 1px solid #e2e7ef;
+  border-bottom: 1px solid #e2e7ef;
+  background: #fff;
+  font-size: 13px;
+}
+
+.fms-history-page .sra-table--fms tbody td:last-child {
+  border-right: 0;
+}
+
+.fms-history-page .sra-table--fms tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.fms-history-page .sra-table--fms .sra-col-no {
+  width: 48px;
+}
+
+.fms-history-page .sra-table--fms .sra-col-fmsno {
+  width: 13%;
+}
+
+.fms-history-page .sra-table--fms .sra-col-fmsname {
+  width: 20%;
+}
+
+.fms-history-page .sra-table--fms .sra-col-pomsname {
+  width: 20%;
+}
+
+.fms-history-page .sra-table--fms .sra-col-match {
+  width: 13%;
+}
+
+.fms-history-page .sra-table--fms .sra-col-view {
+  width: 11%;
+}
+
+.fms-history-page .sra-table--fms .sra-col-hist {
+  width: 12%;
+}
+
+.fms-history-page .sra-table--fms .sra-col-date {
+  width: 11%;
+}
+
+/* 테이블 버튼 */
+.fms-history-page .sra-table--fms .sra-actions {
+  gap: 6px;
+}
+
+.fms-history-page .sra-table--fms .sra-tbl-btn {
+  min-width: 64px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.fms-history-page .sra-table--fms .sra-tbl-btn--approve {
+  border: 1px solid #1f6fff;
+  color: #1f6fff;
+}
+
+.fms-history-page .sra-table--fms .sra-tbl-btn--reject {
+  border: 1px solid #ff1744;
+  color: #ff1744;
+}
+
+.fms-history-page .sra-table--fms .sra-tbl-btn--history,
+.fms-history-page .sra-table--fms .sra-tbl-btn--download {
+  border: 1px solid #9fc6ff;
+  color: #5d7da8;
+}
+
+/* 1400px 이하에서도 FMS 검색영역은 2줄 구조 유지 */
+@media (max-width: 1400px) {
+  .fms-history-page .sra-filters {
+    grid-template-columns:
+      minmax(160px, 1fr)
+      minmax(300px, 1.4fr)
+      minmax(120px, 0.8fr)
+      minmax(160px, 1fr)
+      auto;
+  }
+
+  .fms-history-page .sra-filter-actions {
+    width: auto;
+  }
+}
+
+
+/* FMS 엑셀 다운로드 버튼 아이콘 크기 복구 */
+.fms-history-page .sra-btn--excel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 8px;
+  background: #fff;
+  color: #0d1f35;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.fms-history-page .sra-btn--excel svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  stroke: currentColor;
+}
+
+.fms-history-page .sra-btn--excel:hover {
+  background: #f4f4fa;
+}
+
+
+/* FMS 검색결과 헤더: 엑셀 다운로드 버튼을 오른쪽 끝에 배치 */
+.fms-history-page .sra-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.fms-history-page .sra-results__count {
+  flex: 0 0 auto;
+}
+
+.fms-history-page .sra-btn--excel {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+
+
+/* FMS 화면 상단 위치 및 글자 크기 통일 */
+.fms-history-page .main-content {
+  padding-top: 41px !important;
+  padding-bottom: 36px !important;
+  gap: 20px !important;
+}
+.fms-history-page .page-header { margin: 0 !important; }
+.fms-history-page .page-header__bar {
+  height: 70px !important;
+  padding: 12px 24px !important;
+  border-radius: 14px !important;
+}
+.fms-history-page .page-title {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.6px !important;
+}
+.fms-history-page .page-header__crumb { font-size: 14px !important; }
+.fms-history-page input,
+.fms-history-page select,
+.fms-history-page button,
+.fms-history-page table {
+  font-family: inherit;
+}
+.fms-history-page table { font-size: 13px; }
+.fms-history-page label { font-size: 12px; }
+
+/* ========================================================================
+   FMS 시설물 변경이력 (detail mode=history)
+   ======================================================================== */
+
+.fms-history-page.is-history-mode .page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fms-history-page.is-history-mode .page-header__bar {
+  flex: 1;
+  min-width: 0;
+}
+
+.fms-history-page.is-history-mode .vmd-stack {
+  display: block;
+}
+
+.fms-history-page.is-history-mode .vmd-panel {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.fms-history-page.is-history-mode .vmd-panel__head {
+  gap: 8px;
+  padding: 18px 20px 0;
+  background: #fff;
+}
+
+.fms-history-page.is-history-mode .vmd-panel__title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+  color: #111;
+}
+
+.fms-history-page.is-history-mode .vmd-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #eaf2fd;
+  color: #2f7df6;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fms-history-page.is-history-mode .vmd-panel__note {
+  margin-left: auto;
+  color: #6c788b;
+  font-size: 13px;
+}
+
+.fms-history-page.is-history-mode .vmd-panel__body {
+  gap: 16px;
+  padding: 14px 20px 20px;
+  background: #fff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+}
+
+.fms-history-page.is-history-mode .mock-flow-tabs,
+.fms-history-page.is-history-mode .ua-tabs {
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+}
+
+.fms-history-page.is-history-mode .mock-flow-content {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.fms-history-page.is-history-mode .fms-detail-stack.sra-page {
+  display: block;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.fms-history-page.is-history-mode .sra-filters--history {
+  grid-template-columns:
+    minmax(310px, 1.6fr)
+    minmax(170px, 1fr)
+    minmax(150px, 0.9fr)
+    auto;
+}
+
+.fms-history-page.is-history-mode .sra-table-wrap:has(.sra-table--fms-detail) {
+  overflow-x: auto;
+  border: 1px solid #d7deea;
+  border-radius: 14px;
+}
+
+.fms-history-page.is-history-mode .sra-table--fms-detail {
+  min-width: 720px;
+  table-layout: auto;
+}
+
+.fms-history-page.is-history-mode .sra-table--fms-detail thead th,
+.fms-history-page.is-history-mode .sra-table--fms-detail tbody td {
+  padding-left: 10px;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1400px) {
+  .fms-history-page.is-history-mode .sra-filters--history {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fms-history-page.is-history-mode .sra-filters--history .sra-filter-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+}

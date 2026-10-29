@@ -1,0 +1,818 @@
+@import url("common-modal.css");
+
+/* 보고서 등록관리 상세 — 관리자 시안 기준(플랫 메타 그리드 + 공지사항 표 규격)
+   ─ fmd / fcd / precision 등 공통 CSS 위에 덮어쓰는 오버라이드 레이어입니다. */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========================================================================
+   1) 상단 액션 버튼
+   ======================================================================== */
+.report-registration-detail-page .page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.report-registration-detail-page .fmd-btn,
+.report-registration-detail-page .fcd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 96px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+.report-registration-detail-page .fmd-btn img,
+.report-registration-detail-page .fcd-btn img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.report-registration-detail-page .fmd-btn--history {
+  background: #fff;
+  color: #111;
+}
+
+.report-registration-detail-page .fmd-btn--history:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+.report-registration-detail-page .fcd-btn--approve {
+  min-width: 88px;
+  border-color: #1c6fff;
+  background: #1c6fff;
+  color: #fff;
+}
+
+.report-registration-detail-page .fcd-btn--approve:hover {
+  border-color: #155fdc;
+  background: #155fdc;
+}
+
+.report-registration-detail-page .fcd-btn--reject {
+  min-width: 88px;
+  border-color: #e6002d;
+  background: #fff;
+  color: #e6002d;
+}
+
+.report-registration-detail-page .fcd-btn--reject:hover {
+  background: #fff5f7;
+}
+
+/* ========================================================================
+   2) 패널 헤드
+   ======================================================================== */
+.report-registration-detail-page .fmd-panel__head {
+  justify-content: flex-start;
+}
+
+.report-registration-detail-page .fmd-panel__title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.report-registration-detail-page .fmd-panel__title-icon img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.rrd-panel__note {
+  margin: 0 0 0 auto;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.rrd-panel__note strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+/* ========================================================================
+   3) 메타 그리드 (플랫 격자)
+   ======================================================================== */
+.report-registration-detail-page .rrd-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  border-top: 1px solid #dadae2;
+  border-left: 1px solid #dadae2;
+  border-radius: 14px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .rrd-meta-grid .fcd-meta__row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  min-height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.report-registration-detail-page .rrd-meta-grid .fcd-meta__label {
+  display: flex;
+  align-items: center;
+  width: 140px;
+  flex-shrink: 0;
+  padding: 4px 14px;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  background: #f6f9ff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .rrd-meta-grid .fcd-meta__value {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 4px 14px;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  border-radius: 0;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.3;
+  word-break: keep-all;
+  box-sizing: border-box;
+}
+
+/* 처리상태 배지 */
+.report-registration-detail-page .report-reg-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 20px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 5px;
+  background: #f4f4fa;
+  color: #6c788b;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .report-reg-status.is-approved,
+.report-registration-detail-page .report-reg-status--approved {
+  background: #f6f9ff;
+  color: #1c6fff;
+}
+
+.report-registration-detail-page .report-reg-status.is-rejected,
+.report-registration-detail-page .report-reg-status--rejected {
+  background: #fef5f8;
+  color: #e5002b;
+}
+
+/* ========================================================================
+   4) 데이터 표 — 공지사항 규격
+   ======================================================================== */
+.report-registration-detail-page .info-table,
+.report-registration-detail-page .repair-status-table,
+.report-registration-detail-page .report-repair-table,
+.report-registration-detail-page .repair-related-table,
+.report-registration-detail-page .detail-form-table {
+  width: 100%;
+  margin: 0 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  background: #fff;
+  font-size: 13px;
+}
+
+.report-registration-detail-page .info-table th,
+.report-registration-detail-page .repair-status-table th,
+.report-registration-detail-page .report-repair-table th,
+.report-registration-detail-page .repair-related-table th,
+.report-registration-detail-page .detail-form-table th {
+  height: 32px;
+  padding: 4px 10px;
+  background: #e9f1fe;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .info-table td,
+.report-registration-detail-page .repair-status-table td,
+.report-registration-detail-page .report-repair-table td,
+.report-registration-detail-page .repair-related-table td,
+.report-registration-detail-page .detail-form-table td {
+  height: 32px;
+  padding: 4px 10px;
+  background: #fff;
+  border: 0;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  color: #333;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .info-table th:last-child,
+.report-registration-detail-page .info-table td:last-child,
+.report-registration-detail-page .repair-status-table th:last-child,
+.report-registration-detail-page .repair-status-table td:last-child,
+.report-registration-detail-page .report-repair-table th:last-child,
+.report-registration-detail-page .report-repair-table td:last-child,
+.report-registration-detail-page .repair-related-table th:last-child,
+.report-registration-detail-page .repair-related-table td:last-child,
+.report-registration-detail-page .detail-form-table th:last-child,
+.report-registration-detail-page .detail-form-table td:last-child {
+  border-right: 0;
+}
+
+.report-registration-detail-page .info-table tr:last-child th,
+.report-registration-detail-page .info-table tr:last-child td,
+.report-registration-detail-page .repair-status-table tbody tr:last-child td,
+.report-registration-detail-page .report-repair-table tbody tr:last-child td,
+.report-registration-detail-page .repair-related-table tbody tr:last-child td,
+.report-registration-detail-page .detail-form-table tr:last-child th,
+.report-registration-detail-page .detail-form-table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* 라벨-값 폼 테이블: th는 좌측 정렬 라벨 */
+.report-registration-detail-page .detail-form-table th {
+  width: 140px;
+  text-align: left;
+  white-space: nowrap;
+  background: #f6f9ff;
+}
+
+.report-registration-detail-page .detail-form-table td {
+  text-align: left;
+}
+
+/* 입력이 들어간 셀은 높이 자동 */
+.report-registration-detail-page .info-table td:has(textarea),
+.report-registration-detail-page .detail-form-table td:has(textarea),
+.report-registration-detail-page .info-table td:has(.precision-file-slot),
+.report-registration-detail-page .detail-form-table td:has(.precision-file-slot) {
+  height: auto;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* 표 안 입력 요소 */
+.report-registration-detail-page .info-table input[type="text"],
+.report-registration-detail-page .info-table input[type="number"],
+.report-registration-detail-page .info-table input[type="date"],
+.report-registration-detail-page .info-table select,
+.report-registration-detail-page .detail-form-table input[type="text"],
+.report-registration-detail-page .detail-form-table input[type="number"],
+.report-registration-detail-page .detail-form-table input[type="date"],
+.report-registration-detail-page .detail-form-table select,
+.report-registration-detail-page .precision-modal__cell-input,
+.report-registration-detail-page .precision-modal__cell-select {
+  height: 30px !important;
+  padding: 0 10px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 13px !important;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .info-table textarea,
+.report-registration-detail-page .detail-form-table textarea,
+.report-registration-detail-page .precision-modal__cell-textarea {
+  padding: 8px 10px !important;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  color: #333;
+  font-family: inherit;
+  font-size: 13px !important;
+  line-height: 1.5;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .info-table input:focus,
+.report-registration-detail-page .info-table select:focus,
+.report-registration-detail-page .info-table textarea:focus,
+.report-registration-detail-page .detail-form-table input:focus,
+.report-registration-detail-page .detail-form-table select:focus,
+.report-registration-detail-page .detail-form-table textarea:focus {
+  border-color: #1c6fff !important;
+}
+
+/* 소제목 */
+.report-registration-detail-page .detail-sub-title,
+.report-registration-detail-page .repair-register-head h4 {
+  margin: 18px 0 8px;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* 표 안 보조 버튼 */
+.report-registration-detail-page .btn-doc-link,
+.report-registration-detail-page .btn-doc-file,
+.report-registration-detail-page .precision-file-slot__upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  color: #6c788b !important;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .btn-doc-link:hover,
+.report-registration-detail-page .btn-doc-file:hover,
+.report-registration-detail-page .precision-file-slot__upload:hover {
+  border-color: #c3ccd8 !important;
+  background: #f6f8fb !important;
+}
+
+.report-registration-detail-page .precision-file-slot__name {
+  color: #1c6fff;
+  font-size: 13px;
+}
+
+/* 폼 액션 */
+.report-registration-detail-page .detail-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.report-registration-detail-page .detail-form-actions button {
+  min-width: 96px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .btn-form-primary {
+  border-color: #0b1a2d !important;
+  background: #0b1a2d !important;
+  color: #fff !important;
+}
+
+.report-registration-detail-page .btn-form-primary img {
+  filter: brightness(0) invert(1);
+}
+
+/* ========================================================================
+   5) 페이지네이션 (flat)
+   ======================================================================== */
+.report-registration-detail-page .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+  padding: 20px 0 0;
+}
+
+.report-registration-detail-page .pagination__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: none;
+  transform: none;
+}
+
+.report-registration-detail-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.report-registration-detail-page .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.report-registration-detail-page .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.report-registration-detail-page .pagination__btn[data-page-move] {
+  background-image: none;
+}
+
+.report-registration-detail-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.report-registration-detail-page .pagination__btn[data-page-move="next"] img,
+.report-registration-detail-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.report-registration-detail-page .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.report-registration-detail-page .pagination__btn svg {
+  display: none;
+}
+
+/* ========================================================================
+   6) 결재이력 드로어 / 모달
+   ======================================================================== */
+.report-registration-detail-page .fca-drawer {
+  width: min(560px, calc(100vw - 40px));
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+}
+
+.report-registration-detail-page .fca-drawer-overlay {
+  background: rgba(13, 31, 53, 0.2);
+}
+
+.report-registration-detail-page .fca-drawer__head {
+  min-height: 0;
+  padding: 22px 24px 14px;
+  border-bottom: 1px solid #dadae2;
+  background: #fff;
+}
+
+.report-registration-detail-page .fca-drawer__title {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.report-registration-detail-page .fca-drawer__close,
+.report-registration-detail-page .repair-related-modal__close,
+.report-registration-detail-page .precision-report-modal__close {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.report-registration-detail-page .fca-drawer__close:hover,
+.report-registration-detail-page .repair-related-modal__close:hover,
+.report-registration-detail-page .precision-report-modal__close:hover {
+  background: #f6f8fb;
+}
+
+.report-registration-detail-page .fca-drawer__close img,
+.report-registration-detail-page .repair-related-modal__close img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.report-registration-detail-page .fca-drawer__body {
+  padding: 18px 24px 24px;
+}
+
+.report-registration-detail-page .fca-hist-summary__name {
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* 관련 점검진단 선택 모달 */
+.report-registration-detail-page .repair-related-modal__panel {
+  border-radius: 14px;
+}
+
+.report-registration-detail-page .repair-related-modal__title {
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+
+.report-registration-detail-page .repair-related-search__row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 9px 10px 8px;
+  background: #f3f8fe;
+  border-top: 1px solid #8d9aab;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .repair-related-search__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.report-registration-detail-page .repair-related-search__field label {
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.report-registration-detail-page .repair-related-search__field input,
+.report-registration-detail-page .repair-related-search__field select {
+  width: 100%;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .repair-related-search__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.report-registration-detail-page .btn-condition-search,
+.report-registration-detail-page .btn-condition-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 96px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 14px;
+  background: #fff;
+  color: #6c788b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.report-registration-detail-page .btn-condition-search {
+  min-width: 107px;
+  border-color: #0b1a2d;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.report-registration-detail-page .btn-condition-search:hover {
+  border-color: #16304f;
+  background: #16304f;
+}
+
+.report-registration-detail-page .btn-condition-reset:hover {
+  background: #f6f8fb;
+}
+
+@media (max-width: 1200px) {
+  .report-registration-detail-page .rrd-meta-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ========================================================================
+   [2026 HEADER RIGHT + FLAT INPUT] 오버라이드 블록
+   - 상단 액션 버튼(결재이력/반려/승인) 우측 정렬
+   - 표 안 입력요소(input/select/textarea) 테두리 제거
+   ※ 되돌리려면 이 블록만 삭제하면 됩니다.
+   ======================================================================== */
+
+/* 1) 상단 액션 버튼 우측 배치 */
+html body.report-registration-detail-page .page-header__bar {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+}
+
+html body.report-registration-detail-page .page-header__titles {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+html body.report-registration-detail-page .page-header__actions {
+  flex: 0 0 auto !important;
+  margin: 0 0 0 auto !important;
+  justify-content: flex-end !important;
+}
+
+/* 2) 표 안 입력요소 테두리 제거 (플랫 처리) */
+html body.report-registration-detail-page .info-table input[type="text"],
+html body.report-registration-detail-page .info-table input[type="number"],
+html body.report-registration-detail-page .info-table input[type="date"],
+html body.report-registration-detail-page .info-table input[type="tel"],
+html body.report-registration-detail-page .info-table select,
+html body.report-registration-detail-page .info-table textarea,
+html body.report-registration-detail-page .detail-form-table input[type="text"],
+html body.report-registration-detail-page .detail-form-table input[type="number"],
+html body.report-registration-detail-page .detail-form-table input[type="date"],
+html body.report-registration-detail-page .detail-form-table input[type="tel"],
+html body.report-registration-detail-page .detail-form-table select,
+html body.report-registration-detail-page .detail-form-table textarea,
+html body.report-registration-detail-page .precision-modal__cell-input,
+html body.report-registration-detail-page .precision-modal__cell-select,
+html body.report-registration-detail-page .precision-modal__cell-textarea,
+html body.report-registration-detail-page .repair-related-table input,
+html body.report-registration-detail-page .repair-related-table select,
+html body.report-registration-detail-page .repair-related-table textarea {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+html body.report-registration-detail-page .info-table input:focus,
+html body.report-registration-detail-page .info-table select:focus,
+html body.report-registration-detail-page .info-table textarea:focus,
+html body.report-registration-detail-page .detail-form-table input:focus,
+html body.report-registration-detail-page .detail-form-table select:focus,
+html body.report-registration-detail-page .detail-form-table textarea:focus,
+html body.report-registration-detail-page .precision-modal__cell-input:focus,
+html body.report-registration-detail-page .precision-modal__cell-select:focus,
+html body.report-registration-detail-page .precision-modal__cell-textarea:focus {
+  border: 0 !important;
+  background: #f3f8fe !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 3) select(드롭다운)에는 아래 화살표 표시 — 입력창과 구분 */
+html body.report-registration-detail-page .info-table select,
+html body.report-registration-detail-page .detail-form-table select,
+html body.report-registration-detail-page .repair-related-table select,
+html body.report-registration-detail-page .precision-modal__cell-select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  padding-right: 18px !important;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5L6 8l3.5-3.5' fill='none' stroke='%236c788b' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 2px center !important;
+  background-size: 12px 12px !important;
+  cursor: pointer;
+}
+
+html body.report-registration-detail-page .info-table select:focus,
+html body.report-registration-detail-page .detail-form-table select:focus,
+html body.report-registration-detail-page .repair-related-table select:focus,
+html body.report-registration-detail-page .precision-modal__cell-select:focus {
+  background-color: #f3f8fe !important;
+}
+
+/* IE/Edge 레거시 기본 화살표 숨김 */
+html body.report-registration-detail-page select::-ms-expand {
+  display: none;
+}
+
+/* 4) 안전등급 셀: 셀렉트를 왼쪽으로 붙임 */
+html body.report-registration-detail-page .precision-modal__table td:has(#precisionGrade) {
+  text-align: left !important;
+}
+
+html body.report-registration-detail-page .precision-modal__cell-select--wide,
+html body.report-registration-detail-page #precisionGrade {
+  width: auto !important;
+  min-width: 120px !important;
+  margin: 0 !important;
+  text-align: left !important;
+  text-align-last: left !important;
+}

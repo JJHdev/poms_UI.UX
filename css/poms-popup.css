@@ -1,0 +1,17 @@
+/**
+ * POMS 공통 팝업 틀 — Figma 118:2902
+ * 흰 단일 패널 + 헤더(제목/부제/닫기) + 본문. 내용만 페이지별로 교체.
+ *
+ * 적용 대상: fcr-modal, grade-modal, condition-results-modal,
+ * drone-video-modal, map-modal--detail, repair-related-modal
+ */
+
+:root {
+  --poms-popup-radius: 20px;
+  --poms-popup-title: #111;
+  --poms-popup-sub: #6c788b;
+  --poms-popup-border: #d1d1d1;
+  --poms-popup-close-bg: #dadae2;
+  --poms-popup-backdrop: rgba(0, 0, 0, 0.2);
+  --poms-popup-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+}

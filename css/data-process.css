@@ -1,0 +1,361 @@
+/* 자료처리 / 통계처리 — Figma 225:9585 */
+
+.data-process-page.facility-search-page {
+  --gnb-inner-width: 1400px;
+  --fs-lnb-w: 234px;
+  --fs-gap: 30px;
+  min-width: 1440px;
+  background: #fff;
+  color: #111;
+}
+
+.data-process-page .main-content {
+  display: block;
+  gap: 0;
+  padding-top: 18px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.data-process-page .fs-manage {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 1136px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.data-process-page .fs-lnb__item.is-active {
+  color: #1c6fff !important;
+  font-weight: 600;
+  background: rgba(28, 111, 255, 0.05) !important;
+}
+
+.data-process-page .dp-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-height: 0;
+}
+
+.data-process-page .dp-page__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.data-process-page .dp-page__title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.data-process-page .dp-page__title-icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.data-process-page .dp-page__title-text {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+/* STEP blocks */
+.data-process-page .dp-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.data-process-page .dp-step {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.data-process-page .dp-step__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  background: rgba(28, 111, 255, 0.05);
+  border-top: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.data-process-page .dp-step__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 19px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(28, 111, 255, 0.15);
+  color: #1c6fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.data-process-page .dp-step__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.data-process-page .dp-step__body {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.data-process-page .dp-step__fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.data-process-page .dp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.data-process-page .dp-field label,
+.data-process-page .dp-field__label {
+  display: block;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.data-process-page .dp-field select {
+  width: 100%;
+  height: 34px;
+  padding: 0 36px 0 20px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background-color: #fff;
+  background-image: url("../assets/main/facility-statistics/figma188/icon-angle-down-clean.svg");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111;
+  box-sizing: border-box;
+}
+
+.data-process-page .dp-field select:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+  color: #6c788b;
+  background-color: #f7f7f8;
+}
+
+.data-process-page .dp-file-picker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 34px;
+  padding: 0 14px 0 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.data-process-page .dp-file-picker__btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 6px 10px;
+  border: 1px solid #1c6fff;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  color: #1c6fff;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: inherit;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.data-process-page .dp-file-picker__btn:hover:not(:disabled) {
+  background: rgba(28, 111, 255, 0.1);
+}
+
+.data-process-page .dp-file-picker__btn:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+
+.data-process-page .dp-file-picker__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 400;
+  color: #999;
+  line-height: 1;
+}
+
+.data-process-page .dp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+  height: 34px;
+  padding: 0 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.data-process-page .dp-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.data-process-page .dp-btn--ghost {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+}
+
+.data-process-page .dp-btn--ghost:hover:not(:disabled) {
+  border-color: #1c6fff;
+  color: #1c6fff;
+  background: #eff5ff;
+}
+
+.data-process-page .dp-btn--primary {
+  border: 1px solid #0b1a2e;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.data-process-page .dp-btn--primary:hover:not(:disabled) {
+  background: #16304f;
+  border-color: #16304f;
+}
+
+.data-process-page .dp-btn:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+
+/* STEP.03 result — 작업구분·엑셀파일 박스와 동일 radius·좌측 정렬 */
+.data-process-page .dp-result-box {
+  display: block;
+  width: auto;
+  min-height: 300px;
+  margin: 0 10px;
+  padding: 20px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #6c788b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: left;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+}
+
+.data-process-page .dp-result-box.dp-result-box--success {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #047857;
+  font-weight: 600;
+}
+
+.data-process-page .dp-result-box.dp-result-box--warn {
+  border-color: #fde68a;
+  background: #fffbeb;
+  color: #b45309;
+  font-weight: 600;
+}
+
+.data-process-page .dp-result-box.dp-result-box--info {
+  color: #6c788b;
+  font-weight: 400;
+}
+
+/* 통계처리 — 단일 필드 폭 */
+.stats-process-page .dp-step__fields--single .dp-field {
+  flex: 0 1 480px;
+  max-width: 480px;
+}
+
+@media (max-width: 1400px) {
+  .data-process-page .dp-step__body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .data-process-page .dp-step__fields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stats-process-page .dp-step__fields--single .dp-field {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+
+  .data-process-page .dp-btn {
+    align-self: flex-end;
+  }
+}

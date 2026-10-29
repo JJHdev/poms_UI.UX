@@ -1,0 +1,343 @@
+/* 자료실 공지사항 — type3 flat (자료수신·정보변경 요청과 동일 셸) */
+
+.archive-notice-page.fcr-flat-page .type3-table {
+  min-width: 900px;
+}
+
+.archive-notice-page.fcr-flat-page .type3-table .col-no {
+  width: 72px;
+}
+
+.archive-notice-page.fcr-flat-page .type3-table .col-title {
+  width: auto;
+  min-width: 280px;
+}
+
+.archive-notice-page.fcr-flat-page .type3-table .col-author {
+  width: 120px;
+}
+
+.archive-notice-page.fcr-flat-page .type3-table .col-date {
+  width: 140px;
+}
+
+.archive-notice-page.fcr-flat-page .type3-table .col-views {
+  width: 100px;
+}
+
+.archive-notice-page.fcr-flat-page .type3-table tbody td.col-title {
+  text-align: left;
+  padding-left: 16px;
+  white-space: normal;
+}
+
+.archive-notice-page.fcr-flat-page .type3-results__side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.archive-notice-page.fcr-flat-page .type3-list-guide-note {
+  margin: 0;
+}
+
+.archive-notice-page .type3-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.archive-notice-page .type3-table tbody tr.is-clickable:hover td {
+  background: #f7f9fc;
+}
+
+.archive-notice-page .notice-title-link {
+  color: #111;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.archive-notice-page .type3-table tbody tr.is-clickable:hover .notice-title-link {
+  color: #1c6fff;
+}
+
+.archive-notice-page .notice-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 22px;
+  padding: 0 8px;
+  margin-left: 8px;
+  border-radius: 6px;
+  background: #eef5ff;
+  color: #1c6fff;
+  font-size: 11px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+/* ===== 공지사항 상세 — fcr-detail-flat (자료수신 상세 톤) ===== */
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0 !important;
+  border: none !important;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100%;
+  margin: 0;
+  padding: 0 !important;
+  border: none !important;
+  border-top: 1px solid #dadae2 !important;
+  border-left: 1px solid #dadae2 !important;
+  border-radius: 6px !important;
+  overflow: hidden;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-grid .fac-add-field--full {
+  grid-column: 1 / -1;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-grid .fac-add-field {
+  height: 34px !important;
+  max-height: none !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  border: none !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+  background: #fff;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-grid .fac-add-field__label {
+  flex: 0 0 160px !important;
+  width: 160px !important;
+  max-width: 160px !important;
+  white-space: nowrap;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-grid .fac-add-field.notice-detail-field--content {
+  height: auto !important;
+  max-height: none !important;
+  min-height: 220px !important;
+  align-items: stretch !important;
+  overflow: hidden !important;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-grid .fac-add-field.notice-detail-field--content .fac-add-field__label {
+  height: unset !important;
+  min-height: unset !important;
+  max-height: none !important;
+  align-self: stretch;
+  align-items: flex-start;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-grid .fac-add-field.notice-detail-field--content .fac-add-field__control {
+  height: unset !important;
+  min-height: unset !important;
+  max-height: none !important;
+  align-self: stretch;
+  align-items: stretch;
+  padding: 12px 16px !important;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-content {
+  display: block;
+  width: 100%;
+  min-height: 180px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+  white-space: normal;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-content > p {
+  margin: 0 0 6px;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-content > p:last-child {
+  margin-bottom: 0;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-block {
+  margin: 0 0 8px;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-block__label {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-block__text {
+  margin: 0;
+  color: #374151;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-block__list {
+  margin: 0;
+  padding-left: 18px;
+  color: #374151;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-block__list li {
+  margin-bottom: 2px;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .fac-add-input[readonly] {
+  background: transparent !important;
+  color: #111;
+  cursor: default;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-detail-file {
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-file-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-file-picker > img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-file-link {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  color: #1c6fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-file-link:hover {
+  color: #0f5de0;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-file-link.is-empty {
+  color: #999;
+  text-decoration: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+body.fcr-detail-flat-page.archive-notice-detail-page .notice-file-link.is-empty:hover {
+  color: #999;
+}
+
+/* ===== 공지사항 등록 — 상세와 동일 셸, 입력 가능한 필드만 보정 ===== */
+body.fcr-detail-flat-page.archive-notice-register-page .notice-register-body {
+  display: block;
+  width: 100%;
+  min-height: 180px !important;
+  height: 180px !important;
+  padding: 0 !important;
+  resize: vertical;
+  line-height: 1.7;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+body.fcr-detail-flat-page.archive-notice-register-page .fac-add-input:not([readonly]) {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #111;
+}
+
+body.fcr-detail-flat-page.archive-notice-register-page .fac-add-input:not([readonly]):focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+body.fcr-detail-flat-page.archive-notice-register-page .fac-add-input[readonly] {
+  background: transparent !important;
+  color: #6c788b;
+  cursor: default;
+}
+
+body.fcr-detail-flat-page.archive-notice-register-page .req {
+  margin-left: 2px;
+  color: #e11d48;
+}
+
+body.fcr-detail-flat-page.archive-notice-register-page .notice-register-file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  width: 100%;
+}
+
+body.fcr-detail-flat-page.archive-notice-register-page .notice-register-file .type3-btn--create {
+  height: 28px;
+  padding: 0 12px;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+body.fcr-detail-flat-page.archive-notice-register-page .notice-register-file__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #6c788b;
+}
+
+body.fcr-detail-flat-page.archive-notice-register-page .fac-add-footer {
+  margin-top: 16px;
+  padding-top: 8px;
+}

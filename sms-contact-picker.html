@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연락처 선택 | POMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/facility-condition-search.css">
+  <link rel="stylesheet" href="css/sms-contacts.css">
+  <link rel="stylesheet" href="css/admin-search-inline.css">
+  <style>
+    body { font-family: "Noto Sans KR", system-ui, sans-serif; margin: 0; min-width: 1280px; }
+  </style>
+</head>
+<body class="app-layout">
+  <div id="sidebar-root"></div>
+
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header__top">
+        <h1 class="page-title">연락처 선택</h1>
+        <nav class="breadcrumb" aria-label="현재 위치">
+          <a href="sms-send.html">SMS 관리</a>
+          <span class="breadcrumb__sep" aria-hidden="true">&gt;</span>
+          <span class="breadcrumb__current">연락처 선택</span>
+        </nav>
+      </div>
+    </header>
+
+    <div class="sms-picker-page">
+      <div class="sms-picker-toolbar">
+        <p class="sms-picker-toolbar__info"><strong id="pickerSelectedCount">0</strong>명 선택됨 — 문자 수신자로 추가할 연락처를 선택하세요.</p>
+        <div class="sms-picker-actions">
+          <button type="button" class="btn-sms-picker-cancel" id="pickerCancelBtn">취소</button>
+          <button type="button" class="btn-sms-picker-submit" id="pickerSubmitBtn">선택 추가</button>
+        </div>
+      </div>
+
+      <section class="sms-picker-panel">
+        <div class="sms-contacts-main__head">
+          <h2 class="sms-contacts-panel__title">연락처 목록</h2>
+        </div>
+        <div class="sms-contacts-main__body">
+          <form id="pickerFilterForm" class="sms-contacts-filters" novalidate>
+            <div class="sms-contacts-field">
+              <label for="pickerFilterName">이름</label>
+              <div class="sms-contacts-name-row">
+                <select aria-label="이름 검색 유형" disabled>
+                  <option>이름</option>
+                </select>
+                <input type="text" id="pickerFilterName" placeholder="이름을 입력하세요.">
+              </div>
+            </div>
+            <div class="sms-contacts-field">
+              <label for="pickerFilterGroup">그룹</label>
+              <select id="pickerFilterGroup">
+                <option value="">전체</option>
+              </select>
+            </div>
+            <div class="sms-contacts-field">
+              <label for="pickerFilterAgency">관리기관</label>
+              <select id="pickerFilterAgency">
+                <option value="">전체</option>
+              </select>
+            </div>
+            <div class="sms-contacts-field">
+              <label for="pickerFilterPosition">직급</label>
+              <select id="pickerFilterPosition">
+                <option value="">전체</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-condition-search">검색</button>
+          </form>
+
+          <div class="sms-alpha-tabs" id="pickerAlphaTabs" role="tablist" aria-label="이름 필터"></div>
+
+          <div class="sms-contacts-table-wrap">
+            <table class="sms-contacts-table" aria-label="연락처 선택 목록">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-check"><input type="checkbox" id="pickerCheckAll" aria-label="전체 선택"></th>
+                  <th scope="col">이름</th>
+                  <th scope="col">전화번호</th>
+                  <th scope="col">관리기관</th>
+                  <th scope="col">직급</th>
+                  <th scope="col">그룹</th>
+                </tr>
+              </thead>
+              <tbody id="pickerContactBody"></tbody>
+            </table>
+          </div>
+
+          <div class="sms-contacts-foot">
+            <div class="sms-contacts-foot__left">
+              <select id="pickerPageSize" class="sms-contacts-page-size" aria-label="페이지당 건수">
+                <option value="10">10 / page</option>
+                <option value="20">20 / page</option>
+                <option value="50">50 / page</option>
+              </select>
+            </div>
+            <nav class="sms-contacts-pagination" id="pickerContactPagination" aria-label="페이지 이동"></nav>
+            <p class="sms-contacts-summary" id="pickerContactSummary"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/auth-sample.js"></script>
+  <script src="js/sidebar-admin.js"></script>
+  <script src="js/sms-contacts-data.js"></script>
+  <script src="js/sms-contact-picker.js"></script>
+</body>
+</html>

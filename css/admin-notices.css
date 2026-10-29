@@ -1,0 +1,531 @@
+/* 공지사항 목록 — 관리자 시안 기준 (자체 완결형, facility 계열 CSS 미사용) */
+
+/* ===== 레이아웃 ===== */
+/* 폭/양옆 여백(1400 + 260×2)은 admin-topnav.css의 .main-content 규칙이 담당 */
+.admin-notices-page .main-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* ===== 컨텐츠 ===== */
+.admin-notices-page .ntc-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ===== 섹션 타이틀(검색조건) ===== */
+.admin-notices-page .ntc-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-notices-page .ntc-section-title__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f6f9ff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.admin-notices-page .ntc-section-title__icon img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.admin-notices-page .ntc-section-title__text {
+  margin: 0;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+/* ===== 검색 스트립 ===== */
+.admin-notices-page .ntc-filter-strip {
+  padding: 9px 10px 8px;
+  background: #f3f8fe;
+  border-top: 1px solid #8d9aab;
+  border-bottom: 1px solid #dadae2;
+  box-sizing: border-box;
+}
+
+.admin-notices-page .ntc-filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-notices-page .ntc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-notices-page .ntc-field--title {
+  flex: 0 0 400px;
+  width: 400px;
+  max-width: 400px;
+}
+
+.admin-notices-page .ntc-field label {
+  padding: 0 2px;
+  color: #6c788b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.admin-notices-page .ntc-field input[type="search"],
+.admin-notices-page .ntc-field input[type="text"] {
+  width: 100%;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.admin-notices-page .ntc-field input::placeholder {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.admin-notices-page .ntc-field input:focus {
+  border-color: #1c6fff;
+  box-shadow: none;
+}
+
+.admin-notices-page .ntc-field input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.admin-notices-page .ntc-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+/* ===== 버튼 공통 ===== */
+.admin-notices-page .ntc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.admin-notices-page .ntc-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-notices-page .ntc-btn--search {
+  min-width: 107px;
+  background: #0b1a2d;
+  color: #fff;
+}
+
+.admin-notices-page .ntc-btn--search:hover {
+  background: #16304f;
+}
+
+.admin-notices-page .ntc-btn--reset {
+  min-width: 96px;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.admin-notices-page .ntc-btn--reset:hover {
+  background: #f6f8fb;
+}
+
+/* ===== 검색결과 헤더 ===== */
+.admin-notices-page .ntc-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-notices-page .ntc-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 30px;
+}
+
+.admin-notices-page .ntc-results__count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-notices-page .ntc-results__bar-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.admin-notices-page .ntc-results__bar-icon img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.admin-notices-page .ntc-results__label {
+  margin: 0;
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.admin-notices-page .ntc-results__meta {
+  margin: 0;
+  color: #6c788b;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+}
+
+.admin-notices-page .ntc-results__meta strong {
+  color: #1c6fff;
+  font-weight: 600;
+}
+
+.admin-notices-page .ntc-btn--create {
+  height: 30px;
+  padding: 0 14px;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.admin-notices-page .ntc-btn--create img {
+  width: 14px;
+  height: 14px;
+}
+
+.admin-notices-page .ntc-btn--create:hover {
+  border-color: #c3ccd8;
+  background: #f6f8fb;
+}
+
+/* ===== 목록 테이블 ===== */
+.admin-notices-page .ntc-table-wrap {
+  overflow: hidden;
+  border: 1px solid #dadae2;
+  border-radius: 6px 6px 0 0;
+}
+
+.admin-notices-page .ntc-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.admin-notices-page .ntc-table thead,
+.admin-notices-page .ntc-table tbody,
+.admin-notices-page .ntc-table tr {
+  border: 0 !important;
+  background: transparent;
+  box-shadow: none;
+}
+
+.admin-notices-page .ntc-table thead th,
+.admin-notices-page .ntc-table tbody td {
+  height: 32px;
+  padding: 4px 8px;
+  font-size: 13px;
+  line-height: normal;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.admin-notices-page .ntc-table thead th {
+  background: #e9f1fe !important;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #111;
+  font-weight: 500;
+}
+
+.admin-notices-page .ntc-table thead th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+.admin-notices-page .ntc-table thead th:last-child {
+  border-right: 0 !important;
+  border-radius: 0 6px 0 0;
+}
+
+.admin-notices-page .ntc-table tbody td {
+  background: #fff;
+  border: 0 !important;
+  border-right: 1px solid #dadae2 !important;
+  border-bottom: 1px solid #dadae2 !important;
+  color: #333;
+  font-weight: 400;
+}
+
+.admin-notices-page .ntc-table tbody td:last-child {
+  border-right: 0 !important;
+}
+
+.admin-notices-page .ntc-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.admin-notices-page .ntc-table tbody tr {
+  cursor: pointer;
+}
+
+.admin-notices-page .ntc-table tbody tr:hover td {
+  background: #f5f8fc;
+}
+
+.admin-notices-page .ntc-table tbody tr.is-selected td {
+  background: #eef4ff;
+}
+
+/* 제목 셀 좌측 정렬 */
+.admin-notices-page .ntc-table tbody td:nth-child(2),
+.admin-notices-page .ntc-table .notice-title-cell {
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: left;
+}
+
+/* 컬럼 폭 */
+.admin-notices-page .ntc-table .notice-col-no {
+  width: 48px;
+}
+
+.admin-notices-page .ntc-table .notice-col-title {
+  width: auto;
+}
+
+.admin-notices-page .ntc-table .notice-col-date,
+.admin-notices-page .ntc-table .notice-col-author,
+.admin-notices-page .ntc-table .notice-col-pin,
+.admin-notices-page .ntc-table .notice-col-visible {
+  width: 136px;
+}
+
+/* ===== 배지 ===== */
+.admin-notices-page .notice-pin-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 20px;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.admin-notices-page .notice-pin-text.is-off {
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #8993a1;
+  font-weight: 400;
+}
+
+.admin-notices-page .notice-stat-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 20px;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: #f6f9ff;
+  color: #1c6fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.admin-notices-page .notice-stat-badge.is-off,
+.admin-notices-page .notice-stat-badge--off,
+.admin-notices-page .notice-stat-badge--hidden,
+.admin-notices-page .notice-stat-badge--ended {
+  background: #fef5f8;
+  color: #e5002b;
+}
+
+/* ===== 페이지네이션 (flat) ===== */
+.admin-notices-page .ntc-results-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 0;
+}
+
+.admin-notices-page .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+.admin-notices-page .pagination__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  transform: none;
+}
+
+.admin-notices-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  border-color: transparent;
+  background: #fff;
+  color: #1c6fff;
+}
+
+.admin-notices-page .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.admin-notices-page .pagination__btn.is-active {
+  z-index: 2;
+  border: 1px solid #1c6fff !important;
+  background: #fff !important;
+  color: #1c6fff !important;
+  font-weight: 400;
+}
+
+.admin-notices-page .pagination__btn[data-page-move] {
+  font-size: inherit;
+  color: inherit;
+  background-color: #fff;
+  background-image: none;
+}
+
+.admin-notices-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.admin-notices-page .pagination__btn[data-page-move="next"],
+.admin-notices-page .pagination__btn[data-page-move="last"] {
+  transform: none;
+}
+
+.admin-notices-page .pagination__btn[data-page-move="next"] img,
+.admin-notices-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.admin-notices-page .pagination__btn:disabled img {
+  opacity: 0.35;
+}
+
+.admin-notices-page .pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #6c788b;
+  font-size: 12px;
+}
+
+@media (max-width: 1400px) {
+  .admin-notices-page .ntc-filter {
+    flex-wrap: wrap;
+  }
+
+  .admin-notices-page .ntc-field--title {
+    flex: 1 1 320px;
+    width: auto;
+    max-width: 400px;
+  }
+}

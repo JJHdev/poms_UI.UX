@@ -1,0 +1,833 @@
+/* 시설물 통합검색 — Figma 224:4188 / 상세 224:5234 공유 */
+@import url("fs-lnb.css");
+
+.facility-search-page,
+.facility-detail-page {
+  --gnb-inner-width: 1400px;
+  --gnb-height: 80px;
+  --gnb-subnav-height: 50px;
+  --fs-lnb-w: 234px;
+  --fs-gap: 30px;
+  min-width: 1440px;
+  background: #fff;
+  color: #111;
+}
+
+.facility-search-page #sidebar-root .gnb-wrap,
+.facility-detail-page #sidebar-root .gnb-wrap {
+  height: var(--gnb-height);
+  padding-top: 10px;
+}
+
+.facility-search-page #sidebar-root .gnb,
+.facility-search-page #sidebar-root .gnb.inner,
+.facility-search-page #sidebar-root .inner.gnb,
+.facility-search-page #sidebar-root .gnb-subnav__inner,
+.facility-search-page #sidebar-root .gnb-mega__inner,
+.facility-detail-page #sidebar-root .gnb,
+.facility-detail-page #sidebar-root .gnb.inner,
+.facility-detail-page #sidebar-root .inner.gnb,
+.facility-detail-page #sidebar-root .gnb-subnav__inner,
+.facility-detail-page #sidebar-root .gnb-mega__inner {
+  width: min(1400px, calc(100% - 40px));
+}
+
+/* 메인 탭 + 메가메뉴 — Figma 224:4528 / 224:4538 */
+.facility-search-page #sidebar-root .gnb-subnav--main,
+.facility-search-page #sidebar-root .gnb-subnav--mega,
+.facility-detail-page #sidebar-root .gnb-subnav--main,
+.facility-detail-page #sidebar-root .gnb-subnav--mega {
+  background: rgba(28, 111, 255, 0.03);
+  border-bottom: 1px solid #dadae2;
+  overflow: visible;
+}
+
+.facility-search-page #sidebar-root .gnb-subnav--main .gnb-subnav__inner,
+.facility-search-page #sidebar-root .gnb-subnav--mega .gnb-subnav__inner,
+.facility-detail-page #sidebar-root .gnb-subnav--main .gnb-subnav__inner,
+.facility-detail-page #sidebar-root .gnb-subnav--mega .gnb-subnav__inner {
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.facility-search-page #sidebar-root .gnb-subnav--main .gnb-subnav__item,
+.facility-search-page #sidebar-root .gnb-subnav--mega .gnb-subnav__item,
+.facility-detail-page #sidebar-root .gnb-subnav--main .gnb-subnav__item,
+.facility-detail-page #sidebar-root .gnb-subnav--mega .gnb-subnav__item {
+  flex: 0 0 200px;
+  width: 200px;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  color: #111;
+  font-weight: 500;
+  padding: 0 0 14px;
+  border-bottom: 2px solid transparent;
+  position: relative;
+}
+
+.facility-search-page #sidebar-root .gnb-subnav--main .gnb-subnav__item + .gnb-subnav__item::before,
+.facility-search-page #sidebar-root .gnb-subnav--mega .gnb-subnav__item + .gnb-subnav__item::before,
+.facility-detail-page #sidebar-root .gnb-subnav--main .gnb-subnav__item + .gnb-subnav__item::before,
+.facility-detail-page #sidebar-root .gnb-subnav--mega .gnb-subnav__item + .gnb-subnav__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background: #dadae2;
+}
+
+.facility-search-page #sidebar-root .gnb-subnav--main .gnb-subnav__item.is-active,
+.facility-search-page #sidebar-root .gnb-subnav--mega .gnb-subnav__item.is-active,
+.facility-search-page #sidebar-root .gnb-subnav--mega .gnb-subnav__item:hover,
+.facility-detail-page #sidebar-root .gnb-subnav--main .gnb-subnav__item.is-active,
+.facility-detail-page #sidebar-root .gnb-subnav--mega .gnb-subnav__item.is-active,
+.facility-detail-page #sidebar-root .gnb-subnav--mega .gnb-subnav__item:hover {
+  color: #1c6fff;
+  font-weight: 600;
+  border-bottom-color: #1c6fff;
+}
+
+.facility-search-page .main-content,
+.facility-detail-page .main-content {
+  width: min(1400px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 18px 0 32px;
+  display: block;
+  box-sizing: border-box;
+}
+
+.facility-search-page .search-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.facility-search-page .search-filters__row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+.facility-search-page .filter-field select,
+.facility-search-page .filter-field input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  padding: 0 32px 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  background-color: #fff;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.facility-search-page .btn-search,
+.facility-search-page .btn-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.facility-search-page .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* LNB / fs-layout 크기·위치 — css/fs-lnb.css */
+
+.facility-detail-page .fs-lnb__chevron.ico-angle {
+  overflow: visible;
+}
+
+.facility-detail-page .fs-lnb__chevron.ico-angle img {
+  /* size controlled by .ico-angle__vec inset */
+  object-fit: fill;
+}
+
+/* ── 본문 — 표 한눈에 보이도록 압축 (Figma 비율 유지) ── */
+.facility-search-page .fs-search {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  max-width: 100%;
+}
+
+.facility-search-page .fs-search > .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__home:hover {
+  border-color: #1c6fff;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__home-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__home-icon-roof,
+.facility-search-page .fs-search > .page-header .page-header__home-icon-body,
+.facility-search-page .fs-search > .page-header .page-header__home-icon-door {
+  position: absolute;
+  display: block;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__home-icon-roof {
+  top: 12.5%;
+  right: 12.5%;
+  bottom: 50%;
+  left: 12.5%;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__home-icon-body {
+  top: 50%;
+  right: 20.83%;
+  bottom: 12.5%;
+  left: 20.83%;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__home-icon-door {
+  top: 54.17%;
+  right: 37.5%;
+  bottom: 12.5%;
+  left: 37.5%;
+}
+
+.facility-search-page .fs-search > .page-header .page-header__home-icon img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+}
+
+.facility-search-page .fs-search > .page-header .breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+}
+
+.facility-search-page .fs-search > .page-header .breadcrumb a {
+  color: #a4afc0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.facility-search-page .fs-search > .page-header .breadcrumb__sep {
+  color: #a4afc0;
+  font-weight: 500;
+}
+
+.facility-search-page .fs-search > .page-header .breadcrumb__current {
+  color: #6c788b;
+  font-weight: 500;
+}
+
+.facility-search-page .fs-search > .page-header .breadcrumb a:hover {
+  color: #1c6fff;
+}
+
+.facility-search-page .search-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.facility-search-page .search-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.facility-search-page .search-panel__title-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(28, 111, 255, 0.04);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.facility-search-page .search-panel__title-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.facility-search-page .search-panel__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.facility-search-page .search-filters {
+  width: 100%;
+  background: rgba(28, 111, 255, 0.05);
+  border-top: 1px solid #1c6fff;
+  border-bottom: 1px solid #8d9aac;
+  box-sizing: border-box;
+}
+
+.facility-search-page .search-filters__row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+.facility-search-page .filter-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.facility-search-page .filter-field--agency {
+  flex: 0 0 180px;
+  width: 180px;
+}
+
+.facility-search-page .filter-field--grow {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.facility-search-page .filter-field--name {
+  flex: 0 0 220px;
+  width: 220px;
+}
+
+.facility-search-page .filter-field label {
+  display: block;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c788b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.facility-search-page .filter-field select,
+.facility-search-page .filter-field input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  padding: 0 32px 0 16px;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  background-color: #fff;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.facility-search-page .filter-field--name input[type="text"] {
+  padding-right: 20px;
+}
+
+.facility-search-page .filter-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("../assets/main/facility-search/icon-angle-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+  cursor: pointer;
+}
+
+.facility-search-page .filter-field select:invalid,
+.facility-search-page .filter-field select option[value=""] {
+  color: #999;
+}
+
+.facility-search-page .filter-field select:focus,
+.facility-search-page .filter-field input:focus {
+  border-color: #1c6fff;
+}
+
+.facility-search-page .filter-field input::placeholder {
+  color: #999;
+}
+
+.facility-search-page .search-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding-bottom: 0;
+}
+
+.facility-search-page .btn-search,
+.facility-search-page .btn-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.facility-search-page .btn-search {
+  border: none;
+  background: #0b1a2e;
+  color: #fff;
+}
+
+.facility-search-page .btn-search:hover {
+  background: #152a44;
+}
+
+.facility-search-page .btn-reset {
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #6c788b;
+}
+
+.facility-search-page .btn-reset:hover {
+  background: #f4f4fa;
+}
+
+.facility-search-page .btn-search img,
+.facility-search-page .btn-reset img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ── 결과 표 — Figma 224:4255 ── */
+.facility-search-page .results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.facility-search-page .results-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.facility-search-page .results-panel__bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 14px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.facility-search-page .results-panel__bar img {
+  display: block;
+  width: 8px;
+  height: 14px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.facility-search-page .results-count {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.2;
+}
+
+.facility-search-page .results-count__label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.32px;
+}
+
+.facility-search-page .results-count__meta {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6c788b;
+  letter-spacing: -0.28px;
+}
+
+.facility-search-page .results-count__meta strong {
+  font-weight: 600;
+  color: #1c6fff;
+}
+
+.facility-search-page .data-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  border: 1px solid #dadae2;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.facility-search-page .data-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+  border: none;
+}
+
+/* Figma 비율 유지, 행·글자 압축해 한 화면에 전체 표 노출 */
+.facility-search-page .data-table col.col-no { width: 6.5%; }
+.facility-search-page .data-table col.col-name { width: 16.5%; }
+.facility-search-page .data-table col.col-agency { width: 16.5%; }
+.facility-search-page .data-table col.col-address { width: 24%; }
+.facility-search-page .data-table col.col-type { width: 12%; }
+.facility-search-page .data-table col.col-class { width: 12%; }
+.facility-search-page .data-table col.col-built { width: 12.5%; }
+
+.facility-search-page .data-table thead th {
+  height: 32px;
+  padding: 6px 8px;
+  background: rgba(28, 111, 255, 0.1);
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+
+/* Figma 열 비율 — %로 축소 */
+.facility-search-page .data-table .col-no,
+.facility-search-page .data-table thead th:nth-child(1),
+.facility-search-page .data-table tbody td:nth-child(1) {
+  width: 6.5%;
+}
+
+.facility-search-page .data-table .col-name,
+.facility-search-page .data-table thead th:nth-child(2),
+.facility-search-page .data-table tbody td:nth-child(2) {
+  width: 16.5%;
+}
+
+.facility-search-page .data-table .col-agency,
+.facility-search-page .data-table thead th:nth-child(3),
+.facility-search-page .data-table tbody td:nth-child(3) {
+  width: 16.5%;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.facility-search-page .data-table .col-address,
+.facility-search-page .data-table thead th:nth-child(4),
+.facility-search-page .data-table tbody td:nth-child(4) {
+  width: 24%;
+}
+
+.facility-search-page .data-table .col-type,
+.facility-search-page .data-table thead th:nth-child(5),
+.facility-search-page .data-table tbody td:nth-child(5),
+.facility-search-page .data-table .col-class,
+.facility-search-page .data-table thead th:nth-child(6),
+.facility-search-page .data-table tbody td:nth-child(6) {
+  width: 12%;
+}
+
+.facility-search-page .data-table .col-built,
+.facility-search-page .data-table thead th:nth-child(7),
+.facility-search-page .data-table tbody td:nth-child(7) {
+  width: 12.5%;
+}
+
+.facility-search-page .data-table thead th:last-child {
+  border-right: none;
+}
+
+.facility-search-page .data-table tbody td {
+  height: 32px;
+  padding: 4px 8px;
+  border: none;
+  border-right: 1px solid #dadae2;
+  border-bottom: 1px solid #dadae2;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.2;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facility-search-page .data-table tbody td:last-child {
+  border-right: none;
+}
+
+.facility-search-page .data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.facility-search-page .data-table tbody tr:hover td {
+  background: #f8fafc;
+}
+
+.facility-search-page .data-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.facility-search-page .results-panel__foot,
+.facility-search-page .user-table-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 100%;
+}
+
+.facility-search-page .results-panel__foot .crud-page-size,
+.facility-search-page .crud-page-size[hidden] {
+  display: none !important;
+}
+
+.facility-search-page .pagination,
+.facility-search-page .results-panel__foot .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 0;
+  margin: 0;
+}
+
+.facility-search-page .pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.facility-search-page .pagination__btn:hover:not(:disabled):not(.is-active) {
+  color: #1c6fff;
+}
+
+.facility-search-page .pagination__btn:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.facility-search-page .pagination__btn.is-active {
+  z-index: 2;
+  background: #fff;
+  border-color: #1c6fff;
+  color: #1c6fff;
+}
+
+.facility-search-page .pagination__btn[data-page-move] img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.facility-search-page .pagination__btn[data-page-move="next"] img,
+.facility-search-page .pagination__btn[data-page-move="last"] img {
+  transform: scaleX(-1);
+}
+
+.facility-search-page .pagination__btn svg {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .facility-search-page {
+    min-width: 1400px;
+  }
+}
+
+/* ── 검색결과 엑셀 다운로드 버튼 (inspection-status .insp-btn--excel 스타일 이식) ── */
+.facility-search-page .results-panel__head .insp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.facility-search-page .results-panel__head .insp-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.facility-search-page .results-panel__head .insp-btn--excel {
+  margin-left: auto;
+  border: 1px solid #dadae2;
+  background: #fff;
+  color: #111;
+}
+
+.facility-search-page .results-panel__head .insp-btn--excel:hover {
+  background: #f4f4fa;
+  border-color: #c5c5d0;
+}
+
+.facility-search-page .results-panel__head .insp-btn--excel:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
